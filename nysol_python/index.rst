@@ -1,0 +1,32 @@
+.. nysol_python documentation master file, created by
+   sphinx-quickstart on Sun May 27 10:48:44 2018.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to nysol_python's documentation!
+========================================
+
+NYSOLとはビッグデータからの知識発見を効率的かつ効果的に支援するために開発されたソフトウェアライブラリである。
+これまでに、シェルから利用できるコマンド群として提供してきたが( [#f1]_ )(http://www.nysol.jp/)、
+それらをPython上で利用できるように改良したものが **nysol_python** ライブラリである。
+現在のところ、nysol_pythonには、
+データの前処理に威力を発揮するmcmdモジュールと
+アイテム集合マイニングに関する多様なツールを提供するTakeモジュールが含まれている。
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   mcmdモジュール<mcmd>
+   takeモジュール<take>
+
+.. todolist::
+
+.. [#f1] http://www.nysol.jp/
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
