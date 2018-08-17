@@ -53,7 +53,9 @@ def getSample(sFile):
 with open(iFile,"r") as fpr:
 	paramBlock=False
 	sectBlock=False
+	formBlock=False
 	relatedBlock=False
+	comParams=[]
 	for line in fpr:
 		line=line.strip()
 		#print(line,paramBlock,sectBlock,relatedBlock)
@@ -76,6 +78,7 @@ with open(iFile,"r") as fpr:
 		elif line==r"\subsection*{書式}":
 			#print("xx2")
 			sectBlock=False
+			formBlock=True
 			print("")
 
 		elif sectBlock:
@@ -83,6 +86,28 @@ with open(iFile,"r") as fpr:
 			if line.find(r"\index{")!=-1:
 				continue
 			print(convText(line).strip())
+
+		# 書式の処理
+		# \subsection*{書式} 
+		# \verb|mcut f= [-r] [-nfni]|
+		# \hyperref[sect:option_i]{[i=]}
+		# \hyperref[sect:option_o]{[o=]}
+		# \hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+		# \hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+		# \hyperref[sect:option_nfn]{[-nfn]} 
+		# \hyperref[sect:option_nfno]{[-nfno]}  
+		# \hyperref[sect:option_x]{[-x]}
+		# \hyperref[sect:option_option_tmppath]{[tmpPath=]}
+		# \hyperref[sect:option_precision]{[precision=]}
+		# \verb|[-params]|
+		# \verb|[--help]|
+		# \verb|[--helpl]|
+		# \verb|[--version]|\\
+		elif formBlock and re.search("^\\\\hyperref",line):
+			com=re.sub("\\\\hyperref\[sect:(.*?)\].*","\\1",line)
+			com=re.sub("option_(.*)","\\1",com)
+			com=re.sub("option_(.*)","\\1",com) # tmppathの前に/optionが2つついているため
+			comParams.append(":ref:`%s=<common_param_%s>`\n"%(com,com))
 
 		# パラメータsubsectionの処理
 		##############
@@ -130,21 +155,33 @@ with open(iFile,"r") as fpr:
 		elif line=='\subsection*{パラメータ}':
 			#print("xx4")
 			paramBlock=True
+			formBlock=False
+			print("パラメータ")
+			print("''''''''''''''''''''''")
+			print("")
 			print("  .. list-table::")
 			print("    :header-rows: 1")
 			print("")
-			print("    * - パラメータ")
+			print("    * - キーワード")
 			print("      - 内容")
+			print("")
+
 		elif paramBlock and line==r"\end{table}":
 			#print("xx6")
 			print("")
+			print("共通パラメータ")
+			print("''''''''''''''''''''")
+			print("")
+			print(", ".join(comParams))
 			paramBlock=False
+
 		elif paramBlock and line.find("&")==-1: # 表データ行は必ず"&"を含む
 			#print("xx5")
 			continue
 
 		elif paramBlock:
 			#print("xx7")
+			line=re.sub("\\\\\\\\$","",line)
 			cols=line.split('&')
 			if cols[0]!="":
 				kwd=rmVerb(cols[0])

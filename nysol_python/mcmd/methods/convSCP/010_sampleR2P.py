@@ -5,6 +5,17 @@ import sys
 import re
 from datetime import datetime
 
+fldMap={}
+fldMap["顧客"]=("str","customer")
+fldMap["数量"]=("num","quantity")
+fldMap["金額"]=("num","amount")
+fldMap["売上"]=("num","sales")
+# fldMapのkeyを文字数降順に並べ替える。
+# 置換処理の時に、長い順に処理しないとおかしなことになるから。
+fldMapKey=list(fldMap)
+fldMapKey.sort(key=len)
+fldMapKey.reverse()
+
 argv=sys.argv
 if len(argv)!=2:
 	print("rubyで書かれたsampleスクリプトをpythonスクリプトに変換")
@@ -16,13 +27,31 @@ print("START: "+" ".join(argv),datetime.now())
 iFile="./samples/ruby/%s.rb"%argv[1]
 oFile="./samples/python/%s.py"%argv[1]
 
+# 項目名を英語に変換
+def toEng(txt,ref=False):
+	if ref:
+		for key in fldMapKey:
+			nkey="``"+key+"``"
+			rep=" ``"+fldMap[key][1]+"`` "
+			txt=re.sub(nkey,rep,txt)
+
+			nkey="「"+key+"」"
+			rep=" ``"+fldMap[key][1]+"`` "
+			txt=re.sub(nkey,rep,txt)
+	else:
+		for key in fldMapKey:
+			rep=fldMap[key][1]
+			txt=re.sub(key,rep,txt)
+	return txt
+
 # texの文章をrstに変換
 # 1) \verb|xx| => ``xx``
 # 2) \verb|-xx| => ``xx=True``
 def convText(txt):
 	txt1=re.sub("\\\\verb\|(.*?)\|"," ``\\1`` ",txt.strip()).strip()
 	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1)
-	return txt2
+	txt3=toEng(txt2,True)
+	return txt3
 
 # \verb|xx| => xx
 def rmVerb(txt):
@@ -46,8 +75,8 @@ def convMethod(txt):
 			elif pp[0]=="o":
 				continue
 			else:
-				params.append(pp[0]+'="'+pp[1]+'"')
-	method="%s(%s).run()"%("nm."+token[0],", ".join(params))
+				params.append(pp[0]+'="'+toEng(pp[1])+'"')
+	method="nm.%s(%s).run()"%(token[0],", ".join(params))
 	return method
 
 # CSVヘッダを解釈し、項目名文字列と型リストを返す
@@ -56,17 +85,16 @@ def convMethod(txt):
 # output2(fldTypes): ["str","num","num"]
 def parseHeader(txt):
 	fldTypes=[]
-	header='"'+re.sub(",",'","',line)+'"'
+	headers=[]
+	#header='"'+re.sub(",",'","',line)+'"'
 	for fld in txt.split(","):
-		if fld=="顧客":
-			fldTypes.append("str")
-		elif fld=="数量":
-			fldTypes.append("num")
-		elif fld=="金額":
-			fldTypes.append("num")
+		if fld in fldMap:
+			headers.append('"'+fldMap[fld][1]+'"')
+			fldTypes.append(fldMap[fld][0])
 		else:
+			headers.append('"'+fld+'"')
 			fldTypes.append("str")
-	return header,fldTypes
+	return ",".join(headers),fldTypes
 
 ###################################
 # ここからmain
@@ -258,7 +286,7 @@ with open(iFile,"r") as fpr:
 
 		# title
 		elif re.search("title=",line):
-			if scpFirstTime: #scpにいく直前でデータの出力関数を入れる
+			if scpFirstTime: #scpに入る直前で「利用データ」セクションの出力関数(run_data)を入れる
 				scp+=("LIBmkrst.run_data(dat_str)\n")
 				scpFirstTime=False
 

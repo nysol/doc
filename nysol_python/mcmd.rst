@@ -11,11 +11,14 @@ MCMDは、特に知識発見プロセス [#f2]_ における **前処理** で�
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
    :caption: Contents:
 
    mcmd/hello
    mcmd/list
    mcmd/flow
+   mcmd/methods/index
+   mcmd/common_param
 
 パラメータ
 

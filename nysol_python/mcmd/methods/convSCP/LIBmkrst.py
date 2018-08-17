@@ -39,8 +39,8 @@ def run(scp,title,comment,dat_str):
 		result=fpr.read()
 
 	# 出力
-	print(title)
-	print(":"*len(title)*3)
+	print("**"+title.strip()+"**")
+	#print(":"*len(title)*3)
 	print(comment)
 	print("")
 	print("  .. code-block:: python")
@@ -71,8 +71,7 @@ def run(scp,title,comment,dat_str):
 def run_data(dat_str):
 	txt=""
 
-	txt+="入力データ\n"
-	txt+=":::::::::::::::\n"
+	txt+="**入力データ**\n"
 	txt+="  .. code-block:: python\n"
 	txt+="    :linenos:\n"
 	txt+="\n"
