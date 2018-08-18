@@ -6,6 +6,7 @@
 .. _common_param_i:
 i=
 '''''''''''''''''''''''''''''
+複数指定可能
 
 .. _common_param_assert_diffSize:
 assert_diffSizez=

@@ -57,7 +57,6 @@ mcmdでは、単一機能に特化した80以上のメソッドを自由に組�
     :align: center
     :name: flow_drawModelPNG
     :target: ../_static/cust_amount.html
-    :alt: Alternate Text (キャプションじゃないよ)
 
     視覚化された処理フロー
 
@@ -73,6 +72,10 @@ i=,o=,m=,u=は特殊なキーワードではなく、将来、異なるキーワ
 
 入力と出力ともに指定できるデータソースは、CSVデータファイル名、リストオブジェクト、そして処理フローオブジェクトの3つである。
 
+
+2つの処理フローが同じ項目を出力する2つの処理フローを結合したい場合、
+mcmdメソッドのパラメター ``i=`` 処理フローオブジェクトをリストで与えることができる。
+
 CSVデータ
 ::::::::::::::::::::::::
 
@@ -85,6 +88,43 @@ CSVデータ
 処理フローの構成方法
 '''''''''''''''''''''''
 自動追加される処理。sort,fifo,writelist,readlistなど。
+
+writlist,readlist
+i=,o=にリストを指定した場合
+kgshell.cpp 46行目 => 実クラスはkgload
+readcsv,writecsvも同様
+
+writelistは明示的に利用できる。ヘッダーを出したい場合は明示的に指定する。
+writelist(header=True)
+o=を指定したらCSV出力する。
+xxx1=[]
+n1 <<= nm.mselstr(i=data1,f="a",v="1").writelist(xxx1,addheadder=True)
+n1.run()
+[['a', 'b', 'c'], ['1', '2', '3']]
+
+i=,m=で複数指定したらm2catを追加(core.py 578)。
+
+o=が途中に指定されていればwritecsvが追加される(600)。
+
+一つのオブジェクトが複数の入力になるばあい(518) teeが追加
+f1=nm.mcut
+nm.msum(i=f1
+nm.msum(i=f1
+
+fifoの追加条件:2つに分かれる場合(
+1.o=,u=両方追加されたばあい
+2.teeが追加された時
+
+f1=mselstr()
+f2=f1.redirect(u=)
+mcat i=[f1,f2]
+
+f1=mcut
+total=msum(i=f1)
+f1<<=mjoin(m=total)
+
+NYSOL_MOD_DSP_TYPE=1
+でrunするとオブジェクトを実行して結果を出力(上と下だけ)
 
 sorting
 ::::::::::::
@@ -100,6 +140,18 @@ writelist
 
 
 実行と並列処理
+'''''''''''''''''''''''
+
+Jupyter
+'''''''''''''''''''''''
+
+runfunc メソッドの実行
+'''''''''''''''''''''''
+
+cmd コマンドの実行
+'''''''''''''''''''''''
+
+runとruns
 '''''''''''''''''''''''
 
 メソッド

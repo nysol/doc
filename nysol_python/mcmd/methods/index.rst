@@ -6,4 +6,6 @@
   :maxdepth: 1
   :caption: Contents:
 
+  mavg
   mcut
+  msum

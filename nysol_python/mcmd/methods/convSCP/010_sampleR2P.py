@@ -10,7 +10,11 @@ fldMap["顧客"]=("str","customer")
 fldMap["数量"]=("num","quantity")
 fldMap["金額"]=("num","amount")
 fldMap["売上"]=("num","sales")
-# fldMapのkeyを文字数降順に並べ替える。
+fldMap["数量合計"]=("num","qttTotal")
+fldMap["金額合計"]=("num","amtTotal")
+fldMap["数量平均"]=("num","qttTotal")
+fldMap["金額平均"]=("num","amtTotal")
+# fldMapのkeyを文字数降順に並mtべ替える。
 # 置換処理の時に、長い順に処理しないとおかしなことになるから。
 fldMapKey=list(fldMap)
 fldMapKey.sort(key=len)
@@ -50,7 +54,9 @@ def toEng(txt,ref=False):
 def convText(txt):
 	txt1=re.sub("\\\\verb\|(.*?)\|"," ``\\1`` ",txt.strip()).strip()
 	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1)
+	#print("txt2",txt2)
 	txt3=toEng(txt2,True)
+	#print("txt3",txt3)
 	return txt3
 
 # \verb|xx| => xx
@@ -248,7 +254,9 @@ with open(iFile,"r") as fpr:
 				values=[]
 				i=0
 				for fld in line.split(","):
-					if fldType[i]=="str":
+					if fld=="":
+						values.append('None')
+					elif fldType[i]=="str":
 						values.append('"%s"'%fld)
 					elif fldType[i]=="num":
 						values.append('%s'%fld)

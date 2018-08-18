@@ -15,8 +15,10 @@ MCMDは、特に知識発見プロセス [#f2]_ における **前処理** で�
    :caption: Contents:
 
    mcmd/hello
-   mcmd/list
+   mcmd/data
    mcmd/flow
+   mcmd/autoadd
+   mcmd/iterator
    mcmd/methods/index
    mcmd/common_param
 
