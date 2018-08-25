@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to nysol_python's documentation!
+NYSOL
 ========================================
 
 NYSOLとはビッグデータからの知識発見を効率的かつ効果的に支援するために開発されたソフトウェアライブラリである。
@@ -15,18 +15,15 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: 目次:
 
    mcmdモジュール<mcmd>
    takeモジュール<take>
+   memo_rst
 
-.. todolist::
-
-.. [#f1] http://www.nysol.jp/
-
-Indices and tables
-==================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
+.. [#f1] http://www.nysol.jp/

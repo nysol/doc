@@ -2,44 +2,50 @@
 <head>
 <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
 <script>
-var NodeDATA=[{ title:"writelist ", x:20 , y:380 , name:"writelist", tp:"sysadd"},
-{ title:"msum k=customer f=amount", x:20 , y:320 , name:"msum", tp:"mod"},
-{ title:"m2cat ", x:20 , y:260 , name:"m2cat", tp:"sysadd"},
+var NodeDATA=[{ title:"writelist ", x:20 , y:560 , name:"writelist", tp:"sysadd"},
+{ title:"msum k=customer f=amount", x:80 , y:500 , name:"msum", tp:"mod"},
+{ title:"m2cat ", x:20 , y:440 , name:"m2cat", tp:"sysadd"},
+{ title:"mfifo ", x:20 , y:380 , name:"mfifo", tp:"sysadd"},
+{ title:"m2tee ", x:20 , y:320 , name:"m2tee", tp:"sysadd"},
+{ title:"mselstr f=customer v=A", x:20 , y:260 , name:"mselstr", tp:"mod"},
 { title:"mcut f=customer,amount", x:20 , y:200 , name:"mcut", tp:"mod"},
 { title:"readlist ", x:20 , y:140 , name:"readlist", tp:"sysadd"},
-{ title:"mcut f=customer,amount", x:80 , y:200 , name:"mcut", tp:"mod"},
-{ title:"readlist ", x:80 , y:140 , name:"readlist", tp:"sysadd"},
-{ title:"list olist_0", x:20 , y:440 , name:"list" ,tp:"list"},
-{ title:"list ilist_4", x:20 , y:80 , name:"list" ,tp:"list"},
-{ title:"list ilist_6", x:80 , y:80 , name:"list" ,tp:"list"}]
-var EdgeDATA=[{ title:"o => i ", x1:20,y1:320,x2:20,y2:380 },
+{ title:"mselnum f=amount c=[1000,]", x:80 , y:380 , name:"mselnum", tp:"mod"},
+{ title:"mfifo ", x:80 , y:320 , name:"mfifo", tp:"sysadd"},
+{ title:"list olist_0", x:20 , y:500 , name:"list" ,tp:"list"},
+{ title:"list ilist_7", x:20 , y:80 , name:"list" ,tp:"list"}]
+var EdgeDATA=[{ title:"o => i ", x1:80,y1:500,x2:20,y2:560 },
+{ title:"o => i ", x1:20,y1:440,x2:80,y2:500 },
+{ title:"o => i ", x1:20,y1:380,x2:20,y2:440 },
+{ title:"o => i ", x1:80,y1:380,x2:20,y2:440 },
+{ title:"o => i ", x1:20,y1:320,x2:20,y2:380 },
 { title:"o => i ", x1:20,y1:260,x2:20,y2:320 },
 { title:"o => i ", x1:20,y1:200,x2:20,y2:260 },
-{ title:"o => i ", x1:80,y1:200,x2:20,y2:260 },
 { title:"o => i ", x1:20,y1:140,x2:20,y2:200 },
-{ title:"o => i ", x1:80,y1:140,x2:80,y2:200 },
-{ title:"o => i ", x1:20,y1:380,x2:20,y2:440 },
-{ title:"o => i ", x1:20,y1:80,x2:20,y2:140 },
-{ title:"o => i ", x1:80,y1:80,x2:80,y2:140 }]
-var LinkLIST=[[[6],[0]],
+{ title:"o => i ", x1:80,y1:320,x2:80,y2:380 },
+{ title:"u => i ", x1:20,y1:260,x2:80,y2:320 },
+{ title:"o => i ", x1:20,y1:560,x2:20,y2:500 },
+{ title:"o => i ", x1:20,y1:80,x2:20,y2:140 }]
+var LinkLIST=[[[10],[0]],
 [[0],[1]],
 [[1],[2,3]],
 [[2],[4]],
-[[4],[7]],
-[[3],[5]],
-[[5],[8]],
-[[],[6]],
-[[7],[]],
-[[8],[]]]
+[[4],[5]],
+[[5,9],[6]],
+[[6],[7]],
+[[7],[11]],
+[[3],[8]],
+[[8],[9]],
+[[],[10]],
+[[11],[]]]
 </script>
-</head><body><svg id='flowDspArea' height='1080' width='600'>
+</head><body><svg id='flowDspArea' height='1320' width='480'>
 <defs>
 <marker id='endmrk' markerUnits='strokeWidth' markerWidth='3' markerHeight='3' viewBox='0 0 10 10' refX='5' refY='5' orient='auto'>
 <polygon points='0,0 5,5 0,10 10,5 ' fill='black'/>
 </marker>
 </defs>
 </svg>
-
 	<script>
 	svgGroup = d3.select('#flowDspArea');
 	
@@ -155,6 +161,10 @@ var LinkLIST=[[[6],[0]],
 		.attr('stroke','black')
 		.attr('stroke-width','5')
 		.attr('marker-end','url(#endmrk)')
+
+	edge_g2.append('title')
+			.text(function(d) { return d.title})
+
 	</script>
 	</body>
 </html>
