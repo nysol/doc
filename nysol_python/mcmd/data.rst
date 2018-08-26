@@ -2,54 +2,74 @@
 データ
 =========================
 
-mcmdで扱える入力データは、CSVファイルとPython Listsである。
-ソートヘッダーについて
+mcmdが扱えるデータは、 :numref:`data_table` に示されるような項目名ヘッダー付きの表構造データである。
+mcmdが提供する処理メソッドの多くは、 ``i=`` で入力データを指定し、 ``o=`` で出力データを指定する。
+これらのパラメータに指定できる表構造データは、現在のところ、CSVデータファイル名もしくはPython Listsのいずれかである。
+入力については、処理フローオブジェクトも指定できるが、それはデータフローの接続のためであり、
+詳しくは :doc:`別節<flow>` にて解説している。
 
-入力と出力ともに指定できるデータソースは、CSVデータファイル名、リストオブジェクト、そして処理フローオブジェクトの3つである。
-処理フローオブジェクトの指定については、 :doc:`flow` を参照されたい。
+  .. csv-table:: 入力データ例:mcmdが扱う表構造データ
+    :name: data_table
 
-複数入力
-csvはOk,リストはNG
+    customer,date,amount
+    A,20180101,5200
+    B,20180101,800
+    B,20180112,3500
+    A,20180105,2000
+    B,20180107,4000
 
-リスト
------------------------
+ 
+リスト(Python Lists)
+---------------------
+:numref:`data_list` は :numref:`data_table` をリストで表現したPythonコードである。
+二重リストになっており、最初の要素は項目名ヘッダーで、続いてデータが1行を1要素として格納されている。
+行あたりの項目数は全行で同じでなければならない。
+また、項目名ヘッダーには特殊な規則があり :ref:`後で詳しく解説<項目名ヘッダー>` する。
 
-リストによる指定方法を例をあげて書く。
-Noneがnullであることも書く
-辞書の場合、リストに変換する方法を示しておく。
+  .. code-block:: python
+    :linenos:
+    :caption: リストによる表構造データの表現
+    :name: data_list
 
-mcmdの多くのメソッドでは入出力データとしてPythonのリストとしてデータを指定することができる。
-しかし一方で、mcmd内部ではデータは全てテキストのバイトストリームとして扱われるため、
-入出力にリストを指定した場合、データ型の変換が生じる。
+    >>> dat=[
+    ["customer","date","amount"],
+    ["A","20180101",5200],
+    ["B","20180101",800],
+    ["B","20180112",3500],
+    ["A","20180105",2000],
+    ["B","20180107",4000]
+    ]
 
 細かな変換はreadlist,writelistを使う
 
 入力の変換
 '''''''''''''''
-
-mcmdで入力データとして扱い可能なPythonのデータ型は、文字列、数値(int,float,bool)であり、
+mcmdは内部では全てのデータをテキストのバイトストリームとして扱うため、
+Python Listsを入力データとして指定した場合、変換操作が加わることになる [#f1]_ 。
+mcmdで入力データとして扱い可能なデータ型は、文字列、数値(int,float,bool)であり、
 特殊な値としてNone,nan,infも扱うことができる。
-いずれもmcmd内部では文字列に変換されるが、その変換規則は表 :numref:`list:inTypeConv` に示す通りで、
-実際のPythonコードとその実行結果を :numref:`list_convTypeCode` に示す。
+いずれもmcmd内部では文字列に変換されるが、その変換規則は表 :numref:`data_inTypeConv` に示す通りで、
+実際のPythonコードとその実行結果を :numref:`data_inTypeConvCode` に示す。
+なお、コード中の ``mread`` メソッドは、``i=`` で指定された内容をそのまま出力するメソッドである。
 
   .. csv-table:: Pythonのデータ型のmcmdデータへの変換規則と変換例
-    :name: list_inTypeConv
+    :name: data_inTypeConv
 
-    Pythonデータ型/値,変換後文字列,変換前例,変換後例
-    string,そのまま          ,\'abc\'       ,\'abc\'
-    int   ,文字列としての整数,12            ,\'12\'
-    float ,文字列としての実数,0.123         ,\'0.123\'
-    nan   ,null値            ,float(\'nan\'),\'\'
-    inf   ,null値            ,float(\'inf\'),\'\'
-    -inf  ,null値            ,float(\'inf\'),\'\'
-    True  ,\'1\'             ,True          ,\'1\'
-    False ,\'0\'             ,False         ,\'0\'
-    None  ,null値            ,None          ,\'\'
+    Pythonデータ型/値,変換前,変換後
+    string,\'abc\'       ,\'abc\'
+    int   ,12            ,\'12\'
+    float ,0.123         ,\'0.123\'
+    nan   ,float(\'nan\'),\'\' (空文字)
+    inf   ,float(\'inf\'),\'\' (空文字)
+    -inf  ,float(\'inf\'),\'\' (空文字)
+    True  ,True          ,\'1\'
+    False ,False         ,\'0\'
+    None  ,None          ,\'\' (空文字)
 
   .. code-block:: python
     :linenos:
     :caption: Pythonデータ型の変換例
-    :name: list_convTypeCode
+    :name: data_inTypeConvCode
 
     >>> import nysol.mcmd as nm
     >>> dat=[
@@ -62,16 +82,33 @@ mcmdで入力データとして扱い可能なPythonのデータ型は、文字�
 
 出力の変換
 '''''''''''''''
-mcmdの内部では全てのデータはテキストのバイトストリームとして扱われるため、
-何の指定もなくPythonデータとして出力すれば全て文字列として出力される。
+出力も入力と同様に、mcmdの内部で処理されるテキストのバイトストリームデータを
+Pythonの各種型に変換する必要が出てくる。
+特に何も指定しなければ、全て文字列として出力される。
 それら文字列を他のデータ型に変換したければ、``writelist`` メソッドを用いればよい。
 このメソッドは、項目単位で出力するデータ型を指定できる。
 変換可能なデータ型は、str,int,float,boolであり、いずれの型においてもnull値は ``None`` に変換される。
+出力時の変換規則は表 :numref:`data_outTypeConv` に示す通りで、
+実際のPythonコードとその実行結果を :numref:`data_outTypeConvCode` に示す。
+
+  .. csv-table:: mcmdの出力データのPythonのデータ型への変換規則
+    :name: data_outTypeConv
+
+    Pythonデータ型,変換前,変換後
+    string,\'abc\'       ,\'abc\'
+    int   ,\'12\'        ,12
+    float ,\'0.123\'     ,0.123
+    bool  ,\'1\'         ,True
+    bool  ,\'0\'         ,False
+    string,\'\' (空文字) ,None
+    int   ,\'\' (空文字) ,None
+    float ,\'\' (空文字) ,None
+    bool  ,\'\' (空文字) ,None
 
   .. code-block:: python
     :linenos:
-    :caption: Pythonデータ型の変換例
-    :name: list_convTypeCode
+    :caption: mcmdの出力のPythonデータ型への変換例
+    :name: data_outTypeConvCode
 
     >>> import nysol.mcmd as nm
     >>> dat=[
@@ -83,6 +120,197 @@ mcmdの内部では全てのデータはテキストのバイトストリーム�
     >>> nm.mread(i=dat).writelist(dtype="str:str,int:int,float:float,zero:bool,nonzero:bool,null:int").run()
     ['A', 10, 0.12, False, True, None]
 
+CSV
+-------------------
+CSV(Comma Separated Values)フォーマットとは、 :numref:`data/csv` に例示されるような値をカンマで区切った表構造データである。
+CSVは表構造データのフォーマットのデファクトスタンダードであり、
+アプリケーションプログラム間でのデータ交換用フォーマットとして 広く利用されている。
 
-ヘッダーの有無
+  .. code-block:: python
+    :caption: CSVデータ
+    :name: data_csv
+
+    itemID,itemName,class,price
+    0899781,bread,food,128
+    8879674,orange juice,drink,98
+    3244565,cheese,food,350
+    6711298,bowl,tableware,168
+
+mcmdでCSVファイルの指定は、 ``i="filename.csv"`` のように、ファイル名を文字列で与える。
+``i=`` ``m=`` ``o=`` ``u=`` の全てに利用可能である。
+:numref:`data_csv_io` は、 :numref:`csv_table` をリストで入力したものを
+CSVとして ``dat.csv`` に出力し(最初の ``mread`` メソッド)、
+それを再度入力データとして読み込み、``dat2.csv`` に出力する(2番目の ``mread`` メソッド)例である。
+
+  .. code-block:: python
+    :caption: CSVファイルの入出力例
+    :name: data_csv_io
+
+    >>> import nysol.mcmd as nm
+    >>> dat=[
+    ["itemID","itemName","class","price"],
+    ["0899781","bread","food",128],
+    ["8879674","orange juice","drink",98],
+    ["3244565","cheese","food",350],
+    ["6711298","bowl","tableware",168]
+    ]
+    >>> nm.mread(i=dat,o="dat.csv").run()
+    >>> nm.mread(i="dat.csv",o="dat2.csv").run()
+
+  .. code-block:: sh
+    :caption: 出力内容
+    :name: data_csv_io_output
+
+    $ cat dat.csv
+
+  .. code-block:: sh
+    :caption: :numref:`data_csv_io` の出力内容。 ``dat.csv`` と ``dat2.csv`` の内容は当然同じになる。
+    :name: data_csv
+
+    $ cat dat.csv
+    itemID,itemName,class,price
+    0899781,bread,food,128
+    8879674,orange juice,drink,98
+    3244565,cheese,food,350
+    6711298,bowl,tableware,168
+    $ cat dat2.csv
+    itemID,itemName,class,price
+    0899781,bread,food,128
+    8879674,orange juice,drink,98
+    3244565,cheese,food,350
+    6711298,bowl,tableware,168
+
+CSVの定義
+'''''''''''''''''''
+CSVは標準化協会や企業主導で作成された標準フォーマットではなく、
+それ故にベンダー毎にCSV の扱い方法が異なっているのが現状である。
+その中で2005年10月にインターネット標準である |RFC4180| としてCSVフォーマットが 提案されたのは注目すべき動きである。
+:numref:`csv_abnf` にRFC4180の中で定義されているCSVの |ABNF| 表現とその意味を示す。
+
+.. |ABNF| raw:: html
+
+  <a href="https://ja.wikipedia.org/wiki/ABNF" target="_blank">ABNF</a>
+
+.. |RFC4180| raw:: html
+
+  <a href="https://www.rfc-editor.org/info/rfc4180" target="_blank">RFC4180</a>
+
+.. list-table:: CSVのABNFによる定義とその意味
+  :name: csv_abnf
+
+  * - | **file = [header CRLF] record \*(CRLF record) [CRLF]**
+      | ファイル(file)は，ヘッダ(header)と1行以上のレコード(record)から構成される。
+      | ヘッダはなくてもよい。ヘッダとレコードの末尾には改行(CRLF)が付く。
+      | 最終レコードの改行(CRLF)は任意である。
+  * - | **header = name \*(COMMA name)**
+      | ヘッダ(header)は1つ以上の名前(name)で構成され，カンマ(COMMA)で区切られる。
+  * - | **record = field \*(COMMA field)**
+      | レコード(record)は一つ以上の項目(field)で構成されており，
+  * - | **name = field**
+      | 名前(name)は項目(field)である。
+  * - | **field = (escaped / non\-escaped)**
+      | 項目(field)はエスケープ(escaped)か，
+      | 非エスケープ(non-escaped)のいずれかである。
+  * - | **escaped = DQUOTE \*(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE**
+      | エスケープ(escaped)は，ダブルクォーツで囲まれた0個以上のテキスト文字(TEXTDATA)，
+      | カンマ(COMMA)，改行文字(CRもしくはLF)，もしくは2つの連続したダブルクォーツである。
+  * - | **non\-escaped = \*TEXTDATA**
+      | 非エスケープ(non-escaped)は0個以上のテキスト文字(TEXTDATA)である。
+  * - | **COMMA = %x2C**
+      | コンマは16進数アスキーコード2Cである。
+  * - | **CR = %x0D**
+      | キャリッジリターン(CR)は16進数アスキーコード0Dである。
+  * - | **DQUOTE = %x22**
+      | ダブルクォーツ(DQUOTE)は16進数アスキーコード22である。
+  * - | **LF = %x0A**
+      | ラインフィード(LF)は16進数アスキーコード0Aである。
+  * - | **CRLF = CR LF**
+      | 改行ラインフィードはキャリッジリターン+ラインフィードである。
+  * - | **TEXTDATA = %x20\-21 / %x23\-2B / %x2D\-7E**
+      | テキスト文字(TEXTDATA)は16進数アスキーコードで20〜21，23〜2B，もしくは2D〜7Eである。
+
+mcmdでは上述のCSVの定義に対して以下の制約を追加している。
+
+ * 項目数は全行同じでなければならない。
+ * 1行の最大長に制限を設ける(デフォルトでは1MBで、10MBまで拡張可能)
+ * 改行はLFのみとする。
+ * 最終レコードであっても改行は必須とする。
+ * テキスト文字として80〜FFを付け加える(マルチバイト文字を扱うため)。 
+
+利用するCSVファイルが上記の定義を満たしているかどうかを確かめるには
+``mchkcsv`` メソッドを用いればよい。
+
+.. _項目名ヘッダー:
+
+項目名ヘッダー
+-------------------------
+項目名ヘッダーに利用できる文字
+
+項目名ヘッダーの有無
+-------------------------
+
+
+データ変換
+----------------
+最後に、mcmdの出力データを他のデータ型に変換する方法、及びその逆、
+他のデータ型からmcmdの入力データに変換する方法を以下に整理して示しておく。
+
+転置(transpose)
+'''''''''''''''''''
+mcmdで出力されるリストは、行を要素に出力される。
+一方で列全体を一つのリストとして扱いたい場合も多い。
+そのような場合は、mcmdから出力されたリストを、以下のような方法に従って変換すれば良い。
+
+  .. code-block:: python
+    :caption: リストを転置する方法
+    :name: data_transpose
+
+    >>> import nysol.mcmd as nm
+    >>> import numpy as np
+    >>> dat=[
+    ["customer","date","amount"],
+    ["A","20180101",5200],
+    ["B","20180101",800],
+    ["B","20180112",3500],
+    ["A","20180105",2000],
+    ["B","20180107",4000]
+    ]
+
+    >>> # numpyを使った方法
+    >>> t=np.array(dat).T.tolist()
+    >>> print(t)
+    [['customer', 'A', 'B', 'B', 'A', 'B'], ['date', '20180101', '20180101', '20180112', '20180105', '20180107'], ['amount', '5200', '800', '3500', '2000', '4000']]
+
+    >>> # mapとzipを使った方法
+    >>> t=list(map(list, zip(*dat)))
+    >>> print(t)
+    [['customer', 'A', 'B', 'B', 'A', 'B'], ['date', '20180101', '20180101', '20180112', '20180105', '20180107'], ['amount', 5200, 800, 3500, 2000, 4000]]
+
+    >>> # ヘッダーを省いて転置する方法
+    >>> del dat[0]
+    >>> t=list(map(list, zip(*dat)))
+    >>> print(t)
+    [['A', 'B', 'B', 'A', 'B'], ['20180101', '20180101', '20180112', '20180105', '20180107'], [5200, 800, 3500, 2000, 4000]]
+
+
+
+辞書から
+'''''''''''''''''''
+
+辞書へ
+'''''''''''''''''''
+
+NumPyから
+'''''''''''''''''''
+
+NumPyへ
+'''''''''''''''''''
+
+Pandas dataframeから
+''''''''''''''''''''''
+
+Pandas dataframeへ
+''''''''''''''''''''''
+
+.. [#f1] 実際に変換を行うのは ``i=`` を指定した関数ではなく、 実行時に :doc:`自動追加<autoadd>` される ``readlist`` メソッドである。
 
