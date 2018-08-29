@@ -87,7 +87,7 @@ Pythonの各種型に変換する必要が出てくる。
 特に何も指定しなければ、全て文字列として出力される。
 それら文字列を他のデータ型に変換したければ、``writelist`` メソッドを用いればよい。
 このメソッドは、項目単位で出力するデータ型を指定できる。
-変換可能なデータ型は、str,int,float,boolであり、いずれの型においてもnull値は ``None`` に変換される。
+変換可能なデータ型は、str,int,float,boolであり、strは 空文字に、その他の型は ``None`` に変換される。
 出力時の変換規則は表 :numref:`data_outTypeConv` に示す通りで、
 実際のPythonコードとその実行結果を :numref:`data_outTypeConvCode` に示す。
 
@@ -100,7 +100,7 @@ Pythonの各種型に変換する必要が出てくる。
     float ,\'0.123\'     ,0.123
     bool  ,\'1\'         ,True
     bool  ,\'0\'         ,False
-    string,\'\' (空文字) ,None
+    string,\'\' (空文字) ,""
     int   ,\'\' (空文字) ,None
     float ,\'\' (空文字) ,None
     bool  ,\'\' (空文字) ,None
@@ -265,7 +265,6 @@ mcmdで出力されるリストは、行を要素に出力される。
     :caption: リストを転置する方法
     :name: data_transpose
 
-    >>> import nysol.mcmd as nm
     >>> import numpy as np
     >>> dat=[
     ["customer","date","amount"],
@@ -280,11 +279,20 @@ mcmdで出力されるリストは、行を要素に出力される。
     >>> t=np.array(dat).T.tolist()
     >>> print(t)
     [['customer', 'A', 'B', 'B', 'A', 'B'], ['date', '20180101', '20180101', '20180112', '20180105', '20180107'], ['amount', '5200', '800', '3500', '2000', '4000']]
+    >>> # 同じことをすれば元に戻る
+    >>> tt=np.array(t).T.tolist()
+    >>> print(tt)
+    [['customer', 'date', 'amount'], ['A', '20180101', '5200'], ['B', '20180101', '800'], ['B', '20180112', '3500'], ['A', '20180105', '2000'], ['B', '20180107', '4000']]
+
 
     >>> # mapとzipを使った方法
     >>> t=list(map(list, zip(*dat)))
     >>> print(t)
     [['customer', 'A', 'B', 'B', 'A', 'B'], ['date', '20180101', '20180101', '20180112', '20180105', '20180107'], ['amount', 5200, 800, 3500, 2000, 4000]]
+    >>> # 同じことをすれば元に戻る
+    >>> tt=list(map(list, zip(*t)))
+    >>> print(tt)
+    [['customer', 'date', 'amount'], ['A', '20180101', 5200], ['B', '20180101', 800], ['B', '20180112', 3500], ['A', '20180105', 2000], ['B', '20180107', 4000]]
 
     >>> # ヘッダーを省いて転置する方法
     >>> del dat[0]
@@ -292,25 +300,127 @@ mcmdで出力されるリストは、行を要素に出力される。
     >>> print(t)
     [['A', 'B', 'B', 'A', 'B'], ['20180101', '20180101', '20180112', '20180105', '20180107'], [5200, 800, 3500, 2000, 4000]]
 
+辞書型(Dictionary)
+'''''''''''''''''''''''''''''''''''''''
+mcmdの出力結果を辞書型に変換する方法、および辞書型のデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_dict` に示される通りである。
+
+  .. code-block:: python
+    :caption: 辞書型をヘッダー付きリストに変換する方法
+    :name: data_dict
+
+    >>> # 以下のデータをmcmdの出力結果と想定する。
+    >>> dat=[
+    ["customer","date","amount"],
+    ["A","20180101",5200],
+    ["B","20180101",800],
+    ["B","20180112",3500],
+    ["A","20180105",2000],
+    ["B","20180107",4000]
+    ]
+
+    >>> # mcmdの出力リストを辞書型に変
+    >>> name=dat.pop(0)
+    >>> t=list(map(list, zip(*dat))) # 転置は上述の他の方法でもよい
+    >>> d=dict(zip(name,t))
+    >>> print(d)
+    {'customer': ['A', 'B', 'B', 'A', 'B'], 'date': ['20180101', '20180101', '20180112', '20180105', '20180107'], 'amount': [5200, 800, 3500, 2000, 4000]}
+
+    >>> # 辞書型のデータをmcmdの入力リストに変換
+    >>> b=list(map(list,zip(*list(a.values()))))
+    >>> b.insert(0,list(a.keys()))
+    >>> print(b)
+    [['customer', 'date', 'amount'], ['A', '20180101', 5200], ['B', '20180101', 800], ['B', '20180112', 3500], ['A', '20180105', 2000], ['B', '20180107', 4000]]
 
 
-辞書から
+行を辞書型としたリスト
+'''''''''''''''''''''''''''''''''''''''
+mcmdの出力結果を行を辞書型としたリストに変換する方法、および行を辞書型としたリストのデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_listdict` に示される通りである。
+
+  .. code-block:: python
+    :caption: 行ごとに単位に辞書型をヘッダー付きリストに変換する方法
+    :name: data_listdict
+
+    >>> # 以下のデータをmcmdの出力結果と想定する。
+    >>> dat=[
+    ["customer","date","amount"],
+    ["A","20180101",5200],
+    ["B","20180101",800],
+    ["B","20180112",3500],
+    ["A","20180105",2000],
+    ["B","20180107",4000]
+    ]
+   
+    >>> name=dat.pop(0)
+    >>> a=list(map(lambda x: dict(zip(name,x)), dat))
+    >>> print(a)
+    [{'customer': 'A', 'date': '20180101', 'amount': 5200}, {'customer': 'B', 'date': '20180101', 'amount': 800}, {'customer': 'B', 'date': '20180112', 'amount': 3500}, {'customer': 'A', 'date': '20180105', 'amount': 2000}, {'customer': 'B', 'date': '20180107', 'amount': 4000}]
+
+    >>> b=list(map(lambda x: list(x.values()),a))
+    >>> b.insert(0,list(a[0].keys()))
+    >>> print(b)
+    [['customer', 'date', 'amount'], ['A', '20180101', 5200], ['B', '20180101', 800], ['B', '20180112', 3500], ['A', '20180105', 2000], ['B', '20180107', 4000]]
+
+NumPy
 '''''''''''''''''''
+mcmdの出力結果をNumPyに変換する方法、およびNumPyのデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_numpy` に示される通りである。
 
-辞書へ
-'''''''''''''''''''
+  .. code-block:: python
+    :caption: NumPyデータの変換
+    :name: data_numpy
 
-NumPyから
-'''''''''''''''''''
+    >>> import numpy as np
+    >>> # 以下のデータをmcmdの出力結果と想定する。
+    >>> dat=[
+    ["quantity","amount"],
+    [5,5200],
+    [2,800],
+    [1,3500],
+    [6,2000],
+    [3,4000]
+    ]
 
-NumPyへ
-'''''''''''''''''''
+    >>> # mcmdの出力リストをNumPyに変換
+    >>> name=dat.pop(0)
+    >>> t=np.array(dat).T
+    >>> print(t)
+    [[   5    2    1    6    3]
+     [5200  800 3500 2000 4000]]
 
-Pandas dataframeから
+    >>> # NumPyのデータをmcmdの入力リストに変換
+    >>> tt=t.T.tolist()
+    >>> tt.insert(0,name)
+    >>> print(tt)
+    [['quantity', 'amount'], [5, 5200], [2, 800], [1, 3500], [6, 2000], [3, 4000]]
+ 
+Pandas DataFrame
 ''''''''''''''''''''''
+mcmdの出力結果をPandas DataFrameに変換する方法、およびPandas DataFrameのデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_pandas` に示される通りである。
 
-Pandas dataframeへ
-''''''''''''''''''''''
+  .. code-block:: python
+    :caption: Pandas DataFrameデータの変換
+    :name: data_pandas
+
+    >>> import pandas as pd
+    >>> # 以下のデータをmcmdの出力結果と想定する。
+    >>> dat=[
+    ["customer","date","amount"],
+    ["A","20180101",5200],
+    ["B","20180101",800],
+    ["B","20180112",3500],
+    ["A","20180105",2000],
+    ["B","20180107",4000]
+    ]
+
+    >>> # mcmdの出力リストをPandas DataFrameに変換
+    >>> name=dat.pop(0)
+    >>> df=pd.DataFrame(dat,columns=name)
+    >>> print(df)
+
+    >>> # Pandas DataFrameのデータをmcmdの入力リストに変換
+    >>> a=df.values.tolist()
+    >>> a.insert(0,list(df.columns))
+    >>> print(a)
+
 
 .. [#f1] 実際に変換を行うのは ``i=`` を指定した関数ではなく、 実行時に :doc:`自動追加<autoadd>` される ``readlist`` メソッドである。
 

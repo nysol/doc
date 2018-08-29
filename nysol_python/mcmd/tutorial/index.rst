@@ -12,3 +12,4 @@
   friend
   transition
 
+  onlinestore
