@@ -4,6 +4,7 @@ import os
 import sys
 import re
 import subprocess
+from datetime import datetime
 
 argv=sys.argv
 if len(argv)!=2:
@@ -11,6 +12,8 @@ if len(argv)!=2:
 	print("事前に010,020を動かして例題のrstを生成しなければならない")
 	print("%s mcut"%argv[0])
 	exit()
+
+sys.stderr.write("START: "+" ".join(argv)+" "+str(datetime.now())+"\n")
 
 # texのpath
 iPath=os.path.expanduser("~/nysol/nysolx/doc/mcmd/jp")
@@ -22,9 +25,11 @@ iFile="%s/%s.tex"%(iPath,name)
 sFile="%s/%s.rst"%(sPath,name) # サンプルrst
 
 def convText(txt):
-	txt1=re.sub("\\\\verb\|(.*?)\|"," ``\\1`` ",txt.strip()).strip()
-	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1)
-	return txt2
+	txt1=re.sub("\\\\verb\|(.*?)\|"," ``\\1`` ",txt.strip()).strip() # \verb|xx| => ``xx``
+	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1) # -q => q=True
+	txt3=re.sub("ファイル名", "データ",txt2) # ファイル名 => データ
+	txt4=re.sub("ファイル", "データ",txt3) # ファイル => データ
+	return txt4
 
 def rmVerb(txt):
 	convText=re.sub("\\\\verb\|(.*?)\|"," \\1 ",txt.strip()).strip()
@@ -39,6 +44,19 @@ def getSample(sFile):
 	with open(sFile,"r") as fpr:
 		doc=fpr.read()
 	return doc
+
+# デフォルト値を返す
+def getDefault(name,kwd):
+	ret=""
+	if kwd=="i=" or kwd=="m=":
+		ret="標準入力"
+	elif kwd=="o=" or kwd=="u=":
+		ret="標準出力"
+	elif name=="mchgnum" and kwd=="O=":
+		ret="null値"
+	elif name=="mchgstr" and kwd=="O=":
+		ret="null値"
+	return ret
 
 ##\section{mcut 項目の選択\label{sect:mcut}}
 # mcut: 項目の選択
@@ -55,11 +73,12 @@ with open(iFile,"r") as fpr:
 	sectBlock=False
 	formBlock=False
 	relatedBlock=False
-	comParams=[]
+	comParams=[] # 共通パラメータリスト
+	mandParams=[] # 必須パラメータリスト
 	for line in fpr:
 		line=line.strip()
 		#print(line,paramBlock,sectBlock,relatedBlock)
-		#print("xxxxxxxxxxxxxx",line,line==r"\end{table}")
+		#print("xxxxxxxxxxxxxx",line)
 		if line=="": # 空行飛ばし
 			continue
 		if line[0]=="%": # コメント飛ばし
@@ -108,6 +127,17 @@ with open(iFile,"r") as fpr:
 			com=re.sub("option_(.*)","\\1",com)
 			com=re.sub("option_(.*)","\\1",com) # tmppathの前に/optionが2つついているため
 			comParams.append(":ref:`%s=<common_param_%s>`\n"%(com,com))
+		elif formBlock and re.search(name,line): # 必須かどうかの情報を得る
+			if re.search("verb\|",line): # verb|xxx|
+				form=re.sub("\\\\verb\|","",line)
+				form=re.sub("\|","",form)
+			elif re.search("verb\/",line): # verb/xxx/
+				form=re.sub("\\\\verb\/","",line)
+				form=re.sub("\/","",form)
+			form=re.sub(name+" ","",form)
+			for p in form.strip().split(" "):
+				if p[0]!="[":
+					mandParams.append(p)
 
 		# パラメータsubsectionの処理
 		##############
@@ -187,13 +217,17 @@ with open(iFile,"r") as fpr:
 				kwd=rmVerb(cols[0])
 				if(kwd[0]=="-"):
 					print("    * - | **%sTrue|False**"%(opt2par(kwd)))
-					print("        |   optional")
-					print("        |   default:False")
+					print("        |   任意")
+					print("        |   デフォルト:False")
 					print("      - |   %s"%(convText(cols[1])))
 				else:
 					print("    * - | **%s**"%(kwd))
-					print("        |   optional")
-					print("        |   default:")
+					if kwd in mandParams:
+						print("        |   必須")
+					else:
+						print("        |   任意")
+						default=getDefault(name,kwd)
+						print("        |   デフォルト:%s"%(default))
 					print("      - |   %s"%(convText(cols[1])))
 			else:
 				print("        |   %s"%(convText(cols[1])))

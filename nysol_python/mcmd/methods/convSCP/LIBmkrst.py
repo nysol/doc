@@ -23,7 +23,7 @@ import os
 #     >>> nm.mcut(f="顧客,金額:売上", i=dat1).run()
 #     [['A', '10'], ['A', '20'], ['B', '15'], ['B', '10'], ['B', '20']]
 #
-def run(scp,title,comment,dat_str):
+def run(scp,title,comment,dat_str,outputs):
 	# 結果を得るために例題のスクリプトを実行できる形で生成する
 	# import文の追加+データ定義
 	with open("xxscp","w") as fpw:
@@ -31,12 +31,16 @@ def run(scp,title,comment,dat_str):
 		for dat in dat_str:
 			fpw.write(dat)
 		fpw.write("print("+scp+")")
-	os.system("python xxscp >xxresult") #実行
+	os.system("python xxscp >/dev/null") #実行
 
-	# 実行結果がresultに入る
-	result=None
-	with open("xxresult","r") as fpr:
-		result=fpr.read()
+	# 実行結果がoutputsのファイル名に入る
+	result=[]
+	for fname in outputs.split(","):
+		with open(fname,"r") as fpr:
+			dat="## %s の内容\n"%(fname) + fpr.read()
+			dat=dat[:-1] # 最後に変な文字が入っているので削除
+			#dat=dat[:-1]+"\n" # 最後に変な文字が入っているので削除
+			result.append(re.sub("^","    # ",dat,flags=(re.MULTILINE)))
 
 	# 出力
 	print("**"+title.strip()+"**")
@@ -47,7 +51,7 @@ def run(scp,title,comment,dat_str):
 	print("    :linenos:")
 	print("")
 	print("    >>> "+scp.strip())
-	print("    "+result)
+	print("\n".join(result))
 	print("")
 
 ##########################################################################
@@ -71,15 +75,14 @@ def run(scp,title,comment,dat_str):
 def run_data(dat_str):
 	txt=""
 
-	txt+="**入力データ**\n"
+	txt+="**importと入力データ(CSV)の準備**\n"
 	txt+="  .. code-block:: python\n"
 	txt+="    :linenos:\n"
 	txt+="\n"
+	txt+="    import nysol.mcmd as nm"
+	txt+="    \n"
 	for dat in dat_str:
-		dat2=re.sub("\[","    [",dat.strip())
-		dat3=re.sub("^\]$","    ]",dat2,flags=(re.MULTILINE))
-		dat4=re.sub("= +\[","=[",dat3)
-		txt+="    >>> %s"%dat4
-		txt+="\n"
+		dat2=re.sub("^","    ",dat,flags=(re.MULTILINE))
+		txt+="    %s"%dat2
 	print(txt)
 

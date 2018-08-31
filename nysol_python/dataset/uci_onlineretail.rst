@@ -113,7 +113,7 @@ mcmdでは、日付はyyyymmddの8桁固定長に、時刻はhhmmssの6桁固定
 
   .. code-block:: bash
     :linenos:
-    :caption: 日付時刻項目が固定長に変換されたCSVデータ
+    :caption: 日付時刻項目が固定長に変換されたCSVデータ(onlineRetail2.csv)
     :name: uci_online2_csv
 
     $ head onlineRetail2.csv 

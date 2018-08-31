@@ -41,6 +41,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
+		'sphinx.ext.mathjax',
 ]
 
 todo_include_todos=True

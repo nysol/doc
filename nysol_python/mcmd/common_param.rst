@@ -12,8 +12,16 @@ i=
 assert_diffSizez=
 ------------------------------
 
+.. _common_param_assert_nullkey:
+assert_nullkey=
+------------------------------
+
 .. _common_param_assert_nullin:
 assert_nullin=
+------------------------------
+
+.. _common_param_assert_nullout:
+assert_nullout=
 ------------------------------
 
 .. _common_param_nfn:
@@ -32,10 +40,18 @@ o=
 precision=
 ------------------------------
 
+.. _common_param_q:
+q=
+------------------------------
+
 .. _common_param_x:
 x=
 ------------------------------
 
 .. _common_param_tmppath:
 tmppath=
+------------------------------
+
+.. _common_param_bufcount:
+bufcount=
 ------------------------------

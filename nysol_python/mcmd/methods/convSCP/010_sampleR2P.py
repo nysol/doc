@@ -6,14 +6,20 @@ import re
 from datetime import datetime
 
 fldMap={}
-fldMap["顧客"]=("str","customer")
-fldMap["数量"]=("num","quantity")
-fldMap["金額"]=("num","amount")
-fldMap["売上"]=("num","sales")
+fldMap["数量累計"]=("num","qttAccum")
+fldMap["金額累計"]=("num","amtAccum")
 fldMap["数量合計"]=("num","qttTotal")
 fldMap["金額合計"]=("num","amtTotal")
 fldMap["数量平均"]=("num","qttTotal")
 fldMap["金額平均"]=("num","amtTotal")
+fldMap["性別"]=("str","gender")
+fldMap["女性"]=("str","female")
+fldMap["男性"]=("str","male")
+fldMap["日付"]=("str","date")
+fldMap["顧客"]=("str","customer")
+fldMap["数量"]=("num","quantity")
+fldMap["金額"]=("num","amount")
+fldMap["売上"]=("num","sales")
 # fldMapのkeyを文字数降順に並mtべ替える。
 # 置換処理の時に、長い順に処理しないとおかしなことになるから。
 fldMapKey=list(fldMap)
@@ -26,7 +32,7 @@ if len(argv)!=2:
 	print("%s mcut"%argv[0])
 	exit()
 
-print("START: "+" ".join(argv),datetime.now())
+sys.stderr.write("START: "+" ".join(argv)+" "+str(datetime.now())+"\n")
 
 iFile="./samples/ruby/%s.rb"%argv[1]
 oFile="./samples/python/%s.py"%argv[1]
@@ -57,50 +63,86 @@ def convText(txt):
 	#print("txt2",txt2)
 	txt3=toEng(txt2,True)
 	#print("txt3",txt3)
-	return txt3
+	return txt3.strip()
 
 # \verb|xx| => xx
 def rmVerb(txt):
 	convText=re.sub("\\\\verb\|(.*?)\|"," \\1 ",txt.strip()).strip()
 	return convText
 
+# ダブルクォーツとシングルクォーツを考慮したsplit
+def split2(txt,sep):
+	inDBL=False
+	inSGL=False
+	s=""
+	sp=[]
+	for i in range(len(txt)):
+		if inSGL:
+			if txt[i]=="'":
+				inSGL=False
+				continue
+		elif inDBL:
+			if txt[i]=='"':
+				inDBL=False
+				continue
+		elif txt[i]=="'":
+			inSGL= True
+			continue
+		elif txt[i]=='"':
+			inDBL= True
+			continue
+		elif txt[i]==sep:
+			sp.append(s)
+			s=""
+			continue
+
+		s+=txt[i]
+		if i==len(txt)-1:
+			sp.append(s)
+	return sp
+
+
 # コマンドをnmメソッドに変換
 # mcut f=顧客,金額 -r i=dat1.csv o=rsl1.csv
 # =>
-# nm.mcut(f="顧客,金額:売上", r=True, i=dat1)
+# nm.mcut(f="顧客,金額:売上", r=True, i="dat1.csv", o="rsl1.csv")
 def convMethod(txt):
-	token=txt.split(" ")
+	# 不規則なエラー対応のためのブロック
+	#if re.search("mchgnum", txt):
+	#	txt=re.sub('"out of range"',"outOfRange",txt)
+	#elif re.search("mchgstr", txt):
+	#	txt=re.sub('"out of range"',"outOfRange",txt)
+	#	txt=re.sub('"item info"',"itemInfo",txt)
+	print("convMethod:",txt)
+
+	#token=txt.split(" ")
+	token=split2(txt," ")
+	print(token)
 	params=[]
+	outputs=[]
 	for i in range(1,len(token)):
+		print(i,token[i])
 		if token[i][0]=="-":
 			params.append(token[i][1:]+"=True")
 		else:
 			pp=token[i].split("=")
-			if pp[0]=="i" or pp[0]=="m":
-				params.append(pp[0]+'='+re.sub(u".csv","",pp[1]))
-			elif pp[0]=="o":
-				continue
+			if pp[0]=="i" or pp[0]=="m" or pp[0]=="o" or pp[0]=="u":
+				params.append(pp[0]+'="'+pp[1]+'"')
+				if pp[0]=="o" or pp[0]=="u":
+					outputs.append(pp[1])
 			else:
 				params.append(pp[0]+'="'+toEng(pp[1])+'"')
 	method="nm.%s(%s).run()"%(token[0],", ".join(params))
-	return method
+	return method,outputs
 
-# CSVヘッダを解釈し、項目名文字列と型リストを返す
+# CSVヘッダを解釈し、項目名を英語に変換
 # input(txt): 顧客,数量,金額
-# output1(header): "顧客","数量","金額"
-# output2(fldTypes): ["str","num","num"]
+# output: "customer","quantity","amount"
 def parseHeader(txt):
-	fldTypes=[]
-	headers=[]
-	#header='"'+re.sub(",",'","',line)+'"'
+	flds=[]
 	for fld in txt.split(","):
-		if fld in fldMap:
-			headers.append('"'+fldMap[fld][1]+'"')
-			fldTypes.append(fldMap[fld][0])
-		else:
-			headers.append('"'+fld+'"')
-			fldTypes.append("str")
-	return ",".join(headers),fldTypes
+		flds.append(toEng(fld))
+	return ",".join(flds)
 
 ###################################
 # ここからmain
@@ -173,6 +215,8 @@ with open(iFile,"r") as fpr:
 	commentBlock=False
 	scpBlock=False
 	scpFirstTime=True
+	outputs=None
+
 	for line in fpr:
 		#print(line,fileBlock,headerBlock,commentBlock)
 		line=line.strip()
@@ -208,62 +252,43 @@ with open(iFile,"r") as fpr:
 		#=======
 		# 変換後
 		#=======
-		# dat1=[
-		# ["顧客","数量","金額"],
-		# ["A",1,10],
-		# ["A",2,20],
-		# ["B",1,15],
-		# ["B",3,10],
-		# ["B",1,20]
-		# ]
-		# dat_str.append("""
-		# 		dat1=[
-		# 		["顧客","数量","金額"],
-		# 		["A",1,10],
-		# 		["A",2,20],
-		# 		["B",1,15],
-		# 		["B",3,10],
-		# 		["B",1,20]
-		# 		]
-		# """)
+		# with open("xxham", mode='w') as f:
+		#	  f.write(
+		#	'''顧客,数量,金額
+		# A,1,10
+		# A,2,20
+		# B,1,15
+		# B,3,10
+		# B,1,20
+		#	''')
 		elif line.find(r"fpw.write(")!=-1:
 			dat=""
 			datName=re.sub("File\.open\(\"(.*)\.csv.*$","\\1",line).strip()
-			dat+=("%s=[\n"%datName)
+			dat+="with open('%s.csv','w') as f:\n"%datName
+			dat+="  f.write(\n"
+			dat+=("'''")
 			lines=[]
 			fileBlock=True
 
 		elif fileBlock and line==r"EOF":
-			dat+=",\n".join(lines)
-			dat+=("\n]\n")
+			dat+=("''')\n")
 			scp+=dat
 			scp+='dat_str.append("""\n'
 			scp+=dat
 			scp+='""")'
 			fileBlock=False
+			continue
 
 		elif fileBlock and line=="<<'EOF'":
 			headerBlock=True
 			continue
 		elif fileBlock:
 			if headerBlock: # ヘッダー行
-				header,fldType=parseHeader(line)
+				header=parseHeader(line)
+				dat+=(header+"\n")
 				headerBlock=False
-				lines.append("["+header+"]")
 			else: # 値の行
-				values=[]
-				i=0
-				for fld in line.split(","):
-					if fld=="":
-						values.append('None')
-					elif fldType[i]=="str":
-						values.append('"%s"'%fld)
-					elif fldType[i]=="num":
-						values.append('%s'%fld)
-					else:
-						values.append('"%s"'%fld)
-					i+=1
-				lines.append("["+",".join(values)+"]")
+				dat+=(toEng(line)+"\n")
 
 		#######################################################################################
 		# スクリプトの処理
@@ -288,7 +313,7 @@ with open(iFile,"r") as fpr:
 		# 「顧客」と「金額」項目を選択する。ただし、「金額」項目は「売上」と名前を変更して出力している。
 		# """
 		# scp="""
-		# nm.mcut(f="顧客,金額:売上", i=dat1).run()
+		# nm.mcut(f="顧客,金額:売上", i=dat1, o="rsl1.csv").run()
 		# """
 		# LIBmkrst.run(scp,title,comment,dat_str)
 
@@ -320,11 +345,13 @@ with open(iFile,"r") as fpr:
 		elif scpBlock and re.search("more ",line):
 			continue
 		elif scpBlock:
-			scp+=(convMethod(line)+"\n")
+			methods,outputs=convMethod(line)
+			scp+=(methods+"\n")
 
 		# run
 		elif re.search(r"^run\(",line):
-			scp+=("LIBmkrst."+re.sub(r"comment","comment,dat_str",line)+"\n")
+			#scp+=("LIBmkrst."+re.sub(r"comment","comment,dat_str",line)+"\n")
+			scp+=("LIBmkrst.run(scp,title,comment,dat_str,'%s')"%(','.join(outputs)))
 
 # 出力
 with open(oFile,"w") as fpw:

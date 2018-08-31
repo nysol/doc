@@ -19,6 +19,8 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
 
    mcmdモジュール<mcmd>
    takeモジュール<take>
+   dataset/index
+   glossary
    memo_rst
 
 
