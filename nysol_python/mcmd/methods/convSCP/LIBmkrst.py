@@ -27,15 +27,18 @@ def run(scp,title,comment,dat_str,outputs):
 	# 結果を得るために例題のスクリプトを実行できる形で生成する
 	# import文の追加+データ定義
 	with open("xxscp","w") as fpw:
-		fpw.write("import nysol.mcmd as nm")
+		fpw.write("import nysol.mcmd as nm\n")
 		for dat in dat_str:
 			fpw.write(dat)
-		fpw.write("print("+scp+")")
+		#fpw.write("print("+scp+")")
+		fpw.write(scp)
 	os.system("python xxscp >/dev/null") #実行
 
 	# 実行結果がoutputsのファイル名に入る
 	result=[]
 	for fname in outputs.split(","):
+		if fname=="":
+			break
 		with open(fname,"r") as fpr:
 			dat="## %s の内容\n"%(fname) + fpr.read()
 			dat=dat[:-1] # 最後に変な文字が入っているので削除

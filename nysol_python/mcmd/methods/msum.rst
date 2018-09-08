@@ -53,7 +53,6 @@ msum 項目値の合計
 利用例
 ''''''''''''
 
-rsl1.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -72,8 +71,8 @@ rsl1.csv
     
 **基本例**
 
- ``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の合計値を計算し、
- ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の合計値を計算し、
+``qttTotal`` と ``amtTotal`` という項目名で出力する。
 
 
   .. code-block:: python

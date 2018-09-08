@@ -54,9 +54,6 @@ mcut 項目の選択
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -84,7 +81,7 @@ rsl3.csv
     
 **基本例**
 
- ``customer`` と ``amount`` 項目を選択する。ただし、 ``amount`` 項目は ``sales`` と名前を変更して出力している。
+``customer`` と ``amount`` 項目を選択する。ただし、 ``amount`` 項目は ``sales`` と名前を変更して出力している。
 
 
   .. code-block:: python
@@ -119,7 +116,7 @@ rsl3.csv
 **項目名なしデータ**
 
 ヘッダなし入力ファイルから、0,2番目の項目を選択し、
- ``customer`` と ``amount`` という名前で出力する。
+``customer`` と ``amount`` という名前で出力する。
 
 
   .. code-block:: python

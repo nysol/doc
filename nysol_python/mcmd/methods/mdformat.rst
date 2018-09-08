@@ -59,9 +59,6 @@ mdformat 日付時刻抽出
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

@@ -29,7 +29,7 @@ mdelnull NULL値行の削除
       - |   削除(撰択)する単位となるキー項目名（複数項目指定可）を指定する。
     * - | **u=**
         |   任意
-        |   デフォルト:標準出力
+        |   デフォルト:出力しない
       - |   不一致データ出力データを指定する。
     * - | **bufcount=**
         |   任意
@@ -69,11 +69,6 @@ mdelnull NULL値行の削除
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
-rsl4.csv
-rsl5.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

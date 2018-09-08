@@ -9,7 +9,9 @@
   m2cross
   maccum
   mavg
+  mbest
   mbucket
+  mcat
   mchgnum
   mchgstr
   mcombi
@@ -30,4 +32,52 @@
   mmvavg
   mmvsim
   mmvstats
+  mnewnumber
+  mnewrand
+  mnewstr
+  mnjoin
+  mnormalize
+  mnrcommon
+  mnrjoin
+  mnullto
+  mnumber
+  mpadding
+  mpaste
+  mproduct
+  mrand
+  mrjoin
+  msed
+  msel
+  mselnum
+  mselrand
+  mselstr
+  msep
+  msetstr
+  mshare
+  mshuffle
+  msim
+  mslide
+  msortf
+  msplit
+  mstats
   msum
+  msummary
+  mtab2csv
+  mtonull
+  mtra
+  mtrafld
+  mtraflg
+  muniq
+  mvcat
+  mvcommon
+  mvcount
+  mvdelim
+  mvdelnull
+  mvjoin
+  mvnullto
+  mvreplace
+  mvsort
+  mvuniq
+  mwindow
+  mxml2csv
+

@@ -12,6 +12,8 @@ fldMap["数量合計"]=("num","qttTotal")
 fldMap["金額合計"]=("num","amtTotal")
 fldMap["数量平均"]=("num","qttTotal")
 fldMap["金額平均"]=("num","amtTotal")
+fldMap["金額基準値"]=("num","amtNorm")
+fldMap["数量基準値"]=("num","qttNorm")
 fldMap["性別"]=("str","gender")
 fldMap["女性"]=("str","female")
 fldMap["男性"]=("str","male")
@@ -108,20 +110,23 @@ def split2(txt,sep):
 # nm.mcut(f="顧客,金額:売上", r=True, i="dat1.csv", o="rsl1.csv")
 def convMethod(txt):
 	# 不規則なエラー対応のためのブロック
-	#if re.search("mchgnum", txt):
-	#	txt=re.sub('"out of range"',"outOfRange",txt)
-	#elif re.search("mchgstr", txt):
-	#	txt=re.sub('"out of range"',"outOfRange",txt)
-	#	txt=re.sub('"item info"',"itemInfo",txt)
+	if re.search("mbest", txt):
+		txt=re.sub('from=',"fr=",txt)
+	elif re.search("mcat", txt) and re.search("<", txt):
+		txt=""
+	elif re.search("mnrjoin", txt) or re.search("mrjoin", txt) or re.search("mnrcommon", txt):
+		txt=re.sub('r=',"rf=",txt)
 	print("convMethod:",txt)
 
 	#token=txt.split(" ")
+	txt=re.sub(" +"," ",txt)
 	token=split2(txt," ")
 	print(token)
 	params=[]
 	outputs=[]
+	method=""
 	for i in range(1,len(token)):
-		print(i,token[i])
+		#print(i,token[i])
 		if token[i][0]=="-":
 			params.append(token[i][1:]+"=True")
 		else:
@@ -132,7 +137,8 @@ def convMethod(txt):
 					outputs.append(pp[1])
 			else:
 				params.append(pp[0]+'="'+toEng(pp[1])+'"')
-	method="nm.%s(%s).run()"%(token[0],", ".join(params))
+	if len(token)!=0:
+		method="nm.%s(%s).run()"%(token[0],", ".join(params))
 	return method,outputs
 
 # CSVヘッダを解釈し、項目名を英語に変換
@@ -263,8 +269,8 @@ with open(iFile,"r") as fpr:
 		#	''')
 		elif line.find(r"fpw.write(")!=-1:
 			dat=""
-			datName=re.sub("File\.open\(\"(.*)\.csv.*$","\\1",line).strip()
-			dat+="with open('%s.csv','w') as f:\n"%datName
+			datName=re.sub("File\.open\(\"(.*?\..*?)\".*$","\\1",line).strip()
+			dat+="with open('%s','w') as f:\n"%datName
 			dat+="  f.write(\n"
 			dat+=("'''")
 			lines=[]
@@ -342,9 +348,10 @@ with open(iFile,"r") as fpr:
 		elif scpBlock and line=="EOF":
 			scp+=('"""'+"\n")
 			scpBlock=False
-		elif scpBlock and re.search("more ",line):
+		elif scpBlock and (re.search("more ",line) or re.search("ls ",line)):
 			continue
 		elif scpBlock:
+			#print("line",line)
 			methods,outputs=convMethod(line)
 			scp+=(methods+"\n")
 

@@ -49,8 +49,6 @@ mduprec レコードの複写
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -67,7 +65,7 @@ rsl2.csv
     
 **基本例**
 
- ``quantity`` 項目の値の数分、データを複写し複数行のデータを生成する。
+``quantity`` 項目の値の数分、データを複写し複数行のデータを生成する。
 対象項目がNULL値の場合は複写しない。
 
 

@@ -4,7 +4,7 @@
 mcmdでは行単位およびキー単位のイテレータが用意されている。
 既存のmcmdメソッドを組み合わせるだけでは困難な処理があった場合に利用でき、
 行単位もしくはキーブロック単位で処理するPythonコードを書くことができる。
-表:numref:`iterator_list` にmcmdが提供するイテレータの一覧を示している。
+表 :numref:`iterator_list` にmcmdが提供するイテレータの一覧を示している。
 
   .. list-table:: 処理フローオブジェクトで利用できるメンバーメソッド一覧
     :header-rows: 1
@@ -19,12 +19,14 @@ mcmdでは行単位およびキー単位のイテレータが用意されてい�
         * ``otype`` ="list" | "dict"
         * ``skeys`` =項目名リスト,
         * ``keys`` =項目名リスト
+        * ``header`` =True|False
         * ``q`` =True|False
-    * - keyblock: キー単位のイテレータ
+    * - `keyblock: キー単位のイテレータ`_
       - * ``dtype`` ={項目名:str|int|float|bool,...}
         * ``otype`` ="list" | "dict"
         * ``skeys`` =項目名リスト,
         * ``keys`` =項目名リスト
+        * ``header`` =True|False
         * ``q`` =True|False
 
 
@@ -32,12 +34,11 @@ __iter__: 行イテレータ
 ---------------------------
 処理フローオブジェクトにはイテレータメソッド(__iter__)が定義されており、
 行単位にリストに出力する繰り返し処理を可能としている。
-図:numref:`flow_iter` は、for in 文を使って一行づつ出力している例である。
+図 :numref:`flow_iter` は、for-in 文を使って一行づつ出力している例である。
 すべての値は文字列として出力されることに注意されたい。
 これは、mcmdが内部ではデータをすべてテキストのバイトストリームとして処理しているためである。
 項目別に型を指定するのであれば、``getline`` メソッドを使えば良い。
-また、先頭の項目名行は出力されないのは仕様である。
-項目名でデータを扱いたければ、これも``getline`` メソッドを使えば辞書型として出力される。
+また、先頭の項目名行は出力されないのは仕様であり、これも ``getline`` を使えば出力できる。
 
   .. code-block:: python
     :linenos:
@@ -69,10 +70,13 @@ __iter__: 行イテレータ
 getline: 出力形式指定行イテレータ
 ------------------------------------------
 ``getline`` メソッドは、出力形式を制御できるイテレータである。
+``otype="dict"`` を指定することで、リストではなく項目名をキーとする辞書型で出力することが可能で、
+``header=True`` でヘッダー行を出力することが可能となる。
 ``dtype`` パラメータによって出力項目の型を指定し、``otype`` によってコンテナ型としてリストもしくは辞書を指定できる。
 ``dtype`` を指定しなければ、全ての項目は文字列として出力され、``otype`` を指定しなければリストで出力される。
 また ``skeys`` で項目名を指定すると、事前に指定した項目でソーティングできる。
 さらに ``keys`` の指定によりキーブレイク情報も出力可能となる。
+
 
 .. list-table::
   :header-rows: 1
@@ -105,12 +109,35 @@ getline: 出力形式指定行イテレータ
     - | 指定された項目名リストに従ったキーブレイク情報も出力する。
       |   出力されるデータ形式はタプルで、([行データ],top,bottom)となる。
       | 例) keys="customer,date"
+  * - | **header=True|False**
+      |   optional
+      |   default:False
+    - | ヘッダー行も出力する。
   * - | **q=True|False**
       |   optional
       |   default:False
     - | ``k=`` 項目で事前にソートしない。
 
-:numref:`flow_getline` は、:numref:`flow_iter` と同様のデータについて、``amount`` のみを整数(``int`` )で出力し、
+:numref:`iter_header` は、:numref:`flow_iter` と同様の処理を項目名ヘッダーの出力を加えた処理になっている。
+
+  .. code-block:: python
+    :linenos:
+    :caption: データ型を指定してのイテレータの利用スクリプト
+    :name: iter_header
+
+    f=nm.mcut(f="customer,date,amount",i=dat).getline(header=True)
+    for line in f:
+      print(line)
+    # 以下、出力内容
+    # ['customer', 'date', 'amount']
+    # ['A', '20180101', '5200']
+    # ['B', '20180101', '800']
+    # ['B', '20180112', '3500']
+    # ['A', '20180105', '2000']
+    # ['B', '20180107', '4000']
+
+
+:numref:`flow_getline` は、 :numref:`flow_iter` と同様のデータについて、``amount`` のみを整数(``int`` )で出力し、
 コンテナとして辞書型(``dict`` ) を指定している。
 
   .. code-block:: python
@@ -119,19 +146,14 @@ getline: 出力形式指定行イテレータ
     :name: flow_getline
 
     dtype = {'customer':'str', 'date':'str', 'amount':'int'}
-    f=nm.mcut(f="customer,date,amount",i=dat).getline(dtype=dtype,otype="dict"):
+    f=nm.mcut(f="customer,date,amount",i=dat).getline(dtype=dtype,otype="dict")
     for line in f:
       print(line)
-
-  .. code-block:: sh
-    :caption: :numref:`flow_getline` の実行結果
-    :name: flow_getline_result
-
-    {'customer': 'A', 'date': '20180101', 'amount': 5200}
-    {'customer': 'B', 'date': '20180101', 'amount': 800}
-    {'customer': 'B', 'date': '20180112', 'amount': 3500}
-    {'customer': 'A', 'date': '20180105', 'amount': 2000}
-    {'customer': 'B', 'date': '20180107', 'amount': 4000}
+    # {'customer': 'A', 'date': '20180101', 'amount': 5200}
+    # {'customer': 'B', 'date': '20180101', 'amount': 800}
+    # {'customer': 'B', 'date': '20180112', 'amount': 3500}
+    # {'customer': 'A', 'date': '20180105', 'amount': 2000}
+    # {'customer': 'B', 'date': '20180107', 'amount': 4000}
 
 :numref:`flow_getline_skeys` は、:numref:`flow_getline` に加えて、``amount`` で数値降順に並べ替えた後に繰り返し処理を行っている。
 数値降順にするためには、項目名の後ろに ``%nr`` を付ける必要があるが、これはmcmdのソーティングに関する一般的規則[参照]に従っている。
@@ -144,19 +166,14 @@ getline: 出力形式指定行イテレータ
     :caption: ``amount`` で数値降順ソーティングしてから繰り返し処理
     :name: flow_getline_skeys
 
-    f=nm.mcut(f="customer,date,amount",i=dat).getline(dtype=dtype,otype="dict",skeys="amount%nr"):
+    f=nm.mcut(f="customer,date,amount",i=dat).getline(dtype=dtype,otype="dict",skeys="amount%nr")
     for line in f:
       print(line)
-
-  .. code-block:: sh
-    :caption: :numref:`flow_getline_skeys` の実行結果
-    :name: flow_getline_result
-
-    {'customer': 'A', 'date': '20180101', 'amount': 5200}
-    {'customer': 'B', 'date': '20180107', 'amount': 4000}
-    {'customer': 'B', 'date': '20180112', 'amount': 3500}
-    {'customer': 'A', 'date': '20180105', 'amount': 2000}
-    {'customer': 'B', 'date': '20180101', 'amount': 800}
+    # {'customer': 'A', 'date': '20180101', 'amount': 5200}
+    # {'customer': 'B', 'date': '20180107', 'amount': 4000}
+    # {'customer': 'B', 'date': '20180112', 'amount': 3500}
+    # {'customer': 'A', 'date': '20180105', 'amount': 2000}
+    # {'customer': 'B', 'date': '20180101', 'amount': 800}
 
 :numref:`flow_getline_keys` は、``customer`` 項目で並べ替えた時のキーブレイク情報を出力に付加する。
 出力形式は、コンテナはタップルで、([行データリスト],先頭行フラグ,最終行フラグ)である。
@@ -171,7 +188,7 @@ getline: 出力形式指定行イテレータ
     :caption: ``customer`` でキーブレイク情報を付加
     :name: flow_getline_keys
 
-    f=nm.mcut(f="customer,date,amount",i=dat).getline(keys="customer",skeys="amount%nr"):
+    f=nm.mcut(f="customer,date,amount",i=dat).getline(keys="customer",skeys="amount%nr")
     for line in f:
       print(line)
 
@@ -223,6 +240,10 @@ keyblock: キー単位のイテレータ
       |   "list"を指定した場合、項目名ヘッダーは出力されない。
       |   "dict"を指定した場合、辞書のキーが項目名で、値がその項目の値となる。
       | 例) otype="dict"
+  * - | **header=True|False**
+      |   optional
+      |   default:False
+    - | ヘッダー行も出力する。
   * - | **q=True|False**
       |   optional
       |   default:False
@@ -242,15 +263,26 @@ keyblock: キー単位のイテレータ
     f=nm.mcut(f="customer,date,amount",i=dat).keyblock(keys="customer",skeys="date",dtype=dtype):
     for line in f:
       print(line)
+    # [['A', '20180101', 5200], ['A', '20180105', 2000]]
+    # [['B', '20180101', 800], ['B', '20180107', 4000], ['B', '20180112', 3500]]
 
-  .. code-block:: sh
-    :caption: :numref:`flow_keyblock` の実行結果
-    :name: flow_keyblock_result
+``header=True`` を付けた場合は、最初に項目名ヘッダー行がブロックとして二重リストで出力される( :numref:`flow_keyblock_header` )。
 
-    [['A', '20180101', 5200], ['A', '20180105', 2000]]
-    [['B', '20180101', 800], ['B', '20180107', 4000], ['B', '20180112', 3500]]
+  .. code-block:: python
+    :linenos:
+    :caption: 項目名ヘッダーも出力する例
+    :name: flow_keyblock_header
 
-``dtype`` , ``otype`` の指定方法は``getline`` メソッドと同様である。
+    dtype = {'customer':'str', 'date':'str', 'amount':'int'}
+    f=nm.mcut(f="customer,date,amount",i=dat).keyblock(header=True,keys="customer",skeys="date",dtype=dtype):
+    for line in f:
+      print(line)
+    # [['customer', 'date', 'amount']]
+    # [['A', '20180101', 5200], ['A', '20180105', 2000]]
+    # [['B', '20180101', 800], ['B', '20180107', 4000], ['B', '20180112', 3500]]
+
+
+``dtype`` , ``otype`` の指定方法は ``getline`` メソッドと同様である。
 :numref:`flow_keyblock_dict` は、:numref:`flow_keyblock` の例を辞書型で出力した例である。
 
   .. code-block:: python
@@ -262,13 +294,8 @@ keyblock: キー単位のイテレータ
     f=nm.mcut(f="customer,date,amount",i=dat).keyblock(keys="customer",skeys="date",dtype=dtype,otype="dict"):
     for line in f:
       print(line)
-
-  .. code-block:: sh
-    :caption: :numref:`flow_keyblock_dict` の実行結果
-    :name: flow_keyblock_dict_result
-
-    [{'customer': 'A', 'date': '20180101', 'amount': 5200},{'customer': 'A', 'date': '20180105', 'amount': 2000}]
-    [{'customer': 'B', 'date': '20180101', 'amount': 800},{'customer': 'B', 'date': '20180107', 'amount': 4000},{'customer': 'B', 'date': '20180112', 'amount': 3500}]
+    # [{'customer': 'A', 'date': '20180101', 'amount': 5200},{'customer': 'A', 'date': '20180105', 'amount': 2000}]
+    # [{'customer': 'B', 'date': '20180101', 'amount': 800},{'customer': 'B', 'date': '20180107', 'amount': 4000},{'customer': 'B', 'date': '20180112', 'amount': 3500}]
 
 同じキーの行数が膨大なデータに対して ``keyblock`` を利用する場合は注意が必要である。
 ``keyblock`` メソッドは、メモリが許す限り、ブロック内のデータをpythonのリスト上に展開しようと試みるが、

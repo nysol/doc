@@ -9,6 +9,7 @@
   basics
   rfm
   association
+  kmeans
   friend
   transition
 

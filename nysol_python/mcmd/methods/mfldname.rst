@@ -51,9 +51,6 @@ mfldname 項目名の変更
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

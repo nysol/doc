@@ -69,12 +69,6 @@ mchgstr 文字列の置換
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
-rsl4.csv
-rsl5.csv
-rsl6.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

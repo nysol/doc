@@ -77,10 +77,6 @@ m2cross 1対Nのクロス集計
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
-rsl4.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

@@ -19,6 +19,7 @@ No.4,20081201,4,40,B
 No.5,20081203,5,50,B
 \end{Verbatim}
 
+marff2csv
 パラメータ
 ''''''''''''''''''''''
 
@@ -29,13 +30,13 @@ No.5,20081203,5,50,B
       - 内容
 
     * - | **i=**
-        |   optional
-        |   default:
-      - |   入力ファイル名を指定する。
+        |   任意
+        |   デフォルト:標準入力
+      - |   入力データを指定する。
     * - | **o=**
-        |   optional
-        |   default:
-      - |   出力ファイル名を指定する。
+        |   任意
+        |   デフォルト:標準出力
+      - |   出力データを指定する。
 
 共通パラメータ
 ''''''''''''''''''''
@@ -52,6 +53,45 @@ No.5,20081203,5,50,B
 
 利用例
 ''''''''''''
+
+**importと入力データ(CSV)の準備**
+  .. code-block:: python
+    :linenos:
+
+    import nysol.mcmd as nm    
+        
+    with open('dat1.arff","w"){|fpw| fpw.write(.csv','w') as f:
+      f.write(
+    '''@RELATION       customer購買データ
+    @ATTRIBUTE      customer    string
+    @ATTRIBUTE      date    date yyyyMMdd
+    @ATTRIBUTE      quantity    numeric
+    @ATTRIBUTE      amount    numeric
+    @ATTRIBUTE      商品    {A,B}
+    @DATA
+    No.1,20081201,1,10,A
+    No.2,20081202,2,20,A
+    No.3,20081203,3,30,A
+    No.4,20081201,4,40,B
+    No.5,20081203,5,50,B
+    ''')
+    
+**基本例**
+
+arff形式の顧客購買データをcsv形式のデータへ変換する。
+
+
+  .. code-block:: python
+    :linenos:
+
+    >>> nm.marff2csv(i="dat1.arff", o="rsl1.csv").run()
+    # ## rsl1.csv の内容
+    # customer,date,amount
+    # A,20081201,10
+    # B,20081002,40
+    # A,20081207,20
+    # A,20081213,30
+    # B,20081209,50
 
 
 

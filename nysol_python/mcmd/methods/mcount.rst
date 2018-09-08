@@ -49,8 +49,6 @@ mcount 行数カウント
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:

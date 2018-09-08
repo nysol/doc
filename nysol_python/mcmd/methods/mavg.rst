@@ -53,9 +53,6 @@ mavg 項目値の平均
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -74,7 +71,7 @@ rsl3.csv
     
 **基本例**
 
- ``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
 
 
   .. code-block:: python
@@ -88,7 +85,7 @@ rsl3.csv
 
 **NULL値がある場合の出力**
 
- ``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
 ``n=True`` オプションを指定することで、NULL値が含まれている場合は、結果もNULL値として出力する。
 
 
@@ -103,7 +100,7 @@ rsl3.csv
 
 **顧客項目を単位としない例**
 
- ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
 
 
   .. code-block:: python

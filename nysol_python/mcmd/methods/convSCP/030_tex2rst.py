@@ -29,7 +29,10 @@ def convText(txt):
 	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1) # -q => q=True
 	txt3=re.sub("ファイル名", "データ",txt2) # ファイル名 => データ
 	txt4=re.sub("ファイル", "データ",txt3) # ファイル => データ
-	return txt4
+	txt5=re.sub("【デフォルト.*】", "",txt4) # 【デフォルト値:xx】を外す
+
+	txt6=re.sub("\$(.+?)\$"," :math:`\\1` ",txt5)
+	return txt6
 
 def rmVerb(txt):
 	convText=re.sub("\\\\verb\|(.*?)\|"," \\1 ",txt.strip()).strip()
@@ -46,16 +49,44 @@ def getSample(sFile):
 	return doc
 
 # デフォルト値を返す
-def getDefault(name,kwd):
+def getDefault(name,kwd,txt):
 	ret=""
-	if kwd=="i=" or kwd=="m=":
-		ret="標準入力"
-	elif kwd=="o=" or kwd=="u=":
-		ret="標準出力"
-	elif name=="mchgnum" and kwd=="O=":
-		ret="null値"
-	elif name=="mchgstr" and kwd=="O=":
-		ret="null値"
+	# 説明にデフォルト値の説明があればそれを使う。
+# ex. "乱数の最大値を指定する。【デフォルト値:INT_MAX】"
+	if re.search("【デフォルト値:",txt):
+		ret=re.sub("^.*【デフォルト値:","",txt)
+		ret=re.sub("】.*$","",ret)
+	else:
+		if kwd=="i=" or kwd=="m=":
+			ret="標準入力"
+		elif kwd=="o=":
+			ret="標準出力"
+		elif kwd=="u=":
+			ret="出力しない"
+		elif kwd=="K=":
+			ret="k=と同一項目名"
+		elif name=="mchgnum" and kwd=="O=":
+			ret="null値"
+		elif name=="mchgstr" and kwd=="O=":
+			ret="null値"
+		elif (name=="mnjoin" or name=="mjoin" or name=="mnrjoin" or name=="mproduct") and kwd=="f=":
+			ret="全項目"
+		elif name=="mnullto" and (kwd=="k=" or kwd=="s="):
+			ret="##no_disp##"
+	return ret
+
+# 必須パラメータかどうかの判断
+def isMand(name,kwdm,mandParams):
+	ret=False
+	# マニュアルの書式が間違っている場合は、例外判定させる
+	if name=="mnewstr" and kwd=="v=":
+		ret="必須"
+	elif name=="mnullto" and (kwd=="v=" or kwd=="="):
+		ret="必須(p=Falseの時)"
+	# マニュアルの初期があっている場合は、それで判断させる 
+	else:
+		if kwd in mandParams:
+			ret="必須"
 	return ret
 
 ##\section{mcut 項目の選択\label{sect:mcut}}
@@ -135,6 +166,8 @@ with open(iFile,"r") as fpr:
 				form=re.sub("\\\\verb\/","",line)
 				form=re.sub("\/","",form)
 			form=re.sub(name+" ","",form)
+			form=re.sub(" +"," ",form)
+			#print(form)
 			for p in form.strip().split(" "):
 				if p[0]!="[":
 					mandParams.append(p)
@@ -222,12 +255,17 @@ with open(iFile,"r") as fpr:
 					print("      - |   %s"%(convText(cols[1])))
 				else:
 					print("    * - | **%s**"%(kwd))
-					if kwd in mandParams:
-						print("        |   必須")
-					else:
+					#if kwd in mandParams:
+					mand=isMand(name,kwd,mandParams)
+					if mand==False:
 						print("        |   任意")
-						default=getDefault(name,kwd)
-						print("        |   デフォルト:%s"%(default))
+						default=getDefault(name,kwd,cols[1])
+						if default=="##no_disp##":
+							print("        | ")
+						else:
+							print("        |   デフォルト:%s"%(default))
+					else:
+						print("        |   %s"%mand)
 					print("      - |   %s"%(convText(cols[1])))
 			else:
 				print("        |   %s"%(convText(cols[1])))

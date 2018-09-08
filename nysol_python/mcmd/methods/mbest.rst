@@ -15,53 +15,52 @@ mbest 指定行の選択
       - 内容
 
     * - | **i=**
-        |   optional
-        |   default:
-      - |   入力ファイル名を指定する。
+        |   任意
+        |   デフォルト:標準入力
+      - |   入力データを指定する。
     * - | **o=**
-        |   optional
-        |   default:
-      - |   出力ファイル名を指定する。
+        |   任意
+        |   デフォルト:標準出力
+      - |   出力データを指定する。
     * - | **s=**
-        |   optional
-        |   default:
+        |   必須
       - |   ここで指定した項目(複数項目指定可)で並べ替えられた後、指定した行が選択される。
         |   ``q=True`` オプションを指定しないとき、 ``s=`` パラメータは必須。
     * - | **from=**
-        |   optional
-        |   default:
-      - |   選択する開始行番号(0以上の整数)【デフォルト値:0】
+        |   任意
+        |   デフォルト:0
+      - |   選択する開始行番号(0以上の整数)
     * - | **to=**
-        |   optional
-        |   default:
-      - |   選択する終了行番号(0以上の整数)【デフォルト値:0】
+        |   任意
+        |   デフォルト:0
+      - |   選択する終了行番号(0以上の整数)
         |   「 ``from=`` の値」$\le$「 ``to=`` の値」でなければならない。
     * - | **size=**
-        |   optional
-        |   default:
-      - |   選択する行数【デフォルト値:1】
+        |   任意
+        |   デフォルト:1
+      - |   選択する行数
         |   ``to=`` と ``size=`` の両方を同時に指定することはできない。
     * - | **R=**
-        |   optional
-        |   default:
+        |   任意
+        |   デフォルト:
       - |   行番号範囲リスト(複数項目指定可)【必須】*以前のバージョンで使用されていた範囲指定の方法
         |   ここで指定した行番号の行が選択される。
         |   \_(アンダーバー)で範囲指定できる。
         |   範囲指定の際にはMIN(開始行以降),MAX(最終行まで)を使用できる。
         |   ※One Point：事前に目的とする行選択が行いやすいように並べ替えておくとよい。
     * - | **k=**
-        |   optional
-        |   default:
+        |   任意
+        |   デフォルト:
       - |   指定列の項目(複数項目指定可)が同じ値の行ごとに、 ``from=`` , ``to=`` , ``size=`` で指定した行番号の行を選択する。
         |   ``x=True`` , ``nfn=True`` オプション使用時は、項目番号(0〜)で指定可能。
     * - | **u=**
-        |   optional
-        |   default:
-      - |   不一致データ出力ファイル名
-        |   指定の条件に一致しない行を出力するファイル名。
+        |   任意
+        |   デフォルト:出力しない
+      - |   不一致データ出力データ
+        |   指定の条件に一致しない行を出力するデータ。
     * - | **r=True|False**
-        |   optional
-        |   default:False
+        |   任意
+        |   デフォルト:False
       - |   条件反転
         |   ``from=,to=(size=)`` パラメータで指定した行番号以外の行を選択する。
 
@@ -82,8 +81,6 @@ mbest 指定行の選択
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl4.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -102,7 +99,7 @@ rsl4.csv
             
     with open('dat2.csv','w') as f:
       f.write(
-    '''customer,日付,amount
+    '''customer,date,amount
     A,20081201,10
     A,20081207,20
     A,20081213,30
@@ -120,27 +117,24 @@ rsl4.csv
     :linenos:
 
     >>> nm.mbest(s="quantity%nr,amount%nr", i="dat1.csv", o="rsl1.csv").run()
-    # 結果ファイル rsl1.csv の内容
+    # ## rsl1.csv の内容
     # customer,quantity%0nr,amount%1nr
     # A,20,5200
 
 **基本例2**
 
- ``customer`` で並べ替えた後、先頭行(0行目)から3行選択する
+``customer`` で並べ替えた後、先頭行(0行目)から3行選択する
 
 
   .. code-block:: python
     :linenos:
 
-    >>> nm.mbest(s="customer", from="0", size="3", i="dat1.csv", o="rsl2.csv").run()
-    # 結果ファイル rsl2.csv の内容
-    # item%0,date,quantity
-    # A,20081201,1
-    # A,20081202,2
-    # A,20081203,3
-    # B,20081201,4
-    # B,20081202,
-    # B,20081203,5
+    >>> nm.mbest(s="customer", fr="0", size="3", i="dat1.csv", o="rsl2.csv").run()
+    # ## rsl2.csv の内容
+    # customer%0,quantity,amount
+    # A,20,5200
+    # B,18,4000
+    # C,15,3500
 
 **基本例3**
 
@@ -150,11 +144,11 @@ rsl4.csv
   .. code-block:: python
     :linenos:
 
-    >>> nm.mbest(q=True, from="0", to="1", i="dat1.csv", o="rsl3.csv").run()
-    # 結果ファイル rsl3.csv の内容
-    # item%0,20081203,20081202,20081201
-    # A,3,2,1
-    # B,5,,4
+    >>> nm.mbest(q=True, fr="0", to="1", i="dat1.csv", o="rsl3.csv").run()
+    # ## rsl3.csv の内容
+    # customer,quantity,amount
+    # A,20,5200
+    # B,18,4000
 
 **条件反転**
 
@@ -165,12 +159,13 @@ rsl4.csv
   .. code-block:: python
     :linenos:
 
-    >>> nm.mbest(s="customer,日付", k="customer", r=True, u="fvd.csv", i="dat2.csv", o="rsl4.csv").run()
-    # 結果ファイル fvd.csv の内容
-    # customer,日付,amount
+    >>> nm.mbest(s="customer,date", k="customer", r=True, u="fvd.csv", i="dat2.csv", o="rsl4.csv").run()
+    # ## fvd.csv の内容
+    # customer,date,amount
     # A,20081201,10
-    # B,20081002,40    # 結果ファイル rsl4.csv の内容
-    # customer,日付,amount
+    # B,20081002,40
+    # ## rsl4.csv の内容
+    # customer,date,amount
     # A,20081207,20
     # A,20081213,30
     # B,20081209,50

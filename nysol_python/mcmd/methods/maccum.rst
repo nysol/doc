@@ -54,9 +54,6 @@ maccum 累積計算
 利用例
 ''''''''''''
 
-rsl1.csv
-rsl2.csv
-rsl3.csv
 **importと入力データ(CSV)の準備**
   .. code-block:: python
     :linenos:
@@ -85,7 +82,7 @@ rsl3.csv
     
 **基本例**
 
- ``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
+``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
 
 
   .. code-block:: python
@@ -102,7 +99,7 @@ rsl3.csv
 
 **キー項目を指定する例**
 
- ``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
+``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
 
 
   .. code-block:: python
@@ -119,7 +116,7 @@ rsl3.csv
 
 **NULL値を含む累計**
 
- ``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
+``quantity`` と ``amount`` 項目の累積値を計算し、 ``qttAccum`` と ``amtAccum`` という項目名で出力する。
 NULLは無視される。結果もNULLが出力される。
 
 
