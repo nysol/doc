@@ -122,7 +122,7 @@ Pythonの各種型に変換する必要が出てくる。
 
 CSV
 -------------------
-CSV(Comma Separated Values)フォーマットとは、 :numref:`data/csv` に例示されるような値をカンマで区切った表構造データである。
+CSV(Comma Separated Values)フォーマットとは、 :numref:`data_csv` に例示されるような値をカンマで区切った表構造データである。
 CSVは表構造データのフォーマットのデファクトスタンダードであり、
 アプリケーションプログラム間でのデータ交換用フォーマットとして 広く利用されている。
 
@@ -158,14 +158,8 @@ CSVとして ``dat.csv`` に出力し(最初の ``mread`` メソッド)、
     >>> nm.mread(i="dat.csv",o="dat2.csv").run()
 
   .. code-block:: sh
-    :caption: 出力内容
-    :name: data_csv_io_output
-
-    $ cat dat.csv
-
-  .. code-block:: sh
     :caption: :numref:`data_csv_io` の出力内容。 ``dat.csv`` と ``dat2.csv`` の内容は当然同じになる。
-    :name: data_csv
+    :name: data_csv_io_output
 
     $ cat dat.csv
     itemID,itemName,class,price
@@ -260,7 +254,7 @@ mcmdでは上述のCSVの定義に対して以下の制約を追加している�
     xyz,2
 
 ダブルクォーツを含むデータ
-:::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::
 ダブルクォーツを含むデータはダブルクォーツで囲われ，
 かつ連続するダブルクォーツとして表現される。
 :numref:`data_csv_exp2` は、 ``f1,f2`` の 2 項目から構成される CSV ファイルで、
@@ -291,7 +285,7 @@ mcmdでは上述のCSVの定義に対して以下の制約を追加している�
     def",1
 
 必要のないダブルクオーツ
-:::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::
 :numref:`data_csv_exp4` のようにダブルクオーツで囲う必要のないデータに対して
 ダブルクオーツを用いていた場合、メソッドの出力時には外される。
 
@@ -350,7 +344,7 @@ MCMDで扱うことのできる型は、:numref:`data_type` に示され�
 
   .. list-table:: 各データ型を扱う代表的なメソッド
     :header-rows: 1
-    :name: data_type
+    :name: data_typecmd
 
     * - データ型
       - テキスト例

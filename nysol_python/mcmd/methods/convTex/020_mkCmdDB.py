@@ -18,25 +18,30 @@ sys.stderr.write("START: "+" ".join(argv)+" "+str(datetime.now())+"\n")
 # texのpath
 iPath=os.path.expanduser("~/nysol/nysolx/doc/mcmd/jp")
 
-oPath="./db/cmd"
+oPath="./db_auto/cmd"
 os.system("mkdir -p %s"%oPath)
-docPath="./db/doc"
-os.system("mkdir -p %s"%docPath)
 
 cmdName=argv[1]
 iFile="%s/%s.tex"%(iPath,cmdName)
-oFile="%s/%s"%(oPath,cmdName)
-docFile="%s/%s"%(docPath,cmdName)
+oFile="%s/%s.py"%(oPath,cmdName)
 
 def convText(txt):
-	txt1=re.sub("\\\\verb\|(.*?)\|"," ``\\1`` ",txt.strip()).strip() # \verb|xx| => ``xx``
-	txt2=re.sub("``-(.*?)``", "``\\1=True``",txt1) # -q => q=True
-	txt3=re.sub("ファイル名", "データ",txt2) # ファイル名 => データ
-	txt4=re.sub("ファイル", "データ",txt3) # ファイル => データ
-	txt5=re.sub("【デフォルト.*】", "",txt4) # 【デフォルト値:xx】を外す
+	txt1=txt.strip()
+	txt1=re.sub(r"\\verb\|(.*?)\|"," ``\\1`` ",txt1).strip() # \verb|xx| => ``xx``
+	txt1=re.sub(r"\\verb/(.*?)/"," ``\\1`` ",txt1).strip() # \verb/xx/ => ``xx``
+	txt1=txt1.replace(r"``\r``",r" ``\\r`` ")
+	txt1=txt1.replace(r"``\n``",r" ``\\n`` ")
+	txt1=txt1.replace(r"``\r\n``",r" ``\\r\\n`` ")
+	txt1=re.sub("``-(.*?)``", "``\\1=True``",txt1) # -q => q=True
+	txt1=re.sub("ファイル名", "データ",txt1) # ファイル名 => データ
+	txt1=re.sub("ファイル", "データ",txt1) # ファイル => データ
+	txt1=re.sub("【デフォルト.*】", "",txt1) # 【デフォルト値:xx】を外す
 
-	txt6=re.sub("\$(.+?)\$"," :math:`\\1` ",txt5)
-	return txt6
+	txt1=re.sub("\$(.+?)\$"," :math:`\\1` ",txt1)
+
+	txt1=re.sub(r"表?\\ref{tbl:(.+?)}",r" :numref:`\1` ",txt1,100)
+	txt1=re.sub(r"\\hyperref\[sect:.*?]{(.+?)}",r" :doc:`\1` ",txt1,100)
+	return txt1
 
 def rmVerb(txt):
 	convText=re.sub("\\\\verb\|(.*?)\|"," \\1 ",txt.strip()).strip()
@@ -83,6 +88,19 @@ def isMand(name,kwdm,mandParams):
 			ret=True
 	return ret
 
+def outputTable(table,caption,name):
+	ret="\n\n"
+	ret+=".. csv-table:: %s\n"%convText(caption)
+	ret+="  :header-rows: 1\n"
+	ret+="  :name: %s\n"%name
+	ret+="\n"
+	tbl=[]
+
+	for line in table:
+		ret+="  %s\n"%(convText(",".join(line)))
+	ret+="\n\n"
+	return ret
+
 ##\section{mcut 項目の選択\label{sect:mcut}}
 # mcut: 項目の選択
 # .................................
@@ -98,26 +116,42 @@ with open(iFile,"r") as fpr:
 	sectBlock=False
 	formBlock=False
 	relatedBlock=False
+	tableBlock=False
+	tabularBlock=False
+	verbBlock=False
+	itemizeBlock=False
+	captionBlock=False
+	tbllineBlock=False
 
 	title=None
 	doc=""
+	related=""
+	capLine=""
+	tblline=""
 	params=[]
 
 	comParams=[] # 共通パラメータリスト
 	mandParams=[] # 必須パラメータリスト
+	lineCounter=0
 	for line in fpr:
+		lineCounter+=1
 		line=line.strip()
+		#print("-----line",line,tabularBlock,captionBlock)
 		#print(line,paramBlock,sectBlock,relatedBlock)
 		#print("xxxxxxxxxxxxxx",line)
 		if line=="": # 空行飛ばし
 			continue
 		if line[0]=="%": # コメント飛ばし
 			continue
+		if line.find(r"\if0")!=-1:
+			continue
+		if line.find(r"\fi")!=-1:
+			continue
 
 		# sectionの処理
 		# \section{mcut 項目の選択\label{sect:mcut}}
 		if line.find(r"\section{")!=-1:
-			title=re.sub("\\\\section{(.*?)\\\\label.*$","\\1",line.strip())
+			title=re.sub("\\\\section{.*? (.*?)\\\\label.*$","\\1",line.strip())
 			sectBlock=True
 
 		elif line==r"\subsection*{書式}":
@@ -126,10 +160,92 @@ with open(iFile,"r") as fpr:
 			formBlock=True
 
 		elif sectBlock:
-			#print("xx3")
-			if line.find(r"\index{")!=-1:
+			if line.find(r"\index{")!=-1: # \index{mselstr@mselstr} の行は飛ばす
 				continue
-			doc+=(convText(line).strip()+"\n") ## 本文
+
+			if line.find(r"\begin{itemize}")!=-1:
+				doc+=("\n")
+				itemizeBlock=True
+				continue
+			if line.find(r"\end{itemize}")!=-1:
+				doc+=("\n")
+				itemizeBlock=False
+				continue
+
+			if line.find(r"\begin{Verbatim}")!=-1:
+				verbBlock=True
+				continue
+			if line.find(r"\end{Verbatim}")!=-1:
+				verbBlock=False
+				continue
+
+			if line.find(r"\begin{table}")!=-1:
+				caption=None
+				tableName=None
+				tableBlock=True
+				continue
+			elif line.find(r"\end{table}")!=-1:
+				tableBlock=False
+				continue
+
+			if tableBlock and line.find(r"\begin{tabular}")!=-1:
+				table=[]
+				tabularBlock=True
+				continue
+			if tabularBlock and line.find(r"\end{tabular}")!=-1:
+				doc+=outputTable(table,caption,tableName)
+				tabularBlock=False
+				continue
+
+			if verbBlock:
+				doc+="``%s``"%line.strip()+"\n"
+				continue
+			if itemizeBlock:
+				item=convText(line).strip()
+				item=re.sub(r"\\item","",item)
+				doc+=(" * " + item+"\n")
+				continue
+
+			# \caption{入力データ\label{tbl:mselstr_input}}
+			if tableBlock and line.find(r"\caption{")!=-1: #表タイトル
+				capLine=""
+				captionBlock=True
+
+			#print("xxxxxxxxxxxxxxxxx5",line[-1],captionBlock)
+			if captionBlock:
+				capLine+=line.strip()
+			#if captionBlock and (line.find(r"\label")==-1 and line[-1]!="}"): # 複数行にまたがる時
+			if captionBlock and line[-1]!="}": # 複数行にまたがる時
+				continue
+			#if captionBlock and line.find(r"\label")!=-1:
+			if captionBlock and line[-1]=="}":
+				captionBlock=False
+				caption=re.sub(r'\\caption{(.*?)\\label.*$',r"\1",capLine)
+
+			if tableBlock and line.find(r"{tbl:")!=-1: #表の名前
+				tableName=re.sub(r".*{tbl:(.*?)}.*$",r"\1",line)
+
+			# 表本体
+			if tabularBlock:
+				line=re.sub(r"\\hline","",line).strip()
+			if tabularBlock and line.find(r"\\")!=-1:
+				tblline=""
+				tbllineBlock=True
+			if tbllineBlock:
+				tblline+=line.strip()
+			if tbllineBlock and line.find(r"\\")==-1: #複数行にまたがる =>なくした（データを整形)
+				continue
+			if tbllineBlock and line.find(r"\\")!=-1:
+				tbllineBlock=False
+				lstr=re.sub(r"\\+$","",tblline)
+				lstr=lstr.strip()
+				table.append(lstr.split("&"))
+				continue
+
+			elif tableBlock: # その他諸々のtable設定は読み飛ばす
+				continue
+			else: # table以外は追記するのみ
+				doc+=(convText(line).strip()+"\n") ## 本文
 
 		# 書式の処理
 		# \subsection*{書式} 
@@ -151,7 +267,8 @@ with open(iFile,"r") as fpr:
 			com=re.sub("\\\\hyperref\[sect:(.*?)\].*","\\1",line)
 			com=re.sub("option_(.*)","\\1",com)
 			com=re.sub("option_(.*)","\\1",com) # tmppathの前に/optionが2つついているため
-			comParams.append(":ref:`%s=<common_param_%s>`\n"%(com,com))
+			#comParams.append(":ref:`%s=<common_param_%s>`\n"%(com,com))
+			comParams.append(com)
 		elif formBlock and re.search(cmdName,line): # 必須かどうかの情報を得る
 			if re.search("verb\|",line): # verb|xxx|
 				form=re.sub("\\\\verb\|","",line)
@@ -283,43 +400,30 @@ with open(iFile,"r") as fpr:
 # 出力
 #with open(oFile,"w") as fpw:
 with open(oFile,"w") as fpw:
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#COM コマンドリファレンス自動作成用データ(#COMから始まる行はコメント行,空行は無視される)\n")
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#CMD(%s,sh,py,rb)\n"%cmdName)
+	fpw.write("# ======================================\n")
+	fpw.write("# コマンドマニュアル自動作成用基礎データ\n")
+	fpw.write("# ======================================\n")
+	fpw.write("db={}\n")
+	fpw.write("db['name']='%s'\n"%cmdName)
+	fpw.write("db['title']='%s'\n"%title)
+	fpw.write("db['related']='%s'\n"%related)
+	fpw.write("\n")
+	fpw.write("############################### DOCUMENT\n")
+	fpw.write("db['doc']='''\n%s\n'''\n"%doc)
 	fpw.write("\n")
 
-	fpw.write("##TITLE(sh,py,rb)\n")
-	fpw.write(title+"\n")
-	fpw.write("##TITLE_END\n")
-	fpw.write("\n")
-
+	fpw.write("############################### PARAMETERS\n")
+	fpw.write("db['params']=[]\n\n")
 	for i in range(len(params)):
-		fpw.write("#PARAM(%s,sh,py,rb)\n"%params[i]["kwd"])
-		fpw.write("##TYPE(%s,sh,py,rb)\n"%params[i]["type"])
-		fpw.write("##MAND(%s,sh,py,rb)\n"%params[i]["mand"])
-		fpw.write("##COND(sh,py,rb)\n")
-		fpw.write(params[i]["cond"])
-		fpw.write("##COND_END\n")
-		fpw.write("##DEFAULT(sh,py,rb)\n")
-		fpw.write(params[i]["default"])
-		fpw.write("##DEFAULT_END\n")
-		fpw.write("##TEXT(sh,py,rb)\n")
-		fpw.write(params[i]["text"])
-		fpw.write("##TEXT_END\n")
+		fpw.write("param={}\n")
+		fpw.write("param['kwd']='%s'\n"%params[i]["kwd"])
+		fpw.write("param['type']='%s'\n"%params[i]["type"])
+		fpw.write("param['mand']=%s\n"%params[i]["mand"])
+		fpw.write("param['cond']='%s'\n"%params[i]["cond"])
+		fpw.write("param['default']='%s'\n"%params[i]["default"])
+		fpw.write("param['text']='''\n%s'''\n"%params[i]["text"])
+		fpw.write("db['params'].append(param)\n")
 		fpw.write("\n")
 
-	fpw.write("##RELATED(sh,py,rb)\n")
-	fpw.write(related)
-	fpw.write("##RELATED_END\n")
-
-with open(docFile,"w") as fpw:
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#COM コマンドリファレンス自動作成用データ(#COMから始まる行はコメント行,空行は無視される)\n")
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#CMD(%s,sh,py,rb)\n"%cmdName)
-	fpw.write("\n")
-	fpw.write("#DOC(sh,py,rb)\n")
-	fpw.write(doc)
-	fpw.write("#DOC_END\n")
+	fpw.write("db['comParams']='%s'\n"%(",".join(comParams)))
 

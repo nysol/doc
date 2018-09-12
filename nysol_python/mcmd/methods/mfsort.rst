@@ -1,5 +1,5 @@
 mfsort 項目ソート
-------------------------------------
+------------------------
 
 各行で ``f=`` で指定した複数項目の値を並べ替え(デフォルトでは文字列昇順)、その順序で出力する。
 項目名の並びは変化しないことに注意する。
@@ -8,30 +8,26 @@ mfsort 項目ソート
 ''''''''''''''''''''''
 
   .. list-table::
-    :header-rows: 1
+   :header-rows: 1
 
-    * - キーワード
-      - 内容
+   * - キーワード
+     - 内容
+   * - | **i=str**
+       | 任意
+     - | 入力データを指定する。
+   * - | **o=str**
+       | 任意
+     - | 出力データを指定する。
+   * - | **f=str**
+       | 必須
+     - | ソート対象となる項目を複数指定する。単一の項目を指定してもよいが、結果は変わらない。
+   * - | **n=bool**
+       | 任意
+     - | 数値順に並べる。
+   * - | **r=bool**
+       | 任意
+     - | 逆順に並べる。
 
-    * - | **i=**
-        |   任意
-        |   デフォルト:標準入力
-      - |   入力データを指定する。
-    * - | **o=**
-        |   任意
-        |   デフォルト:標準出力
-      - |   出力データを指定する。
-    * - | **f=**
-        |   必須
-      - |   ソート対象となる項目を複数指定する。単一の項目を指定してもよいが、結果は変わらない。
-    * - | **n=True|False**
-        |   任意
-        |   デフォルト:False
-      - |   数値順に並べる。
-    * - | **r=True|False**
-        |   任意
-        |   デフォルト:False
-      - |   逆順に並べる。
 
 共通パラメータ
 ''''''''''''''''''''
@@ -46,15 +42,17 @@ mfsort 項目ソート
 , :ref:`tmppath=<common_param_tmppath>`
 , :ref:`precision=<common_param_precision>`
 
+
 利用例
 ''''''''''''
 
 **importと入力データ(CSV)の準備**
+
   .. code-block:: python
     :linenos:
 
-    import nysol.mcmd as nm    
-        
+    import nysol.mcmd as nm
+
     with open('dat1.csv','w') as f:
       f.write(
     '''id,v1,v2,v3
@@ -62,39 +60,13 @@ mfsort 項目ソート
     2,a,b,a
     3,b,,e
     ''')
-    
+
+
 **例1: 基本例**
 
 各行において  ``v1,v2,v3``  の値を昇順にならべ、その順番で  ``v1,v2,v3``  項目として出力する。
 
-
   .. code-block:: python
     :linenos:
 
-    >>> nm.mfsort(f="v*", i="dat1.csv", o="rsl1.csv").run()
-    # ## rsl1.csv の内容
-    # id,v1,v2,v3
-    # 1,a,b,c
-    # 2,a,a,b
-    # 3,,b,e
-
-**例2: 降順**
-
-降順にしたければ ``r=True`` を付ける。
-
-
-  .. code-block:: python
-    :linenos:
-
-    >>> nm.mfsort(f="v*", r=True, i="dat1.csv", o="rsl2.csv").run()
-    # ## rsl2.csv の内容
-    # id,v1,v2,v3
-    # 1,c,b,a
-    # 2,b,a,a
-    # 3,e,b,
-
-
-
-関連メソッド
-''''''''''''
-
+    nm.mfsort(f="v*", i="dat1.csv", o="rsl1.csv").run()

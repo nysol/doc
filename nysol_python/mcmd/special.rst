@@ -278,8 +278,8 @@ UNIX系のコマンドの扱いに慣れた人にとっては、cmdメソッド�
 
   .. code-block:: python
     :linenos:
-    :caption: 項目名ヘッダーをスキップする例
-    :name: special_cmd2
+    :caption: lsコマンドを使ってファイル一覧を取得する例
+    :name: special_ls
 
     f=None
     f <<= nm.cmd("ls -l")

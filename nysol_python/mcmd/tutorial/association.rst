@@ -120,7 +120,7 @@ support と liftは、定義式よりルールに方向性はない。
   .. code-block:: python
     :linenos:
     :caption: トランザクション件数の計算
-    :name: tutorial_as_totauci_online_download
+    :name: tutorial_as_total
 
     total=None
     total <<= nm.mcut(f="tra", i=base)
@@ -164,7 +164,7 @@ support と liftは、定義式よりルールに方向性はない。
 
 共起件数
 ''''''''''''''''''''''''''
-そして2アイテムの共起件数を求る。
+そして2アイテムの共起件数を求る( :numref:`tutorial_as_cooccur` )。
 ``mcombi`` メソッドは、トランザクション内の全アイテムから、2アイテムの順列を求め、
 それら2アイテムの項目名を ``item1`` ``item2`` と命名している。
 そしてこれら2アイテムの件数をカウントすれば、共起件数が計算できたことになる。
@@ -190,13 +190,13 @@ support と liftは、定義式よりルールに方向性はない。
 
 結合、そして指標の計算
 ''''''''''''''''''''''''''
-最後に、ここまでに計算してきた結果を結合し、各種指標を計算する。
+最後に、ここまでに計算してきた結果を結合し、各種指標を計算する( :numref:`tutorial_as_all` )。
 最後に実行される ``mcal`` で ``o=`` を指定しているので、結果はPython ListsではなくCSVファイルに書き込まれる。
 
   .. code-block:: python
     :linenos:
     :caption: 全ての結果を結合し指標を計算する
-    :name: tutorial_as_cooccur
+    :name: tutorial_as_all
 
     f=None
     f <<= nm.mjoin(k="item1", K="item", m=freq, f="freq:freq1", i=cooc)

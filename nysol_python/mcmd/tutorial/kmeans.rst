@@ -28,7 +28,7 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
 詳細は省くが、そこから、各クラスタに分類されたサンプル数、および各クラスタの中心ベクトルも取得する。
 
   .. csv-table:: k-meansクラスタリングの出力イメージ
-    :name: tutorial_as_output_image
+    :name: tutorial_kmeans_output_image
     :header: CustomerID,cluster
 
     12347,3
@@ -55,7 +55,7 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
 まずは、 顧客(行)、商品(列)、購入回数(セル)の3項目からなる表の作成を目指そう。
 
   .. csv-table:: online retailデータセット
-    :name: tutorial_as_onlineRetail
+    :name: tutorial_kmeans_onlineRetail
     :header: InvoiceNo,StockCode,Description,Quantity,UnitPrice,CustomerID,Country,date,time
 
     536365,85123A,WHITE HANGING HEART T-LIGHT HOLDER,6,2.55,17850,United Kingdom,20101201,082600
@@ -136,7 +136,7 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
   .. code-block:: python
     :linenos:
     :caption: 疎行列の行列への変換( :numref:`tutorial_kmeans_smatrix` の続き)
-    :name: tutorial_kmeans_matrix
+    :name: tutorial_kmeans_selmatrix
 
     import nysol.mcmd as nm
     base=None

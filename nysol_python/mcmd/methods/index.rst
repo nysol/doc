@@ -8,6 +8,7 @@
 
   m2cross
   maccum
+  marff2csv
   mavg
   mbest
   mbucket

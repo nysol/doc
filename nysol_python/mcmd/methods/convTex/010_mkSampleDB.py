@@ -40,9 +40,9 @@ sys.stderr.write("START: "+" ".join(argv)+" "+str(datetime.now())+"\n")
 
 cmdName=argv[1]
 iFile="./samples/ruby/%s.rb"%cmdName
-oPath="./db/sample"
+oPath="./db_auto/smp"
 os.system("mkdir -p %s"%oPath)
-oFile="%s/%s"%(oPath,cmdName)
+oFile="%s/%s.py"%(oPath,cmdName)
 
 # 項目名を英語に変換
 def toEng(txt,ref=False):
@@ -209,6 +209,16 @@ def parseHeader(txt):
 # EOF
 # run(scp,title,comment)
 
+if not os.path.exists(iFile):
+	with open(oFile,"w") as fpw:
+		fpw.write("# ================================================\n")
+		fpw.write("# コマンドマニュアル自動作成用サンプルコードデータ\n")
+		fpw.write("# ================================================\n")
+		fpw.write("db={}\n")
+		fpw.write("db['name']='%s'\n"%cmdName)
+		fpw.write("\n")
+	exit()
+
 # scpにpythonスクリプトを文字列として追加していく
 scp=""
 scp+=("#!/usr/bin/env python\n")
@@ -358,36 +368,38 @@ with open(iFile,"r") as fpr:
 # 出力
 with open(oFile,"w") as fpw:
 #with open("xxscp.txt","w") as fpw:
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#COM コマンドリファレンス自動作成用データ(#COMから始まる行はコメント行,空行は無視される)\n")
-	fpw.write("#COM ===================================================================================\n")
-	fpw.write("#CMD(%s,sh,py,rb)\n"%cmdName)
+	fpw.write("# ================================================\n")
+	fpw.write("# コマンドマニュアル自動作成用サンプルコードデータ\n")
+	fpw.write("# ================================================\n")
+	fpw.write("db={}\n")
+	fpw.write("db['name']='%s'\n"%cmdName)
 	fpw.write("\n")
 
+	fpw.write("############################### IDATA\n")
+	fpw.write("db['idatas']=[]\n\n")
 	for i in range(len(idatDocs)):
-		fpw.write("#IDAT(%s,sh,py,rb)\n"%idatDocs[i])
-		fpw.write(dataDocs[i])
-		fpw.write("#IDAT_END\n")
+		fpw.write("data={}\n")
+		fpw.write("data['name']='%s'\n"%idatDocs[i])
+		fpw.write("data['text']='''\n%s'''\n"%dataDocs[i])
+		fpw.write("db['idatas'].append(data)\n")
 		fpw.write("\n")
+
+	fpw.write("############################### SCRIPTS\n")
+	fpw.write("db['scripts']=[]\n\n")
 	for i in range(len(titleDocs)):
-		fpw.write("#EXAMPLE(sh,py,rb)\n")
-		fpw.write("##TITLE(sh,py,rb)\n")
-		fpw.write(titleDocs[i]+"\n")
-		fpw.write("##TITLE_END\n")
-		fpw.write("##COMMENT(sh,py,rb)\n")
-		fpw.write("%s"%commentDocs[i])
-		fpw.write("##COMMENT_END\n")
-		fpw.write("##SCRIPT(sh)\n")
+		fpw.write("script={}\n")
+		fpw.write("script['title']='%s'\n"%titleDocs[i])
+		fpw.write("script['comment']='''\n%s'''\n"%commentDocs[i])
+		fpw.write("script['sh_code']='''\n")
 		for j in range(len(shDocs[i])):
 			fpw.write(shDocs[i][j]+"\n")
-		fpw.write("##SCRIPT_END\n")
-		fpw.write("##SCRIPT(py)\n")
-		for j in range(len(pyDocs[i])):
+		fpw.write("'''\n")
+		fpw.write("script['py_code']='''\n")
+		for j in range(len(shDocs[i])):
 			fpw.write(pyDocs[i][j]+"\n")
-		fpw.write("##SCRIPT_END\n")
-		fpw.write("##ODAT(sh,py,rb)\n")
-		#for j in range(len(pyDocs[i])):
-		fpw.write(",".join(odatDocs[i])+"\n")
-		fpw.write("##ODAT_END\n")
-		fpw.write("#EXAMPLE_END\n")
+		fpw.write("'''\n")
+
+		fpw.write("script['odatas']='%s'\n"%(",".join(odatDocs[i])))
+		fpw.write("db['scripts'].append(script)\n")
 		fpw.write("\n")
+

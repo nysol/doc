@@ -1,42 +1,37 @@
 marff2csv arff形式からcsv形式への変換
----------------------------------------------------------------------------------
+------------------------------------------------------
 
 arff形式(WEKA用のデータフォーマット)のデータからcsv形式のデータへ変換する。
 \subsubsection*{arff形式データ}
 以下arff形式データのフォーマットを記載する。
-\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
-@RELATION       タイトル
-@ATTRIBUTE      項目名    string(文字列)
-@ATTRIBUTE      項目名    date(日時 フォーマット:フォーマットは省略可能。
-省略した場合は、"yyyy-MM-dd'T'HH:mm:ss"）
-@ATTRIBUTE      数量    numeric(数字)
-@ATTRIBUTE      商品    {A,B}(カテゴリ型項目)
-@DATA(実データ)
-No.1,20081201,1,10,A
-No.2,20081202,2,20,A
-No.3,20081203,3,30,A
-No.4,20081201,4,40,B
-No.5,20081203,5,50,B
-\end{Verbatim}
+``@RELATION       タイトル``
+``@ATTRIBUTE      項目名    string(文字列)``
+``@ATTRIBUTE      項目名    date(日時 フォーマット:フォーマットは省略可能。``
+``省略した場合は、"yyyy-MM-dd'T'HH:mm:ss"）``
+``@ATTRIBUTE      数量    numeric(数字)``
+``@ATTRIBUTE      商品    {A,B}(カテゴリ型項目)``
+``@DATA(実データ)``
+``No.1,20081201,1,10,A``
+``No.2,20081202,2,20,A``
+``No.3,20081203,3,30,A``
+``No.4,20081201,4,40,B``
+``No.5,20081203,5,50,B``
 
-marff2csv
 パラメータ
 ''''''''''''''''''''''
 
   .. list-table::
-    :header-rows: 1
+   :header-rows: 1
 
-    * - キーワード
-      - 内容
+   * - キーワード
+     - 内容
+   * - | **i=str**
+       | 任意
+     - | 入力データを指定する。
+   * - | **o=str**
+       | 任意
+     - | 出力データを指定する。
 
-    * - | **i=**
-        |   任意
-        |   デフォルト:標準入力
-      - |   入力データを指定する。
-    * - | **o=**
-        |   任意
-        |   デフォルト:標準出力
-      - |   出力データを指定する。
 
 共通パラメータ
 ''''''''''''''''''''
@@ -51,23 +46,25 @@ marff2csv
 , :ref:`tmppath=<common_param_tmppath>`
 , :ref:`precision=<common_param_precision>`
 
+
 利用例
 ''''''''''''
 
 **importと入力データ(CSV)の準備**
+
   .. code-block:: python
     :linenos:
 
-    import nysol.mcmd as nm    
-        
-    with open('dat1.arff","w"){|fpw| fpw.write(.csv','w') as f:
+    import nysol.mcmd as nm
+
+    with open('dat1.arff','w') as f:
       f.write(
     '''@RELATION       customer購買データ
     @ATTRIBUTE      customer    string
     @ATTRIBUTE      date    date yyyyMMdd
     @ATTRIBUTE      quantity    numeric
     @ATTRIBUTE      amount    numeric
-    @ATTRIBUTE      商品    {A,B}
+    @ATTRIBUTE      item    {A,B}
     @DATA
     No.1,20081201,1,10,A
     No.2,20081202,2,20,A
@@ -75,29 +72,22 @@ marff2csv
     No.4,20081201,4,40,B
     No.5,20081203,5,50,B
     ''')
-    
+
+
 **基本例**
 
 arff形式の顧客購買データをcsv形式のデータへ変換する。
 
-
   .. code-block:: python
     :linenos:
 
-    >>> nm.marff2csv(i="dat1.arff", o="rsl1.csv").run()
-    # ## rsl1.csv の内容
-    # customer,date,amount
-    # A,20081201,10
-    # B,20081002,40
-    # A,20081207,20
-    # A,20081213,30
-    # B,20081209,50
+    nm.marff2csv(i="dat1.arff", o="rsl1.csv").run()
+    ### rsl1.csv の内容
+    # customer,date,quantity,amount,item
+    # No.1,20081201,1,10,A
+    # No.2,20081202,2,20,A
+    # No.3,20081203,3,30,A
+    # No.4,20081201,4,40,B
+    # No.5,20081203,5,50,B
 
 
-
-関連メソッド
-''''''''''''
-
-- :doc:`mcsv2arff` 
-\subsection*{参考資料}
-\href{http://weka.wikispaces.com/ARFF}{http://weka.wikispaces.com/ARFF}

@@ -6,12 +6,12 @@
 簡単な例から始めよう。nysol_python をインストールしているのであれば、
 pythonを起動し、例に従って入力し動作を確認してもらいたい。
 
-以下では、:numref:`intable` に示される顧客の日別購買金額データを用いて簡単な実行例を示そう。
+以下では、:numref:`hello_intable` に示される顧客の日別購買金額データを用いて簡単な実行例を示そう。
 mcmdはこの様な表構造データを扱い、
 現在のところ2重リストもしくはCSVのいずれかのフォーマットによって与える。
 
   .. csv-table:: 入力データ例:mcmdが扱う表構造データ
-    :name: intable
+    :name: hello_intable
 
     customer,date,amount
     A,20180101,5200
@@ -20,12 +20,12 @@ mcmdはこの様な表構造データを扱い、
     A,20180101,2000
     B,20180101,800
 
-まずは、mcmdモジュールをimportし、上記の表を二重リストとして ``dat`` 変数に格納しておく(:numref:`indat`)。
+まずは、mcmdモジュールをimportし、上記の表を二重リストとして ``dat`` 変数に格納しておく(:numref:`hello_indat`)。
 
   .. code-block:: python
     :linenos:
     :caption: mcmdのインポートと入力データの設定
-    :name: indat
+    :name: hello_indat
 
     >>> import nysol.mcmd as nm
     >>> dat=[
@@ -38,14 +38,14 @@ mcmdはこの様な表構造データを扱い、
     ]
 
 このデータから、顧客別に合計金額を合計する処理を以下に示す。
-まずは、必要となる顧客と金額の2項目(``customer`` , ``amount`` )のみを切り出す(:numref:`cutCustAmount` )。
+まずは、必要となる顧客と金額の2項目(``customer`` , ``amount`` )のみを切り出す(:numref:`hello_cutCustAmount` )。
 ``mcut`` がその機能を実現するメソッドで、入力データとして ``dat`` 変数を指定している( ``i=`` )。
 そして続けて ``run`` メソッドを指定することで ``mcut`` の処理が実行される。
 
   .. code-block:: python
     :linenos:
     :caption: 必要な項目の切り出し処理
-    :name: cutCustAmount
+    :name: hello_cutCustAmount
 
     >>> nm.mcut(f="customer,amount",i=dat).run()
     >>> [['A', '5200'], ['B', '4000'], ['B', '3500'], ['A', '2000'], ['B', '800']]
@@ -59,21 +59,21 @@ mcmdはこの様な表構造データを扱い、
   .. code-block:: python
     :linenos:
     :caption: 顧客別金額合計の処理
-    :name: custAmount
+    :name: hello_custAmount
 
     >>> nm.mcut(f="customer,amount",i=dat).msum(k="customer",f="amount").run()
     [['A', '7200'], ['B', '8300']]
 
 なお、上述の2つの実行結果のリストからは項目名が省かれているがこれは仕様である [#f2]_。
-mcmdでは、:numref:`custAmount` の例のようにメソッドを連結して段階的に処理を行うが、
+mcmdでは、:numref:`hello_custAmount` の例のようにメソッドを連結して段階的に処理を行うが、
 メソッド間を流れるデータはPythonリストではなく、テキストのバイトストリームである。
-そして、最後のメソッド(:numref:`custAmount` の例では ``msum`` )に明示的に出力ファイル ``o=`` を指定しなければ、
+そして、最後のメソッド(:numref:`hello_custAmount` の例では ``msum`` )に明示的に出力ファイル ``o=`` を指定しなければ、
 項目名ヘッダを省いたリストが出力されるようになっている。
 
 組み合わせるmcmdメソッドの数が増えると、それらのメソッドをドットで繋げていくと見にくくなる。
 また、途中にコメント書いたり、条件分岐で追加するメソッドを変更したりすることもできない。
 そこで、同じ機能を ``<<=`` 演算子を使うことで、これらの問題を解決することができる。
-:numref:`hello_ope` は、 :numref:`custAmount` と同様の処理を ``<<=`` 演算子で書き直したものである。
+:numref:`hello_ope` は、 :numref:`hello_custAmount` と同様の処理を ``<<=`` 演算子で書き直したものである。
 変数 ``f`` に次々と処理内容を追加登録し、最後に ``run`` メソッドで実行している。
 
   .. code-block:: python

@@ -21,10 +21,10 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
    takeモジュール<take>
    dataset/index
    glossary
-   memo_rst
 
 
 * :ref:`genindex`
+
 .. * :ref:`modindex`
 .. * :ref:`search`
 
