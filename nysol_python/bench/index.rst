@@ -1,11 +1,11 @@
 
-データセット
+ベンチマークテスト
 ==============================
 
 .. toctree::
   :maxdepth: 1
   :caption: Contents:
 
-  uci_onlineretail
-  randStock
+  mcmd_fit2018
+  take_fit2018
 

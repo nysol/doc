@@ -1,5 +1,5 @@
-online retailデータセット
-==========================
+オンラインストア購買データ
+=============================
 |uci| より配布されている |uci_onlineretail| の利用方法について解説する。
 このデータは雑貨を扱う英国のオンラインストアの顧客ID付きPOSデータで、
 :numref:`uci_online_fields` に示される8項目から構成される。
@@ -128,4 +128,8 @@ mcmdでは、日付はyyyymmddの8桁固定長に、時刻はhhmmssの6桁固定
     536366,22633,HAND WARMER UNION JACK,6,1.85,17850.0,United Kingdom,20101201,082800
     536366,22632,HAND WARMER RED POLKA DOT,6,1.85,17850.0,United Kingdom,20101201,082800
 
-以上で、online retail データセットをmcmdで利用する準備が整った。
+以上で、online retail データセットを利用する準備が整った。
+
+* mcmdのチュートリアルは :doc:`こちら<../mcmd/tutorial/index>`
+
+

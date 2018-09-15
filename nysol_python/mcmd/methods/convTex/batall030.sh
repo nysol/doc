@@ -3,11 +3,13 @@ function sub {
 ./030_mkRST.py $1
 }
 
+sub marff2csv #エラー
 sub m2cross
 sub maccum
 sub mavg
 sub mbest
 sub mbucket
+sub mcal # mcalは別項目
 sub mcat # <dat1.csvの例題とエラー出す例題は変えないとだめ
 sub mchgnum
 sub mchgstr # wide文字の例を修正する必要あり
@@ -78,8 +80,6 @@ sub mvuniq
 sub mwindow
 sub mxml2csv
 
-##sub marff2csv #エラー
-##sub mcal # mcalは別項目
 
 ## pythonのみ
 ##sub mread

@@ -10,9 +10,10 @@ sub marff2csv
 sub mavg
 sub mbest
 sub mbucket
-sub mcat # <dat1.csvの例題とエラー出す例題は変えないとだめ
+sub mcal
+sub mcat
 sub mchgnum
-sub mchgstr # wide文字の例を修正する必要あり
+sub mchgstr
 sub mcombi
 sub mcommon
 sub mcount
@@ -80,7 +81,6 @@ sub mvuniq
 sub mwindow
 sub mxml2csv
 
-##sub mcal # mcalは別項目
 
 ## pythonのみ
 ##sub mread

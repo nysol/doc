@@ -40,22 +40,15 @@ def runpy(idat_code,code):
 
 def getodata(odata):
 	s=""
-	with open(odata,"r") as fpr:
-		line=fpr.readline()
-		while line:
-			s+="    # %s\n"%line.strip()
+	if os.path.exists(odata):
+		with open(odata,"r") as fpr:
 			line=fpr.readline()
+			while line:
+				s+="    # %s\n"%line.strip()
+				line=fpr.readline()
 	return s
 
-with open(oFile,"w") as fpw:
-	title="%s %s"%(cmd.db["name"],cmd.db["title"])
-	fpw.write(title+"\n")
-	fpw.write("-"*2*len(title)+"\n")
-	fpw.write(cmd.db["doc"])
-
-	fpw.write("パラメータ\n")
-	fpw.write("''''''''''''''''''''''\n\n")
-
+def writeParams1(fpw):
 	fpw.write("  .. list-table::\n")
 	fpw.write("   :header-rows: 1\n")
 	fpw.write("\n")
@@ -78,13 +71,13 @@ with open(oFile,"w") as fpw:
 	#	      - |   入力データを指定する。
 	for param in cmd.db["params"]:
 		## kwd
-		fpw.write("   * - | **%s=%s**\n"%(param["kwd"],param["type"]))
+		fpw.write("   * - | **%s=** *%s*\n"%(param["kwd"],param["type"]))
 		## 必須/任意/条件付き必須
 		s="任意"
 		if param["mand"]:
 			s="必須"
-		elif param["cond"]!="":
-			s=param["cond"]
+		if param["cond"]!="":
+			s="条件付き必須("+param["cond"]+")"
 		fpw.write("       | %s\n"%(s))
 		## デフォルト
 		if param["default"]!="":
@@ -101,6 +94,51 @@ with open(oFile,"w") as fpw:
 			i+=1
 		fpw.write(para)
 	fpw.write("\n\n")
+
+def writeParams2(fpw):
+
+	# param={}
+	# param['kwd']='i'
+	# param['type']='str'
+	# param['mand']=False
+	# param['cond']=''
+	# param['default']=''
+	# param['text']='''
+	# 入力データを指定する。
+	# '''
+	# =>
+	# **i=** *str*
+	# 任意(デフォルト:標準入力)
+	#	入力データを指定する。
+	for param in cmd.db["params"]:
+		## kwd
+		## 必須/任意/条件付き必須
+		if param["mand"]:
+			if param["cond"]!="":
+				s="条件付き必須("+param["cond"]+")"
+			else:
+				s="必須"
+		else:
+			s="任意(default=%s)"%param["default"]
+		fpw.write("**%s=** : 型=%s , %s\n\n"%(param["kwd"],param["type"],s))
+
+		## 説明
+		txt=param["text"].strip().split("\n")
+		for line in txt:
+			fpw.write("  | %s\n"%line)
+		fpw.write("\n")
+	fpw.write("\n\n")
+
+with open(oFile,"w") as fpw:
+	title="%s %s"%(cmd.db["name"],cmd.db["title"])
+	fpw.write(title+"\n")
+	fpw.write("-"*2*len(title)+"\n")
+	fpw.write(cmd.db["doc"])
+
+	fpw.write("パラメータ\n")
+	fpw.write("''''''''''''''''''''''\n\n")
+
+	writeParams2(fpw)
 
 	# 共通パラメータ
 	#		''''''''''''''''''''
@@ -228,4 +266,25 @@ with open(oFile,"w") as fpw:
 				fpw.write("    ### %s の内容\n"%odata)
 				fpw.write(dat)
 			fpw.write("\n\n")
+
+	# db['related']=[
+	#   ["mhashsum","集計キーを事前に並べ替えなくても計算できる。"]
+	#	  ["mavg","平均バージョン。"]
+	#	  ["mstats","その他の多様な統計量を求めるのであればこれ。"]
+	#	]
+	# ===========>>>>>>>>
+	# 関連メソッド
+	#	''''''''''''''''''''
+	#	* :doc:`mcross` : xxxxxxx
+	# * :doc:`xxx`
+	if "related" in cmd.db:
+		fpw.write("関連メソッド\n")
+		fpw.write("''''''''''''''''''''\n\n")
+		methods=[]
+		i=0
+		for method in cmd.db["related"]:
+			methods.append("* :doc:`%s` : %s"%(method[0],method[1]))
+		fpw.write("\n".join(methods))
+		fpw.write("\n\n")
+
 

@@ -138,7 +138,7 @@ CSVは表構造データのフォーマットのデファクトスタンダー�
 
 mcmdでCSVファイルの指定は、 ``i="filename.csv"`` のように、ファイル名を文字列で与える。
 ``i=`` ``m=`` ``o=`` ``u=`` の全てに利用可能である。
-:numref:`data_csv_io` は、 :numref:`csv_table` をリストで入力したものを
+:numref:`data_csv_io` は、 :numref:`data_list` をリストで入力したものを
 CSVとして ``dat.csv`` に出力し(最初の ``mread`` メソッド)、
 それを再度入力データとして読み込み、``dat2.csv`` に出力する(2番目の ``mread`` メソッド)例である。
 

@@ -7,27 +7,27 @@ mavg 項目値の平均
 パラメータ
 ''''''''''''''''''''''
 
-  .. list-table::
-   :header-rows: 1
+**i=** : 型=str , 任意(default=標準入力)
 
-   * - キーワード
-     - 内容
-   * - | **i=str**
-       | 任意
-     - | 入力データを指定する。
-   * - | **o=str**
-       | 任意
-     - | 出力データを指定する。
-   * - | **f=str**
-       | 必須
-     - | ここで指定した項目(複数項目指定可)の値が集計される。
-       | :(コロン）で新項目名を指定可能。例） ``f=`` 数量:数量平均
-   * - | **k=str**
-       | 任意
-     - | 集計の単位となる項目(複数項目指定可)名リストを指定する。
-   * - | **n=bool**
-       | 任意
-     - | NULL値が1つでも含まれていると結果もNULL値とする。
+  | 入力データを指定する。
+
+**o=** : 型=str , 任意(default=標準出力)
+
+  | 出力データを指定する。
+
+**f=** : 型=str , 必須
+
+  | ここで指定した項目(複数項目指定可)の値が集計される。
+  | :(コロン）で新項目名を指定可能。例） ``f=`` 数量:数量平均
+
+**k=** : 型=str , 任意(default=キーブレイク処理しない)
+
+  | 集計の単位となる項目(複数項目指定可)名リストを指定する。
+
+**n=** : 型=bool , 任意(default=False)
+
+  | NULL値が1つでも含まれていると結果もNULL値とする。
+
 
 
 共通パラメータ
@@ -76,3 +76,44 @@ mavg 項目値の平均
     :linenos:
 
     nm.mavg(k="customer", f="quantity:qttTotal,amount:amtTotal", i="dat1.csv", o="rsl1.csv").run()
+    ### rsl1.csv の内容
+    # customer%0,qttTotal,amtTotal
+    # A,1.5,12.5
+    # B,3,15
+
+
+**NULL値がある場合の出力**
+
+``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+``n=True`` オプションを指定することで、NULL値が含まれている場合は、結果もNULL値として出力する。
+
+  .. code-block:: python
+    :linenos:
+
+    nm.mavg(k="customer", f="quantity:qttTotal,amount:amtTotal", n=True, i="dat1.csv", o="rsl2.csv").run()
+    ### rsl2.csv の内容
+    # customer%0,qttTotal,amtTotal
+    # A,1.5,12.5
+    # B,,15
+
+
+**顧客項目を単位としない例**
+
+``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` という項目名で出力する。
+
+  .. code-block:: python
+    :linenos:
+
+    nm.mavg(f="quantity:qttTotal,amount:amtTotal", i="dat1.csv", o="rsl3.csv").run()
+    ### rsl3.csv の内容
+    # customer,qttTotal,amtTotal
+    # B,2.25,14
+
+
+関連メソッド
+''''''''''''''''''''
+
+* :doc:`mhashavg` : 集計キーを事前に並べ替えなくても計算できる。
+* :doc:`msum` : 合計バージョン。
+* :doc:`mstats` : その他の多様な統計量を求めるのであればこれ。
+

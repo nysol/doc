@@ -6,12 +6,12 @@
   :maxdepth: 1
   :caption: Contents:
 
-  m2cross
   maccum
   marff2csv
   mavg
   mbest
   mbucket
+  mcal
   mcat
   mchgnum
   mchgstr
@@ -19,6 +19,7 @@
   mcommon
   mcount
   mcross
+  m2cross
   mcut
   mdelnull
   mdformat

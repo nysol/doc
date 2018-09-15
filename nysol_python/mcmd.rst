@@ -11,23 +11,25 @@ MCMDは、特に知識発見プロセス [#f2]_ における **前処理** で�
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
+   :numbered: 2
    :caption: Contents:
 
-   mcmd/install
    mcmd/hello
    mcmd/data
    mcmd/field
    mcmd/flow
-   mcmd/autoadd
    mcmd/methods/index
    mcmd/common_param
+   mcmd/autoadd
    mcmd/special
    mcmd/run
    mcmd/iterator
+   mcmd/tutorial/index
+
+..
    mcmd/workfile
    mcmd/jupyter
-   mcmd/tutorial/index
+
 
 パラメータ
 

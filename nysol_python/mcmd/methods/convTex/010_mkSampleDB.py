@@ -7,6 +7,7 @@ import json
 from datetime import datetime
 
 fldMap={}
+fldMap["顧客購買データ"]=("str","customerPurchaseData")
 fldMap["数量累計"]=("num","qttAccum")
 fldMap["金額累計"]=("num","amtAccum")
 fldMap["数量合計"]=("num","qttTotal")
@@ -15,6 +16,8 @@ fldMap["数量平均"]=("num","qttTotal")
 fldMap["金額平均"]=("num","amtTotal")
 fldMap["金額基準値"]=("num","amtNorm")
 fldMap["数量基準値"]=("num","qttNorm")
+fldMap["購入日"]=("str","buyDate")
+fldMap["前回購入日"]=("str","prevBuyDate")
 fldMap["性別"]=("str","gender")
 fldMap["女性"]=("str","female")
 fldMap["男性"]=("str","male")
@@ -300,6 +303,7 @@ with open(iFile,"r") as fpr:
 		elif fileBlock and line.find(r"EOF")!=-1:
 			dataBlock=False
 		elif dataBlock:
+			print("eng",cmdName,toEng(line))
 			dataDocs[-1]+=(toEng(line)+"\n")
 
 		#######################################################################################

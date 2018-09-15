@@ -16,7 +16,7 @@ if len(argv)!=2:
 sys.stderr.write("START: "+" ".join(argv)+" "+str(datetime.now())+"\n")
 
 # texのpath
-iPath=os.path.expanduser("~/nysol/nysolx/doc/mcmd/jp")
+iPath=os.path.expanduser("./tex")
 
 oPath="./db_auto/cmd"
 os.system("mkdir -p %s"%oPath)
@@ -40,6 +40,8 @@ def convText(txt):
 	txt1=re.sub("\$(.+?)\$"," :math:`\\1` ",txt1)
 
 	txt1=re.sub(r"表?\\ref{tbl:(.+?)}",r" :numref:`\1` ",txt1,100)
+
+	txt1=re.sub(r"\\ref{sect:(.+?)}",r" :doc:`mcal/\1` ",txt1)
 	txt1=re.sub(r"\\hyperref\[sect:.*?]{(.+?)}",r" :doc:`\1` ",txt1,100)
 	return txt1
 
@@ -62,6 +64,8 @@ def getDefault(name,kwd,txt):
 			ret="標準出力"
 		elif kwd=="u=":
 			ret="出力しない"
+		elif kwd=="k=":
+			ret="キーブレイク処理しない"
 		elif kwd=="K=":
 			ret="k=と同一項目名"
 		elif name=="mchgnum" and kwd=="O=":
@@ -70,9 +74,14 @@ def getDefault(name,kwd,txt):
 			ret="null値"
 		elif (name=="mnjoin" or name=="mjoin" or name=="mnrjoin" or name=="mproduct") and kwd=="f=":
 			ret="全項目"
-		elif name=="mnullto" and (kwd=="k=" or kwd=="s="):
-			ret=None
-	return ""
+	return ret
+
+def getCond(name,kwd,txt):
+	ret=""
+	if kwd=="s=":
+		ret=" ``q=True`` の指定がない場合"
+	return ret
+
 
 # 必須パラメータかどうかの判断
 def isMand(name,kwdm,mandParams):
@@ -97,7 +106,12 @@ def outputTable(table,caption,name):
 	tbl=[]
 
 	for line in table:
-		ret+="  %s\n"%(convText(",".join(line)))
+		ls=[]
+		for cell in line:
+			txt=convText(cell)
+			txt=re.sub(r","," ",txt)
+			ls.append(txt)
+		ret+="  %s\n"%(convText(",".join(ls)))
 	ret+="\n\n"
 	return ret
 
@@ -125,7 +139,7 @@ with open(iFile,"r") as fpr:
 
 	title=None
 	doc=""
-	related=""
+	related=[]
 	capLine=""
 	tblline=""
 	params=[]
@@ -371,13 +385,13 @@ with open(iFile,"r") as fpr:
 					params[-1]["type"]="bool"
 					params[-1]["mand"]=False
 					params[-1]["cond"]=""
-					params[-1]["default"]=""
+					params[-1]["default"]="False"
 					params[-1]["text"]=(convText(cols[1])+"\n")
 				else:
 					params[-1]["kwd"]=kwd[:-1]
 					params[-1]["type"]="str" # 後で手編集
 					params[-1]["mand"]=isMand(cmdName,kwd,mandParams)
-					params[-1]["cond"]=""
+					params[-1]["cond"]=getCond(cmdName,kwd,cols[1])
 					params[-1]["default"]=getDefault(cmdName,kwd,cols[1])
 					params[-1]["text"]=(convText(cols[1])+"\n")
 			else:
@@ -391,8 +405,13 @@ with open(iFile,"r") as fpr:
 		elif line==r"\subsection*{関連コマンド}":
 			relatedBlock=True
 
+		# db["related"]=[["msum","commnet"],[],[]]
 		elif relatedBlock:
-			related=re.sub("\\\\hyperref\[sect:(.*?)\].*","\\1",line)
+			relKWD=re.sub("\\\\hyperref\[sect:(.*?)\].*","\\1",line)
+			relCOM=""
+			if len(line.split(" : "))>=2:
+				relCOM=line.split(" : ")[1]
+			related.append([relKWD,convText(relCOM)])
 			#print("xx10")
 			#print(re.sub("\\\\hyperref\[sect:(.*?)\].*","- :doc:`\\1` ",line))
 			#print(re.sub("\\\\hyperref\[sect:(.*?)\].*","- :doc:`mcut` ",line))
@@ -406,7 +425,14 @@ with open(oFile,"w") as fpw:
 	fpw.write("db={}\n")
 	fpw.write("db['name']='%s'\n"%cmdName)
 	fpw.write("db['title']='%s'\n"%title)
-	fpw.write("db['related']='%s'\n"%related)
+
+	fpw.write("db['related']=[\n")
+	s=[]
+	for rel in related:
+		s.append('  ["%s","%s"]'%(rel[0],rel[1]))
+	fpw.write(",\n".join(s))
+	fpw.write("\n]\n")
+
 	fpw.write("\n")
 	fpw.write("############################### DOCUMENT\n")
 	fpw.write("db['doc']='''\n%s\n'''\n"%doc)
