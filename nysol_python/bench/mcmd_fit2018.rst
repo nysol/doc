@@ -153,13 +153,13 @@ DATAディレクトリの下にデータが生成される。20〜30分ほど時
 
   # mcmdによる平均計算
   def nm1(iFile):
-    r = nm.mhashsum(k="date",f="o,h,l,c",i=iFile).run()
+    r = nm.mhashavg(k="date",f="o,h,l,c",i=iFile).run()
 
   # mcmdによる平均計算(並列処理)
   def nm1a(iPath):
     fs=[]
     for iFile in glob("%s/*"%iPath):
-      fs.append(nm.mhashsum(f="o,h,l,c",i=iFile))
+      fs.append(nm.mhashavg(f="o,h,l,c",i=iFile))
     r=nm.runs(fs)
 
   # pandasによる移動平均
@@ -299,6 +299,11 @@ small,mid,largeは :numref:`mcmd_fit2018_data` に示したサイズ別データ
  * CPU: 2.7GHz 12-Core Intel Xeon E5
  * memory: 64GB
  * hdd: USB3 HDD
+
+
+.. note::
+
+  ここ以降の内容は、近い将来「 :doc:`../tutorial/index` 」の節に移動します。
 
 
 高収益率による銘柄の共起分析

@@ -8,16 +8,7 @@ pythonの拡張ライブラリとして利用できるようにしたもので�
 パッケージ名は開発者の名前の音からとったものである。
 本パッケージは、大きく２種類のメソッドを提供している。
 一つはオリジナルのソフトウェアを、ほぼそのままの形で利用できるようにしたcoreパッケージで、
-以下の7種類のメソッドが提供されている。
-
-* :py:func:`take.extcore.lcm`: アイテム集合列挙
-* :py:func:`take.extcore.lcmseq`: 系列パターン列挙
-* :py:func:`take.extcore.mace`: 極大クリーク列挙
-* :py:func:`take.extcore.sspc`: 類似アイテムペア列挙
-* :py:func:`take.extcore.medset`: アイテム集合の共通集合
-* :py:func:`take.extcore.simset`: simset
-* :py:func:`take.extcore.grhfil`: グラフの変換
-
+以下の7種類のコアメソッドが提供されている。
 他方は、オリジナルのソフトウェアを組み合わせて、
 より利用しやすくした以下に示す7つのメソッドを提供している。
 coreのメソッドでは、アイテムのシンボルとして整数を用いなければならず、
@@ -25,14 +16,16 @@ coreのメソッドでは、アイテムのシンボルとして整数を用い�
 ただし、そのためにシンボルの変換などの余分なオーバーヘッドが発生するために、
 coreパッケージに比べて処理速度は劣る。
 
-* *mitemset*: アイテム集合列挙
-* *msequence*: 系列パターン列挙
-* *mclique*: クリーク列挙
-* *mtra2gc*: トランザクションからの類似度グラフ生成
-* *mpolishing*: グラフ研磨
-* *mfriends*: 順序関係を考慮した類似アイテムペア列挙
-* *mpal*:  順序関係を考慮した類似アイテムペア列挙
+
+.. toctree::
+   :maxdepth: 2
+   :numbered: 2
+   :caption: Contents:
+
+   take/methods0/index
+   take/methods/index
 
 .. rubric:: Footnotes
 
 .. [#f1] http://research.nii.ac.jp/~uno/codes-j.htm
+

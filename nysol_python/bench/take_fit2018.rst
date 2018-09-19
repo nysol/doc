@@ -259,6 +259,11 @@ org,s-10,s-100,s-1000は :numref:`take_fit2018_data` に示したサイズ別デ
  * memory: 64GB
  * hdd: USB3 HDD
 
+.. note::
+
+  ここ以降の内容は、近い将来「 :doc:`../tutorial/index` 」の節に移動します。
+
+
 
 ランク情報に基づく相関ルール分析
 -----------------------------------------------
@@ -380,35 +385,82 @@ Takeでは、そのような研磨処理は ``mbipolish`` メソッドを利用�
   oPath=("./OUTPUTS/bicluster")
   os.system("mkdir -p %s"%oPath)
 
-  # make a bipartitle graph of StockCode-CustomerID
+  # 購入回数が5回以上の商品-顧客のペアを選択することで二部グラフを構成する。
   f=None
   f <<= nm.mcut(f="StockCode,CustomerID",i=iFile)
   f <<= nm.mdelnull(f="StockCode,CustomerID")
   f <<= nm.mcount(k="StockCode,CustomerID",a="freq")
   f <<= nm.mselnum(f="freq",c='[5,]',o="%s/bipartiteGraph.csv"%oPath)
   f.run()
+  # bipartiteGraph.csvの内容
+  # StockCode%0,CustomerID%1,freq
+  # 10125,12731,5
+  # 10133,12748,5
+  # 10135,14096,11
+  # 11001,14096,7
 
-  # biclusterig on the bipartite graph non-polished
+  # 二部クリークの列挙
+  # 出力項目StockCode,CustomerIDはベクトル型で出力されており、それぞれのサイズがsize1,size2項目
   nt.mbiclique(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", o="%s/clique_non-polish.csv"%oPath).run()
+  # clique_non-polish.csvの内容
+  # StockCode%0,CustomerID%1,size1,size2
+  # 10125 20682 20685 ... 90119 90166 CRUK DOT,14096,453,1
+  # 15036,12748 12841 12877 12971 13089 13098 14060 16186 16700,1,9
+  # 15036 15044D 20723 22355 22502 22661,12877,6,1
+  #                     :
 
-  # biclusterig on the bipartite graph polished
+  # 二部グラフの研磨を行う。出力も二部グラフとなる。
   nt.mbipolish(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", sim="R", th=0.3, eo="%s/bipartiteGraphPolish.csv"%oPath).run( )
-  nt.mbiclique(ei="%s/bipartiteGraphPolish.csv"%oPath,ef="StockCode,CustomerID", o="%s/clique_polish.csv"%oPath).run()
+  # bipartiteGraphPolish.csvの内容
+  # StockCode,CustomerID
+  # 10133,12748
+  # 10135,14096
+  # 11001,14096
+  #      :
 
-  # histogram by cluster size of CustomerID (non-polish)
+  # 研磨された二部グラフから鈍くリークを列挙する。
+  nt.mbiclique(ei="%s/bipartiteGraphPolish.csv"%oPath,ef="StockCode,CustomerID", o="%s/clique_polish.csv"%oPath).run()
+  # clique_polish.csvの内容
+  # StockCode%0,CustomerID%1,size1,size2
+  # 15056BL 15056N 20679,15854,3,1
+  # 16011 20975 22440,17596,3,1
+  # 16014 16015 16016 22300,18077,4,1
+  # 16161U,17365,1,1
+  #          :
+
+  # 研磨なしの二部クリークのサイズ別件数(size2:顧客のサイズのみを示してる)
   f=None
   f <<= nm.mchgnum(f="size2",R="1,3,5,7,9,11,21,31,41,51,MAX",v="1-2,3-4,5-6,7-8,9-10,11-20,21-30,31-40,41-50,51-",i="%s/clique_non-polish.csv"%oPath)
   f <<= nm.mcut(f="size2")
   f <<= nm.mcount(k="size2",a="freq",o="%s/hist_non-polish.csv"%oPath)
   f.run(meg="on")
+  # hist_non-polish.csvの内容
+  # size2%0,freq
+  # 1-2,2636
+  # 11-20,1512
+  # 21-30,140
+  # 3-4,9027
+  # 31-40,31
+  # 41-50,11
+  # 5-6,6682
+  # 51-,12
+  # 7-8,3156
+  # 9-10,1501
 
-  # histogram by cluster size of CustomerID (polish)
+  # 研磨ありの二部クリークのサイズ別件数(size2:顧客のサイズのみを示してる)
   f=None
   f <<= nm.mchgnum(f="size2",R="1,3,5,7,9,11,21,31,41,51,MAX",v="1-2,3-4,5-6,7-8,9-10,11-20,21-30,31-40,41-50,51-",i="%s/clique_polish.csv"%oPath)
   f <<= nm.mcut(f="size2")
   f <<= nm.mcount(k="size2",a="freq",o="%s/hist_polish.csv"%oPath)
   f.run(meg="on")
-
+  # hist_polish.csvの内容
+  # size2%0,freq
+  # 1-2,205
+  # 11-20,6
+  # 3-4,31
+  # 5-6,17
+  # 7-8,4
+  # 9-10,2
 
 .. rubric:: Footnotes
 

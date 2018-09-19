@@ -21,6 +21,7 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
    mcmdモジュール<mcmd>
    takeモジュール<take>
    dataset/index
+   tutorial/index
    bench/index
    glossary
 
@@ -32,4 +33,6 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
 
 .. [#f0] 本ソフトウェアの開発には、JST CREST(グラント番号: JPMJCR1401)の研究助成を受けている。
 .. [#f1] http://www.nysol.jp/
+
+last update : |today|
 

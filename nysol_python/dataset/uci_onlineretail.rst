@@ -130,6 +130,6 @@ mcmdでは、日付はyyyymmddの8桁固定長に、時刻はhhmmssの6桁固定
 
 以上で、online retail データセットを利用する準備が整った。
 
-* mcmdのチュートリアルは :doc:`こちら<../mcmd/tutorial/index>`
+* このデータセットを用いたチュートリアルは :doc:`こちら<../tutorial/index>`
 
 

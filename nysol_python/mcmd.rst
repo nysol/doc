@@ -24,7 +24,6 @@ MCMDは、特に知識発見プロセス [#f2]_ における **前処理** で�
    mcmd/special
    mcmd/run
    mcmd/iterator
-   mcmd/tutorial/index
 
 ..
    mcmd/workfile
