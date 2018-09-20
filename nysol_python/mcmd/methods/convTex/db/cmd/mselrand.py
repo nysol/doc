@@ -13,10 +13,11 @@ db['related']=[
 db['doc']='''
 ``c=`` パラメータもしくは ``p=`` パラメータで指定した行数をランダムに選択する(非復元抽出)。
 ``k=`` を指定した場合、同一キーの行から指定の行数をランダムに選択し、
-また同時に ``B=True`` オプションを指定すると、キー単位で選択する。
+また同時に ``B`` オプションを指定すると、キー単位で選択する。
 乱数の生成にはメルセンヌ・ツイスター法を利用している
-(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
-, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
+
+* 原作者のページ: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
+* boostライブラリ: http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html
 
 '''
 

@@ -59,11 +59,11 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=False
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 ここで指定した項目(複数項目指定可)で並べ替えられた後、移動平均が計算される。
-``q=True`` オプションを指定しないとき、 ``s=`` パラメータは必須。
+``q`` オプションを指定しないとき、 ``s=`` パラメータは必須。
 '''
 db['params'].append(param)
 
@@ -97,7 +97,7 @@ param['cond']=''
 param['default']=''
 param['text']='''
 期間数を1以上の整数で指定する。
-``exp=True`` 指定時に ``alpha=`` を指定すれば ``t=`` は指定できない。
+``exp`` オプション指定時に ``alpha=`` を指定すれば ``t=`` は指定できない。
 '''
 db['params'].append(param)
 
@@ -130,7 +130,7 @@ param['mand']=False
 param['cond']=''
 param['default']=''
 param['text']='''
-``exp=True`` が指定された時の平滑化係数を実数値で与える。
+``exp`` オプションが指定された時の平滑化係数を実数値で与える。
 省略時は ``alpha=2/(t=の値+1)`` 。
 '''
 db['params'].append(param)
@@ -143,7 +143,7 @@ param['cond']=''
 param['default']=''
 param['text']='''
 出力を抑制する最初の行数。
-デフォルト値:  ``skip=(t=の値-1)`` ,  ``exp=True`` が指定された場合は ``skip=0``
+デフォルト値:  ``skip=(t=の値-1)`` ,  ``exp`` オプションが指定された場合は ``skip=0``
 '''
 db['params'].append(param)
 

@@ -69,16 +69,16 @@ param['text']='''
 db['params'].append(param)
 
 param={}
-param['kwd']='r'
+param['kwd']='rf'
 param['type']='str'
 param['mand']=True
 param['cond']=''
 param['default']=''
 param['text']='''
-範囲比較される項目名[\%n]
+範囲比較される項目名
 入力データ上の項目名を指定する。
 ここでここで指定した項目(複数項目指定可)で並べ替えられた後、結合が行われる。
-\%nが指定されると、数値範囲として解釈し、指定がなければ文字列範囲として解釈する。
+%nが指定されると、数値範囲として解釈し、指定がなければ文字列範囲として解釈する。
 ここで指定する項目にNULL値があってはならない。NULL値があった場合の動作は不定である。
 '''
 db['params'].append(param)

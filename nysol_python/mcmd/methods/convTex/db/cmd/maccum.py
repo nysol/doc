@@ -34,11 +34,11 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=True
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 ここで指定した項目(複数項目指定可)で並べ替えられた後、累積が計算される。
-``q=True`` オプションを指定しないとき、 ``s=`` パラメータは必須。
+``q`` オプションを指定しないとき、 ``s=`` パラメータは必須。
 '''
 db['params'].append(param)
 

@@ -83,7 +83,7 @@ param['text']='''
 db['params'].append(param)
 
 param={}
-param['kwd']='r'
+param['kwd']='rf'
 param['type']='str'
 param['mand']=True
 param['cond']=''
@@ -91,7 +91,7 @@ param['default']=''
 param['text']='''
 範囲比較される項目名[\%{n}]
 入力データ上の項目名を指定する。
-数値として処理したい場合は ``r=`` パラメータの項目名のあとに\%nをつける。
+数値として処理したい場合は ``rf=`` パラメータの項目名のあとに\%nをつける。
 '''
 db['params'].append(param)
 

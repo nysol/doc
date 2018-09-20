@@ -20,6 +20,8 @@ MCMDは、特に知識発見プロセス [#f2]_ における **前処理** で�
    mcmd/flow
    mcmd/methods/index
    mcmd/common_param
+   mcmd/calsel
+   mcmd/methods/func_index
    mcmd/autoadd
    mcmd/special
    mcmd/run

@@ -91,7 +91,7 @@ DAGの節点が処理メソッドに、そして有向辺がデータの流れ�
     :caption: 処理フローの視覚化
     :name: flow_drawModel
 
-    nm.drawModelsD3(f,"cust_amount.html") 
+    nm.drawModelsD3([f],"cust_amount.html") 
 
   .. figure:: figure/flowChart.png
     :scale: 40%

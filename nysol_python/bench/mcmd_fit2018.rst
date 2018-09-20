@@ -278,8 +278,9 @@ DATAディレクトリの下にデータが生成される。20〜30分ほど時
 出力結果をまとめたものを :numref:`mcmd_fit2018_bench_result` に示している。
 defは :numref:`mcmd_fit2018_bench` の関数名を表す。
 small,mid,largeは :numref:`mcmd_fit2018_data` に示したサイズ別データセットの名称である。
+また、fit2018での報告日に実験をやり直した結果は :numref:`mcmd_fit2018_bench_result2` に示している。
 
-.. csv-table:: ベンチマークの結果(単位:秒)。
+.. csv-table:: ベンチマークの結果(単位:秒)。fit2018のproceeding執筆時の結果。
   :name: mcmd_fit2018_bench_result
   :header: task,program,def,small,mid,large
 
@@ -292,6 +293,20 @@ small,mid,largeは :numref:`mcmd_fit2018_data` に示したサイズ別データ
   for ,pandas        ,pd3 ,18.72,174.54,
   for ,pandas(values),pd3a, 0.35,  3.10,73.42
   for ,mcmd          ,nm3 , 0.27,  2.73,60.43
+
+.. csv-table:: ベンチマークの結果(単位:秒)。2018/9/20の結果。
+  :name: mcmd_fit2018_bench_result2
+  :header: task,program,def,small,mid,large
+
+  avg ,pandas        ,pd1 ,0.103,  0.96,24.10
+  avg ,mcmd          ,nm1 ,0.031,  0.29, 7.32
+  avg ,mcmd(multi)   ,nm1a,     ,      , 7.85
+  win ,pandas        ,pd2 ,26.21, 27.77,66.96
+  win ,mcmd          ,nm2 , 0.23,  2.29,58.70
+  win ,mcmd(file)    ,nm2a, 0.15,  1.39,38.03
+  for ,pandas        ,pd3 ,16.92,165.96,
+  for ,pandas(values),pd3a, 0.30,  2.92,71.29
+  for ,mcmd          ,nm3 , 0.28,  2.65,65.43
 
 ベンチマークテストを実施した計算環境は以下の通りである。
 

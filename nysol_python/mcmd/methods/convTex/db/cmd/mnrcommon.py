@@ -80,13 +80,13 @@ param['text']='''
 db['params'].append(param)
 
 param={}
-param['kwd']='r'
+param['kwd']='fr'
 param['type']='str'
 param['mand']=True
 param['cond']=''
 param['default']=''
 param['text']='''
-範囲比較される入力データ上の項目名を指定する。[\%{n}]
+範囲比較される入力データ上の項目名を指定する。
 ここで指定した参照データの項目と ``k=`` パラメータで指定された入力データの項目が同じ行が選択される。
 数値として処理したい場合は ``r=`` パラメータの項目名のあとに\%nをつける。
 '''

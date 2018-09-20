@@ -118,7 +118,7 @@ param['mand']=False
 param['cond']=''
 param['default']='False'
 param['text']='''
-``sub=True`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。
+``sub`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。
 '''
 db['params'].append(param)
 

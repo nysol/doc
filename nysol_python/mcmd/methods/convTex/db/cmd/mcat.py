@@ -72,9 +72,9 @@ param['mand']=False
 param['cond']=''
 param['default']='False'
 param['text']='''
-``nostop=True``  , ``skip=True`` , ``force=True`` は、指定の項目名がなかったときの動作を制御するフラグである。
-``nostop=True`` は、指定の項目名がなければnullを出力する。
-``nfn=True`` が同時に指定された場合，項目数が異なればエラー終了する。
+``nostop``  , ``skip`` , ``force`` の各オプションは、指定の項目名がなかったときの動作を制御するフラグである。
+``nostop`` オプションは、指定の項目名がなければnullを出力する。
+``nfn`` オプションが同時に指定された場合，項目数が異なればエラー終了する。
 '''
 db['params'].append(param)
 
@@ -86,7 +86,7 @@ param['cond']=''
 param['default']='False'
 param['text']='''
 指定の項目名がなければそのデータは併合しない。
-``nfn=True`` が同時に指定された場合、項目数が異なればそのデータは併合しない。
+``nfn`` オプションが同時に指定された場合、項目数が異なればそのデータは併合しない。
 '''
 db['params'].append(param)
 
@@ -97,7 +97,7 @@ param['mand']=False
 param['cond']=''
 param['default']='False'
 param['text']='''
--nfnを指定していない場合でも0バイトデータでエラーにならないようにする。
+``nfn`` オプションを指定していない場合でも0バイトデータでエラーにならないようにする。
 '''
 db['params'].append(param)
 
@@ -119,7 +119,7 @@ param['mand']=False
 param['cond']=''
 param['default']=''
 param['text']='''
-パス名に含めた”key-value”の文字列を抜き出し項目名とその値としてデータに付加する。
+パス名に含めた key-value の文字列を抜き出し項目名とその値としてデータに付加する。
 '''
 db['params'].append(param)
 
@@ -155,7 +155,7 @@ param['default']='False'
 param['text']='''
 併合元のデータを最終項目として追加する。
 標準入力は ``/dev/stdin`` という名称になる。
-項目名は ``"fileName"`` 固定なので、入力データに同一の項目名があるとエラーとなる。
+項目名は ``fileName`` 固定なので、入力データに同一の項目名があるとエラーとなる。
 '''
 db['params'].append(param)
 

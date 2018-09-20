@@ -56,7 +56,7 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=False
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 ここで指定した項目(複数項目指定可)で並べ替えた後、先頭・終端に印を付ける。

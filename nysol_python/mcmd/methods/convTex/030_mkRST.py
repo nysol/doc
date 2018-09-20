@@ -134,6 +134,7 @@ with open(oFile,"w") as fpw:
 	fpw.write(title+"\n")
 	fpw.write("-"*2*len(title)+"\n")
 	fpw.write(cmd.db["doc"])
+	fpw.write("\n")
 
 	fpw.write("パラメータ\n")
 	fpw.write("''''''''''''''''''''''\n\n")
@@ -248,6 +249,8 @@ with open(oFile,"w") as fpw:
 	#print("scp",smp.db["scripts"])
 	if "scripts" in smp.db:
 		for scp in smp.db["scripts"]:
+			if scp["py_code"].strip()=="":
+				continue
 			fpw.write("**%s**\n\n"%scp["title"])
 			fpw.write(scp["comment"][1:]+"\n")
 			fpw.write("  .. code-block:: python\n")

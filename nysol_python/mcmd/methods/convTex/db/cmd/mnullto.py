@@ -82,7 +82,7 @@ param['mand']=False
 param['cond']=''
 param['default']='キーブレイク処理しない'
 param['text']='''
-``p=True`` を指定した時にのみ意味があり、ここで指定した項目値の単位で置換処理を行なう。
+``p`` オプションを指定した時にのみ意味があり、ここで指定した項目値の単位で置換処理を行なう。
 '''
 db['params'].append(param)
 
@@ -90,10 +90,10 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=False
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
-``p=True`` を指定した時にのみ意味があり、 ``k=`` 項目内での並び順を指定する。
+``p`` オプションを指定した時にのみ意味があり、 ``k=`` 項目内での並び順を指定する。
 '''
 db['params'].append(param)
 
@@ -116,7 +116,7 @@ param['cond']=''
 param['default']='False'
 param['text']='''
 このオプションにより、指定した項目を置き換えるのではなく、
-``A=True`` オプションを指定した場合は必ず、
+``A`` オプションを指定した場合は必ず、
 :(コロン）で新項目名を指定する必要がある。例）f=数量:置換後の項目名
 '''
 db['params'].append(param)

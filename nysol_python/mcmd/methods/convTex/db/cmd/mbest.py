@@ -14,8 +14,7 @@ db['related']=[
 db['doc']='''
 指定した行番号の行を選択する。
 行番号は0から始まることに注意する(項目名行は除いて、データ本体の先頭行が0行目)。
-行番号は ``from=`` と ``to=`` (もしくは ``size=`` )で指定する。
-
+行番号は ``fr=`` と ``to=`` (もしくは ``size=`` )で指定する。
 '''
 
 ############################### PARAMETERS
@@ -47,16 +46,16 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=True
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 ここで指定した項目(複数項目指定可)で並べ替えられた後、指定した行が選択される。
-``q=True`` オプションを指定しないとき、 ``s=`` パラメータは必須。
+``q`` オプションを指定しないとき、 ``s=`` パラメータは必須。
 '''
 db['params'].append(param)
 
 param={}
-param['kwd']='from'
+param['kwd']='fr'
 param['type']='str'
 param['mand']=False
 param['cond']=''
@@ -74,7 +73,7 @@ param['cond']=''
 param['default']='0'
 param['text']='''
 選択する終了行番号(0以上の整数)
-「 ``from=`` の値」 :math:`\le` 「 ``to=`` の値」でなければならない。
+「 ``fr=`` の値」 :math:`\le` 「 ``to=`` の値」でなければならない。
 '''
 db['params'].append(param)
 
@@ -112,8 +111,8 @@ param['mand']=False
 param['cond']=''
 param['default']='キーブレイク処理しない'
 param['text']='''
-指定列の項目(複数項目指定可)が同じ値の行ごとに、 ``from=`` , ``to=`` , ``size=`` で指定した行番号の行を選択する。
-``x=True`` , ``nfn=True`` オプション使用時は、項目番号(0〜)で指定可能。
+指定列の項目(複数項目指定可)が同じ値の行ごとに、 ``fr=`` , ``to=`` , ``size=`` で指定した行番号の行を選択する。
+``x`` オプションもしくは ``nfn`` オプション使用時は、項目番号(0〜)で指定可能。
 '''
 db['params'].append(param)
 
@@ -137,7 +136,7 @@ param['cond']=''
 param['default']='False'
 param['text']='''
 条件反転
-``from=,to=(size=)`` パラメータで指定した行番号以外の行を選択する。
+``fr=,to=(size=)`` パラメータで指定した行番号以外の行を選択する。
 '''
 db['params'].append(param)
 

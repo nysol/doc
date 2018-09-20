@@ -72,7 +72,7 @@ script['title']='項目名の異なるファイルの併合2'
 script['comment']='''
 前例に ``nostop=True`` オプションを付けると、項目が見つからないデータについてはNULL値を出力するようになり、
 途中でエラー終了することはなくなる。
-その他にも、項目が見つからなかった場合の動作を変更するオプションとして、 ``skip,force`` がある。
+その他にも、項目が見つからなかった場合の動作を変更するオプションとして、 ``skip`` , ``force`` がある。
 詳しくはパラメータの説明を参照されたい。
 '''
 script['sh_code']='''
@@ -107,7 +107,6 @@ script['sh_code']='''
 mcat -stdin i=dat1.csv o=rsl5.csv <dat2.csv
 '''
 script['py_code']='''
-
 '''
 script['odatas']=''
 db['scripts'].append(script)
@@ -115,14 +114,13 @@ db['scripts'].append(script)
 script={}
 script['title']='ファイル名項目を追加'
 script['comment']='''
-``add_fname=True`` を指定すると、元ファイルの名前を ``fileName`` 項目で追加する。
+``add_fname`` オプションを指定すると、元ファイルの名前を ``fileName`` 項目で追加する。
 標準入力のファイル名は ``/dev/stdin`` となる。
 '''
 script['sh_code']='''
 mcat -add_fname -stdin i=dat1.csv o=rsl6.csv <dat2.csv
 '''
 script['py_code']='''
-
 '''
 script['odatas']=''
 db['scripts'].append(script)

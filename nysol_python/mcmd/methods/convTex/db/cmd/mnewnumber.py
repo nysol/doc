@@ -39,7 +39,7 @@ param['cond']=''
 param['default']=''
 param['text']='''
 新規に作成する連番行の項目名を指定する。
-``nfn,-nfno=True`` オプション指定時は指定の必要はない。
+``nfn`` もしくは ``nfno`` オプション指定時は指定の必要はない。
 '''
 db['params'].append(param)
 

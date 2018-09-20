@@ -59,7 +59,7 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=False
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 ここで指定した項目(複数項目指定可)で並べ替えられた後、変換が行われる。
@@ -74,7 +74,7 @@ param['cond']=''
 param['default']='キーブレイク処理しない'
 param['text']='''
 文字列パターンの単位となる項目名(複数項目指定可)リスト。
-``r=True`` オプションが指定された時は指定できない。
+``r`` オプションが指定された時は指定できない。
 '''
 db['params'].append(param)
 

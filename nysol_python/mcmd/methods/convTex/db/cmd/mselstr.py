@@ -58,15 +58,15 @@ db['doc']='''
 
  *   ``v=`` に複数の文字列を指定すれば、いずれかの文字列にマッチすれば選択される。
  *   ``f=`` に複数項目を指定すれば、いずれかの項目の値がマッチすれば選択される。
- *  複数項目のマッチ条件をAND条件とすることも可能( ``F=True`` オプション)。
- *  完全一致だけでなく、先頭一致、末尾一致、部分一致の指定も可能( ``head,-tail,-sub=True`` オプション)。
+ *  複数項目のマッチ条件をAND条件とすることも可能( ``F`` オプション)。
+ *  完全一致だけでなく、先頭一致、末尾一致、部分一致の指定も可能( ``head`` , ``tail`` ``sub`` オプション)。
  *   ``k=`` を指定することでキー単位で選択することが可能。
- *  キー単位選択の場合、複数レコードのAND条件を指定可能( ``R=True`` オプション)。
+ *  キー単位選択の場合、複数レコードのAND条件を指定可能( ``R`` オプション)。
 
 いま同じキーのデータとして２項目２行からなるデータ( :numref:`mselstr_input2` )に対して、
 ``mselstr k=key f=fld1,fld2 v=s1,s2``
 を実行した場合、
-オプション ``R,-F=True`` の指定の有無によるマッチ条件を :numref:`mselstr_cond` に示す。
+オプション ``R`` , ``F`` の指定の有無によるマッチ条件を :numref:`mselstr_cond` に示す。
 
 
 .. csv-table:: 入力データ
@@ -84,7 +84,7 @@ db['doc']='''
   :header-rows: 1
   :name: mselstr_cond
 
-  ``F=True``,``R=True``,マッチ条件
+  ``F`` オプション, ``R`` オプション,マッチ条件
   ,,(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  or ( :math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) or (( :math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  or ( :math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))
   -F,,(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  and ( :math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) or (( :math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  and ( :math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))
   ,-R,(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  or ( :math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) and (( :math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  or ( :math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))
@@ -239,7 +239,7 @@ param['mand']=False
 param['cond']=''
 param['default']='False'
 param['text']='''
-``sub=True`` , ``head=True`` , ``tail=True`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。
+``sub`` , ``head`` , ``tail`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。
 '''
 db['params'].append(param)
 

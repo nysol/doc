@@ -12,7 +12,7 @@ db['related']=[
 ############################### DOCUMENT
 db['doc']='''
 0.0から1.0の範囲の実数乱数を生成する。
-``int=True`` を指定することで、整数乱数を生成することもできる。
+``int`` オプションを指定することで、整数乱数を生成することもできる。
 乱数の生成にはメルセンヌ・ツイスター法を利用している
 (\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
 , \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
@@ -41,7 +41,7 @@ param['cond']=''
 param['default']=''
 param['text']='''
 新規に作成するデータの項目名を指定する。
-``nfn,-nfno=True`` オプション指定時は指定の必要はない。
+``nfn`` もしくは ``nfno`` オプション指定時は指定の必要はない。
 '''
 db['params'].append(param)
 
@@ -53,7 +53,7 @@ param['cond']=''
 param['default']='INT\_MAX'
 param['text']='''
 乱数の最大値を指定する。
-このパラメータを指定するときは ``int=True`` も指定しなければならない。
+このパラメータを指定するときは ``int`` オプションも指定しなければならない。
 '''
 db['params'].append(param)
 
@@ -65,7 +65,7 @@ param['cond']=''
 param['default']='0'
 param['text']='''
 乱数の最小値を指定する。
-このパラメータを指定するときは ``int=True`` も指定しなければならない。
+このパラメータを指定するときは ``int`` オプションも指定しなければならない。
 '''
 db['params'].append(param)
 

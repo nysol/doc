@@ -61,7 +61,7 @@ param={}
 param['kwd']='s'
 param['type']='str'
 param['mand']=True
-param['cond']=' ``q=True`` の指定がない場合'
+param['cond']=' ``q`` オプションの指定がない場合'
 param['default']=''
 param['text']='''
 列項目名に展開する項目を指定する。
