@@ -12,7 +12,7 @@
 
   (上記URLより引用)
 
-.. csv-table:: 入力データ例:mcmdが扱う表構造データ
+.. csv-table:: オンラインストアデータの項目一覧
     :name: uci_online_fields
     :header: 項目名,      日本語,    型,    内容
 

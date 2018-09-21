@@ -8,4 +8,5 @@
 
   uci_onlineretail
   randStock
+  yakiniku
 
