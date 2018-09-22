@@ -293,14 +293,15 @@ mcmdでは上述のCSVの定義に対して以下の制約を追加していま�
     :caption: 不要なダブルクオーツは外される
     :name: data_csv_exp4
 
+    import nysol.mcmd as nm
     with open('dat.csv','w') as f:
-      f.write(
-      '''f1,f2
-      "abc",efg
-      "","efg"
-      ''')
+    f.write(
+    '''f1,f2
+    "abc",efg
+    "","efg"
+    ''')
 
-    print(dat)
+    print(nm.mcut(f="f1,f2",i="dat.csv").run())    
     # [['f1', 'f2'], ['"abc"', 'efg'], ['abc', '"efg"']]
     print(nm.mcut(f="f1,f2",i="dat.csv").run())
     # [['abc', 'efg'], ['', 'efg']]
