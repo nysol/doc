@@ -20,4 +20,3 @@ db['doc']='''
 * 原作者のページ: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
 * boostライブラリ: http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html
 '''
-
