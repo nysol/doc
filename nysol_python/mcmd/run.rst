@@ -73,7 +73,7 @@ threadのスタックサイズ
 
 threadのスタックサイズの上限は1048576( :math:`2^{20}` )バイトである。
 この値は、環境変数 ``KG_THREAD_STK`` を設定することで変更可能である( :numref:`run_stack` )。
-ただし、16384以上の16の倍数にしなければエラーとなる [#f1]_ 。
+ただし、16384以上の16の倍数にしなければエラーとなる [#f2]_ 。
 
   .. code-block:: python
     :linenos:
@@ -106,12 +106,20 @@ runs: クラスメソッド
     :caption: o=の指定と返り値の例
     :name: run_ret
 
+    dat1=[
+    ["key","val"],
+    ["a",1],
+    ["a",2],
+    ["b",3],
+    ["b",4],
+    ]
+
     # o=にファイル名を指定すると、ファイル名を返す。
     ret=nm.mcut(f="key,val",i=dat1,o="out1.csv").run()
     print(ret)
     # out1.csv
 
-    # o=にリストを指定すると、結果データをリストを返す。
+    # o=にリストを指定すると、結果データをリストで返す。
     out1=[]
     ret=nm.mcut(f="key,val",i=dat1,o=out1).run()
     print(ret)

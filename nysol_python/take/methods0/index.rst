@@ -8,10 +8,10 @@
 
   lcm
   lcmseq
-  lcmseq_zero
   mace
   sspc
   medset
   simset
   grhfil
 
+.. lcmseq_zero

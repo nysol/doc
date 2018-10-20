@@ -9,7 +9,8 @@ mcmdのベンチマークテスト(FIT2018)
 
 準備
 -------------------------------------
-本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ にupされているのでダウンロードする。
+本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ よりダウンロードできる
+( :numref:`mcmd_fit2018_download` )。
 ダウンロードしたディレクトリ下 bench/fit2018/nysol_mcmd に 以下の3つのスクリプトがある。
 
  * mkdata.py : 株価データセット生成用スクリプト

@@ -7,51 +7,6 @@ mvuniq ベクトル要素の単一化
 一方で、 ``n`` オプションを指定すると、
 ベクトルを系列として考え、
 要素を先頭から順番に走査し、互いに隣接した要素のみを単一化し出力する。
-典型的な例を :numref:`mvuniq_out1` , :numref:`mvuniq_out2` に示す。
-:numref:`mvuniq_out1` では、全ての要素が単一化されているのが分かる。
-一方で、 ``n`` オプションを指定して実行すると、
-:numref:`mvuniq_out2` の３行目に見られるように、
-互いに隣接する ``b`` のみが単一化される。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvuniq_input
-
-  no,items
-  1,b a a
-  2,a a b b b
-  3,a b b a
-  4,a b c
-
-
-
-
-.. csv-table:: 基本的な例
-  :header-rows: 1
-  :name: mvuniq_out1
-
-  no,items
-  1,a b
-  2,a b
-  3,a b
-  4,a b c
-
-
-
-
-.. csv-table:: ベクトルを系列と考え、互いに隣り合う同じ要素のみを単一化する例
-  :header-rows: 1
-  :name: mvuniq_out2
-
-  no,items
-  1,b a
-  2,a b
-  3,a b a
-  4,a b c
-
-
-
 
 パラメータ
 ''''''''''''''''''''''

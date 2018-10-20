@@ -1,4 +1,4 @@
-k-meaansクラスタリング
+k-meansクラスタリング
 ------------------------
 本節ではonline storeのデータセットを用いて、顧客(および商品)をクラスタリングする方法について解説する。
 クラスタリングには、k-means方を用いる。
@@ -17,7 +17,7 @@ online storeデータには約4000の商品が登場する。
 顧客ごとに、これら4000商品の購入数量のベクトルを用意してやり、
 ベクトルが似た顧客を一つのグループ(クラスタ)としてまとめてやることで、
 購買傾向の似た顧客クラスタを得ることができる。
-クラスタリングの方法には様々な方法が提案されているが、ここでは |kmeans| を用いる。
+クラスタリングには様々な方法が提案されているが、ここでは |kmeans| を用いる。
 手法の詳細を理解することはここでの目的ではないので割愛する。
 
 出力イメージ
@@ -82,14 +82,14 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
 
     import nysol.mcmd as nm
     f=None
-    f <<= nm.mcut(f="CustomerID,StockCode,Date",i="onlineRetail.csv")
+    f <<= nm.mcut(f="CustomerID,StockCode,Date",i="onlineRetail2.csv")
     f <<= nm.mdelnull(f="*")
     f <<= nm.muniq(k="CustomerID,StockCode,Date")
     f <<= nm.mcut(f="Date",r=True)
     f <<= nm.mcount(k="CustomerID,StockCode",a="freq")
-    print(smatrix.run(msg="on")[0:5])
+    print(f.run(msg="on")[0:5])
     # 以下画面に表示される内容
-    # #END# kgcut f=CustomerID,StockCode,Date i=onlineRetail.csv; IN=541909 OUT=541909; 2018/09/08 08:12:23; 2018/09/08 08:12:23
+    # #END# kgcut f=CustomerID,StockCode,Date i=onlineRetail2.csv; IN=541909 OUT=541909; 2018/09/08 08:12:23; 2018/09/08 08:12:23
     # #END# kgdelnull f=*; IN=541909 OUT=406829; 2018/09/08 08:12:23; 2018/09/08 08:12:23
     # #END# kguniq k=CustomerID,StockCode,Date; IN=406829 OUT=392940; 2018/09/08 08:12:24; 2018/09/08 08:12:24
     # #END# kgcut -r f=Date; IN=392940 OUT=392940; 2018/09/08 08:12:24; 2018/09/08 08:12:24
@@ -117,14 +117,14 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
 顧客ベクトルのサイズは4300にもなり、もしうまくクラスタリングできたとしても、その特徴を見るのに
 4300の商品を眺めるのはなかなか困難なことである。
 そこで、ベクトルのサイズを小さくしてみよう。
-ここでは簡単のために、一定回数以上購入されている商品のみを対象とする。
+ここでは簡単のために、全体で一定回数以上購入されている商品のみを対象とする。
 :numref:`tutorial_kmeans_selmatrix` にここまでの全てのコード合わせて示している。
 わかりやすさのため、オブジェクトの変数名は上述のものから変更している。
 
 疎行列を求める処理オブジェクト ``base`` の出力結果を使って、
 商品の総購入回数を ``freq`` オブジェクトにて計算し、 一定以上(ここでは1000)の購入がある商品のみに絞っている。
 そして、次の ``matrix`` ブロックにて、 ``mcommon`` を用いて疎行列からそれらの商品を選択している。
-商品の選択のために、元データ ``onlineRetail.csv`` から再計算しても良いが、疎行列の計算で
+商品の選択のために、元データ ``onlineRetail2.csv`` から再計算しても良いが、疎行列の計算で
 すでに目的とする商品の総購入回数の前段階まで計算が終わっているので、そのデータを使いまわしている。
 もし元データから再計算させると同じような処理内容のオブジェクトが増え、バグの温床になってしまう。
 
@@ -140,7 +140,7 @@ Rのkmeans関数は、モデルとして様々な統計値を保持している�
 
     import nysol.mcmd as nm
     base=None
-    base <<= nm.mcut(f="CustomerID,StockCode,Date",i="onlineRetail.csv")
+    base <<= nm.mcut(f="CustomerID,StockCode,Date",i="onlineRetail2.csv")
     base <<= nm.mdelnull(f="*")
     base <<= nm.muniq(k="CustomerID,StockCode,Date")
     base <<= nm.mcut(f="Date",r=True)
@@ -215,7 +215,7 @@ Rでの結果を直接取得するには、 ``r.get(オブジェクト名)`` メ
 
 全体のスクリプト
 ''''''''''''''''''''''''''
-最後に、上述の処理をまとめたスクリプトを :numref:`tutorial_kemans_summary`` に示しておく。
+最後に、上述の処理をまとめたスクリプトを :numref:`tutorial_kemans_summary` に示しておく。
 途中、顧客-商品行列を作成する処理フローを視覚化するコードを入れている(22行目)。
 :numref:`kmeans.png` はその内容である。
 また、最後に項目名を追加して顧客-クラスタ表を整形しCSVに出力するコードも追加している(39-41行目)。
@@ -272,7 +272,7 @@ Rでの結果を直接取得するには、 ``r.get(オブジェクト名)`` メ
     :scale: 40%
     :align: center
     :name: kmeans.png
-    :target: ../../_static/kmeans.html
+    :target: ../_static/tutorial_kmeans.html
 
     k-meansクラスタリングの入力データ(顧客-商品)行列を作成するスクリプトのフロー図
 

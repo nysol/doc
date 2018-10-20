@@ -35,7 +35,7 @@ mtra2gc トランザクションからの類似度グラフ生成
 .. code-block:: bash
   :linenos:
   :caption: mtra2gcの節点出力ファイルの例
-  :name: mtra2gc.py_outNode
+  :name: mtra2gc.py_outEdge
 
   node1%0,node2%1,frequency,frequency1,frequency2,total,support,confidence,lift,jaccard,PMI
   a,b,3,3,4,5,0.6,1,1.25,0.75,0.4368292054

@@ -2,63 +2,8 @@ mvreplace ベクトル要素の参照置換
 ------------------------------------------
 
 ベクトル要素をキーにして参照データ上のベクトル型データで置換する。
-ベクトル型の項目とは、 :numref:`mvreplace_input` のitems項目のように、
-スペースで区切られた複数の文字列を値として持つ項目である。
-典型的な例を :numref:`mvreplace_input` 〜 :numref:`mvreplace_out3` に示す。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvreplace_input
-
-  no,items
-  1,a b c
-  2,a d
-  3,b f e f
-  4,f c d
-
-
-
-
-.. csv-table:: 参照データ
-  :header-rows: 1
-  :name: mvreplace_ref
-
-  item,taxo
-  a,X
-  b,Y
-  c,Z
-  e,X
-  f,Z
-
-
-
-
-.. csv-table:: 基本例
-  :header-rows: 1
-  :name: mvreplace_out2
-
-  no,items
-  1,X Y Z
-  2,X d
-  3,Y Z X Z
-  4,Z Z d
-
-
-
-
-.. csv-table:: アンマッチ要素の指定例
-  :header-rows: 1
-  :name: mvreplace_out3
-
-  no,items
-  1,X Y Z
-  2,X *
-  3,Y Z X Z
-  4,Z Z *
-
-
-``mvreplace`` コマンドは、参照データデータを一旦全てメモリにセットするので、
+ベクトル型の項目とは、スペースで区切られた複数の文字列を値として持つ項目である。
+なお、参照データデータを一旦全てメモリにセットするので、
 巨大な参照データを指定した場合はメモリを使い果たす可能性があることに注意する。
 
 

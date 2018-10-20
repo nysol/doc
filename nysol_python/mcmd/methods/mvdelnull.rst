@@ -6,9 +6,14 @@ mvdelnull ベクトルのNULL要素の削除
 以下に示したベクトルは全てNULLを含む。
 ただし、わかりやすさのためにベクトルの末尾に  ``\n``  を記している。
 上から順番に、3番目、1番目、4番目の要素がNULLである。
-``a b  c\n``
-``a b\n``
-``a b c \n``
+
+.. code-block:: bash
+  :linenos:
+
+  ab c\n
+   ab\n
+  abc \n
+
 
 
 パラメータ

@@ -2,47 +2,6 @@ mvcat ベクトルの併合
 --------------------------
 
 複数のベクトルを併合して新しいベクトルを生成する。
-典型的な例を :numref:`mvcat_input` 〜 :numref:`mvcat_out2` に示す。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvcat_input
-
-  no,items1 items2
-  1,a c b
-  2,a d a e
-  3,b f
-  4,e e
-
-
-
-
-.. csv-table:: 基本例
-  :header-rows: 1
-  :name: mvcat_out1
-
-  no,catItems
-  1,a c b
-  2,a d a e
-  3,b f
-  4,e e
-
-
-
-
-.. csv-table:: 併合前のベクトルを残す例
-  :header-rows: 1
-  :name: mvcat_out2
-
-  no,items1 items2 new
-  1,a c b a c b
-  2,a d a e a d a e
-  3,b f  b f
-  4,e e e e
-
-
-
 
 パラメータ
 ''''''''''''''''''''''

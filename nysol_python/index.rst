@@ -23,7 +23,8 @@ NYSOLとはビッグデータからの知識発見を効率的かつ効果的に
    dataset/index
    tutorial/index
    bench/index
-   glossary
+
+..   glossary
 
 
 * :ref:`genindex`

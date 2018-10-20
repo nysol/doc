@@ -2,34 +2,6 @@ mvcount ベクトルサイズの計算
 ------------------------------------
 
 ベクトルのサイズ(ベクトルの要素数)を計算する。
-典型的な例を :numref:`mvcount_input` 〜 :numref:`mvcount_out3` に示す。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvcount_input
-
-  no,items
-  1,a b c
-  2,a d
-  3,b f e f
-  4,
-
-
-
-
-.. csv-table:: 基本例
-  :header-rows: 1
-  :name: mvcount_out1
-
-  no,items,size
-  1,a b c,3
-  2,a d,2
-  3,b f e f,4
-  4,,0
-
-
-
 
 パラメータ
 ''''''''''''''''''''''

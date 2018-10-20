@@ -10,7 +10,9 @@
   rfm
   association
   kmeans
+
+..
+  onlinestore
+  lasso
   friend
   transition
-
-  onlinestore

@@ -2,61 +2,8 @@ mvcommon ベクトル要素の参照選択
 ----------------------------------------
 
 ベクトルから、参照データで指定された要素を選択する。
-典型的な例を :numref:`mvcommon_input` 〜 :numref:`mvcommon_out3` に示す。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvcommon_input
-
-  no,items
-  1,a b c
-  2,a d
-  3,b f e f
-  4,f c d
-
-
-
-
-.. csv-table:: 参照データ
-  :header-rows: 1
-  :name: mvcommon_ref
-
-  item
-  a
-  c
-  e
-
-
-
-
-.. csv-table:: 基本例
-  :header-rows: 1
-  :name: mvcommon_out2
-
-  no,items
-  1,a c
-  2,a
-  3,e
-  4,c
-
-
-
-
-.. csv-table:: アンマッチアイテムの選択例
-  :header-rows: 1
-  :name: mvcommon_out3
-
-  no,items
-  1,b
-  2,d
-  3,b f f
-  4,f d
-
-
-``mvcommon`` コマンドは、参照データデータを一旦全てメモリにセットするので、
+なお、参照データデータを一旦全てメモリにセットするので、
 巨大な参照データを指定した場合はメモリを使い果たす可能性があることに注意する。
-
 
 パラメータ
 ''''''''''''''''''''''

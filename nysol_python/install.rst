@@ -59,7 +59,7 @@ PyPiにおけるnysolのページは  |pypi_nysol| を参照されたい。
   .. code-block:: bash
     :linenos:
     :caption: Ubuntu,Bash on Windowsでのインストール
-    :name: install_pip_centos
+    :name: install_pip_bow
 
     $ sudo apt-get install libboost-all-dev
     $ sudo apt-get install libxml2-dev

@@ -2,65 +2,9 @@ mvjoin ベクトル要素の参照結合
 ------------------------------------
 
 ベクトル要素をキーにして参照データ上のベクトル型データを結合する。
-ベクトル型の項目とは、 :numref:`mvjoin_input` のitems項目のように、
-スペースで区切られた複数の文字列を値として持つ項目である。
-典型的な例を :numref:`mvjoin_input` 〜 :numref:`mvjoin_out3` に示す。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvjoin_input
-
-  no,items
-  1,a b c
-  2,a d
-  3,b f e f
-  4,f c d
-
-
-
-
-.. csv-table:: 参照データ
-  :header-rows: 1
-  :name: mvjoin_ref
-
-  item,taxo
-  a,X
-  b,Y
-  c,Z
-  e,X
-  f,Z
-
-
-
-
-.. csv-table:: 基本例
-  :header-rows: 1
-  :name: mvjoin_out2
-
-  no,items
-  1,a b c X Y Z
-  2,a d X
-  3,b f e f Y Z X Z
-  4,f c d Z Z
-
-
-
-
-.. csv-table:: アンマッチ要素の指定例
-  :header-rows: 1
-  :name: mvjoin_out3
-
-  no,items
-  1,a b c X Y Z
-  2,a d X *
-  3,b f e f Y Z X Z
-  4,f c d Z Z *
-
-
-``mvjoin`` コマンドは、参照データデータを一旦全てメモリにセットするので、
+ベクトル型の項目とは、スペースで区切られた複数の文字列を値として持つ項目である。
+なお、参照データデータを一旦全てメモリにセットするので、
 巨大な参照データを指定した場合はメモリを使い果たす可能性があることに注意する。
-
 
 パラメータ
 ''''''''''''''''''''''

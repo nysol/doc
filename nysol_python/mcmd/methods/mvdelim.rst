@@ -2,82 +2,12 @@ mvdelim ベクトル要素の区切り文字変更
 --------------------------------------------
 
 ベクトル型の要素を区切る文字列を変更する。
-ただし、区切り文字に空文字を指定すれば区切り文字を削除することになる。
-典型的な例を :numref:`mvdelim_input` 〜 :numref:`mvdelim_out4` に示す。
-カンマも指定することはできるが、
-ダブルクォーテーションで括られ 一つの項目となる ( :numref:`mvdelim_out2` )。
-``v=`` のように値を指定しなければ空文字と見なされ、
-結果として区切り文字が消去される( :numref:`mvdelim_out3` )。
-文字列や漢字も指定することは可能であるが( :numref:`mvdelim_out4` )、
+ただし、``v=`` のように値を指定しなければ空文字と見なされ、
+結果として区切り文字が消去される。
+文字列や漢字も指定することは可能であるが、
 ベクトルを扱うコマンド(mvsortなど)で指定できる区切り文字
 ( ``delim=`` によって指定)はアルファベット１文字であるため、
 もはやベクトルとして利用することはできなくなることに注意する。
-
-
-.. csv-table:: 入力データ
-  :header-rows: 1
-  :name: mvdelim_input
-
-  no,items
-  1,b a a
-  2,a a b b
-  3,a b b a
-  4,a b c
-
-
-
-
-.. csv-table:: 基本例:区切りをマイナス記号に置換
-  :header-rows: 1
-  :name: mvdelim_out1
-
-  no,items
-  1,b-a-a
-  2,a-a-b-b
-  3,a-b-b-a
-  4,a-b-c
-
-
-
-
-.. csv-table:: 区切り文字にカンマを指定すると。。
-  :header-rows: 1
-  :name: mvdelim_out2
-
-  no,items
-  1,"b a a"
-  2,"a a b b"
-  3,"a b b a"
-  4,"a b c"
-
-
-
-
-.. csv-table:: 空文字を指定すると区切りが消える
-  :header-rows: 1
-  :name: mvdelim_out3
-
-  no,items
-  1,baa
-  2,aabb
-  3,abba
-  4,abc
-
-
-
-
-.. csv-table:: 複数文字も指定できるが。。
-  :header-rows: 1
-  :name: mvdelim_out4
-
-  no,items
-  1,bxxaxxa
-  2,axxaxxbxxb
-  3,axxbxxbxxa
-  4,axxbxxc
-
-
-
 
 パラメータ
 ''''''''''''''''''''''

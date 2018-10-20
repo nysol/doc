@@ -14,7 +14,7 @@ Takeのベンチマークテスト(FIT2018)
    
 準備
 -------------------------------------
-本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ にupされているのでダウンロードする。
+本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ よりダウンロードできる。
 ただし、既に「 :doc:`mcmd_fit2018` 」の節を実行済みであれば、同じものなのでダウンロードの必要はない。
 ダウンロードしたディレクトリ下 bench/fit2018/nysol_take に 以下の4つのスクリプトがある。
 
@@ -279,7 +279,7 @@ Takeモジュールでは、 ``mfriends`` 及び ``mpal`` メソッドとして�
 :math:`A=>B` 及び :math:`B=>A` の評価指標(supportやconfidence)が、それぞれの前件部を共通としてもつルール集合の中で
 ユーザが指定した k 位以内であるとき、アイテム集合 :math:`A` と :math:`B` の関連が強いと考える。
 :numref:`take_fit2018_fig1` は、OnlineStoreのデータから、そのようなルールを列挙するPythonコードである。
-そして、グラフで視覚化した結果を :numref:`friedns.png` に示す。
+そして、グラフで視覚化した結果を :numref:`friends.png` に示す。
 赤い節点が一つのアイテムを示し、エッジが関連の強い結びつきを表している。
 
 .. code-block:: python

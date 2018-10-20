@@ -5,7 +5,8 @@ nysol.mcmdが提供する70以上の処理メソッドの中から、主な処�
 
 準備
 -------------------------------------
-本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ にupされているのでダウンロードする。
+本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ よりダウンロードできる
+( :numref:`methods_fit2018_download` )。
 ダウンロードしたディレクトリ下 bench/methods に 以下の2つのスクリプトがある。
 
  * mkdata.py : 集計キーや数値項目を備えたランダムなデータを生成する
@@ -15,7 +16,7 @@ nysol.mcmdが提供する70以上の処理メソッドの中から、主な処�
 .. code-block:: bash
   :linenos:
   :caption: ベンチマークスクリプトのダウンロード
-  :name: mcmd_fit2018_download
+  :name: methods_fit2018_download
 
   $ git clone https://github.com/nysol/bench.git
   $ cd bench/methods
