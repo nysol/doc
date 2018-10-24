@@ -3,13 +3,15 @@
 ==============================
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
+  :numbered: 2
   :caption: Contents:
 
   basics
   rfm
   association
   kmeans
+  friends
 
 ..
   onlinestore
