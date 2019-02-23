@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/special.rst:3
+msgid "特殊な処理メソッド"
+msgstr ""
+
+#: ../../mcmd/special.rst:5
+msgid ""
+"mcmdのメソッドが行っていることは、バイトストリームとして受け取ったデータに対して "
+"何らかの「処理」を行い、その結果をバイトストリームとして出力しているだけである。 "
+"とすると、その「処理」をPythonの関数やOSのコマンドで実現できてもおかしくない。 これらの機能を担うのが以下で説明する、 "
+"``runfunc`` と ``cmd`` メソッドである。"
+msgstr ""
+
+#: ../../mcmd/special.rst:11
+msgid "runfunc: 関数の実行"
+msgstr ""
+
+#: ../../mcmd/special.rst:12
+msgid ""
+"``runfunc`` メソッドは、 Pythonの関数をあたかもmcmdのメソッドのように動作させるためのメソッドである。 基本的な利用方法を "
+":numref:`special_runfunc1` に示している。 ``bigAmount`` 関数の中で使われている、 ``mstdin`` "
+"と ``mstdout`` メソッドがポイントで、 それぞれ、標準入力を読み込む、そして標準出力に書き出す機能を持っている。 "
+"このように、関数が、標準入力を入力データとして読み込み、標準出力を出力データとして書き出す機能さえ持っていれば、 ``runfunc`` "
+"関数によって、mcmdの処理メソッドのように扱えるようになるのである。 :numref:`special_runfunc1` では、 "
+"``mcut`` の出力が、 ``runfunc`` により、 ``bigAmount`` 関数の標準入力に接続されており、 "
+"またbigAmount関数の標準出力が、 ``msum`` へと接続されている。"
+msgstr ""
+
+#: ../../mcmd/special.rst:23
+msgid "runfuncメソッドの基本的な利用方法"
+msgstr ""
+
+#: ../../mcmd/special.rst:53
+msgid "mcmdを用いずに関数を実装する"
+msgstr ""
+
+#: ../../mcmd/special.rst:55
+msgid ""
+":numref:`special_runfunc1` では、mcmdの処理メソッド ``mstdin`` ``mstdout`` "
+"をつかって実装したが、 Pythonで利用可能な一般的な標準入出力のライブラリを用いても全く問題ない。 "
+":numref:`special_runfunc2` は :numref:`special_runfunc1` の ``bigAmount`` "
+"関数のみを書き換えたものである。 中では、sysライブラリの ``stdin`` を標準入力として用い、print で標準出力に書き出している。 "
+"全てPythonのネイティブコードのため自由度は非常に高くなる。 "
+"ただし、この場合、CSVデータのparsingロジックを自分で書く必要があることに注意する。 "
+"単純なCSVであれば問題ないが、ダブルクオーテーションやカンマの入った文字列を扱うのは結構面倒である。"
+msgstr ""
+
+#: ../../mcmd/special.rst:63
+msgid "mcmdを利用しない実装"
+msgstr ""
+
+#: ../../mcmd/special.rst:81
+msgid "mcmdのイテレータを用いた実装"
+msgstr ""
+
+#: ../../mcmd/special.rst:83
+msgid ""
+"最後に、:numref:`special_runfunc1` と :numref:`special_runfunc2` の中間的な書き方として、 "
+":numref:`special_runfunc3` に示すように、CSVのparsingはmcmdの ``mstdin`` にまかせて、 "
+"その後にmcmdのイテレーションを用いてPythonロジックを書く方法を紹介しておこう。 "
+"ポイントは、mcmdのイテレータは項目名ヘッダーを無視するため、 ``for`` 文の中でヘッダー行を意識しなくてもよい一方で、 "
+"次のメソッドへの出力には項目名ヘッダーを出力しなければならないという点である。 以下のコードでは、最初に項目名ヘッダーを出力している。"
+msgstr ""
+
+#: ../../mcmd/special.rst:90
+msgid "mstdinとイテレーションを組み合わせた例"
+msgstr ""
+
+#: ../../mcmd/special.rst:101
+msgid ""
+"もしデータから項目名を取得したければ、 ``mstdin`` に続けて、 ``getline`` イテレータに接続し、 "
+"そこで項目名行を出力するオプション ``header=True`` を指定すれば良い。 項目名行の扱いは、 "
+":numref:`special_runfunc2` と同様である。"
+msgstr ""
+
+#: ../../mcmd/special.rst:105
+msgid "イテレーションの中で項目名をデータから取得する方法"
+msgstr ""
+
+#: ../../mcmd/special.rst:121
+msgid "runfuncのデバッグ"
+msgstr ""
+
+#: ../../mcmd/special.rst:122
+msgid ""
+"``runfunc()`` メソッドは指定された関数をPythonにまかせて実行するだけなので、 "
+"もし関数の中でエラーが生じても、エラーが生じたことは分かっても、その詳細については感知していない。 例えば、 "
+":numref:`special_debug1` は、上述の :numref:`special_runfunc3` に文法エラーを加えたコードで、"
+" これを実行した時のエラーメッセージは :numref:`special_debug2` に示すとおりである。 "
+"このように、runfuncでエラーが起こっていることは分かってもそれ以上の詳細はわからない。"
+msgstr ""
+
+#: ../../mcmd/special.rst:128
+msgid "関数内にエラーを入れた例(debug1.py)"
+msgstr ""
+
+#: ../../mcmd/special.rst:148
+msgid ":numref:`special_debug1` の実行結果。"
+msgstr ""
+
+#: ../../mcmd/special.rst:161
+msgid ""
+"関数の中でのエラーの詳細を追跡するには、 ``try`` 〜 ``exception`` を入れることで解決できる。 そのコードを "
+":numref:`special_debug3` に示す。 ``exception`` "
+"の中で、トレースバック関数を呼び出しているが、出力先を標準エラー出力にするのがポイントである。 標準入出力は、 ``runfunc`` "
+"メソッドによってデータとし扱われてしまうからである。 "
+"また、デバッグ目的で変数の内容を表示させるときも、標準出力ではなくエラー出力に出さなければならない。 以下のコードでは、 "
+"``sys.stderr`` のメソッドを使って引数 ``lowerBound`` を標準エラー出力に出力している。"
+msgstr ""
+
+#: ../../mcmd/special.rst:168
+msgid ""
+"実行時のメッセージは :numref:`special_debug4` に示す通りで、 7行目の ``int(line)`` "
+"に問題があることが示され、また最初に ``lowerBound`` の内容も表示されている。"
+msgstr ""
+
+#: ../../mcmd/special.rst:171
+msgid "エラーの追跡を可能とする関数の実装例(debug2.py)"
+msgstr ""
+
+#: ../../mcmd/special.rst:187
+msgid ":numref:`special_debug3` の実行結果。"
+msgstr ""
+
+#: ../../mcmd/special.rst:205
+msgid "runfuncは試験運用"
+msgstr ""
+
+#: ../../mcmd/special.rst:206
+msgid ""
+"runfuncメソッドは非常に強力で、個人や企業がよく利用する処理機能をメソッド化することが可能となり、 プログラムのモジュール化を促進できる。 "
+"しかしながら、一方でrunfuncからrunfuncを実行することも可能で、このようなネストが深くなった時にも "
+"内部的にはどうにか頑張って処理しようとするが、まだ十分な運用と検証ができていない。 現在のところ、このメソッドは試験運用と考えてもらいたい。"
+msgstr ""
+
+#: ../../mcmd/special.rst:213
+msgid "cmd: コマンドの実行"
+msgstr ""
+
+#: ../../mcmd/special.rst:214
+msgid ""
+"``runfunc`` が処理をPythonの関数で実現していた一方で、 ``cmd`` メソッドは、OSのコマンドによって実現するものである。 "
+"UNIX系OSの多くは標準入力からデータを受け取り、コマンド内部で一定の処理を付し、標準出力に結果を書き込む。 基本的な利用方法を "
+":numref:`special_cmd1` に示している。 ここでは、 ``customer`` と ``amount`` 項目を選択したのち、"
+" ``tr`` コマンドに接続している(あまり意味のある例ではない)。 ``tr`` コマンドは "
+"入力のバイトストリームに対して1文字単位の置換を実行する。 以下の例では 文字 ``A`` を ``C`` に置換している。 結果として、顧客 "
+"``A`` が ``C`` に置き換わった集計結果が計算されている。 ただし、``cmd`` "
+"メソッドには、項目名もデータ本体も区別することはなく、 "
+"さらにはカンマ区切りの項目も区別なくデータストリームとして流されるだけであることに注意する。 例えば、以下の例では、もし項目名に ``A`` "
+"が含まれていれば、それも ``C`` に変換されてしまい、意図した動きにはならない。 項目名ヘッダーの問題だけであれば、 "
+":numref:`special_cmd2` に示されるように、直前のメソッド ``mcut`` で項目名ヘッダーを抑制し( "
+"``nfno=True`` ) そして、コマンド実行後に ``mcut`` メソッドにより項目名ヘッダー行を追加してやれば良い。"
+msgstr ""
+
+#: ../../mcmd/special.rst:227
+msgid "mcmdのインポートと入力データの設定"
+msgstr ""
+
+#: ../../mcmd/special.rst:250
+msgid "項目名ヘッダーをスキップする例"
+msgstr ""
+
+#: ../../mcmd/special.rst:265
+msgid "ファイル一覧の取得"
+msgstr ""
+
+#: ../../mcmd/special.rst:267
+msgid ""
+"UNIX系OSには多くの便利なコマンドが多く存在する。 例えば、 表構造データを柔軟に扱うawk、パターンマッチで行を選択するgrep、 "
+"正規表現による文字列置換のsedなどである。 UNIX系のコマンドの扱いに慣れた人にとっては、cmdメソッドを利用することで、 "
+"これらのコマンドをmcmdメソッドと連携して利用することができるようになる。 以下に、 ``ls`` ``tail`` ``sed`` "
+"の3つのコマンドを用いて、ファイルリストの一覧を処理するプログラムを紹介しておく。 :numref:`special_ls` はそのコードである。"
+" ``ls -l`` でパーミッションやサイズ、ファイル名といった情報が標準出力に出力される。 最初の行にファイル数の情報が出力されるので "
+"``tail`` コマンドでその行をスキップしている(2行目から読み込む)。 そして、 ``ls`` の出力の区切り文字である複数のスペース文字を"
+" ``sed`` コマンドによりカンマに変換している。 あとは、 ``mcut`` "
+"メソッドで項目名ヘッダーを付けてファイル一覧の出来上がりである。"
+msgstr ""
+
+#: ../../mcmd/special.rst:279
+msgid "lsコマンドを使ってファイル一覧を取得する例"
+msgstr ""
+
+#: ../../mcmd/special.rst:294
+msgid "マルチバイト文字の変換"
+msgstr ""
+
+#: ../../mcmd/special.rst:296
+msgid ""
+"最後に、データクリーニングでよく利用されるマルチバイトコードの変換コマンドである |nkf| の利用例を "
+":numref:`special_nkf` に示しておく。 ただし、これは動作させるためのコーディング例であるため、データ ``dat.csv``"
+" にはマルチバイト文字は含まれていないが、 このファイルがShift_jisコードであることを想定している。 また、OSコマンドとして |nkf|"
+" をインストールしておく必要がある。"
+msgstr ""
+
+#: ../../mcmd/special.rst:302
+msgid "nkfによるShift_jisコードをutf-8コードに変換する例"
+msgstr ""
+

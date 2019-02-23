@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msplit.rst:2
+msgid "msplit 区切り文字による項目分割"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:4
+msgid "区切り文字によって項目を分割する。"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:18
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "区切り文字で分割するデータの項目名を指定する"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:22
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "新項目を指定する"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "ここで指定した項目名分分割される。足りない分はNULLとなる"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:27
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "新しい区切り文字を指定する。デフォルト値は半角スペース。"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:31
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst
+msgid "``f=`` で指定した項目を取り除く"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:38
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:40
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:53
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:55
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:93
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:95
+msgid "半角スペースで分割"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:110
+msgid "**-r利用**"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:112
+msgid "``r=True`` を指定することで、 ``f=`` で項目を削除できる。"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:127
+msgid "**分割数不一致**"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:129
+msgid "``a=`` で指定した項目数よりも分割できる項目数が少ない場合は、NULLが追加され、 多い場合、先頭から指定した分割数まで出力する"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:145
+msgid "**delim指定**"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:147
+msgid "``delim=`` を使用して半角スペース以外の文字で分割する"
+msgstr ""
+
+#: ../../mcmd/methods/msplit.rst:163
+msgid "関連メソッド"
+msgstr ""
+

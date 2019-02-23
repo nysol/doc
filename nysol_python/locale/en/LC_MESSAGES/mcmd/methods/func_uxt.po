@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_uxt.rst:2
+msgid "uxt UNIX時刻変換"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:4
+msgid "書式1: uxt(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:5
+msgid "書式2: uxt(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:6
+msgid "書式3: uxt2d(num)"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:7
+msgid "書式4: uxt2t(num)"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:10
+msgid ""
+"書式1,2では、日付 :math:`date` もしくは時刻 :math:`time` をUNIX時刻に変換する。 "
+"逆に書式3,4では、UNIX時刻を日付型もしくは時刻型に変換する。 ここで、日付型が与えられたときは、その日の最初の時刻である "
+"``00:00:00`` として計算される。"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:16
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:18
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:44
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:46
+msgid "日付型の ``date`` 項目を ``uxt`` 関数でUNIX時刻に変換し、 ``uxt2d`` 関数でまたもとに戻す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_uxt.rst:61
+msgid "**時刻型も同様**"
+msgstr ""
+

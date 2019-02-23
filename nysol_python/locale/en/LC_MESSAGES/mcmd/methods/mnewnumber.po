@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnewnumber.rst:2
+msgid "mnewnumber 連番データの新規生成"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:4
+msgid ""
+"``S=`` パラメータで指定した開始数値もしくはアルファベットにより、 ``I=`` "
+"パラメータで指定した間隔で連番もしくはアルファベット連番を新規作成し、 ``a=`` パラメータで指定した項目名で出力する。 "
+"アルファベット連番とは、AからZの26文字を用いた26進数のこと(A,B, :math:`\\cdots` ,Z,AA,AB, "
+":math:`\\cdots` ,AZ,BA,BB, :math:`\\cdots` ,ZZ,AAA,AAB, :math:`\\cdots` "
+")。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:12
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:16
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "新規に作成する連番行の項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "``nfn`` もしくは ``nfno`` オプション指定時は指定の必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:21
+msgid "**I=** : 型=str , 任意(default=1)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "連番をふる間隔を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:25
+msgid "**S=** : 型=str , 任意(default=1)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "開始数値/アルファベット(大文字)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "連番の開始数値もしくはアルファベットを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "数値を指定した場合は数値の連番がふられる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "アルファベットを指定した場合はアルファベット連番がふられる。(小文字は指定できない)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:32
+msgid "**l=** : 型=str , 任意(default=10)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst
+msgid "作成するデータ行数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:39
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:41
+msgid ""
+":ref:`o=<common_param_o>` , :ref:`nfn=<common_param_nfn>` , "
+":ref:`nfno=<common_param_nfno>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:50
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:52
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:60
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:62
+msgid "1から始まる間隔が1の連番をふり、 ``No.`` という項目名で新規に5行のデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:77
+msgid "**開始番号と間隔の変更**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:79
+msgid "10から始まる間隔が5の連番をふり、 ``No.`` という項目名で新規に5行のデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:94
+msgid "**アルファベット連番**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:96
+msgid "Aから始まる間隔が1のアルファベット連番をふり、 ``No.`` という項目名で新規に5行のデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:111
+msgid "**ヘッダ行なしで新規作成**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:113
+msgid "Bから始まる間隔が3のアルファベット連番をふり、ヘッダなしで新規に11行のデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:134
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:136
+msgid ":doc:`mnewrand` : 新たに乱数を生成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewnumber.rst:137
+msgid ":doc:`mnewstr` : 固定文字列を生成する。"
+msgstr ""
+

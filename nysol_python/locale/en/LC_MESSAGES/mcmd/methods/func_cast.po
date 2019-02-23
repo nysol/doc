@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_cast.rst:2
+msgid "cast 型変換"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:4
+msgid "書式1: s2n(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:5
+msgid "書式2: n2s(num)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:6
+msgid "書式3: n2b(num)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:7
+msgid "書式4: s2n(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:8
+msgid "書式5: s2d(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:9
+msgid "書式6: s2t(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:10
+msgid "書式7: s2b(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:11
+msgid "書式8: d2s(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:12
+msgid "書式9: d2t(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:13
+msgid "書式10: t2s(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:14
+msgid "書式11: t2d(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:15
+msgid "書式12: b2n(bool)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:16
+msgid "書式13: b2s(bool)"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:19
+msgid ""
+"型変換を行う関数群。 mcalでは型の自動変換は行わないため、必要なときはユーザが明示的に型変換を指定しなければならない。 "
+"n2b(s2b)関数は、1(\"1\")を真に0(\"0\")を偽に、それ以外をNULL値に変換する。 "
+"b2n(b2s)関数は、真は1(\"1\")に偽は0(\"0\")に変換する。 "
+"d2t関数は、日付型を時刻型に変換するが、そのとき時刻として12:00:00を自動的に補完する。 "
+"d2s関数は、8文字固定長文字列(\"yyyymmdd\")に変換し、t2s関数は14文字固定長文字列(\"yyyymmddHHMMSS\")に変換する。"
+" 日付/時刻についての詳細は「 ef{sect:datetime}日付型と時刻型」を参照のこと。"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:30
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:32
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:67
+msgid "**乱数の固定長化**"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:69
+msgid ""
+"1から9999の整数乱数を発生させ、4桁固定長で出力する。 fixlen関数は整数型のデータ(ここではrandiの結果)には対応していないので、 "
+"n2s関数で文字列型に変換する必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:85
+msgid "**真偽パターン**"
+msgstr ""
+
+#: ../../mcmd/methods/func_cast.rst:87
+msgid "項目v1,v2,v3が10異常かどうかを判定し、01のパターンを出力する。"
+msgstr ""
+

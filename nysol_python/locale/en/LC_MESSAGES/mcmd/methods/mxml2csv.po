@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mxml2csv.rst:2
+msgid "mxml2csv xmlからcsvへの変換"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:4
+msgid ""
+"xml形式のデータをcsv形式のデータに変換する。 基本的な変換規則は、一行の単位となる要素(XMLタグ)と、 "
+"項目に対応させる要素(もしくは属性)を、それぞれ ``k=`` 、 ``f=`` によって指定する。 項目の値としては、 "
+"要素で囲われたテキスト、要素が出現するかどうか、 属性の値、属性が出現するかどうか、の4通りの方法を指定できる。 "
+"XMLのパーサーとしてはSAXを用いているので、XMLのサイズ制約はない。 XMLのエンコーディングがUTF-8以外であれば、UTF-"
+"8に変換されてCSVに出力される。 XMLデータは、整形式XML文書(well-formed XML "
+"document)であることを前提としている。 そうでない場合の処理結果は不定である。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:15
+msgid ""
+"典型例を、 :numref:`mxml2csv_input` に示されたXMLデータを用いて概略を示す。 "
+":numref:`mxml2csv_out1` は、 行の単位を要素 ``<b>`` とし(このような要素のことを「キー要素」と呼ぶ)、 "
+"項目として、要素 ``b`` の属性 ``att`` の値(CSV項目名 ``b_att`` )、 要素 ``c`` の属性 ``p`` の値( "
+"``b_p`` )とフラグ( ``b_p_f`` )、 そして要素 ``d`` と ``a`` 内のテキスト( ``d`` と ``a`` "
+")を出力した結果である。 ここで、フラグとは、指定した要素もしくは属性が、出現するかどうかを0-1で出力したものである。 "
+"要素のテキスト出力は、指定した要素で囲われた範囲に出現する文字列を全て連結した文字列である。 "
+"ただし、スペースと制御文字は出力されないことに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:25
+msgid "XMLデータ"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:46
+msgid "``k=/a/b、f=b@att,c@p,d,/a``"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:57
+msgid "解説"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:60
+msgid "キー要素の指定方法"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:61
+msgid ""
+"一行の単位となるキー要素( ``k=`` パラメータで指定)は絶対パスで指定する。 絶対パスは、ルート記号( ``'/'`` "
+")から始めて、要素の階層を ``'/'`` 記号で区切って表される。 "
+"本コマンドにおけるキー要素の役割は、キー要素の終了タグが出現した時に、以下の２点を実行することにある。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:65
+msgid "項目データを一行出力する。上記の例では、キー要素の終了タグ ``</b>`` が3回出現しており、"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:66
+msgid "その度にCSVデータ一行が出力され改行される。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:67
+msgid "項目データを初期化する。ただし、キー要素の外側にある項目要素の出力データは初期化しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:68
+msgid ":numref:`mxml2csv_out1` の要素 ``a`` の出力において、テキストが連結されていくのは、"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:69
+msgid "キー要素の終了タグが出現した時であっても、要素 ``/a`` がキー要素 ``/a/b`` より外側にあり、"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:70
+msgid "出力データが初期化されないためである。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:73
+msgid "要素の出力項目指定"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:74
+#, python-format
+msgid ""
+"``f=`` で要素をCSV項目として出力する場合、以下に示すフォーマットに従う。 ``要素パス[%フラグ]:CSV項目名`` "
+"「項目名」は、出力されるCSVの項目名であり、必ず指定しなければならない。 要素を項目として出力する方法は２通りある。 "
+"一つは、指定の要素の開始タグと終了タグで囲われたテキストを出力する方法で、 他方は、指定した要素が存在するかどうかを0-1値で出力する方法である。"
+" 前者は、対象となる要素パスを指定し、 後者は、加えてフラグ ``%f`` を付与する。 "
+"また要素パスの指定方法は、絶対パスと相対パスの２通りある。 相対パスは、k=で指定された要素からのパスを指定する。 以下、 "
+":numref:`mxml2csv_input` のXMLについて、いくつかの要素パスの指定例を示す。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:86
+msgid "``k=/a/b`` において、 ``f=:B`` と指定すると、相対パスは空でキー要素と同じ要素となる。CSVの項目名は ``B`` である。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:87
+msgid "``k=/a/b`` において、 ``f=c:C`` と ``f=/a/b/c:C`` は同じ意味である。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:88
+msgid "前者は相対パスによる指定、後者は絶対パスによる指定である。両者ともCSV項目名は ``C`` である。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:89
+msgid "``f=d:D`` は要素 ``d`` で囲われたテキストを出力し、"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:90
+#, python-format
+msgid "``f=d%f:D`` は要素 ``d`` が存在するかどうかを出力する。CSV項目名は ``D`` である。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:91
+msgid "``k=/a/b`` において ``f=/a:A`` とした場合、"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:92
+msgid "項目要素はキー要素の外側にあるため、 ``a`` 要素内に含まれるテキストが次々と結合される。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:93
+msgid "なぜならば、キー要素の終了タグが出現しても、項目要素の終了タグが出現しないために、その時点でデータがクリアされることがないためである。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:96
+msgid "属性の出力項目指定"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:97
+#, python-format
+msgid ""
+"``f=`` で属性をCSV項目として出力する場合、以下に示すフォーマットに従う。 ``要素パス@要素名[%フラグ]:CSV項目名`` "
+"「項目名」は、出力されるCSVの項目名であり、必ず指定しなければならない。 要素パスの指定は、要素の出力項目指定と同様である。 "
+"そして、属性名は、要素パスに続けて ``@`` で連結して指定する。 要素名の後に ``%f`` "
+"を付けることで、その要素が存在するかどうかを0-1値で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:106
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:108
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:112
+msgid "**k=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "一行の単位となる要素をルートからのパス名として指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "パスはルート記号'/'から始まり、要素を'/'でつなげることで指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "例: /article/sentence/chunk"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:118
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "項目として出力する要素もしくは属性をカンマで区切って指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "フォーマットは以下のとおり。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "``要素パス[%フラグ]:CSV項目名``"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "``要素パス@要素名[%フラグ]:CSV項目名``"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:125
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst
+msgid "xmlデータデータを指定する。省略時は標準入力から読み込まれる。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:132
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:134
+msgid ""
+":ref:`o=<common_param_o>` , :ref:`nfn=<common_param_nfn>` , "
+":ref:`nfno=<common_param_nfno>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:143
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:145
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:171
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:173
+msgid "概要にて解説した例。 /a/bをキー要素として、5つのCSV項目を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:183
+msgid "**絶対パス**"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:185
+msgid "基本例と同じ要素を絶対パスで指定する例。 /a/bをキー要素として、5つのCSV項目を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:195
+msgid "**キー要素の変更**"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:197
+msgid ""
+"絶対パスの例でキー要素をaに変更した例。 aの終了タグは一つしかないので、一行だけ出力されている。 "
+"f=で指定した/a/b@attは、2回出現しているが、最後に出現した値が出力されている。"
+msgstr ""
+
+#: ../../mcmd/methods/mxml2csv.rst:209
+msgid "関連メソッド"
+msgstr ""
+

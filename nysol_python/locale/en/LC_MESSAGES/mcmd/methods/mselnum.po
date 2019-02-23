@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mselnum.rst:2
+msgid "mselnum 数値範囲による行選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:4
+msgid ""
+"``f=`` で指定した項目の値が、 ``c=`` で指定した数値範囲にマッチする行を選択する。 "
+"以下に示すように多様な選択条件を指定することが可能である。 このコマンドで指定できないより複雑な条件(文字列マッチとの組み合せなど) "
+"を設定するのであれば :doc:`msel` コマンドを利用すればよい。 OR条件、AND条件およびキー指定についての詳細は "
+"``mselstr`` コマンドを参照されたい。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:11
+msgid "開区間、閉区間、半開区間、無限区間の制定が可能である。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:12
+msgid "``c=`` に複数の範囲を指定すれば、いずれかの範囲にマッチすれば選択される(OR条件)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:13
+msgid "``f`` =に複数項目を指定すれば、いずれかの項目の値がマッチすれば選択される(OR条件)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:14
+msgid "``f=`` のOR条件をAND条件に変更することも可能( ``F`` オプション)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:15
+msgid "``k=`` を指定することでキー単位で選択することが可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:16
+msgid "キー単位選択の場合、複数レコードのAND条件を指定可能( ``R`` オプション)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:18
+msgid "典型的な例を :numref:`mselnum_input` 〜 :numref:`mselnum_out3` に示す。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:21
+msgid "入力データ"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "key"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "val"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "a"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "-3"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "b"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:1
+msgid "6"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:34
+msgid "val項目が1以上3以下の行を選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:45
+msgid "val項目が1以上3未満の行を選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:55
+msgid "5以上の行を選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:65
+msgid "1以下もしくは5以上の行を選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:78
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:80
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:84
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "検索対象となる項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:88
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "``f=`` パラメータで指定した項目の値が、ここで指定した文字列リスト(複数範囲指定可)の1つにマッチすれば選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:92
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "撰択する単位となるキー項目(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:96
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "指定の条件に一致する行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:100
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "指定の条件に一致しない行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:104
+msgid "**F=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "``f=`` パラメータで複数項目を指定した場合、その全ての値がマッチする行を撰択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:108
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "選択ではなく削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:113
+msgid "**R=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "``k=`` パラメータを指定した場合、その全ての行がマッチすれば行を撰択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:117
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:124
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:126
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:141
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:143
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:161
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:163
+msgid "``val`` 項目が2以上5以下の行、すなわち ``id=2,5`` の行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:175
+msgid "**片側範囲**"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:177
+msgid "``val`` 項目が2以上の行、すなわち ``id=1,2,5`` の行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselnum.rst:191
+msgid "関連メソッド"
+msgstr ""
+

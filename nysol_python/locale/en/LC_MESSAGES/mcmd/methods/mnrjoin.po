@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnrjoin.rst:2
+msgid "mnrjoin 参照ファイルの複数範囲条件による自然結合"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:4
+msgid ""
+"範囲により参照データの項目を結合(join)する。 ``r=`` パラメータで指定した項目値が、 ``m=`` パラメータで指定した参照データの "
+"``R=`` パラメータで指定した2項目の値の範囲条件(項目1以上項目2未満)に マッチすれば ``f=`` パラメータの項目を結合する。 "
+"マッチする行が複数あれば、それらの行全てが出力され、ちょうど自然結合のような動きをする。 範囲比較される値は、デフォルトで文字列と見なされる。 "
+"数値として処理したい場合は ``r=`` パラメータの項目名のあとに\\%nをつける。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:14
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:16
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:20
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:24
+msgid "**f=** : 型=str , 任意(default=全項目)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "結合する参照データ上の項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "省略するとK=で指定された項目以外の項目を全て結合する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:29
+msgid "**m=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "参照データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "このパラメータが省略された時には標準入力が用いられる。( ``i=`` 指定ありの場合)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:34
+msgid "**R=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "範囲項目名リスト(二項目限定)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "参照データ上の範囲項目名(start,end)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "第一項目のNULL値は無限小，第二項目のNULL値は無限大として扱われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:40
+msgid "**rf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "範囲比較される項目名[\\%{n}]"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "入力データ上の項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "数値として処理したい場合は ``rf=`` パラメータの項目名のあとに\\%nをつける。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:46
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "入力データ上の突き合わせる項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "ここで指定した入力データの項目と ``K=`` パラメータで指定された参照データの項目が同じ行の項目結合が行われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:51
+msgid "**K=** : 型=str , 任意(default=k=と同一項目名)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "参照データ上の突き合わせる項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "ここで指定した参照データの項目と ``k=`` パラメータで指定された入力データの項目が同じ行の項目結合が行われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "参照データ上に ``k=`` パラメータで指定した入力データ上の項目と同名の項目が存在する場合は指定する必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:57
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "参照データにない入力データをNULL値として出力するフラグ。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:61
+msgid "**N=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst
+msgid "入力データにない参照データをNULL値として出力するフラグ。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:68
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:70
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:85
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:87
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:112
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:114
+msgid ""
+"日付項目の値が ``20080203`` で、 ``amount`` 項目の値が ``5`` 以上 ``15`` 未満の入力データ行には "
+"``avg=150`` を、 ``40`` 以上 ``50`` 未満の行には ``avg=200`` を結合する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:126
+msgid "**未結合データ出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:128
+msgid ""
+"``n=True`` を指定することで、参照ファイルにマッチしない入力ファイルの行( ``avg=`` がNULL値の行)も出力し、 "
+"``N=True`` を指定することで、入力ファイルにマッチしない参照ファイルの行( ``price=`` がNULL値の行)も出力する。 "
+"いわゆる外部結合である。"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:147
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnrjoin.rst:149
+msgid ":doc:`mrjoin` : 参照データの結合キー( ``K=`` 項目)に重複がなければ ``mrjoin`` を使う。"
+msgstr ""
+

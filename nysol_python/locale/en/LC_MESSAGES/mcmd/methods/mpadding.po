@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mpadding.rst:2
+msgid "mpadding (行補完) コマンド"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:4
+msgid ""
+"``k=`` パラメータで指定した項目をキーとして、 ``f=`` パラメータで指定した項目の値が連続するようにレコードを作成する。 ``v=``"
+" パラメータを指定した場合は、 ``k=`` , ``f=`` で指定した以外の項目値を指定した文字列でパディングし、 ``n`` "
+"オプション指定時は、nullでパディングする。 ただし、 ``v=`` と ``n`` オプション共に指定がなければ直前の項目値でパディングする。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:14
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:18
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:22
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "ここで指定された項目をキーとする。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:26
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "連続パディング対象項目名"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "ここで指定された項目の値が連続するようにレコードをパディングする。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "数字としてパディングするときは、no\\%nのように\\%nを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+#, python-format
+msgid "日付としてパディングするときは\\%d、時刻としてパディングするときは\\%tを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+#, python-format
+msgid "降順でパディングしたいときはno\\%d\\%rのようにrを追加する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:34
+msgid "**v=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "パディング用文字列指定"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "k=,f=で指定した以外の項目値を指定した文字列で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:39
+msgid "**S=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "開始値"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "f=で指定した項目の値の開始値を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:44
+msgid "**E=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "終了値"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "f=で指定した項目の値の終了値を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:49
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "パディングにnull値指定"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst
+msgid "k=,f=で指定した以外の項目値をnullで出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:57
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:59
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:74
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:76
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:100
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:102
+msgid ""
+"``no`` 項目が整数(\\%n)として連続するようにレコードをパディングする。 ``1`` とverb|4|の間に ``2,3`` を、 "
+"``4`` と ``2`` の間に ``3`` が挿入されている。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:119
+msgid "**開始値、終了値の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:121
+msgid "行間のパディングだけでなく、先頭行/終端行の前後もパディングする。 前後の範囲は ``S=,E=`` で指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:142
+msgid "**日付パディング**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:144
+#, python-format
+msgid ""
+"``date`` 項目が日付(\\%d)として連続するようにレコードをパディングする。 ``k=,f=`` "
+"で指定した以外の項目は、直前の行の項目値でパディングする。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:161
+msgid "**パディング用文字列指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:163
+msgid "``v=`` にてパディング文字列を指定することもできる。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:179
+msgid "**パディングにNULL値を指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:181
+msgid "``n=True`` を指定してNULL値でパディングすることも可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mpadding.rst:198
+msgid "関連メソッド"
+msgstr ""
+

@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/mace.rst:2
+msgid "mace 極大クリークの列挙"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:4
+msgid "実装の詳細は |maceorg| を参照されたい。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:14
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "列挙するクリークのタイプ(C|M)、及び出力形式を文字列として指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "クリークのタイプとして以下の2つから一つを選ぶ。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "* C:クリーク"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "* M:極大クリーク"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "また出力形式として以下の組み合わせで指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "* e:エッジリストとして出力する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "* _:メッセージを出力しない。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "* +:出力を追記する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:28 ../../take/methods0/mace.rst:52
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "入力データファイル名(隣接行列形式)を指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:32
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:36
+msgid "**l=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "クリークのサイズの下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:40
+msgid "**u=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "クリークのサイズの上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:44
+msgid "**S=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "ここで指定した数のクリークを出力したら停止する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:48
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid "入力データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/mace.rst
+msgid ""
+"replace the output numbers according to the permutation table given by "
+"[filename]"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:59
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/mace.rst:62
+msgid "関連メソッド"
+msgstr ""
+

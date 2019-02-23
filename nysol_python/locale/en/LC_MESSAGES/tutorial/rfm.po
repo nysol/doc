@@ -1,0 +1,317 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../tutorial/rfm.rst:2
+msgid "RFM分析"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:3
+msgid ""
+"本節ではonline storeのデータセットを用いて、|rfm| をおこなう方法について解説する。 |rfm| "
+"は、マーケティングの分野で用いられる顧客セグメンテーションの一手法である。 "
+"以下に示すRecency(最新購入日)、Frequency(購入頻度)、 Monetary(購入金額)の3軸によって顧客を分類し、 "
+"それぞれの分類に適したマーケティング施策を実施しようというものである。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:9
+msgid "Recency: ある基準日から最新購入日までの日数をスコア化したもの。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:10
+msgid "Frequency: 一定期間に何回の来店があったか、その回数をスコア化したもの。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:11
+msgid "Monetary: 一定期間に購入した総金額をスコア化したもの。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:17
+msgid ""
+"RFMの各軸は、1〜5もしくは1〜10(高いスコアがよい顧客) "
+"にスコア化されることが多いが、特に定まった方法があるわけではない(このチュートリアルでは1〜3を用いている)。 "
+"また、RFMの各軸の区切り方には様々な方法が考えられる。 例えば、お得意の顧客は少なくとも1週間に1度は来店するという経験則があれば、 "
+"最新購入日の区切りを1週間,2週間,...と定めるかもしれない。 このような経験則は業種や業態によって異なってくるであろう。 "
+"数理的な方法を用いるのであれば、最大値と最小値の幅(range)を均等に分割する方法や 順位を均等に分割する方法などが考えられる。 "
+"rangeで分割すると、異常値があった場合によい分割ができない(例えば1点ばかりに集中するなど)ことになるかもしれない。 "
+"以下の例ではランクを均等に分割することでスコアリングする方法を紹介する。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:29
+msgid "入力データと出力データ"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:30
+msgid ""
+":numref:`tutorial_rfm_input_image` に本課題で利用する入力データ ``onlineRetail2.csv`` "
+"のサンプルを示している。 このファイルは、 :doc:`../../dataset/uci_onlineretail` "
+"で作成したデータセットである。 カレントディレクトリにコピーしておこう。 RFM分析を進めるにあたって必要となる項目は、 顧客IDの "
+"``CustomerID`` 、RecencyとFrequencyを計算するための ``date`` 、 そして、Monetaryを計算するための"
+" ``UnitPrice`` と ``Quantity`` である。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:38
+msgid "online retailデータセット"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "InvoiceNo"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "StockCode"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "Description"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "Quantity"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "UnitPrice"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "CustomerID"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "Country"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "time"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "536365"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "85123A"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "WHITE HANGING HEART T-LIGHT HOLDER"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "6"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "2.55"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "17850"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "United Kingdom"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "20101201"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "082600"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "71053"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "WHITE METAL LANTERN"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "3.39"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "84406B"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "CREAM CUPID HEARTS COAT HANGER"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "8"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "2.75"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:47
+msgid ""
+":numref:`tutorial_rfm_output_image` には出力データイメージを示している。 顧客別にRFMそれぞれのスコアを項目"
+" ``R`` ``F`` ``M`` として出力し、 それらの合計点を ``score`` として計算したものである。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:51
+msgid "RFM分析の出力イメージ"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "R"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "F"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "M"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "score"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "12347"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "5"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "4"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "11"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "12348"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "12349"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid "9"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:1
+msgid ":   :"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:61
+msgid "スクリプト"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:62
+msgid ""
+"RFM分析のスクリプトを :numref:`tutorial_rfm_scp` に示す。 まず最初に ``base`` 変数に "
+"入力データからRFMの計算で必要となる共通項目を作成している(13-17行目)。 R,F,Mのそれぞれで入力データ "
+"``onlineRetail2.csv`` から計算してもよいが、 ここで共通の処理を行っているのには2つの理由があり、 "
+"同じ処理を3度実行するより計算効率が高まることと、 同じ処理をまとめることでメンテナンス性が高まることである。 "
+"ここでは、入力データ全てを対象としているが、直近の1年間のみを選択したり、 分析対象商品を購入したことのある顧客に絞ったりするなどの処理は、 "
+"このブロックに追記すればよい。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:72
+#, python-format
+msgid ""
+"19-31行目のRecencyの計算では、まず ``mstats`` メソッドで入力データの最新日を取得している。 "
+"これは日付を数値とみなし、最大値を得ることで実現できる。 ``mstats`` では ``o=`` "
+"を指定していないので、結果はPythonの2重リスト ``[[\"20111209\"]]`` に格納される。 "
+"そして、その日付(20111209)を基準にして、 ``mcal`` によって日数計算を行っている。 ``mcal`` のパラメータである "
+"``c=\"0d%s-$d{date}\"%latestDate[0][0]`` の ``%s`` を展開すると "
+"``c=\"0d20111209-$d{date}\"`` となる。 mcmdの内部では、データは全て文字列として扱われるため、 ``mcal``"
+" では、定数や項目を日付型として扱うことを指定しなければならない。 ``0d`` で始まる書式が定数を日付型として指定する方法であり、 "
+"``$d{date}`` のように ``$d`` で始まり括弧で項目名を囲うのが、項目を日付型として指定する方法である。 詳細は、「 "
+":doc:`../mcmd/calsel` 」の節を参照されたい。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:84
+msgid ""
+"そして最後に ``mbucket`` により、計算された基準日からの日数により顧客を3分割している。 "
+"このメソッドでは、顧客を日数の小さい順に並べ替え、 できる限り顧客数が均等になるような日数の分割ポイントを計算し、 "
+"順番に1,2,3のグループ番号を割り当てている。 ただしここでは、 ``r=True`` "
+"が指定されているので、逆順に3,2,1の分類番号を付与される。 すなわち、直近に来店している良い顧客はグループ番号3が付与され、 "
+"逆にしばら来店していない問題のある顧客は1が付与される。 その値をそのままRecencyのスコア( ``R`` 項目)として用いている。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:93
+msgid ""
+"Frequency(33-37行)は、 ``CustomerID`` の件数を数えることで、来店した合計日数が計算されている。 "
+"来店日数ではなく、買い物の回数でFrequencyを定義したければ、 日付の代わりに入力データの ``InvoiceNo`` 項目を用いればよい。"
+" Monetary(39-43行)は、 ``amount`` 項目を合計することで計算される。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:98
+msgid ""
+"FrequencyもMonetaryも、値が大きいほど良い顧客であると考えるので、 ``mbucket`` では ``r=True`` "
+"を指定せず、値が大きいほど大きなグループ番号を割り当て、R,Mのスコアとしている。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:101
+msgid ""
+"そして最後に、R,F,Mのスコアを合計した ``score`` 項目を作成している。 "
+"R,F,M全てが3の顧客が最も優良な顧客グループでscore=9となり、全てが1の顧客が最低スコアの3となる。 "
+"このスコアは、優良顧客の分類モデルや回帰モデルの目的変数として利用することができるであろう。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:105
+msgid ""
+"以上の処理フローを視覚化するメソッド ``drawModelD3`` を53行目に入れている。 "
+"また、R,F,Mの人数分布とscoreの人数分布を55〜79行目で計算している。"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:108
+msgid "RFM分析のスクリプト"
+msgstr ""
+
+#: ../../tutorial/rfm.rst:200
+msgid "rfm分析の処理フロー図"
+msgstr ""
+

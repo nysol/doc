@@ -1,0 +1,352 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/lcmseq.rst:2
+msgid "lcmseq 系列パターン列挙"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:4
+msgid "実装の詳細は |lcmseqorg| を参照されたい。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:14
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* %:show progress"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* _:no message"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* +:write solutions in append mode"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* F:position occurrence"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* C:document occurrence"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* m:output extension maximal patterns only"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* c:output extension closed patterns only"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* f,Q:output frequency following/preceding to each output sequence"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* A:output coverages for positive/negative transactions"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* I(J):output ID's of transactions including each pattern,"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"* if J is given, an occurrence is written in a complete stype; "
+"transaction ID, starting position and ending position"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* i:do not output itemset to the output file (only rules)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "* s:output confidence and item frequency by absolute values"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"* t:transpose the input database (item i will be i-th transaction, and "
+"i-th transaction will be item i)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:31
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "トランザクションファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:35
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:39
+msgid "**sup=** : 型=int , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "最小サポートを指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:43
+msgid "**U=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "最大サポートを指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:47
+msgid "**K=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "頻出な上位のアイテム集合のみ出力する"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:51
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "アイム集合のサイズの下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:55
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "アイム集合のサイズの上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:59
+msgid "**g=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "ギャップ長の上限を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:63
+msgid "**G=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "パターンを含む窓幅の上限を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:67
+msgid "**w=** : 型=str , 任意(default=全トランザクションの重みは等しいものとする)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "トランザクションの重みファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:71
+msgid "**a=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "相関ルールマイニングを実施しconfidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:75
+msgid "**A=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "相関ルールマイニングを実施しconfidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:79
+msgid "**r=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:83
+msgid "**R=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:87
+msgid "**f=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequences with frequency no less than [ratio] times"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "the frequency given by the product of appearance probability of each item"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:92
+msgid "**F=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequences with frequency no greater than [ratio] times"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:97
+msgid "**p=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"output sequence only if (frequency)/(abusolute frequency) is no less than"
+" [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:101
+msgid "**P=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"output sequence only if (frequency)/(abusolute frequency) is no greater "
+"than [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:105 ../../take/methods0/lcmseq.rst:110
+msgid "**n=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequence only if its negative frequency is no less than [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"(negative frequency is the sum of weights of transactions having negative"
+" weights)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequence only if its negative frequency is no greater than [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:115
+msgid "**opos=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequence only if its positive frequency is no less than [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"(positive frequency is the sum of weights of transactions having positive"
+" weights)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:120
+msgid "**Opos=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "output sequence only if its positive frequency is no greater than [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:125
+msgid "**s=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"output itemset rule (of the form (a,b,c) => (d,e)) with confidence at "
+"least [num]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "(only those whose frequency of the result is no less than the support)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:130
+msgid "**stop=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "ここで指定した数のパターンを出力したら停止する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:134
+msgid "**q=** : 型=str , 任意(default=出力なし)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid ""
+"replace the output numbers according to the permutation table given by "
+"[filename]"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:138
+msgid "**item=** : 型=int , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "指定した番号のアイテムに関する相関ルールを出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:142
+msgid "**so=** : 型=str , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "標準出力の内容を指定のファイルに出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:146
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst
+msgid "出力時のアイテムの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:153
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/lcmseq.rst:156
+msgid "関連メソッド"
+msgstr ""
+

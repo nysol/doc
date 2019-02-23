@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mduprec.rst:2
+msgid "mduprec レコードの複写"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:4
+msgid "各レコードを複写する。 複写する行数は ``n=`` で固定値を与えるか、 もしくは ``f=`` で指定した項目の値により与える。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:12
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:20
+msgid "**f=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "複写行数をもつ項目名"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "ここで指定した項目の値の数分、その行を複写する。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:25
+msgid "**n=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "複写行数の指定"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst
+msgid "ここで指定した値の数分、行を複写する。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:33
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:35
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:47
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:49
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:65
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:67
+msgid "``quantity`` 項目の値の数分、データを複写し複数行のデータを生成する。 対象項目がNULL値の場合は複写しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:85
+msgid "**複写行数の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:87
+msgid "データを2行づつ複写した( ``n=2`` )データを生成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:104
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:106
+msgid ":doc:`mcount` : ``mduprec`` と逆の動きをする。"
+msgstr ""
+
+#: ../../mcmd/methods/mduprec.rst:107
+msgid ":doc:`mwindow` : 一定数のレコードをずらしながら複写する。"
+msgstr ""
+

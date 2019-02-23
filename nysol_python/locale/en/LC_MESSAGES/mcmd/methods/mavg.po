@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mavg.rst:2
+msgid "mavg 項目値の平均"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:4
+msgid ""
+"``f=`` で指定した項目の平均値を計算する。 ``k=`` と ``f=`` "
+"で指定した項目以外については、どの行が出力されるか>は不定であることに注意されたい。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:18
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid "ここで指定した項目(複数項目指定可)の値が集計される。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid ":(コロン）で新項目名を指定可能。例） ``f=amount:average``"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:23
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid "集計の単位となる項目(複数項目指定可)名リストを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:27
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst
+msgid "NULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:34
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:36
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:51
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:53
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:71
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:73
+msgid ""
+"``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と "
+"``amtTotal`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:85
+msgid "**NULL値がある場合の出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:87
+msgid ""
+"``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と "
+"``amtTotal`` という項目名で出力する。 ``n=True`` "
+"オプションを指定することで、NULL値が含まれている場合は、結果もNULL値として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:100
+msgid "**顧客項目を単位としない例**"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:102
+msgid ""
+"``quantity`` と ``amount`` 項目の平均値を計算し、 ``qttTotal`` と ``amtTotal`` "
+"という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:114
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:116
+msgid ":doc:`mhashavg` : 集計キーを事前に並べ替えなくてよい分高速である。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:117
+msgid ":doc:`msum` : 合計バージョン。"
+msgstr ""
+
+#: ../../mcmd/methods/mavg.rst:118
+msgid ":doc:`mstats` : その他の多様な統計量を求めるのであればこれ。"
+msgstr ""
+

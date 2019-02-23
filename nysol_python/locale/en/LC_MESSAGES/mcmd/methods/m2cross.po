@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/m2cross.rst:2
+msgid "m2cross 1対Nのクロス集計"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:4
+msgid ""
+"1対Nのクロス集計を行う。 ``s=`` を指定した場合には項目の値が項目名となるように横に展開され、 ``f=`` "
+"で指定した項目がセルとして出力される。 ``a=`` を指定した場合(2項目指定)には 指定した値が項目名となり、 １項目に ``f=`` "
+"で指定した項目名が、 ２項目に ``f=`` で指定した項目値がそれぞれ縦展開される ``k=`` が指定されていた場合には、 "
+"指定した値が行idとなり、id単位で展開される。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:16
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:18
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:22
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:26
+msgid "**fixfld=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "横に展開する際、データがない場合に追加する項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:30
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "ここで指定された項目の値がセルの値として出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "a=を使用するときのみ複数項目指定可。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:35
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "列項目名に展開する項目を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "ここで指定された項目の値が項目名として出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:40
+msgid "**a=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "２項目指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "１項目目に ``f=`` で指定した項目名がデータとして展開される項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "２項目目に ``f=`` で指定した項目値の項目名を指定する"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:46
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "キー項目名リスト"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "ここで指定した項目を単位に展開をおこなう。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:51
+msgid "**v=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "NULL値置換文字列"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst
+msgid "NULL値があった場合、 ``v=`` パラメータで指定する置換文字列により、項目の値を置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:59
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:61
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:76
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:78
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:106
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:108
+msgid "``item`` 項目を単位に ``date`` 項目を横に展開し、 ``quantity`` 項目を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:121
+msgid "**元の入力データに戻す例**"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:123
+msgid "例1の出力結果を元に戻すには、同じく ``m2cross`` を以下のよう用いればよい。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:139
+msgid "**並びを逆順する例**"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:141
+msgid "横に展開する項目名の並びを逆順にする。"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:153
+msgid "**データがない場合に項目を追加する例**"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:155
+msgid "横に展開する際に、データがない場合に項目を追加する\""
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:168
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/m2cross.rst:170
+msgid ":doc:`mcross` : イメージは同じだが、 ``mcross`` はN対Nクロス集計として出力する。\\"
+msgstr ""
+

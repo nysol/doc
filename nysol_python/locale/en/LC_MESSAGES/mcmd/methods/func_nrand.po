@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_nrand.rst:2
+msgid "nrand 正規乱数"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:4
+msgid "書式1: nrand(nrand) ([正規乱数])"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:7
+msgid ""
+"指定された平均値と標準偏差による正規乱数を発生させる。 同じ乱数の種を指定すれば、同じ乱数系列となる。 "
+"指定可能な乱数の種の範囲は-2147483648〜2147483647である。 乱数の種を省略すると、 "
+"時刻(1/1000秒単位)に応じた異なる乱数の種が利用される。 乱数の生成にはメルセンヌ・ツイスター法を利用している "
+"(\\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}"
+" , "
+"\\href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:18
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:20
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:37
+msgid "**例1: 基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_nrand.rst:39
+msgid "平均 0 標準偏差 1(標準正規分布) に基づく乱数を成する。また、乱数の種は 10 に設定している。"
+msgstr ""
+

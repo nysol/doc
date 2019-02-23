@@ -1,0 +1,44 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/workfile.rst:3
+msgid "ワークファイル"
+msgstr ""
+
+#: ../../mcmd/workfile.rst:6
+msgid "コマンドが裏で使うワークファイル"
+msgstr ""
+
+#: ../../mcmd/workfile.rst:7
+msgid "msortf,mfifoなどワークファイル"
+msgstr ""
+
+#: ../../mcmd/workfile.rst:9
+msgid "msortf (kgsortf) mfifo (kgfifo) 切断 (kgshellsplit) => 最終出力のファイル名に割り当てられる"
+msgstr ""
+
+#: ../../mcmd/workfile.rst:15
+msgid "ユーザ指定のワークファイル"
+msgstr ""
+
+#: ../../mcmd/workfile.rst:18
+msgid "ワークファイルの設定"
+msgstr ""
+

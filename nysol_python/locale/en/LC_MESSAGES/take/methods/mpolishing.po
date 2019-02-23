@@ -1,0 +1,242 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mpolishing.rst:2
+msgid "mpolishing 一般グラフの研磨"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:4
+msgid ""
+"一般グラフデータを入力として、密度の高い部分グラフの中でエッジが張られていないノードペアに枝を張る。 "
+"逆に、密度の低い部分グラフのエッジを削除する。 新たに張られる枝や刈られる枝の程度は、sim=とth=で与えた値によって変わる。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:12
+msgid "**ei=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "エッジデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:16
+msgid "**ef=** : 型=str , 任意(default=node1,node2)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "エッジデータ上の2つのノード項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:20
+msgid "**ni=** : 型=str , 任意(default=エッジファイル上のノードのみを対象にする)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "ノードデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:24
+msgid "**nf=** : 型=str , 任意(default=node)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "ノードデータ上のノード項目名"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:28
+msgid "**eo=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "データ研磨後のエッジデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:32
+msgid "**no=** : 型=str , 任意(default=ノードデータを出力しない)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "データ研磨後のノードデータファイル"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:36
+msgid "**sim=** : 型=str , 任意(default=R)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "ノードa,bに張られたエッジ集合を、それぞれA,Bとしたとき、ノードa,bに枝を張るために用いる類似度を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "* i: inclusion"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "* I: both-inclusion"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "* S: :math:`|A \\cap B| / max(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "* s: :math:`|A \\cap B| / min(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "* T (intersection): find pairs having common [threshld] items"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid ""
+"* R (resemblance): find pairs s.t. :math:`|A \\cap B| / |A \\cup B| >= "
+"[threshld]`"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid ""
+"* P (PMI): find pairs s.t. log ( :math:`|A \\cap B| * |all| / (|A|*|B|)) "
+">= [threshld]`"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid ""
+"* C (cosine distance): find pairs s.t. inner product of their normalized "
+"vectors >= [threshld]"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:48
+msgid "**th=** : 型=float , 必須"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "sim=で指定された類似度について、ここで指定された値以上の節点間に枝を張る。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:52
+msgid "**sup=** : 型=int , 任意(default=0)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "類似度計算において、 :math:`|A∩B|>=sup` の条件を加える。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:56
+msgid "**indirect=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "上記類似度計算における隣接節点集合から直接の関係を除外する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "すなわち、 :math:`A=A-b, B=B-a` として類似度を計算する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:61
+msgid "**iter=** : 型=int , 任意(default=30)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "データ研磨の最大繰り返し数を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:65
+msgid "**log=** : 型=str , 任意(default=ログを出力しない)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "パラメータの設定値や収束回数等をkey-value形式のCSVで保存するファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:69
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "ワークディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:73
+msgid "**O=** : 型=str , 任意(default=研磨過程を出力しない)"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst
+msgid "デバッグモード時、データ研磨過程のグラフを保存するディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:80
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:82
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:103
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:105
+msgid ""
+"類似度をresemblance(sim=R)とし、th=0.4で枝を張り直してグラフ研磨する。 ``log1.csv`` "
+"を見ると、グラフ情報の表示が繰り返されておりそれが 5回目(dens4など)で終わっており、研磨回数は5回で収束していることがわかる。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:150
+msgid "**PMIによる研磨**"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:152
+msgid "類似度をnormalized PMI(sim=P)とし、th=0.2で枝を張り直して得られた研磨グラフ。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:167
+msgid "**intersectionで1回の研磨**"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:169
+msgid ""
+"類似度をintersection(sim=T)とし、2件以上(th=2)で枝を張り直し "
+"直接の接続を考慮に入れる例。研磨回数は1回のみ(iter=1)。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:185
+msgid "**直接の接続を考慮しない例**"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:187
+msgid ""
+"``indirect`` オプションを指定することで、類似度の計算で直接の接続は無視される。 "
+"出力結果では、枝が全て消えるため、研磨後の枝データは出力されない。"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:204
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mpolishing.rst:206
+msgid ":doc:`mbipolish` : 2部グラフの研磨"
+msgstr ""
+

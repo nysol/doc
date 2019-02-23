@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mmvavg.rst:2
+msgid "mmvavg 移動平均の算出"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:4
+msgid ""
+"移動平均(moving average)を算出する。 移動平均としては、単純移動平均( :math:`SMA` )、線形荷重移動平均( "
+":math:`WMA` )、指数平滑移動平均( :math:`EMA` )の３種類の移動平均が計算可能である。 ある時 :math:`t` "
+"における値を :math:`x_t` で表したとき、 :math:`m` 期の各種移動平均は式( ef{eq:sma}, ef{eq:wma}, "
+"ef{eq:ema})で定義される。 egin{eqnarray} SMA_t= rac{1}{m} \\sum_{i=0}^{m-1} "
+"x_{t-i} \\label{eq:sma} \\end{eqnarray} egin{eqnarray} "
+"WMA_t=\\sum_{i=0}^{m-1}  rac{m-i}{S} x_{t-i},\\ \\ S=\\sum_{i=1}^m i "
+"\\label{eq:wma} \\end{eqnarray} egin{eqnarray} EMA_t=lpha x_t + "
+"(1-lpha)EMA_{t-1} \\label{eq:ema} \\end{eqnarray}"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:25
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:27
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:31
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:35
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "ここで指定した項目(複数項目指定可)で並べ替えられた後、移動平均が計算される。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "``q`` オプションを指定しないとき、 ``s=`` パラメータは必須。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:40
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "ここで指定された項目(複数項目指定可)を単位として集計する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:44
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "移動平均を求める項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:48
+msgid "**t=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "期間数を1以上の整数で指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "``exp`` オプション指定時に ``alpha=`` を指定すれば ``t=`` は指定できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:53
+msgid "**w=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "線形加重移動平均を求める。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:57
+msgid "**exp=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "指数平滑移動平均を求める。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:61
+msgid "**alpha=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "``exp`` オプションが指定された時の平滑化係数を実数値で与える。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "省略時は ``alpha=2/(t=の値+1)`` 。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:66
+msgid "**skip=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "出力を抑制する最初の行数。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "デフォルト値:  ``skip=(t=の値-1)`` ,  ``exp`` オプションが指定された場合は ``skip=0``"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:71
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst
+msgid "期間内にNULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:78
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:80
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:95
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:97
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:147
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:149 ../../mcmd/methods/mmvavg.rst:169
+msgid "最初の行は期数に満たないため出力されない。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:167
+msgid "**基本例2**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:187
+msgid "**基本例3**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:189
+msgid "指数平滑移動平均( ``exp=True`` )の場合は最初の行から出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:208
+msgid "**キーを指定する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:226
+msgid "**指定した期に満たなくても出力する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:247
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:249
+msgid ":doc:`mmvstats` : 平均だけでなく、各種統計量を指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:250
+msgid ":doc:`mmvsim` : 2変量の統計量を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmvavg.rst:251
+msgid ":doc:`mwindow` : 動窓のデータを作成するので、そのデータを使えば ``mmvstats`` で計算できない統計量も計算可能。"
+msgstr ""
+

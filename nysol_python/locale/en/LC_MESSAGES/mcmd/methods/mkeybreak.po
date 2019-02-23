@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mkeybreak.rst:2
+msgid "mkeybreak キーブレイク箇所"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:4
+msgid ""
+"``k=`` パラメータで指定した項目をキー項目について、先頭と終端に印を付ける。 先頭は ``top`` 項目に、終端は ``bot`` 項目に"
+" ``1`` を出力する。 先頭/終端でない行はNULL値を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:12
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:20
+msgid "**k=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst
+msgid "集計キーとなる項目名リスト（複数項目指定可）を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:24
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst
+msgid "ここで指定した項目(複数項目指定可)で並べ替えた後、先頭・終端に印を付ける。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:28
+msgid "**a=** : 型=str , 任意(default=top,bot)"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst
+msgid "先頭と終端の印を出力する項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:35
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:37
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:51
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:53
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:71
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:73
+msgid ""
+"``k1`` 項目で並べ替えた後、 ``k1`` キー項目の先頭( ``top`` 項目)と終端( ``bottom`` 項目)に印( ``1``"
+" )をつける。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:88
+msgid "**2項目キー**"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:90
+msgid ""
+"``k1`` ・ ``k2`` 項目で並べ替えた後、 ``k1`` キー項目の先頭( ``top`` 項目)と終端( ``bottom`` "
+"項目)に印( ``1`` )をつける。"
+msgstr ""
+
+#: ../../mcmd/methods/mkeybreak.rst:106
+msgid "関連メソッド"
+msgstr ""
+

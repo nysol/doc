@@ -1,0 +1,274 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mpal.rst:2
+msgid "mpal 相互類似関係にあるアイテムペア列挙"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:4
+msgid "トランザクションデータから2アイテム相関ルールを求め、 ランクに基づいた類似関係にある相関ルールを選択する"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:7
+msgid "入力ファイル形式:"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:9
+msgid "トランザクションIDとアイテムの２項目によるトランザクションデータ。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:11
+msgid "o=の出力形式:"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:13
+msgid "辺ファイル: simType,simPriority,node1,node2,sim,dir,color"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:14
+msgid "節点ファイル: node,support,frequency,total"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:18
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:20
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "トランザクションデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:24
+msgid "**tid=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "トランザクションID項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:28
+msgid "**item=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "アイテム項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:32
+msgid "**ro=** : 型=str , 任意(default=ファイル出力なし)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "出力ルールファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:36
+msgid "**eo=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "出力の辺データファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:40
+msgid "**s=** : 型=float , 任意(default=0.05)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "最小支持度(全トランザクション数に対する割合による指定)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:44
+msgid "**S=** : 型=int , 条件付き必須(S= or s=を指定しなければならない)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "最小支持度(件数による指定)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:48
+msgid "**filter=** : 型=str , 任意(default=相関ルール評価指数でのルール選択をしない)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "相関ルールの評価指標(省略可,複数指定可)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "指定できる類似度は以下の3つ(括弧内は値域)。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "J: Jaccard(0..1), P:normalized PMI(-1..0..1), C:Confidence(0..1)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:54
+msgid "**lb=** : 型=float , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "filter=で指定した相関ルール評価指標の下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "例1: sim=P lb=0.5 : normalized PMIが0.5以上1以下の相関ルールを列挙する"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "例2: sim=P,C lb=0.5,0.2 ub=,0.8 : 例1に加えて、confidenceが0.2以上0.8以下の相関ルールを列挙する"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:60
+msgid "**ub=** : 型=float , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "filter=で指定した相関ルール評価指標の上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:64
+msgid "**sim=** : 型=str , 任意(default=S)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "列挙された相関ルールを元にして枝を張る条件となる指標を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "以下に示す4つの相関ルール評価指標が指定できる。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "S:Support, J: Jaccard, P:normalized PMI, C:Confidence"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:70
+msgid "**rank=** : 型=str , 任意(default=3)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "辺を張る条件で、類似枝の上位何個までを選択するかを指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:74
+msgid "**dir=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "双方向類似関係(b)のみを出力するか、単方向類似関係(m)のみか、両方とも含める(x)かを指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "相関ルールa=>bの類似度をsim(a=>b)としたとき、"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "b:(bi-directional) sim(a=>b)およびsim(b=>a)がrank=で指定した順位内である相関ルールのみ選択される。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "m:(mono-directional) 片方向の類似度のみが、指定された順位内である相関ルールが選択される。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "x:(both) bとmの両方共含める。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "以上の3つのパラメータは複数指定することが可能(3つまで)。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "例1: sim=S dir=b rank=3 :"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "アイテムaからみてsupport(a=>b)が3位以内で、かつ"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "アイテムbからみてsupport(b=>a)も3位以内であるような相関ルールを選択する"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "例2: sim=S,C dir=b,m rank=3,1"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "例1に加えて、アイテムaから見てconfidenc(a=>b)が3以内、もしくは"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "アイテムbから見てconfidenc(b=>a)が3以内であれば、そのような相関ルールも選択する"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:89
+msgid "**prune=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "sim=等を複数指定した場合、マルチ枝を単一化する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "第1優先順位: 双方向>片方向"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "第2優先順位: パラメータ位置昇順"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:95
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mpal.rst
+msgid "ワークディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:102
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:104
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:145
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:147
+msgid ""
+"最小支持度を1件で指定しているの( ``S=1`` )、全アイテムペアを列挙し、 そこから類似度として支持度( ``sim=\"S\"`` "
+")が相互に1位のアイテムペアのみを選択する。"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:170
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mpal.rst:172
+msgid ":doc:`mfriends` : グラフデータから相互類似関係にあるアイテムペア(辺)を求める"
+msgstr ""
+

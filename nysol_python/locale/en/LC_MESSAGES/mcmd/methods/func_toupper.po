@@ -1,0 +1,44 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_toupper.rst:2
+msgid "toupper 大文字変換"
+msgstr ""
+
+#: ../../mcmd/methods/func_toupper.rst:6
+msgid "文字列をすべて大文字に変更する。 アルファベット26文字以外の文字については何の影響もない。"
+msgstr ""
+
+#: ../../mcmd/methods/func_toupper.rst:11
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_toupper.rst:13
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_toupper.rst:30
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_toupper.rst:32
+msgid "$str$項目のアルファベット小文字を全て大文字に変換する。"
+msgstr ""
+

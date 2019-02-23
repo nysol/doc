@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnullto.rst:2
+msgid "mnullto NULL値の置換"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:4
+msgid "``f=`` パラメータで指定した項目について NULL値を ``v=`` パラメータで指定した文字列に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:19
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "ここで指定した項目(複数項目指定可)のNULL値が置換される。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:23
+msgid "**v=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "ここで指定した文字列にNULL値を置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:27
+msgid "**p=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "前の行の値で置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "``v=`` パラメータと同時に指定できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:32
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "``p`` オプションを指定した時にのみ意味があり、ここで指定した項目値の単位で置換処理を行なう。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:36
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "``p`` オプションを指定した時にのみ意味があり、 ``k=`` 項目内での並び順を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:40
+msgid "**O=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "NULL値以外を置換したい場合は、ここで値を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:44
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "このオプションにより、指定した項目を置き換えるのではなく、"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid "``A`` オプションを指定した場合は必ず、"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst
+msgid ":(コロン）で新項目名を指定する必要がある。例）f=数量:置換後の項目名"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:53
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:55
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:67
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:69
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:107
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:109
+msgid "``birthday`` 項目がNULL値の場合は ``\"no value\"`` に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:124
+msgid "**NULL値以外の置換**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:126
+msgid ""
+"``birthday`` 項目がNULL値の場合は、 ``\"no value\"`` 値がある場合は ``\"value\"`` 置換し "
+"``entry`` という項目名に変更して出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:142
+msgid "**新しい項目を出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:144
+msgid ""
+"``birthday`` 項目がNULL値の場合は ``\"no value\"`` 、値がある場合は ``\"value\"`` に置換し "
+"``entry`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:159
+msgid "**前行の値に置換**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:175
+msgid "**キー項目を指定した場合の例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:192
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:194
+msgid ":doc:`mdelnull` : 置換ではなく、行を削除したい場合はこちら。"
+msgstr ""
+
+#: ../../mcmd/methods/mnullto.rst:195
+msgid ":doc:`mchgstr` : NULL値でなく文字列を置換したい場合に使用する。"
+msgstr ""
+

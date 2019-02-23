@@ -1,0 +1,326 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/grhfil.rst:2
+msgid "grhfil グラフフィルタ"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:4
+msgid "グラフの加工を行う。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:10
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "以下に示すパラメータを組み合わせて文字列として指定する(ex. \"UeEs\")。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "1) グラフタイプ【必須】"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "グラフの種類を以下の5つから一つ選んで指定する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* B:二部グラフ"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* d:有向グラフ(入力隣接行列を変更しない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* D:逆向きの有向グラフ(隣接行列の下三角行列と上三角行列を入れ替える)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* U:片方向無向グラフ(隣接行列の下三角行列を削除し、重複したエッジを削除する)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* u:双方向無向グラフ(入力隣接行列の下三角行列と上三角行列を対称にする)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "2) グラフの書式【オプション】"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "入出力ファイルのグラフの書式は、隣接行列形式がデフォルトであるが、"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "それをノードペアのエッジ形式に変更することができる。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* e: 入力ファイルをエッジ形式とする。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* E: 出力ファイルをエッジ形式とする。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "3) その他の指定"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* s: 出力のグラフの隣接ノードを昇順に並べる。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* S: 出力のグラフの隣接ノードを降順に並べる。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* n: 入力データの一行目を\"ノード数 エッジ数\"とする。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* N: 出力データの一行目に\"ノード数 エッジ数\"を出力する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* v: 入力データのノード番号は1から始まるものとする。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* V: 出力データのノード番号は1からはじまるものとして出力する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* 0: 一列目にノード番号を出力する(出力が隣接行列形式の場合のみ)。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* w: 入力ファイルの隣接ノードの次の数字を重みとする。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* W: 出力ファイルの隣接ノードの次に重みを出力する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* %:show progress"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* _:no message"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* +:write solutions in append mode"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* v,V:node ID in read/write file starts from 1,"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* q:non-transform mode (valid with -P option)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* 9:give weight 1 to each vertex ID (with 0)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "* 1:unify consecutive two same numbers into one"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:50
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "トランザクションファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:54
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:58
+msgid "**t=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "次数が指定した値より小さいノードは出力しない【デフォルト=制約なし】"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:62
+msgid "**T=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "次数が指定した値より大きいノードは出力しない【デフォルト=制約なし】"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:66
+msgid "**ideg=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "有向グラフにおいて入次数が指定した値より小さいノードは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:70
+msgid "**Ideg=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "有向グラフにおいて入次数が指定した値より大きいノードは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:74
+msgid "**odeg=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "有向グラフにおいて出次数が指定した値より小さいノードは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:78
+msgid "**Odeg=** : 型=int , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "有向グラフにおいて出次数が指定した値より大きいノードは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:82
+msgid "**r=** : 型=float , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "重みが指定した値より小さいエッジは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:86
+msgid "**R=** : 型=float , 任意(default=制約なし)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "重みが指定した値より大きいエッジは出力しない"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:90
+msgid "**n=** : 型=int , 任意(default=データ上の最大番号+1)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "ノードの個数を与える"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:94
+msgid "**w=** : 型=bool , 任意(default=均等な重みを使う)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "入力ファイルの3項目目を重みとして読み込む(3項目目がなければ0がセットされる)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:98
+msgid "**W=** : 型=bool , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "出力ファイルの3項目目に重みを出力する"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:102
+msgid "**d=** : 型=bool , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "指定したグラフとの差異を出力する(gTypeとgFormatは同じでなければならない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:106
+msgid "**dth=** : 型=float , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "specify the threshold value (d=が必要)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:110
+msgid "**m=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "指定したグラフとのintersectionを出力する(gTypeとgFormatは同じでなければならない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:114
+msgid "**M=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "指定したグラフとのunionを出力する(gTypeとgFormatは同じでなければならない)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:118
+msgid "**P=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid ""
+"permute the vertex ID to coutinuous numbering and output the permutation "
+"table to the file"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:122
+msgid "**Q=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst
+msgid "permute the numbers in the file according to the table"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:129
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:131
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:147
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods0/grhfil.rst:161
+msgid "関連メソッド"
+msgstr ""
+

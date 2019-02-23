@@ -1,0 +1,306 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/msequence.rst:2
+msgid "msequence 多頻度系列パターンの列挙"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:4
+msgid ""
+"多頻度系列パターンを列挙する。 内部的には、 :doc:`Takeのコアメソッドlcmseq <../methods0/lcmseq>` "
+"を用いている。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:11
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "系列データファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:15
+msgid "**O=** : 型=str , 任意(default=./take_現在日付時刻)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "出力ディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:19
+msgid "**x=** : 型=str , 任意(default=階層分類を使わない)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "taxonomyファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid ""
+"``item`` "
+"項目の値を対応するtaxonomyに変換して実行する。例えば、アイテムa,bのtaxonomyをX、c,dのtaxonomyをYとすると、"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "シーケンス aeadd は XeXYY に変換される。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:25
+msgid "**tid=** : 型=str , 任意(default=tid)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "トランザクションID項目名(i=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:29
+msgid "**time=** : 型=str , 任意(default=time)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "系列の順序関係を表す時間項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:33
+msgid "**item=** : 型=str , 任意(default=item)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "アイテム項目名(i=,t=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:37
+msgid "**cls=** : 型=str , 任意(default=class)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "クラス項目名(c=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:41
+msgid "**taxo=** : 型=str , 条件付き必須(x=指定時)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:45
+msgid "**s=** : 型=float , 任意(default=0.05)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最小支持度(全トランザクション数に対する割合による指定)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:49
+msgid "**S=** : 型=int , 任意(default=1)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最小支持度(件数による指定)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "s=,S=共に指定しなければ、s=0.05が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "両方指定されれば、S=が優先される。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:55
+msgid "**sx=** : 型=float , 任意(default=1.0)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最大支持度(全トランザクション数に対する割合による指定)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:59
+msgid "**Sx=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最大支持度(件数による指定)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "sx=,Sx=共に指定しなければ、sx=1.0が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "両方指定されれば、Sx=が優先される。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:65
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "パターンサイズの下限(1以上20以下の整数)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:69
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "パターンサイズの上限(1以上20以下の整数)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:73
+msgid "**p=** : 型=float , 任意(default=0.5)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最小事後確率"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:77
+msgid "**g=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "最小増加率"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "p=,g=共に指定しなければ、p=0.5が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "両方指定されれば、g=が優先される。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:83
+msgid "**gap=** : 型=int , 任意(default=0)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "パターンのギャップ長の上限(0以上の整数)を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "0を指定すれば制限なしとなる。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:88
+msgid "**win=** : 型=int , 任意(default=0)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "パターンのウィンドウサイズの上限(0以上の整数)を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:93
+msgid "**padding=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "時刻を整数とみなし、連続でない時刻に特殊なアイテムがあることを想定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "``gap=`` や ``win=`` の指定に影響する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:99
+msgid "**top=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "列挙するパターン数の上限を指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "例えばtop=10と指定すると、支持度が10番目高いパターンの支持度を最小支持度として頻出パターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "よって、同じ支持度のパターンが複数個ある場合は10個以上のパターンが列挙されるかもしれない。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:105
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/msequence.rst
+msgid "ワークディレクトリを指定する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:112
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:114
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:182
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:184
+msgid "出現頻度が3以上の長さが2の系列パターンのみを列挙する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:209
+msgid "**パターン長の制限**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:211
+msgid "2件以上で出現する系列パターン。 入力データの項目名は、全てデフォルトのものと同じなので省略していることに注意する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:237
+msgid "**gap長とwindowサイズの指定**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:239
+msgid "出現頻度が2以上、長さが2以上の系列パターンのうち、gap長が2、windowサイズが4のパターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:264
+msgid "**paddingにより時間を考慮する**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:266
+msgid ""
+"前の例と同じ条件で、 ``padding`` オプションを指定することで、 "
+"時間を考慮したgap長とwindowサイズ制約により系列パターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:290
+msgid "**顕在系列パターンの列挙**"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:292
+msgid "最初の例と同じ条件で、クラス項目を指定することで顕在パターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:318
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/msequence.rst:320
+msgid ":doc:`mitemset` : アイテム集合列挙ならこちら"
+msgstr ""
+

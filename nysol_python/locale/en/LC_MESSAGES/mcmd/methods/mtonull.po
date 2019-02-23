@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mtonull.rst:2
+msgid "mtonull NULL値へ置換"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:4
+msgid ""
+"``f=`` パラメータで指定した項目を対象に、 ``v=`` パラメータで指定した値にマッチした項目データをNULL値に置換する。 "
+"マッチの方法としては完全一致(デフォルト)と部分文字列マッチ( ``sub`` オプション)を選択できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:12
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:20
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "置換対象の項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:24
+msgid "**v=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "``f=`` パラメータで指定した項目の値が、ここで指定した文字列リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "のいずれかにマッチすればNULL値に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:29
+msgid "**sub=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "部分文字列マッチを行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:33
+msgid "**W=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst
+msgid "ワイド文字としてマッチを行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:40
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:42
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:54
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:56
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:84
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:86
+msgid "``quantity`` と ``price`` 項目が0をNULL値に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:101
+msgid "**NULL値に置換する数字の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:103
+msgid "``quantity`` と ``price`` 項目が0もしくは1をNULL値に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:118
+msgid "**部分文字列マッチでの置換**"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:120
+msgid "``quantity`` と ``price`` 項目が0を含めばNULL値に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:135
+msgid "**指定の文字列の置換**"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:137
+msgid "``item`` 項目に ``apple、orange、pineapple`` を含む値をNULL値に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:153
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mtonull.rst:155
+msgid ":doc:`mnullto` : 逆にNULL値を指定の文字列に置換する。"
+msgstr ""
+

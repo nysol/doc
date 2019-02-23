@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_tseconds.rst:2
+msgid "tseconds 経過秒数"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:4
+msgid "書式1: tseconds(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:5
+msgid "書式2: tuseconds(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:8
+msgid ""
+"00:00:00から時刻 :math:`time` までの経過秒数を計算する。 "
+"tsecondsでは秒単位で、tusecondsではマイクロ秒単位で値を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:13
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:15
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:40
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:55
+msgid "**日付が異なっても結果は同じ**"
+msgstr ""
+
+#: ../../mcmd/methods/func_tseconds.rst:69
+msgid "**マイクロ秒**"
+msgstr ""
+

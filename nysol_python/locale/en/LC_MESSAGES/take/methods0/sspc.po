@@ -1,0 +1,294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/sspc.rst:2
+msgid "sspc 類似アイテムペア列挙"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:4
+msgid "実装の詳細は |sspcorg| を参照されたい。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:14
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* _:no message"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* +:write solutions in append mode"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* #:count the number of similar records for each record"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* i(inclusion): find pairs [ratio] of items (weighted sum) of one is "
+"included in the other (1st is included in 2nd)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* I(both-inclusion): find pairs s.t. the size (weight sum) of "
+"intersection is [ratio] of both"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* S:set similarity measure to :math:`|A\\cap B| / max{|A|,|B|}`"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* s:set similarity measure to :math:`|A\\cap B| / min{|A|,|B|}`"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* T(intersection): find pairs having common [threshld] items"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* R(resemblance): find pairs s.t. :math:`|A\\cap B|/|A\\cup B| >= "
+"[threshld]`"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* P(PMI): set similarity measure to :math:`log(|A\\cap B|*|all| / "
+"(|A|*|B|))` where :math:`|all|` is the number of all items"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* C(cosign distance): find pairs s.t. inner product of their normalized "
+"vectors >= [threshld]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* f,Q:output ratio/size of pairs following/preceding to the pairs"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* D:the first entry is ID, and unify the records with the same ID"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* N:normalize the ID of latter sets, in -c mode"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* n:do not consider a and b in the set when comparing a and b"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"* Y(y):output elements of each set that contribute to no similarity "
+"(y:fast with much memory use)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* 1:remove duplicated items in each transaction"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* t:transpose the database so that i-th transaction will be item i"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* E:input column-row representation"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "* w:load weight of each item in each row (with E command)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:37
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "トランザクションファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:41
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:45
+msgid "**th=** : 型=float , 必須"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "``type=`` で指定した類似度の閾値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:49
+msgid "**K=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "output [num] pairs of most large similarities"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:53
+msgid "**k=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "output [num] elements of most large similarities, for each element"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:57
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore transactions with size (weight sum) less than [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:61
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore transactions with size (weight sum) more than [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:65
+msgid "**L=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore items appearing less than [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:69
+msgid "**U=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore items appearing more than [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:73
+msgid "**w=** : 型=str , 任意(default=全トランザクションの重みは等しいものとする)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "トランザクションの重みファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:77
+msgid "**W=** : 型=str , 任意(default=重みを使わない)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "read item weights in each row from [filename]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:81
+msgid "**c=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "compare transactions of IDs less than num and the others"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "(if 0 is given, automatically set to the boundary of the 1st and 2nd file)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:87
+msgid "**b=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore pairs having no common item of at least [num]th frequency"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:91
+msgid "**B=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore pairs having no common item of frequency at most [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:95
+msgid "**T=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ignore pairs whose intersection size is less than [num]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:99
+msgid "**TT=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "``T=`` with outputting intersection size to the 1st column of each line"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:103
+msgid "**stop=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "ここで指定した数のパターンを出力したら停止する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:107
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid "出力時のアイテムの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:111
+msgid "**Q=** : 型=str , 任意(default=replaceしない)"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst
+msgid ""
+"replace the output numbers according to the permutation table given by "
+"[filename]"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:118
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/sspc.rst:121
+msgid "関連メソッド"
+msgstr ""
+

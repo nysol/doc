@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mcut.rst:2
+msgid "mcut 項目の選択"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:4
+msgid "指定した項目を選択する。 ``r`` オプションを付けると、指定した項目を削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:18
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "抜き出す項目名"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "項目名をコロンで区切ることで、出力項目名を変更することができる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "ex.  ``f=a:A,b:B``"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:24
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "項目削除スイッチ"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "``f=`` で指定した項目を削除し、それ以外の項目が抜き出される。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:29
+msgid "**nfni=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "入力データの１行目を項目名行とみなさない。よって項目番号で指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "以下のように、新項目名を組み合わせて指定することで項目名行を追加出力することが可能となる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst
+msgid "例）f=0:日付,2:店,3:数量"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:38
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:40
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:52
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:54
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:81
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:83
+msgid ""
+"``customer`` と ``amount`` 項目を選択する。ただし、 ``amount`` 項目は ``sales`` "
+"と名前を変更して出力している。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:98
+msgid "**項目削除**"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:100
+msgid "``r=True`` を指定することで、項目を削除できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:115
+msgid "**項目名なしデータ**"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:117
+msgid "ヘッダなし入力ファイルから、0,2番目の項目を選択し、 ``customer`` と ``amount`` という名前で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:134
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mcut.rst:136
+msgid ":doc:`mfldname` : 項目名を変更したいだけの場合は ``mfldname`` を使う。"
+msgstr ""
+

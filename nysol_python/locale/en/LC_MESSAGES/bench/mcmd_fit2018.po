@@ -1,0 +1,677 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../bench/mcmd_fit2018.rst:2
+msgid "mcmdのベンチマークテスト(FIT2018)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:4
+msgid ""
+"`FIT2018 <https://www.ipsj.or.jp/event/fit/fit2018/>`_ に発表した原稿 [#f1]_ "
+"に掲載されたスクリプトについて説明する。 "
+"そこでは2つのスクリプトが掲載されており、1つはmcmdとpandasのベンチマークテストに関するもので、 "
+"他方は、相関ルール生成のスクリプトである。 いずれもデータとして株価4本値データを利用している。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:11
+msgid "準備"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:12
+msgid ""
+"本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ "
+"よりダウンロードできる ( :numref:`mcmd_fit2018_download` )。 ダウンロードしたディレクトリ下 "
+"bench/fit2018/nysol_mcmd に 以下の3つのスクリプトがある。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:16
+msgid "mkdata.py : 株価データセット生成用スクリプト"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:17
+msgid "bench.py : pandasとのベンチマーク用スクリプト( :numref:`mcmd_fit2018_bench` )"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:18
+msgid "apriori.py : 原稿のfig.1に示された相関ルール分析のスクリプト( :numref:`mcmd_fit2018_fig1` )"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:20
+msgid "ベンチマークスクリプトのダウンロード"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:30
+msgid "mcmdベンチマークテスト(vs. pandas)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:31
+msgid ""
+"nysol.mcmdの処理速度を評価する時に、Pythonにおける表構造データの加工によく利用される `Pandas "
+"<https://pandas.pydata.org/>`_ をベンチマークとする速度比較テストを実施した。 "
+"Pandasは、表データをメモリ上で加工するための多種のメソッドを提供しており、 mcmdと同様にデータの前処理によく利用されるモジュールである。"
+" 内部では `Numpy <http://www.numpy.org/>`_ のコードも利用しており高速に動作する。 "
+"mcmdとの大きな違いは、Pandasはメモリ内に収まるデータを対象としているのに対して、 "
+"mcmdはファイル処理が基本のため、メモリサイズの制約を受けない。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:40
+msgid "利用データ"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:41
+msgid ""
+"利用したデータは、「 :doc:`../dataset/randStock` 」節で解説されている人工的に生成した株価4本値データであり、 "
+"上述のgitからダウンロードしたスクリプト ``mkdata.py`` を実行すれば( "
+":numref:`mcmd_fit2018_datarun` )、 DATAディレクトリの下にデータが生成される。20〜30分ほど時間を要する。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:45
+msgid "株価生成スクリプトの実行"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:57
+msgid ""
+"データは :numref:`mcmd_fit2018_sample` に例示されるように、 銘柄ID( ``id`` )、日付( ``date``"
+" )、 始値( ``o`` )、 高値( ``h`` )、 安値( ``l`` )、 終値( ``c`` ) "
+"の6項目から構成される株価4本値データである。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:61
+msgid "個別銘柄の4本値データ"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "id"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "o"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "h"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "l"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "c"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "1000"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "20180628"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "63427"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "63492"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "58474"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "61979"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "20180627"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "61341"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "65684"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "63604"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "20180626"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "64200"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "66672"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "62960"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "64267"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "20180625"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "65361"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "66354"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "63189"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "65268"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:71
+msgid ""
+"このデータからサイズ違いの3種類のデータ(large,middle,small)を用意した。 それぞれのデータ行数とサイズは、 "
+":numref:`mcmd_fit2018_data` に示される通りである。 "
+"名称=multiは、並列処理用にlargeデータを日別に分割したものである。 "
+"株価生成スクリプトでは固定の乱数シードを用いているので、データの内容も同一であるはずであるが、 "
+"乱数システムの違いから異なる可能性もあり、サイズを確認されたい。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:77
+msgid "ベンチマークに用いたデータ一覧"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:81
+msgid "名称"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:82
+msgid "ファイル名"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:83
+msgid "行数(ヘッダ含む)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:84
+msgid "サイズ(byte)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:85
+msgid "内容"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1 ../../bench/mcmd_fit2018.rst:86
+msgid "large"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:87
+msgid "price_large.csv"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:88
+msgid "27,707,820"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:89
+msgid "1,032,785,399"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:90
+msgid "個別銘柄別4本値データ"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:91
+msgid "middle"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:92
+msgid "price_middle.csv"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:93
+msgid "1,116,001"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:94
+msgid "42,182,505"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:95
+msgid "largeから2017/12/25以降を選択"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1 ../../bench/mcmd_fit2018.rst:96
+msgid "small"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:97
+msgid "price_small.csv"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:98
+msgid "114,001"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:99
+msgid "4,297,064"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:100
+msgid "largeから2018/6/10以降を選択"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:101
+msgid "multi"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:102
+msgid "sep"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:103
+msgid "11,546(ファイル数)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:105
+msgid "largeを日別ファイルにしたもの"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:109
+msgid "処理内容"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:110
+msgid ""
+"処理内容は、平均計算(task=\"avg\")、移動平均の計算(task=\"win\")、ループ処理(task=\"for\")の3つのである。"
+" それぞれについて、mcmdとpandasの最速と思われる実装によりコーディングしている。 時間計測も含めたベンチマークテストのスクリプトは "
+":numref:`mcmd_fit2018_bench` に示すとおりである。 平均値の計算においては、largeデータを日別に分割しておき、 "
+"それぞれのファイルで平均値を並列計算させる処理を参考までに実施した( 関数 ``nm1a`` )。 "
+"また、mcmdでの移動平均の結果出力において、Pythonのリストに変換せず、ファイルにそのまま出力する実験も追加している( 関数 "
+"``nm2a`` )。 ループ処理については、pandasの提供するインデックス参照 ``iloc`` が低速であったために、 "
+"内部的にnumpyを用いた ``values`` を用いた処理(関数 ``pd3a`` )も行った。 計測結果は、 "
+"``OUTPUT/bench/price_5.txt`` に出力される。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:120
+msgid "ベンチマークスクリプト"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:278
+msgid "結果"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:279
+msgid ""
+"出力結果をまとめたものを :numref:`mcmd_fit2018_bench_result` に示している。 defは "
+":numref:`mcmd_fit2018_bench` の関数名を表す。 small,mid,largeは "
+":numref:`mcmd_fit2018_data` に示したサイズ別データセットの名称である。 "
+"また、fit2018での報告日に実験をやり直した結果は :numref:`mcmd_fit2018_bench_result2` に示している。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:284
+msgid "ベンチマークの結果(単位:秒)。fit2018のproceeding執筆時の結果。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "task"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "program"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "def"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "mid"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "avg"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pandas"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pd1"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.130"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "1.28"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "29.18"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "mcmd"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "nm1"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.036"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.33"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "7.39"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "mcmd(multi)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "nm1a"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "5.38"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "win"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pd2"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "16.91"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "19.22"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "74.88"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "nm2"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.27"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "2.54"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "63.94"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "mcmd(file)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "nm2a"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.19"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "1.63"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "41.87"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "for"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pd3"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "18.72"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "174.54"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pandas(values)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "pd3a"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.35"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "3.10"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "73.42"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "nm3"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "2.73"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "60.43"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:298
+msgid "ベンチマークの結果(単位:秒)。2018/9/20の結果。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.103"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.96"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "24.10"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.031"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.29"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "7.32"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "7.85"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "26.21"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "27.77"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "66.96"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.23"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "2.29"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "58.70"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.15"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "1.39"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "38.03"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "16.92"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "165.96"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.30"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "2.92"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "71.29"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "0.28"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "2.65"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:1
+msgid "65.43"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:312
+msgid "ベンチマークテストを実施した計算環境は以下の通りである。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:314
+msgid "PC: MacPro(2013)"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:315
+msgid "CPU: 2.7GHz 12-Core Intel Xeon E5"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:316
+msgid "memory: 64GB"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:317
+msgid "hdd: USB3 HDD"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:322
+msgid "ここ以降の内容は、近い将来「 :doc:`../tutorial/index` 」の節に移動します。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:326
+msgid "高収益率による銘柄の共起分析"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:328
+msgid ""
+":numref:`mcmd_fit2018_fig1` は原稿の図1に掲載したスクリプトである (原稿にはタイポがいくつかあり修正している)。 "
+"このスクリプトは、日をトランザクションにして、収益率が高くなる時に共起しやすい銘柄について 2アイテムの相関ルール分析を行ったものである。 "
+"内容の詳細については、原稿を参考にしてもらいたい。"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:334
+msgid "株価をランダムに生成するスクリプト"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:378
+msgid "Footnotes"
+msgstr ""
+
+#: ../../bench/mcmd_fit2018.rst:379
+msgid ""
+"中元政一,羽室行信,「NYSOL: "
+"Pythonにおける大規模データ前処理支援ツール」FIT2018:第17回情報科学技術フォーラム,2018/9/20,福岡工業大学."
+msgstr ""
+

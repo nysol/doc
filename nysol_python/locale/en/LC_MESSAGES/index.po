@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../index.rst:7
+msgid "NYSOL"
+msgstr ""
+
+#: ../../index.rst:9
+msgid ""
+"NYSOLとはビッグデータからの知識発見を効率的かつ効果的に支援するために開発されたソフトウェアライブラリである [#f0]_ 。 "
+"これまでに、シェルから利用できるコマンド群として提供してきたが [#f1]_ それらをPython上で利用できるように改良したものが "
+"**nysol_python** ライブラリである。 現在のところ、nysol_pythonには、 "
+"データの前処理に威力を発揮するmcmdモジュールと アイテム集合マイニングに関する多様なツールを提供するTakeモジュールが含まれている。"
+msgstr ""
+"NYSOL is a software library developed to support knowledge discovery from Big Data efficiently and effectively [#f0]_ ."
+"It has been provided as a set of commands that can be used on shells so far [#f1]_ ,"
+"the nysol_python library was developed additionally to make these available on Python."
+"As of today, nysol_python contains MCMD module which demonstrates its power in data preprocessing and Take module which provides a variety of tools available for Itemset mining."
+
+#: ../../index.rst:16
+msgid "目次:"
+msgstr "Table of Contents"
+
+#: ../../index.rst:30
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:35
+msgid "本ソフトウェアの開発には、JST CREST(グラント番号: JPMJCR1401)の研究助成を受けている。"
+msgstr ""
+
+#: ../../index.rst:36
+msgid "http://www.nysol.jp/"
+msgstr ""
+
+#: ../../index.rst:38
+msgid "last update : |today|"
+msgstr ""
+

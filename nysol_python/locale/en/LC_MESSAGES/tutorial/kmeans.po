@@ -1,0 +1,323 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../tutorial/kmeans.rst:2
+msgid "k-meansクラスタリング"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:3
+msgid ""
+"本節ではonline storeのデータセットを用いて、顧客(および商品)をクラスタリングする方法について解説する。 "
+"クラスタリングには、k-means方を用いる。 ここでは統計パッケージRで利用可能なkmeans関数をPythonから呼び出すことで実現する。 "
+"以下のサンプルコードの実行は、スクリプトとしてテキストエディタで入力して実行してもよいし、 "
+"Pythonを対話モードで起動し、サンプルコードをコピペして実行していっても良い。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:9
+msgid ""
+"近年、消費者ニーズの多様化・高度化が進み、小売店サイドからすると、 "
+"自分の店にはどのような顧客が来店しくれているかを把握することは重要な経営課題となっている。 "
+"来店顧客の嗜好を知ることで、どのような顧客にどのような施策を打てばよいかがわかるし、 薄い客層の来店を促すような施策を打つこともできよう。 "
+"そこで、まずは、購買傾向の似た顧客を複数のグループに分けることを考える。 これは古くからあるクラスタリングと呼ばれる統計的手法である。 "
+"「似た」を定義するために、ここでは顧客の商品購買ベクトルを取り上げる。 online storeデータには約4000の商品が登場する。 "
+"顧客ごとに、これら4000商品の購入数量のベクトルを用意してやり、 ベクトルが似た顧客を一つのグループ(クラスタ)としてまとめてやることで、 "
+"購買傾向の似た顧客クラスタを得ることができる。 クラスタリングには様々な方法が提案されているが、ここでは |kmeans| を用いる。 "
+"手法の詳細を理解することはここでの目的ではないので割愛する。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:24
+msgid "出力イメージ"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:25
+msgid ""
+":numref:`tutorial_kmeans_output_image` に本課題での出力イメージを示す。 "
+"単純にどの顧客がどのクラスタに属するかを表したデータである。 Rのkmeans関数は、モデルとして様々な統計値を保持している。 "
+"詳細は省くが、そこから、各クラスタに分類されたサンプル数、および各クラスタの中心ベクトルも取得する。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:30
+msgid "k-meansクラスタリングの出力イメージ"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "CustomerID"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "cluster"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "12347"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "12348"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "12349"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid ":   :"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:40
+msgid "顧客ベクトルの作成"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:41
+msgid ""
+"まず、 :doc:`../../dataset/uci_onlineretail` で作成したデータセット "
+"``onlineRetail2.csv`` をカレントディレクトリにコピーしておこう。 |r-kmeans| "
+"を見ると、データは行列で与えるとあり、 行がクラスタリング対象となるサンプルで、列が変数となる。 "
+"今回のケースでは、行が顧客、列が商品ということになる。 "
+"全てのデータを使うとすると、顧客数が約4300人、商品数が約4000なので、4300×4000の行列を作成することになる。 "
+"行列の要素は、今回は簡単のために購入回数とすることにする。 "
+"実際の分析においては、購入数量を用いたり、期間あたりの数量に基準化した値を使うことになるかもしれない。 "
+"また、ある一定数量の購入の有無(0/1値)とするなども考えられるであろう。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:54
+msgid ""
+":numref:`tutorial_kmeans_onlineRetail` に示されたonline "
+"retailデータセットから行列を作るにあたって、 まずは、 顧客(行)、商品(列)、購入回数(セル)の3項目からなる表の作成を目指そう。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:57
+msgid "online retailデータセット"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "InvoiceNo"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "StockCode"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "Description"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "Quantity"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "UnitPrice"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "Country"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "time"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "536365"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "85123A"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "WHITE HANGING HEART T-LIGHT HOLDER"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "6"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "2.55"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "17850"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "United Kingdom"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "20101201"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "082600"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "71053"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "WHITE METAL LANTERN"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "3.39"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "84406B"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "CREAM CUPID HEARTS COAT HANGER"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "8"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid "2.75"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:66
+msgid ""
+"この形式は「疎行列」と呼ばれる形式で、そのまま行列として扱えるRの関数も中にはあるが、 "
+"今回のkmeans関数は一般的な行列形式を入力データにとるので、最終的には商品を横に展開して行列形式に整形する。 顧客としては "
+"``CustomerID`` を、商品としては ``StockeID`` を利用することにする。 "
+"購入回数の定義であるが、ある日に何度注文してもそれは1回とカウントすると定義しよう。 これらを踏まえて、疎行列の作成スクリプトは、 "
+":numref:`tutorial_kmeans_smatrix` に示すようなものになる。 ``mcut`` で必要な項目を抜き出し、 "
+"``mdelnull`` でnull値を含む行を削除している。 次の ``muniq`` "
+"が一日一回の購入回数定義を満たすための処理で、同じ顧客で同じ商品は日単位で単一化される。 最後に ``mcut`` で不要になった "
+"``Date`` 項目を削除し、 ``mcount`` で顧客商品別に行数をカウントすれば出来上がりである。 実行時には ``run`` 関数に "
+"``msg=\"on\"`` を指定することで、各メソッドの終了メッセージを画面に表示させている。 また結果は、最初の5行のみを表示させている( "
+"``[0:5]`` )。 出力結果の各行の3つの値は、左から顧客、商品、購入回数である。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:78
+msgid "疎行列の作成"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:100
+msgid ""
+"そして次に、疎行列を一般の行列形式に変換するのであるが、 いくつかのアプローチがあり、大きくは、1) "
+"mcmdメソッドで行う、2)Pythonコードを書く、3)R内でやる、が考えられる。 "
+"基本的には得意な方法で実現すれば良いが、ここでは1)の方法を紹介する(mcmdのチュートリアルなので)。 "
+":numref:`tutorial_kmeans_matrix` がそのコードで、 ``m2cross`` と ``mnullto`` "
+"の2つのメソッドで実現できる。 ``m2cross`` はクロス集計用のメソッドで、 ``k=`` で指定された項目を行に、 ``s=`` "
+"で指定された項目を列に、 そして ``f=`` で指定された項目をセルにフォーマットを変換してくれる。 値の無いセルはnull値のままなので、次の"
+" ``mnullto`` でnull値を0に変換している。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:108 ../../tutorial/kmeans.rst:136
+#: ../../tutorial/kmeans.rst:169
+msgid "疎行列の行列への変換( :numref:`tutorial_kmeans_smatrix` の続き)"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:116
+msgid ""
+"ここで、 :numref:`tutorial_kmeans_matrix` で作成された行列は 4000×4300の大きな行列である。 "
+"顧客ベクトルのサイズは4300にもなり、もしうまくクラスタリングできたとしても、その特徴を見るのに "
+"4300の商品を眺めるのはなかなか困難なことである。 そこで、ベクトルのサイズを小さくしてみよう。 "
+"ここでは簡単のために、全体で一定回数以上購入されている商品のみを対象とする。 "
+":numref:`tutorial_kmeans_selmatrix` にここまでの全てのコード合わせて示している。 "
+"わかりやすさのため、オブジェクトの変数名は上述のものから変更している。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:124
+msgid ""
+"疎行列を求める処理オブジェクト ``base`` の出力結果を使って、 商品の総購入回数を ``freq`` オブジェクトにて計算し、 "
+"一定以上(ここでは1000)の購入がある商品のみに絞っている。 そして、次の ``matrix`` ブロックにて、 ``mcommon`` "
+"を用いて疎行列からそれらの商品を選択している。 商品の選択のために、元データ ``onlineRetail2.csv`` "
+"から再計算しても良いが、疎行列の計算で すでに目的とする商品の総購入回数の前段階まで計算が終わっているので、そのデータを使いまわしている。 "
+"もし元データから再計算させると同じような処理内容のオブジェクトが増え、バグの温床になってしまう。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:131
+msgid ""
+"そして最後に、疎行列を行列に変換し、CSVファイル ``custVectors.csv`` に書き出している。 "
+"ここでも最終結果をリスト形式で保持し、そのままRに渡してやることもできるが、ファイルに出力することで確認も可能になり、 "
+"なによりpythonとRとの境界線がここにできてわかりやすい。 では、次にそのファイルをRに読み込ませてk-meansクラスタリングを行おう。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:160
+msgid "pyperモジュール"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:161
+msgid ""
+"pyperモジュールは、PythonからバックグラウンドでRを起動し、 "
+"パイプ(プロセス間通信)によってRに処理命令を送ることを可能にするモジュールである。 "
+"実際の開発では、Rを起動して、上で作成した行列ファイルを直接読み込み、 "
+"試行錯誤しながら実行手順を作り上げていく方が、特にデバッグ面において効率的かもしれない。 "
+"Rの詳細を紹介するのが目的ではないので、以下のサンプルコードでは直接pyperを用いてコーディングしている。 "
+":numref:`tutorial_kmeans_pyper` にpyperによりRを実行するコードを示す。 "
+"このコードにより、最終的に、最初に示した最終出力の顧客-cluser表がCSV( ``r_cluster.csv`` )で出力される。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:205
+msgid ""
+"pyperでは、 ``pyper.R()`` にてバックグラウンドでRを起動し、 ``r(Rへの命令文字列)`` の形式で、Rでの処理を実行する。"
+" Rでの結果を直接取得するには、 ``r.get(オブジェクト名)`` メソッドを使う。 最終結果はCSVファイルに出力している。 "
+"各行の意味はコメントして示している。 "
+"途中、モデルの内容をPythonの辞書として取得しているが、その内容については、kmeansのマニュアル等を参照して理解する。 "
+"目的の顧客-クラスタ対応表は ``m$cluster`` 変数に格納されている。 "
+"ただし、Pythonに持ってきたときには単純なクラスタ番号リストになっており、オリジナルで保持していた顧客IDのラベルが消えてしまっている。 "
+"そこで、Rの中でデータフレームに変換し、それをCSVファイルに出力している。 "
+"このような細かな対応は、やはりRインタプリタを起動して直接行う方が効率がよいであろう。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:217
+msgid "全体のスクリプト"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:218
+msgid ""
+"最後に、上述の処理をまとめたスクリプトを :numref:`tutorial_kemans_summary` に示しておく。 "
+"途中、顧客-商品行列を作成する処理フローを視覚化するコードを入れている(22行目)。 :numref:`kmeans.png` はその内容である。"
+" また、最後に項目名を追加して顧客-クラスタ表を整形しCSVに出力するコードも追加している(39-41行目)。"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:223
+msgid "k-meansによるクラスタリングのスクリプト"
+msgstr ""
+
+#: ../../tutorial/kmeans.rst:277
+msgid "k-meansクラスタリングの入力データ(顧客-商品)行列を作成するスクリプトのフロー図"
+msgstr ""
+

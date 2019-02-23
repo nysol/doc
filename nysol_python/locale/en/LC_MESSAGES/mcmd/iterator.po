@@ -1,0 +1,364 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/iterator.rst:3
+msgid "イテレータ"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:4
+msgid ""
+"mcmdでは行単位およびキー単位のイテレータが用意されている。 既存のmcmdメソッドを組み合わせるだけでは困難な処理があった場合に利用でき、 "
+"行単位もしくはキーブロック単位で処理するPythonコードを書くことができる。 表 :numref:`iterator_list` "
+"にmcmdが提供するイテレータの一覧を示している。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:9
+msgid "処理フローオブジェクトで利用できるメンバーメソッド一覧"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:13
+msgid "メソッド名: 内容"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:14 ../../mcmd/iterator.rst:84
+#: ../../mcmd/iterator.rst:216
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:15
+msgid "`__iter__: 行イテレータ`_"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:16
+msgid "なし"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:17
+msgid "`getline: 出力形式指定行イテレータ`_"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:18 ../../mcmd/iterator.rst:25
+msgid "``dtype`` ={項目名:str|int|float|bool,...}"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:19 ../../mcmd/iterator.rst:26
+msgid "``otype`` =\"list\" | \"dict\""
+msgstr ""
+
+#: ../../mcmd/iterator.rst:20 ../../mcmd/iterator.rst:27
+msgid "``skeys`` =項目名リスト,"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:21 ../../mcmd/iterator.rst:28
+msgid "``keys`` =項目名リスト"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:22 ../../mcmd/iterator.rst:29
+msgid "``header`` =True|False"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:23 ../../mcmd/iterator.rst:30
+msgid "``q`` =True|False"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:24
+msgid "`keyblock: キー単位のイテレータ`_"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:34
+msgid "__iter__: 行イテレータ"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:35
+msgid ""
+"処理フローオブジェクトにはイテレータメソッド(__iter__)が定義されており、 行単位にリストに出力する繰り返し処理を可能としている。 "
+":numref:`flow_iter` は、for-in 文を使って一行づつ出力している例である。 "
+"すべての値は文字列として出力されることに注意されたい。 "
+"これは、mcmdが内部ではデータをすべてテキストのバイトストリームとして処理しているためである。 "
+"項目別に型を指定するのであれば、``getline`` メソッドを使えば良い。 また、先頭の項目名行は出力されないのは仕様であり、これも "
+"``getline`` を使えば出力できる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:43
+msgid "イテレータの利用スクリプト"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:60
+msgid ":numref:`flow_iter` の実行結果"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:71
+msgid "getline: 出力形式指定行イテレータ"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:72
+msgid ""
+"``getline`` メソッドは、出力形式を制御できるイテレータである。 ``otype=\"dict\"`` "
+"を指定することで、リストではなく項目名をキーとする辞書型で出力することが可能で、 ``header=True`` "
+"でヘッダー行を出力することが可能となる。 ``dtype`` パラメータによって出力項目の型を指定し、``otype`` "
+"によってコンテナ型としてリストもしくは辞書を指定できる。 ``dtype`` "
+"を指定しなければ、全ての項目は文字列として出力され、``otype`` を指定しなければリストで出力される。 また ``skeys`` "
+"で項目名を指定すると、事前に指定した項目でソーティングできる。 さらに ``keys`` の指定によりキーブレイク情報も出力可能となる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:85 ../../mcmd/iterator.rst:217
+msgid "内容"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**dtype={項目名:型,...}**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "optional"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "default:全項目\"str\"型"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "辞書型データで指定し、キーに項目名、値にデータ型を指定する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "変換可能なデータ型は次の通り。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "\"str\":文字列, \"int\":整数, \"float\":実数, \"bool\":真偽値"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) dtype={\"customer\":\"str\",\"date\":\"str\",\"amount\":\"int\"}"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**otype=型**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "default:\"list\""
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "出力データのコンテナ型を指定する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "\"list\"(リスト型),\"dict\"(辞書型)の2つの型を指定できる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "\"list\"を指定した場合、項目名ヘッダーは出力されない。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "\"dict\"を指定した場合、辞書のキーが項目名で、値がその項目の値となる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) otype=\"dict\""
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**skeys=項目名リスト**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "default:sortingなし"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "事前にソーティングを行う。そのソーティングキーを指定する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) skeys=\"amount%nr,customer\" # ``amount`` 項目数値降順+ ``customer`` 項目昇順"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**keys=項目名リスト**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "default:キーブレイク情報の出力なし"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "指定された項目名リストに従ったキーブレイク情報も出力する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "出力されるデータ形式はタプルで、([行データ],top,bottom)となる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) keys=\"customer,date\""
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**header=True|False**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "default:False"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "ヘッダー行も出力する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "**q=True|False**"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "``k=`` 項目で事前にソートしない。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:121
+msgid ":numref:`iter_header` は、:numref:`flow_iter` と同様の処理を項目名ヘッダーの出力を加えた処理になっている。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:123 ../../mcmd/iterator.rst:143
+msgid "データ型を指定してのイテレータの利用スクリプト"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:140
+msgid ""
+":numref:`flow_getline` は、 :numref:`flow_iter` と同様のデータについて、``amount`` "
+"のみを整数(``int`` )で出力し、 コンテナとして辞書型(``dict`` ) を指定している。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:158
+msgid ""
+":numref:`flow_getline_skeys` は、:numref:`flow_getline` に加えて、``amount`` "
+"で数値降順に並べ替えた後に繰り返し処理を行っている。 数値降順にするためには、項目名の後ろに ``%nr`` を付ける必要があるが、 これは "
+":doc:`msortf<methods/msortf>` の ``f=`` の指定方法と同様の規則に従っている。 なお、``dtype`` "
+"での型指定と ``skeys`` で指定するソーティングの型指定は、内部的には全く独立に動作する。 例えば、 "
+"``skeys=\"amount%nr\",dtype={\"amount\":\"str\"}`` としていても、並び順は数値降順( "
+"``%nr`` )であり、 出力される ``amount`` 項目は文字列( ``\"str\"`` )となる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:165
+msgid "``amount`` で数値降順ソーティングしてから繰り返し処理"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:179
+msgid ""
+":numref:`flow_getline_keys` は、``customer`` 項目で並べ替えた時のキーブレイク情報を出力に付加する。 "
+"出力形式は、コンテナはタップルで、([行データリスト],先頭行フラグ,最終行フラグ)である。 "
+"先頭行フラグは、同じキー値の先頭行を読み込んでいるときのみ ``True`` となるBool値である。 "
+"最終行フラグは、同様に同じキー値の最終行を読み込んでいるときのみ ``False`` となるBool値である。 "
+"なお、同じキー内での並び順は、``skeys`` パラメータを用いれば良い。 :numref:`flow_getline_keys` では、 "
+"``skeys=\"amount%nr\"`` と指定しており、 結果として、``customer`` 昇順+ ``amount`` "
+"数値降順で出力される。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:187
+msgid "``customer`` でキーブレイク情報を付加"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:196
+msgid ""
+":numref:`flow_getline_keys` の実行結果。例えば、最初の行は、キー項目値 ``A``  "
+"の先頭行であるためタップル二番目の要素が ``True`` になっており、最終行はキー項目 ``B`` の最終行なのでタップル三番目の要素が "
+"``True`` となっている。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:207
+msgid "keyblock: キー単位のイテレータ"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:208
+msgid ""
+"``getline`` メソッドが行単位で繰り返し処理をする一方で、``keyblock`` "
+"メソッドでは、キーブロック(キー項目の値が同じ行)を単位として繰り返し処理を行う。 "
+"よって、データは2重リストもしくは辞書inリストの形式で得られることになる。 指定可能なパラメータは ``getline`` "
+"メソッドと同様であるが、``keys`` の指定は必須である。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "必須"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "キーブロックとなる項目を指定する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "出力されるデータ形式は二重リスト(もしくはdict要素のリスト)で、"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "([[行データ1],[行データ2],...,[行データn])となる(nはブロックに含まれる行数)。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) keys=\"customer\""
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "キーブロック内でのソーティング項目を指定する。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst
+msgid "例) skeys=\"amount%n\" # ``amount`` 項目数値昇順"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:253
+msgid ""
+":numref:`flow_keyblock` は、:numref:`flow_iter` と同様のデータについて、``customer`` "
+"をキーブロック項目に指定した例である。 出力結果を見てもわかるように、``customer`` "
+"項目の値ごとに繰り返し処理が行われており、行とブロックの二重リストでデータが得られる。 また、このケースでは ``skeys=\"date\"``"
+" と指定しているので、``customer`` の中では日付順に並んでいる。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:258
+msgid "キーブロック単位でのイテレータの利用スクリプト"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:270
+msgid ""
+"``header=True`` を付けた場合は、最初に項目名ヘッダー行がブロックとして二重リストで出力される( "
+":numref:`flow_keyblock_header` )。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:272
+msgid "項目名ヘッダーも出力する例"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:286
+msgid ""
+"``dtype`` , ``otype`` の指定方法は ``getline`` メソッドと同様である。 "
+":numref:`flow_keyblock_dict` は、:numref:`flow_keyblock` の例を辞書型で出力した例である。"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:289
+msgid "キーブロック単位でのイテレータで出力を辞書型にした例"
+msgstr ""
+
+#: ../../mcmd/iterator.rst:301
+msgid ""
+"同じキーの行数が膨大なデータに対して ``keyblock`` を利用する場合は注意が必要である。 ``keyblock`` "
+"メソッドは、メモリが許す限り、ブロック内のデータをpythonのリスト上に展開しようと試みるが、 メモリ制限を超えた場合の動作は不定である。"
+msgstr ""
+

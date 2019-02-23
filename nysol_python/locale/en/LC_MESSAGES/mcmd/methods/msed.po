@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msed.rst:2
+msgid "msed 正規表現による文字列置換"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:4
+msgid ""
+"``f=`` パラメータで指定した項目について、 ``c=`` パラメータで指定した正規表現に一致する内容を ``v=`` "
+"パラメータ指定した文字列で置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:12
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:20
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "置換対象となる項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:24
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "置換したい文字列についての正規表現を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "正規表現の使用方法参照"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:29
+msgid "**v=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "``c=`` パラメータで指定した正規表現にマッチした部分文字列が、"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "ここで指定した文字列に置換される。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "マッチ結果を用いた置換も可能で、指定方法は以下の通り。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "erb|$"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "``$```  : 置換対象文字列の先頭から、マッチした文字列の直前までの文字列"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "``$'``  : マッチした文字列の直後から、置換対象文字列の最後までの文字列"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "``$N``  : N番目の部分マッチ文字列( ``N>=1`` )"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:39
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "このオプションにより、指定した項目を置き換えるのではなく、"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "新たに項目が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:44
+msgid "**g=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "正規表現にマッチする全ての部分文字列を置換対象とする。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:48
+msgid "**W=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst
+msgid "ワイド文字として正規表現による文字列置換を行う。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:55
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:57
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:70
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:72
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:108
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:110
+msgid "``zipCode`` 項目の値が00から始まる4桁文字列を ``####`` に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:125
+msgid "**項目名指定**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:127
+msgid "``zipCode`` の値が00から始まる4桁の数字を ``####`` に置換し、 ``zipCode4`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:142
+msgid "**グローバル置換**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:144
+msgid "``zipCode`` の値が ``0`` を全て ``=True`` にグローバル置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:159
+msgid "**部分置換**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:161
+msgid ""
+"``item`` の先頭の ``fruit`` を削除する。 先頭一致( ``^`` )を指定しているので、最後の行の "
+"``grapefruit`` は削除されていないことに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:177
+msgid "**マッチ結果を用いた置換**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:179
+msgid "``v=`` の中で ``$&`` を用いれば、マッチした文字列(連続した ``b`` )に置き換わる。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:192
+msgid "**グローバルマッチとの組み合せ**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:194
+msgid "グローバルマッチにすると、個々のマッチ毎に ``v=`` の内容が評価される。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:207
+msgid "**プレフィックス置換**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:209
+msgid "``$``` にて、マッチした箇所の前の文字列(プレフィックス)に置換される。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:222
+msgid "**サフィックス置換**"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:224
+msgid "``$'`` にて、マッチした箇所の後の文字列(サフィックス)に置換される。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:238
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:240
+msgid ":doc:`mchgstr` : 単純な文字列マッチによる置換であればこのコマンドを利用する。"
+msgstr ""
+
+#: ../../mcmd/methods/msed.rst:241
+msgid ":doc:`mcal` : 正規表現を扱う関数がいくつか用意されている。"
+msgstr ""
+

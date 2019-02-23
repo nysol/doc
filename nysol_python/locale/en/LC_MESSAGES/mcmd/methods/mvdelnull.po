@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mvdelnull.rst:2
+msgid "mvdelnull ベクトルのNULL要素の削除"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:4
+msgid ""
+"ベクトル要素でNULLの要素を全て削除する。 ベクトル要素がNULLであれば、要素の区切り文字が連続する。 "
+"以下に示したベクトルは全てNULLを含む。 ただし、わかりやすさのためにベクトルの末尾に  ``\\n``  を記している。 "
+"上から順番に、3番目、1番目、4番目の要素がNULLである。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:20
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:22
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:26
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:30
+msgid "**vf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "NULL要素を削除する対象となる項目名( ``i=`` データ上)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "複数項目指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:36
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "``vf=`` で:(コロン)に続けて指定した項目名で、新たな項目が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "なお ``A`` オプションを指定した場合、 ``vf=`` パラメータで指定するすべての"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "項目に新項目名を指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:42
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst
+msgid "ベクトル型データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:49
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:51
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`delim=<common_param_delim>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:65
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:67
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:91
+msgid "**nullを削除する基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:105
+msgid "**分かりやすく区切り文字を.(ドット)にした例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:119
+msgid "**項目名を変更して出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:133
+msgid "**-Aを指定することで追加項目として出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:148
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelnull.rst:150
+msgid ":doc:`mvnullto` : NULL要素を任意の値に置換する。"
+msgstr ""
+

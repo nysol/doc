@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_avg.rst:2
+msgid "avg 平均"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:4
+msgid "書式1: avg(num_1,num_2,...)"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:5
+msgid "書式2: avg(num_1,num_2,...,str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:8
+msgid ""
+":math:`num_i` で与えられた数値の平均を計算する。 "
+"書式1では、NULL値は無視されるが、全てがNULL値であれば結果もNULLとなる。 書式2において最後の引数として\"-n\"を与えると、 "
+"NULL値に対する扱いが変わり、 項目値に一つでもNULL値がある場合は、結果もNULL値となる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:16
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:18
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:35
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:50
+msgid "**ワイルドカードを利用した例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:52
+msgid "``v`` から始まる項目( ``v1,v2,v3`` )をワイルドカード「 ``v*`` 」によって指定している。"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:66
+msgid "**-nを利用した例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_avg.rst:68
+msgid "``v2`` にNULL値を含む ``id=3`` の行の結果もNULLとなる。"
+msgstr ""
+

@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take.rst:3
+msgid "「竹(Take)」とは？"
+msgstr ""
+
+#: ../../take.rst:5
+msgid ""
+"本パッケージ「TAKE(竹)」は、宇野毅明氏 (国立情報学研究所教授) を中心に開発されたデータマイニングソフトウェア [#f1]_ を "
+"pythonの拡張ライブラリとして利用できるようにしたものである。 パッケージ名は開発者の名前の音からとったものである。 "
+"本パッケージは、大きく２種類のメソッドを提供している。 "
+"一つはオリジナルのソフトウェアを、ほぼそのままの形で利用できるようにしたcoreパッケージで、 以下の7種類のコアメソッドが提供されている。 "
+"他方は、オリジナルのソフトウェアを組み合わせて、 より利用しやすくした以下に示す7つのメソッドを提供している。 "
+"coreのメソッドでは、アイテムのシンボルとして整数を用いなければならず、 また出力も独自フォーマットによるテキストであり、 "
+"コアメソッドを組み合わせたメソッドでは、それらの制約を取り除いてもいる。 "
+"ただし、そのためにシンボルの変換などの余分なオーバーヘッドが発生するために、 coreパッケージに比べて処理速度は劣る。"
+msgstr ""
+
+#: ../../take.rst:20
+msgid "Contents:"
+msgstr ""
+
+#: ../../take.rst:29
+msgid "Footnotes"
+msgstr ""
+
+#: ../../take.rst:30
+msgid "http://research.nii.ac.jp/~uno/codes-j.htm"
+msgstr ""
+

@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/lcm.rst:2
+msgid "lcm Linear time Closed itemset Miner"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:4
+msgid "実装の詳細は |lcmorg| を参照されたい。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:14
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "列挙するアイテム集合のタイプ(F|C|M)、及び出力形式を文字列として指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "アイテム集合のタイプとして以下の３つから一つを選ぶ。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* F:頻出アイテム集合"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* C:飽和アイテム集合"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* M:極大アイテム集合"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "また出力形式として以下の組み合わせで指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* f:アイテム集合の後ろに出現件数を出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* Q:アイテム集合の前に出現件数を出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* I:アイテム集合の次の行に出現集合(出現するトランザクション行番号)を出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* t:トランザクションデータベースを転置する(アイテムiはi番目のトランザクションとなり、j番目のトランザクションはアイテムjとなる)。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* A:w=でプラスとマイナスのトランザクションの重みを指定した場合、プラス/マイナスそれぞれの件数とその比を出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* P:positive-closed itemset mining"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid ""
+"* R:output redundant items for rule mining (usually, redundant items are "
+"removed, to be minimal, in the case of rule mining)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* i:do not output itemset to the output file (only rules)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "* s:output confidence and item frequency by absolute values"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:35
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "トランザクションファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:39
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:43
+msgid "**sup=** : 型=<class 'int'> , 必須"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "最小サポートを指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:47
+msgid "**U=** : 型=<class 'int'> , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "最大サポートを指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:51
+msgid "**K=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "頻出な上位のアイテム集合のみ出力する"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:55
+msgid "**l=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "アイム集合のサイズの下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:59
+msgid "**u=** : 型=<class 'int'> , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "アイム集合のサイズの上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:63
+msgid "**w=** : 型=str , 任意(default=全トランザクションの重みは等しいものとする)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "トランザクションの重みファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:67
+msgid "**a=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "相関ルールマイニングを実施しconfidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:71
+msgid "**A=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "相関ルールマイニングを実施しconfidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:75
+msgid "**r=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:79
+msgid "**R=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:83
+msgid "**item=** : 型=int , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "指定した番号のアイテムに関する相関ルールを出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:87
+msgid "**so=** : 型=str , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "標準出力の内容を指定のファイルに出力する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:91
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst
+msgid "出力時のアイテムの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:98
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:100
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:126
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:128
+msgid ""
+"頻出アイテム集合( ``F`` )の列挙。 ``type=`` に ``f`` を指定すると出現件数を出力する。 ``type=`` に "
+"``_`` を含めることでメッセージを表示しなくなる。 出力結果の各行が頻出アイテム集合を表しており、末尾の括弧内の数字が出現件数を表している。 "
+"一行目には空のアイテム集合が出力されている。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:156
+msgid "**飽和集合の列挙**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:158
+msgid "``type=`` に ``C`` を指定することで、頻出飽和アイテム集合を列挙する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:176
+msgid "**極大集合の列挙**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:178
+msgid "``type=`` に ``M`` を指定することで、頻出極大アイテム集合を列挙する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:191
+msgid "**アイテム集合サイズを制限**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:193
+msgid "``l=3`` でアイテム集合のサイズを3以上に限定する。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:205
+msgid "**出現集合の出力**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:207
+msgid ""
+"``type=`` に ``I`` を加えることで、アイテム集合の下に出現集合が出力される。 アイテム集合 ``{5,1,3}`` "
+"はトランザクションデータ( ``dat1.tra`` )の2,3,5行目に出現している(先頭行は0行目と数える}。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:222
+msgid "**データベースの転置**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:224
+msgid ""
+"``type=`` に ``t`` を加えることでトランザクションデータベースを転置してから実行する。 トランザクション集合 "
+"``{4,2,5}`` はアイテム ``{0,1,3}`` に出現する(先頭行は0行目と数える}。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:239
+msgid "**上位k番目の出現件数**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:241
+msgid ""
+"``K=4`` で頻出上位4番目の出現件数を出力する。 「基本例」での結果から、頻出上位4番目のルールは ``1 3 (4)`` "
+"であり、その出現件数 ``4`` が出力されている。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:253
+msgid "**トランザクション重みの利用**"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:255
+msgid ""
+"``w=`` を指定すると、指定されたトランザクションの重みで件数をカウントする。 ``type=`` に ``A`` "
+"を加えることで、マイナス重みとプラス重みの件数情報が表示される。 アイテム ``3`` "
+"は、1,2,3,4,5行目に含まれ、その重み合計は1(=1-1+1+1-1)となる "
+"(プラス重み件数3件、マイナス重み件数2件、プラス率は3/5=0.6)。 "
+"同様にアイテム集合{4,3}は1,4,5行目に含まれ、その重み合計は1(=1+1-1)となる "
+"(プラス重み件数2件、マイナス重み件数1件、プラス率は2/3=0.6666)。"
+msgstr ""
+
+#: ../../take/methods0/lcm.rst:273
+msgid "関連メソッド"
+msgstr ""
+

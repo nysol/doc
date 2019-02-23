@@ -1,0 +1,153 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mstats.rst:2
+msgid "mstats 一変数の統計量算出"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:4
+msgid ""
+"``f=`` パラメータで指定した数値項目について ``c=`` パラメータで指定した統計量の計算をする。 ``k=`` "
+"を指定することで、キー単位で集計することができる。 ``f=`` で指定した項目のNULL値は無視される。 "
+"ただし、全行がNULL値であればNULL値が出力される。 ``(注)`` "
+"k=とf=パラメータで指定した項目以外については、どの行が出力されるか>は不定であることに注意してください。\\"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:13
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:15
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:19
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:23
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "ここで指定された項目(複数項目指定可)を単位として集計する。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:27
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "ここで指定された項目(複数項目指定可)の値が集計される。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:31
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "統計量(以下のリストから一つだけ指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "``sum|mean|count|ucount|devsq|var|uvar|sd|usd|USD|cv|min|qtile1|``"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "``median|qtile3|max|range|qrange|mode|skew|uskew|kurt|ukurt``"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:37
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst
+msgid "NULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:44
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:46
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:61
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:63
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:82
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:84
+msgid "``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の 各統計量合計値を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:98
+msgid "**基本例2**"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:100
+msgid "各統計量最大値を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:114
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:116
+msgid ":doc:`msim` : 2変量の統計量を求める。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:117
+msgid ":doc:`mavg` : ``c=avg`` に特化したコマンド。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:118
+msgid ":doc:`msum` : ``c=sum`` に特化したコマンド。"
+msgstr ""
+
+#: ../../mcmd/methods/mstats.rst:119
+msgid ":doc:`mcount` : ``c=count`` と異なり、集計キーの行数をカウントする。"
+msgstr ""
+

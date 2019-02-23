@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msortf.rst:2
+msgid "msortf レコードの並べ換え"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:4
+msgid ""
+"``f=`` パラメータで指定した項目を基準にして、レコードを並べ換える。\\ ソーティングアルゴリズムはquick sortを利用しており、 "
+"安定ソート(キーの値が同じ行については元の順序を保存する)にはならないことに注意する。\\ 出力CSVの項目名の後ろには、並び順情報として "
+"``%`` で始まる文字列が付加される。 書式は ``%優先順位[並び順]`` で、 詳細は以下、 ``f=`` パラメータを参照のこと。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:13
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:15
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:19
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:23
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "レコードを並べ換える基準となる項目名リストを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "並び順は、数値/文字列、昇順/降順の組み合せで4通り指定できる。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "指定方法は ``%`` に続けて ``n`` と ``r`` を以下の通り組み合わせる。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+#, python-format
+msgid ""
+"文字列昇順: ``項目名`` ( ``%`` 指定なし)、文字列逆順: ``f=項目名%r`` 、数値昇順: ``f=項目名%n`` 、数値降順:"
+" ``f=項目名%nr`` 。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:30
+msgid "**noflg=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "出力CSVのヘッダーにソーティングの印( ``%0,%0n`` など)を付けない。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:34
+msgid "**pways=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "同時併合データ数([2-100]:デフォルト32)【任意】"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "分割ソートされた複数のデータを同時に何個併合するかを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:39
+msgid "**blocks=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "バッファブロック数([1-1000]:デフォルト10)【任意】"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "メモリ内でソートする際のメモリサイズ上限をブロックサイズで指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "1ブロックは入力バッファサイズ×4で、デフォルトは4MB。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:45
+msgid "**maxlines=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "メモリソートレコード件数上限([100-1000万]:デフォルト50万)【任意】"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "メモリ内でソートする際の件数の上限を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "データの一行あたりの平均サイズに応じて、"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:51
+msgid "**threadCnt=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "メモリ内でソートを実行するthread数 ([1-50]:デフォルト8)【任意】"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst
+msgid "分割ソートする際に、マルチスレッドの機能を用いて同時にソートする数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:59
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:61
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmpPath=<common_param_tmpPath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:72
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:74
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:93
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:95
+msgid "``item、date`` 順に並べ替える。"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:111
+msgid "**数量(quantity)降順，金額(price)昇順に並べ替える例**"
+msgstr ""
+
+#: ../../mcmd/methods/msortf.rst:129
+msgid "関連メソッド"
+msgstr ""
+

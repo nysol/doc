@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../bench/take_fit2018.rst:2
+msgid "Takeのベンチマークテスト(FIT2018)"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:4
+msgid ""
+"`FIT2018 <https://www.ipsj.or.jp/event/fit/fit2018/>`_ に発表した原稿 [#f1]_ "
+"に掲載されたTakeパッケージの利用方法に関するスクリプトについて説明する。 "
+"そこでは3つのスクリプトが掲載されており、ランク情報に基づく相関ルール分析、バイクラスタリング、 そして、:doc:`Take "
+"<../take>` と |Orange3a| のベンチマークテストに関するものである。 いずれもデータとして「 "
+"|uci_onlineretail| 」を利用している。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:16
+msgid "準備"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:17
+msgid ""
+"本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ "
+"よりダウンロードできる。 ただし、既に「 :doc:`mcmd_fit2018` "
+"」の節を実行済みであれば、同じものなのでダウンロードの必要はない。 ダウンロードしたディレクトリ下 "
+"bench/fit2018/nysol_take に 以下の4つのスクリプトがある。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:21
+msgid "mkdata.py : online retailデータセットのダウンロードとデータクリーニング用スクリプト"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:22
+msgid "bench.py : Orange3とのベンチマーク用スクリプト( :numref:`take_fit2018_bench` )"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:23
+msgid ""
+"friends.py : 原稿のfig.1に示されたランク情報に基づいた2アイテム相関ルールの視覚化のスクリプト( "
+":numref:`take_fit2018_fig1` )"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:24
+msgid "bicluster.py : 原稿のfig.3に示されたバイクラスタリングのスクリプト( :numref:`take_fit2018_fig3` )"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:26
+msgid "ベンチマークスクリプトのダウンロード"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:36
+msgid "takeベンチマークテスト(vs. Orange3)"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:37
+msgid ""
+"nysol.takeの処理速度を評価するにあたって、Pythonで利用可能なデータマイニングモジュール |orange3a| "
+"をベンチマークとする速度比較テストを実施した。 Orange3-associateモジュールは、機械学習のパッケージ |orange3| "
+"のアドオンパッケージであり、 Orange3のインストールも必要となる。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:51
+msgid "利用データ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:52
+msgid ""
+"利用したデータは、「 :doc:`../dataset/uci_onlineretail` 」節で解説されている "
+"オンラインストアの購買履歴データである。 上述のgitからダウンロードしたスクリプト ``mkdata.py`` を実行すれば、 "
+"DATAディレクトリの下にデータが生成される( :numref:`take_fit2018_datarun` )。 20〜30分ほど時間を要する。"
+" 基本データの生成は直ぐに終わるが、ベンチマークテストのために、基本データを定数倍したデータを生成している。 "
+"これは、単に基本データをそのまま定数回コピーして作成するのではなく、 "
+"トランザクション毎に30%ほどのアイテムをランダムに入れ替える処理を行っており、 その作業に20〜30分の時間を要する。 データは "
+":numref:`take_fit2018_sample` に例示されるような8項目の54万行ほどのデータである。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:63
+msgid "オンラインストア購買履歴データの取得スクリプトの実行"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:98
+msgid "オンラインストア購買履歴データ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:109
+msgid ""
+":numref:`take_fit2018_sample` に示されたデータから、 "
+"TakeとOrangeの頻出アイテム列挙メソッドで用いるトランザクションデータを作成した。 ``InvoiceNo`` を単位に "
+"``StockCode`` をアイテムとするトランザクションデータである。 "
+"さらに、アイテム数はそのままに、オリジナルデータに3割のノイズを乗せたデータを追加し、 "
+"サイズ違いのデータ(s-10:10倍,s-100:100倍,s-1000:1000倍)を用意した。 トランザクションデータは "
+":numref:`take_fit2018_tra` に示されるように、 "
+"行をトランザクションとし、0から始まる整数をアイテム番号としたスペース区切りのデータである。 全データセットのサイズは、 "
+":numref:`take_fit2018_data` に示される通りである。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:118
+msgid "トランザクションデータ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:131
+msgid "ベンチマークに用いたデータ一覧"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:135
+msgid "名称"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:136
+msgid "トランザクション数"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:137
+msgid "item数"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:138
+msgid "サイズ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:139
+msgid "内容"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1 ../../bench/take_fit2018.rst:140
+msgid "org"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:141
+msgid "25,900"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:142 ../../bench/take_fit2018.rst:147
+msgid "4070"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:143
+msgid "2,559,662"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:144
+msgid "オリジナルのデータ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1 ../../bench/take_fit2018.rst:145
+msgid "s-10"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:146
+msgid "259,000"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:148
+msgid "25,238,529"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:149
+msgid "orgを10倍したデータ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1 ../../bench/take_fit2018.rst:150
+msgid "s-100"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:151
+msgid "2,590,000"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:152 ../../bench/take_fit2018.rst:157
+msgid "4,070"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:153
+msgid "252,014,860"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:154
+msgid "orgを100倍したデータ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1 ../../bench/take_fit2018.rst:155
+msgid "s-1000"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:156
+msgid "25,900,000"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:158
+msgid "2,519,826,014"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:159
+msgid "orgを1000倍したデータ"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:163
+msgid "処理内容"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:164
+msgid ""
+"評価に使ったコードは、 :numref:`take_fit2018_bench` に示される通りである。 頻出アイテム集合の列挙には、 "
+"Orange3-associateでは、frequent_itemsetsメソッドを、Takeからはlcmメソッドを利用した。 計測結果は、 "
+"``OUTPUT/bench/bench_5.txt`` に出力される。 "
+"TakeのcoreメソッドのTakeのlcmはOrangeのfrequent_itemsetに比べて、 3-4倍高速であることがわかる。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:171
+msgid "ベンチマークスクリプト"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:243
+msgid "結果"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:244
+msgid ""
+"出力結果をまとめたものを :numref:`take_fit2018_bench_result` に示している。 defは "
+":numref:`take_fit2018_bench` の関数名を表す。 org,s-10,s-100,s-1000は "
+":numref:`take_fit2018_data` に示したサイズ別データセットの名称である。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:248
+msgid "ベンチマークの結果(単位:秒)。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "program"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "def"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "Take.lcm"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "L1"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "0.269"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "1.427"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "19.39"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "250.3"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "Orange.frequent_itemsets"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "O1"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "0.569"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "5.598"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "58.72"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:1
+msgid "778.4"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:255
+msgid "ベンチマークテストを実施した計算環境は以下の通りである。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:257
+msgid "PC: MacPro(2013)"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:258
+msgid "CPU: 2.7GHz 12-Core Intel Xeon E5"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:259
+msgid "memory: 64GB"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:260
+msgid "hdd: USB3 HDD"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:264
+msgid "ここ以降の内容は、近い将来「 :doc:`../tutorial/index` 」の節に移動します。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:269
+msgid "ランク情報に基づく相関ルール分析"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:270
+msgid ""
+"相関ルール分析は、データマイニングの分野で代表的な分析手法で、 特にルールを高速に列挙する技術は飛躍的な進展を遂げてきた。 "
+"しかしながら、パラメータの設定次第では時に大量のルールが出力され、 "
+"そこから興味深いルールを抽出するまでにユーザに多大な負担を強いることも少なくない。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:275
+msgid ""
+"この問題を解決する一つの方法として相互ランク情報に基づいたルールの抽出方法が提案されている [#f2]_ 。 Takeモジュールでは、 "
+"``mfriends`` 及び ``mpal`` メソッドとして実装されている。 この手法の特徴は、相関ルール列挙において2アイテムルール "
+":math:`A=>B(|A|=1,|B|=1)` のみを列挙し、 そこから :math:`A,B` "
+"相互に関連の強いルールを選択するというものである。 :math:`A=>B` 及び :math:`B=>A` "
+"の評価指標(supportやconfidence)が、それぞれの前件部を共通としてもつルール集合の中で ユーザが指定した k "
+"位以内であるとき、アイテム集合 :math:`A` と :math:`B` の関連が強いと考える。 "
+":numref:`take_fit2018_fig1` "
+"は、OnlineStoreのデータから、そのようなルールを列挙するPythonコードである。 そして、グラフで視覚化した結果を "
+":numref:`friends.png` に示す。 赤い節点が一つのアイテムを示し、エッジが関連の強い結びつきを表している。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:285 ../../bench/take_fit2018.rst:373
+msgid "ルールの相互ランク情報に基づいた2アイテム相関ルールの列挙とその可視化を実現するスクリプト"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:352
+msgid ":numref:`take_fit2018_fig1` の実行結果"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:356
+msgid "バイクラスタリング"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:357
+msgid ""
+"顧客 :math:`v\\in V` が商品 :math:`u\\in U` を一定数以上購入していた時に枝を :math:`(v,u)\\in "
+"E` を張るようような二部グラフ :math:`G=(V\\cup U,E)` について、枝が密に貼られている２つの部の部分集合 "
+"を抽出することで、 商品の購入パターンが似た顧客集合を得ることができる。 これはバイクラスタリングと呼ばれる手法である。 :math:`G` "
+"上の密な部分集合の定義としては、極大二部クリーク [#f4]_ を用いることができるが、 "
+"現実のデータにおいては例外的な接続関係が多く含まれるために、何の工夫もなければ、 多数のクリークが列挙されることとなり、 "
+"元のデータを小数のグループで表現するというクラスタリングの目的が損なわれてしまう。 そこで、与えられた二部グラフ :math:`G` "
+"を「研磨(polish)」することで、 元の性質をできる限り失わずに、劇的にクラスタの数を削減する方法が提案されている [#f3]_ 。 "
+"Takeでは、そのような研磨処理は ``mbipolish`` メソッドを利用することで実現できる。 "
+":numref:`take_fit2018_fig3` onlineStoreのデータから顧客と商品の二部グラフを構成し、 "
+"それを研磨し極大二部クリークを列挙するPythonコードである。"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:466
+msgid "Footnotes"
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:467
+msgid ""
+"羽室行信,宇野毅明,中元政一,中原孝信,丸橋弘明,「 Take: "
+"Pythonにおけるデータマイニング支援ツール」FIT2018:第17回情報科学技術フォーラム,2018/9/20,福岡工業大学."
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:469
+msgid "岩﨑幸子,中元政一,中原孝信,宇野毅明,羽室行信,グラフ構造による相関ルールの視覚化ツール：KIZUNA,2017年度人工知能学会(第31回),ウインクあいち,2017/5/24."
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:471
+msgid ""
+"中原孝信, 大内章子, 宇野毅明, 羽室行信, 「データ研磨の2部グラフへの適用と Twitter "
+"からの意見抽出」,2016年度人工知能学会（第30回）,北九州国際会議場, 2016.6.6〜6.9."
+msgstr ""
+
+#: ../../bench/take_fit2018.rst:473
+msgid ""
+":math:`U,V` の部分集合によって誘導される部分グラフの部間の任意の節点に枝があるような :math:`G` "
+"の誘導部分グラフを二部クリークと呼び、ある二部クリークが他の二部クリークの真部分集合でなければ、それは極大二部クリークと呼ばれる。"
+msgstr ""
+

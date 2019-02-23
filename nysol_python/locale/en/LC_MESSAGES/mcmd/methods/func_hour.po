@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_hour.rst:2
+msgid "hour 時"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:4
+msgid "書式1: hour(time) 数値"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:5
+msgid "書式2: hours(time) 2桁固定長文字列"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:8
+msgid "時刻 :math:`time` から時刻を取り出す。 返す型によって、書式1,2を使い分ければよい。"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:13
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:15
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:32
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_hour.rst:47
+msgid "**文字列とし出力**"
+msgstr ""
+

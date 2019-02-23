@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mvsort.rst:2
+msgid "mvsort ベクトル要素のソート"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:4
+msgid "ベクトル型の項目をソートする。 ベクトル型の項目とは、スペースで区切られた複数の文字列を値として持つ項目である。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:18
+msgid "**vf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "ソーティングするベクトル項目名を指定する。複数項目指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "``%`` に続けて ``n`` を指定すれば数値ソートに、"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "``%`` に続けて ``r`` を指定すれば逆順ソートに、"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "また、 ``n`` と ``r`` の両方を指定すれば数値逆順ソートとなる。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:26
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "``vf=`` で:(コロン)に続けて指定した項目名で、新たな項目が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "なお ``A`` オプションを指定した場合、 ``vf=`` パラメータで指定するすべての"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "項目に新項目名を指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:32
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst
+msgid "ベクトル型データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:39
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:41
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`delim=<common_param_delim>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:55
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:57
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:73
+msgid "**複数項目を並べる例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:75
+msgid "``item1`` 項目を文字列降順に並べ、 ``item2`` 項目を数値昇順に並べる。"
+msgstr ""
+
+#: ../../mcmd/methods/mvsort.rst:89
+msgid "関連メソッド"
+msgstr ""
+

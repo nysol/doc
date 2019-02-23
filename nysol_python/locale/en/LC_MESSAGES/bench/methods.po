@@ -1,0 +1,381 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../bench/methods.rst:2
+msgid "mcmdのメソッド比較"
+msgstr ""
+
+#: ../../bench/methods.rst:4
+msgid "nysol.mcmdが提供する70以上の処理メソッドの中から、主な処理メソッドについての処理速度の実験を行う。"
+msgstr ""
+
+#: ../../bench/methods.rst:7
+msgid "準備"
+msgstr ""
+
+#: ../../bench/methods.rst:8
+msgid ""
+"本節で扱っているPythonスクリプトの全ては `github <https://github.com/nysol/bench>`_ "
+"よりダウンロードできる ( :numref:`methods_fit2018_download` )。 ダウンロードしたディレクトリ下 "
+"bench/methods に 以下の2つのスクリプトがある。"
+msgstr ""
+
+#: ../../bench/methods.rst:12
+msgid "mkdata.py : 集計キーや数値項目を備えたランダムなデータを生成する"
+msgstr ""
+
+#: ../../bench/methods.rst:13
+msgid "bench.py : ベンチマーク用スクリプト( :numref:`mcmd_fit2018_bench` )"
+msgstr ""
+
+#: ../../bench/methods.rst:16 ../../bench/methods.rst:70
+msgid "ベンチマークスクリプトのダウンロード"
+msgstr ""
+
+#: ../../bench/methods.rst:25
+msgid "利用データ"
+msgstr ""
+
+#: ../../bench/methods.rst:26
+msgid ""
+"利用したデータは、「 :doc:`../dataset/rand` 」節で解説されている人工的に生成したデータであり、 "
+"上述のgitからダウンロードしたスクリプト mkdata.py を実行すれば ./DATA ディレクトリが作成され、 そこに "
+":numref:`bench_methods_data` に示される異なる3つのサイズのデータが生成される。 処理には10分ほどかかる。 "
+"データの詳細については、「 :doc:`../dataset/rand` 」節を参照されたい。"
+msgstr ""
+
+#: ../../bench/methods.rst:33
+msgid "ベンチマークに用いたデータ一覧"
+msgstr ""
+
+#: ../../bench/methods.rst:37
+msgid "名称"
+msgstr ""
+
+#: ../../bench/methods.rst:38
+msgid "ファイル名"
+msgstr ""
+
+#: ../../bench/methods.rst:39
+msgid "行数(ヘッダ除く)"
+msgstr ""
+
+#: ../../bench/methods.rst:40
+msgid "サイズ"
+msgstr ""
+
+#: ../../bench/methods.rst:41
+msgid "small"
+msgstr ""
+
+#: ../../bench/methods.rst:42
+msgid "10000.csv"
+msgstr ""
+
+#: ../../bench/methods.rst:43
+msgid "10000"
+msgstr ""
+
+#: ../../bench/methods.rst:44
+msgid "665 KB"
+msgstr ""
+
+#: ../../bench/methods.rst:45
+msgid "middle"
+msgstr ""
+
+#: ../../bench/methods.rst:46
+msgid "1000000.csv"
+msgstr ""
+
+#: ../../bench/methods.rst:47
+msgid "1000000"
+msgstr ""
+
+#: ../../bench/methods.rst:48
+msgid "68.5 MB"
+msgstr ""
+
+#: ../../bench/methods.rst:49
+msgid "large"
+msgstr ""
+
+#: ../../bench/methods.rst:50
+msgid "100000000.csv"
+msgstr ""
+
+#: ../../bench/methods.rst:51
+msgid "100000000"
+msgstr ""
+
+#: ../../bench/methods.rst:52
+msgid "7.05 GB"
+msgstr ""
+
+#: ../../bench/methods.rst:55
+msgid "検証内容"
+msgstr ""
+
+#: ../../bench/methods.rst:56
+msgid ""
+"mcmdの処理メソッドの速度を評価するために、最も処理速度が速いであろう mcut 処理メソッドをベンチマークに、 "
+"他のメソッドの相対的実行時間を計測した。 個々の処理メソッドの関数を bench.py から抜粋したものを "
+":numref:`bench_methods_code_part` に示している。 それぞれの関数では、入力ファイル名 ``iFile`` と "
+"実行回数 ``loop`` をパラメータとしてとる。 入力ファイルは、 :numref:`bench_methods_data` "
+"に示される3種のCSVデータで、 実行回数は5回固定である。 時間の計測は、実行に要した実時間を計測し、その平均と標準偏差を計算している。 "
+"なお、出力は基本的にカレントディレクトリにファイルとして書き出している。"
+msgstr ""
+
+#: ../../bench/methods.rst:65
+msgid ""
+"``msum_key3`` 関数は、key3項目を集計キーにして全ての数値項目を合計する処理である。 "
+"このように関数の名前にキー項目など主だった特徴となるキーワードを用いている。 ``msum_key3_presort`` "
+"関数では、キー項目を事前に並べ替えた後で ``msum`` を実行している。 "
+"このことによって、裏で自動的に実行される並べ替えを省いて純粋なmsumの実行時間を計測できることになる。"
+msgstr ""
+
+#: ../../bench/methods.rst:103
+msgid "実験結果"
+msgstr ""
+
+#: ../../bench/methods.rst:105
+msgid ""
+":numref:`bench_methods_results` に、mcut処理メソッドをベンチマークにした相対時間を示す。 msum_key3 "
+"のlargeで6.2となっているが、mcutのlargeを処理した時間に比べて6.2倍の時間を要したことを意味している。 "
+"個々の処理内容の詳細については bench.py を直接参照されたい。 "
+"また、:numref:`bench_methods_results_time`  に実時間の平均と標準偏差を示す。"
+msgstr ""
+
+#: ../../bench/methods.rst:110
+msgid "実験結果(対mcutの実行時間比)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "method"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "small(1万行:665KB)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "middle(100万行:68.5MB)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "large(1億行:7.05GB)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "mcut"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "msum_key3"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "21.9"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "4.9"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "6.2"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "msum_key3_presort"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "3.7"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1.5"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1.1"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "mhashsum_key3"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "7.4"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "2.6"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1.8"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "msortf_key3"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "4.8"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "2.2"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "4.6"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "msortf_float2"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "20.8"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "6.1"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "12.9"
+msgstr ""
+
+#: ../../bench/methods.rst:121
+msgid "実験結果(実時間秒数:mean(sd))"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.004002(0.000703)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.307001(0.001781)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "30.737572(0.125166)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.087729(0.113214)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1.494672(0.012172)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "190.174376(1.948978)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.014930(0.000098)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.463388(0.001697)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "35.182463(0.048672)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.029656(0.002965)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.805394(0.003971)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "56.813676(0.107048)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.019332(0.004538)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.666170(0.004806)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "140.808167(0.528175)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "0.083201(0.131085)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "1.887404(0.024765)"
+msgstr ""
+
+#: ../../bench/methods.rst:1
+msgid "397.061643(0.161616)"
+msgstr ""
+
+#: ../../bench/methods.rst:133
+msgid "ベンチマークテストを実施した計算環境は以下の通りである。"
+msgstr ""
+
+#: ../../bench/methods.rst:135
+msgid "PC: MacPro(2013)"
+msgstr ""
+
+#: ../../bench/methods.rst:136
+msgid "CPU: 2.7GHz 12-Core Intel Xeon E5"
+msgstr ""
+
+#: ../../bench/methods.rst:137
+msgid "memory: 64GB"
+msgstr ""
+
+#: ../../bench/methods.rst:138
+msgid "hdd: USB3 HDD"
+msgstr ""
+
+#: ../../bench/methods.rst:141
+msgid "参考: ベンチマークスクリプト"
+msgstr ""
+
+#: ../../bench/methods.rst:142
+msgid "参考までにベンチマークテストに利用したスクリプトを、 :numref:`bench_methods_code` に示す( |today| 時点)。"
+msgstr ""
+
+#: ../../bench/methods.rst:144
+msgid "ベンチマークスクリプト"
+msgstr ""
+

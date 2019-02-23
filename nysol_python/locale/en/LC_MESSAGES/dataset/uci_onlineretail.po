@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../dataset/uci_onlineretail.rst:2
+msgid "オンラインストア購買データ"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:3
+msgid ""
+"|uci| より配布されている |uci_onlineretail| の利用方法について解説する。 "
+"このデータは雑貨を扱う英国のオンラインストアの顧客ID付きPOSデータで、 :numref:`uci_online_fields` "
+"に示される8項目から構成される。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:9
+msgid ""
+"Abstract: This is a transnational data set which contains all the "
+"transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based "
+"and registered non-store online retail."
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:11
+msgid "概要: 英国を拠点にしたオンラインストアの2010年1月12日〜2011年9月12日のトランザクションデータである。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:13
+msgid "(上記URLより引用)"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:15
+msgid "オンラインストアデータの項目一覧"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "項目名"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "日本語"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "型"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "内容"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "InvoiceNo"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "請求番号"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "文字列"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "基本は6桁の整数で、\"c\"から始まるコードはキャンセルを表す。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "StockCode"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "商品コード"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "基本は5桁の整数だが、末尾にアルファベットが付くものもある。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "Description"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "商品名"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "商品の名称(商品コードと1:1に対応していないものもある)"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "Quantity"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "数量"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "整数"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "購入数量"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "InvoiceDate"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "請求日時"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "実数"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "トランザクションが生成された日時"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "UnitPrice"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "単価"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "一商品あたりの英貨"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "CustomerID"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "顧客コード"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "5桁の整数で顧客の識別コード"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "Country"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "国名"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:1
+msgid "顧客が居住する国"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:29
+msgid ""
+"このデータはMicrosoft Excelのデータとして配布されている。 :numref:`uci_online_download` "
+"に、ダウンロードの方法を示している。 wgetやcurlコマンドを用いて、コマンドラインからダウンロードするのであれば、 "
+":numref:`uci_online_wget` に従えば良い。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:33
+msgid "とExcelをCSVに変換する方法を示している。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:43
+msgid "OnlineRetailのExcelファイルのダウンロード"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:52
+msgid "curlもしくはwgetによるダウンロード"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:60
+msgid ""
+"次に、ExcelファイルをCSVに変換する。変換にはPandasの ``to_csv`` メソッドを用いる。 "
+"ExcelデータにはASCIIコード以外に、マルチバイトコード(通貨記号など)も利用されているので、 ``to_csv`` に "
+"``encoding='utf-8'`` を指定する。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:64
+msgid "Pandasを用いて、ExcelファイルをCSVに変換する"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:73
+msgid "変換されたCSVは :numref:`uci_online_csv` に示される通り、8項目の54万行ほどのデータである。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:75
+msgid "変換されたCSVデータの内容"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:95
+msgid ""
+"このデータには ``InvoiceDate`` という日付時刻項目が含まれている。 "
+"mcmdでは、日付はyyyymmddの8桁固定長に、時刻はhhmmssの6桁固定長にしておくと扱いやすい。 その変換を行うスクリプトを "
+":numref:`uci_online_convdate` に示している。 変換後のデータは :numref:`uci_online2_csv`"
+"  に示される通りで、 ``InvoiceDate`` 項目から 日付8桁と時刻6桁が切り出され、 それぞれ ``date`` と "
+"``time`` 項目として追加されている。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:101
+msgid "日付時刻項目を固定長に変換する。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:114
+msgid "日付時刻項目が固定長に変換されたCSVデータ(onlineRetail2.csv)"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:131
+msgid "以上で、online retail データセットを利用する準備が整った。"
+msgstr ""
+
+#: ../../dataset/uci_onlineretail.rst:133
+msgid "このデータセットを用いたチュートリアルは :doc:`こちら<../tutorial/index>`"
+msgstr ""
+

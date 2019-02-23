@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_length.rst:2
+msgid "length 文字列長"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:4
+msgid "書式1: length(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:5
+msgid "書式2: lengthw(str)"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:8
+msgid ""
+"文字列の長さを計算する。 lengthw関数を用いると、 :math:`str` をワイド文字として扱う。 "
+"NULL値の長さは0であることに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:14
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:16
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:40
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:55
+msgid "**マルチバイト文字を含む例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:57
+msgid ""
+"以下はutf-8でエンコーディングされた日本語を用いた例である。 utf-8の日本語は1文字3バイトでエンコーディングされているので、 "
+"length関数では日本語としての文字数ではなく、そのバイト数を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:71
+msgid "**ワイド文字として扱う例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_length.rst:73
+msgid "lengthwを使うと、内部で文字列をワイド文字に変換するので、マルチバイト文字1文字を正しく認識して計算する。"
+msgstr ""
+

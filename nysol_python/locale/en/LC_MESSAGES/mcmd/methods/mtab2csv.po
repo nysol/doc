@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mtab2csv.rst:2
+msgid "mtab2csv TSVからCSVデータへの変換"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:4
+msgid ""
+"タブ区切りデータをCSVデータへ変換する。 ``d=`` で区切り文字を指定することで、タブ以外の区切り文字のテキストデータも "
+"変換することが可能である。 変換後の項目数に違いある場合には、その直前行まで出力され、 その後エラー終了する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:14
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:18
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:22
+msgid "**d=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "区切り文字の指定(１バイト文字のみ指定可)。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:26
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "改行コード(CR:  ``\\r``  )を取り除く。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "MCMDが扱うCSVは改行コードがLF(  ``\\n``  )固定であるため、"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "Windowsのテキスト改行CR+LF(  ``\\r\\n``  )やMacのテキスト改行CR(  ``\\r``  )があれば、"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "単なる文字列として扱ってしまい、変換後に不具合が生じる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst
+msgid "この問題を回避するためのオプションである。"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:37
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:39
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:50
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:52
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:80
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:82
+msgid "タブ区切りデータをcsvへ変換"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:97
+msgid "**d=指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:99
+msgid "``d=`` を使用してtab以外の区切り文字を使う"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:115
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:117
+msgid ":doc:`mxml2csv` :"
+msgstr ""
+
+#: ../../mcmd/methods/mtab2csv.rst:118
+msgid ":doc:`msplit` :"
+msgstr ""
+

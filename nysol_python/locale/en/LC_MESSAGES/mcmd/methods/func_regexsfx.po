@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_regexsfx.rst:2
+msgid "regexsfx マッチ文字列のサフィックス"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:4
+msgid "書式1: regexsfx(str,正規表現)"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:5
+msgid "書式2: regexsfxw(str,正規表現)"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:8
+msgid ""
+"指定した正規表現が最長マッチする文字列 :math:`str` の部分文字列のサフィックス (部分文字列より末尾側の文字列)を返す。 "
+"同じ文字列及び正規表現によってregexpfx関数,regexstr関数,regexsfx関数の3関数を実行した場合、 "
+"それぞれで得られた文字列をその順番に結合すると元の文字列が再現できる関係にある。 :math:`str` "
+"もしくは正規表現にマルチバイト文字を含み、 "
+"Shift\\_JISなど文字の出現順によっては意に沿わない検索結果となる場合はregexsfxw関数を使うこと。"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:17
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:19
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:36
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexsfx.rst:38
+msgid ""
+"正規表現 ``c.*a`` に最も長くマッチする部分文字列のサフィックスを得る。 例えば ``id=4`` では、$str$項目の "
+"``cabbca`` にマッチしており、そのサフィックス すなわちnull文字を返している。 ``regexstr,regexpfx`` "
+"と同じ入力データを使っているので、比較すると分かりやすい。"
+msgstr ""
+

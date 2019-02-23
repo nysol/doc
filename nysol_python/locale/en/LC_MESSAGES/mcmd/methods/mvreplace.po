@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mvreplace.rst:2
+msgid "mvreplace ベクトル要素の参照置換"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:4
+msgid ""
+"ベクトル要素をキーにして参照データ上のベクトル型データで置換する。 "
+"ベクトル型の項目とは、スペースで区切られた複数の文字列を値として持つ項目である。 なお、参照データデータを一旦全てメモリにセットするので、 "
+"巨大な参照データを指定した場合はメモリを使い果たす可能性があることに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:11
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:13
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:17
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:21
+msgid "**vf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "結合キーとなるベクトルの項目名( ``i=`` データ上)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "複数項目指定可能。ベクトル要素はソーティングされている必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:27
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "``vf=`` で:(コロン)に続けて指定した項目名で、新たな項目が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "なお ``A`` オプションを指定した場合、 ``vf=`` パラメータで指定するすべての"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "項目に新項目名を指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:33
+msgid "**m=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "参照データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:37
+msgid "**K=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "参照データ( ``m=`` )上の結合キーとなるベクトル要素の項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "並べ変わっている必要はないが、ベクトル要素は単一化されていなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "単一化されていない時の動作は不定である。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:43
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "結合するベクトル(要素)項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:47
+msgid "**n=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "``vf=`` と ``K=`` のベクトル要素がマッチしなかった場合に結合する文字列を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "省略した場合、対象のベクトル(要素)の結合は行われない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:52
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst
+msgid "ベクトル型データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:59
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:61
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`delim=<common_param_delim>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:75
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:77
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:118
+msgid "**ベクトルで置換する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:132
+msgid "**複数項目に対して適用する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:147
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mvreplace.rst:149
+msgid ":doc:`mvjoin` : 要素の置換ではなく、結合であれば ``mvjoin`` を使う。"
+msgstr ""
+

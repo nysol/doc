@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnormalize.rst:2
+msgid "mnormalize 基準化"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:4
+msgid "``f=`` パラメータで指定した項目を、 ``c=`` パラメータで指定した基準化の方法で基準化する。\\"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:18
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "以下に示す基準化の方法のいずれかを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid ""
+"``z``  : z得点 :  :math:`z_i=(x_i-m)/u`  ( :math:`x_i` :  :math:`i` 番目のデータ,"
+"  :math:`m`  :算術平均,  :math:`u`  :標準偏差)"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "``Z``  : 偏差値 :  :math:`Z_i=50+10    imes z_i`"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "``range``  : 最小値を0,最大値を1に線形変換  :math:`r_i=(x_i-\\min_x)/(\\max_x-\\min_x)`"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:25
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "ここで指定された項目が基準化される。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid ":(コロン）で新項目名を指定する必要がある。例） ``f=`` 数量:数量基準値"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:30
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "キー項目名リスト"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "ここで指定された項目を単位に基準化を行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:35
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:42
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:44
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:60
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:62
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:80
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:82
+msgid ""
+"``customer`` を単位にして ``quantity`` と ``amount`` 項目を基準化（z得点）し、 ``qttNorm`` と"
+" ``amtNorm`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:98
+msgid "**偏差値**"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:114
+msgid "**0から1への線形変換**"
+msgstr ""
+
+#: ../../mcmd/methods/mnormalize.rst:131
+msgid "関連メソッド"
+msgstr ""
+

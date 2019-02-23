@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mbiclique.rst:2
+msgid "mbiclique 極大2部クリークの列挙"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:4
+msgid "2部グラフデータを入力として、極大2部クリークを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:6
+msgid "入力形式)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:8
+msgid "二部グラフの節点ペアを項目で表現したCSVデータ。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:10
+msgid "出力形式1) デフォルトの出力形式"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:12
+msgid ""
+"二部クリークを構成する全節点を各部ごとにベクトル形式で出力する。 出力項目は、 ``節点項目名1,節点項目名2,size1,size2`` "
+"の4項目で、節点名1と節点名2は、 ``ef=`` で指定された名称が利用される。 "
+"節点項目名1,節点項目名2に出力される値が節点名ベクトルである(一行が一つの二部クリークに対応)ことが異なる。 "
+"節点項目名1,節点項目名2には、各部を構成する節点名のベクトルが出力される。 size1,size2は2部クリークを構成する各部の節点数である。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:19
+msgid "出力形式2) ``edge`` オプションを指定した場合の出力形式"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:21
+msgid ""
+"クリークIDと二部クリークを構成する全枝(節点ペア)を出力する。 出力項目は\"id,節点項目名1,節点項目名2,size\"の5項目である。 "
+"idはクリークの識別番号で、一つのクリークは同じid番号が振られる。id番号そのものに意味はない。 "
+"例えば各部のサイズが3,4であるような二部クリークは3*4=12行の枝データとして出力される。 出力形式1に比べてファイルサイズは大きくなる。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:29
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:31
+msgid "**ei=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "辺データファイルを指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:35
+msgid "**ef=** : 型=str , 任意(default=node1,node2)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "エッジデータ上の2つのノード項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:39
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:43
+msgid "**l=** : 型=str , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "2部クリークを構成する最小節点数(ここで指定したサイズより小さいクリークは列挙されない)を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "カンマで区切って2つの値を指定すると、各部のサイズを制限できる。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "1つ目の値はef=で指定した1つ目の部に対応し、2つ目の値は2つ目に指定した部に対応する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:49
+msgid "**u=** : 型=str , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "クリークを構成する最大節点数(ここで指定したサイズより大きいクリークは列挙されない)を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "カンマで区切って2つの値を指定すると、各部のサイズを制限できる"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:54
+msgid "**edge=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "枝による出力(クリークIDと枝(節点ペア)で出力する)。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:58
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst
+msgid "ワークディレクトリを指定する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:65
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:67
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:89
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:91
+msgid "2部グラフデータ ``dat.csv`` から極大2部クリークを列挙し ``result.csv`` に出力する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:112
+msgid "**サイズを制限する例**"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:114
+msgid "項目 ``node1,node2`` 共にサイズが2の極大二部クリークを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:129
+msgid "**エッジ形式での出力**"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:131
+msgid "``edge=True`` によって、出力形式がエッジ形式(ノードペア)になる。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:158
+msgid "**部分的にサイズを制限する例**"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:160
+msgid ""
+"項目 ``node1`` のサイズの下限を1に(デフォルトの下限が1なので実際には意味がないが指定例として)、 項目 ``node2`` "
+"のサイズの上限を3に制限した極大二部クリークを列挙する。 ``u=` パラメータの1番目の値がnullになっているのは、項目 ``node1`` "
+"の上限を設定しないためである。"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:184
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mbiclique.rst:186
+msgid ":doc:`mclique` : 一般グラフのクリーク列挙"
+msgstr ""
+

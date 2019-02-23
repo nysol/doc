@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_hasspace.rst:2
+msgid "hasspace 空白類文字検索"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:4
+msgid "書式1: hasspace(str,長さ)"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:5
+msgid "書式2: hasspacew(str,長さ)"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:8
+msgid ""
+"文字列 :math:`str` に空白類文字列が含まれていれば真を、含まれていなければ偽を返す。 "
+"空白類文字とは、ASCIIコードの0x20および0x09〜0x0dまでの事をいう。 "
+"それぞれ、半角スペース(0x20)、水平tab(0x09)、改行(0x0a)、垂直タブ(0x0b)、改ページ(0x0c)、復帰(0x0d)である。"
+" マルチバイト文字における空白類文字を検索したければhasspacewを使うこと。"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:15
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:17
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:36
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:38
+msgid ""
+"``str`` 項目に空白類文字列が含まれていれば真を返す。 ``id=1`` の行は半角スペース文字が含まれ、 ``id=2`` "
+"の行はtab文字が含まれ、 そして ``id=4`` の行は改行文字が含まれているために真となっている。 ここで、 ``id=3`` "
+"の行は全角スペースのため、検知できていない。"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:58
+msgid "**マルチバイト文字**"
+msgstr ""
+
+#: ../../mcmd/methods/func_hasspace.rst:60
+msgid "hasspacew関数を使えば全角スペースも正しく検知できる。"
+msgstr ""
+

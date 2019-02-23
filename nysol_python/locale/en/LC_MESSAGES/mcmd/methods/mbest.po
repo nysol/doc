@@ -1,0 +1,227 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mbest.rst:2
+msgid "mbest 指定行の選択"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:4
+msgid ""
+"指定した行番号の行を選択する。 行番号は0から始まることに注意する(項目名行は除いて、データ本体の先頭行が0行目)。 行番号は ``fr=`` と"
+" ``to=`` (もしくは ``size=`` )で指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:19
+msgid "**s=** : 型=str , 条件付き必須( ``q`` オプションの指定がない場合)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "ここで指定した項目(複数項目指定可)で並べ替えられた後、指定した行が選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "``q`` オプションを指定しないとき、 ``s=`` パラメータは必須。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:24
+msgid "**fr=** : 型=str , 任意(default=0)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "選択する開始行番号(0以上の整数)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:28
+msgid "**to=** : 型=str , 任意(default=0)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "選択する終了行番号(0以上の整数)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "「 ``fr=`` の値」 :math:`\\le` 「 ``to=`` の値」でなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:33
+msgid "**size=** : 型=str , 任意(default=1)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "選択する行数"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "``to=`` と ``size=`` の両方を同時に指定することはできない。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:38
+msgid "**R=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "行番号範囲リスト(複数項目指定可)【必須】*以前のバージョンで使用されていた範囲指定の方法"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "ここで指定した行番号の行が選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "\\_(アンダーバー)で範囲指定できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "範囲指定の際にはMIN(開始行以降),MAX(最終行まで)を使用できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "※One Point：事前に目的とする行選択が行いやすいように並べ替えておくとよい。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:46
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "指定列の項目(複数項目指定可)が同じ値の行ごとに、 ``fr=`` , ``to=`` , ``size=`` で指定した行番号の行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "``x`` オプションもしくは ``nfn`` オプション使用時は、項目番号(0〜)で指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:51
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "不一致データ出力データ"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "指定の条件に一致しない行を出力するデータ。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:56
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst
+msgid "``fr=,to=(size=)`` パラメータで指定した行番号以外の行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:64
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:66
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:79
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:81
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:109
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:111
+msgid ""
+"この例では、 ``quantity`` と ``amount`` 項目値の大きい順（降順）に並べ替えている。 ``from=`` , "
+"``to=`` , ``size=`` を指定しなければ先頭行(0行目)のみ選択する"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:123
+msgid "**基本例2**"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:125
+msgid "``customer`` で並べ替えた後、先頭行(0行目)から3行選択する"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:138
+msgid "**基本例3**"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:140
+msgid "並べ替えを行わず(もとのレコード順序を維持したまま)、0行目から1行目まで選択する"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:152
+msgid "**条件反転**"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:154
+msgid "顧客の初回来店日以外の行を選択する。 初回来店日は ``fvd.csv`` というファイルに出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:173
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:175
+msgid ":doc:`msel` : ``line()`` 関数を使えば、同じようなことができる。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:176
+msgid ":doc:`muniq` : 単純にキー項目を単一化したいだけならこれ。"
+msgstr ""
+
+#: ../../mcmd/methods/mbest.rst:177
+msgid ":doc:`mselnum` : 数値範囲によって行選択ができる。"
+msgstr ""
+

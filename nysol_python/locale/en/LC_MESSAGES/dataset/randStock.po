@@ -1,0 +1,355 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../dataset/randStock.rst:2
+msgid "乱数に基づいた株価データ"
+msgstr ""
+
+#: ../../dataset/randStock.rst:3
+msgid ""
+"個別銘柄の4本値データとmarket indexのデータをランダムに生成するデータセットである。 "
+"データの生成にはNysolをインストールしておく必要がある。 個別銘柄のデータイメージは :numref:`randStock_equity` "
+"に示される通りで。 銘柄ID( ``id`` )、日付( ``date`` )、 始値( ``o`` )、 高値( ``h`` )、 安値( "
+"``l`` )、 終値( ``c`` ) の6項目から構成されるデータセットである。 "
+"marketインデックスは個別銘柄の日別単純平均で計算したもので、 そのデータイメージを :numref:`randStock_index` "
+"に示している。 それぞれの項目は基本的には乱数に基づいて生成されており、その概要を :numref:`randStock_gen4` "
+"に示している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst:12
+msgid "個別銘柄の4本値データ"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:38
+msgid "id"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:40
+msgid "date"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:44
+msgid "o"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:47
+msgid "h"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:50
+msgid "l"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:53
+msgid "c"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "1000"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "20180628"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "63427"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "63492"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "58474"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "61979"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "20180627"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "61341"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "65684"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "63604"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "20180626"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "64200"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "66672"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "62960"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "64267"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "20180625"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "65361"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "66354"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "63189"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "65268"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../dataset/randStock.rst:22 ../../dataset/randStock.rst:156
+msgid "marketインデックスデータ"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1 ../../dataset/randStock.rst:55
+msgid "i"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "19861118"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "316"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "19861119"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "314"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "19861120"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "321"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "19861121"
+msgstr ""
+
+#: ../../dataset/randStock.rst:1
+msgid "325"
+msgstr ""
+
+#: ../../dataset/randStock.rst:32
+msgid "データの生成方法"
+msgstr ""
+
+#: ../../dataset/randStock.rst:36
+msgid "項目名"
+msgstr ""
+
+#: ../../dataset/randStock.rst:37
+msgid "生成方法"
+msgstr ""
+
+#: ../../dataset/randStock.rst:39
+msgid "1000〜6999の6000の銘柄を生成している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid ":math:`N(m=4600,s=2000)` の正規乱数(整数)で存続日数を生成し、"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "2018年6月29日からその日数分過去に遡った日まで生成している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "期間が1000日に満たなければ1000日に修正している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "ベース価格を :math:`N(m=4600,s=2000)` の正規乱数(整数)で決め、"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid ":math:`N(m=1.0,s=0.02)` の正規乱数を掛けたもの。"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "ベース価格に :math:`N(m=1.04,s=0.02)` の正規乱数を掛けたものをpとすると、"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "h=max(o,c,p) により設定している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "ベース価格に :math:`N(m=0.96,s=0.02)` の正規乱数を掛けたものをpとすると、"
+msgstr ""
+
+#: ../../dataset/randStock.rst
+msgid "l=max(o,c,p) により設定している。"
+msgstr ""
+
+#: ../../dataset/randStock.rst:54
+msgid "oと同じ方法で生成。"
+msgstr ""
+
+#: ../../dataset/randStock.rst:56
+msgid "全個別銘柄の終値 ``c`` を日別に単純平均して整数化したもの。"
+msgstr ""
+
+#: ../../dataset/randStock.rst:58
+msgid ""
+"データ生成のスクリプトを :numref:`randStock_mkdata` に示す。 このスクリプトを実行すると、 "
+":numref:`randStock_run` に示されるように、 "
+"6000の個別銘柄のデータが順番に生成されていき、10分程で全データが生成される。 そして、カレントディレクトリの下に、 "
+":numref:`randStock_files` に示されるディレクトリ/ファイルが生成される。"
+msgstr ""
+
+#: ../../dataset/randStock.rst:63
+msgid "株価をランダムに生成するスクリプト"
+msgstr ""
+
+#: ../../dataset/randStock.rst:121
+msgid "株価生成スクリプトの実行"
+msgstr ""
+
+#: ../../dataset/randStock.rst:133
+msgid "生成されるデータ一覧"
+msgstr ""
+
+#: ../../dataset/randStock.rst:137
+msgid "ファイル名"
+msgstr ""
+
+#: ../../dataset/randStock.rst:138
+msgid "行数(ヘッダ含む)"
+msgstr ""
+
+#: ../../dataset/randStock.rst:139
+msgid "サイズ"
+msgstr ""
+
+#: ../../dataset/randStock.rst:140
+msgid "内容"
+msgstr ""
+
+#: ../../dataset/randStock.rst:141
+msgid "price_large.csv"
+msgstr ""
+
+#: ../../dataset/randStock.rst:142
+msgid "27,707,820"
+msgstr ""
+
+#: ../../dataset/randStock.rst:143
+msgid "1,032,785,399"
+msgstr ""
+
+#: ../../dataset/randStock.rst:144
+msgid "個別銘柄別4本値データ"
+msgstr ""
+
+#: ../../dataset/randStock.rst:145
+msgid "price_middle.csv"
+msgstr ""
+
+#: ../../dataset/randStock.rst:146
+msgid "1,116,001"
+msgstr ""
+
+#: ../../dataset/randStock.rst:147
+msgid "42,182,505"
+msgstr ""
+
+#: ../../dataset/randStock.rst:148
+msgid "price_large.csvから2017年12月25日以降のデータを選択したもの"
+msgstr ""
+
+#: ../../dataset/randStock.rst:149
+msgid "price_small.csv"
+msgstr ""
+
+#: ../../dataset/randStock.rst:150
+msgid "114,001"
+msgstr ""
+
+#: ../../dataset/randStock.rst:151
+msgid "4,297,064"
+msgstr ""
+
+#: ../../dataset/randStock.rst:152
+msgid "price_large.csvから2018年6月10日以降のデータを選択したもの"
+msgstr ""
+
+#: ../../dataset/randStock.rst:153
+msgid "index.csv"
+msgstr ""
+
+#: ../../dataset/randStock.rst:154
+msgid "11,547"
+msgstr ""
+
+#: ../../dataset/randStock.rst:155
+msgid "172,763"
+msgstr ""
+
+#: ../../dataset/randStock.rst:157
+msgid "sep"
+msgstr ""
+
+#: ../../dataset/randStock.rst:158
+msgid "11,546(ファイル数)"
+msgstr ""
+
+#: ../../dataset/randStock.rst:160
+msgid "price_large.csvを日別ファイルにしたもの"
+msgstr ""
+

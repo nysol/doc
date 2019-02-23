@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_null.rst:2
+msgid "null NULL値"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:4
+msgid "書式1: nulln()"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:5
+msgid "書式2: nulls()"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:6
+msgid "書式3: nulld()"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:7
+msgid "書式4: nullt()"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:8
+msgid "書式5: nullb()"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:11
+msgid "型に応じたNULL値を返す。 if関数と組み合わせてNULL値を出力したい時に使うことができる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:16
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:18
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:42
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:44
+msgid "rslという項目の全行にNULL値を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:57
+msgid "**if文の中での利用**"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:59
+msgid "if文の第二パラメータで数値を指定しているので、それに合わせてnulln()関数を用いる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_null.rst:72
+msgid "**isnullと同等の指定**"
+msgstr ""
+

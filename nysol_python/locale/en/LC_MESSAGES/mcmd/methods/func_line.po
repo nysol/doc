@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_line.rst:2
+msgid "line 行番号"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:4
+msgid "書式1: line()"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:7
+msgid ""
+"mcalコマンドが処理中の行番号を返す。 mcmdでは行番号は全て0から始まるように統一されており、 "
+"line関数においても、データの先頭行の行番号は0であることに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:13
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:15
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:32
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:34
+msgid "0から始まる番号が出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:48
+msgid "**1から始める**"
+msgstr ""
+
+#: ../../mcmd/methods/func_line.rst:50
+msgid "1から始まる番号を出力する。"
+msgstr ""
+

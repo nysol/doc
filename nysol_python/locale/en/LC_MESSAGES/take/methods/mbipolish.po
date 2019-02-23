@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mbipolish.rst:2
+msgid "mbipolish 2部グラフの研磨"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:4
+msgid ""
+"2部グラフデータを入力として、密度の高い部分グラフの中でエッジが張られていないノードペアに枝を張る。 "
+"逆に、密度の低い部分グラフのエッジを削除する。 新たに張られる枝や刈られる枝の程度は、``sim=`` , ``th=`` と ``sim2=``"
+" , ``th2=`` で与えた値によって変わる。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:12
+msgid "**ei=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "エッジデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:16
+msgid "**ef=** : 型=str , 任意(default=node1,node2)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "エッジデータ上の2つのノード項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:20
+msgid "**eo=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "データ研磨後のエッジデータファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:24
+msgid "**sim=** : 型=str , 任意(default=R)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "ノードa,bに張られたエッジ集合を、それぞれA,Bとしたとき、ノードa,bに枝を張るために用いる類似度を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "* i: inclusion"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "* I: both-inclusion"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "* S: :math:`|A \\cap B| / max(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "* s: :math:`|A \\cap B| / min(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "* T (intersection): find pairs having common [threshld] items"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid ""
+"* R (resemblance): find pairs s.t. :math:`|A \\cap B| / |A \\cup B| >= "
+"[threshld]`"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid ""
+"* P (PMI): find pairs s.t. log ( :math:`|A \\cap B| * |all| / (|A|*|B|)) "
+">= [threshld]`"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid ""
+"* C (cosine distance): find pairs s.t. inner product of their normalized "
+"vectors >= [threshld]"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:36
+msgid "**sim2=** : 型=str , 任意(default=sim=の値)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "指定できる値は ``sim=`` と同じ。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:40
+msgid "**th=** : 型=float , 必須"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "``sim=`` で指定された類似度について、ここで指定された値以上の節点間に辺を張る。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:44
+msgid "**th2=** : 型=float , 任意(default=th=の値)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "``sim2=`` で指定された類似度について、ここで指定された値以上の節点間に辺を張る。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:48
+msgid "**sup=** : 型=int , 任意(default=0)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "左の部の次数がsup以上のノードを対象とする。省略すればsup=0。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:52
+msgid "**kn=** : 型=int , 任意(default=1)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "kn=で指定された値以上の共起頻度を対象とする。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:56
+msgid "**kn2=** : 型=int , 任意(default=1)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "kn2=で指定された値以上の次数を持つ右部を対象とする。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:60
+msgid "**iter=** : 型=int , 任意(default=30)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "データ研磨の最大繰り返し数を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:64
+msgid "**O=** : 型=str , 任意(default=研磨過程を出力しない)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "デバッグモード時、データ研磨過程のグラフを保存するディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:68
+msgid "**log=** : 型=str , 任意(default=ログを出力しない)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "パラメータの設定値や収束回数等をkey-value形式のCSVで保存するファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:72
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst
+msgid "ワークディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:79
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:81
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:100
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:112
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mbipolish.rst:114
+msgid ":doc:`mpolishing` : 一般グラフの研磨"
+msgstr ""
+

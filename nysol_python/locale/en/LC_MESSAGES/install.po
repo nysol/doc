@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../install.rst:2
+msgid "インストール"
+msgstr ""
+
+#: ../../install.rst:5
+msgid "対応OS"
+msgstr ""
+
+#: ../../install.rst:6
+msgid ""
+"nysolは、Linux, MacOSX, Bash on Ubuntu on Windowsといった、 代表的なOSでの動作確認はとれている。 "
+"その他にも、UNIX系のOSであれば利用できるであろう。 以下に動作が確認できているOSおよびそのバージョン一覧を示す。"
+msgstr ""
+
+#: ../../install.rst:11
+msgid "MacOS 10.9.5(Marverics)以上"
+msgstr ""
+
+#: ../../install.rst:12
+msgid "CentOS 7.3 1611"
+msgstr ""
+
+#: ../../install.rst:13
+msgid "Ubuntu 16.04 LTS"
+msgstr ""
+
+#: ../../install.rst:14
+msgid "Bash on Ubuntu on Windows(Windows 10)"
+msgstr ""
+
+#: ../../install.rst:17
+msgid "Pythonのバージョン"
+msgstr ""
+
+#: ../../install.rst:18
+msgid "Pythonのバージョンは、3.6.5での動作確認は取れている。 2.xは未対応である。"
+msgstr ""
+
+#: ../../install.rst:22
+msgid "必要なライブラリ"
+msgstr ""
+
+#: ../../install.rst:23
+msgid "Nysolのインストールには、以下のソフトウェアが必要となる。"
+msgstr ""
+
+#: ../../install.rst:25
+msgid "c++コンパイラ"
+msgstr ""
+
+#: ../../install.rst:26
+msgid "|boost|"
+msgstr ""
+
+#: ../../install.rst:27
+msgid "|lib2xml|"
+msgstr ""
+
+#: ../../install.rst:38
+msgid "pipインストール"
+msgstr ""
+
+#: ../../install.rst:39
+msgid ""
+"他の多くのPythonのパッケージ同様、pipを利用してインストールできる。 PyPiにおけるnysolのページは  |pypi_nysol| "
+"を参照されたい。"
+msgstr ""
+
+#: ../../install.rst:42
+msgid "MAC OSでのインストール"
+msgstr ""
+
+#: ../../install.rst:50
+msgid "CentOSでのインストール"
+msgstr ""
+
+#: ../../install.rst:59
+msgid "Ubuntu,Bash on Windowsでのインストール"
+msgstr ""
+
+#: ../../install.rst:76
+msgid "オフラインインストール"
+msgstr ""
+
+#: ../../install.rst:77
+msgid "ネット環境がない環境では、あらかじめgitHubよりソース一式をダウンロードしておき、以下の手順でインストールを行う。"
+msgstr ""
+
+#: ../../install.rst:79
+msgid "nysolのダウンロードとオフラインインストール"
+msgstr ""
+
+#: ../../install.rst:91
+msgid "インストール完了の確認"
+msgstr ""
+
+#: ../../install.rst:92
+msgid ""
+"インストールが完了すれば、Pythonを起動し、Nysolモジュールをimportしてみよう。 "
+"エラーメッセージが表示されなければインストール完了である。 mcmdモジュールの「 :doc:`mcmd/hello` "
+"」節の例題を実行してみよう！"
+msgstr ""
+
+#: ../../install.rst:96
+msgid "モジュールのimport"
+msgstr ""
+

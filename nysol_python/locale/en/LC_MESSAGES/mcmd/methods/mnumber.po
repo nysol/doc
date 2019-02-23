@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnumber.rst:2
+msgid "mnumber 連番"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:4
+msgid ""
+"数字連番もしくはアルファベット連番(A,B,...,Z,AA,AB,...,AZ,BA,BB,...,ZZ,AAA,AAB,...)ををふり、 "
+"``a=`` パラメータで指定した項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:18
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "新たに追加される項目の名前を指定する。【但し、-nfn,-nfnoオプション指定時は必要なし】"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:22
+msgid "**e=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "同Rankの処理方法"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "同一キー同一ソート項目値への処理方法を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "指定しない場合は、デフォルトは ``e=seq`` である。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "``seq:`` 同Rankの場合は各行に連番を振るが、その順序は不定である。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "``same:`` 同Rankの場合は同じNoもしくはアルファベットを付け加える。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "``skip:`` 同Rankの場合は同じNoを振り、"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "次のNoはスキップするようにNoもしくはアルファベット連番を付け加える。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "(注意) ``e={same/skip}`` を指定する場合は、 ``s=`` パラメータを同時に指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:33
+msgid "**I=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "連番の間隔を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:37
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid ""
+"連番もしくは連文字をふる単位となる項目名リスト(複数項目指定可)を指定する。【 "
+":ref:`集計キーブレイク処理<autoadd_keybreak>` 】"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "(注意）指定する場合は事前に ``k=`` パラメータで指定する連番、"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "もしくは連文字をふる単位となる項目順に並べ替えておく必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:43
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "ここで指定した項目(複数項目指定可)で並べ替えられた後、連番が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "``B`` オプション指定時以外は必須。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:48
+msgid "**S=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "開始No"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "連番の開始Noを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "大文字のアルファベットが指定された場合はアルファベット連番となる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "ただし、アルファベット連番の場合、間隔( ``I=`` )に負の値は指定できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:55
+msgid "**B=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "キー毎に連番もしくはアルファベット連番をふる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst
+msgid "あるキー内では全行同じNoもしくはアルファベットがふられる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:63
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:65
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:78
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:80
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:128
+msgid "**数字の連番**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:130
+msgid "Customer項目名順（昇順）に連番を振り「No」という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:145
+msgid "**Date項目順の連番**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:147
+msgid "Date項目順（昇順）に連番をふる。その際、同じDateには同じNoを振り「No」という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:162
+msgid "**Sum項目順の連番(同Rankは同じアルファベットをふる)**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:164
+msgid ""
+"Sum項目の多い順（降順）にアルファベットのAから順に連文字を振り「Rank」という項目名で出力する。 "
+"また、同Rankの場合は同じアルファベット文字を振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:180
+msgid "**Sum項目順の連番(同Rankは並び順でNoをふる)**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:182
+msgid "Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。 その際、同Rankの場合は並び順でNoを振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:198
+msgid "**Sum項目順の連番(同Rankは同じNoをふる)**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:200
+msgid "Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。 その際、同Rankの場合は同じNoを振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:216
+msgid "**Sum項目順の連番(同Rankの場合は同じRankNoを振り、次のNoはスキップ)**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:218
+msgid ""
+"Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。 "
+"その際、同Rankの場合は同じRankNoを振り、次のNoはスキップするようにNoを振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:234
+msgid "**10から始まる連番**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:236
+msgid ""
+"Sum項目の小さい順（昇順）に10から始まる連番を振り「Score」という項目名で出力する。 "
+"その際、同Rankの場合は同じRankNoを振り、次のNoはスキップするようにNoを振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:252
+msgid "**10から始まる5つ飛びの連番**"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:254
+msgid ""
+"Sum項目の小さい順番（昇順）に10から始まる5つ飛びの連番を振り「Score」という項目名で出力する。 "
+"また、同Rankの場合は同じNoを振ることにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:271
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:273
+msgid ":doc:`mnewnumber` : 新たに連番データを生成する場合に使う。"
+msgstr ""
+
+#: ../../mcmd/methods/mnumber.rst:274
+msgid ":doc:`mbest` : 行番号による選択であれば、 ``mnumber`` を使わずともこのコマンドで。"
+msgstr ""
+

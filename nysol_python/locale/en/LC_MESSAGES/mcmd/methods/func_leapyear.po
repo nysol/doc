@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_leapyear.rst:2
+msgid "leapyear 閏年判定"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:4
+msgid "書式1: leapyear(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:5
+msgid "書式2: leapyear(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:8
+msgid "日付 :math:`date` もしくは時刻 :math:`time` が閏年かどうか判定する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:12
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:14
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:40
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_leapyear.rst:55
+msgid "**時刻型でも判定可能**"
+msgstr ""
+

@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mcount.rst:2
+msgid "mcount 行数カウント"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:4
+msgid ""
+"行数をカウントし、 ``a=`` パラメータで指定した項目名で出力する。 ``k=`` を指定すると、集計キー毎の件数をカウントし、 ``k=``"
+" を指定しなければ、全行数がカウントされる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:10
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:12
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:20
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "新たに追加される項目の名前を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "``nfn`` オプション使用時は、必須ではない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:25
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "キー項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst
+msgid "カウントの単位となる項目名リスト。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:33
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:35
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:48
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:50
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:68
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:70
+msgid "``date`` 項目を単位に行数をカウントし、 ``count`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:82
+msgid "**集計キーなし**"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:84
+msgid "集計キーを指定しなければ全体の行数をカウントする。"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:96
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mcount.rst:98
+msgid ":doc:`mstats` : ``c=count`` を指定することで、NULL値でないデータ件数をカウントできる。"
+msgstr ""
+

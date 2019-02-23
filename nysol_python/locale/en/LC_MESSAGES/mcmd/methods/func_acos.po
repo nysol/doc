@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_acos.rst:2
+msgid "acos コサインの逆関数"
+msgstr ""
+
+#: ../../mcmd/methods/func_acos.rst:4
+msgid "書式1: acos(num)"
+msgstr ""
+
+#: ../../mcmd/methods/func_acos.rst:7
+msgid ""
+"アークコサイン(コサインの逆関数)を計算する。 パラメータの範囲は :math:`-1.0\\sim 1.0` で戻り値の範囲は "
+":math:`0.0\\sim \\pi` である。"
+msgstr ""
+
+#: ../../mcmd/methods/func_acos.rst:12
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_acos.rst:14
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_acos.rst:32
+msgid "**基本例**"
+msgstr ""
+

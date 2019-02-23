@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mwindow.rst:2
+msgid "mwindow スライド窓の生成"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:4
+msgid ""
+"複数行をずらしながら複製していく。 移動平均の計算など、時系列データにおいて一定幅の窓を設定し、 "
+"その窓をずらしながらその窓を単位に何らかの処理(例えば平均)をする目的に利用する。 このような窓をスライド窓(sliding "
+"window)と呼ぶ。 典型的な例を :numref:`mwindow_input` 〜 :numref:`mwindow_out2` に示す。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst ../../mcmd/methods/mwindow.rst:11
+msgid "入力データ"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "val"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "4/6"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "4/7"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "4/8"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "4/9"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "4"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:24
+msgid "wk=date:win t=2"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:1
+msgid "win"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:39
+msgid "wk=date:win t=2 -r"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:52
+msgid ""
+":numref:`mwindow_input` "
+"に示される入力データは日別の集計値が4日分示されており、スーパーの売上推移や株価推移と考えればよい。 "
+"この入力データについて、2日間を窓サイズとして移動平均を計算することを考える。 "
+"入力データに示される日付4/6〜4/9についてサイズ2の窓を作成すると [(4/6,1),(4/7,2)], [(4/7,2),(4/8,3)],"
+" [(4/8,3),(4/9,4)]の3つの窓が作成される。 ここで`[]'は一つの窓を示し、`()'は行を示すものとする。 "
+"そしてこれらの窓のユニークキー(以下「窓キー」と呼ぶ)として、 各窓の日付の最大値( ``wk=`` "
+"で指定した項目の最終行の値)をwinという項目名で出力する( :numref:`mwindow_out1` )。 "
+"窓キーを各窓の最小値(先頭行)とするには ``r`` オプションを用いればよい( :numref:`mwindow_out2` )。 "
+"あとは、出力結果( :numref:`mwindow_out1` )に対して ``mavg`` を実行することで移動平均が計算される。 ちなみに "
+"``mmvavg`` コマンドは、上述の一連の処理( ``mwindow`` + ``mavg`` )と同様の処理を行うが、 ``mmvavg``"
+" の方が高速である(約3.5倍速:200MB,1000万件データで窓サイズを10で実験した結果)。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:65
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:67
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:71
+msgid "**wk=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "出力データにおいて、窓をユニークに識別する値となる入力データ上の項目を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "ここで指定した項目で並べ替えられたのちスライド窓を生成していくが、"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+#, python-format
+msgid "降順で並べ替えるときは\\%r、数値として並べ替えるときは\\%nと追加する。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "数値の降順で並べ替えるときは\\%nrと追加すればよい。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "またコロンに続いて窓キーの項目名を指定しなければならない。複数項目を指定することもできる。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:79
+msgid "**t=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "窓のサイズ(行数)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:83
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "ここで指定された項目の値を単位に窓の生成を行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:87
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "窓における基準行を先頭行とする。指定がなければ最終行となる。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:91
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "窓のサイズが ``t=`` で指定した行数に満たなくても出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:95
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:99
+msgid "**nfn=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst
+msgid "入力データの1行目を項目名行とみなさない。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:106
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:108
+msgid ""
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:119
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:121
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:151
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:168
+msgid "**基準行を先頭にした例**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:185
+msgid "**指定行数に満たない窓も出力する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:205
+msgid "**キー項目を指定した例**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:228
+msgid "**前日までの移動平均を求める**"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:230
+msgid ""
+"冒頭に示した移動平均の例では、窓における最終日を基準として平均を計算している。 時に、基準日を前日として移動平均を計算したいケースがある。 "
+"そういった場合は ``mslide`` で1日日付をずらしてから本コマンドを使えばよい。 その例を以下に示す。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:248
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:250
+msgid ":doc:`mmvavg` : 移動窓の平均(移動平均)に特化した計算コマンド。"
+msgstr ""
+
+#: ../../mcmd/methods/mwindow.rst:251
+msgid ":doc:`mmvstats` : 移動窓の各種統計量を計算する。"
+msgstr ""
+

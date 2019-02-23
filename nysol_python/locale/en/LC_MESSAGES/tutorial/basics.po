@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../tutorial/basics.rst:2
+msgid "基本処理"
+msgstr ""
+
+#: ../../tutorial/basics.rst:3
+msgid ""
+"mcmdを初めて利用するユーザにとって最も難しい点は、 "
+"80を超えるメソッドをどのように組み合わせれば、どのような処理を実現できるかを思い描けないことにあるであろう。 "
+"そこで、本チュートリアルでは、小さな課題別にその解決方法を示していく。 以下に示すいずれの例も、Pythonを起動してコピペすれば実行可能である。"
+" なお、多くのサンプルコードには、わかりやすさのため、ポイントとなる箇所で途中経過をファイル(o=\"xx1\"など)に出力しているが、 "
+"実際に動かす時は、この指定を外した方が処理速度は速くなる。"
+msgstr ""
+
+#: ../../tutorial/basics.rst:11
+msgid "来店回数(日数)を求める"
+msgstr ""
+
+#: ../../tutorial/basics.rst:43
+msgid "平均来店間隔日数を求める"
+msgstr ""
+
+#: ../../tutorial/basics.rst:83
+msgid "累積計算"
+msgstr ""
+
+#: ../../tutorial/basics.rst:139
+msgid "ある条件を満たした行以降にフラグを立てる"
+msgstr ""
+
+#: ../../tutorial/basics.rst:231
+msgid "webページAから2-hops以内で到達できるページ"
+msgstr ""
+
+#: ../../tutorial/basics.rst:290
+msgid "顧客の会員期間(開始-終了)を行に展開して集計"
+msgstr ""
+
+#: ../../tutorial/basics.rst:361
+msgid "ニュースのキーワードの出現回数を過去3日のスライド窓毎に求める。"
+msgstr ""
+
+#: ../../tutorial/basics.rst:416
+msgid "つづく。。"
+msgstr ""
+

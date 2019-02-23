@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_regexs.rst:2
+msgid "regexs マッチ"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:4
+msgid "書式1: regexs(str,正規表現)"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:5
+msgid "書式2: regexsw(str,正規表現)"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:8
+msgid ""
+"指定した正規表現が、文字列 :math:`str` の一部にでもマッチすれば真を返す。 :math:`str` "
+"もしくは正規表現にマルチバイト文字を含み、 "
+"Shift\\_JISなど文字の出現順によっては意に沿わない検索結果となる場合はregexsw関数を使うこと。"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:14
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:16
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:33
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:35
+msgid "``id=1,id=2`` 共に、正規表現で示された ``c`` に続く ``aa`` を含んでいるので真を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:49
+msgid "**先頭一致**"
+msgstr ""
+
+#: ../../mcmd/methods/func_regexs.rst:51
+msgid "正規表現 ``.*c`` を$str$項目が含むのは ``id=3`` 以外全ての行である。"
+msgstr ""
+

@@ -1,0 +1,1835 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/calsel.rst:2
+msgid "項目間演算"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:4
+msgid ""
+"``mcal`` と ``msel`` は項目間の演算を行うことを主目的に開発された処理メソッドある。 項目間演算として100 "
+"以上の関数/演算子が実装されており、 それらを組み合わせることで多様な処理を実現できるようになっている。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:9
+msgid "式の構成要素"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:11
+msgid ""
+"項目間演算で記述する式を構成する要素は、定数、項目値、演算子、関数の4つに大きく分類できる。 "
+"そして、それぞれの要素において、ユーザはデータ型を意識して利用する必要がある。 mcmdの処理メソッドではデータは全て文字列として与えらており、 "
+"それら文字列を 項目間演算 でどのようなデータ型として扱うかはユーザに委ねられているからである。 "
+"項目間演算で扱えるデータ型は文字列型(str),数値型(num)、日付型(date)、時刻型(time)、論理型(bool)の5つである。 "
+"以下では、式を構成するそれぞれの要素で、5つのデータ型をどのように扱うかを示す。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:19
+msgid "定数"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:21
+msgid "定数の書式一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "データ型"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "書式"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "内容"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "例"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "数値( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "整数、実数の文字列表記"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "内部的には全て倍精度実数を利用"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``20  0.55  1.5*e10``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "文字列( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "文字列"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "ダブルクオーテーションで括った文字列"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"abc\" \"日本語\"``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "日付( :math:`date` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "0dyyyymmdd"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "先頭に\"0d\"を付けた年月日固定長"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0d20080923``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "時刻( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "0tyyyymmddHHMMSS"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "先頭に\"0t\"を付けた年月日時分秒固定長"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0t20080923121115``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "0tHHMMSS"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "先頭に\"0t\"を付けた時分秒固定長(内部的に本日の日付が補完される)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0t121115``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "論理( :math:`bool` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "0b1  0b0"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "先頭に\"0b\"を付けた\"1\"(true)もしくは\"0\"(false)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0b1  0b0``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:35
+msgid "項目値"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:37
+msgid ""
+"データ上の項目名を指定するには :numref:`mcal_fld` に示される通り、 データをどのデータ型として扱うかによって異なってくる。 "
+"データは全て文字列データであるために、それらをどのような型のデータとして扱うかはユーザの判断に任されている。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:42
+msgid "項目値の書式一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "CSVデータ内容"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "数値(num)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "${項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "整数、実数(指数表現含む) の文字列表記"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``${amount}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "文字列(str)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "$s{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``$s{gender}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "日付(date)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "$d{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "年月日固定長(yyyymmdd)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``$d{date}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "時刻(time)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "$t{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "年月日時分秒の固定長(yyyymmddHHMMSS)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``$t{time}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "時分秒(HHMMSS)の固定長(内部的に本日の日付が補完される)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "論理(bool)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "$b{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "項目値の一文字目が\"1\"の時にtrue、\"0\"の時にfalse、その他の場合にはNULLと解釈される。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``$b{condition}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:54
+msgid ""
+"項目名にはワイルドカードを指定することができる。 例えばsum関数は複数の数値項目の合計を計算する関数であるが、 "
+"ワイルドカードを指定することで、多数の項目を一つのワイルドカードで指定することも可能となる。 例えば、入力データとして ``A1,A2,A3`` "
+"の3つの数値項目名があったとすると、 ``sum(${A*})`` とすれば、 ``A1,A2,A3`` の合計値を計算してくれる。 "
+"``sum(${A*},${B*})`` のように複数のワイルドカードを指定することも可能である。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:62
+msgid "前行の項目値"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:64
+msgid ""
+"項目値の指定に ``$`` の代わりに ``#`` を指定すると、前行の項目値となる。 ただし、先頭行は前行がないのでNULLとなる。 "
+"各データ型における指定方法を :numref:`mcal_prev` に示す。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:68
+msgid "前行の項目値の書式一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#{amount}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#s{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#s{gender}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#d{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#d{date}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#t{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#d{time}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#b{項目名}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#b{condition}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:81
+msgid "前行の結果項目値"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:83
+msgid ""
+"前行項目の指定において項目名を省略すると前行の計算結果項目の値となる。 各データ型における指定方法を "
+":numref:`mcal_prev_rsl` に示す。 if関数とtop()関数とを組み合わせる事で、累計計算などが可能となる。 "
+"以下に、金額項目の累計計算例を示す。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:88
+msgid "``mcal c='if(top(),${price},${price}+#{})' a=accum``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:90
+msgid "前行の結果項目値の書式一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#{}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#{}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#s{}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#s{}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#d{}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#d{}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#t{}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "#b{}"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``#b{}``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:102
+msgid "算術演算子"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:104
+msgid ""
+"``+`` や ``=True`` などの算術演算子は数値型だけでなく、文字列型や日付型のデータに対しても定義されている。 それらの一覧を "
+":numref:`mcal_ope` に示す。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:107
+msgid "算術演算子一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "演算子"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "加算(+)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1+num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "数値の足し算"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``1.5+2.3 (3.8)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`str_1+str_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "文字列の結合"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"150\"+\"円\" (\"150円\")``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`date+num`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` 日後の日付"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0d20121130+2 (0d20121202)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`time+num`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` 秒後の時刻"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0t095959+2 (0t100001)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "減算(-)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1-num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "数値の引き算"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``1.5-2.3 (-1.8)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`str_1-str_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "部分文字列の削除"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"aababa\"-\"a\"``  ( ``\"bb\"`` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "(貪欲マッチによる)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"aababa\"-\"aba\"``  ( ``\"aba\"`` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`date-num`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` 日前の日付"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0d20121202-2 (0d20121130)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`time-num`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` 秒前の時刻"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0t100001-2 (0t095959)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`date_1-date_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "日付差"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0d20121202-0d20121130 (2)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`time_1-time_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "時刻差"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``0t095959-0t100001 (-2)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "乗算(*)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1*num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "掛け算"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10*2 (20)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "除算(/)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1/num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "割り算"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10/2 (5)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "剰余(\\%)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1\\%num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "剰余"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10%3 (1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "累乗(\\^{})"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1` \\^{} :math:`num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "累乗"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10^3 (1000)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:129
+msgid "比較演算子"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:131
+msgid ""
+"比較演算は同一のデータ型の値同士でのみ適用可能である。 全てのデータ型に共通した書式であり、以下では数値型についてのみ(例では文字型につても) "
+":numref:`mcal_ope_comp` に示す。 文字型、日付型、時刻型においても同様に利用できる。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:136
+msgid "比較演算子一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "比較内容"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "等しい"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1==num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``1.5==1.5(0b1)  \"abc\"==\"abcd\" (0b0)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "等しくない"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1!=num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``1.5!=1.5(0b0)  \"abc\"==\"abcd\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "より大きい"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1>num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10>5(0b1)  \"abc\">\"abcd\" (0b0)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "より小さい"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1<num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10<5(0b0)  \"abc\"<\"abcd\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "以上"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1>=num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``10>=10(0b1)  \"a\">\"\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "以下"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num_1<=num_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``8<=9(0b1)  \"a\"<=\"a\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:150
+msgid "論理演算子"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:152
+msgid ""
+"3つの論理演算子(論理積、論理和、排他的論理和)が利用でき、それぞれの書式を :numref:`mcal_bool` に示す。 "
+"また、それぞれの演算における真偽(1:真,0:偽)の組み合せとその結果を :numref:`mcal_and` , "
+":numref:`mcal_or` , :numref:`mcal_xor` に示す。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:156
+msgid "論理演算子一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1 ../../mcmd/calsel.rst:165
+msgid "論理積"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool_1` && :math:`bool_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"abc\"==\"abc\" && \"xyz\"==\"abc\" (0b0)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1 ../../mcmd/calsel.rst:179
+msgid "論理和"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool_1` || :math:`bool_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"abc\"==\"abc\" || \"xyz\"==\"abc\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1 ../../mcmd/calsel.rst:193
+msgid "排他的論理和"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool_1` ^^ :math:`bool_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``\"abc\"==\"abc\" ^^ \"xyz\"==\"abc\" (0b1)``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool_1`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool_2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "結果"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "0"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "null"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:207
+msgid ""
+"演算子(後述)の優先順位は :numref:`mcal_pri_ope` に示すとおりである。 同一の演算子間の優先順位は出現順序による。 "
+"優先順位を変更するときは括弧を利用すれば良い。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:212
+msgid "演算子の優先順位"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "優先順位"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``*`` ``/`` ``%`` ``^``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``+`` ``-``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``>`` ``<`` ``>=`` ``<=``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "4"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``==`` ``!=``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "5"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``&&``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "6"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "``||`` ``^^``"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:225
+msgid "関数"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:227
+msgid ""
+"以下では、数値関連( :numref:`mcal_num` )、三角関数関連( :numref:`mcal_sankaku` )、 文字列関連( "
+":numref:`mcal_char` )、正規表現関連( :numref:`mcal_regex` )、 日付時間関連( "
+":numref:`mcal_date` )、論理関数( :numref:`mcal_logical` )、 行/項目情報関連( "
+":numref:`mcal_line` )、NULL値関連( :numref:`mcal_null` )、 そして型変換関連( "
+":numref:`mcal_cast` )の9つに分けて解説する。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:234
+msgid "数値関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "関数名"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "出力型"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sum`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sum( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_avg`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "avg( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sqsum`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sqsum( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_min`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "min( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_max`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "max( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_product`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "product( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_factorial`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "factorial( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_gcd`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "gcd( :math:`num_1`   :math:`num_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_lcm`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "lcm( :math:`num_1`   :math:`num_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sqrt`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sqrt( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_abs`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "abs( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sign`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sign( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_int`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "int( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_fract`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "fract( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_round`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "round( :math:`num`  基準値)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_floor`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "floor( :math:`num` ，基準値)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_ceil`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "ceil( :math:`num` ，基準値)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_power`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "power( :math:`num` ，指数)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_exp`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "exp( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_log`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "log( :math:`num` ，底)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_ln`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "ln( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_log2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "log2( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_log10`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "log10( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_dist`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "dist(タイプ  :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_distgps`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "distgps(緯度1 経度1 緯度2 経度2)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_heron`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "heron( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_rand`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "rand([乱数の種])"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_randi`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "randi(最小値  最大値[  乱数の種])"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_nrand`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nrand(平均  標準偏差[  乱数の種])"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_pi`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "pi()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_e`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "e()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_format`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "format()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`str`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:275
+msgid "三角関数関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "出力範囲"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_acos`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "acos( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`0\\sim\\pi`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_asin`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "asin( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`-\\pi\\sim\\pi`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_atan`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "atan( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_atan2`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "atan2( :math:`num_1`   :math:`num_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_cos`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "cos( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`-1.0\\sim 1.0`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sin`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sin( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_tan`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "tan( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`-\\infty\\sim\\infty`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_degree`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "degree( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_radian`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "radian(角度)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_cosh`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "cosh( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`0\\sim\\infty`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_sinh`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "sinh( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_tanh`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "tanh( :math:`r` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:294
+msgid "文字列関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_cat`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "cat( :math:`token  str_1  str_2  \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_length`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "length( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_fixlen`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "fixlen( :math:`str`   長さ  位置  padding文字)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_right`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "right( :math:`str`  長さ)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_left`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "left( :math:`str`  長さ)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_mid`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "mid( :math:`str`   開始位置  長さ)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_toupper`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "toupper( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_tolower`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "tolower( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_capitalize`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "capitalize( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_match`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "match(検索文字列  :math:`str_1 str_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`bool`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_hasspace`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "hasspace( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:312
+msgid "正規表現関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexm`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexm( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexs`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexs( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexrep`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexrep( :math:`str`  正規表現 置換文字列)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexlen`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexlen( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexpos`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexpos( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexstr`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexstr( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexpfx`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexpfx( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_regexsfx`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "regexsfx( :math:`str`  正規表現)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:326
+msgid "日付時間関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_today`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "today()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`date`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_now`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "now()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`time`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_tseconds`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "tseconds( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_leapyear`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "leapyear( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_year`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "year( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_month`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "month( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_day`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "day( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_week`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "week( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_dow`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "dow( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_time`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "time( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_date`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "date( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_hour`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "hour( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_minute`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "minute( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_second`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "second( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_age`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "age( :math:`dt_1 dt_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_diff`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "diff( :math:`dt_1 dt_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_uxt`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "uxt( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` (UNIX時刻)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_julian`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "julian( :math:`dt` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":math:`num` (ユリウス通日)"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:351
+msgid "論理関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_and`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "and( :math:`bool_1 bool_2 \\cdots)`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_or`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "or( :math:`bool_1 bool_2 \\cdots)`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_not`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "not( :math:`bool)`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_if`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "if( :math:`bool num_1 num_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "if( :math:`bool str_1 str_2` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "if( :math:`bool date_1 date_2)`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "if( :math:`bool time_1 time_2)`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:365
+msgid "行/項目情報関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_line`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "line()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_top`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "top()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_bottom`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "bottom()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_fldsize`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "fldsize()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_argsize`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "argsize( :math:`str_1 str_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:377
+msgid "NULL値関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_null`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nulln()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nulls()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nulld()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nullt()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "nullb()"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_isnull`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "isnull( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "isnull( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "isnull( :math:`date` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "isnull( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "isnull( :math:`bool` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_countnull`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "countnull( :math:`num_1 num_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "countnull( :math:`str_1 str_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "countnull( :math:`date_1 date_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "countnull( :math:`time_1 time_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "countnull( :math:`bool_1 bool_2 \\cdots` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:399
+msgid "型変換関連関数一覧"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid ":doc:`methods/func_cast`"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "n2s( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "n2b( :math:`num` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "s2n( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "s2d( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "s2t( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "s2b( :math:`str` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "d2s( :math:`date` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "d2t( :math:`date` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "t2s( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "t2d( :math:`time` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "b2n( :math:`bool` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:1
+msgid "b2s( :math:`bool` )"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:412
+msgid "日付型と時刻型について"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:414
+msgid ""
+"mcalでは日付時刻について2つの型を用意している。 一つは日付型で他方は時刻型である。 時刻型は時刻だけでなく日付とセットで表現する。 "
+"内部的にはグレゴリオ暦に基づいたboost C++ライブラリのdate_timeライブラリを利用しており、 "
+"日付型にはboost::gregorian::dateクラスを、 "
+"時刻型にはboost::posix\\_time::ptimeクラスを使っている。 詳細は http://www.boost.org/ "
+"のドキュメントを参照されたい。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:422
+msgid ""
+"dateクラスは32ビット整数で管理されており、1400年1月1日から9999年12月31日の範囲をサポートしている。 "
+"日付の演算は全てグレゴリオ暦に基づいたものとなっている。 "
+"不正な日付(例えば、2013/2/29や1399/12/31)が与えられたときはNULL値が出力される。 "
+"一方でptimeクラスは、64ビットで管理されており、ミリ秒まで扱える時刻システムであるが、 "
+"mcalコマンドにおいてはミリ秒を扱うインターフェースは備えていない。 "
+"またptimeクラスはdateクラスも内部で参照しており、日付をまたいだ時間計算を可能としている。 "
+"不正な時刻(例えば、18:62:11)が与えられたときはNULL値が出力される。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:430
+msgid ""
+"mcmdはテキストデータを扱うので、日付/時刻は、データ上は文字列で表現される必要がある。 "
+"それらの文字列を日付型および時刻型に内部で変換して各種演算を行い、最終結果を再度文字列に戻して出力している。 "
+"文字列のフォーマットは、日付型は8桁固定長文字列(例えば、 ``20130911`` )、 時刻型は14桁固定長文字列(例えば、 "
+"``20130911110528`` )、 もしくは6桁固定長文字列(例えば、 ``110528`` )を標準としている。 "
+"日付型と時刻型と各種関数の関係を :numref:`calsel_datetime.png` に示す。 "
+"2013年9月6日10時43分27秒を例に、date型とtime型と各種関数の関係を図示している。 "
+"実線で囲われたボックスは実データを表し、アンダーラインを付したものは関数等を表している。"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:444
+msgid "日付型と時刻型と各種関数の関係"
+msgstr ""
+
+#: ../../mcmd/calsel.rst:446
+msgid ""
+"またユーザは日付/時刻として固定長文字列を標準とせずに、 "
+"ユリウス通日(紀元前4713年1月1日正午からの日数)やUNIX時刻(1970年1月1日00時00分00秒(GMT)からの "
+"経過秒数)などの整数を標準の日時の表記として利用してもよいであろう。 "
+"ユリウス通日やUNIX時刻と、日付型/時刻型との変換関数も備えており、十分に運用可能である。 "
+"ただし、mcalが提供する日付/時刻関数を使う限りにおいては、内部的にはグレゴリオ暦によって管理されており、 "
+"その範囲は、1400年1月1日から9999年12月31日に限定されることに注意する。 "
+"またUNIX時刻は32ビット整数で管理されているため、2038年1月19日3時14分7秒を超えると正しく計算できないことに注意する。 "
+"ただユリウス通日やUNIX時刻を利用する欠点は、その数字を見ただけでは実際にいつの日付時刻なのか理解出来ない点にあろう。"
+msgstr ""
+

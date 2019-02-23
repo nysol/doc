@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_age.rst:2
+msgid "age 年令"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:4
+msgid "書式1: age(生年月日,date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:5
+msgid "書式2: age(生年月日,time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:8
+msgid ""
+"日付 :math:`date` (書式1)もしくは時刻 :math:`time` (書式2)における年令を返す。 "
+"生年月日は書式1,2によって日付型/時刻型を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:13
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:15
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:32
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_age.rst:34
+msgid "2013年9月1日における年令を求める。"
+msgstr ""
+

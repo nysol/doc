@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnewrand.rst:2
+msgid "mnewrand 乱数データの新規生成"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:4
+msgid ""
+"0.0から1.0の範囲の実数乱数を生成する。 ``int`` オプションを指定することで、整数乱数を生成することもできる。 "
+"乱数の生成にはメルセンヌ・ツイスター法を利用している "
+"(\\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}"
+" , "
+"\\href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:18
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "新規に作成するデータの項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "``nfn`` もしくは ``nfno`` オプション指定時は指定の必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:23
+msgid "**max=** : 型=str , 任意(default=INT\\_MAX)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "乱数の最大値を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "このパラメータを指定するときは ``int`` オプションも指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:28
+msgid "**min=** : 型=str , 任意(default=0)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "乱数の最小値を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:33
+msgid "**S=** : 型=str , 任意(default=現在時刻)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "乱数の種を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:37
+msgid "**l=** : 型=str , 任意(default=10)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "行数"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "新規作成する乱数データの行数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:42
+msgid "**int=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst
+msgid "整数乱数を生成する"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:49
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:51
+msgid ""
+":ref:`o=<common_param_o>` , :ref:`nfn=<common_param_nfn>` , "
+":ref:`nfno=<common_param_nfno>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:60
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:62
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:70
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:72
+msgid "実数乱数を10行生成する。乱数の種は1に固定しているので、いつ実行しても乱数系列は同じになる。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:92
+msgid "**整数乱数**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:94
+msgid "最小値が0、最大値が1000、乱数の種が1の整数乱数を5行作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:109
+msgid "**ヘッダ行なしで出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:111
+msgid "``nfn=True`` でヘッダーなしのデータが生成される。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:126
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:128
+msgid ":doc:`mnewnumber` : 連番を生成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewrand.rst:129
+msgid ":doc:`mnewstr` : 固定文字列を生成する。"
+msgstr ""
+

@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msep.rst:2
+msgid "msep レコードの分割"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:4
+msgid ""
+"``d=`` パラメータで指定したデータのデータに各レコードを出力する。 "
+"指定するデータに項目名を埋め込むことができるので、結果としてレコード分割することになる。 埋め込むデータは ``${項目名}`` "
+"によって指定する。 例えば、 ``d=./out/${date}.csv`` と指定すれば、カレントディレクトリの下の ``out`` "
+"ディレクトリの下に、 ``date`` 項目の値別にデータが作成されることになる。 "
+"内部的には、埋め込んだ項目の値をキーとして認識し、並べ替えが行われた後レコードが分割される。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:13
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:15
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:19
+msgid "**d=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "異なるデータデータに分割する項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "ここで指定した文字列をデータとして各レコードが追記されていく。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "項目名は ``${項目名}`` によって埋め込む。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:25
+msgid "**f=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "出力する項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:29
+msgid "**p=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst
+msgid "``d=``  パラメータで指定したディレクトリ名が存在しなければ作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:36
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:38
+msgid ""
+":ref:`i=<common_param_i>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:49
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:51
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:69
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:71
+msgid "``dat`` という名前のディレクトリを作成し、 そのディレクトリに日付項目値 ``date`` ごとに異なるファイルに出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:82
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/msep.rst:84
+msgid ":doc:`mcat` : ``msep`` で分割したデータをこのコマンドで併合すると元に戻る。"
+msgstr ""
+

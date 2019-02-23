@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_floor.rst:2
+msgid "floor 切り捨て"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:4
+msgid "書式1: floor(num,基数)"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:7
+msgid ""
+":math:`num` を切り捨てにより丸める。 この時、基数の整数倍の値集合のうち :math:`num` "
+"より小さい最大の目盛点にまるめられる。 例えば、floor(3.82,0.5)の場合、0.5とびに目盛がうたれた数直線上で、 "
+"3.82より小さい最大の目盛点、すなわち3.5が基数0.5における切り捨て点となる。 基数を省略すると1.0がデフォルト値として用いられる。 "
+"これは小数点以下1桁目を切り捨てて整数値にまるめることに等しい。"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:16
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:18
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:44 ../../mcmd/methods/func_floor.rst:60
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:46
+msgid "小数点以下一桁目を切り捨てる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:62
+msgid "小数点以下二桁目を切り捨てる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:76
+msgid "**基数0.5の例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:78
+msgid "0.5を基数として切り捨てる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:92
+msgid "**基数10の例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_floor.rst:94
+msgid "一桁目を切り捨てる。"
+msgstr ""
+

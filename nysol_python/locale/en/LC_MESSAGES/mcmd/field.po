@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/field.rst:5
+msgid "項目名"
+msgstr ""
+
+#: ../../mcmd/field.rst:7
+msgid ""
+"mcmdはデータの列を名前(項目名)で扱うこともできるし、項目名なしのデータも扱うことができる。 "
+"本節では、データ上の項目名に関するルール、及びmcmdメソッドでの項目の指定方法について説明する。"
+msgstr ""
+
+#: ../../mcmd/field.rst:11
+msgid "利用可能文字"
+msgstr ""
+
+#: ../../mcmd/field.rst:12
+msgid "項目名として利用可能な文字は以下の通りである。"
+msgstr ""
+
+#: ../../mcmd/field.rst:14
+msgid "マルチバイト文字 (UTF-8 など)"
+msgstr ""
+
+#: ../../mcmd/field.rst:15
+msgid "アルファベット (a-z,A-Z)"
+msgstr ""
+
+#: ../../mcmd/field.rst:16
+msgid "数字 (0-9)"
+msgstr ""
+
+#: ../../mcmd/field.rst:17
+msgid "半角記号"
+msgstr ""
+
+#: ../../mcmd/field.rst:19
+msgid ""
+"ただし、半角記号については、以下の 9 つの利用は避けることを推奨する。 利用してエラーとなるわけではないが、 いずれも mcmd "
+"の中で項目指定時の特殊文字として利用しており、 その特殊用途を利用できなくなる可能性があるからである。"
+msgstr ""
+
+#: ../../mcmd/field.rst:24
+msgid "``,`` カンマ"
+msgstr ""
+
+#: ../../mcmd/field.rst:25
+msgid "``:`` コロン"
+msgstr ""
+
+#: ../../mcmd/field.rst:26
+msgid "``%`` パーセント"
+msgstr ""
+
+#: ../../mcmd/field.rst:27
+msgid "``*`` アスタリスク"
+msgstr ""
+
+#: ../../mcmd/field.rst:28
+msgid "``?`` クエスチョンマーク"
+msgstr ""
+
+#: ../../mcmd/field.rst:29
+msgid "``&`` アンド"
+msgstr ""
+
+#: ../../mcmd/field.rst:30
+msgid "``\\`` バックスラッシュ"
+msgstr ""
+
+#: ../../mcmd/field.rst:31
+msgid "``]`` 四角括弧右"
+msgstr ""
+
+#: ../../mcmd/field.rst:32
+msgid "``[`` 四角括弧左"
+msgstr ""
+
+#: ../../mcmd/field.rst:35
+msgid "項目名ヘッダー上のソーティング情報"
+msgstr ""
+
+#: ../../mcmd/field.rst:36
+msgid ""
+"mcmdで ``k=`` にてキー項目を指定できるメソッドの多くは、内部でキー項目による並べ替え処理を行っている。 "
+"そして、その時、既に指定の項目で並び替わっていれば、並べ替え処理はスキップされる。 その判断は、項目名ヘッダーに付帯する情報によって判断している。"
+" その書式は以下に示される通り、項目名に続き ``%`` を区切り文字にしてソーティング情報が示される。"
+msgstr ""
+
+#: ../../mcmd/field.rst:41
+msgid "項目名%[優先順位][数値/文字][昇順/降順]"
+msgstr ""
+
+#: ../../mcmd/field.rst:43
+msgid "**優先順位**: 並べ替え項目として指定した順に 0,1,2,...の番号が振られる。"
+msgstr ""
+
+#: ../../mcmd/field.rst:45
+msgid ""
+"**数値/文字**: 数値として並べ替えたのか、文字列として並べ替えられたかが示される。``n`` "
+"が示されていれば数値としてソートされており、なければ文字列としてソートされている。"
+msgstr ""
+
+#: ../../mcmd/field.rst:47
+msgid "**昇順/降順**: 昇順か降順かが示される。``r`` が示されていれば降順でソートされており、なければ昇順でソートされている。"
+msgstr ""
+
+#: ../../mcmd/field.rst:49
+msgid ""
+"これらのソート情報は、データを出力するメソッドが自動的に付加するものである。 ``msortf`` "
+"メソッドを使用して項目の並べ替えを行った場合や、 ``mnumber`` メソッドで ``k=`` や ``s=`` を指定した場合である。 "
+"以下に例として、``a,b,c,d`` の4項目の入力データに対するいくつかの処理結果を示しておく。"
+msgstr ""
+
+#: ../../mcmd/field.rst:55
+msgid "実行メソッド"
+msgstr ""
+
+#: ../../mcmd/field.rst:55
+msgid "出力の項目名ヘッダー"
+msgstr ""
+
+#: ../../mcmd/field.rst:57
+msgid "nm.mcut(f=\"a,b,c,d\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:57
+msgid "a,b,c,d"
+msgstr ""
+
+#: ../../mcmd/field.rst:58
+msgid "nm.msortf(f=\"a,b,c\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:58
+msgid "a%0,b%1,c%2,d"
+msgstr ""
+
+#: ../../mcmd/field.rst:59
+msgid "nm.msortf(f=\"b,c,a\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:59
+msgid "a%2,b%0,c%1,d"
+msgstr ""
+
+#: ../../mcmd/field.rst:60
+msgid "nm.msortf(f=\"d,b\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:60
+msgid "a,b%1,c,d%0"
+msgstr ""
+
+#: ../../mcmd/field.rst:61
+#, python-format
+msgid "nm.msortf(f=\"a%r,b%n,c%rn\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:61
+#, python-format
+msgid "a%0,b%1r,c%2n,d"
+msgstr ""
+
+#: ../../mcmd/field.rst:62
+msgid "nm.mnumber(k=\"a\", s=\"b%nr\",i=dat).run()"
+msgstr ""
+
+#: ../../mcmd/field.rst:62
+msgid "a%0,b%1nr,c,d"
+msgstr ""
+
+#: ../../mcmd/field.rst:65
+msgid ""
+"なお、項目名の並べ替え情報と実際のデータの並び順が整合していない場合、メソッドの動作は不定となる。 "
+"このようなケースがあり得るのは、実際には並べ替えられていないのに、人為的に項目名に%0 を付加したり、 "
+"項目名に%が含まれているデータを扱うなどである。"
+msgstr ""
+
+#: ../../mcmd/field.rst:70
+msgid "入力項目と出力項目"
+msgstr ""
+
+#: ../../mcmd/field.rst:71
+msgid ""
+"多くのコマンドで項目の指定には ``f=`` が利用される。 ``f=`` "
+"の書式は、「入力項目:出力項目」で、出力項目の指定を省略すれば、 入力項目名が出力項目名として利用される。 "
+":numref:`field_ioname` では、 ``mcut`` により、 ``val`` 項目は ``frequency`` "
+"という名前に変更されて出力される。"
+msgstr ""
+
+#: ../../mcmd/field.rst:76 ../../mcmd/field.rst:97
+msgid "入力と出力で項目名を変更する例"
+msgstr ""
+
+#: ../../mcmd/field.rst:94
+msgid ""
+":numref:`field_addname` では、 ``maccum`` が、 ``val`` 項目の累計を計算し、追加項目 "
+"``accum`` として出力し、 ``key,val,accum`` の3項目が出力される。"
+msgstr ""
+
+#: ../../mcmd/field.rst:109
+msgid "ワイルドカード"
+msgstr ""
+
+#: ../../mcmd/field.rst:110
+msgid ""
+"mcmdメソッドで、複数項目を指定する際には、項目名に ``*`` と ``?`` のワイルドカードを利用することができる。 ``*`` "
+"は任意の長さの任意の文字列にマッチし、 ``?`` は任意の1文字にマッチする。 "
+"また、ワイルドカードの評価順は入力データ上の項目の並び順となることに注意する。 "
+"例えば、入力データの項目の並びが、A5,A3,A4,A2,A1 であれば、 `f=A*` は `f=A5,A3,A4,A2,A1` "
+"と評価される。 :numref:`field_wildcard` に例を示す。"
+msgstr ""
+
+#: ../../mcmd/field.rst:116
+msgid "ワイルドカードを用いた項目名指定"
+msgstr ""
+
+#: ../../mcmd/field.rst:142
+msgid "出力項目名の置換"
+msgstr ""
+
+#: ../../mcmd/field.rst:143
+msgid ""
+"出力項目名に指定された ``&`` は特殊な意味を持ち、入力項目名に置換される。 例えば、 ``f=abc:xx&xx`` では、出力項目名は"
+" xxabcxx に置換される。 ``&`` は、出力項目名の任意の位置に指定することができ、またその指定数に制限はない。 "
+":numref:`field_repout` に例を示す。"
+msgstr ""
+
+#: ../../mcmd/field.rst:148 ../../mcmd/field.rst:170
+msgid "出力項目名の置換の例"
+msgstr ""
+
+#: ../../mcmd/field.rst:165
+msgid ""
+"ワイルドカードの指定においても出力項目名の置換は可能である。 ワイルドカードを全て展開し、それらの項目全てに同じ置換のルールが適用される。 "
+":numref:`field_repwild` では、ワイルドカード ``f*`` は ``f09,f10,f11,f123`` に展開され、 "
+"それぞれについて ``g_&`` の置換ルールが適用され ``g_f09,g_f10,g_f11,g_f123`` に展開される。"
+msgstr ""
+
+#: ../../mcmd/field.rst:189
+msgid "項目名ヘッダーなしでの利用"
+msgstr ""
+
+#: ../../mcmd/field.rst:190
+msgid ""
+"mcmdは項目名以外にも、項目番号によって項目を指定することが可能である。 項目番号による扱いに関係するパラメータは ``nfn=`` , "
+"``nfno=`` , ``nfni=`` , ``x=`` の4つある。 以下では、例を示しながら、その利用方法について説明する。 "
+"なお、項目番号は左から 0,1,2 のように 0 から始まることに注意する。 また、項目番号の指定は、整数ではなく文字列で与えなければならない。"
+msgstr ""
+
+#: ../../mcmd/field.rst:197
+msgid "nfn="
+msgstr ""
+
+#: ../../mcmd/field.rst:198
+msgid ""
+"``nfn=True`` (no field name) "
+"を指定すると、入力データの先頭行を項目名ヘッダーと見なさず、また項目名ヘッダーを出力もしない。 :numref:`field_ex1` では、 "
+"項目名ヘッダーのないデータ ``dat`` について、 ``msum`` では ``nfn=True`` "
+"を指定することで項目番号によって項目を指定している。"
+msgstr ""
+
+#: ../../mcmd/field.rst:202
+msgid "``nfn=True`` で項目番号で項目を指定する例"
+msgstr ""
+
+#: ../../mcmd/field.rst:219
+msgid "nfno="
+msgstr ""
+
+#: ../../mcmd/field.rst:220
+msgid ""
+"``nfno=`` (no field name for output) を指定すると，入力データの先頭行は項目名行として扱うが、 "
+"出力データには項目名を出力しない。 :numref:`field_ex2` では、 ``msum`` "
+"の結果には項目名ヘッダーが出力されていないので、 続く ``mcut`` では ``nfn=True`` を指定して項目番号で項目を指定している。"
+msgstr ""
+
+#: ../../mcmd/field.rst:225
+msgid "``nfno=True`` で項目番号で項目を指定する例"
+msgstr ""
+
+#: ../../mcmd/field.rst:243
+msgid "nfni="
+msgstr ""
+
+#: ../../mcmd/field.rst:244
+msgid ""
+"``nfni=`` (no field name for input) は ``mcut`` でのみ指定可能なオプションである。 "
+"このオプションは ``nfno=`` と逆の働きをする。 "
+"すなわち，入力データの先頭行は項目名行として扱わないが，出力データには項目名を出力する。 出力データの項目名は ``f=`` "
+"で項目番号に続けて ``:`` で区切って指定する。 :numref:`field_ex3` の例では、 ``mcut`` "
+"により、0番目1番目の項目に ``key``, ``val`` という項目名を付け、 続く ``msum`` "
+"では、項目名により項目を指定している。"
+msgstr ""
+
+#: ../../mcmd/field.rst:251
+msgid "``nfni=True`` で項目番号で項目を指定する例"
+msgstr ""
+
+#: ../../mcmd/field.rst:268
+msgid "-x"
+msgstr ""
+
+#: ../../mcmd/field.rst:269
+msgid ""
+"項目名行があるデータに対して、項目番号で指定したい場合は ``x=`` オプションを利用する。 :numref:`field_ex4` "
+"の例では、 入力データは項目ヘッダーがあるが、 ``msum`` では項目番号により項目を指定し、 続く ``mcut`` "
+"では項目名により項目を指定している。 このように ``x=`` "
+"を指定すれば、入出力ともに項目ヘッダー付きのデータを扱うことになるが、項目指定のみ項目番号で行うことができるようになる。"
+msgstr ""
+
+#: ../../mcmd/field.rst:274
+msgid "``x=True`` で項目番号で項目を指定する例"
+msgstr ""
+
+#: ../../mcmd/field.rst:292
+msgid "多様な項目番号の指定方法"
+msgstr ""
+
+#: ../../mcmd/field.rst:293
+msgid ""
+"項目番号の指定では、単純に項目番号をカンマで区切って列挙する以外にも、 後ろの項目からの番号指定 (\"L\"を付 ける) や範囲 (-) "
+"を指定することが可能である。 例えば 0L とすれば、最後の項目を指定したことになり、2L とすれば、 最後から数えて2番目の項目 (0"
+" 番から始まることに注意) を指定したことになる。 また 0-5 と指定すれば、0 番項目 から 5 番項目まで 6 "
+"つの項目を指定したことになる。 すなわち 0,1,2,3,4,5 と指定したことと同等である。 :numref:`field_num` "
+"にいくつかの例を示す。"
+msgstr ""
+
+#: ../../mcmd/field.rst:301
+msgid "項目番号を範囲や末尾から指定する例"
+msgstr ""
+

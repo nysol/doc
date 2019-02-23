@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/marff2csv.rst:2
+msgid "marff2csv arff形式からcsv形式への変換"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:4
+msgid ""
+"arff形式(WEKA用のデータフォーマット: http://weka.wikispaces.com/ARFF "
+")のデータからcsv形式のデータへ変換する。 :numref:`marff2csv.py_exp` にarff形式データのフォーマットを記載する。"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:7
+msgid "arff形式の例"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:26
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:28
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:32
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:39
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:41
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:53
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:55
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:79
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:81
+msgid "arff形式の顧客購買データをcsv形式のデータへ変換する。"
+msgstr ""
+
+#: ../../mcmd/methods/marff2csv.rst:97
+msgid "関連メソッド"
+msgstr ""
+

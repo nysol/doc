@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mdelnull.rst:2
+msgid "mdelnull NULL値行の削除"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:4
+msgid "``f=`` パラメータで指定した項目について、NULL値が含まれる行を削除(撰択)する。\\"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:18
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "NULL値の検索対象となる項目名（複数項目指定可）を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:22
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "削除(撰択)する単位となるキー項目名（複数項目指定可）を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:26
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "不一致データ出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:30
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:34
+msgid "**F=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "項目間AND条件"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "``f=`` パラメータで複数項目を指定した場合、その全ての値がNULL値の行を削除(撰択)する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:39
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "削除ではなく選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:44
+msgid "**R=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "レコード間AND条件"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst
+msgid "``k=`` パラメータを指定した場合、その全ての行がNULL値の行を削除(撰択)する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:52
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:54
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:68
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:70
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:98
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:100
+msgid "``quantity`` と ``amount`` 項目がNULL値の行を削除する。 NULL値の行は ``oth.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:118
+msgid "**NULL値の行を選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:120
+msgid "``r=True`` を指定することで、削除ではなく選択することになる。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:132
+msgid "**キー項目でのNULL値の行の削除**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:134
+msgid ""
+"``k=`` を指定することで、集計キー単位で削除することになる。 以下では ``customer`` 項目を単位にして、 "
+"``quantity`` と ``amount`` 項目にNULL値が一つでも含まれていれば削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:146
+msgid "**項目間AND条件の例**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:148
+msgid "``quantity`` と ``amount`` 項目の両方がNULL値の行を削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:162
+msgid "**レコード間AND条件の例**"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:164
+msgid "``customer`` 項目を単位にして、 ``quantity`` 項目が全てNULL値の行を削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:180
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mdelnull.rst:182
+msgid ":doc:`mnullto` : NULL値を含む行を削除するのではなく、NULL値を指定の文字列に変換する。"
+msgstr ""
+

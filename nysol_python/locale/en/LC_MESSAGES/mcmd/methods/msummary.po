@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msummary.rst:2
+msgid "msummary 1変数の統計量の計算"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:4
+msgid "``f=`` パラメータで指定した集計項目で ``c=`` パラメータで指定した統計量の計算をする。\\"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:19
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "キー項目名リスト(複数項目指定可)【 :ref:`集計キーブレイク処理<autoadd_keybreak>` 】"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "ここで指定された項目を単位として集計する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "指定する場合は事前に指定する集計の単位となる項目順に並べ替えておく必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:25
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "集計項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "ここで指定された項目の値が集計される。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "``x`` , ``nfn`` オプション使用時は、項目番号(0～)で指定。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:31
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "統計量リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "出力する統計量をコンマで区切って指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "統計量リスト:"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "``sum/mean/count/ucount/devsq/var/uvar/sd/usd/cv/min/qtile1/median/qtile3/max/``"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "``range/qrange/mode/skew/uskew/kurt/ukurt``"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:39
+msgid "**a=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "新項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "``f=`` パラメータで指定した項目名をデータとして出力する際の項目名(省略時はfld)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:44
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst
+msgid "NULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:51
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:53
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:68
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:70
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:88
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:90
+msgid ""
+"``customer`` 項目を単位に ``quantity`` と ``amount`` 項目の中央値・平均値を求める。 "
+"統計量を求めた項目名は「変数」という項目に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:106
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/msummary.rst:108
+msgid ":doc:`mstats` : 求める統計量が1つのとき用いる。"
+msgstr ""
+

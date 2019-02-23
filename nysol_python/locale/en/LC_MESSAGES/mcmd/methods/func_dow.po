@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_dow.rst:2
+msgid "dow 曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:4
+msgid "書式1: dow(date) 曜日番号(1〜7)"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:5
+msgid "書式2: dow(time) 曜日番号(1〜7)"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:6
+msgid "書式3: dowj(date) 日本語曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:7
+msgid "書式4: dowj(time) 日本語曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:8
+msgid "書式5: dowe(date) 英語曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:9
+msgid "書式6: dowe(time) 英語曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:10
+msgid "書式7: dowes(date) 英語短縮曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:11
+msgid "書式8: dowes(time) 英語短縮曜日"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:14
+msgid ""
+"日付 :math:`date` もしくは時刻 :math:`time` から曜日を返す。 曜日の表記によって書式1〜8を使い分ける。 "
+"曜日番号は、ISO8601の規定に従い、1が月曜日で7が日曜日に対応する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:20
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:22
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:48
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:63
+msgid "**日本語表記**"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:78
+msgid "**英語表記**"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:93
+msgid "**英語短縮表記**"
+msgstr ""
+
+#: ../../mcmd/methods/func_dow.rst:108
+msgid "**時刻型でも可能**"
+msgstr ""
+

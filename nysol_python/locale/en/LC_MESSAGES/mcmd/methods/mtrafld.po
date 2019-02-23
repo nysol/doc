@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mtrafld.rst:2
+msgid "mtrafld クロス表をトランザクション項目に変換"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:4
+msgid ""
+"``f=`` で指定した項目値とその値のペアのアイテムを作成し、 "
+"それらのアイテムを連結し新しいベクトル項目(トランザクション項目とも呼ぶ)として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:19
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "トランザクション項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:23
+msgid "**f=** : 型=str , 条件付き必須(``r`` オプション指定時必須)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "ここで指定された項目名と値とを連結したアイテムを作成し"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "トランザクション項目として出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "``r`` オプションの指定がある時は"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "トランザクションデータから抜き出す項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "``r`` オプションが指定されたとき，このパラメータは省略可能である。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "省略すると、全ての項目名と値ペアを処理対象とする。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "ただし、 ``f=`` パラメータを省略すると標準入力(パイプ入力)は利用できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:34
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "トランザクション項目のアイテムを区切る文字を指定する(省略時はスペース)。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:38
+msgid "**delim2=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "項目名と値ペアとを区切る文字を指定する(省略時は=)。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:42
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "トランザクション項目をクロス表に変換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:47
+msgid "**valOnly=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst
+msgid "このオプションが指定されると、アイテムとして「項目名=」は出力しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:54
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:56
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:69
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:71
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:99
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:101
+msgid "``price`` と ``quantity`` 項目を1つの文字列として連結し、 ``transaction`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:117
+msgid "**基本例2**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:119 ../../mcmd/methods/mtrafld.rst:170
+msgid "出力された結果を ``r=True`` をつけて再実行し元に戻す。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:134
+msgid "**区切り文字の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:136
+msgid ""
+"``price`` と数量 ``quantity`` 項目を\\_(アンダーバー）で区切り1つの文字列として連結し、 "
+"項目名とデータは：（コロン）で区切り ``transaction`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:152
+msgid "**NULL値を含む場合**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:168
+msgid "**NULL値を含む場合2**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:185
+msgid "**-valOnlyの指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:202
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:204
+msgid ""
+":doc:`mvsort` : トランザクションデータはベクトル型データを処理する一連の処理コマンド( ``mv`` "
+"から始まる)によって加工できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:205
+msgid ":doc:`mcross` : トランザクションデータとしてではなく、個々のアイテムを独立した項目として出力し、その出現件数を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:206
+msgid ":doc:`mtra` : 項目の値をアイテムとしてトランザクションデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtrafld.rst:207
+msgid ":doc:`mtraflg` : 項目名をアイテムとしてトランザクションデータを作成する。"
+msgstr ""
+

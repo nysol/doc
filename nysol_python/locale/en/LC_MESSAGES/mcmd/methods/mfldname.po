@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mfldname.rst:2
+msgid "mfldname 項目名の変更"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:4
+msgid "``f=`` で指定した項目名を変更する。又、 ``n=`` で項目名を新規設定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:18
+msgid "**f=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "ここで指定された項目名のみを変更する。(現項目名:新項目名)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "指定していない項目名は変更せずに元の項目名が出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:23
+msgid "**n=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "ここで指定された項目名が新たに採用される。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "データ項目数と同じ数の項目名を指定する必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:28
+msgid "**nfni=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst
+msgid "入力データの１行目を項目名行とみなさない。このオプションが指定された場合は ``f=`` は利用できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:35
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:37
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:49
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:51
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:74
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:76
+msgid "項目名の ``customer`` を「cust」に、「10月」を「Oct.」に変更する。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:89
+msgid "**項目名変更**"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:91
+msgid "項目名を ``x,y,z`` に変更する。"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:104
+msgid "**項目名行がないデータ**"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:119
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mfldname.rst:121
+msgid ""
+":doc:`mcut` : ``mfldname`` と同じことができるが、一部の項目名を変更するには少し面倒。また ``mfldname`` "
+"の方が少しだけ高速。"
+msgstr ""
+

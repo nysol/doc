@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mtra.rst:2
+msgid "mtra 縦型データをベクトル項目に変換"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:4
+msgid ""
+"``f=`` パラメータで指定した項目値をアイテムとし、それらのアイテムを連結し新しいベクトル項目(トランザクション項目とも呼ぶ)として出力する。"
+" アイテムの区切り文字は ``delim=`` パラメータで指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:19
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "ここで指定した項目(複数項目指定可)の値がアイテムとして連結されトランザクション項目となる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "NULL値は無視される。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:24
+msgid "**s=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "ここで指定した項目(複数項目指定可)で並べ替えられた後、変換が行われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:28
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "文字列パターンの単位となる項目名(複数項目指定可)リスト。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "``r`` オプションが指定された時は指定できない。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:33
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "ここで指定した文字を区切り文字とする（省略時はスペース）。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:37
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst
+msgid "トランザクション項目を縦型データに変換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:45
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:47
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:62
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:64
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:82
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:84
+msgid "``customer`` を単位に ``item`` をスペース区切りで結合し、 ``transaction`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:97
+msgid "**アイテムの区切り文字を-(ハイフン）で実行**"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:110
+msgid "**アイテムを降順に並べ替えてから変換**"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:124
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:126
+msgid ""
+":doc:`mvsort` : トランザクションデータは、ベクトル型データを処理する一連の処理コマンド( ``mv`` "
+"から始まる)によって加工できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:127
+msgid ":doc:`mcross` : トランザクションデータとしてではなく、個々のアイテムを独立した項目として出力し、その出現件数を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:128
+msgid ":doc:`mtrafld` : 「項目名=値」の形式でトランザクションデータを作成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mtra.rst:129
+msgid ":doc:`mtraflg` : 項目名をアイテムとしてトランザクションデータを作成する。"
+msgstr ""
+

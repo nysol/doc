@@ -1,0 +1,436 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../tutorial/association.rst:2
+msgid "mcmdによる相関ルール"
+msgstr ""
+
+#: ../../tutorial/association.rst:3
+msgid ""
+"本節では「ビールを買えばおむつも購入する」で有名な相関ルールの列挙をmcmdで行う方法について解説する [#f1]_ 。 "
+"相関ルールとは、どのような商品が同時購入しやすいかについてのルールを列挙する手法である。 "
+"ルールは通常、「A=>B」のように表され、商品AとBに強い関係があることを表している。 "
+"そして、関係の強さを測る指標が色々と提案されており、特に支持度(support)、確信度(confidence)、リフト値(lift)がよく用いられる。"
+" 本節では、2つのアイテムに限定して、相関ルールを列挙する方法について紹介する。 データは、online storeのデータ・セットを用いる。 "
+"データセットの利用方法については、 :doc:`../../dataset/uci_onlineretail` を参照されたい。"
+msgstr ""
+
+#: ../../tutorial/association.rst:12
+msgid "出力イメージ"
+msgstr ""
+
+#: ../../tutorial/association.rst:13
+msgid ""
+":numref:`tutorial_as_output_image` にこの課題での出力イメージを示す。 左の2項目で相関ルール「 "
+"``item1`` => ``item2`` 」を示している。 ``freq`` は ``item1`` と ``item2`` "
+"の共起件数を表している。 共起件数とは、2つのアイテムを共に含むトランザクションの件数である。 "
+"ここで、トランザクションの定義は分析者に依存することに注意されたい。 "
+"本ケースでは、例えば、一回の注文(同じ請求番号)をトランザクションとも定義できるし、 一人の顧客をトランザクションの単位とすることも可能である。 "
+"また、一人の顧客の一ヶ月の買い物をトランザクションと定義する人もいるかも知れない。 "
+"ここでは、顧客の一日での購買をトランザクションの単位とすることにしよう。"
+msgstr ""
+
+#: ../../tutorial/association.rst:23
+msgid ""
+"``freq1`` ( ``freq2`` )は、 ``item1`` ( ``item2`` ) を含むトランザクションの件数である。 "
+"``total`` は、総トランザクション件数(総顧客数)である。"
+msgstr ""
+
+#: ../../tutorial/association.rst:26
+msgid "相関ルールの出力イメージ"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "item1"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "item2"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "freq"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "freq1"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "freq2"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "total"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "support"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "confidence"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "lift"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "15034"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "10002"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "95"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "49"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "19296"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "0.0001036484245"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "0.02105263158"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "8.290440387"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "22414"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "72"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "5.182421227e-05"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "0.01388888889"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "5.469387755"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "35961"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "154"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "0.0001554726368"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "0.01948051948"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "7.671349059"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../tutorial/association.rst:35
+msgid ""
+"``support`` ``confidence`` ``lift`` はルールの興味深さを定義する指標で、 相関ルール「 ``item1`` "
+"=> ``item2`` 」に関するそれぞれの定義式を以下に示す。"
+msgstr ""
+
+#: ../../tutorial/association.rst:38
+msgid ""
+"support(item1=>item2) = \\frac{freq}{total}  confidence(item1=>item2) = "
+"\\frac{freq}{freq1}  lift(item1=>item2) = \\frac{freq \\cdot total}{freq1"
+" \\cdot freq2}"
+msgstr ""
+
+#: ../../tutorial/association.rst:46
+msgid ""
+"supportとは、 ``item1`` と ``item2`` の共起確率を表しており、 confidenceは、 ``item1`` "
+"の出現を条件とした時の ``item2`` の出現確率を表している。 liftは、 定義式では分かりにくいが、 ``item1`` と "
+"``item2`` それぞれの出現確率から計算される ``item1`` と ``item2`` の期待共起確率に対する 実際の共起確率( "
+"``support`` )の比である。 support と liftは、定義式よりルールに方向性はない。 すなわち "
+":math:`support(item1=>item2) = support(item2=>item1)`  であり、 "
+":math:`lift(item1=>item2) = lift(item2=>item1)` である。 "
+"一方で、confidenceには方向性があり、 :math:`confidence(item1=>item2) \\ne "
+"confidence(item2=>item1)` である。"
+msgstr ""
+
+#: ../../tutorial/association.rst:55
+msgid "さてそれでは、以上9項目からなるルール一覧を作成してみよう。"
+msgstr ""
+
+#: ../../tutorial/association.rst:58
+msgid "ベースデータの作成"
+msgstr ""
+
+#: ../../tutorial/association.rst:59
+msgid ""
+"まず、 :doc:`../../dataset/uci_onlineretail` で作成したデータセット "
+"``onlineRetail2.csv`` をカレントディレクトリにコピーしておこう。 "
+"各項目を作成するに先立ち、トランザクションデータから必要な項目、必要な行を抽出することから始めよう。 "
+":numref:`tutorial_as_onlineRetail` に今回利用するonline retailデータセットの一部を例示している。 "
+"ここでアイテムとしては ``StockCode`` 項目を使い、トランザクションとして ``CustomerID`` と ``date`` "
+"項目を使う。 必要な項目はこれら3項目だけである。 ただし、``CustomerID`` "
+"項目にはnull値が含まれるため、それらの行は前もって省いておくことにする。"
+msgstr ""
+
+#: ../../tutorial/association.rst:66
+msgid "online retailデータセット"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "InvoiceNo"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "StockCode"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "Description"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "Quantity"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "UnitPrice"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "CustomerID"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "Country"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "time"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "536365"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "85123A"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "WHITE HANGING HEART T-LIGHT HOLDER"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "6"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "2.55"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "17850"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "United Kingdom"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "20101201"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "082600"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "71053"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "WHITE METAL LANTERN"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "3.39"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "84406B"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "CREAM CUPID HEARTS COAT HANGER"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "8"
+msgstr ""
+
+#: ../../tutorial/association.rst:1
+msgid "2.75"
+msgstr ""
+
+#: ../../tutorial/association.rst:75
+msgid ":numref:`tutorial_as_base` にそのスクリプトを示す。"
+msgstr ""
+
+#: ../../tutorial/association.rst:77
+msgid ""
+"``mdelnull`` メソッドで ``CustomerID`` 項目がnullの行を削除し、 ``mcal`` メソッドで、 "
+"``CustomerID`` と ``date`` を併合してトランザクションID項目 ``tra`` を作成している。 ``mcut`` "
+"で必要な項目のみ選択し、 ``muniq`` でトランザクション内の重複するアイテムを単一化している。 "
+"相関ルール分析は、一般的にアイテムを購入したか否かについてルールを列挙するもので、アイテムの数量は勘案しない。 ``run()`` "
+"の実行結果は件数が多くなるために、出力は最初の5件のみに限定している。 また、データ少し大きいため、実行時にはメッセージを表示するようにしている。"
+" なお、ここでの ``run()`` は、後述のスクリプトに直接連結するため必要なくなる。 ここではあくまでも確認のために実行している。"
+msgstr ""
+
+#: ../../tutorial/association.rst:86 ../../tutorial/association.rst:120
+msgid "トランザクション件数の計算"
+msgstr ""
+
+#: ../../tutorial/association.rst:109
+msgid "トランザクション総件数"
+msgstr ""
+
+#: ../../tutorial/association.rst:110
+msgid ""
+"項目を一つずつ作成していこう。 まずは簡単なところから、トランザクションの総件数 ``total`` を計算する。 "
+":numref:`tutorial_as_total`  にそのスクリプトを示す。 入力は元のCSVファイルではなく、上述の ``base`` "
+"を指定していることに注意しよう。 出力の1項目目は ``tra`` 項目の値が残ってしまっているが意味はなく、 "
+"2項目目にトランザクション総件数が出力されている。 全ての項目が計算された後に、この値は結合されることになる。 "
+"なお、出力される完了メッセージを見ると、 ``base`` の内容が再実行されているが、 "
+"これは、ブロックごとに実行していっているからであり、最終的に全てを接続すれば、ダブって計算されることはない。"
+msgstr ""
+
+#: ../../tutorial/association.rst:143
+msgid "アイテム別出現件数"
+msgstr ""
+
+#: ../../tutorial/association.rst:144
+msgid ""
+"次に、アイテム別出現件数を計算する。 :numref:`tutorial_as_item_freq` にそのスクリプトを示す。 "
+"出力の2項目目にアイテムが、3項目目にその出現件数(トランザクション数)が出力されている。 ここでも結果は最初の5件のみに限定している。"
+msgstr ""
+
+#: ../../tutorial/association.rst:149
+msgid "アイテムの出現件数の計算"
+msgstr ""
+
+#: ../../tutorial/association.rst:166
+msgid "共起件数"
+msgstr ""
+
+#: ../../tutorial/association.rst:167
+msgid ""
+"そして2アイテムの共起件数を求める( :numref:`tutorial_as_cooccur` )。 ``mcombi`` "
+"メソッドは、トランザクション内の全アイテムから、2アイテムの順列を求め、 それら2アイテムの項目名を ``item1`` ``item2`` "
+"と命名している。 そしてこれら2アイテムの件数をカウントすれば、共起件数が計算できたことになる。"
+msgstr ""
+
+#: ../../tutorial/association.rst:172 ../../tutorial/association.rst:234
+msgid "2アイテムの共起件数の計算"
+msgstr ""
+
+#: ../../tutorial/association.rst:192
+msgid "結合、そして指標の計算"
+msgstr ""
+
+#: ../../tutorial/association.rst:193
+msgid ""
+"最後に、ここまでに計算してきた結果を結合し、各種指標を計算する( :numref:`tutorial_as_all` )。 最後に実行される "
+"``mcal`` で ``o=`` を指定しているので、結果はPython ListsではなくCSVファイルに書き込まれる。"
+msgstr ""
+
+#: ../../tutorial/association.rst:196
+msgid "全ての結果を結合し指標を計算する"
+msgstr ""
+
+#: ../../tutorial/association.rst:222
+msgid "全てを一つのスクリプトにまとめる"
+msgstr ""
+
+#: ../../tutorial/association.rst:223
+msgid ""
+"以上の説明では、わかりやすさのため、ブロック単位で実行してきたが、 それらを全てまとめたスクリプトを "
+":numref:`tutorial_as_script` に示しておく。 ブロック単位で実行した時との違いは2つある。 1つは、 ``cooc``"
+" ブロックと ``f`` ブロックはそのまま接続できるので、まとめて ``f`` ブロックとしている。 2つ目は、各ブロックの最後で実行していた "
+"``run()`` はなくなり、最後の ``f`` のみrunすれば十分である。 "
+"これは、全てのブロックが何らかの形で接続され一つのストリームを形成しているからである( "
+"もし独立のストリームが複数あれば、それぞれをrunさせる必要がある)。 全体として全てのフローが接続されている様子を見るために、スクリプトの最後で"
+" ``drawModelD3`` メソッドを使って処理フローを視覚化している。 :numref:`association.png` "
+"にその結果を示している。"
+msgstr ""
+
+#: ../../tutorial/association.rst:275
+msgid "相関ルールを求めるスクリプトの処理フロー図"
+msgstr ""
+
+#: ../../tutorial/association.rst:278
+msgid "Footnotes"
+msgstr ""
+
+#: ../../tutorial/association.rst:279
+msgid ""
+"あくまでもmcmdの使い方を解説するためであり、実際に相関ルールを列挙するのであれば :doc:`TAKE<../take>` "
+"パッケージを用いれば良い。"
+msgstr ""
+

@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mcat.rst:2
+msgid "mcat 併合"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:4
+msgid ""
+"``i=`` パラメータで指定した全データのレコードを、指定した順に併合する。 "
+"ワイルドカードでデータを指定した場合は、データのアルファベット順に併合される。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "入力データリストを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "複数のデータをカンマで区切って指定する。ワイルドカードを用いることができる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:16
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:20
+msgid "**f=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "併合する項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "指定を省略すれば ``i=`` で指定した1つ目のデータの項目名が使われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:25
+msgid "**skip_fnf=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``i=`` で指定したデータが存在しなくてもエラー終了しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "ただし、全データがなければエラーとなる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:30
+msgid "**nostop=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``nostop``  , ``skip`` , ``force`` の各オプションは、指定の項目名がなかったときの動作を制御するフラグである。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``nostop`` オプションは、指定の項目名がなければnullを出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``nfn`` オプションが同時に指定された場合，項目数が異なればエラー終了する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:36
+msgid "**skip=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "指定の項目名がなければそのデータは併合しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``nfn`` オプションが同時に指定された場合、項目数が異なればそのデータは併合しない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:41
+msgid "**skip_zero=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "``nfn`` オプションを指定していない場合でも0バイトデータでエラーにならないようにする。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:45
+msgid "**flist=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "併合するデータリストをCSVデータとして指定する。flist=fileName:fldNameで指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:49
+msgid "**kv=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "パス名に含めた key-value の文字列を抜き出し項目名とその値としてデータに付加する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:53
+msgid "**force=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "指定の項目名がなければ，項目番号で強制併合する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "指定の項目番号がなければnullを出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:58
+msgid "**stdin=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "標準入力も併合する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:62
+msgid "**add_fname=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "併合元のデータを最終項目として追加する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "標準入力は ``/dev/stdin`` という名称になる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst
+msgid "項目名は ``fileName`` 固定なので、入力データに同一の項目名があるとエラーとなる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:71
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:73
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`add_fname=<common_param_add_fname>` , "
+":ref:`-stdin=<common_param_-stdin>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:87
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:89
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:119
+msgid "**同一項目名ファイルの併合**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:135
+msgid "**項目名の異なるファイルの併合**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:137
+msgid ""
+"``i=`` の最初のファイル ``dat1.csv`` の項目「顧客,日付,金額」の3項目を併合する。 しかし、 ``dat3.csv`` には"
+" ``amount`` 項目がないので、エラーとなる。 ただし、 ``dat1.csv`` の内容は既に出力されていることに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:148
+msgid "**項目名の異なるファイルの併合2**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:150
+msgid ""
+"前例に ``nostop=True`` オプションを付けると、項目が見つからないデータについてはNULL値を出力するようになり、 "
+"途中でエラー終了することはなくなる。 その他にも、項目が見つからなかった場合の動作を変更するオプションとして、 ``skip`` , "
+"``force`` がある。 詳しくはパラメータの説明を参照されたい。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:167
+msgid "**項目名を指定して併合**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:169
+msgid "``f=`` で項目名を指定すると、それら指定した項目のみを併合する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:184
+msgid "**ワイルドカード指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:186
+msgid ""
+"カレントディレクトリに ``dat1.csv,dat2.csv,dat3.csv`` の3つのCSVファイルがあったとして、 "
+"それらを全て併合するのにワイルドカード ``dat*.csv`` を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:213
+msgid "**同一ファイルの複数回併合**"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:215
+msgid "同一ファイルを複数指定することも可能である。"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:232
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mcat.rst:234
+msgid ":doc:`msep` : ちょうど逆の動きをする。"
+msgstr ""
+

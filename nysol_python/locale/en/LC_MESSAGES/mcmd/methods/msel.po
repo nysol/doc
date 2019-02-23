@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msel.rst:2
+msgid "msel 条件式による行選択"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:4
+msgid ""
+"``c=`` パラメータで指定した計算式で計算をおこない、結果が真であれば、その行を選択する。 なおmcalと同じ計算式が利用できるので、詳細は "
+":doc:`mcal` を参照されたい。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:15
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "用意された関数を組み合わせて計算する式を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "詳細は :doc:`mcal` を参照。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:20
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "指定の条件に一致する行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:24
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "指定の条件に一致しない行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:28
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst
+msgid "選択ではなく削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:36
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:38
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:49
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:51
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:77
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:79
+msgid "``amount`` 項目の値が40より大きい行を選択する。 それ以外のデータは ``unmatch1.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:97
+msgid "**NULL値の選択規制**"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:99
+msgid ""
+"``msel`` コマンドでは ``c=`` で与えられた式を評価した結果がNULL値の場合その行は選択されない。 また、アンマッチ出力ファイルが"
+" ``u=`` によって指定されていれば、そのファイルに出力される。 以下の例では項目 ``b`` に ``1=True`` 、NULL値、 "
+"``1`` を持つ3行のデータについて、0より大きい行を選択しているが、 NULL値を含む行はアンマッチ出力ファイルへと出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:117
+msgid "**-rオプション指定**"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:119
+msgid ""
+"真偽は逆転するがNULL値の評価に変わりはない。 すなわちNULL値の行は選択されない。 以下の例では、上の例と同様のデータおよび選択条件で "
+"``r=True`` をつけている。 "
+"真偽の選択条件は逆転しているが、NULL値を含む行は上記の例と同様にアンマッチファイルへと出力されていることがわかる。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:138
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:140
+msgid ":doc:`mselnum` : 簡単な数値範囲による行選択はこちら。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:141
+msgid ":doc:`mselstr` : 簡単な文字列マッチによる行選択はこちら。"
+msgstr ""
+
+#: ../../mcmd/methods/msel.rst:142
+msgid ":doc:`mcal` : 行選択でなく、計算の結果を項目として出力する。"
+msgstr ""
+

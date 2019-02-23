@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_diff.rst:2
+msgid "diff 期間"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:4
+msgid "書式1: diffyear(date_1,date_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:5
+msgid "書式2: diffyear(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:6
+msgid "書式3: diffmonth(date_1,date_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:7
+msgid "書式4: diffmonth(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:8
+msgid "書式5: diffday(date_1,date_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:9
+msgid "書式6: diffday(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:10
+msgid "書式7: diffhour(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:11
+msgid "書式8: diffminute(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:12
+msgid "書式9: diffsecond(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:13
+msgid "書式10: diffusecond(time_1,time_2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:16
+msgid ""
+"二つの引数が日付型の場合、 :math:`date_1` と :math:`date_2` の差( :math:`date_1-date_2` "
+")を計算し、 その年数(difyear)、月数(diffmonth)、日数(diffday)で計算する。 二つの引数が時刻型の場合、 "
+":math:`time_1` と :math:`time_2` の差( :math:`time_1-time_2` )を計算し、 "
+"その年数(difyear)、月数(diffmonth)、日数(diffday)、 "
+"時間数(diffhour)、分数(diffminute)、秒数(diffsecond)、マイクロ秒数(diffusecond)で計算する。 "
+"端数は切り捨てられる。"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:25
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:27
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:55
+msgid "**月単位での期間**"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:57
+msgid "``date`` 項目から2013年9月1日までの経過期間を日数で計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:72
+msgid "**分単位での期間**"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:74
+msgid "``time`` 項目から2012年1月1日 00時00分00秒までの経過期間を分単位で計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:89
+msgid "**マイクロ秒単位での期間**"
+msgstr ""
+
+#: ../../mcmd/methods/func_diff.rst:91
+msgid "``time`` 項目から2012年1月1日 00時00分00秒までの経過期間を秒単位およびマイクロ秒単位で計算する。"
+msgstr ""
+

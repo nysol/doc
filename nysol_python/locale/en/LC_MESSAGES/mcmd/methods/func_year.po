@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_year.rst:2
+msgid "year 西暦年"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:4
+msgid "書式1: year(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:5
+msgid "書式2: year(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:6
+msgid "書式3: years(date)"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:7
+msgid "書式4: years(time)"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:10
+msgid ""
+"日付 :math:`date` もしくは時刻 :math:`time` から西暦年を取り出す。 "
+"書式1,2は数値として返し、書式3,4は文字列として返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:15
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:17
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:43
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_year.rst:58
+msgid "**時刻型でも可能**"
+msgstr ""
+

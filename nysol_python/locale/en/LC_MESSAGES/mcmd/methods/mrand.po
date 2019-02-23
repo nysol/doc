@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mrand.rst:2
+msgid "mrand 擬似乱数"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:4
+msgid ""
+"0.0から1.0の範囲の実数の擬似乱数、もしくは範囲指定による整数の擬似乱数を生成し、 ``a=`` パラメータで指定した項目名で出力する。 "
+"乱数の生成にはメルセンヌ・ツイスター法を利用している "
+"(\\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}"
+" , "
+"\\href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:11
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:13
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:17
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:21
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "指定したキー項目について、同じキー値には同じ乱数値が振られる。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:25
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "新たに追加される項目の名前を指定する。【但し、-nfn,-nfnoオプション指定時は必要なし】"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:29
+msgid "**max=** : 型=str , 任意(default=INT\\_MAX)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "乱数の最大値"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "0〜 :math:`2^{32}` (約21億)の範囲の整数が指定可能"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "このパラメータを指定するときは ``int`` オプションも指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:35
+msgid "**min=** : 型=str , 任意(default=0)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "整数乱数の最小値"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:41
+msgid "**S=** : 型=str , 任意(default=現在時刻)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "乱数の種"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "同じ乱数の種を指定すれば、同じ乱数系列となる。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "``S=`` を指定しなければ、時刻(ミリ(1/1000秒単位)に応じた異なる乱数の種が利用される。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "指定可能な乱数の種(-2147483648〜2147483647)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:48
+msgid "**int=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst
+msgid "整数乱数を生成"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:55
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:57
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:70
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:72
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:104
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:106
+msgid "0.0から1.0の範囲の実数乱数を生成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:121
+msgid "**基本例2**"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:123
+msgid "-intで整数乱数"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:138
+msgid "**最小値、最大値を決めた乱数の生成**"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:140
+msgid "最小値が10、最大値が100の整数の乱数を生成し、 ``rand`` という項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:155
+msgid "**キー単位の乱数生成**"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:157
+msgid "以下の例は、顧客 ``A,B,C,D`` の4人について同じ顧客には同じ乱数値を振る。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:177
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:179
+msgid ":doc:`mselrand` : ランダムに行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mrand.rst:180
+msgid ":doc:`mnewrand` : 入力データなしに、乱数データを新たに生成する。"
+msgstr ""
+

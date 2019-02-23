@@ -1,0 +1,448 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mselstr.rst:2
+msgid "mselstr 文字列による行選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:4
+msgid ""
+"``f=`` で指定した項目の値が、 ``v=`` で指定した文字列に一致すれば、その行を選択する。 典型例を "
+":numref:`mselstr_input` 〜 :numref:`mselstr_out2` に示す。 "
+":numref:`mselstr_out1` では ``key`` に関係なく ``val`` が ``\"y\"`` である行を選択する。 "
+":numref:`mselstr_out2` では、 ``val`` が ``\"x\"`` の行を含んでいる同一キーの行全て、 すなわち "
+"``key`` 項目が ``\"a\"`` である行全てを選択する。 すなわち ``key`` 項目が ``\"b\"`` の行はいずれも "
+"``\"x\"`` を含んでいないので選択されない。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:12 ../../mcmd/methods/mselstr.rst:62
+msgid "入力データ"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "key"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "val"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "a"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "x"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "y"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "b"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "z"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:25
+msgid "f=val v=y"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:36
+msgid "k=key f=val v=x"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:45
+msgid ""
+"また、以下に示すように多様な選択条件を指定することも可能である。 このコマンドで指定できない複雑な条件(例えば正規表現など)を設定するのであれば "
+":doc:`msel` コマンドを利用すればよい。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:49
+msgid "``v=`` に複数の文字列を指定すれば、いずれかの文字列にマッチすれば選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:50
+msgid "``f=`` に複数項目を指定すれば、いずれかの項目の値がマッチすれば選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:51
+msgid "複数項目のマッチ条件をAND条件とすることも可能( ``F`` オプション)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:52
+msgid "完全一致だけでなく、先頭一致、末尾一致、部分一致の指定も可能( ``head`` , ``tail`` ``sub`` オプション)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:53
+msgid "``k=`` を指定することでキー単位で選択することが可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:54
+msgid "キー単位選択の場合、複数レコードのAND条件を指定可能( ``R`` オプション)。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:56
+msgid ""
+"いま同じキーのデータとして２項目２行からなるデータ( :numref:`mselstr_input2` )に対して、 ``mselstr "
+"k=key f=fld1,fld2 v=s1,s2`` を実行した場合、 オプション ``R`` , ``F`` の指定の有無によるマッチ条件を "
+":numref:`mselstr_cond` に示す。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:` ``key`` `"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:` ``fld1`` `"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:` ``fld2`` `"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "k"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:`v_{a1}`"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:`v_{a2}`"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:`v_{b1}`"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ":math:`v_{b2}`"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:73
+msgid ""
+":numref:`mselstr_input2` で示されるデータに、mselstr k=key f=fld1,fld2 "
+"v=v1,v2を実行した時の、-R,-Fオプションの指定の有無によるマッチ条件の違い。条件にマッチすれば全行(２行)出力され、アンマッチなら１行も出力されない。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "``F`` オプション"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "``R`` オプション"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "マッチ条件"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ""
+"(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  or ( "
+":math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) or (( "
+":math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  or ( "
+":math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "-F"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ""
+"(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  and ( "
+":math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) or (( "
+":math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  and ( "
+":math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid "-R"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ""
+"(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  or ( "
+":math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) and (( "
+":math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  or ( "
+":math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:1
+msgid ""
+"(( :math:`v_{a1}`   ``==``  s1 or  :math:`v_{a1}`   ``==``  s2)  and ( "
+":math:`v_{a2}`   ``==``  s1 or  :math:`v_{a2}`   ``==``  s2)) and (( "
+":math:`v_{b1}`   ``==``  s1 or  :math:`v_{b1}`   ``==``  s2)  and ( "
+":math:`v_{b2}`   ``==``  s1 or  :math:`v_{b2}`   ``==``  s2))"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:87
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:89
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:93
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "検索対象となる項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:97
+msgid "**v=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "``f=`` パラメータで指定した項目の値が、ここで指定した文字列リスト(複数項目指定可)の1つにマッチすれば選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:101
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "選択する単位となるキー項目(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:105
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "指定の条件に一致する行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:109
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "指定の条件に一致しない行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:113
+msgid "**F=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "``f=``  パラメータで複数項目を指定した場合、その全ての値がマッチする行を撰択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:117
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "選択ではなく削除する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:122
+msgid "**R=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "``k=``  パラメータを指定した場合、その全ての行がマッチすれば行を撰択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:126
+msgid "**sub=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "検索を完全一致ではなく部分文字列マッチで比較する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "すなわち、 ``f=`` パラメータで指定した項目の値に、"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "``v=`` パラメータで指定の文字列が部分文字列として含まれていればその行を撰択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:132
+msgid "**head=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "先頭文字列マッチオプション"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:136
+msgid "**tail=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "末尾文字列マッチオプション"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:140
+msgid "**W=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "``sub`` , ``head`` , ``tail`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:144
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:151
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:153
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:168
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:170
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:225
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:227
+msgid ""
+"``item`` 項目の値が ``apple、orange`` に完全一致する行を選択し、 ``rsl1.csv`` に出力する。 "
+"``u=oth1.csv`` を指定すれば、それ以外の行は ``oth1.csv`` に出力する。 ``pineapplejuice`` "
+"は完全一致ではないので、 ``oth1.csv`` に出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:247
+msgid "**行の削除**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:249
+msgid ""
+"``r=True`` オプションを指定することで、例1とは逆に、商品項目の値が ``apple、orange`` に完全一致する行を削除し、 "
+"``rsl2.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:263
+msgid "**キー単位での選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:265
+msgid ""
+"``orange`` を購入したことのある顧客を選択する ``k=顧客`` を指定することで、 ``orange`` "
+"を購入したことのある顧客の他に購入した商品の行を含めて選択する。 それ以外の行は ``oth2.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:287
+msgid "**部分一致**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:289
+msgid ""
+"``item`` 項目の値が ``apple`` に部分一致するの行を選択し、 ``rsl4.csv`` に出力する。 部分一致であるため "
+"``pine(apple)juice`` も ``rsl4.csv`` に出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:303
+msgid "**ワイド文字の部分一致**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:305
+msgid ""
+"``item`` 項目の値がワイド文字の「柿」、「桃」、「葡萄」の行を選択(部分一致) "
+"選択項目にワイド文字が使用されている場合にバイト単位のマッチングを使用すると、 マルチバイト文字をまたいだ文字列にマッチングする可能性がある。 "
+"その為、ワイド文字が選択項目に含まれる場合は ``W=True`` オプションを使用して、 ワイド文字を使用していることを意図的に示す必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:322
+msgid "**商品の購入日と前回の購入日が2013年の商品データを選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:324
+msgid ""
+"``F=True`` オプションを指定することで、同じ商品を2013年内に購入したことのある(購入日と前回購入日両方が2013年)商品行を選択し、"
+" ``rsl6.csv`` に出力する。 それ以外の行は ``oth3.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:347
+msgid "**商品の購入日と前回の購入日が2013年の顧客データの抽出**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:349
+msgid ""
+"``k=顧客`` を指定することで、同じ商品を2013年内に購入したことのある顧客の他に購入した商品の行を含めて選択する。 それ以外の行は "
+"``oth4.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:371
+msgid "**2013年度の新規顧客情報の抽出**"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:373
+msgid ""
+"``R=True`` オプションを指定することで、購入日、前回購入日両方が2013年,NULL(前回購入なし)の顧客情報を抽出する。 "
+"つまり2013年の新規顧客データを選択し、 ``rsl8.csv`` に出力する。 それ以外の行は  ``oth5.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:397
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:399
+msgid ":doc:`msel` : より複雑な条件で行選択を行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mselstr.rst:400
+msgid ":doc:`mcommon` : 選択対象となる文字列の数が多いときは、参照データを用意することで ``mcommon`` コマンドが使える。"
+msgstr ""
+

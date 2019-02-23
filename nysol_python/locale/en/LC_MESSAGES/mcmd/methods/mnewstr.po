@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mnewstr.rst:2
+msgid "mnewstr 固定文字列データの新規生成"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:4
+msgid ""
+"``v=`` パラメータで指定した文字列データを新規作成し、 ``a=`` パラメータで指定した項目名で出力する。 "
+"一度に複数の項目を生成することも可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:11
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:15
+msgid "**a=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "新規に作成するデータの項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "複数の項目を生成する場合は、項目名をカンマで区切る。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "``nfn`` もしくは ``nfno`` オプション指定時は指定の必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:21
+msgid "**v=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "新しく作成する文字列を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "複数の項目を生成する場合は、値をカンマで区切る。 ``a=`` で指定した個数と同数でなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:26
+msgid "**l=** : 型=str , 任意(default=10)"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst
+msgid "新規作成する乱数データの行数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:33
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:35
+msgid ""
+":ref:`o=<common_param_o>` , :ref:`nfn=<common_param_nfn>` , "
+":ref:`nfno=<common_param_nfno>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:44
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:46
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:54
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:56
+msgid "``custNo`` と ``A0001`` という文字列データを5行作成し、 ``attribute,code`` という名前の項目名で出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:72
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:74
+msgid ":doc:`mnewnumber` : 連番を生成する。"
+msgstr ""
+
+#: ../../mcmd/methods/mnewstr.rst:75
+msgid ":doc:`mnewrand` : 乱数を生成する。"
+msgstr ""
+

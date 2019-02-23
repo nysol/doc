@@ -1,0 +1,902 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/data.rst:3
+msgid "データ"
+msgstr ""
+
+#: ../../mcmd/data.rst:5
+msgid ""
+"mcmdが扱えるデータは、 :numref:`data_table` に示されるような項目名ヘッダー付きの表構造データである。 "
+"mcmdが提供する処理メソッドの多くは、 ``i=`` で入力データを指定し、 ``o=`` で出力データを指定する。 "
+"これらのパラメータに指定できる表構造データは、現在のところ、CSVデータファイル名もしくはPython Listsのいずれかである。 "
+"入力については、処理フローオブジェクトも指定できるが、それはデータフローの接続のためであり、 詳しくは :doc:`別節<flow>` "
+"にて解説している。"
+msgstr ""
+
+#: ../../mcmd/data.rst:11
+msgid "入力データ例:mcmdが扱う表構造データ"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "customer"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "date"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "amount"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "A"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "20180101"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "5200"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "B"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "800"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "20180112"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "3500"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "20180105"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "2000"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "20180107"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "4000"
+msgstr ""
+
+#: ../../mcmd/data.rst:23
+msgid "リスト(Python Lists)"
+msgstr ""
+
+#: ../../mcmd/data.rst:24
+msgid ""
+":numref:`data_list` は :numref:`data_table` をリストで表現したPythonコードである。 "
+"二重リストになっており、最初の要素は項目名ヘッダーで、続いてデータが1行を1要素として格納されている。 "
+"行あたりの項目数は全行で同じでなければならない。 また、項目名ヘッダーには特殊な規則があり 詳しくは、別節「 "
+":doc:`項目名ヘッダー<field>` 」で解説している。"
+msgstr ""
+
+#: ../../mcmd/data.rst:29
+msgid "リストによる表構造データの表現"
+msgstr ""
+
+#: ../../mcmd/data.rst:44
+msgid "入力の変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:45
+msgid ""
+"mcmdは内部では全てのデータをテキストのバイトストリームとして扱うため、 Python "
+"Listsを入力データとして指定した場合、変換操作が加わることになる [#f1]_ 。 "
+"mcmdで入力データとして扱い可能なデータ型は、文字列、数値(int,float,bool)であり、 "
+"特殊な値としてNone,nan,infも扱うことができる。 いずれもmcmd内部では文字列に変換されるが、その変換規則は "
+":numref:`data_inTypeConv` に示す通りで、 実際のPythonコードとその実行結果を "
+":numref:`data_inTypeConvCode` に示す。 なお、コード中の ``mread`` メソッドは、``i=`` "
+"で指定された内容をそのまま出力するメソッドである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:53
+msgid "Pythonのデータ型のmcmdデータへの変換規則と変換例"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "Pythonデータ型/値"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "変換前"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "変換後"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "string"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'abc\\'"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "int"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "12"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'12\\'"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "float"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "0.123"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'0.123\\'"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "nan"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "float(\\'nan\\')"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'\\' (空文字)"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "inf"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "float(\\'inf\\')"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "-inf"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "True"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'1\\'"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "False"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "\\'0\\'"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "None"
+msgstr ""
+
+#: ../../mcmd/data.rst:67
+msgid "Pythonデータ型の変換例"
+msgstr ""
+
+#: ../../mcmd/data.rst:81
+msgid "出力の変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:82
+msgid ""
+"出力も入力と同様に、mcmdの内部で処理されるテキストのバイトストリームデータを Pythonの各種型に変換する必要がでてくる。 "
+"特に何も指定しなければ、全て文字列として出力される。 それら文字列を他のデータ型に変換したければ、``writelist`` "
+"メソッドを用いればよい。 このメソッドは、項目単位で出力するデータ型を指定できる。 "
+"変換可能なデータ型は、str,int,float,boolであり、strは 空文字に、その他の型は ``None`` に変換される。 "
+"出力時の変換規則は :numref:`data_outTypeConv` に示す通りで、 実際のPythonコードとその実行結果を "
+":numref:`data_outTypeConvCode` に示す。"
+msgstr ""
+
+#: ../../mcmd/data.rst:91
+msgid "mcmdの出力データのPythonのデータ型への変換規則"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "Pythonデータ型"
+msgstr ""
+
+#: ../../mcmd/data.rst:1
+msgid "bool"
+msgstr ""
+
+#: ../../mcmd/data.rst:105
+msgid "mcmdの出力のPythonデータ型への変換例"
+msgstr ""
+
+#: ../../mcmd/data.rst:127
+msgid "CSV"
+msgstr ""
+
+#: ../../mcmd/data.rst:128
+msgid ""
+"CSV(Comma Separated Values)フォーマットとは、 :numref:`data_csv` "
+"に例示されるような値をカンマで区切った表構造データである。 CSVは表構造データのフォーマットのデファクトスタンダードであり、 "
+"アプリケーションプログラム間でのデータ交換用フォーマットとして 広く利用されている。"
+msgstr ""
+
+#: ../../mcmd/data.rst:132
+msgid "CSVデータ"
+msgstr ""
+
+#: ../../mcmd/data.rst:142
+msgid ""
+"mcmdでCSVファイルの指定は、 ``i=\"filename.csv\"`` のように、ファイル名を文字列で与える。 ``i=`` "
+"``m=`` ``o=`` ``u=`` の全てに利用可能である。 :numref:`data_csv_io` は、 入力したデータを "
+"CSVとして ``dat.csv`` に出力し(最初の ``mread`` メソッド)、 "
+"それを再度入力データとして読み込み、``dat2.csv`` に出力する(2番目の ``mread`` メソッド)例である。"
+msgstr ""
+
+#: ../../mcmd/data.rst:148
+msgid "CSVファイルの入出力例"
+msgstr ""
+
+#: ../../mcmd/data.rst:165
+msgid ":numref:`data_csv_io` の出力内容。 ``dat.csv`` と ``dat2.csv`` の内容は当然同じになる。"
+msgstr ""
+
+#: ../../mcmd/data.rst:183
+msgid "CSVの定義"
+msgstr ""
+
+#: ../../mcmd/data.rst:184
+msgid ""
+"CSVは標準化協会や企業主導で作成された標準フォーマットではなく、 それ故にベンダー毎にCSV の扱い方法が異なっているのが現状である。 "
+"その中で2005年10月にインターネット標準である |RFC4180| としてCSVフォーマットが 提案されたのは注目すべき動きである。 "
+":numref:`csv_abnf` にRFC4180の中で定義されているCSVの |ABNF| 表現とその意味を示す。"
+msgstr ""
+
+#: ../../mcmd/data.rst:197
+msgid "CSVのABNFによる定義とその意味"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**file = [header CRLF] record \\*(CRLF record) [CRLF]**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "ファイル(file)は，ヘッダ(header)と1行以上のレコード(record)から構成される。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "ヘッダはなくてもよい。ヘッダとレコードの末尾には改行(CRLF)が付く。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "最終レコードの改行(CRLF)は任意である。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**header = name \\*(COMMA name)**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "ヘッダ(header)は1つ以上の名前(name)で構成され，カンマ(COMMA)で区切られる。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**record = field \\*(COMMA field)**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "レコード(record)は一つ以上の項目(field)で構成されており，"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**name = field**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "名前(name)は項目(field)である。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**field = (escaped / non\\-escaped)**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "項目(field)はエスケープ(escaped)か，"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "非エスケープ(non-escaped)のいずれかである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**escaped = DQUOTE \\*(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "エスケープ(escaped)は，ダブルクォーツで囲まれた0個以上のテキスト文字(TEXTDATA)，"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "カンマ(COMMA)，改行文字(CRもしくはLF)，もしくは2つの連続したダブルクォーツである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**non\\-escaped = \\*TEXTDATA**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "非エスケープ(non-escaped)は0個以上のテキスト文字(TEXTDATA)である。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+#, python-format
+msgid "**COMMA = %x2C**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "コンマは16進数アスキーコード2Cである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+#, python-format
+msgid "**CR = %x0D**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "キャリッジリターン(CR)は16進数アスキーコード0Dである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+#, python-format
+msgid "**DQUOTE = %x22**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "ダブルクォーツ(DQUOTE)は16進数アスキーコード22である。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+#, python-format
+msgid "**LF = %x0A**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "ラインフィード(LF)は16進数アスキーコード0Aである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "**CRLF = CR LF**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "改行ラインフィードはキャリッジリターン+ラインフィードである。"
+msgstr ""
+
+#: ../../mcmd/data.rst
+#, python-format
+msgid "**TEXTDATA = %x20\\-21 / %x23\\-2B / %x2D\\-7E**"
+msgstr ""
+
+#: ../../mcmd/data.rst
+msgid "テキスト文字(TEXTDATA)は16進数アスキーコードで20〜21，23〜2B，もしくは2D〜7Eである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:231
+msgid "mcmdでは上述のCSVの定義に対して以下の制約を追加している。"
+msgstr ""
+
+#: ../../mcmd/data.rst:233
+msgid "項目数は全行同じでなければならない。"
+msgstr ""
+
+#: ../../mcmd/data.rst:234
+msgid "1行の最大長に制限を設ける(デフォルトでは1MBで、10MBまで拡張可能)"
+msgstr ""
+
+#: ../../mcmd/data.rst:235
+msgid "改行はLFのみとする。"
+msgstr ""
+
+#: ../../mcmd/data.rst:236
+msgid "最終レコードであっても改行は必須とする。"
+msgstr ""
+
+#: ../../mcmd/data.rst:237
+msgid "テキスト文字として80〜FFを付け加える(マルチバイト文字を扱うため)。"
+msgstr ""
+
+#: ../../mcmd/data.rst:239
+msgid "利用するCSVファイルが上記の定義を満たしているかどうかを確かめるには ``mchkcsv`` メソッドを用いればよい。"
+msgstr ""
+
+#: ../../mcmd/data.rst:243
+msgid "特殊文字を含むCSVの例"
+msgstr ""
+
+#: ../../mcmd/data.rst:244
+msgid "以下に CSV データで注意すべき点について、例を交えながら説明する。"
+msgstr ""
+
+#: ../../mcmd/data.rst:247
+msgid "カンマを含むデータ"
+msgstr ""
+
+#: ../../mcmd/data.rst:248
+msgid ""
+"カンマを含むデータはダブルクォーツで囲われる。 :numref:`data_csv_exp1` は、``f1,f2`` の 2 "
+"項目から構成される CSV ファイルで、 0行目 [#f2]_ の ``f1`` "
+"項目はカンマを含んでいるのでダブルクォーツで囲われている。"
+msgstr ""
+
+#: ../../mcmd/data.rst:252
+msgid "カンマを値に含むCSV"
+msgstr ""
+
+#: ../../mcmd/data.rst:262
+msgid "ダブルクォーツを含むデータ"
+msgstr ""
+
+#: ../../mcmd/data.rst:263
+msgid ""
+"ダブルクォーツを含むデータはダブルクォーツで囲われ， かつ連続するダブルクォーツとして表現される。 "
+":numref:`data_csv_exp2` は、 ``f1,f2`` の 2 項目から構成される CSV ファイルで、 0行目と1行目の "
+"``f1`` 項目はダブルクォーツを含んでおり、オリジナルのデータはそれぞれ ``abc\"def`` 、 ``\"`` である。"
+msgstr ""
+
+#: ../../mcmd/data.rst:268
+msgid "ダブルクオーツを値に含むCSV"
+msgstr ""
+
+#: ../../mcmd/data.rst:278
+msgid "改行を含むデータ"
+msgstr ""
+
+#: ../../mcmd/data.rst:279
+msgid ""
+"改行を含むデータもダブルクオーツで囲うことで処理可能となる。 :numref:`data_csv_exp3` の 0行目の ``f1``"
+" 項目は、 ``abc`` の後に改行 が含まれているが、ダブルクオーツで囲われているため、 "
+"行末ではなくデータの一部として識別される。"
+msgstr ""
+
+#: ../../mcmd/data.rst:283
+msgid "改行を値に含むCSV"
+msgstr ""
+
+#: ../../mcmd/data.rst:293
+msgid "必要のないダブルクオーツ"
+msgstr ""
+
+#: ../../mcmd/data.rst:294
+msgid ""
+":numref:`data_csv_exp4` のようにダブルクオーツで囲う必要のないデータに対して "
+"ダブルクオーツを用いていた場合、メソッドの出力時には外される。"
+msgstr ""
+
+#: ../../mcmd/data.rst:297
+msgid "不要なダブルクオーツは外される"
+msgstr ""
+
+#: ../../mcmd/data.rst:318
+msgid "mcmd内部でのデータ型"
+msgstr ""
+
+#: ../../mcmd/data.rst:319
+msgid ""
+"MCMDで扱うデータはプレーンテキストであり、全てのデータは文字列で表されている。 "
+"よって、その文字列をどのようなデータ型として扱うかはメソッドによって決まる。 例えば、 ``msum`` の ``f=`` "
+"で指定した項目データは、 メソッド内部で文字列から数値へと変換される。 "
+"MCMDで扱うことのできる型は、:numref:`data_type` に示される通り、 "
+"数値型、文字列型、日付型、時刻型、論理型、ベクトル型の6つである。 また、 :numref:`data_typecmd` "
+"に各データ型として扱う代表的なコマンドを示しておく。"
+msgstr ""
+
+#: ../../mcmd/data.rst:327
+msgid "mcmdが扱う6つのデータ型"
+msgstr ""
+
+#: ../../mcmd/data.rst:331 ../../mcmd/data.rst:357
+msgid "データ型"
+msgstr ""
+
+#: ../../mcmd/data.rst:332 ../../mcmd/data.rst:358
+msgid "テキスト例"
+msgstr ""
+
+#: ../../mcmd/data.rst:333 ../../mcmd/data.rst:359
+msgid "変換内容"
+msgstr ""
+
+#: ../../mcmd/data.rst:334 ../../mcmd/data.rst:360
+msgid "数値型"
+msgstr ""
+
+#: ../../mcmd/data.rst:335
+msgid "\"10\", \"2.5\", \"1.5E+10\""
+msgstr ""
+
+#: ../../mcmd/data.rst:336
+msgid "倍精度実数に変換した値"
+msgstr ""
+
+#: ../../mcmd/data.rst:337 ../../mcmd/data.rst:365
+msgid "文字列型"
+msgstr ""
+
+#: ../../mcmd/data.rst:338
+msgid "\"abc\", \"あいう\""
+msgstr ""
+
+#: ../../mcmd/data.rst:339
+msgid "変換なし"
+msgstr ""
+
+#: ../../mcmd/data.rst:340 ../../mcmd/data.rst:370
+msgid "日付型"
+msgstr ""
+
+#: ../../mcmd/data.rst:341
+msgid "\"20130920\""
+msgstr ""
+
+#: ../../mcmd/data.rst:342
+msgid "8 桁固定長をグレゴリオ暦のオブジェクトに変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:343 ../../mcmd/data.rst:375
+msgid "時刻型"
+msgstr ""
+
+#: ../../mcmd/data.rst:344
+msgid "\"20180906150620\", \"150620\""
+msgstr ""
+
+#: ../../mcmd/data.rst:345
+msgid "6桁もしくは14桁固定長をグレゴリオ暦+POSIX 時刻のオブジェクトに変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:346 ../../mcmd/data.rst:380
+msgid "論理型"
+msgstr ""
+
+#: ../../mcmd/data.rst:347
+msgid "\"1\", \"0\""
+msgstr ""
+
+#: ../../mcmd/data.rst:348
+msgid "1を真、0を偽の bool 値に変換する"
+msgstr ""
+
+#: ../../mcmd/data.rst:349 ../../mcmd/data.rst:385
+msgid "ベクトル型"
+msgstr ""
+
+#: ../../mcmd/data.rst:350
+msgid "\"a c b\", \"1 5 11\""
+msgstr ""
+
+#: ../../mcmd/data.rst:351
+msgid "スペースで区切られた文字列を、上記のいずれかのデータ型に変換したもの"
+msgstr ""
+
+#: ../../mcmd/data.rst:353
+msgid "各データ型を扱う代表的なメソッド"
+msgstr ""
+
+#: ../../mcmd/data.rst:361
+msgid "msum"
+msgstr ""
+
+#: ../../mcmd/data.rst:362
+msgid "msim"
+msgstr ""
+
+#: ../../mcmd/data.rst:363
+msgid "数値項目の合計計算"
+msgstr ""
+
+#: ../../mcmd/data.rst:364
+msgid "2つの項目の類似度計算"
+msgstr ""
+
+#: ../../mcmd/data.rst:366
+msgid "mjoin"
+msgstr ""
+
+#: ../../mcmd/data.rst:367
+msgid "mcombi"
+msgstr ""
+
+#: ../../mcmd/data.rst:368
+msgid "参照ファイルの結合"
+msgstr ""
+
+#: ../../mcmd/data.rst:369
+msgid "組合せの列挙"
+msgstr ""
+
+#: ../../mcmd/data.rst:371
+msgid "mcalのage関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:372
+msgid "mcalのleapyear関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:373
+msgid "年令計算"
+msgstr ""
+
+#: ../../mcmd/data.rst:374
+msgid "うるう年の判定"
+msgstr ""
+
+#: ../../mcmd/data.rst:376
+msgid "mcalのnow関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:377
+msgid "mcalのdiffminute関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:378
+msgid "現在時刻の出力"
+msgstr ""
+
+#: ../../mcmd/data.rst:379
+msgid "分単位での時刻差の計算"
+msgstr ""
+
+#: ../../mcmd/data.rst:381
+msgid "mcalのand関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:382
+msgid "mcalのif関数"
+msgstr ""
+
+#: ../../mcmd/data.rst:383
+msgid "論理積の計算"
+msgstr ""
+
+#: ../../mcmd/data.rst:384
+msgid "条件に寄る値の設定"
+msgstr ""
+
+#: ../../mcmd/data.rst:386
+msgid "mvsort"
+msgstr ""
+
+#: ../../mcmd/data.rst:387
+msgid "mvuniq"
+msgstr ""
+
+#: ../../mcmd/data.rst:388
+msgid "ベクトル要素の並べ替え"
+msgstr ""
+
+#: ../../mcmd/data.rst:389
+msgid "ベクトル要素の単一化"
+msgstr ""
+
+#: ../../mcmd/data.rst:392
+msgid "データ本体がない場合の動作"
+msgstr ""
+
+#: ../../mcmd/data.rst:393
+msgid ""
+"データ本体 (項目名行を除いたデータ) がないデータに対する動作は、 項目名ヘッダー付きのデータが入力の場合は、 "
+"処理内容に応じた項目名のみが出力され、正常に終了する。 一方で、項目名ヘッダーなしのデータが入力の場合、 "
+"データ本体がないということは空リストもしくは0バイトファイルということになり、 出力結果も0バイトファイルとなる。 "
+"入力行数，出力行数は共に0件である。"
+msgstr ""
+
+#: ../../mcmd/data.rst:402
+msgid "マルチバイト文字"
+msgstr ""
+
+#: ../../mcmd/data.rst:403
+msgid ""
+"mcmdが扱う漢字等のマルチバイト文字は基本的にはUTF-8を前提としている。 SHIFT JIS "
+"等、異なるエンコーディングによるマルチバイト文字でも運用は可能であるが、 一部の機能は正しく動作しないであろう。 "
+"以下ではマルチバイト文字の扱いについてのMCMDでの処理方式について説明する。 MCMD "
+"では処理速度を重視する観点から、漢字コードはマルチバイト文字のまま扱っているために、 "
+"エンコーディングによっては、文字列検索や置換の処理で思わぬ結果がもたらされることがある。 例えば、SHIFT JIS で「陰」は "
+"0x8941 であるが、 これは2バイトめがシングルバイト文字の「A」にあたる。 "
+"そのため「陰」に対して「A」を「B」に置換する処理を付すと「隠」(0x8942) に変換されてしまう。 UTF-8 "
+"ではこのような問題が起こらないようなコード体系を採用している。 さらにマルチバイト文字とASCII "
+"文字が混在した文字列において文字数をカウントすることは、 たとえ UTF-8 であろうと非常に困難である。 "
+"このような問題を避ける最良の方法は、ASCII コードも含めて全ての文字を固定長に変換してしまうことである。 "
+"これがワイド文字と呼ばれるものである (mcmdでは 32bit 固定長を採用している)。 "
+"ワイド文字への変換には、マルチバイト文字のエンコーディング方式が分かっている必要がある。 変換プログラムは、環境変数 LANG "
+"に設定された値によって、 その方式を識別している。 環境変数は以下のように確認すればよいであろう。"
+msgstr ""
+
+#: ../../mcmd/data.rst:422
+msgid "LANG環境変数の確認"
+msgstr ""
+
+#: ../../mcmd/data.rst:430
+msgid ""
+"mcmdの中の一部のメソッドは、データ処理に先立ち、 入力データを全てワイド文字に変換してから処理するオプション( ``W=True`` "
+")が提供されている。 対応しているコマンド一覧を :numref:`data_wide` に示す。 "
+"これらのメソッドは検索もしくは置換の機能を有するものであり、エンコーディングが UTF-8 であれば利用する必要はない。"
+msgstr ""
+
+#: ../../mcmd/data.rst:435
+msgid "ワイド文字変換の機能をもつメソッド一覧"
+msgstr ""
+
+#: ../../mcmd/data.rst:439
+msgid "メソッド名"
+msgstr ""
+
+#: ../../mcmd/data.rst:440
+msgid "機能"
+msgstr ""
+
+#: ../../mcmd/data.rst:441
+msgid "説明"
+msgstr ""
+
+#: ../../mcmd/data.rst:442
+msgid "mchgstr"
+msgstr ""
+
+#: ../../mcmd/data.rst:443 ../../mcmd/data.rst:450
+msgid "置換"
+msgstr ""
+
+#: ../../mcmd/data.rst:444 ../../mcmd/data.rst:451
+msgid "``W=True`` を指定することで ``f=`` で指定した項目データは内部でワイド文字に変換される。"
+msgstr ""
+
+#: ../../mcmd/data.rst:445
+msgid "mselstr"
+msgstr ""
+
+#: ../../mcmd/data.rst:446 ../../mcmd/data.rst:453
+msgid "検索"
+msgstr ""
+
+#: ../../mcmd/data.rst:447 ../../mcmd/data.rst:454
+msgid ""
+"部分文字列マッチング ( ``sub=True`` ) を行う場合、``W=True`` を指定することで ``f=`` "
+"で指定した項目データは内部でワイド文字に変換される。"
+msgstr ""
+
+#: ../../mcmd/data.rst:449
+msgid "msed"
+msgstr ""
+
+#: ../../mcmd/data.rst:452
+msgid "mtonull"
+msgstr ""
+
+#: ../../mcmd/data.rst:457
+msgid "mcmdの入出力データの変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:458
+msgid ""
+"最後に、mcmdの出力データを他のデータ型に変換する方法、及びその逆、 "
+"他のデータ型からmcmdの入力データに変換する方法を以下に整理して示しておく。"
+msgstr ""
+
+#: ../../mcmd/data.rst:462
+msgid "転置(transpose)"
+msgstr ""
+
+#: ../../mcmd/data.rst:463
+msgid ""
+"mcmdで出力されるリストは、行を要素に出力される。 一方で列全体を一つのリストとして扱いたい場合も多いであろう。 "
+"そのような場合は、mcmdから出力されたリストを、以下のような方法に従って変換すればよいであろう。"
+msgstr ""
+
+#: ../../mcmd/data.rst:467
+msgid "リストを転置する方法"
+msgstr ""
+
+#: ../../mcmd/data.rst:506
+msgid "辞書型(Dictionary)"
+msgstr ""
+
+#: ../../mcmd/data.rst:507
+msgid ""
+"mcmdの出力結果を辞書型に変換する方法、および辞書型のデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_dict`"
+" に示される通りである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:509
+msgid "辞書型をヘッダー付きリストに変換する方法"
+msgstr ""
+
+#: ../../mcmd/data.rst:538
+msgid "行を辞書型としたリスト"
+msgstr ""
+
+#: ../../mcmd/data.rst:539
+msgid ""
+"mcmdの出力結果の行を辞書型としたリストに変換する方法、および行を辞書型としたリストのデータをmcmdの入力として用いる時の変換方法は、 "
+":numref:`data_listdict` に示される通りである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:542
+msgid "行ごとに辞書型をヘッダー付きリストに変換する方法"
+msgstr ""
+
+#: ../../mcmd/data.rst:567
+msgid "NumPy"
+msgstr ""
+
+#: ../../mcmd/data.rst:568
+msgid ""
+"mcmdの出力結果をNumPyに変換する方法、およびNumPyのデータをmcmdの入力として用いる時の変換方法は、 "
+":numref:`data_numpy` に示される通りである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:570
+msgid "NumPyデータの変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:599
+msgid "Pandas DataFrame"
+msgstr ""
+
+#: ../../mcmd/data.rst:600
+msgid ""
+"mcmdの出力結果をPandas DataFrameに変換する方法、およびPandas "
+"DataFrameのデータをmcmdの入力として用いる時の変換方法は、 :numref:`data_pandas` に示される通りである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:602
+msgid "Pandas DataFrameデータの変換"
+msgstr ""
+
+#: ../../mcmd/data.rst:629
+msgid ""
+"実際に変換を行うのは ``i=`` を指定した関数ではなく、 実行時に :doc:`自動追加<autoadd>` される ``readlist``"
+" メソッドである。"
+msgstr ""
+
+#: ../../mcmd/data.rst:630
+msgid "mcmdでは統一的に先頭行 (項目名行を除いた最初の行) を 0 行目と数える。"
+msgstr ""
+

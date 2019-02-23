@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_round.rst:2
+msgid "round 四捨五入"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:4
+msgid "書式1: round(num,基数)"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:7
+msgid ""
+":math:`num` を四捨五入によりまるめる。 この時、基数の整数倍の値集合のうち最も近い値にまるめられる。 "
+"例えば、round(3.82,0.5)の場合、0.5とびに目盛がうたれた数直線上で、 "
+"3.82に最も近い目盛点、すなわち4.0が基数0.5における四捨五入点となる。 基数を省略すると1.0がデフォルト値として用いられる。 "
+"これは小数点以下1桁目を四捨五入して整数値にまるめることに等しい。"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:16
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:18
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:44 ../../mcmd/methods/func_round.rst:60
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:46
+msgid "小数点以下一桁目を四捨五入する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:62
+msgid "小数点以下二桁目を四捨五入する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:76
+msgid "**基数0.5の例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:78
+msgid "0.5を基数として四捨五入する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:92
+msgid "**基数10の例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_round.rst:94
+msgid "一桁目を四捨五入する。"
+msgstr ""
+

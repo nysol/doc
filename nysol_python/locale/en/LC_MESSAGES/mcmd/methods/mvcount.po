@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mvcount.rst:2
+msgid "mvcount ベクトルサイズの計算"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:4
+msgid "ベクトルのサイズ(ベクトルの要素数)を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:7
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:9
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:13
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:17
+msgid "**vf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "要素数をカウントするベクトルの項目名( ``i=`` データ上)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "結果項目を ``:`` に続けて複数項目指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "複数項目指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:23
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst
+msgid "ベクトル型データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:30
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:32
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`delim=<common_param_delim>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:45
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:47
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:63
+msgid "**複数項目に対して適用する例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvcount.rst:78
+msgid "関連メソッド"
+msgstr ""
+

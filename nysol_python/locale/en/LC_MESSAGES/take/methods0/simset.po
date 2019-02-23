@@ -1,0 +1,456 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/simset.rst:2
+msgid "sspc アイテム集合のクラスタリング"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:4
+msgid "実装の詳細は |simsetorg| を参照されたい。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:14
+msgid "**type=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* _:no message"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* +:write solutions in append mode"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* =:do not remove temporal files"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* @:do not execute data polishing, E:read edge list file"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* i:set similarity measure to the ratio of one is included in the other"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* I:set similarity measure to the ratio of both are included in the other"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* S:set similarity measure to :math:`|A\\cap B|/max(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* s:set similarity measure to :math:`|A\\cap B|/min(|A|,|B|)`"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"* C:set similarity measure to the cosign distance, the inner product of "
+"the normalized characteristic vectors"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"* T:set similarity measure to the intersection size, i.e., :math:`|A\\cap"
+" B|`"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* R:(recemblance) set similarity measure to :math:`|A\\cap B|/|A\\cup B|`"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"* P(PMI): set similarity measure to :math:`log(|A\\cap B|*|all| / "
+"(|A|*|B|))` where :math:`|all|` is the number of all items"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* M:output intersection of each clique, instead of IDs of its members"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* v (with M): output ratio of records, including each item"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* m:do not remove edges in the data polishing phase"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* O:repeatedly similarity clustering until convergence"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"* Y:take intersection of original graph and polished graph, instead of "
+"clique mining"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* 1:do not remove the same items in a record (with -G)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "* W:load weight of each element"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"* t:transpose the input database, so that each line will be considered as"
+" a record"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:37
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "similarity-graph-filename"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:41
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:45
+msgid "**th_s=** : 型=float , 必須"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "similarity-threshold"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:49
+msgid "**th_d=** : 型=int , 必須"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "degree-threshold"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:53
+msgid "**G=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"use [similarity] of [threshold] in the first phase (file is regarded as a"
+" transaction database)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:57
+msgid "**k=** : 型=int , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "find only k-best for each record in ``G`` option"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:61
+msgid "**M=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"merge similar cliques of similarity in [num] of recemblance (changes to "
+"'x' by giving '-Mx')"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:65
+msgid "**m=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"take independently cliques from similar cliques of similarity in [num] of"
+" recemblance,"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"and merge the neighbors of each independent clique ('recemblance' changes"
+" to 'x' by giving '-Mx')"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:70
+msgid "**v=** : 型=float , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "specify majority threshold (default=0.5)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "(if negative is given, items of frequency no more than -[num] are output)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:75 ../../take/methods0/simset.rst:164
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore vertices of degree more than [num]"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:79 ../../take/methods0/simset.rst:160
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore vertices of degree less than [num]"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:83
+msgid "**U=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore transactions of size more than [num] (with -G)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:87
+msgid "**L=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore transactions of size less than [num] (with -G)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:91
+msgid "**I=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore items of frequency more than [num] (with -G)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:95
+msgid "**i=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "ignore items of frequency less than [num] (with -G)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:99
+msgid "**II=** : 型=float , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "give thresholds by the ratio of #ransactions/#items)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:103
+msgid "**ii=** : 型=float , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:107
+msgid "**t=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"ignore pairs whose intersection size is less than [num] (T for first "
+"phase with -G option, and t for polishing)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:111
+msgid "**T=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"ignore pairs whose intersection size is more than [num] (T for first "
+"phase with -G option, and t for polishing)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:115
+msgid "**O=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "specify the number of repetitions"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:119
+msgid "**9=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "shrink records of similarity more than [num]"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:123
+msgid "**X=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "multiply the weight by [num] (and trancate by 1, for C command)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:127
+msgid "**x=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "power the weight by [num] (and normalize, for C command)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:131
+msgid "**y=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "at last, remove edges with weight less than [num]"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:135
+msgid "**w=** : 型=str , 任意(default=重みは等しいものとする)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "load weight of elements from the file"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:139
+msgid "**multi=** : 型=int , 任意(default=1)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "use multicores of [num] (compile by 'make multicore')"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:143
+msgid "**W=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "specify the working directory (folder)."
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "The last letter of the directory has to be '/' ('')"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:148 ../../take/methods0/simset.rst:192
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "give the separator of the numbers in the output"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:152
+msgid "**Q=** : 型=str , 任意(default=replaceしない)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid ""
+"replace the output numbers according to the permutation table given by "
+"[filename]"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:156
+msgid "**K=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "頻出な上位のアイテム集合のみ出力する"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "アイム集合のサイズの下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "アイム集合のサイズの上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:168
+msgid "**a=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "相関ルールマイニングを実施しconfidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:172
+msgid "**A=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "相関ルールマイニングを実施しconfidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:176
+msgid "**r=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:180
+msgid "**R=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:184
+msgid "**item=** : 型=int , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "指定した番号のアイテムに関する相関ルールを出力する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:188
+msgid "**so=** : 型=str , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "標準出力の内容を指定のファイルに出力する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst
+msgid "出力時のアイテムの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:199
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/simset.rst:202
+msgid "関連メソッド"
+msgstr ""
+

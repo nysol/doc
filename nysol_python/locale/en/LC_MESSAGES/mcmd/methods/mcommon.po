@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mcommon.rst:2
+msgid "mcommon 参照ファイルによる行選択"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:4
+msgid ""
+"``k=`` パラメータで指定した入力データの項目値と ``m=`` "
+"パラメータで指定した参照データの項目値を比較し、同じ値を持つ入力データの行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:10
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:14
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:18
+msgid "**k=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "入力データ上の突き合わせる項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "ここで指定した入力データの項目と ``K=`` パラメータで指定された参照データの項目が同じ行が選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "同じ値が複数行連続していてもよい。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:24
+msgid "**m=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "参照データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "またこのパラメータが省略された時には標準入力が用いられる。( ``i=`` 指定ありの場合)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:29
+msgid "**K=** : 型=str , 任意(default=k=と同一項目名)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "参照データ上の突き合わせる項目名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "ここで指定した参照データの項目と ``k=`` パラメータで指定された入力データの項目が同じ行が選択される。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "参照データ上に ``k=`` パラメータで指定した入力データ上の項目と同名の項目が存在する場合は指定する必要はない。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:36
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "指定の条件に一致しない行を出力するデータ。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:40
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "条件反転"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "``k=`` パラメータで指定した入力データの項目値と"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "``m=`` パラメータで指定した参照データの項目値を比較し、"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst
+msgid "同じ値を持たない入力データの行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:50
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:52
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:65
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:67
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:120
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:122
+msgid ""
+"入力ファイルにある ``customer`` 項目と、参照ファイルにある ``customer`` 項目が同じ値を持つ入力ファイルの行を選択する。"
+" それ以外のデータは ``oth.csv`` に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:140
+msgid "**同じ値を持たない入力ファイルの行選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:142
+msgid "``r=True`` オプションを付けることで、条件が逆転し、参照ファイルにない ``customer`` を選択することになる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:154
+msgid "**結合キー項目名が異なる場合**"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:156
+msgid "結合キーの項目名が異なる場合は、 ``K=`` で指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:169
+msgid "**キー項目に重複行がある場合の例**"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:171
+msgid "参照ファイルと入力ファイルのキー項目に重複行があっても選択可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:183
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:185
+msgid ":doc:`mselstr` : 参照データの結合キーの種類数が少なければこのコマンドでも対応できる。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:186
+msgid ":doc:`mnrcommon` : 参照データの結合キーがユニークでなければこちらを使う。"
+msgstr ""
+
+#: ../../mcmd/methods/mcommon.rst:187
+msgid ":doc:`mjoin` : 選択だけでなく、項目を結合したい場合はこのコマンド。"
+msgstr ""
+

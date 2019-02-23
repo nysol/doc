@@ -1,0 +1,397 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../dataset/rand.rst:2
+msgid "mcmdベンチマーク用乱数データセット"
+msgstr ""
+
+#: ../../dataset/rand.rst:3
+msgid ""
+"「:doc:`../bench/methods` 」の節で解説されている、 "
+"mcmd処理メソッドの処理速度に関するベンチマークテストで用いられているデータセットである。 データイメージは "
+":numref:`dataset_rand_data` に示される通りで。 ``id`` , ``key1`` , ``key2`` , "
+"``key3`` , ``int1`` , ``int2`` , ``float1`` , ``float2`` , ``date`` , "
+"``time`` の10項目から構成されるデータセットである。 全ての項目はランダムに生成されたもので、その概要を "
+":numref:`dataset_rand_field` に示している。"
+msgstr ""
+
+#: ../../dataset/rand.rst:10
+msgid "乱数データセット"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:27
+msgid "id"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:29
+msgid "key1"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:31
+msgid "key2"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:33
+msgid "key3"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:35
+msgid "int1"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:37
+msgid "int2"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:39
+msgid "float1"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:41
+msgid "float2"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:43
+msgid "date"
+msgstr ""
+
+#: ../../dataset/rand.rst:1 ../../dataset/rand.rst:45
+msgid "time"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "982"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "31795"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "516"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "224"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0.09428928373"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-10.87915357"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "20190608"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "100405"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "1"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "4"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "747"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "24803"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "552"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-758"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0.02317879722"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-14.61856635"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "20150122"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "084221"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "2"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "9"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "839"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "92127"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "570"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-662"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0.2467738762"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "81.67126765"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "20101120"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "030642"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "3"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "546"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "67524"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "952"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-396"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0.8956414664"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "93.21300858"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "20121117"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "223858"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "681"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "74869"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "28"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-128"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "0.9464241466"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "-85.74571619"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "20161213"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid "023745"
+msgstr ""
+
+#: ../../dataset/rand.rst:1
+msgid ":"
+msgstr ""
+
+#: ../../dataset/rand.rst:21
+msgid "データの生成方法"
+msgstr ""
+
+#: ../../dataset/rand.rst:25
+msgid "項目名"
+msgstr ""
+
+#: ../../dataset/rand.rst:26
+msgid "生成方法"
+msgstr ""
+
+#: ../../dataset/rand.rst:28
+msgid "先頭行から0,1,2,...の整数を振ったもの。"
+msgstr ""
+
+#: ../../dataset/rand.rst:30
+msgid "キーブレイク処理用の項目で、0〜9の10種の一様乱数を生成。1桁固定長。"
+msgstr ""
+
+#: ../../dataset/rand.rst:32
+msgid "キーブレイク処理用の項目で、100〜999の900種の一様乱数を生成。3桁固定長。"
+msgstr ""
+
+#: ../../dataset/rand.rst:34
+msgid "キーブレイク処理用の項目で、10000〜99999の9万種の一様乱数を生成。5桁固定長。"
+msgstr ""
+
+#: ../../dataset/rand.rst:36
+msgid "集計用の整数項目で、0〜999の一様乱数を生成。"
+msgstr ""
+
+#: ../../dataset/rand.rst:38
+msgid "集計用の整数項目で、-999〜999の一様乱数を生成。"
+msgstr ""
+
+#: ../../dataset/rand.rst:40
+msgid "集計用の実数項目で、0〜1の一様乱数を生成。"
+msgstr ""
+
+#: ../../dataset/rand.rst:42
+msgid "集計用の実数項目で、-100〜100の一様乱数を生成。"
+msgstr ""
+
+#: ../../dataset/rand.rst:44
+msgid "日付計算用の項目で、2010年1月1日を基準に、0〜3650日の乱数を加算したもの。"
+msgstr ""
+
+#: ../../dataset/rand.rst:46
+msgid "時刻計算用の項目で、0時0分0秒を基準に0〜86399秒の乱数を加算したもの。"
+msgstr ""
+
+#: ../../dataset/rand.rst:48
+msgid ""
+"データ生成のスクリプトを :numref:`dataset_rand_mkdata` に示す。 このスクリプトを実行すると、 "
+":numref:`dataset_rand_files` に示されるような サイズ違いの3つのデータが ``./DATA`` に生成される。 "
+"10分ほどの時間を要する。"
+msgstr ""
+
+#: ../../dataset/rand.rst:53
+msgid "ランダムデータの生成するスクリプト ``mkdata.py``"
+msgstr ""
+
+#: ../../dataset/rand.rst:87
+msgid "生成されるデータ一覧"
+msgstr ""
+
+#: ../../dataset/rand.rst:91
+msgid "名称"
+msgstr ""
+
+#: ../../dataset/rand.rst:92
+msgid "ファイル名"
+msgstr ""
+
+#: ../../dataset/rand.rst:93
+msgid "行数(ヘッダ除く)"
+msgstr ""
+
+#: ../../dataset/rand.rst:94
+msgid "サイズ(MB)"
+msgstr ""
+
+#: ../../dataset/rand.rst:95
+msgid "small"
+msgstr ""
+
+#: ../../dataset/rand.rst:96
+msgid "10000.csv"
+msgstr ""
+
+#: ../../dataset/rand.rst:97
+msgid "10000"
+msgstr ""
+
+#: ../../dataset/rand.rst:98
+msgid "665 KB"
+msgstr ""
+
+#: ../../dataset/rand.rst:99
+msgid "middle"
+msgstr ""
+
+#: ../../dataset/rand.rst:100
+msgid "1000000.csv"
+msgstr ""
+
+#: ../../dataset/rand.rst:101
+msgid "1000000"
+msgstr ""
+
+#: ../../dataset/rand.rst:102
+msgid "68 MB"
+msgstr ""
+
+#: ../../dataset/rand.rst:103
+msgid "large"
+msgstr ""
+
+#: ../../dataset/rand.rst:104
+msgid "100000000.csv"
+msgstr ""
+
+#: ../../dataset/rand.rst:105
+msgid "100000000"
+msgstr ""
+
+#: ../../dataset/rand.rst:106
+msgid "7056 MB"
+msgstr ""
+

@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mhashsum.rst:2
+msgid "mhashsum ハッシュ法による項目値の合計"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:4
+msgid ""
+"hash法を使って ``k=`` パラメータで指定した項目を単位にして、 ``f=`` パラメータで指定した項目値を合計する。 "
+":doc:`msum` との違いは、キー項目の並べ替えが必要ないため、その分処理速度が速い。 "
+"ただし、キーのサイズ(キー項目のとる値の種類数)が多い場合は処理速度が遅くなる。 "
+"msumとmhashsumのどちらを利用するかはデータの内容からユーザーが判断する(後半に示す「ベンチマーク」参照)。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:11
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:13
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:17
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:21
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "ここで指定された項目(複数項目指定可)が合計される。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid ":(コロン）で新項目名を指定可能。例）f=数量:数量合計"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:26
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "ここで指定された項目(複数項目指定可)をキーとして集計する。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:30
+msgid "**hs=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "ハッシュサイズ"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "処理対象データのキーサイズから，ユーザが消費メモリ量と速度を判断して指定する。指定する値としては素数がよい。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "キーサイズが大きいデータに対してハッシュサイズが十分な大きさでなければ処理速度が遅くなる。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "ハッシュサイズが十分に大きいと処理速度は速いが、"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "その分多くのメモリが必要になる(後半に示す「ベンチマーク」参照)。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "必要なメモリ量の目安: K*(24+F*16) byte, K:キーのサイズ, F:f=で指定した項目数"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:39
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst
+msgid "NULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:46
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:48
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:62
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:64
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:82
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:84
+msgid "``customer`` 項目を単位にして、 ``quantity`` と ``amount`` 項目の合計を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:96
+msgid "**NULL値出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:98
+msgid "``n=True`` オプションを指定することで、NULL値が含まれている場合は、結果もNULL値として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:111
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:113
+msgid ":doc:`msum` : 同じ機能をもつコマンドだが、内部的にキー項目の並べ替えを行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mhashsum.rst:114
+msgid ":doc:`mhashavg` : 同じくハッシュ法を用いた平均計算。"
+msgstr ""
+

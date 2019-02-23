@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods0/medset.rst:2
+msgid "medset アイテム集合の共通集合"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:4
+msgid "アイテム集合の共通集合を列挙する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:8
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:10
+msgid "**ci=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "cluster-filename"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:14
+msgid "**si=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "set-filename"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:18
+msgid "**th=** : 型=int , 必須"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "threshold"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:22
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:26
+msgid "**H=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "do not use histgram, just output the items"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:30
+msgid "**R=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "do not output singleton clusters"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:34
+msgid "**V=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "output ratio of appearances of all items"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:38
+msgid "**T=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "clustering by connected component (read edge type file)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:42
+msgid "**I=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid ""
+"find an independent set, and clustering by using the vertices in it as "
+"seeds"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "(read edge type files)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:47
+msgid "**i=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "output for each item, ratio of records including the item"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:51
+msgid "**t=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "transpose the input database, (transaction will be item, and vice varsa)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:55 ../../take/methods0/medset.rst:75
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "output clusters of size at least [num]"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:59
+msgid "**progress=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "show progress"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:63
+msgid "**nomsg=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "no message"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:67
+msgid "**U=** : 型=int , 任意(default=上限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "最大サポートを指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:71
+msgid "**K=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "頻出な上位のアイテム集合のみ出力する"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "アイム集合のサイズの下限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:79
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "アイム集合のサイズの上限値を指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:83
+msgid "**w=** : 型=str , 任意(default=全トランザクションの重みは等しいものとする)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "トランザクションの重みファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:87
+msgid "**a=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "相関ルールマイニングを実施しconfidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:91
+msgid "**A=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "相関ルールマイニングを実施しconfidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:95
+msgid "**r=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの下限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:99
+msgid "**R=** : 型=float(0以上1以下) , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "相関ルールマイニングを実施しrelational confidenceの上限値を与える。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:103
+msgid "**item=** : 型=int , 任意(default=)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "指定した番号のアイテムに関する相関ルールを出力する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:107
+msgid "**so=** : 型=str , 任意(default=ファイル出力しない)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "標準出力の内容を指定のファイルに出力する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:111
+msgid "**separator=** : 型=str , 任意(default=スペース)"
+msgstr ""
+
+#: ../../take/methods0/medset.rst
+msgid "出力時のアイテムの区切り文字を指定する。"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:118
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods0/medset.rst:121
+msgid "関連メソッド"
+msgstr ""
+

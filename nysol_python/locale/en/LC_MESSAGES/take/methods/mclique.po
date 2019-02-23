@@ -1,0 +1,156 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mclique.rst:2
+msgid "mclique クリークの列挙"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:4
+msgid "一般グラフデータから極大クリークを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:6
+msgid ""
+"**入力形式**: "
+"一般グラフを節点ペアで表現した形式。他のいかなる節点とも接続のない節点は、サイズが1の自明なクリークであるため、入力対象外とする。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:8
+msgid ""
+"**出力形式**: クリークIDと接点を出力する。出力項目は ``id,node,size`` "
+"の3項目である。sizeはクリークを構成する節点数である。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:14
+msgid "**ei=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "辺データファイルを指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:18
+msgid "**ef=** : 型=str , 任意(default=node1,node2)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "エッジデータ上の2つのノード項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:22
+msgid "**ni=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "節点データファイルを指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:26
+msgid "**nf=** : 型=str , 任意(default=node)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "節点データ上の節点項目名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:30
+msgid "**o=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "出力ファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:34
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "クリークを構成する最小節点数(ここで指定したサイズより小さいクリークは列挙されない)を指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:38
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "クリークを構成する最大節点数(ここで指定したサイズより大きいクリークは列挙されない)を指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:42
+msgid "**all=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "極大クリークだけでなく、全クリークを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:46
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mclique.rst
+msgid "ワークディレクトリを指定する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:53
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:55
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:77
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:79
+msgid "グラフデータ ``dat.csv`` から極大クリークを列挙し ``result.csv`` に出力する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:89
+msgid "**サイズの指定**"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:91
+msgid "サイズが4以上の極大クリークのみ列挙する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:101
+msgid "**全クリーク列挙**"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:103
+msgid "サイズが4以上の全クリークを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:114
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mclique.rst:116
+msgid ":doc:`mbiclique` : クリーク列挙"
+msgstr ""
+

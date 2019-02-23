@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mmbucket.rst:2
+msgid "mmbucket 多次元均等化バケット分割"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:4
+msgid ""
+"``f=`` で指定した複数の数値項目を次元とした件数均等化バケット分割を行う。 例えば、 ``f=a,b,c`` そして ``n=5`` "
+"と指定すると、 :doc:`mbucket` コマンドと同様に、項目 ``a,b,c`` それぞれを5つの区間に分割するが、 "
+"``mmbucket`` では、項目 ``a,b,c`` の3次元空間における各バケット(バケット数は :math:`5^3=125` "
+"個になる)に 属する件数ができるだけ均等になるような区間を計算する"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:12
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:14
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:18
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:22
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "ここで指定した項目(複数項目指定可)の値を分割する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "複数指定すれば、その数の次元に基づく均等化バケット分割を行う。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "1項目のみ指定すれば ``mbucket`` と同じ結果になる。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "``x`` , ``nfn`` オプション使用時は、項目番号(0〜)で指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:29
+msgid "**n=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "``f=`` で指定した項目数と同じ個数分指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "ただし1つの数字を指定した場合、 ``f=`` で指定した全ての項目に、同じ分割数が適用される。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:34
+msgid "**F=** : 型=str , 任意(default=1)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "出力形式を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "バケットの名前を出力形式。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "0:バケット番号のみを表示する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "1:バケットの範囲のみを表示する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "2:バケット番号とバケット範囲の両方を表示する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:42
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "バケット分割を行う単位となる項目名リスト(複数項目指定可)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:46
+msgid "**O=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "``f=`` パラメータで指定した各項目の各バケットの数値範囲を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:50
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:54
+msgid "**ms=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "各項目を順次バケット分割していく時の開始項目を変えることで複数回のバケット分割をトライし、"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "よりよい解を求める。詳細は、以下の「アルゴリズムの概要」を参照のこと。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:59
+msgid "**r=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst
+msgid "バケット番号を逆順に出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:66
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:68
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:84
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:86
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:124
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:126
+msgid ""
+"``x、y`` 項目の件数ができるだけ多次元均等になるように2分割する。 その際、各バケットの数値範囲を ``rng.csv`` "
+"という名前のファイルに出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:147
+msgid "**出力形式**"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:149
+msgid ""
+"``id`` 項目を単位に件数ができるだけ多次元均等になるように ``x,y`` 項目を2分割する。 "
+"出力形式はバケット番号とバケット範囲の両方を表示する。"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:171
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mmbucket.rst:173
+msgid ":doc:`mbucket` : 複数項目指定しても、それぞれの項目で1次元バケット分割を実行する。"
+msgstr ""
+

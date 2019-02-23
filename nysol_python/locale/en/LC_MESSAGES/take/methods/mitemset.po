@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../take/methods/mitemset.rst:2
+msgid "mitemset アイテム集合列挙"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:4
+msgid "多頻度アイテム集合を列挙する。 列挙のアルゴリズムにはlcmを用いている。 以下のような特徴を持っている。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:8
+msgid "分類階層を扱うことが可能"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:9
+msgid "頻出パターン, 飽和頻出パターン, 極大頻出パターンの3種類のパターンを列挙可能"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:10
+msgid "分類クラスを指定することで、上記3パターンに関する顕在パターン(emerging patterns)を列挙可能"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:14
+msgid "パラメータ"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:16
+msgid "**i=** : 型=str , 必須"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "アイテム集合データベースファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:20
+msgid "**O=** : 型=str , 任意(default=./take_現在日付時刻)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "出力ディレクトリ名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:24
+msgid "**x=** : 型=str , 任意(default=階層分類を使わない)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "taxonomyファイル名を指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "x=が指定されたとき、itemに対応するtaxonomyをトランザクションに追加して実行する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "例えば、アイテムa,bのtaxonomyをX、c,dのtaxonomyをYとすると、あるトランザクションabdはabdXYとなる。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "ただしreplaceTaxoオプションが指定されると、taxonomyは追加ではなく置換して実行する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "前例ではトランザクションabdはXYに置換される。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:32
+msgid "**tid=** : 型=str , 任意(default=tid)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "トランザクションID項目名(i=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:36
+msgid "**item=** : 型=str , 任意(default=item)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "アイテム項目名(i=,t=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:40
+msgid "**cls=** : 型=str , 任意(default=class)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "クラス項目名(i=上の項目名)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:44
+msgid "**taxo=** : 型=str , 条件付き必須(x=指定時)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:48
+msgid "**type=** : 型=str , 任意(default=F)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "抽出するパターンの型(F,C,M)を指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "F:頻出集合, C:飽和集合, M:極大集合"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:53
+msgid "**s=** : 型=float , 任意(default=0.05)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最小支持度(全トランザクション数に対する割合による指定)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:57
+msgid "**S=** : 型=int , 任意(default=1)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最小支持度(件数による指定)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "s=,S=共に指定しなければ、s=0.05が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "両方指定されれば、S=が優先される。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:63
+msgid "**sx=** : 型=float , 任意(default=1.0)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最大支持度(全トランザクション数に対する割合による指定)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:67
+msgid "**Sx=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最大支持度(件数による指定)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "sx=,Sx=共に指定しなければ、sx=1.0が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "両方指定されれば、Sx=が優先される。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:73
+msgid "**l=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "パターンサイズ(アイテム数)の下限(1以上20以下の整数)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:77
+msgid "**u=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "パターンサイズ(アイテム数)の上限(1以上20以下の整数)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:81
+msgid "**p=** : 型=float , 任意(default=0.5)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最小事後確率"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:85
+msgid "**g=** : 型=float , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "最小増加率"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "p=,g=共に指定しなければ、p=0.5が指定されたことになる。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "両方指定されれば、g=が優先される。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:91
+msgid "**top=** : 型=int , 任意(default=制限なし)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "列挙するパターン数の上限を指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "例えばtop=10と指定すると、支持度が10番目高いパターンの支持度を最小支持度として頻出パターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "よって、同じ支持度のパターンが複数個ある場合は10個以上のパターンが列挙されるかもしれない。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:97
+msgid "**replaceTaxo=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "taxonomyを置換する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:101
+msgid "**T=** : 型=str , 任意(default=/tmp)"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst
+msgid "ワークディレクトリを指定する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:108
+msgid "利用例"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:110
+msgid "**入力データの準備**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:179
+msgid "**基本例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:181
+msgid "3件以上で出現する頻出アイテム集合を列挙する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:206
+msgid "**アイテム集合のサイズに制限を加えた例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:208
+msgid "出現頻度が3以上で、アイテム集合のサイズ3のパターンを列挙する。"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:221
+msgid "**飽和集合の列挙例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:239
+msgid "**極大集合の列挙例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:254
+msgid "**アイテムの階層分類を使った例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:272
+msgid "**オリジナルアイテムを階層分類で置換する例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:287
+msgid "**顕在パターンの列挙例**"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:306
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../take/methods/mitemset.rst:308
+msgid ":doc:`msequence` : 系列列挙ならこちら"
+msgstr ""
+

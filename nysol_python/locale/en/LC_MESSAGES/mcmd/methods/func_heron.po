@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_heron.rst:2
+msgid "heron 三角形の面積"
+msgstr ""
+
+#: ../../mcmd/methods/func_heron.rst:4
+msgid ""
+"書式1: "
+"heron(タイプ,num_1,num_2,...,n_k,num_{k+1},num_{k+2},...,num_{2k},num_{2k+1},num_{2k+2},...,num_{3k})"
+msgstr ""
+
+#: ../../mcmd/methods/func_heron.rst:7
+msgid ""
+"k次元空間の3点の座標$(num_1,num_2,\\cdots,n_k),(num_{k+1},num_{k+2},\\cdots,num_{2k)}"
+" ,(num_{2k+1},num_{2k+2},\\cdots,num_{3k})$によって作られる3角形の面積を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_heron.rst:12
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_heron.rst:14
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_heron.rst:31
+msgid "**基本例**"
+msgstr ""
+

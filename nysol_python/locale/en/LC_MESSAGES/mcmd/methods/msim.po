@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/msim.rst:2
+msgid "msim 二変数間の類似度の計算"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:4
+msgid ""
+"``f=`` パラメータで指定した項目の二変数間の類似度(距離)を ``c=`` "
+"パラメータで指定した類似度(距離)関数で計算し類似度行列として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:19
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "ここで指定された項目(複数項目指定可)を単位として求める。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:23
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "ここで指定された項目全ての二項目間の類似度を求める。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:27
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "類似度(距離)名リスト(複数項目指定可)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "次項に示した類似度(距離)名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "項目名は以下のように，(:)コロンに続けて指定して変更可能。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "コロンに続く名称を省略した場合は類似度(距離)関数名がそのまま項目名として利用される。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "例)  ``msim f=x,y,z c=pearson:ピアソン積率相関係数,euclid:ユークリッド距離,cosine:コサイン``"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "類似度 ``=covar|ucovar|pearson|spearman|kendall|euclid|cosine|``"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "~~ ``cityblock|hamming|chi|phi|jaccard|supportr|lift|confMax|``"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "~~ ``confMin|yuleQ|yuleY|kappa|oddsRatio|convMax|convMin``"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:38
+msgid "**a=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "2変数の名称を示す項目名を指定する。カンマで区切って2つ指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "省略すると ``fld1,fld2`` が使われる。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:43
+msgid "**d=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "対角行列、上三角行列を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "``d`` オプションが指定されないと類似度行列の下三角行列のみ出力されるが、"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "``d`` オプションを指定することにより対角行列及び上三角行列も出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:49
+msgid "**n=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "NULL値が1つでも含まれていると結果もNULL値とする。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:53
+msgid "**bufcount=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst
+msgid "バッファのサイズ数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:60
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:62
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`bufcount=<common_param_bufcount>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`x=<common_param_x>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:78
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:80
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:117
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:119
+msgid "``x、y、z`` 項目の2項目間の組み合わせについて ピアソンの積率相関係数とコサインを計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:133
+msgid "**対角行列、上三角行列を出力**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:135
+msgid "``x、y、z`` 項目の2項目間の組み合わせについて ピアソンの積率相関係数とコサインを計算する。(dオプションあり)"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:155
+msgid "**キー単位での計算**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:157
+msgid "``key`` 項目を単位にして計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:173
+msgid "**類似度名の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:175
+msgid "01値のデータに付いての計算。ハミング距離とphi係数を計算する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:188
+msgid "**類似度名の変更**"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:190
+msgid "01値のデータに付いての計算。ハミング距離とphi係数を計算し、 出力項目名を変更する。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:205
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:207
+msgid ":doc:`mstats` : 1変量の統計量を計算するときはこちら。"
+msgstr ""
+
+#: ../../mcmd/methods/msim.rst:208
+msgid ":doc:`mmvsim` : 移動窓を設定した類似度計算。"
+msgstr ""
+

@@ -1,0 +1,210 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mchgstr.rst:2
+msgid "mchgstr 文字列の置換"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:4
+msgid "``f=`` パラメータで指定した項目について、 ``c=`` パラメータで指定した置換条件で文字列を置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:9
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:11
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:15
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:19
+msgid "**c=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "置換対象となる文字列と置換文字列を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:23
+msgid "**f=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "ここで指定した項目(複数項目指定可)の文字列を ``c=`` パラメータで指定した置換条件リストに従って置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:27
+msgid "**O=** : 型=str , 任意(default=null値)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "``c=`` パラメータで指定した置換条件リストのいずれとも合致しない値を"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "置換するときの文字列(指定がなければNULL値となる)を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:32
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "このオプションにより、指定した項目を置き換えるのではなく、"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:36
+msgid "**F=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "``c=`` パラメータで指定した置換条件リストのいずれとも合致しない値は、"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "その項目の値のまま出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:41
+msgid "**sub=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "検索を完全一致ではなく部分文字列マッチで比較する"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "すなわち、 ``f=`` パラメータで指定した項目の値に、"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "``c=`` パラメータで指定した置換条件で文字列を置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:47
+msgid "**W=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst
+msgid "``sub`` オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:54
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:56
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:69
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:71
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:109
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:111
+msgid ""
+"``item`` の値が ``\"01\"`` を ``\"A\"`` に、 ``\"03\"`` を ``\"B\"`` に、 "
+"``\"04\"`` を ``\"C\"`` に置換する。 その他はNULL値として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:130
+msgid "**条件に合致しない値を置換する文字列の指定**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:132
+msgid "``O=`` パラメータを指定することで、 置換条件に合致しない場合は ``\"out of range\"`` という文字列に置換して出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:148
+msgid "**新しい項目として出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:150
+msgid "``A=True`` オプションを付けることで、新しい項目( ``item info`` )として出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:165
+msgid "**条件外を項目の値として出力**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:167
+msgid "``F=True`` オプションを付けることで、 置換条件に合致しない場合は、元の値をそのまま出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:183
+msgid "**条件を部分文字列マッチで置換**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:185
+msgid ""
+"``sub=True`` オプションをつけることで、部分文字列の置換となる。 以下の例では、 ``item`` 項目に文字列 ``\"01\"``"
+" が含まれていれば、それを ``\"A\"`` に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:201
+msgid "**ワイド文字での部分文字列マッチ**"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:203
+msgid ""
+"ワイド文字の部分文字列置換をする場合は ``W=True`` オプションを用いる。 ただし、UTF-8エンコーディングを用いているのであれば "
+"``W=True`` をつけなくても正しく動作する。 "
+"詳しくは「\\hyperref[sect:multibyte]{マルチバイト文字}」の節を参照されたい。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:221
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:223
+msgid ":doc:`mchgnum` : 数値範囲による置換ならばこちら。"
+msgstr ""
+
+#: ../../mcmd/methods/mchgstr.rst:224
+msgid ":doc:`msed` : 正規表現による置換が可能。"
+msgstr ""
+

@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_match.rst:2
+msgid "match 検索"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:4
+msgid "書式1: match(検索文字列,str_1,str_2,...)"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:5
+msgid "書式2: matcha(検索文字列,str_1,str_2,...)"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:6
+msgid "書式3: matchs(検索文字列,str_1,str_2,...)"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:7
+msgid "書式4: matchas(検索文字列,str_1,str_2,...)"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:10
+msgid ""
+":math:`str_1,str_2,\\cdots` から指定した検索文字列を検索し、 マッチすれば真をマッチしなければ偽を返す。 "
+"OR検索かAND検索か、そして完全一致か部分一致かにより、 表 ef{tbl:func_match_cond}に示すとおり異なる関数名を指定する。"
+" egin{table}[htbp] egin{center} "
+"\\caption{入力データ\\label{tbl:func_match_cond}} {\\small "
+"egin{tabular}{l|ll} \\hline & OR検索 & AND検索 \\ \\hline 完全一致 & match  & "
+"matcha  \\ 部分一致 & matchs & matchas \\ \\hline \\end{tabular} } "
+"\\end{center} \\end{table} ``match`` 関数は、指定した検索文字列が、 "
+":math:`str_1,str_2,\\cdots` のいずれかに完全一致すれば真を返す。 ``matcha`` 関数は、指定した検索文字列が、"
+" :math:`str_1,str_2,\\cdots` の全てに完全一致すれば真を返す。 ``matchs`` 関数は、指定した検索文字列が、 "
+":math:`str_1,str_2,\\cdots` のいずれかに部分一致すれば真を返す。 ``matchas`` "
+"関数は、指定した検索文字列が、 :math:`str_1,str_2,\\cdots` の全てに部分一致すれば真を返す。 "
+"NULL値を含めたOR/AND論理演算の真偽値表は表 ef{tbl:mcal_and}を参照のこと。"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:39
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:41
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:67
+msgid "**OR完全一致**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:69
+msgid "``f1,f2,f3`` 項目のいずれかが ``1`` であれば真を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:83
+msgid "**AND完全一致**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:85
+msgid "``f1,f2,f3`` 項目の全てが文字列 ``\"1\"`` であれば真を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:99
+msgid "**OR部分一致**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:101
+msgid "``s1,s2,s3`` 項目のいずれかが、文字列 ``ab`` を含んでいれば真を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:115
+msgid "**AND部分一致**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:117
+msgid "文字列 ``ab`` が ``s1,s2,s3`` 項目の全てに、文字列 ``ab`` が含まれて入れば真を返す。"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:131
+msgid "**NULL値の検索**"
+msgstr ""
+
+#: ../../mcmd/methods/func_match.rst:133
+msgid "``str`` 項目がNULL値であれば真を返す。"
+msgstr ""
+

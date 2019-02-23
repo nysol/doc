@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mselrand.rst:2
+msgid "mselrand ランダムに行を選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:4
+msgid ""
+"``c=`` パラメータもしくは ``p=`` パラメータで指定した行数をランダムに選択する(非復元抽出)。 ``k=`` "
+"を指定した場合、同一キーの行から指定の行数をランダムに選択し、 また同時に ``B`` オプションを指定すると、キー単位で選択する。 "
+"乱数の生成にはメルセンヌ・ツイスター法を利用している"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:9
+msgid "原作者のページ: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:10
+msgid ""
+"boostライブラリ: "
+"http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:14
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:16
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:20
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:24
+msgid "**c=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "各キーの値毎に選択する行数を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "``p=`` パラメータを指定しない場合の指定は必ず指定する必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:29
+msgid "**p=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "各キーの値毎に選択する割合をパーセントで指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "``c=`` パラメータを指定しない場合の指定は必ず指定する必要がある。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:34
+msgid "**k=** : 型=str , 任意(default=キーブレイク処理しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "指定する項目（複数項目指定可）の値が同じ行から、一定行数ランダムに選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:38
+msgid "**S=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "同じ乱数の種は同じシーケンスの乱数をふる。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "指定しない場合は、時刻に応じた異なる乱数の種が利用される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "指定可能な乱数の種(-2147483648〜2147483647)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:44
+msgid "**u=** : 型=str , 任意(default=出力しない)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "指定の条件に一致しない行を出力するデータを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:48
+msgid "**B=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst
+msgid "キー単位選択"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:55
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:57
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullkey=<common_param_assert_nullkey>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`q=<common_param_q>` , "
+":ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:70
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:72
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:104
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:106
+msgid "一人の顧客につきランダムに1行を選択する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:118
+msgid "**ランダムに一定割合の行を選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:120
+msgid "一人の顧客につきランダムに50\\%の行を選択する。 また、それ以外の不一致データは ``oth2.csvと`` いうファイルに出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:138
+msgid "**キー単位の選択**"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:140
+msgid "以下の例は、顧客 ``A,B,C,D`` の4人からランダムに2人を選ぶ。 顧客 ``D`` が選ばれると、顧客 ``D`` の行は全て出力される。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:156
+msgid "関連メソッド"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:158
+msgid ":doc:`msel` : 正規乱数も使える。"
+msgstr ""
+
+#: ../../mcmd/methods/mselrand.rst:159
+msgid ":doc:`mrand` : ランダム選択でなく、乱数項目を付け加える。"
+msgstr ""
+

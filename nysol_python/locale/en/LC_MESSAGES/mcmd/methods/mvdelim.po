@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/mvdelim.rst:2
+msgid "mvdelim ベクトル要素の区切り文字変更"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:4
+msgid ""
+"ベクトル型の要素を区切る文字列を変更する。 ただし、``v=`` のように値を指定しなければ空文字と見なされ、 結果として区切り文字が消去される。"
+" 文字列や漢字も指定することは可能であるが、 ベクトルを扱うコマンド(mvsortなど)で指定できる区切り文字 ( ``delim=`` "
+"によって指定)はアルファベット１文字であるため、 もはやベクトルとして利用することはできなくなることに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:13
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:15
+msgid "**i=** : 型=str , 任意(default=標準入力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "入力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:19
+msgid "**o=** : 型=str , 任意(default=標準出力)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "出力データを指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:23
+msgid "**vf=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "区切り文字を変更するベクトル項目名を指定する。複数項目指定可能。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:28
+msgid "**v=** : 型=str , 必須"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "新しい区切り文字を指定する。何も指定しなければ空文字として扱われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:32
+msgid "**A=** : 型=bool , 任意(default=False)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "``vf=`` で:(コロン)に続けて指定した項目名で、新たな項目が追加される。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "なお ``A`` オプションを指定した場合、 ``vf=`` パラメータで指定するすべての"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "項目に新項目名を指定しなければならない。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:38
+msgid "**delim=** : 型=str , 任意(default=)"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst
+msgid "ベクトル型データの区切り文字を指定する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:45
+msgid "共通パラメータ"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:47
+msgid ""
+":ref:`i=<common_param_i>` , :ref:`o=<common_param_o>` , "
+":ref:`delim=<common_param_delim>` , "
+":ref:`assert_diffSize=<common_param_assert_diffSize>` , "
+":ref:`assert_nullin=<common_param_assert_nullin>` , "
+":ref:`assert_nullout=<common_param_assert_nullout>` , "
+":ref:`nfn=<common_param_nfn>` , :ref:`nfno=<common_param_nfno>` , "
+":ref:`x=<common_param_x>` , :ref:`tmppath=<common_param_tmppath>` , "
+":ref:`precision=<common_param_precision>`"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:61
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:63
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:79
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:81
+msgid "ベクトル型要素のデフォルトの区切り文字である半角スペースを ``_`` (アンダーバー)に置換する。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:94
+msgid "**カンマ**"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:96
+msgid "CSVの区切り文字であるカンマに置換すると、CSVの区切り文字との区別を付けるために、 ベクトル全体がダブルクオーツで囲われる。"
+msgstr ""
+
+#: ../../mcmd/methods/mvdelim.rst:111
+msgid "関連メソッド"
+msgstr ""
+

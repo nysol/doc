@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/methods/func_if.rst:2
+msgid "if 条件選択"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:4
+msgid "書式1: if(bool,num1,num2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:5
+msgid "書式2: if(bool,str1,str2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:6
+msgid "書式3: if(bool,date1,date2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:7
+msgid "書式4: if(bool,time1,time2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:8
+msgid "書式5: if(bool,bool1,bool2)"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:11
+msgid ""
+"第1パラメータの値が真であれば第2パラメータを、偽であれば第3パラメータを返す。 第1パラメータがNULL値であればNULL値を返す。 "
+"第2パラメータと第3パラメータは同じ型でなくてはならないことに注意する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:17
+msgid "利用例"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:19
+msgid "**importと入力データ(CSV)の準備**"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:54
+msgid "**基本例**"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:56
+msgid "time項目が数値として120000以下であれば\"AM\"、そうでなければ\"PM\"を出力する。"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:70
+msgid "**真偽値による条件選択**"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:72
+msgid "``$b{項目名}`` によって、データ上の値\"1\"は真、 \"0\"は偽、そしてその他の値はNULLとして解釈される。"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:87
+msgid "**時刻型として比較**"
+msgstr ""
+
+#: ../../mcmd/methods/func_if.rst:102
+msgid "**if関数のネスト**"
+msgstr ""
+

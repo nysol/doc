@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd.rst:3
+msgid "mcmdモジュール"
+msgstr ""
+
+#: ../../mcmd.rst:4
+msgid ""
+"MCMD [#f1]_ とは、大規模な表構造データを高速に処理する目的で開発されたメソッド群である。 "
+"MCMDは、単一の機能(例えば、並べ替えや表の結合など)に特化したメソッドを80種類以上提供している。 "
+"全てのメソッドは共通して、CSV(カンマ区切りデータ)ファイルもしくはPythonのリストを読み込み、 "
+"結果をCSVとして標準出力に書き出すだけの非常にシンプルな処理方式に従っている。 "
+"個々のメソッドはスレッド単位で実行され、データはスレッド間パイプを構成することで組み合わせて処理され、 "
+"sh等のOSのシェルを用いることなくPython内で完結したプログラミングを可能としている。 MCMDは、特に知識発見プロセス [#f2]_ "
+"における **前処理** で威力を発揮するが、その他のプロセスにおいても利用可能である。"
+msgstr ""
+
+#: ../../mcmd.rst:12
+msgid "Contents:"
+msgstr ""
+
+#: ../../mcmd.rst:35
+msgid "パラメータ"
+msgstr ""
+
+#: ../../mcmd.rst:38
+msgid "Footnotes"
+msgstr ""
+
+#: ../../mcmd.rst:39
+msgid "これまでの慣習に従って「Mコマンド」と呼ぶが、もはやコマンドではない。MCMDのMは、発案者である松田康之氏のイニシャルに拠っている。"
+msgstr ""
+
+#: ../../mcmd.rst:40
+msgid "データ獲得，選択，前処理，変換，知識発見アルゴリズムの適用，解釈，評価といった 一連のサイクルを指す(引用: OR辞典 [#f3]_ )。"
+msgstr ""
+
+#: ../../mcmd.rst:41
+#, python-format
+msgid "http://www.orsj.or.jp/~wiki/wiki/index.php/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0"
+msgstr ""
+

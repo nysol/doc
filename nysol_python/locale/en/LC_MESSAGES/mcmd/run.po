@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, nysol
+# This file is distributed under the same license as the nysol_python
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nysol_python \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 12:48+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../mcmd/run.rst:5
+msgid "runとruns"
+msgstr ""
+
+#: ../../mcmd/run.rst:6
+msgid ""
+"「 :doc:`flow` 」の節で説明したように、処理フローオブジェクトに登録された処理フローの実行には、 ``run`` もしくは "
+"``runs`` メソッドが用いられる。 処理フローを構成する処理メソッドはthread上に展開され [#f3]_ "
+"[#f4]_、メソッド間にパイプラインが敷設される。 "
+"そして与えられた入力データがパイプラインを流れ、各thread上の処理メソッドが流れ来るデータを処理していく。 "
+"このように、全てのthreadはMISD(Multiple Instruction Single Data)型の並列処理で実行される。 "
+"MISD型の並列処理の欠点は、処理フローの中で相対的に遅い処理メソッドがあれば、そこがボトルネックになるということだ。 "
+"ただし、より大規模な処理であれば、「 :doc:`flow` 」の節で紹介した SIMD(Single Instruction Multiple "
+"Data)型の並列処理と組み合わせることで、 より効率的な処理を実現できる。"
+msgstr ""
+
+#: ../../mcmd/run.rst:17
+msgid "run: メンバーメソッド"
+msgstr ""
+
+#: ../../mcmd/run.rst:18
+msgid ""
+"``run`` は、実行前に自動追加される処理メソッドを加えた上で処理フローを構成する。 "
+"その後、各処理メソッドはthread上に展開され実行されるが、 処理メソッドの数が多い場合は、それら全てが同時に実行されるわけではない。 "
+"メモリの圧迫や、ワークファイルの増加など、処理速度を低下させる要因が増え効率が上がらなくなるからである。 "
+"さらに1プロセスで利用できるファイルのオープン数制限もある(パイプも特殊なファイルの一種で、read/writeで2回のオープン数となる)。 "
+"そこで、同時実行thread数を経験的に制限している。 "
+"処理メソッドの平均的なメモリ利用量は47MB程度であり、実メモリ量を47MBで割った値を同時実行数として割り当てている。 "
+"他にどのようなプロセスが実行しているかは見ておらず、あくまでも物理的なメモリ要量から計算される。 "
+"例えば4GBメモリのマシンであれば、同時実行thread数の上限は86(=4084/47)となる。 "
+"この上限を変更することは可能で、2つの方法がある。 1つは、環境変数 ``KG_RUN_LIMIT`` にその値を設定することで、 もう一つは、 "
+"``run`` の引数に ``runlimit`` を与えることである( :numref:`run_limit` )。 "
+"両方が同時に与えられた時は、 ``run`` の引数が優先される。"
+msgstr ""
+
+#: ../../mcmd/run.rst:32
+msgid "同時実行thread数の上限変更の2つの方法"
+msgstr ""
+
+#: ../../mcmd/run.rst:42
+msgid ""
+"ある処理フローオブジェクトで実行される処理メソッドの数が上限を上回る場合には、 処理フローの「適当なところ」でフローを切断し(パイプ接続を切り)、"
+" 切断された箇所の結果をワークファイルへの出力に切り替える。 "
+"そして切断された先の処理は、前の全threadの処理が終わった後でワークファイルから読み込み、処理が継続されることになる。 "
+"極端な例として、``runlimit=1`` と設定すると、全てのメソッドは切断され、 "
+"全てのメソッドがシングルthreadで動作し、入力ファイルに近い処理メソッドから順番に起動され、 "
+"それらの処理メソッド間のデータのやりとりは、ワークファイルへの入出力で実現される。 結果としてファイルI/Oが多発して遅くなってしまう。"
+msgstr ""
+
+#: ../../mcmd/run.rst:51
+msgid ""
+"さて、処理フローを切断する「適当なところ」とはどこであろうか？ mcmdの処理フローは循環のない有向グラフ(DAG:Directed "
+"Acyclic Graph)で表すことができる(詳細は「 :doc:`flow` 」の節を参照)。 "
+"そこで概ね、次のようなヒューリスティックで切断位置を決めている。 入力データから始め、DAG上を有向辺に沿って幅優先で巡回していき、 "
+"訪れた節点に番号を振っていく。 その番号がthread数の上限を超えたところで、その番号以下の処理メソッドを1つのブロックとして切断する。 "
+"この操作を繰り返すことで、処理フロー全体を複数のブロックに分割し、順次threadの並列処理にて実行していっている。 "
+"実行中に起動されたthreadの数を確認したければ ``top`` コマンドを用いればよい。"
+msgstr ""
+
+#: ../../mcmd/run.rst:60
+msgid ""
+"以上のような切断方法以外にも、より処理効率を高めるための切断点の検出方法は存在するであろう。 "
+"ただ、各メソッドのアルゴリズムの処理効率、ワークファイル利用の有無、フロー分岐後の切断へのペナルティなど、 "
+"考慮すべき要因が多く、それらの要因を考慮した最適切断点の検出は今後の課題である。"
+msgstr ""
+
+#: ../../mcmd/run.rst:65
+msgid "threadのスタックサイズ"
+msgstr ""
+
+#: ../../mcmd/run.rst:66
+msgid ""
+"処理メソッドはthread上で実行されるが、threadにはスタックサイズに上限があり、 この制約のためにメモリエラーが生じることがある。 "
+"処理メソッドはC++で実装されており、C++ではローカル関数のauto変数は全てスタック上に確保される。 "
+"スタックの方が、スタティック領域やヒープ領域より速度が早いのが理由である。 "
+"処理メソッド内部のデータバッファやソーティングバッファなど大きなメモリを必要とするものはヒープを用いているが、 例えば、 ``mselstr`` "
+"の ``v=`` で指定する文字列リストなどはスタック領域を使っている。 もし ``v=a1,a2,a3,...,a1000000`` "
+"のような指定をすると [#f1]_ 、途端にthreadのスタック領域を使い切ってしまう。"
+msgstr ""
+
+#: ../../mcmd/run.rst:74
+msgid ""
+"threadのスタックサイズの上限は1048576( :math:`2^{20}` )バイトである。 この値は、環境変数 "
+"``KG_THREAD_STK`` を設定することで変更可能である( :numref:`run_stack` )。 "
+"ただし、16384以上の16の倍数にしなければエラーとなる [#f2]_ 。"
+msgstr ""
+
+#: ../../mcmd/run.rst:78
+msgid "theadのスタックサイズの変更"
+msgstr ""
+
+#: ../../mcmd/run.rst:87
+msgid "runs: クラスメソッド"
+msgstr ""
+
+#: ../../mcmd/run.rst:88
+msgid ""
+"前節の ``run`` メソッドは、最終出力が1つの時に呼び出す処理フローオブジェクトのメンバーメソッドであるのに対し、 "
+"複数の出力を持つような処理フローの実行には ``runs`` が用いられる(詳細は、「 :doc:`flow` 」を参照)。 "
+"より正確には、シンク節点を複数持つDAGである時に ``runs`` を用いる。 ``run`` で実行できるフローを ``runs`` "
+"で実行することはなんの問題もない。 しかし逆に、出力を複数もちフローを複数の ``run`` "
+"メソッドで実行すると、処理結果は同じでも処理効率に違いが出てくる。 ``runs``  も基本的には ``run`` "
+"とやっていることはほぼ同じであるが、 ``runs`` "
+"では、指定された複数の処理フローオブジェクトを統合して、DAGを再構成する点に違いがあるからである。 よって、複数の ``run`` "
+"を実行すると、統合した場合には共通化できるフローが別々に重複して実行されてしまい、効率が落ちるのである。"
+msgstr ""
+
+#: ../../mcmd/run.rst:98
+msgid "返り値"
+msgstr ""
+
+#: ../../mcmd/run.rst:99
+msgid ""
+"``run`` の返り値は、最終出力で ``o=ファイル名`` を指定していればそのファイル名を返す。 ``o=`` を省略していれば、もしくは "
+"``o=リスト`` を指定している時は、結果をリストで返す。 ``runs`` では最終出力が複数になるので、 ``run`` "
+"と同様のルールで、結果をリストで返す。 :numref:`run_ret` に例を示す。"
+msgstr ""
+
+#: ../../mcmd/run.rst:104
+msgid "o=の指定と返り値の例"
+msgstr ""
+
+#: ../../mcmd/run.rst:157
+msgid "メッセージ制御"
+msgstr ""
+
+#: ../../mcmd/run.rst:158
+msgid ""
+"``run`` と ``runs`` に共通したパラメータとしてメッセージ出力の有無を制御する ``msg=`` を指定できる。 "
+"``msg=\"on\"`` とすれば処理フロー上の各メソッドが終了した時に終了メッセージが表示される。"
+msgstr ""
+
+#: ../../mcmd/run.rst:161
+msgid "mcmdのインポートと入力データの設定"
+msgstr ""
+
+#: ../../mcmd/run.rst:182
+msgid ""
+"さらに、環境変数 ``KG_VerboseLevel`` を設定することでメッセージをより細かく制御することができる。 "
+"以下に、設定値とその内容を、設定例を :numref:`run_setverbose`  に示す。 ``msg=\"on\"`` "
+"を指定しなかった場合は、``KG_VerboseLevel=2`` の設定に従ってメッセージが表示される。 "
+"すなわち、errorとwarningメッセージのみ表示する。 この値は変更できない。 変更できるのは ``msg=\"on\"`` "
+"を指定したときの振る舞いで、 環境変数 ``KG_VerboseLevel`` の設定に従ったメッセージが表示される。"
+msgstr ""
+
+#: ../../mcmd/run.rst:191
+msgid "値"
+msgstr ""
+
+#: ../../mcmd/run.rst:191
+msgid "内容"
+msgstr ""
+
+#: ../../mcmd/run.rst:193
+msgid "0"
+msgstr ""
+
+#: ../../mcmd/run.rst:193
+msgid "メッセージを一切出力しない"
+msgstr ""
+
+#: ../../mcmd/run.rst:194
+msgid "1"
+msgstr ""
+
+#: ../../mcmd/run.rst:194
+msgid "\\+ error メッセージ出力"
+msgstr ""
+
+#: ../../mcmd/run.rst:195
+msgid "2"
+msgstr ""
+
+#: ../../mcmd/run.rst:195
+msgid "\\+ warning メッセージ出力(msg=\"on\"以外の場合)"
+msgstr ""
+
+#: ../../mcmd/run.rst:196
+msgid "3"
+msgstr ""
+
+#: ../../mcmd/run.rst:196
+msgid "\\+ end メッセージ出力"
+msgstr ""
+
+#: ../../mcmd/run.rst:197
+msgid "4"
+msgstr ""
+
+#: ../../mcmd/run.rst:197
+msgid "\\+ msg メッセージ出力 (msg=\"on\"のデフォルト)"
+msgstr ""
+
+#: ../../mcmd/run.rst:200
+msgid "メッセージの表示レベルの変更例"
+msgstr ""
+
+#: ../../mcmd/run.rst:209
+msgid "Footnotes"
+msgstr ""
+
+#: ../../mcmd/run.rst:210
+msgid "内部的には |pthread| を使っている。"
+msgstr ""
+
+#: ../../mcmd/run.rst:211
+msgid "``cmd`` と ``runfunc`` ( :doc:`special` )はthread上でforkしてプロセスとして起動される。"
+msgstr ""
+
+#: ../../mcmd/run.rst:212
+msgid "このような処理は、条件となる複数の文字列をPythonリストもしくはCSVに格納し ``mcommon`` を用いればよい。"
+msgstr ""
+
+#: ../../mcmd/run.rst:213
+msgid "この制約に違反した時、OSによっては自動調整されるが、macだと ``stack size change error`` で停止してしまう。"
+msgstr ""
+
