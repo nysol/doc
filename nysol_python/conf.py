@@ -16,6 +16,9 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../nysol'))
 
+locale_dirs = ['locale/']
+gettext_compact = False
+
 # -- Project information -----------------------------------------------------
 
 project = 'nysol_python'
