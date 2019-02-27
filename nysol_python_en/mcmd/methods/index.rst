@@ -1,0 +1,85 @@
+
+処理メソッド一覧
+==============================
+
+.. toctree::
+  :maxdepth: 1
+  :caption: Contents:
+
+  maccum
+  marff2csv
+  mavg
+  mbest
+  mbucket
+  mcal
+  mcat
+  mchgnum
+  mchgstr
+  mcombi
+  mcommon
+  mcount
+  mcross
+  m2cross
+  mcut
+  mdelnull
+  mdformat
+  mduprec
+  mfldname
+  mfsort
+  mhashavg
+  mhashsum
+  mjoin
+  mkeybreak
+  mmbucket
+  mmvavg
+  mmvsim
+  mmvstats
+  mnewnumber
+  mnewrand
+  mnewstr
+  mnjoin
+  mnormalize
+  mnrcommon
+  mnrjoin
+  mnullto
+  mnumber
+  mpadding
+  mpaste
+  mproduct
+  mrand
+  mrjoin
+  msed
+  msel
+  mselnum
+  mselrand
+  mselstr
+  msep
+  msetstr
+  mshare
+  mshuffle
+  msim
+  mslide
+  msortf
+  msplit
+  mstats
+  msum
+  msummary
+  mtab2csv
+  mtonull
+  mtra
+  mtrafld
+  mtraflg
+  muniq
+  mvcat
+  mvcommon
+  mvcount
+  mvdelim
+  mvdelnull
+  mvjoin
+  mvnullto
+  mvreplace
+  mvsort
+  mvuniq
+  mwindow
+  mxml2csv
+

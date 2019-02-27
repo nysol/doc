@@ -1,0 +1,164 @@
+<html>
+<head>
+<script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+<script>
+var NodeDATA=[{ title:"writelist ", x:20 , y:500 , name:"writelist", tp:"sysadd"},
+{ title:"mcal c=${amount}/${totalAmount} a=share", x:80 , y:440 , name:"mcal", tp:"mod"},
+{ title:"mjoin k=customer f=totalAmount", x:20 , y:380 , name:"mjoin", tp:"mod"},
+{ title:"mfifo ", x:20 , y:320 , name:"mfifo", tp:"sysadd"},
+{ title:"m2tee ", x:20 , y:260 , name:"m2tee", tp:"sysadd"},
+{ title:"mcut f=customer,amount", x:20 , y:200 , name:"mcut", tp:"mod"},
+{ title:"readlist ", x:20 , y:140 , name:"readlist", tp:"sysadd"},
+{ title:"msum k=customer f=amount:totalAmount", x:80 , y:380 , name:"msum", tp:"mod"},
+{ title:"mfifo ", x:80 , y:320 , name:"mfifo", tp:"sysadd"},
+{ title:"list olist_0", x:20 , y:440 , name:"list" ,tp:"list"},
+{ title:"list ilist_6", x:20 , y:80 , name:"list" ,tp:"list"}]
+var EdgeDATA=[{ title:"o => i ", x1:80,y1:440,x2:20,y2:500 },
+{ title:"o => i ", x1:20,y1:380,x2:80,y2:440 },
+{ title:"o => i ", x1:20,y1:320,x2:20,y2:380 },
+{ title:"o => m ", x1:80,y1:380,x2:20,y2:380 },
+{ title:"o => i ", x1:20,y1:260,x2:20,y2:320 },
+{ title:"o => i ", x1:20,y1:200,x2:20,y2:260 },
+{ title:"o => i ", x1:20,y1:140,x2:20,y2:200 },
+{ title:"o => i ", x1:80,y1:320,x2:80,y2:380 },
+{ title:"o => i ", x1:20,y1:260,x2:80,y2:320 },
+{ title:"o => i ", x1:20,y1:500,x2:20,y2:440 },
+{ title:"o => i ", x1:20,y1:80,x2:20,y2:140 }]
+var LinkLIST=[[[9],[0]],
+[[0],[1]],
+[[1],[2,3]],
+[[2],[4]],
+[[4,8],[5]],
+[[5],[6]],
+[[6],[10]],
+[[3],[7]],
+[[7],[8]],
+[[],[9]],
+[[10],[]]]
+</script>
+</head><body><svg id='flowDspArea' height='1200' width='480'>
+<defs>
+<marker id='endmrk' markerUnits='strokeWidth' markerWidth='3' markerHeight='3' viewBox='0 0 10 10' refX='5' refY='5' orient='auto'>
+<polygon points='0,0 5,5 0,10 10,5 ' fill='black'/>
+</marker>
+</defs>
+</svg>
+
+	<script>
+	svgGroup = d3.select('#flowDspArea');
+	
+	node_g = svgGroup.selectAll('g .node').data(NodeDATA);
+	edge_g = svgGroup.selectAll('g .edge').data(EdgeDATA);
+	// 移動処理用
+	var drag = d3.behavior.drag()
+	drag.on('drag', dragMove);
+	function dragMove(d,i) {
+		d.x += d3.event.dx
+  	d.y += d3.event.dy
+   	d3.select(this)
+   		.attr('transform','translate('+d.x+','+d.y+')')
+
+		for(var j=0 ; j<LinkLIST[i][0].length;j++){
+			EdgeDATA[LinkLIST[i][0][j]].x1 += d3.event.dx
+			EdgeDATA[LinkLIST[i][0][j]].y1 += d3.event.dy
+	   	d3.select('#edgeP-'+LinkLIST[i][0][j])
+				.attr('x1',function(d) {
+					return d.x1 + ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('x2',function(d) {
+					return d.x2 - ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('y1',function(d) {
+					return d.y1 + ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('y2',function(d) { 
+					return d.y2 - ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+		}
+		for(var j=0 ; j<LinkLIST[i][1].length;j++){
+			EdgeDATA[LinkLIST[i][1][j]].x2 += d3.event.dx
+			EdgeDATA[LinkLIST[i][1][j]].y2 += d3.event.dy
+	   	d3.select('#edgeP-'+LinkLIST[i][1][j])
+				.attr('x1',function(d) {
+					return d.x1 + ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('x2',function(d) {
+					return d.x2 - ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('y1',function(d) {
+					return d.y1 + ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+				.attr('y2',function(d) { 
+					return d.y2 - ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+				})
+		}
+	}
+ 	node_g2 = node_g.enter().append('g')
+		.attr('class', 'node')
+		.attr('id', function (d,i) {return 'node-' + i;})
+		.attr('transform',function (d) { return 'translate('+d.x+','+d.y+')'})
+    .call(drag)		
+
+	node_g2.append('title')
+			.text(function(d) { return d.title})
+
+	node_g2
+		.filter(function(d) { return d.tp != "file" && d.tp != "list" && d.tp != "sysadd"})
+		.append('circle')
+		.attr('r',20)
+		.attr('stroke','blue')
+		.attr('fill','white')
+		.attr('stroke-width',1)
+
+	node_g2
+		.filter(function(d) { return d.tp == "sysadd"})
+		.append('circle')
+		.attr('r',20)
+		.attr('stroke','gray')
+		.attr('fill','white')
+		.attr('stroke-width',1)
+
+	node_g2
+		.filter(function(d) { return d.tp == "file" || d.tp == "list"  })
+		.append('rect')
+		.attr('x',-20)
+		.attr('y',-15)
+		.attr('width',40)
+		.attr('height',30)
+		.attr('stroke','blue')
+		.attr('fill','white')
+		.attr('stroke-width',1)
+
+	node_g2.append('text')
+		.attr('x',function(d) { return -20})
+		.attr('fill',function(d) { 
+			if ( d.tp == 'excmd' || d.tp == "sysadd" ){ return 'gray'; } 
+			else { return 'black'; }
+		})
+		.text(function(d) { return d.name})
+
+ 	edge_g2 = edge_g.enter().append('g')
+		.attr('class', 'edge')
+		.attr('id', function (d,i) {return 'edge-' + i;})
+
+
+	edge_g2.append('line')
+		.attr('id', function (d,i) {return 'edgeP-' + i;})
+		.attr('x1',function(d) {
+			return d.x1 + ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+		})
+		.attr('x2',function(d) {
+			return d.x2 - ( 20.0 * (d.x2-d.x1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+		})
+		.attr('y1',function(d) {
+			return d.y1 + ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+		})
+		.attr('y2',function(d) { 
+			return d.y2 - ( 20.0 * (d.y2-d.y1) / (Math.pow(Math.pow(d.x2-d.x1,2)+Math.pow(d.y2-d.y1,2),0.5)))
+		})
+		.attr('stroke','black')
+		.attr('stroke-width','5')
+		.attr('marker-end','url(#endmrk)')
+	</script>
+	</body>
+</html>

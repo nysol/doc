@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>処理フロー &mdash; nysol_python  ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="「竹(Take)」とは？" href="../take.html" />
+    <link rel="prev" title="Pythonデータの入出力" href="list.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> nysol_python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../mcmd.html">mcmdモジュール</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hello.html">はじめよう</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">Pythonデータの入出力</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">処理フロー</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">入力の変換</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">出力の変換</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../take.html">takeモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nysol_python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../mcmd.html">mcmdモジュール</a> &raquo;</li>
+        
+      <li>処理フロー</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mcmd/flow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>処理フロー<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>mcmdでは、単一機能に特化した80以上のメソッドを自由に組み合わせることで、
+データ処理の複雑なフローを構築することができ、それらは並列で処理される。
+このようなフロー全体のことを <strong>データ処理フロー</strong> もしくは単に <strong>処理フロー</strong> と呼ぶ。
+そして処理フローを扱うオブジェクトを <strong>データ処理フローオブジェクト</strong> と呼ぶ。
+以下では、単純な例から始め、mcmdがデータ処理フローをどのように扱うかについて説明する。</p>
+<p>単純なデータ処理フローから始めよう。
+図 <a class="reference internal" href="#flow-base"><span class="std std-numref">リスト 7</span></a> は、「 <a class="reference internal" href="hello.html"><span class="doc">はじめよう</span></a> 」節の <a class="reference internal" href="hello.html#hello-ope"><span class="std std-numref">リスト 4</span></a> に示したフローである。
+2重リストに格納された3項目5行のデータを入力データとして、
+<code class="docutils literal notranslate"><span class="pre">mcut</span></code> メソッドにより、 <code class="docutils literal notranslate"><span class="pre">customer</span></code> と <code class="docutils literal notranslate"><span class="pre">amount</span></code> 項目のみを切り出し、
+<code class="docutils literal notranslate"><span class="pre">amount</span></code> 項目を合計するというものである。</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="flow-base">
+<div class="code-block-caption"><span class="caption-number">リスト 7 </span><span class="caption-text">処理フローの基本例</span><a class="headerlink" href="#flow-base" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nysol.mcmd</span> <span class="kn">as</span> <span class="nn">nm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dat</span><span class="o">=</span><span class="p">[</span>
+<span class="go">[&quot;customer&quot;,&quot;date&quot;,&quot;amount&quot;],</span>
+<span class="go">[&quot;A&quot;,&quot;20180101&quot;,5200],</span>
+<span class="go">[&quot;B&quot;,&quot;20180101&quot;,4000],</span>
+<span class="go">[&quot;B&quot;,&quot;20180101&quot;,3500],</span>
+<span class="go">[&quot;A&quot;,&quot;20180101&quot;,2000],</span>
+<span class="go">[&quot;B&quot;,&quot;20180101&quot;,800]</span>
+<span class="go">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">&lt;&lt;=</span> <span class="n">nm</span><span class="o">.</span><span class="n">mcut</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="s2">&quot;customer,amount&quot;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">dat</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">&lt;&lt;=</span> <span class="n">nm</span><span class="o">.</span><span class="n">msum</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="s2">&quot;customer&quot;</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="s2">&quot;amount&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">[[&#39;A&#39;, &#39;7200&#39;], [&#39;B&#39;, &#39;8300&#39;]]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;=</span></code> 演算子により、左辺の処理フローオブジェクトに右辺のメソッドが追加登録される。
+左辺が <code class="docutils literal notranslate"><span class="pre">None</span></code> の場合は、新規に処理フローオブジェクトが生成され、メソッドが登録される。
+登録順は重要で、明示的な接続関係(後述)を設定しなければ、前のメソッドの出力データが次のメソッドの入力データとして接続される。
+<a class="reference internal" href="#flow-base"><span class="std std-numref">リスト 7</span></a> では、<code class="docutils literal notranslate"><span class="pre">mcut</span></code> の出力が <code class="docutils literal notranslate"><span class="pre">msum</span></code> の入力として接続される。</p>
+<p>データ処理フロー全体の接続関係を表示したければ、nysol.shellのverb|topology|メソッドを用いれば良い(図ref{code:flow1_topo}の1行目)。
+verb|name=|でhtmlファイル名を指定すれば図ref{fig:flow1}のようなネットワーク図が出力される。
+このネットワーク図には、ノードにメソッドが示され、エッジにソケットの接続関係が示される。
+verb|read|メソッドとverb|mcut|メソッドを連結する有向エッジにラベルverb|p1:o &gt;&gt; i|と示されているが、
+これは、連結元のverb|read|メソッドの出力ソケットverb|o=|がverb|mcut|メソッドの入力ソケットverb|i=|に連結されていることを示している。
+さらに、ノードにカーソルを合わせると、各メソッドに指定されたパラメータがポップアップで表示される。
+ただしリストデータの内容は、省略表示される。</p>
+<p>またverb|topology|メソッドをパラメータなしで実行すれば、ネットワーク情報が辞書型データとして出力される。
+図ref{code:flow1_topo}に示されたネットワークの情報全てを含んでおり、
+辞書のキーワードの意味を表ref{tbl:flow_dic}に示す。</p>
+<p>mcmdの多くのメソッドでは入出力データとしてPythonのリストとしてデータを指定することができる。
+しかし一方で、mcmd内部ではデータは全てテキストのバイトストリームとして扱われるため、
+入出力にリストを指定した場合、データ型の変換が生じる。</p>
+<div class="section" id="id2">
+<h2>入力の変換<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>mcmdで入力データとして扱い可能なPythonのデータ型は、文字列、数値(int,float,bool)であり、
+特殊な値としてNone,nan,infも扱うことができる。
+いずれもmcmd内部では文字列に変換されるが、その変換規則は表 <code class="xref std std-numref docutils literal notranslate"><span class="pre">list:inTypeConv</span></code> に示す通りで、
+実際のPythonコードとその実行結果を <code class="xref std std-numref docutils literal notranslate"><span class="pre">list_convTypeCode</span></code> に示す。</p>
+<blockquote>
+<div><table border="1" class="docutils" id="list-intypeconv">
+<caption><span class="caption-number">表 3 </span><span class="caption-text">Pythonのデータ型のmcmdデータへの変換規則と変換例</span><a class="headerlink" href="#list-intypeconv" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Pythonデータ型/値</td>
+<td>変換後文字列</td>
+<td>変換前例</td>
+<td>変換後例</td>
+</tr>
+<tr class="row-even"><td>string</td>
+<td>そのまま</td>
+<td>'abc'</td>
+<td>'abc'</td>
+</tr>
+<tr class="row-odd"><td>int</td>
+<td>文字列としての整数</td>
+<td>12</td>
+<td>'12'</td>
+</tr>
+<tr class="row-even"><td>float</td>
+<td>文字列としての実数</td>
+<td>0.123</td>
+<td>'0.123'</td>
+</tr>
+<tr class="row-odd"><td>nan</td>
+<td>null値</td>
+<td>float('nan')</td>
+<td>''</td>
+</tr>
+<tr class="row-even"><td>inf</td>
+<td>null値</td>
+<td>float('inf')</td>
+<td>''</td>
+</tr>
+<tr class="row-odd"><td>-inf</td>
+<td>null値</td>
+<td>float('inf')</td>
+<td>''</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>'1'</td>
+<td>True</td>
+<td>'1'</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>'0'</td>
+<td>False</td>
+<td>'0'</td>
+</tr>
+<tr class="row-even"><td>None</td>
+<td>null値</td>
+<td>None</td>
+<td>''</td>
+</tr>
+</tbody>
+</table>
+<div class="literal-block-wrapper docutils container" id="list-convtypecode">
+<div class="code-block-caption"><span class="caption-number">リスト 8 </span><span class="caption-text">Pythonデータ型の変換例</span><a class="headerlink" href="#list-convtypecode" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nysol.mcmd</span> <span class="kn">as</span> <span class="nn">nm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dat</span><span class="o">=</span><span class="p">[</span>
+<span class="go">[&quot;str&quot;,&quot;int&quot;,&quot;float&quot;,&quot;nan&quot;,&quot;inf&quot;,&quot;-inf&quot;,&quot;True&quot;,&quot;False&quot;,&quot;None&quot;],</span>
+<span class="go">[&quot;A&quot;,10,0.123,float(&quot;nan&quot;),float(&quot;inf&quot;),float(&quot;-inf&quot;),True,False,None]</span>
+<span class="go">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nm</span><span class="o">.</span><span class="n">mread</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">dat</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">[&#39;A&#39;, &#39;10&#39;, &#39;0.123&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;1&#39;, &#39;0&#39;, &#39;&#39;]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>出力の変換<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>mcmdの内部では全てのデータはテキストのバイトストリームとして扱われるため、
+何の指定もなくPythonデータとして出力すれば全て文字列として出力される。
+それら文字列を他のデータ型に変換したければ、<code class="docutils literal notranslate"><span class="pre">writelist</span></code> メソッドを用いればよい。
+このメソッドは、項目単位で出力するデータ型を指定できる。
+変換可能なデータ型は、str,int,float,boolであり、いずれの型においてもnull値は <code class="docutils literal notranslate"><span class="pre">None</span></code> に変換される。</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">リスト 9 </span><span class="caption-text">Pythonデータ型の変換例</span><a class="headerlink" href="#id4" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nysol.mcmd</span> <span class="kn">as</span> <span class="nn">nm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dat</span><span class="o">=</span><span class="p">[</span>
+<span class="go">[&quot;str&quot;,&quot;int&quot;,&quot;float&quot;,&quot;zero&quot;,&quot;nonzero&quot;,&quot;null&quot;],</span>
+<span class="go">[&quot;A&quot;,10,0.123,0,1,&quot;&quot;]</span>
+<span class="go">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nm</span><span class="o">.</span><span class="n">mread</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">dat</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># writelistを用いなければ、全ての項目は文字列として出力される</span>
+<span class="go">[&#39;A&#39;, &#39;10&#39;, &#39;0.12&#39;, &#39;0&#39;, &#39;1&#39;, &#39;&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nm</span><span class="o">.</span><span class="n">mread</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">dat</span><span class="p">)</span><span class="o">.</span><span class="n">writelist</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;str:str,int:int,float:float,zero:bool,nonzero:bool,null:int&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">[&#39;A&#39;, 10, 0.12, False, True, None]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div></blockquote>
+<p>ヘッダーの有無</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../take.html" class="btn btn-neutral float-right" title="「竹(Take)」とは？" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="list.html" class="btn btn-neutral" title="Pythonデータの入出力" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, nysol.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'ja',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
