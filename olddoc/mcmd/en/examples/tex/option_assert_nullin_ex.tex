@@ -1,0 +1,24 @@
+\subsubsection*{(Basic example) }
+Assume, for instance, the maccum command (accumulation) is used. The maccum command ignores the fields specified by the f= parameter if they contain a NULL value. Specify the -assert\_nullin option to check whether a key field specified by the f= parameter contains a NULL value. When a NULL value is contained, the \verb|“#WARNING# ; exist NULL in input data”| message is shown.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,
+A,2,20
+B,1,15
+B,3,10
+B,,20
+
+$ maccum s=customer f=quantity:quantityC,amount:amountC -assert_nullin i=dat1.csv o=rsl1.csv
+#WARNING# ; exist NULL in input data
+#END# kgaccum -assert_nullin f=quantity:quantityC,amount:amountC i=dat1.csv o=rsl1.csv s=customer
+
+$ more rsl1.csv
+customer%0,quantity,amount,quantityC,amountC
+A,1,,1,
+A,2,20,3,20
+B,1,15,4,35
+B,3,10,7,45
+B,,20,,65
+\end{Verbatim}

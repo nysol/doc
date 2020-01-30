@@ -1,0 +1,52 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{maccum Cumulative Calculation\label{sect:maccum}}
+\index{maccum@maccum}
+Calculates the cumulative value for the column specified at \verb|f=| parameter and save the result in a new column. 
+Cumulative calculation is carried by the key unit when \verb|k=| is specified. 
+
+\subsection*{Format}
+\verb|maccum f= s= [k=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the field(s) (multiple fields can be specified) for cumulative calculation. \\
+             & Field with NULL values is ignored. \\
+             & Use :(colon) to specify new field name. Example: \verb|f=quantity:cumulativeqty| \\
+\verb|s=|    & After sorted by specified field (multiple fields can be specified), calculate cumulative value.\\
+             & \verb|s=| parameter is required if \verb|-q| option is not specified. \\
+\verb|k=|    & Specify the field name as unit for cumulative calculation (multiple fields can be specified). \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/maccum_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mshare]{mshare} : Calculate composition ratio. Cumulative relative frequency can be calculated when used with \verb|maccum|.
+
+\hyperref[sect:mcal]{mcal} : Cumulative total can be calculated by using the results from the previous row with \verb|#{}|.
+
+%\end{document}

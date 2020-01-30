@@ -1,0 +1,267 @@
+
+%\begin{document}
+
+\section{M-Command\label{sect:whatis}}
+M-Command (also referred to as MCMD) is a set of commands developed for high-speed processing of large-scale spreadsheet data (CSV). The M derives from the name of the inventor, Mr. Yasuyuki Matsuda. M-Command provides about 80 different commands where each command is specific to a single function (for example, sort or join tables). All commands use the same, very simple processing method – they all read CSV data from standard input and write the results to standard output. The user can interconnect the single-function commands with pipes and implement sophisticated processing. M-Command enables a standard PC to process data records in the order of hundreds of millions. You will not need much time to learn the basic usage of M-Command. Through intensive practice, it will take just a matter of weeks to be fairly skillful in data processing.
+
+%Mコマンド(MCMDとも表記する)とは、大規模表構造データ(CSV)を高速に処理する目的で開発されたコマンド群である。
+%その起源は、1990年代初頭にまで遡ることができ、ある大企業で実施された大規模システム開発プロジェクトにおいて
+%松田康之氏が発案したものであり、MコマンドのMは同氏のイニシャルに拠っている。
+%同氏の発案は、単なる技術論ではなく、ビジネスにおいて「情報」システムとはどうあるべきかを根本的に問うたものであり、
+%これまでに我々が西洋から学んできた方法論とは全く異質のシステム設計思想と言ってもよいであろう。
+%その思想的内容については別稿に譲るとして、その技術内容においては、
+%現在のビッグデータ処理技術に酷似していたことは書き留めておく。
+
+%それはさておき、Mコマンドは、単一の機能(例えば、並べ替えや表の結合など)に特化したコマンドを約70種類提供している。
+%全てのコマンドは共通して、標準入力からCSVデータを読み込み、標準出力に結果を書き込むだけの非常にシンプルな処理方式に従っている。
+%そして単一の機能を持ったコマンドを「パイプ」と呼ばれるプロセス間通信を使って接続することで多様な処理を実現する。
+%これらの特徴は、まさにUNIXの思想であり、MコマンドとはUNIXコマンドだけで情報システムを構築しようとするものである。
+
+%Mコマンドを使えば、標準的なPCであっても、数億件規模のデータ処理が可能であり、
+%Mコマンドの習得にはさほど時間は必要としない。
+%これまでにも文系の学部生に簡単な指導を行ってきたが、集中的に取り組めば数週間で、
+%かなり自由にデータ加工ができるようになる。
+
+\newpage
+\section{Installation\label{sect:install}}
+\subsection{Requirements}
+Operation of MCMD has been confirmed on major operating systems, including Linux, MaxOS X, and Bash on Ubuntu on Windows. It will probably work on any UNIX operating system with the help of the above tools. The following are the versions of operating systems on which MCMD has been confirmed to run:
+
+\begin{itemize}
+\item	MacOS 10.9.5 (Marverics) or later
+\item CentOS 7.3 1611
+\item Ubuntu 16.04 LTS
+\item Bash on Ubuntu on Windows(Windows 10)
+\end{itemize}
+
+To compile source codes, you need the following tools:
+\begin{itemize}
+\item	c++ compiler
+\item autotools
+\item boost C++ Library
+\item lib2xml Library
+\end{itemize}
+
+%\subsection{ダウンロード}
+%\subsubsection*{ZIPから}
+%\begin{itemize}
+%\item ソースコード(ZIP)をhttps://github.com/nysol/mcmdからダウンロードする。
+%\item アーカイブを展開し、ソースコードのディレクトリに移動する。
+%\end{itemize}
+%\subsubsection*{gitから}
+%\begin{itemize}
+%\item MCMDのリポジトリをクローンする git clone https://github.com/nysol/mcmd.git
+%\item mcmdディレクトリに移動する。
+%\end{itemize}
+
+\subsection{Compilation and installation}
+\subsubsection{MacOS X\\} % \\が無いと改行が小さすぎる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## Make sure autotools and boost have been installed. If not, use brew or similar to install them.
+$ brew install autoconf
+$ brew install automake
+$ brew install libtool
+$ brew install boost
+
+## Download the source.
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd
+
+## Compile and install MCMD.
+$ aclocal
+$ autoreconf -i
+$ automake --add-mising
+$ ./configure
+$ make
+$ sudo make install
+\end{Verbatim}
+
+\subsubsection{CentOS\\}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## Make sure autotools, boost, and libxml2 have been installed. If not, use yum or similar to install them.
+$ sudo yum update
+$ sudo yum groupinstall "Development Tools"
+$ sudo yum install boost-devel
+$ sudo yum install libxml2-devel
+
+## Download the source.
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd
+
+## Compile and install MCMD.
+$ aclocal
+$ autoreconf -i
+$ ./configure
+$ make
+$ sudo make install
+\end{Verbatim}
+
+\subsubsection{Ubuntu,Bash on Windows\\}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## Make sure necessary tools have been installed, including autotools, boost, and libxml2. If not, use apt-get or similar to install them.
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install build-essential
+$ sudo apt-get install git
+$ sudo apt-get install libboost-all-dev
+$ sudo apt-get install libxml2-dev
+
+## Download the source.
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd/
+
+## Compile and install MCMD.
+$ aclocal
+$ autoreconf -i
+$ ./configure 
+$ make
+$ sudo make install
+
+# Specify the path to the shared library.
+# If the path is to be specified each time upon startup, have it described in .bash_profile.
+$ export LD_LIBRARY_PATH=/usr/local/lib
+\end{Verbatim}
+
+\subsection{Checking successful installation}
+To check how to use each command, use the \verb|--help| option to view a simple help (see Figure \ref{fig:abstract3_1}). Check that the command help is shown as described below, and the installation is complete. In MCMD Ver. 2.4 and later, the help is in English by default. To view Japanese help, specify the \verb|--helpl| option (see Figure \ref{fig:abstract3_2}). To make Japanese the default output language for \verb|--help|, specify \verb|KG_LOCALHELP=true| in the environment variables. 
+To view the version number of the installed MCMD, specify the \verb|--version| option (see Figure \ref{fig:abstract3_3}). Note that the shown version number is for the entire MCMD and not for each command. Thus, the same version number is shown for all commands.
+
+\subsection{What to do when installation has failed}
+Some cases of MCMD installation failure have been reported regarding operating systems installed with Anaconda. You can avoid this error by changing the command search path sequence as described below. Change the sequence before installing MCMD.
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Correct the ~/.bash_profile path as described below.
+# Before)
+export PATH="/Users/username/anaconda/bin:$PATH"
+
+# After)
+export PATH="$PATH:/Users/username/anaconda/bin"
+\end{Verbatim}
+\end{figure}
+\
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --help
+
+MCUT - SELECT COLUMN
+
+Extract the specified column(s). The specified column is removed with the -r
+option.
+
+Format
+
+mcut f= [-r] [-nfni] [i=] [o=] [-assert_diffSize] [-assert_nullin]
+[-nfn] [-nfno] [-x] [-q] [tmpPath=] [--help] [--helpl] [--version]
+\end{Verbatim}
+
+\caption{Help in English (default)\label{fig:abstract3_1}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --helpl
+
+mcut 項目の選択
+===============
+指定した項目を選択する。
+-rオプションを付けると、指定した項目を削除する。
+
+書式
+----
+mcut f= [-r] [i=] [o=] [-nfn] [-nfno] [-x] [--help]  [--helpl] [--version]  
+
+パラメータ
+----------
+  f=      抜き出す項目名
+          項目名をコロンで区切ることで、出力項目名を変更することができる。
+          ex. f=a:A,b:B
+  -r      項目削除スイッチ
+          f=で指定した項目を削除し、それ以外の項目が抜き出される。
+  -nfni   入力データの１行目を項目名行とみなさない。よって項目番号で指定しなければならない。
+          以下のように、新項目名を組み合わせて指定することで項目名行を追加出力することが可能となる。
+          例）f=0:日付,2:店,3:数量
+                  :
+                  :
+
+\end{Verbatim}
+\caption{Help in Japanese\label{fig:abstract3_2}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --version
+lib Version 1:1:0:0
+\end{Verbatim}
+\caption{Version\label{fig:abstract3_3}}
+\end{figure}
+
+\section{Let's start\label{sect:helloWorld}}
+Let's start with a simple example. Sample CSV data is required in order to proceed with the tutorial. In MCMD, the \verb|mdata| command outputs many different kinds of data sets. See the example in Figure \ref{fig:abstract0_1}.
+The line beginning with \verb|$| indicates the command line input, followed by the execution message and results from the command. The \verb|mdata| command reads the data type from the parameter and directs the contents to standard output (Refer to \hyperref[sect:mdata]{the chapter on mdata} for more details). In the following example, the data is saved to the file \verb|man0.csv| by redirecting the contents to the standard output.
+
+%簡単な例から始めよう。
+%MCMDを\hyperref[sect:install]{インストール}しているのであれば、例に従ってコマンドラインに入力することで動作を確認してもらいたい。
+%まずはデータがなければ始まらない。
+%MCMDでは、多くの種類のデータセットを出力するための\verb|mdata|コマンドを備えている。
+%このコマンドには以下の例で利用する入力データやチュートリアルのデータを生成してくれる。
+%図\ref{fig:abstract0_1}にその利用例を示す。
+%\verb|$|で始まる行はコマンドラインでの入力を表し、その下に実行結果が示されている。
+%\verb|mdata|コマンドは、データセットの種類を引数にとり、標準出力に内容を出力する(詳細は\hyperref[sect:mdata]{mdataの章}を参照)。
+%以下の例では、標準出力の内容をリダイレクトして\verb|man0.csv|という名前のファイルに出力している。
+
+\input{examples/tex/abstract0_fig.tex}
+All commands of MCMD return a status message starting with \verb|#END#| when they have ended successfully. (If they have abended, they return a status message starting with \verb|#ERROR#|.) In addition, \verb|more| is a UNIX command to display the contents of the file one page at a time which allows forward navigation of the file. All examples in this manual are illustrated according to the above-mentioned format.
+
+%MCMDの全てのコマンドは、終了すれば\verb|#END#|から始まるメッセージを出力する。
+%また、\verb|more|はファイルの内容をページ送りで表示するコマンドであり、データの内容を示すために利用している。
+%本マニュアルで用いる例は、全て以上の形式に従って記述されている。
+
+Figure \ref{fig:abstract1_1} shows an example of calculating the total amount for each customer from the data in \verb|man0.csv|. The \verb|msum| command reads the data from the \verb|man0.csv| file (\verb|i=|), uses the customer field set as the key field (\verb|k=|) to calculate the total amount (\verb|f=|), and the results are written to the output.csv file (\verb|o=|). In the output CSV file, the field name customer is followed by \verb|%0|, which indicates that the msum command has used the customer field as the sorting key. The \verb|%0| is not part of the fieldname, and you can just ignore it for the time being.
+
+%図\ref{fig:abstract0_1}で生成された\verb|man0.csv|データを利用して、金額を顧客別に合計する例を図\ref{fig:abstract1_1}に示す。
+%入力データは、「顧客」と「金額」の2つの項目の5行から構成されるCSVデータである。
+%このデータを\verb|msortf|コマンドで顧客別に並べ変え、その結果は、パイプ(\verb/"|"/)で連結されて
+%次の\verb|msum|コマンドへと送られる。
+%\verb|msum|コマンドでは、顧客項目を集計キーにして、金額項目を合計し、
+%結果を出力ファイル\verb|output.csv|に書き込んでいる。
+%Mコマンドは、その処理を終了するとメッセージを出力する。
+%正常終了すると\verb|#END#|から始まるメッセージが出力され、
+%エラー終了すると\verb|#ERROR#|から始まるメッセージが出力される。
+
+\input{examples/tex/abstract1_fig.tex}
+Let ’s explore a more complex example. Figure \ref{fig:abstract2_1} shows how to display products and their quantities for each customer in a matrix format. The lines starting with a \verb|#| are comments and need not be typed.
+
+%もう少し複雑な例を示しておこう。
+%図\ref{fig:abstract2_1}に示された例では、顧客別にどのような商品を何個購入したか、マトリックス形式で集計する。
+%わかりやすさのために、各コマンドはパイプで接続せず、それぞれファイルに書きだし
+%その内容を示している。\verb|#|で始める行はコメントである。
+The \hyperref[sect:mcut]{mcut} command only extracts the specified field, the \hyperref[mcount]{mcount} command counts the number of rows, and the \hyperref[mcross]{mcross} command performs cross tabulation. You do not have to pay attention to the detailed processes of each command. Instead, capture the flow of the input data, that is, how it is processed by each command. As shown in this example, M-Command has more than 80 commands that can be combined to enable a variety of data processing.
+
+\input{examples/tex/abstract2_fig.tex}
+In the examples so far, the results of the commands are output to work files (\verb|xxa, xxb, and xxc|). As shown in Figure \ref{fig:abstract2-1_1} below, you can execute the same commands without using work files. Use pipes (\verb|I|) to connect the commands, and the output result of a command is handed over as the input of the next command one after another.
+
+% 以下、パイプで連結したコマンドの例がはみ出るので、examples/tex/abstract2-1_fig.texの内容を貼り付ける。
+%\input{examples/tex/abstract2-1_fig.tex}
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdata -man1 | mcut f=customer,product | mcount k=customer,product a=number of items | mcross k=customer s=product f=number of items v=0 |
+mcut f=fld -r o=output.csv
+#END# mdata -man1
+#END# kgcut f=customer,product
+#END# kgcount a=number of items k=customer,product
+#END# kgcross f=number of items k=customer s=product v=0
+#END# kgcut -r f=fld o=output.csv
+$ more output.csv
+customer%0,a,c,d,e,f
+A,2,1,0,1,0
+B,1,0,2,0,1
+\end{Verbatim}
+\caption{Using pipes to connect the commands\label{fig:abstract2-1_1}}
+\end{figure}
+
+%\end{document}

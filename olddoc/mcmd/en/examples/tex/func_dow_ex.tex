@@ -1,0 +1,82 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,20000101
+2,20121021
+3,
+4,19770812
+$ mcal c='dow($d{date})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=dow($d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,rsl
+1,20000101,6
+2,20121021,7
+3,,
+4,19770812,5
+\end{Verbatim}
+\subsubsection*{Example 2: Weekday in Japanese }
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='dowj($d{date})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=dowj($d{date}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,date,rsl
+1,20000101,土
+2,20121021,日
+3,,
+4,19770812,金
+\end{Verbatim}
+\subsubsection*{Example 3: Weekday in English}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='dowe($d{date})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=dowe($d{date}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,date,rsl
+1,20000101,Saturday
+2,20121021,Sunday
+3,,
+4,19770812,Friday
+\end{Verbatim}
+\subsubsection*{Example 4: Weekday Abbreviated in English }
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='dowes($d{date})' a=rsl i=dat1.csv o=rsl4.csv
+#END# kgcal a=rsl c=dowes($d{date}) i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+id,date,rsl
+1,20000101,Sat
+2,20121021,Sun
+3,,
+4,19770812,Fri
+\end{Verbatim}
+\subsubsection*{Example 5: Time format}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20000101000000
+2,20121021111213
+3,
+4,19770812122212
+$ mcal c='dow($t{time})' a=rsl i=dat2.csv o=rsl5.csv
+#END# kgcal a=rsl c=dow($t{time}) i=dat2.csv o=rsl5.csv
+$ more rsl5.csv
+id,time,rsl
+1,20000101000000,6
+2,20121021111213,7
+3,,
+4,19770812122212,5
+\end{Verbatim}

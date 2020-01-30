@@ -1,0 +1,49 @@
+
+%\begin{document}
+
+\section{mcsv2arff - Convert csv to arff Format\label{sect:mcsv2arff}}
+\index{mcsv2arff@mcsv2arff}
+Convert csv formatted data into arff file (data format for WEKA). 
+User must specify the type of attribute for arff, for instance, \verb|d=| defines category format field, \verb|n=| defines numeric format field, \verb|s=| defines string format field, and finally, \verb|D=| defines date format field. The date format includes time information when attached \verb|%t| to date format field name.
+
+\subsection*{Format}
+\verb/mcsv2arff n=|d=|D=|s= [T=]/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|n=|    & Numeric field name(s) (multiple items can be specified).\\
+\verb|d=|    & Category field name(s) (multiple items can be specified).\\
+\verb|D=|    & List of date (time) field name(s) (multiple items can be specified).  [\%{t}]\\
+             & When \verb|%t| is not specified：yyyyMMdd\\
+             & When \verb|%t| is specified　　　：yyyyMMddHHmmss\\
+\verb|s=|    & Character string field names (multiple items can be specified).\\
+\verb|T=|    & Title in character string. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcsv2arff_ex.tex}
+\subsection*{Related Command}
+
+\hyperref[sect:marff2csv]{marff2csv} : Reverse conversion. 
+
+\subsection*{Reference}
+\href{http://weka.wikispaces.com/ARFF}{http://weka.wikispaces.com/ARFF}
+
+%\end{document}

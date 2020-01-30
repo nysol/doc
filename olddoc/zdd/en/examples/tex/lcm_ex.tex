@@ -1,0 +1,25 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# Contents of tra.txt
+# 1 2 3 6
+# 4 5 6
+# 1 2 4 6
+# 2 4 6
+# 1 2 4 5
+# Contents of order.txt
+# 1 2 3 4 5 6
+> p1=ZDD::lcm("FQ","tra.txt",3,"order.txt")
+> p1.show
+ 3 x6 x4 + 3 x6 x2 + 4 x6 + 3 x4 x2 + 4 x4 + 3 x2 x1 + 4 x2 + 3 x1 + 5
+
+# If order file is not specified, the resulting frequent itemset will be the same
+# Note that the item number in the results is different from the item number
+# in the transaction file.
+> p2=ZDD::lcm("FQ","tra.txt",3)
+> p2.show
+ 3 x4 x1 + 3 x4 + 3 x3 x2 + 3 x3 x1 + 4 x3 + 3 x2 x1 + 4 x2 + 4 x1 + 5
+\end{Verbatim}

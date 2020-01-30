@@ -1,0 +1,50 @@
+\subsubsection*{例1: ユークリッド距離}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,x1,y1,x2,y2
+1,0,0,1,1
+2,0,1,2,0
+3,,,,
+$ mcal c='dist("euclid",${x1},${y1},${x2},${y2})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=dist("euclid",${x1},${y1},${x2},${y2}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,x1,y1,x2,y2,rsl
+1,0,0,1,1,1.414213562
+2,0,1,2,0,2.236067977
+3,,,,,
+\end{Verbatim}
+\subsubsection*{例2: 都市ブロック距離}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='dist("cityblock",${x1},${y1},${x2},${y2})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=dist("cityblock",${x1},${y1},${x2},${y2}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,x1,y1,x2,y2,rsl
+1,0,0,1,1,2
+2,0,1,2,0,3
+3,,,,,
+\end{Verbatim}
+\subsubsection*{例3: ハミング距離}
+
+ハミング距離の計算では、値を文字列として指定していることに注意する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,x1,y1,x2,y2
+1,a,b,a,c
+2,0,1,0,1
+3,,,,
+$ mcal c='dist("hamming",$s{x1},$s{y1},$s{x2},$s{y2})' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=dist("hamming",$s{x1},$s{y1},$s{x2},$s{y2}) i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,x1,y1,x2,y2,rsl
+1,a,b,a,c,1
+2,0,1,0,1,2
+3,,,,,
+\end{Verbatim}

@@ -1,0 +1,32 @@
+\subsubsection*{Example 1: Basic Example}
+
+Count the number of rows by date, and save the results in a new column \verb|count|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date
+20090109
+20090109
+20090109
+20090110
+20090110
+$ mcount k=date a=count i=dat1.csv o=rsl1.csv
+#END# kgcount a=count i=dat1.csv k=date o=rsl1.csv
+$ more rsl1.csv
+date%0,count
+20090109,3
+20090110,2
+\end{Verbatim}
+\subsubsection*{Example 2: Count without aggregate key}
+
+Count the number of rows without specifying the aggregate key.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcount a=count i=dat1.csv o=rsl2.csv
+#END# kgcount a=count i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+date,count
+20090110,5
+\end{Verbatim}

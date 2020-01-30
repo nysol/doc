@@ -1,0 +1,38 @@
+
+%\begin{document}
+
+\section{diff 期間\label{sect:diff}}
+\index{diff@diff}
+
+書式1: diffyear($date_1,date_2$)
+
+書式2: diffyear($time_1,time_2$)
+
+書式3: diffmonth($date_1,date_2$)
+
+書式4: diffmonth($time_1,time_2$)
+
+書式5: diffday($date_1,date_2$)
+
+書式6: diffday($time_1,time_2$)
+
+書式7: diffhour($time_1,time_2$)
+
+書式8: diffminute($time_1,time_2$)
+
+書式9: diffsecond($time_1,time_2$)
+
+書式10: diffusecond($time_1,time_2$)
+
+二つの引数が日付型の場合、$date_1$と$date_2$の差($date_1-date_2$)を計算し、
+その年数(difyear)、月数(diffmonth)、日数(diffday)で計算する。
+二つの引数が時刻型の場合、$time_1$と$time_2$の差($time_1-time_2$)を計算し、
+その年数(difyear)、月数(diffmonth)、日数(diffday)、
+時間数(diffhour)、分数(diffminute)、秒数(diffsecond)、マイクロ秒数(diffusecond)で計算する。
+端数は切り捨てられる。
+
+\subsection*{利用例}
+\input{examples/tex/func_diff_ex}
+
+%\end{document}
+

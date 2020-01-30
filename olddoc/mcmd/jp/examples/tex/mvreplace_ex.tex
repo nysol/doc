@@ -1,0 +1,47 @@
+\subsubsection*{例1: ベクトルで置換する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items
+b a c
+c c
+e a a
+$ more ref1.csv
+item,taxo
+a,X Y
+b,X
+c,Z Z
+$ mvreplace vf=items K=item m=ref1.csv f=taxo i=dat1.csv o=rsl1.csv
+#END# kgvreplace K=item f=taxo i=dat1.csv m=ref1.csv o=rsl1.csv vf=items
+$ more rsl1.csv
+items
+X X Y Z Z
+Z Z Z Z
+e X Y X Y
+\end{Verbatim}
+\subsubsection*{例2: 複数項目に対して適用する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+$ more ref2.csv
+item,taxo
+a,X
+b,X
+c,Y
+d,Y
+$ mvreplace vf=items1,items2 K=item m=ref2.csv f=taxo i=dat2.csv o=rsl2.csv
+#END# kgvreplace K=item f=taxo i=dat2.csv m=ref2.csv o=rsl2.csv vf=items1,items2
+$ more rsl2.csv
+items1,items2
+X X Y,X X
+Y Y,X Y
+e X X,X X
+\end{Verbatim}

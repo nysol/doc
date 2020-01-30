@@ -1,0 +1,69 @@
+
+\section{show : Display ZDD\label{sect:show}}
+\subsection*{Format}
+$obj$.show([$switch$])
+
+~~$switch$ : string
+
+\subsection*{Description}
+Display various format of ZDD object$obj$ through standard output. 
+Output format converts the given value (character string) as shown in Table \ref{tbl:zdd_show_switch}.
+If $switch$ is not specified, items will be displayed in sum-of-products format.
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption{List of switches for ZDD object display format\label{tbl:zdd_show_switch}}
+{\small
+\begin{tabular}{l|l}
+\hline
+Value and function of $switch$ \\
+\hline
+ (No switch)	& Display item's sum-of-products \\
+  bit					& Display the weight in (-2) base for each digit by itemset \\
+  hex					& Display integer value sum-of-products in hexadecimal digits\\
+  map				& Display in Karnaugh map. The map displays up to 6 item variables\\
+  rmap				& Display in Karnaugh map. Redundant item variables are removed \\
+  case				& Display case analysis of sum of products for each integer value \\
+%  /size				& 計算結果のBDD節点数(および処理系全体の節点数)を表示 \\
+%  /count				& 式に現れる(0 以外の値を持つ)組合せの個数を表示 \\
+%  /density		  & 集合の濃度(0 以外の値を持つ組合せの比率)を表示 \\
+%  /value				& シンボル変数にすべて数値を代入したときの式の値を表示 \\
+%  /maxcover		& 式に含まれる(0 以外の値を持つ)コスト最大の組合せを1つ表示 \\
+%  /maxcost		  & コスト最大組合せのコスト値を表示 \\
+%  /mincover		& 式に含まれる(0 以外の値を持つ)コスト最小の組合せを1つ表示 \\
+%  /mincost		  & コスト最小組合せのコスト値を表示 \\
+%  /plot				& BDDの形を図示する。(使用不可) \\
+  decomp			& Display simple disjoint decomposition format \\
+%  /export			& BDDの形を図示する(否定枝不使用)。$fileName$に指定があれば、指定されたファイルに出力 \\
+%              & 指定されたファイルに出力 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\if0
+\subsubsection*{bit}
+Weight in ZDD is displayed in -2 base, thus generate ZDD for each digit. 
+This method separates each digit, itemsets registered in ZDD is displayed through standard output. 
+\subsubsection*{hex}
+Display the weight of sum-of-products in hexadecimal digits through standard output. 
+\subsubsection*{map}
+Display as Karnaugh map through standard output. 
+The map displays up to 6 items.
+
+\subsubsection*{rmap}
+Display as Karnaugh map through standard output. 
+However, items not used are not displayed. 
+\subsubsection*{case}
+Returns the value of weight of each itemset through standard output. 
+\subsubsection*{decomp}
+Returns $obj$ in simple disjoint decomposition format. 
+\fi
+
+\subsection*{Example}
+\input{examples/tex/show_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:export]{export} : Save the structure of ZDD in a file.

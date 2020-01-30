@@ -1,0 +1,41 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a b")
+> a.show
+ a b
+> b=ZDD::itemset("b")
+> b.show
+ b
+> c=ZDD::itemset("")
+> c.show
+ 1
+
+# 数字をアイテム名として利用することも可能
+> x0=ZDD::itemset("2")
+> x0.show
+ 2
+
+# ただし、表示上重みと区別がつかなくなるので注意が必要。
+> (2*x0).show
+ 2 2
+
+# こんな記号ばかりのアイテム名もOK。
+> x1=ZDD::itemset("!#%&'()=~|@[;:]")
+> x1.show
+ !#%&'()=~|@[;:]
+
+# ただし、rubyで特殊な意味を持つ記号はエスケープする必要がある。
+# 以下では、\,$,"の3つの文字をエスケープしている例である。
+> x2=ZDD::itemset("\\\$\"")
+> x2.show
+ \$"
+
+# もちろん日本語も利用可。
+> x3=ZDD::itemset("りんご ばなな")
+> x3.show
+ りんご ばなな
+\end{Verbatim}

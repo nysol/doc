@@ -1,0 +1,36 @@
+\subsubsection*{例1: 終了メッセージ}
+
+デフォルトでは \verb|KG_Verbose=4| なので、正常終了時のメッセージもエラー終了メッセージも出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat.csv
+k,v
+A,1
+B,2
+$ mcut f=k,v i=dat.csv o=out.csv
+#END# kgcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+#ERROR# unknown parameter x= (kgcut)
+\end{Verbatim}
+\subsubsection*{例2: エラーメッセージのみ出力}
+
+\verb|KG_Verbose=1|とすると、エラー終了メッセージは表示されるが、正常終了メッセージは表示されない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_VerboseLevel=1
+$ mcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+#ERROR# unknown parameter x= (kgcut)
+\end{Verbatim}
+\subsubsection*{例3: メッセージを一切表示させない}
+
+\verb|KG_Verbose=0|とすると、いずれのメッセージも表示されない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_VerboseLevel=0
+$ mcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+\end{Verbatim}

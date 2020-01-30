@@ -1,0 +1,59 @@
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{mselrand - Random Sampling\label{sect:mselrand}}
+\index{mselrand@mselrand}
+Random selection of records based on the number of rows set at \verb|c=| and \verb|p=| parameters (random sampling without replacement).  When \verb|k=| is specified, a defined number of records with same key are randomly selected, when option \verb|-B| specified at the same time, records are selected based in the key. 
+
+This command used Mersenne twister (developed in 1937) as pseudo random number generator (\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Webpage of author}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library}).
+
+
+
+\subsection*{Format}
+\verb/mselrand c=|p= [k=] [S=] [u=] [-B]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|c=|    &  Select row(s) based on the number of keys and field specified. \\
+             & This parameter must be specified when \verb|p=| is not specified. \\
+\verb|p=|    & Define the percentage of records for selection based on each key value. \\
+             & This parameter must be specified if \verb|c=| parameter is not specified.  \\
+\verb|k=|    & Select certain number of rows randomly from records with same key  (Allow multiple fields). \\
+
+\verb|S=|    & The same random seed generates the same row selection sequence. \\
+             & The default setting of random seed is set to the current time if the random seed is not specified.  \\
+             & Range of random seed value is between -2147483648 - 2147483647. \\
+\verb|u=|    & Print unmatched records to this output file. \\
+\verb|-B|    & Selection based on key unit.\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mselrand_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:msel]{msel} :  Use normally distributed random numbers. 
+
+\hyperref[sect:mrand]{mrand} : Add random numbers as a new column. 
+
+
+%\end{document}

@@ -1,0 +1,156 @@
+\subsubsection*{Example 1: Sequential numbers}
+
+Generate sequential numbers for each value in ascending order in the \verb|Customer| column. Name the sequence as \verb|No| in a new column.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Val,Sum
+A,29,300
+B,35,250
+C,15,200
+D,23,150
+E,10,100
+$ mnumber s=Customer a=No i=dat1.csv o=rsl1.csv
+#END# kgnumber a=No i=dat1.csv o=rsl1.csv s=Customer
+$ more rsl1.csv
+Customer%0,Val,Sum,No
+A,29,300,0
+B,35,250,1
+C,15,200,2
+D,23,150,3
+E,10,100,4
+\end{Verbatim}
+\subsubsection*{Example 2: Serialize the Date column}
+
+Sequentially number items in the \verb|Date| column according to earliest date to latest date. Use same sequence number (\verb|No|) for same \verb|Date|. Save the sequence in a new column named \verb|"No"|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+Date
+20090101
+20090101
+20090102
+20090103
+20090103
+$ mnumber k=Date a=No -B i=dat2.csv o=rsl2.csv
+#END# kgnumber -B a=No i=dat2.csv k=Date o=rsl2.csv
+$ more rsl2.csv
+Date%0,No
+20090101,0
+20090101,0
+20090102,1
+20090103,2
+20090103,2
+\end{Verbatim}
+\subsubsection*{Example 3: Serialize the Sum column (use same alphabet for same Rank order)}
+
+Create a alphabetical sequence according to the \verb|Sum| column which is arranged in descending order. Save the sequence in a new column named \verb|“Rank”|. Assign the same alphabet character to items with the same values.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+Customer,Val,Sum
+A,3,300
+B,1,250
+C,2,250
+D,1,150
+E,1,100
+$ mnumber a=Rank e=same s=Sum%nr S=A  i=dat3.csv o=rsl3.csv
+#END# kgnumber S=A a=Rank e=same i=dat3.csv o=rsl3.csv s=Sum%nr
+$ more rsl3.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,A
+B,1,250,B
+C,2,250,B
+D,1,150,C
+E,1,100,D
+\end{Verbatim}
+\subsubsection*{Example 4: Serialize the Sum column (sequential numbers for same Rank order)}
+
+Number records sequentially according to \verb|Sum| column (sum arranged in descending order), and save serials in the \verb|"Rank"| column. For items with same rank order, assign sequential numbers according to sort order.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=seq s=Sum%nr i=dat3.csv o=rsl4.csv
+#END# kgnumber a=Rank e=seq i=dat3.csv o=rsl4.csv s=Sum%nr
+$ more rsl4.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,2
+D,1,150,3
+E,1,100,4
+\end{Verbatim}
+\subsubsection*{Example 5: Serialize the Sum column (Same No for same Rank)}
+
+Number records sequentially according to \verb|Sum| column (sum arranged in descending order), and save the numbers in the \verb|“Rank”| column. Assign the same No to records with the same Rank order.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=same s=Sum%nr i=dat3.csv o=rsl5.csv
+#END# kgnumber a=Rank e=same i=dat3.csv o=rsl5.csv s=Sum%nr
+$ more rsl5.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,1
+D,1,150,2
+E,1,100,3
+\end{Verbatim}
+\subsubsection*{Example 6: Serialize the Sum column (duplicate numbers for same Rank and skip number for next record)}
+
+Number records sequentially according to \verb|Sum| column (sum arranged in descending order), and save the numbers is the “Rank” column. Assign same \verb|RankNo| number to records with same rank order, subsequent No is skipped for the following record.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=skip s=Sum%nr i=dat3.csv o=rsl6.csv
+#END# kgnumber a=Rank e=skip i=dat3.csv o=rsl6.csv s=Sum%nr
+$ more rsl6.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,1
+D,1,150,3
+E,1,100,4
+\end{Verbatim}
+\subsubsection*{Example 7: Number sequence starting from 10}
+
+Serialize the \verb|Sum| column sequentially from 10 with items, where values of sum is arranged in ascending order. Save the serials in the \verb|"Score"| column. Assign same RankNo to records with same Rank order , subsequent No is skipped for the following record.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat4.csv
+Customer,Val,Sum
+A,1,100
+B,1,150
+C,1,250
+D,2,250
+E,3,300
+$ mnumber a=Score e=same s=Sum%n S=10 i=dat4.csv o=rsl7.csv
+#END# kgnumber S=10 a=Score e=same i=dat4.csv o=rsl7.csv s=Sum%n
+$ more rsl7.csv
+Customer,Val,Sum%0n,Score
+A,1,100,10
+B,1,150,11
+C,1,250,12
+D,2,250,12
+E,3,300,13
+\end{Verbatim}
+\subsubsection*{Example 8: Start sequence from 10 with an interval of 5}
+
+Number the \verb|Sum| column sequentially from 10 at an interval of 5, where values of sum is arranged in ascending order. Save the serials in the \verb|“Score”| column. Assign the same number to records with the same Rank order.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Score e=same s=Sum%n S=10 I=5 i=dat4.csv o=rsl8.csv
+#END# kgnumber I=5 S=10 a=Score e=same i=dat4.csv o=rsl8.csv s=Sum%n
+$ more rsl8.csv
+Customer,Val,Sum%0n,Score
+A,1,100,10
+B,1,150,15
+C,1,250,20
+D,2,250,20
+E,3,300,25
+\end{Verbatim}

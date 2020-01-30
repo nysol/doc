@@ -1,0 +1,52 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{msel 条件式による行選択\label{sect:msel}}
+\index{msel@msel}
+\verb|c=|パラメータで指定した計算式で計算をおこない、結果が真であれば、その行を選択する。
+なおmcalと同じ計算式が利用できるので、詳細は\hyperref[sect:mcal]{mcal}を参照されたい。
+
+\subsection*{書式}
+\verb|msel c=  [u=] [-r]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|c=|    & 用意された関数を組み合わせて計算する式を指定する。\\
+             & 詳細は\hyperref[sect:mcal]{mcal}を参照。 \\
+\verb|o=|    & 指定の条件に一致する行を出力するファイル名を指定する。 \\
+\verb|u=|    & 指定の条件に一致しない行を出力するファイル名を指定する。\\
+\verb|-r|    & 条件反転\\
+             & 選択ではなく削除する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/msel_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mselnum]{mselnum} : 簡単な数値範囲による行選択はこちら。
+
+\hyperref[sect:mselstr]{mselstr} : 簡単な文字列マッチによる行選択はこちら。
+
+\hyperref[sect:mcal]{mcal} : 行選択でなく、計算の結果を項目として出力する。
+
+%\end{document}

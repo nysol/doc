@@ -1,0 +1,307 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mwindow (generate sliding window) command}
+Replicate original records and shift specified fields for used in calculating moving averages for time series data. The first element of moving average is obtained by taking the average of the initial fixed subset of the number series. The subset is shifted forward and included the next number following the original subset in the series. This creates a new subset of numbers which is averaged. The process is repeated over the entire data series. This method is known as sliding window calculation. 
+
+An example is shown in Table \ref{tbl:input}〜\ref{tbl:out3}.
+
+\renewcommand{\tablename}{Table.}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{input data\label{tbl:input}}
+
+{\small
+\begin{tabular}{cc}
+\hline
+date&val \\
+\hline
+4/6&1 \\
+4/7&2 \\
+4/8&3 \\
+4/9&4 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{wk=date:win t=2\label{tbl:out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+win&date&val \\
+\hline
+4/7&4/6&1 \\
+4/7&4/7&2 \\
+4/8&4/7&2 \\
+4/8&4/8&3 \\
+4/9&4/8&3 \\
+4/9&4/9&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\caption{wk=date:win t=2 -r\label{tbl:out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+win&date&val \\
+\hline
+4/6&4/6&1 \\
+4/6&4/7&2 \\
+4/7&4/7&2 \\
+4/7&4/8&3 \\
+4/8&4/8&3 \\
+4/8&4/9&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{mavg+mcut\label{tbl:out3}}
+{\small
+\begin{tabular}{cc}
+\hline
+win&val \\
+\hline
+4/7&1.5 \\
+4/8&2.5 \\
+4/9&3.5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+
+
+\end{tabular}
+\end{center}
+\end{table}
+
+
+Table \ref{tbl:input} shows the input data which contains total daily values of four consecutive days. The figures could represent the changes in sales in supermarket and stock price trends. 
+
+This example calculates the moving average from 4/6 to 4/9 with a subset size of 2 for each window. Three window intervals [(4/6,1),(4/7,2)], [(4/7,2),(4/8,3)], [(4/8,3),(4/9,4)] are generated, where [ ] indicates a window, and ( ) indicates a line.  
+
+Based on the unique key of each windows (referred as "window key"), the output prints the maximum value of the window (the last row of item can be specified by \emph{wk=} parameter) and the field name based (Table \ref{tbl:out1}).  \emph{-r} option is used as the minimum value (using the first row of data) of each window (table \ref{tbl:out2}). The command can be followed by using \verb|mavg| to calculate the averages of the data series (Table \ref{tbl:out3}). 
+
+The mmvag command is equivalent to processing the data with \verb|mwindow|+\verb|mavg| as described above. However, mmvag is  3.5 times faster when experimented with a data set of 200MB for 10 million records with a subset size of 10 for each window. 
+
+
+\subsection*{Format}
+mwindow wk= t= [k=key] [-r] [-n] [i=] [o=] [\href{run:nfn.pdf}{-nfn}] [\href{run:nfno.pdf}{-nfno}] [\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+
+\verb|wk=|   & Specify an unique window key to identify the value from the field name in input data. 【required parameter】\\
+                      & Define the field name of window key after a colon. Multiple fields can be specified.  \\
+\verb|t=| & Specify the window size (number of rows). 【required parameter】 \\
+\verb|k=|    & Specify the unit value for the window \\
+\verb|-r|    & Use the first row of data as baseline of the window. By default, the last row of data is used as baseline.  \\
+\verb|-n|    & Print all window intervals even though the window size less than the defined parameter at  \verb|t=|. \\
+\verb|i=|    & Input file name\\
+\verb|-nfn|  & Field names not available in the first line of input data.\\
+\verb|-nfno| & Header in the input file will be removed in the output file.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example1 Basic application}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mwindow wk=date:win t=2 i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+win,date,val
+20130407,20130406,1
+20130407,20130407,2
+20130408,20130407,2
+20130408,20130408,3
+20130409,20130408,3
+20130409,20130409,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Prepare the baseline data}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mwindow wk=date:win t=3 -r i=dat1.csv o=rsl2.csv
+
+# rsl2.csv
+win,date,val
+20130406,20130406,1
+20130406,20130407,2
+20130406,20130408,3
+20130407,20130407,2
+20130407,20130408,3
+20130407,20130409,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Print all window intervals even if the window size is less than the defined parameter}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mwindow wk=date:win t=3 -r -n i=dat1.csv o=rsl3.csv
+
+# rsl3.csv
+win,date,val
+20130406,20130406,1
+20130406,20130407,2
+20130406,20130408,3
+20130407,20130407,2
+20130407,20130408,3
+20130407,20130409,4
+20130408,20130408,3
+20130408,20130409,4
+20130409,20130409,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Define a key field}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+store,date,val
+a,20130406,1
+a,20130407,2
+a,20130408,3
+a,20130409,4
+b,20130406,11
+b,20130407,12
+b,20130408,13
+b,20130409,14
+
+$ mwindow k=store wk=date:win t=2 i=dat1.csv o=rsl4.csv
+
+# rsl4.csv
+win,store,date,val
+20130407,a,20130406,1
+20130407,a,20130407,2
+20130408,a,20130407,2
+20130408,a,20130408,3
+20130409,a,20130408,3
+20130409,a,20130409,4
+20130407,b,20130406,11
+20130407,b,20130407,12
+20130408,b,20130407,12
+20130408,b,20130408,13
+20130409,b,20130408,13
+20130409,b,20130409,14
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 5 Find out the moving averages of differences between current day and previous day  }
+In the above example, moving average is calculated based on the last day of the window. There are instances to calculate the moving averages of current day and previous day. \verb|mslide| can be used for this purpose. The example is as follows:
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=date:date2 i=dat1.csv o=rsl5.csv
+
+# rsl5.csv
+date,val,date2
+20130406,1,20130407
+20130407,2,20130408
+20130408,3,20130409
+
+$ mwindow wk=date2:win t=2 i=rsl5.csv o=rsl6.csv
+
+# rsl6.csv
+win,date,val,date2
+20130408,20130406,1,20130407
+20130408,20130407,2,20130408
+20130409,20130407,2,20130408
+20130409,20130408,3,20130409
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mslide.pdf}{mslide}: slide data series
+\item \href{run:mmvavg.pdf}{mmvavg}: moving average
+\item \href{run:mmvsd.pdf}{mmvsd}: moving standard deviation 
+\item \href{run:mmvcorvar.pdf}{mmvsd}: moving covariance
+\end{itemize}
+
+\end{document}

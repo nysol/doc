@@ -1,0 +1,21 @@
+\subsubsection*{例1: 基本例}
+
+0番目と2番目の項目を切り出す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ mcut -nfn f=0,2 i=dat1.csv o=rsl1.csv
+#END# kgcut -nfn f=0,2 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+A,10
+A,20
+B,15
+B,10
+B,20
+\end{Verbatim}

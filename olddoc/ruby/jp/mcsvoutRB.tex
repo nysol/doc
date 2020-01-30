@@ -1,0 +1,224 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mcsvout CSVの書き込みクラス\label{sect:mcsvoutRB}}
+CSVデータファイルに出力するためのクラス。
+以下のような特徴を持つ。
+\begin{itemize}
+\setlength{\itemindent}{0mm}
+\item C++で実装されており高速に動作する。
+\item 項目名行あり/なし、いずれの形式も扱うことができる。
+\item RFC4180にほぼ準拠
+%\footnote{CSVの仕様についての詳しい情報は
+%http://nysol.jp/mcmd/の「MCMDが扱うデータ構造について」を参照。}（カンマやダブルクォーテーションのエスケープなど)。
+\item 一行の項目数は固定であることを前提とする。
+\end{itemize}
+
+
+\subsection{メソッド}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvout::new(arguments){block}
+\end{verbatim}
+}
+
+Mcsvoutオブジェクトを生成する。
+\verb|arguments|に、以下の引数をスペースで区切った文字列として指定する。
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|o=|    & 出力ファイル名(String)\\
+\verb|f=|    & 出力するCSVデータのヘッダー(一行目)の項目名文字列を配列で指定する(String Array)。\\
+             & \verb|f=|を省略して\verb/size=/を指定すれば、項目名なしのCSVを出力する。\\
+\verb|size=| & 項目名を出力しない時には、CSV項目の数(Fixnum)を指定する。\\
+\verb|precision= | & Float型変数の有効桁数を指定する。デフォルトは10桁。 \\
+                   & C言語の出力書式\verb/"%.ng"/の\verb|n|の値。\\
+                   & 100/3に対して有効桁数5桁であれば33.333、2桁であれば33となる。\\
+\verb|bool=| & trueとfalseの出力値をカンマで区切って指定する。デフォルトは"1,0"\\
+\end{tabular} 
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvout::write(values)
+\end{verbatim}
+}
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[values ] 配列(Array)に格納された値をCSVデータとして出力する。
+配列に格納できるデータクラスはString, Fixnum, Bignum, Float, nil, true, falseである。
+それ以外のクラスは全てnilとして扱われる。
+配列のサイズが項目名の数より少い場合はnull値が追加出力される。
+配列のサイズが項目名の数より多い場合は、超過分は出力されない。
+\end{description}
+
+\subsection{備考}
+\begin{itemize}
+\item 文字列にカンマが含まれていれば、その値は自動的にダブルクオーテーションで囲われ出力される。
+文字列にダブルクオーテーションが含まれていれば、連続する二つのダブルクオーテーションに変換される。
+\end{itemize}
+
+\subsection{利用例}
+\subsubsection*{例1 項目名行ありのCSVデータ出力例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+csv=MCMD::Mcsvout.new("o=rsl.csv f=a,b,c"){|csv|
+  csv.write(["1",2,3.4])
+  csv.write([1,2,3,4,5])
+  csv.write([1,2])
+}
+
+# 出力結果(rsl.csv)
+a,b,c
+1,2,3.4
+1,2,3
+1,2,
+\end{Verbatim}
+
+\subsubsection*{例2 項目名行なしのCSVデータ出力例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+csv=MCMD::Mcsvout.new("o=rsl.csv size=3"){|csv|
+  csv.write(["1",2,3.4])
+  csv.write([true,nil,false])
+  csv.write(["4\"5","","6,7"])
+}
+
+# 出力結果(rsl.csv)
+1,2,3.4
+1,,0
+"4""5",,"6,7"
+\end{Verbatim}
+
+\subsubsection*{例3 オプション指定(有効桁数,bool値)}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+MCMD::Mcsvout.new("o=rsl.csv size=3 precision=3 bools=T,F"){|csv|
+  csv.write([0.123456,123456.0]) # 有効桁数の指定は小数点以下の桁数でないことに注意する
+  csv.write([123456,0])  # 有効桁数の指定はFixnumには影響しない
+  csv.write([true,false])
+}
+
+# 出力結果(rsl.csv)
+0.123,1.23e+05
+123456,0
+T,F
+\end{Verbatim}
+
+\subsubsection*{例4 データコピー}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+顧客,日付
+A,20081201
+B,20081002
+
+MCMD::Mcsvin.new("i=dat1.csv -array"){|csvIn|
+  MCMD::Mcsvout.new("o=rsl.csv f=#{csvIn.names.join(",")}){|csvOut|
+    csvIn.each{|val|
+      csvOut.write(val)
+    }
+  }
+}
+
+# rsl.csv
+顧客,日付
+A,20081201
+B,20081002
+\end{Verbatim}
+
+\subsection{ベンチマークテスト}
+
+CSVデータの書き込み処理について、Rubyの拡張ライブラリとして提供されている
+各種ライブラリをベンチマークとして処理速度の比較を行う。
+ベンチマーク対象は以下の2つのライブラリである。
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[FasterCSV] http://www.gesource.jp/programming/ruby/database/fastercsv.html
+\item[CSV] http://www.ruby-lang.org/ja/old-man/html/CSV.html
+\end{description}
+
+表\ref{tb:mcsvoutRB_bench1}にベンチマークテストの結果を示す。
+1万行,10万行,100万行のデータについて書き込み実験を行った。
+ただし、実ファイルとしては出力せず、nullデバイス(/dev/null)への書き込みとした。
+図\ref{fig:mcsvoutRB_script}には、ベンチマークテストで利用したスクリプトの抜粋が示されている。
+McsvoutはC++による実装のため、他の二つのライブラリより高速である。
+Rubyネイティブコードによる実装との差があらわれているのであろう。
+
+\begin{table}[htpb]
+\begin{center}
+\caption{各種CSVライブラリの実行速度比較(単位:秒)\label{tb:mcsvoutRB_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r}
+\hline
+行数      & 10K    & 100K  & 1000K \\ \hline
+Mcsvout   & 0.0158 & 0.150 & 1.50  \\
+FasterCSV & 0.232  & 1.90  & 20.0  \\
+CSV       & 0.279  & 2.80  & 27.9  \\
+\hline
+\end{tabular}  
+{\small
+\\10回実行した結果の平均値(real time)を示している。\\
+行数10Kは10000行の意味。String, Fixnum, Float, true, false, nilの6つの値を出力。\\
+バージョン: FasterCSV 1.5.1 CSV(Ruby 1.8.7) \\
+テスト環境: Mac Book Pro, 2.66GHz Intel Core i7, 8GB メモリ, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+\centering
+\begin{minipage}{.7\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'csv'
+require 'fastercsv'
+require 'mtools'
+
+require 'benchmark'
+
+$data = ["12345678", 10, 1.1, true, nil, false]
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # Mcsvoutの場合
+    MCMD::Mcsvout.new("o=/dev/null size=6){|csv|
+      (0...10000).each{|j|
+        csv.write($data)
+      }
+    }
+
+    # FasterCSVの場合
+    FasterCSV.open("/dev/null", 'w'){|csv|
+      (0...10000).each{|j|
+        csv << $data
+      }
+    }
+
+    # CSVの場合
+    CSV.open("/dev/null", 'w'){|csv|
+      (0...10000).each{|j|
+        csv << $data
+      }
+    }
+  }
+}
+\end{Verbatim}
+}
+\end{minipage}
+\caption{ベンチマークテストのスクリプト(抜粋)\label{fig:mcsvoutRB_script}}
+\end{figure}
+
+
+\subsection{関連コマンド}
+
+\hyperref[sect:mcsvinRB]{Mcsvin} : CSVデータの読み込み
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+

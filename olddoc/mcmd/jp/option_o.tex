@@ -1,0 +1,46 @@
+
+%\begin{document}
+
+\subsection{o= 出力ファイル名\label{sect:option_o}}
+出力ファイル名を指定する。
+単一のファイルのみ指定可能である。
+ただし、例外として、\verb|mtee|コマンドは複数の出力ファイルを指定でき、
+また出力データを必要としないコマンド、例えば、\verb|msep|などもある。
+
+このパラメータが省略された時には標準出力にデータを書き込む。
+この機能があるために、パイプラインによる接続が可能となる。
+例えば、以下の例では、\verb|msortf|で\verb|o=|を指定していないが、
+これは\verb|msortf|の結果が標準出力を通じてパイプラインに出力されるためである。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+また、上記の似たような処理ではあるが、以下に示した例はうまく動作しない。
+上記との違いは\verb|msortf|に\verb|o=|パラメータが指定されている点である。
+\verb|msortf|の結果は\verb|tmp.csv|に出力されるが、標準出力に出力するデータがなく、
+パイプ接続された\verb|msum|はいつまでも入力データが来るのを待つこととなり、一見動いているように見えて、いつまでも終了しない。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv o=tmp.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+少し複雑な例であるが、上記の例は以下のように\verb|mtee|コマンドを利用することでうまく動作するようになる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | mtee o=tmp.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+\verb|mtee|コマンドは、標準入力を\verb|o=|で指定されたファイルおよび標準出力に書き出す。
+結果として、\verb|msortf|の結果は\verb|tmp.csv|に書きこまれ、\verb|msum|も\verb|mtee|よりパイプラインを通じてデータ供給を受け、
+最終結果を\verb|rsl.csv|に書き出す。
+
+
+\subsection*{利用例}
+\input{examples/tex/option_o_ex.tex}
+
+\subsubsection*{対応コマンド}
+\verb|sep|など一部のコマンドを除いて全てのコマンドで利用できる。
+
+%\end{document}
+

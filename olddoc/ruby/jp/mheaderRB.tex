@@ -1,0 +1,55 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mheader CSVデータの項目名配列取得メソッド\label{sect:mheaderRB}}
+CSVデータファイルの項目名(先頭行)を配列で返す。
+先頭行がなくデータ行から始まるファイルについては、
+１行目の各項目の値を配列で返す。
+
+\subsection{書式}
+
+{\large
+\begin{verbatim}
+MCMD::mheader(arguments)
+\end{verbatim}
+} 
+
+\verb|arguments|に、以下の引数をスペースで区切った文字列として指定する。
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名(String)\\
+\end{tabular} 
+\end{table} 
+
+\subsection{利用例}
+\subsubsection*{例1}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+# 顧客,日付,金額
+# A,20081201,10
+# B,20081002,40
+
+> p MCMD::mheader("i=dat1.csv")
+ => ["顧客", "日付", "金額"] 
+\end{Verbatim}
+
+\subsubsection*{例2}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+# A,20081201,10
+# B,20081002,40
+
+> p MCMD::mheader("i=dat1.csv")
+ => ["A", "20081201", "10"] 
+\end{Verbatim}
+
+\subsection{関連コマンド}
+\hyperref[sect:mcsvinRB]{Mcsvin} : CSVデータの読み込みクラス
+
+\hyperref[sect:mtableRB]{Mtable} : CSVデータのセル単位での読み込みクラス
+
+%\end{document}
+

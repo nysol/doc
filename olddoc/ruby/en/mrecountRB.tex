@@ -1,0 +1,109 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mrecount - Row calculation method for CSV data \label{sect:mrecountRB}}
+Class to process CSV data file by row. The features are as follows.
+\begin{itemize}
+%\setlength{\itemindent}{0mm}
+\item Implemented in C++ and thus operates at high speed (Slightly faster than the UNIX command  \verb|wc-l|).
+\item Only counts the number of rows in data excluding the field names in the first row.
+\item Only counts the line break char, thus, line break(s) escaped by double quotes are also counted. 
+Use MCMD::Mtable to avoid this problem.
+
+\end{itemize}
+
+\subsection{Format}
+ 
+{\large
+\begin{verbatim}
+MCMD::mrecount(arguments)
+\end{verbatim}
+}
+
+Specify the following arguments in character string separated with space at \verb|arguments|.
+
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & Input file name (String)\\
+\verb|-nfn|  & No field names in the first row. \\
+\end{tabular} 
+\end{table} 
+
+\subsection{Examples}
+\subsubsection*{Example 1 Print row number and value from field names}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+p MCMD::mrecount("i=dat1.csv")      # -> 2
+p MCMD::mrecount("i=dat1.csv -nfn") # -> 3
+\end{Verbatim}
+
+\subsection{Related Command}
+\hyperref[sect:mtableRB]{Mtable} : Class to read CSV data into cell 
+
+\subsection{Benchmark Test}
+
+The processing speed of the UNIX command \verb/wc/ and \verb/Mtable/ are benchmarked in terms of row count of CSV data. The results of the benchmark test in shown in Table \ref{tb:mrecount_bench1}. The experiment is carried out for data with one million, two million, three million, four million and 500 million rows. As shown in the results, \verb/mrecount/ is slightly faster than \verb/wc/. Further, \verb/Mtable/ is not a class for used to count the number of rows, mrecount is 5-6 times faster when compared to Mtable. 
+
+An excerpt of the script used in the benchmark test is shown in Figure \ref{fig:mrecount_script}. 
+
+
+\begin{table}[htpb]
+\begin{center}
+\caption{Comparison of execution speed among various CSV library (in seconds)\label{tb:mrecount_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+Number of rows      & 1000K & 2000K & 3000K & 4000K & 5000K \\ \hline
+mrecount  & 0.034 & 0.066 & 0.097 & 0.129 & 0.161 \\
+wc -l     & 0.038 & 0.070 & 0.103 & 0.133 & 0.169 \\
+Mtable    & 0.231 & 0.407 & 0.503 & 0.731 & 0.828 \\
+\hline
+\end{tabular}  
+{\small
+\\The results show the average value (real time) of 10 benchmark tests.\\
+1000K number of rows refer to one million rows. Data size of 1000K records is about 25MB. The data consists of 5 columns. \\
+Test environment: Mac Book Pro, 2.66GHz Intel Core i7, 8GB memory, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+%\centering
+%\begin{minipage}{.6\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'mtools'
+
+require 'benchmark'
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # Case of mrecount
+    p MCMD::mrecount("i=data.csv")
+
+    # Case of wc
+    system "wc -l data.csv"
+
+    # Case of Mtable
+    MCMD::Mtable("i=data.csv -array"){|tbl|
+			p tbl.recordSize
+    }
+  }
+}
+\end{Verbatim}
+}
+%\end{minipage}
+\caption{Excerpt of benchmark test script \label{fig:mrecount_script}}
+\end{figure}
+
+%\end{document}
+

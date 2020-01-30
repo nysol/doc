@@ -1,0 +1,117 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+$ mwindow wk=date:win t=2 i=dat1.csv o=rsl1.csv
+#END# kgwindow i=dat1.csv o=rsl1.csv t=2 wk=date:win
+$ more rsl1.csv
+win%0,date,val
+20130407,20130406,1
+20130407,20130407,2
+20130408,20130407,2
+20130408,20130408,3
+20130409,20130408,3
+20130409,20130409,4
+\end{Verbatim}
+\subsubsection*{Example 2: Use first row as baseline data}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mwindow wk=date:win t=3 -r i=dat1.csv o=rsl2.csv
+#END# kgwindow -r i=dat1.csv o=rsl2.csv t=3 wk=date:win
+$ more rsl2.csv
+win%0,date,val
+20130406,20130406,1
+20130406,20130407,2
+20130406,20130408,3
+20130407,20130407,2
+20130407,20130408,3
+20130407,20130409,4
+\end{Verbatim}
+\subsubsection*{Example 3: Print all window intervals even if the window size is less than the defined parameter}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mwindow wk=date:win t=3 -r -n i=dat1.csv o=rsl3.csv
+#END# kgwindow -n -r i=dat1.csv o=rsl3.csv t=3 wk=date:win
+$ more rsl3.csv
+win%0,date,val
+20130406,20130406,1
+20130406,20130407,2
+20130406,20130408,3
+20130407,20130407,2
+20130407,20130408,3
+20130407,20130409,4
+20130408,20130408,3
+20130408,20130409,4
+20130409,20130409,4
+\end{Verbatim}
+\subsubsection*{Example 4: Example of specifying key field}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+store,date,val
+a,20130406,1
+a,20130407,2
+a,20130408,3
+a,20130409,4
+b,20130406,11
+b,20130407,12
+b,20130408,13
+b,20130409,14
+$ mwindow k=store wk=date:win t=2 i=dat2.csv o=rsl4.csv
+#END# kgwindow i=dat2.csv k=store o=rsl4.csv t=2 wk=date:win
+$ more rsl4.csv
+win%1,store%0,date,val
+20130407,a,20130406,1
+20130407,a,20130407,2
+20130408,a,20130407,2
+20130408,a,20130408,3
+20130409,a,20130408,3
+20130409,a,20130409,4
+20130407,b,20130406,11
+20130407,b,20130407,12
+20130408,b,20130407,12
+20130408,b,20130408,13
+20130409,b,20130408,13
+20130409,b,20130409,14
+\end{Verbatim}
+\subsubsection*{Example 5: Find out the moving averages between current day and previous day}
+
+In the above example, moving average is calculated based on the last day of the window.  \verb|mslide| can be used for instances to calculate the moving averages of current day and previous day. The example is as follows:
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mslide f=date:date2 -q i=dat1.csv o=rsl5.csv
+#END# kgslide -q f=date:date2 i=dat1.csv o=rsl5.csv
+$ more rsl5.csv
+date,val,date2
+20130406,1,20130407
+20130407,2,20130408
+20130408,3,20130409
+\end{Verbatim}
+\subsubsection*{Example 6: Find out the moving averages from the previous day}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mwindow wk=date2:win t=2 i=rsl5.csv o=rsl6.csv
+#END# kgwindow i=rsl5.csv o=rsl6.csv t=2 wk=date2:win
+$ more rsl6.csv
+win%0,date,val,date2
+20130408,20130406,1,20130407
+20130408,20130407,2,20130408
+20130409,20130407,2,20130408
+20130409,20130408,3,20130409
+\end{Verbatim}

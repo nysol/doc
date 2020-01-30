@@ -1,0 +1,23 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{f= Input and output field name\label{sect:option_f}}
+
+Specify the input and output field name for processing.
+For example, this parameter specifies the "field name to select" in mcut, "field name to aggregate" for magg, and "field name to merge" for mjoin.
+In addition, multiple field names can be specified separated by a comma in between such as \verb|f=a,b,c|.
+
+The output field name for every specified item from the input file can be renamed in MCMD. This can be done by defining the input field name and output field name separated by a colon in between e.g. \verb|f=a:A,b:B|. The field name in the output remains the same if the output field name is not specified. 
+
+\subsection*{Examples}
+\input{examples/tex/option_f_ex.tex}
+
+\subsubsection*{Related commands}
+\hyperref[sect:mcut]{mcut},
+\hyperref[sect:msum]{msum},
+\hyperref[sect:mcat]{mcat},
+\hyperref[sect:mjoin]{mjoin}, etc. 
+
+%\end{document}
+

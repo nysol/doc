@@ -1,0 +1,31 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{k= Key field name\label{sect:option_k}}
+
+Specify the key field name.
+A key field  uniquely identifies individual rows or an entity in the data, it is used as unit of aggregation, or used as common key for joining fields between two files. 
+
+For example, in  \verb|msum| command,  aggregate computation is carried out for records with the same key (aggregate key break processing).  Whereas in \verb|mjoin| command, the size of key items in the two data files are compared (join key break processing) and joined. 
+
+When \verb|k=| command is specified, the field(s) specified are first sorted in character string ascending order, afterwards, corresponding processing is carried out. 
+
+and is considered as the default field for sorting character strings in ascending order (except for \hyperref[sect:mhashsum]{mhashsum}). 
+Key break process refers to the processing method for every same key field with the same value assuming that the items are sorted beforehand (However, \hyperref[sect:mhashsum]{mhashsum} command is an exception). 
+
+For details on key break process, please refer to \hyperref[sect:keybreak]{Key break processing}. 
+Since frequent sorting may decrease the processing performance, understanding the need for key break processing would help reduce the instances for sorting, desirable for optimizing script performance. 
+
+\subsection*{Examples}
+\input{examples/tex/option_k_ex.tex}
+
+\subsubsection*{Related commands}
+\hyperref[sect:msum]{msum},
+\hyperref[sect:mslide]{mslide},
+\hyperref[sect:mjoin]{mjoin},
+\hyperref[sect:mrjoin]{mrjoin},
+\hyperref[sect:mcommon]{mcommon}, etc.
+
+%\end{document}
+

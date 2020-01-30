@@ -1,0 +1,125 @@
+\documentclass[a4paper]{book}
+%\documentclass[a4paper]{jsbook}
+\usepackage{zdd}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge ZDD Ruby Package Documentation}\\
+\vspace{10truept}
+{\normalsize ZDD version: 1.1.0}\\
+\vspace{1cm}
+
+Revision history:\\
+November 26, 2013 : First release\\
+\vspace{18cm}
+{\small \today}
+
+{\small JST-ERATO MINATO Discrete Structure Manipulation System Project}
+\end{center}
+\end{titlepage}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\chapter{Let's Start}
+
+\include{abstract}
+
+\include{tutorial}
+
+%%\include{getstarted}
+
+%%\include{tutorial}
+
+%%\include{usage}
+
+\chapter{Overview of ZDD Operators and Methods}
+\input{ref_comments}
+
+\include{zdd_remainder}
+\include{zdd_multiply}
+\include{zdd_plus}
+\include{zdd_plus_op}
+\include{zdd_minus}
+\include{zdd_minus_op}
+\include{zdd_quotiment}
+\include{zdd_lt}
+\include{zdd_le}
+\include{zdd_gt}
+\include{zdd_eq}
+\include{zdd_ge}
+\include{zdd_constant}
+\include{zdd_cost}
+\include{zdd_count}
+\include{zdd_csvout}
+\include{zdd_delta}
+\include{zdd_density}
+\include{zdd_diff}
+\include{zdd_each}
+\include{zdd_each_item}
+\include{zdd_export}
+\include{zdd_freqpatA}
+\include{zdd_freqpatC}
+\include{zdd_freqpatM}
+\include{zdd_hashout}
+\include{zdd_iif}
+\include{zdd_import}
+\include{zdd_items}
+\include{zdd_itemset}
+\include{zdd_lcm}
+\include{zdd_maxcost}
+\include{zdd_maxcover}
+\include{zdd_maxweight}
+\include{zdd_meet}
+\include{zdd_mincost}
+\include{zdd_mincover}
+\include{zdd_minweight}
+\include{zdd_ne}
+\include{zdd_partly}
+\include{zdd_permit}
+\include{zdd_permitsym}
+\include{zdd_restrict}
+\include{zdd_same}
+\include{zdd_show}
+\include{zdd_size}
+\include{zdd_symbol}
+\include{zdd_termsEQ}
+\include{zdd_termsGE}
+\include{zdd_termsGT}
+\include{zdd_termsLE}
+\include{zdd_termsLT}
+\include{zdd_termsNE}
+\include{zdd_to_a}
+\include{zdd_to_i}
+\include{zdd_to_s}
+\include{zdd_totalsize}
+\include{zdd_totalweight}
+\if 0
+\fi
+
+\begin{thebibliography}{9}
+	\label{sect:bib}
+  \bibitem{minato1993} S.Minato,
+		``Zero-suppressed BDDs for set manipulation in combinatorial problems,''
+		In Proc. 30th ACM/IEEE Design Automation Conference, pp.272-277, 1993.
+  \bibitem{okumura1995} 奥村博,湊真一,
+		``二分決定グラフによる制約充足問題の解法,''
+		情報処理学会論文誌,Vol.36, No.8, pp.1789-1799, 1995.
+  \bibitem{minato2005} 湊真一,
+		``VSOP：ゼロサプレス型BDDに基づく「重み付き積和集合」計算プログラム,''
+		信学技報, COMP2005-5, pp.31-38, 2005.
+  \bibitem{minato2005} S. Minato, T. Uno, and H. Arimura,
+		``LCM overZBDDs: Fast generation of very large-scale frequent itemsets using a compact graph-based representation,''
+		In Proc. 12-th Pacific-Asia Conference on Knowledge Discovery and Data Mining (PAKDD 2008),pp.234-246,2008.
+  \bibitem{minato2011} 湊真一,
+		``\href{https://www.jstage.jst.go.jp/article/essfr/4/3/4_3_224/_pdf}{BDD/ZDDを基盤とする離散構造と演算処理系の最近の展開},''
+    IEICE Fundamentals Review Vol.4 No.3,
+    pp.224-230, 2011.
+
+\end{thebibliography}
+
+\end{document}
+\end
+

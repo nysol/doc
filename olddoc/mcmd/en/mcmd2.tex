@@ -1,0 +1,281 @@
+% how to compile: platex xxx ; dvipdfmx xxx.dvi
+
+%\documentclass[a4paper]{book}
+\documentclass[a4paper]{book}
+\usepackage{mcmd2}
+\usepackage{color}
+\newcommand{\textColor}[3]{\colorbox{#1}{\color{#2}#3}}
+
+\title{MCMD Manual}
+\author{nysol corporation}
+\date{}
+\usepackage{makeidx}
+\makeindex
+
+\begin{document} 
+\begin{titlepage}
+\begin{center}
+{\huge M-Command Manual}\\
+\vspace{10truept}
+{\normalsize NYSOL Package Current Release: Ver. 3.0}\\
+\vspace{1cm}
+
+Releases:\\
+April 30, 2017: Ver. 3.0 Release\\
+June 30, 2016: Addition of notes about summary processing command, and modify of parameters\\
+December 24, 2015:  Ver. 2.4 Release, and addition of assert function\\
+October 6, 2014:  Ver. 2.0 Release\\
+April 30, 2014 : Updated errors in examples\\
+March 10, 2014 : Changes in installation method corresponding to integration of NYSOL package\\
+February 15, 2014 : Added mxml2csv\\
+November 2, 2013 :  Added mpadding, mvnullto, mvdelnull, and minor changes\\
+September 20, 2013 : First Release\\
+\vspace{13cm}
+{\small \today}
+
+{\small Copyright \copyright 2013-2017 by NYSOL CORPORATION}
+
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+\label{mcmd:toc}
+\tableofcontents
+
+\chapter{Changes}
+\include{changes2} %added from ver.3.0
+
+\chapter{M-Command}
+\index{Mこまんど@M-Command}
+
+\include{abstract}
+\include{csv}
+\include{datatype}
+\include{field}
+\include{nulldata}
+\include{wide}
+\include{option}
+\include{env}
+\include{keybreak}
+
+\chapter{Convenient tools}
+\index{Convenient tools@Convenient tools}
+\include{bashcompletion} %added from ver.3.0
+
+%\if0
+
+\chapter{Command Reference}
+
+\include{format}
+\include{maccum}
+\include{marff2csv}
+\include{mavg}
+\include{mbest}
+\include{mbucket}
+
+%\section{mcal 項目間およびレコード間の計算}
+%mcalは、一つのコマンドであるが、他のコマンドに比べ非常に多機能であるため、
+%\ref{chapter:mcal}章にて詳細に解説する。
+
+\include{mcat}
+\include{mchgnum}
+\include{mchgstr}
+\include{mchkcsv}
+\include{mcombi}
+\include{mcommon}
+\include{mcount}
+\include{mcross}
+\include{m2cross} %added from ver.3.0
+\include{mcsv2arff}
+\include{mcsv2json} %added from ver.3.0
+\include{mcsvconv} %added from  ver.3.0
+\include{mcut}
+
+%\section{mdata データセットの生成}
+%mdataは多様なデータセットを生成するコマンドであり、
+%\ref{chapter:mdata}章にて詳細に解説する。
+\include{mdata}
+\include{mdelnull}
+\include{mdformat} % added mdformat
+\include{mdsp} % added from ver.3.0
+\include{mduprec}
+\include{mfldname}
+\include{mfsort}
+\include{mhashavg}
+\include{mhashsum}
+\include{minput} % added from ver.3.0
+\include{mjoin}
+\include{mkeybreak}
+\include{mmbucket}
+\include{mminput} % added from ver.3.0
+\include{mmseldsp} % added from ver.3.0
+\include{mmvavg}
+\include{mmvsim}
+\include{mmvstats}
+\include{mnewnumber}
+\include{mnewrand}
+\include{mnewstr}
+\include{mnjoin}
+\include{mnormalize}
+\include{mnrcommon}
+\include{mnrjoin}
+\include{mnullto}
+\include{mnumber}
+\include{mpadding}
+\include{mpaste}
+\include{mproduct}
+\include{mrand}
+\include{mrjoin}
+\include{msed}
+\include{msel}
+\include{mseldsp} % added from ver.3.0
+\include{mselnum}
+\include{mselrand}
+\include{mselstr}
+\include{msep}
+\include{msep2}
+\include{msetstr}
+\include{mshare}
+\include{mshuffle} % added from ver.3.0
+\include{msim}
+\include{mslide}
+\include{msortf}
+\include{msplit} % added from ver.3.0
+\include{mstats}
+\include{msum}
+\include{msummary} % added msummary
+\include{mtab2csv} % added from ver.3.0
+\include{mtee}
+\include{mtonull}
+\include{mtra}
+\include{mtrafld}
+\include{mtraflg}
+\include{muniq}
+%\include{mvcal} % added from ver.3.0
+\include{mvcat}
+\include{mvcommon}
+\include{mvcount}
+\include{mvdelim}
+\include{mvdelnull}
+\include{mvjoin}
+\include{mvnullto}
+\include{mvreplace}
+\include{mvsort}
+\include{mvuniq}
+\include{mwindow}
+\include{mxml2csv}
+
+%\chapter{mcal\label{chapter:mcal}}
+\chapter{mcal}
+\verb|mcal| command is developed for computation between columns. 
+
+Commands other than \verb|mcal| carry out record based processing,  however, mcal command specializes in item-based calculations.  There are more than 100 functions/operators in mcal, user has the flexibility to define various processing functions that combine multiple functions and operators. 
+
+\include{mcal}
+%\section{関数リファレンス}
+\include{func_abs}
+\include{func_acos}
+\include{func_age}
+\include{func_and}
+\include{func_argsize}
+\include{func_asin}
+\include{func_atan}
+\include{func_atan2}
+\include{func_avg}
+\include{func_binomdist} %added from ver.3.0
+\include{func_berrand} % added from ver.3.0
+\include{func_bottom}
+\include{func_capitalize}
+\include{func_cat}
+\include{func_ceil}
+\include{func_cos}
+\include{func_cosh}
+\include{func_countnull}
+\include{func_d2julian} % added from ver.3.0
+\include{func_day}
+\include{func_date}
+\include{func_degree}
+\include{func_diff}
+\include{func_dist}
+\include{func_distgps} 
+\include{func_dow}
+\include{func_e}
+\include{func_exp}
+\include{func_factorial}
+\include{func_fixlen}
+\include{func_fldsize}
+\include{func_floor}
+\include{func_format}
+\include{func_fract}
+\include{func_gcd}
+\include{func_hasspace}
+\include{func_heron}
+\include{func_hour}
+\include{func_if}
+\include{func_int}
+\include{func_match} % added 
+\include{func_isnull}
+\include{func_julian}
+\include{func_lcm}
+\include{func_leapyear}
+\include{func_left}
+\include{func_length}
+\include{func_line}
+\include{func_ln}
+\include{func_log}
+\include{func_log10}
+\include{func_log2}
+\include{func_max}
+\include{func_mid}
+\include{func_min}
+\include{func_minute}
+\include{func_month}
+\include{func_not}
+\include{func_now}
+\include{func_null}
+\include{func_nrand}
+\include{func_or}
+\include{func_pi}
+\include{func_power}
+\include{func_product}
+\include{func_radian}
+\include{func_rand}
+\include{func_randi}
+\include{func_regexlen}
+\include{func_regexm}
+\include{func_regexpfx}
+\include{func_regexpos}
+\include{func_regexrep}
+\include{func_regexs}
+\include{func_regexsfx}
+\include{func_regexstr}
+\include{func_right}
+\include{func_round}
+\include{func_second}
+\include{func_sign}
+\include{func_sin}
+\include{func_sinh}
+\include{func_sqrt}
+\include{func_sqsum}
+\include{func_sum}
+\include{func_t2julian} % added from ver.3.0
+\include{func_tan}
+\include{func_tanh}
+\include{func_time}
+\include{func_today}
+\include{func_tolower}
+\include{func_top}
+\include{func_toupper}
+\include{func_tseconds}
+\include{func_uxt}
+\include{func_week}
+\include{func_xor} % added from ver.3.0
+\include{func_year}
+\include{func_cast}
+%\chapter{データセット\label{chapter:mdata}}
+%\include{mdata}
+%\if0
+%\fi
+\printindex
+\end{document}

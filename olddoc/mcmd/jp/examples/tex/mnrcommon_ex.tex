@@ -1,0 +1,38 @@
+\subsubsection*{例1: 基本例}
+
+日付項目の値が\verb|20080203|で、「金額」項目の値が\verb|5|以上\verb|15|未満の行、および\verb|40|以上\verb|50|未満の行を選択する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+日付,金額
+20080123,10
+20080203,10
+20080203,20
+20080203,45
+200804l0,50
+$ more ref1.csv
+日付,金額F,金額T
+20080203,5,15
+20080203,40,50
+$ mnrcommon k=日付 m=ref1.csv R=金額F,金額T r=金額%n i=dat1.csv o=rsl1.csv
+#END# kgnrcommon R=金額F,金額T i=dat1.csv k=日付 m=ref1.csv o=rsl1.csv r=金額%n
+$ more rsl1.csv
+日付%0,金額
+20080203,10
+20080203,45
+\end{Verbatim}
+\subsubsection*{例2: 条件反転}
+
+\verb|-r|を付けると選択条件は反転する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnrcommon k=日付 m=ref1.csv R=金額F,金額T r=金額%n -r i=dat1.csv o=rsl2.csv
+#END# kgnrcommon -r R=金額F,金額T i=dat1.csv k=日付 m=ref1.csv o=rsl2.csv r=金額%n
+$ more rsl2.csv
+日付%0,金額
+20080123,10
+20080203,20
+200804l0,50
+\end{Verbatim}

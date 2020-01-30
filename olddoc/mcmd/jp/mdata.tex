@@ -1,0 +1,155 @@
+
+%\documentclass{jarticle}
+%\begin{document}
+
+\section{mdata データセットの出力\label{sect:mdata}}
+\index{mdata@mdata}
+様々なデータセットを生成する。データセットの詳細は以下を参照のこと。
+
+\subsection*{書式}
+\verb/mdata [O=] -iris|-man0|-man0_en|-man1|-man1_en|-tutorial_en|-tutorial_jp|-yakiniku_en|-yakiniku_jp/
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|O=|    & 出力ファイル名。省略時は標準出力に出力される。\\
+             & \verb|-tutorial_jp|もしくは\verb|-tutorial_en|が指定された場合はディレクトリ名となり、\\
+             & 省略した場合は、\verb|O=tutorial_jp|もしくは\verb|O=tutorial_en|が指定されたことになる。\\
+\verb|-iris| & 萼片と花びらの大きさによって、アヤメの種類の分類モデルの構築を目的に構成されるデータセット \\
+             & 項目名:SepalLength,SepalWidth,PetalLength,PetalWidth,Species(ガク長,ガク幅,花びら長,花びら幅,種)\\
+             & \href{http://archive.ics.uci.edu/ml/datasets/Iris?ref=datanews.io}{http://archive.ics.uci.edu/ml/datasets/Iris?ref=datanews.io} \\
+\verb|-man0|  & 本マニュアルの図\ref{fig:abstract0_1}で使われている5行データ\\
+             & 項目名: 顧客,金額\\
+\verb|-man0_en|  & 本マニュアルの図\ref{fig:abstract0_1}で使われている5行データの英語版\\
+             & 項目名: customer,amount\\
+\verb|-man1|  & 本マニュアルの図\ref{fig:abstract2_1}で使われている8行データ\\
+             & 項目名: 顧客,日付,商品\\
+\verb|-man1_en|  & 本マニュアルの図\ref{fig:abstract2_1}で使われている8行データの英語版\\
+             & 項目名: customer,date,item\\
+\verb|-yakiniku_jp| & 焼肉店の販売データ(\href{http://okayamafs.com/}{岡山フードサービス株式会社}より提供された焼肉店
+\href{https://r.gnavi.co.jp/c032802/}{福牛}の販売データ)。 \\
+                   & 項目名: 日付,時間,レシート,商品,単価,数量,金額 \\
+                   & 注1) 時間は注文時刻で、同じレシート内でも追加注文時はその時の時刻が記録されている。\\
+                   & 注2) 金額=単価×数量 \\
+\verb|-yakiniku_en| & 焼肉店の注文データの英語版 \\
+                   & 項目名: date,time,receipt,item,price,quantity,totalAmount \\
+\verb|-tutorial_jp| & チュートリアルで利用されるスーパーマーケットの擬似購買データ。\\
+                   & \verb|dat.csv|: 購買履歴データ\\
+                   &   項目名:店,日付,時間,レシート,顧客,商品,大分類,中分類,小分類,細分類,メーカー,ブランド,\\
+                   & 仕入単価,単価,数量,金額,仕入金額,粗利金額 \\
+                   & \verb|syo.csv|: 商品マスター\\
+                   &   項目名: 商品,商品名,大分類,中分類,小分類,細分類,メーカー,ブランド,仕入単価 \\
+                   & \verb|cust.csv|: 顧客マスター\\
+                   &   項目名: 顧客,生年月日,性別 \\
+                   & \verb|jicfs1,2,4,6.csv|: 商品分類マスター\\
+                   &   項目名: 大分類,大分類名(中分類,中分類名)(小分類,小分類名)(細分類,細分類名) \\
+\verb|-tutorial_en| & \verb|tutorial_jp|データセットの英語版\\
+                   & \verb|dat.csv|: 購買履歴データ\\
+                   & 項目名:shop,date,time,receipt,customer,product,CategoryCode1,CategoryCode2,CategoryCode4,\\
+                   & CategoryCode6,manufacturer,brand,unitCost,unitPrice,quantity,amount,costAmount,profit\\
+                   & \verb|syo.csv|: 商品マスター\\
+                   & 項目名: product,productName,CategoryCode1,CategoryCode2,CategoryCode4,CategoryCode6,\\
+                   & manufacturer,brand,unitCost \\
+                   & \verb|cust.csv|: 顧客マスター\\
+                   &   項目名: customer,dob,gender \\
+                   & \verb|jicfs1,2,4,6.csv|: 商品分類マスター\\
+                   &   項目名: CategoryCode1,Category1(CategoryCode2,Category2)(CategoryCode4,Category4)\\
+                   & (CategoryCode6,Category6) \\
+\end{tabular} 
+}
+\end{table} 
+
+%データセット名とそれに対するパラメータを"/"で区切ることで指定する。
+%データセットの一覧と内容は表\ref{tbl:mdata_dataset}に示すとおりである。
+%パラメータの与え方はそれぞれのデータセットによって異なり、その方法も同表に示されている。
+
+%\begin{table}[hbt]
+%\begin{center}
+%\caption{データセット名とその内容\label{tbl:mdata_dataset}}
+%{\small
+%\begin{tabular}{l|l|l}
+%\hline
+%データセット名 & 内容 & パラメータ \\ \hline \hline
+%\verb|iris| & 萼片と花びらの大きさによって、アヤメの種類の   & なし \\
+%            & 分類モデルの構築を目的に構成されるデータセット &\\ \hline
+%\verb|man0| & 本マニュアルの図\ref{fig:abstract0_1}で使われているデータ & なし \\ \hline
+%\verb|man1| & 本マニュアルの図\ref{fig:abstract2_1}で使われているデータ & なし \\ \hline
+%\verb|yakiniku_jp| & 焼肉店の注文データ & なし \\ \hline
+%\verb|yakiniku_en| & 焼肉店の注文データの英語版 & なし \\ \hline
+%\verb|tutorial_jp| & チュートリアルで利用されるスーパーマーケットの & データ名を指定すると各データが標準出力に出力される。\\
+%                   & 擬似購買データ。顧客マスターや商品マスターなど & 指定しないと全てのファイルが\verb|tutorial_jp|\\
+%                   & 複数のデータファイルから構成される。           & ディレクトリの下に生成される。\\
+%                   &                                                & データ名とその内容は以下のとおり。\\
+%                   &                                                & \verb|dat|:購買データ \\
+%                   &                                                & \verb|syo|:商品マスター \\
+%                   &                                                & \verb|cust|:顧客マスター \\
+%                   &                                                & \verb|jicfs1,jicfs2,jicfs4,jicfs6|:商品分類マスター \\ \hline
+%\verb|tutorial_en| & \verb|tutorial_jp|データセットの英語版 & \verb|tutorial_jp|に同じ \\ \hline
+%\end{tabular}
+%}
+%\end{center}
+%\end{table}
+
+\subsection*{利用例}
+\subsubsection*{例1 irisデータセットの出力}
+irisデータセットを標準出力に出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -iris
+SepalLength,SepalWidth,PetalLength,PetalWidth,Species
+5.1,3.5,1.4,0.2,setosa
+4.9,3,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+         :
+\end{Verbatim}
+
+\subsubsection*{例2 チュートリアルデータセットの出力}
+チュートリアルデータセットを全てファイル出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -tutorial_en
+#END# mdata -tutorial_en
+
+$ ls -l tutorial_en
+total 4704
+-rw-r--r--  1 nysol  staff    20673  8 22 08:14 cust.csv
+-rw-r--r--  1 nysol  staff  2281312  8 22 08:14 dat.csv
+-rw-r--r--  1 nysol  staff      128  8 22 08:14 jicfs1.csv
+-rw-r--r--  1 nysol  staff      529  8 22 08:14 jicfs2.csv
+-rw-r--r--  1 nysol  staff     6630  8 22 08:14 jicfs4.csv
+-rw-r--r--  1 nysol  staff    36400  8 22 08:14 jicfs6.csv
+-rw-r--r--  1 nysol  staff    46466  8 22 08:14 syo.csv
+
+$ more tutorial_en/dat.csv
+customer,dob,gender
+00000A,19711107,female
+00000B,19461025,female
+00000C,19660307,female
+         :
+\end{Verbatim}
+
+\subsubsection*{例3 焼肉データを出力}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -yakiniku_jp
+日付,時間,レシート,商品,単価,数量,金額
+20070701,1123,10000,焼肉ヘルシーセット,1410,1,1410
+20070701,1152,10001,和牛焼肉弁当,1240,1,1240
+20070701,1202,10002,ランチコーヒー,130,2,260
+             :
+$ mdata -yakiniku_en
+date,time,receipt,item,price,quantity,totalAmount
+20070701,1123,10000,Low-fat BBQ set,1410,1,1410
+20070701,1152,10001,Japanese grilled beef lunch box,1240,1,1240
+20070701,1202,10002,Lunchtime coffee,130,2,260
+         :
+\end{Verbatim}
+
+%\end{document}

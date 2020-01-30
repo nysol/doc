@@ -1,0 +1,62 @@
+
+%\begin{document}
+
+\section{d2julian: date-Change date to a Julian day\label{sect:d2julian}}
+\index{d2julian@d2julian}
+
+Format: d2julian($date$)
+Use this function to obtain a Julian day from the date.
+\begin{verbatim}
+A Julian day is the number of days from noon of January 1, 4713 B.C. (universal time).
+The effective range of the Gregorian calendar, however, is 1400-1-1 to 9999-12-31, so the corresponding range of the Julius days is 2232300 to 5373484.
+NULL is output if the result is outside the range.
+\end{verbatim}
+
+\subsection*{Usage}
+\begin{verbatim}
+c=d2julian(0d20080822)
+\end{verbatim}
+
+\subsection*{Example}
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{Input data}
+  \begin{tabular}{|c|c|c|} \hline
+Date&Time&Number\\ \hline\hline
+20020824&20020824145408&10660\\ \hline
+20020622&20020622173449&22740\\ \hline
+20020824&20020824145408&14800\\ \hline
+20021009&20021009095743&54510\\ \hline
+20020121&20020121173449&18750\\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+
+Examples based on the above data are shown below.
+
+\subsubsection*{Execution example1)}
+The value in the “Date” field is input and converted into a Julian day. A “Julian day” field is newly created, and the result is output.
+\begin{verbatim}
+------------------------------------------------
+mcal c='d2julian($d{Date})' a="Julian day" i=date.csv o=od2julian.csv
+------------------------------------------------
+\end{verbatim}
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{Output file(od2julian.csv)}
+  \begin{tabular}{|c|c|c|c|} \hline
+Date&Time&Number&Julian day\\ \hline\hline
+20020824&20020824145408&10660&2452511\\ \hline
+20020622&20020622173449&22740&2452448\\ \hline
+20020824&20020824145408&14800&2452511\\ \hline
+20021009&20021009095743&54510&2452557\\ \hline
+20020121&20020121173449&18750&2452296\\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+
+\href{run:hizuke.pdf}{Return to mcal - date related}\\
+%\end{document}
+

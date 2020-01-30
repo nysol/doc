@@ -1,0 +1,50 @@
+\subsubsection*{例1: 基本例}
+
+3つの項目str1,str2,str3を\verb|"#"|の区切り文字を挿入して併合する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str1,str2,str3
+1,abc,def,ghi
+2,A,,CDE
+3,,,
+4,,,XY
+$ mcal c='cat("#",$s{str1},$s{str2},$s{str3})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=cat("#",$s{str1},$s{str2},$s{str3}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abc#def#ghi
+2,A,,CDE,A##CDE
+3,,,,##
+4,,,XY,##XY
+\end{Verbatim}
+\subsubsection*{例2: tokenが空文字の場合}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='cat("",$s{str1},$s{str2},$s{str3})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=cat("",$s{str1},$s{str2},$s{str3}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abcdefghi
+2,A,,CDE,ACDE
+3,,,,
+4,,,XY,XY
+\end{Verbatim}
+\subsubsection*{例3: ワイルドカードを利用した例}
+
+\verb|str|から始まる項目(\verb|str1,str2,str3|)をワイルドカード「\verb|str*|」によって指定している。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='cat("",$s{str*})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=cat("",$s{str*}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abcdefghi
+2,A,,CDE,ACDE
+3,,,,
+4,,,XY,XY
+\end{Verbatim}

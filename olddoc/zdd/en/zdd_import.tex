@@ -1,0 +1,19 @@
+
+\section{import : Import ZDD\label{sect:import}}
+\subsection*{Format}
+$obj$.import($fileName$) $\rightarrow zdd$
+
+~~$fileName$ : string
+
+\subsection*{Description}
+Import restores the serialised output of ZDD object $zdd$ object previously saved in the ZDD file (defined at fileName) with the export method. 
+ 
+The declaration order of symbols during import must be defined in the same order during export. 
+
+
+\subsection*{Examples}
+\input{examples/tex/import_ex}
+
+\subsection*{See Also}
+\hyperref[sect:export]{export} : Serialized output of ZDD
+

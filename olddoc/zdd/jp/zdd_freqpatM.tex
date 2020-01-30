@@ -1,0 +1,20 @@
+
+\section{freqpatM : 頻出極大アイテム集合の列挙\label{sect:freqpatM}}
+\subsection*{書式}
+ZDD Object $obj$.freqpatM($minsup$) $\rightarrow$ $zdd$
+
+~~$minsup$ : Ruby Integer
+
+\subsection*{説明}
+ZDDオブジェクト$obj$から最小サポート$minsup$以上出現する頻出極大アイテム集合を全て列挙し、そのZDDオブジェクト$zdd$を返す。
+
+
+\subsection*{例}
+\input{examples/tex/freqpatM_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:freqpatA]{freqpatA} : 頻出アイテム集合の列挙
+
+\hyperref[sect:freqpatC]{freqpatC} : 頻出飽和アイテム集合の列挙
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD

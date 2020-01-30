@@ -1,0 +1,69 @@
+\subsubsection*{例1: 基本例}
+
+1から始まる間隔が1の連番をふり、\verb|No.|という項目名で新規に5行のデータを作成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=1 S=1 l=5 o=rsl1.csv
+#END# kgNewnumber I=1 S=1 a=No. l=5 o=rsl1.csv
+$ more rsl1.csv
+No.
+1
+2
+3
+4
+5
+\end{Verbatim}
+\subsubsection*{例2: 開始番号と間隔の変更}
+
+10から始まる間隔が5の連番をふり、\verb|No.|という項目名で新規に5行のデータを作成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=5 S=10 l=5 o=rsl2.csv
+#END# kgNewnumber I=5 S=10 a=No. l=5 o=rsl2.csv
+$ more rsl2.csv
+No.
+10
+15
+20
+25
+30
+\end{Verbatim}
+\subsubsection*{例3: アルファベット連番}
+
+Aから始まる間隔が1のアルファベット連番をふり、\verb|No.|という項目名で新規に5行のデータを作成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=1 S=A l=5 o=rsl3.csv
+#END# kgNewnumber I=1 S=A a=No. l=5 o=rsl3.csv
+$ more rsl3.csv
+No.
+A
+B
+C
+D
+E
+\end{Verbatim}
+\subsubsection*{例4: ヘッダ行なしで新規作成}
+
+Bから始まる間隔が3のアルファベット連番をふり、ヘッダなしで新規に11行のデータを作成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber  -nfn  I=3 l=11 S=B o=rsl4.csv
+#END# kgNewnumber -nfn I=3 S=B l=11 o=rsl4.csv
+$ more rsl4.csv
+B
+E
+H
+K
+N
+Q
+T
+W
+Z
+AC
+AF
+\end{Verbatim}

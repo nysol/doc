@@ -1,0 +1,14 @@
+
+\section{each\_item : アイテムの繰り返し\label{sect:each_item}}
+\subsection*{書式}
+$obj$.each\_item\{$|weight,item,top,bottom|\dots$\} $\rightarrow$ $Qtrue$
+
+\subsection*{説明}
+ZDDオブジェクト$obj$からアイテム集合を１つずつ読み込み、重みとアイテムを$weight$と$item$にそれぞれセットし，指定されたブロックを実行する．
+セットされたアイテムが処理中のアイテム集合の最初のアイテムであれば$top$がtrueに、最後であれば$bottom$がfalseにセットされる。
+
+\subsection*{例}
+\input{examples/tex/each_item_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:each]{each} : アイテム集合の繰り返し

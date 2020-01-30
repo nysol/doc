@@ -1,0 +1,56 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{msum 項目値の合計\label{sect:msum}}
+\index{msum@msum}
+\verb|k=|パラメータで指定した項目の値が同じ行について、
+\verb|f=|パラメータで指定した集計項目の項目値を合計する。\\
+\verb|(注)|k=とf=パラメータで指定した項目以外については、どの行が出力されるかは不定であることに注意してください。\\
+
+\subsection*{書式}
+\verb|msum f= [k=] [-n]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_tmpPath]{[tmpPath=]} 
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\ 
+\verb|k=|    & 集計の単位となる項目名リスト（複数項目指定可）を指定する。\\
+%\verb|k=|    & 集計の単位となる項目名リスト（複数項目指定可）を指定する。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+%             & このパラメータを指定する場合は事前に、してした項目で並べ替えておく必要がある。\\
+\verb|f=|    & ここで指定された項目（複数項目指定可）の値が集計される。NULL値は無視される。 \\
+\verb|-n|    & \verb|f=|で指定した項目にNULL値が入っていると計算結果もNULLとする。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/msum_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mhashsum]{mhashsum} : 集計キーを事前に並べ替えなくても計算できる。
+
+\hyperref[sect:mavg]{mavg} : 平均バージョン。
+
+\hyperref[sect:mstats]{mstats} : その他の多様な統計量を求めるのであればこれ。
+
+%\end{document}

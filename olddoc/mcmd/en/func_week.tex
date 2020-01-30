@@ -1,0 +1,22 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{Week \label{sect:week}}
+\index{week@week}
+
+Format 1: week($date$)
+
+Format 2: week($time$)
+
+Format 3: week111($date$)
+
+Format 4: week111($time$)
+
+Return the week number following the ISO8601 standard from $date$ or $time$. ISO8601 prescribed week number starts at the first week containing Thursday in the new ISO year. The function week111 returns the week number that starts at the first day of week 01 on 1/1 regardless of the day of week.  
+
+\subsection*{Usage Example}
+\input{examples/tex/func_week_ex.tex}
+
+%\end{document}
+

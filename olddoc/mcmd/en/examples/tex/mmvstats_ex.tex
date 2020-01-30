@@ -1,0 +1,31 @@
+\subsubsection*{Example 1: Basic Example}
+
+Calculate sum of sliding window.
+The first row is not printed as there is less than the required nubmer of intervals for computation.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,value
+1,5
+2,1
+3,3
+4,4
+5,4
+6,6
+7,1
+8,4
+9,7
+$ mmvstats s=id f=value t=2 c=sum i=dat1.csv o=rsl1.csv
+#END# kgmvstats c=sum f=value i=dat1.csv o=rsl1.csv s=id t=2
+$ more rsl1.csv
+id%0,value
+2,6
+3,4
+4,7
+5,8
+6,10
+7,7
+8,5
+9,11
+\end{Verbatim}

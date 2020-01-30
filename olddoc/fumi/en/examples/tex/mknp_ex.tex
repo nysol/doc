@@ -1,0 +1,72 @@
+\subsubsection*{Example 1: Basic Example }
+
+File \verb|test.txt| is contained in \verb|text| directory for parsing. 
+The resuls is saved in \verb|xml| directory.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more text/test.txt
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+$ mknp.rb I=text O=xml
+#MSG# KNP: reading text/test.txt
+#MSG# KNP: MP-2 aid=test.txt sid=0 (sentences:1/2, articles:1/1)
+#MSG# KNP: MP-2 aid=test.txt sid=1 (sentences:2/2, articles:1/1)
+#MSG# KNP2XML 1/1
+#MSG# Elapse: 0.149sec, # of sentences=2, # of articles=1
+#MSG#   0.075sec/sentence, 0.149sec/article
+#MSG#   mpCount=2, poolSize=1000
+#MSG#   maxLen=512Byte, maxSec=30sec, sizeLimit=2000MB
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mknp.rb I=text O=xml
+$ head -n20 xml/test.txt
+<?xml version='1.0' encoding='UTF-8'?>
+<article id='test.txt'>
+  <sentence id='0' text='子どもはリンゴがすきです。'>
+    <chunk id='0' link='2' phraseType='格助詞句' caseType='ガ２格' phrase='子供' phraseTok='
+      <token id='0' class1='名詞' class2='普通名詞' word='子ども' orgWord='子ども' daiWord='
+      <token id='1' class1='助詞' class2='副助詞' word='は' orgWord='は'/>
+    </chunk>
+    <chunk id='1' link='2' phraseType='格助詞句' caseType='ガ格' phrase='林檎' phraseTok='リ
+      <token id='2' class1='名詞' class2='普通名詞' word='リンゴ' orgWord='リンゴ' daiWord='
+      <token id='3' class1='助詞' class2='格助詞' word='が' orgWord='が'/>
+    </chunk>
+    <chunk id='2' link='-1' phraseType='用言句' phraseTok='すきだ' rawPhrase='すきです。' ph
+      <token id='4' class1='形容詞' class3='ナ形容詞' class4='デス列基本形' word='すきだ' or
+      <token id='5' class1='特殊' class2='句点' word='。' orgWord='。'/>
+    </chunk>
+  </sentence>
+  <sentence id='1' text='望遠鏡で泳ぐ少女を見た。'>
+    <chunk id='0' link='3' phraseType='格助詞句' caseType='デ格' phrase='望遠鏡' phraseTok='
+      <token id='0' class1='名詞' class2='普通名詞' word='望遠' orgWord='望遠' daiWord='望遠
+      <token id='1' class1='名詞' class2='普通名詞' word='鏡' orgWord='鏡' daiWord='鏡' cate
+\end{Verbatim}
+\subsubsection*{Example 2: Example of output results of KNP (original). }
+
+Resuls of KNP (original) is saved in \verb|knp| directory. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more text/test.txt
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+$ mknp.rb I=text O=xml P=knp
+#MSG# KNP: reading text/test.txt
+#MSG# KNP: MP-2 aid=test.txt sid=0 (sentences:1/2, articles:1/1)
+#MSG# KNP: MP-2 aid=test.txt sid=1 (sentences:2/2, articles:1/1)
+#MSG# KNP2XML 1/1
+#MSG# Elapse: 0.147sec, # of sentences=2, # of articles=1
+#MSG#   0.074sec/sentence, 0.147sec/article
+#MSG#   mpCount=2, poolSize=1000
+#MSG#   maxLen=512Byte, maxSec=30sec, sizeLimit=2000MB
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mknp.rb I=text O=xml P=knp
+$ head knp/test.txt
+# S-ID:1 KNP:4.11-CF1.1 DATE:2014/07/28 SCORE:-21.86138
+* 2D <文頭><SM-主体><SM-人><ハ><助詞><体言><係:未格><提題><区切:3-5><主題表現><格要素><連用
++ 2D <文頭><SM-主体><SM-人><ハ><助詞><体言><係:未格><提題><区切:3-5><主題表現><格要素><連用
+子ども こども 子ども 名詞 6 普通名詞 1 * 0 * 0 "代表表記:子供/こども カテゴリ:人" <代表表記:
+は は は 助詞 9 副助詞 2 * 0 * 0 NIL <かな漢字><ひらがな><付属>
+* 2D <ガ><助詞><体言><係:ガ格><区切:0-0><格要素><連用要素><正規化代表表記:林檎/りんご><主辞
++ 2D <ガ><助詞><体言><係:ガ格><区切:0-0><格要素><連用要素><名詞項候補><先行詞候補><正規化代
+リンゴ りんご リンゴ 名詞 6 普通名詞 1 * 0 * 0 "代表表記:林檎/りんご カテゴリ:植物
+が が が 助詞 9 格助詞 1 * 0 * 0 NIL <かな漢字><ひらがな><付属>
+* -1D <文末><句点><用言:形><レベル:C><区切:5-5><ID:（文末）><係:文末><提題受:30><主節><格要
+\end{Verbatim}

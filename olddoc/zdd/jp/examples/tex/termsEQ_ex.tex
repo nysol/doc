@@ -1,0 +1,29 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a + 3*b + c
+> f.show
+ 5 a + 3 b + c
+
+# 3の重みを持つ項を選択する。
+> f.termsEQ(3).show
+ 3 b
+
+# 3以上の重みを持つ項を選択する。
+> f.termsGE(3).show
+ 5 a + 3 b
+
+# 3でない重みを持つ項を選択する。
+> f.termsNE(3).show
+ 5 a + c
+
+# 条件に合う項がなければ0
+> f.termsGT(10).show
+ 0
+\end{Verbatim}

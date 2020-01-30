@@ -1,0 +1,43 @@
+
+%\begin{document}
+
+\section{mcount - Count the Number of Rows\label{sect:mcount}}
+\index{mcount@mcount}
+Count the number of rows and store the results in a new column defined in \verb|a=| parameter. Counting is carried out by each aggregate key when \verb|k=| parameter is specified. Otherwise, if \verb|k=|  is not specified, all rows are counted. 
+
+\subsection*{Format}
+\verb|mcount a= [k=]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & Specify the new field name to be added. \\
+             & This parameter is not required when \verb|nfn| option is specified.\\
+\verb|k=|    & Key item(s) (Multiple keys can be specified) [\hyperref[sect:option_k]{aggregate key break processing}]\\
+             & Count the number of instances for incremental rows based on the key field(s) defined.  \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcount_ex.tex}
+
+\subsection*{Related command}
+\hyperref[sect:mstats]{mstats} : Specify \verb|c=count| to count non-null values in the data.  
+
+%\end{document}

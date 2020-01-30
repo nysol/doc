@@ -1,0 +1,150 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mmerge},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mmerge command}
+Merge while maintaining the order of the specified item for specified multiple files. The multiple files must be sorting by the specified item. It is possible to sort for each item in order to ascending of character, descending of character, numeric ascending and numeric descending.
+\subsection*{Format}
+mmerge 
+[k=] [pways=] 
+\href{run:option.pdf}{i=} 
+[\href{run:option.pdf}{tmpPath=}] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & List of merge item name [\%n$|$\%r$|$\%nr]\\
+& Specify the list of the item name which becomes criterial sorting the records\\
+& If not specified, merge the file specified by i = in order.\\
+& If one specify only the item name, it is sorted in a string ascending.\\
+& If one wants to sort them as numeric item, by specifying "\%n" after the item name,\\ 
+& such as "f = item name \% n", it is sorted by ascending as a numeric item.\\
+& In addition, if one wants to execute a descending sort of character string and numerical value, \\
+& specify each "k = item name \% r" and "k = item name \% nr"\\
+& However, in addition, if a NULL value is included in the data, NULL value is treated\\ 
+& as a value smaller than any value.\\
+& Plus when multiple sort, according to the priority of the sort, specify the item name\\ 
+& by comma-separated (,).\\
+& Note) The operation is indeterminate in case of specifying "\%n" for a character string item. \\
+& NULL value is treated as the smallest value both as numerical and character string.\\
+\verb|pways=|  & The number of open the files at the same time【default=32】\\
+& It is possible to specify the number of files to be opened at the same time, \\
+& when one merges the multiple files. It can be specified in the range of no fewer than 2, nor more than 100.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+
+
+\subsection*{Remark}
+\begin{itemize}
+\item It is assumed that each file is sorted in order of the item specified in k=.
+\end{itemize}
+
+\subsection*{Usage example}
+\subsubsection*{Example 1 Merge files in ascending sort of character string.}
+
+\begin{verbatim}
+------------------------------------------------
+# in0
+fld1,fld2,fld3
+p,q,3
+x,y,1
+x,y,5
+
+# in1
+fld1,fld2,fld3
+a,c,2
+a,c,4
+
+$ mmerge k=fld1,fld2 i=in0,in1
+
+# result of output
+fld1,fld2,fld3
+a,c,2
+a,c,4
+p,q,3
+x,y,1
+x,y,5
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Merge files in ascending sort of numerical string.}
+
+\begin{verbatim}
+------------------------------------------------
+# in0
+fld1,fld2,fld3
+p,q,2
+x,y,4
+x,y,5
+
+# in1
+fld1,fld2,fld3
+a,c,1
+a,c,3
+p,q,3
+x,y,5
+x,y,6
+
+$ mmerge k=fld3%n,fld1 i=in0,in1
+
+# result of output
+fld1,fld2,fld3
+a,c,1
+p,q,2
+a,c,3
+p,q,3
+x,y,4
+x,y,5
+x,y,5
+x,y,6
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+
+\hyperlink{mcat.pdf}{mcat} : merge of data
+\hyperlink{mshuffle.pdf}{mshuffle} : Hash split of file
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+
+\end{document}
+

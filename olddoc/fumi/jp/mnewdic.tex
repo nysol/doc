@@ -1,0 +1,110 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mnewdic.rb コーパスからの隣接単語ペア候補出力\label{sect:mnewdic}}
+\index{mnewdic@mnewdic}
+
+コーパス（大量の文例からなるテキストファイル）から、
+辞書に登録すべき隣接単語ペアの候補情報を出力する。
+
+JUMANが標準で搭載する辞書は一般的なもののため、
+特定分野のテキストをマイニングするには、
+1つの語として解釈（形態素解析）して欲しい語が
+複数の語に分割されてしまうことがある。
+\verb|mnewdic.rb|コマンドは
+与えられたコーパスを分析し、並んで出現する頻度が高く
+1つの語として解釈すべき可能性が高い語のペアを
+リストアップしてCSVに出力する。
+
+このCSVを参考に登録の要否を人目で判断し、
+\verb|mjumandic.rb|コマンドに与えることで
+JUMANへの辞書登録が容易になる。
+
+
+\subsection{書式}
+\begin{verbatim}
+mnewdic.rb [i=] [O=] [S=] [n=] [seed=] [-dai] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|i=|       & : コーパスファイル名 \\
+\verb|O=|       & : 出力ディレクトリ名 \\
+\verb|S=|       & : 単語ペア出現件数最小値 \\
+\verb|n=|       & : 単語ペアごとに出力する文例数 \\
+\verb|seed=|    & : 乱数の種 \\
+\verb|-dai|     & : 見出し語として代表表記を使う \\
+\verb|-mcmdenv| & : 内部で利用しているMCMDのメッセージ出力レベルを環境変数に任せる。 \\
+                &   省略時は警告とエラーメッセージのみ出力(KG\_VerboseLevel=2)。 \\
+\verb|--help|   & : ヘルプメッセージの表示 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection*{入力ファイル例}
+
+\verb|i=|パラメータで指定するコーパスファイルには、
+1行1文にしたテキストファイルを与える。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+3年ぶりにウォークマンを買ったけど、育休中はあまり活躍の余地がないですね。
+待機児童解消の方がいい気がするけど。
+:
+\end{Verbatim}
+
+\subsubsection*{出力ファイル例}
+
+\verb|O=|パラメータで指定したディレクトリには、
+\verb|words.csv|ファイルと\verb|corpus.csv|ファイルが出力される
+（\verb|nkf|コマンドがインストールされている場合、
+両ファイルの文字コードをShift JISに変換したファイルも同時に出力される）。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+見出し語,品詞,読み,カテゴリ,ドメイン,pid,word1,word2,freq
+職場復帰,,,,,0,職場,復帰,31
+授業参観,,,,,1,授業,参観,28
+会議参加,,,,,2,会議,参加,26
+:
+\end{Verbatim}
+
+\newpage
+
+\verb|words.csv|ファイルの各項目の意味を以下に示す。
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|見出し語| & : 見出し語 \\  
+\verb|品詞|     & : 品詞 \\  
+\verb|読み|     & : 読み \\  
+\verb|カテゴリ| & : カテゴリ \\  
+\verb|ドメイン| & : ドメイン \\  
+\verb|pid|      & : pid \\  
+\verb|word1|    & : 語1 \\  
+\verb|word2|    & : 語2 \\  
+\verb|freq|     & : 出現頻度 \\  
+\end{tabular} 
+}
+\end{table} 
+
+\verb|corpus.csv|は、登録候補の語がどのようなテキストに出現したのかを
+確認するために参照すればよい。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+pid,id,text
+0,52,"神戸で始めての、育休後職場復帰セミナーを開催しました。"
+0,317,"僕の知り合いは2人子どもを産んで、立て続けに産休＋育休を取って、職場復帰した。"
+:
+\end{Verbatim}
+
+
+
+
+\subsection{利用例}
+\input{examples/tex/mnewdic_ex.tex}
+
+%\end{document}
+

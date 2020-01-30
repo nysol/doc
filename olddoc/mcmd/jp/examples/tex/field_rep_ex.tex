@@ -1,0 +1,37 @@
+\subsubsection*{例1: 基本例}
+
+ここでは、\verb|"&"|が入力項目名である「\verb|ブランド|」に置換され、「\verb|f=ブランド:ブランドコード|」と指定したことと同等となる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+ブランド,数量10,数量11,数量12,数量123
+A,10,15,9,1
+B,20,16,8,2
+C,30,17,7,3
+D,40,18,6,4
+$ mcut f="ブランド:&コード" i=dat1.csv o=rsl1.csv
+#END# kgcut f=ブランド:&コード i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+ブランドコード
+A
+B
+C
+D
+\end{Verbatim}
+\subsubsection*{例2: ワイルドカードとの併用}
+
+出力項目名指定における\verb|売上&|の\verb|&|が入力項目名(例えば「数量10」)に置き換わる。
+結果として、「\verb|数量|」で始まる項目全てに対して「\verb|売上|」を先頭に加えて出力することになる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f="ブランド,数量*:売上&" i=dat1.csv o=rsl2.csv
+#END# kgcut f=ブランド,数量*:売上& i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+ブランド,売上数量10,売上数量11,売上数量12,売上数量123
+A,10,15,9,1
+B,20,16,8,2
+C,30,17,7,3
+D,40,18,6,4
+\end{Verbatim}

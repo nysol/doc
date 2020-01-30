@@ -1,0 +1,71 @@
+\subsubsection*{Example 1: Compute the interval in terms of months}
+
+Compute the number of months during the period between the value in the \verb|date| column and September 1, 2013.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,19641010
+2,20000101
+3,20130831
+4,20130901
+5,20130902
+$ mcal c='diffday(0d20130901,$d{date})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=diffday(0d20130901,$d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,rsl
+1,19641010,17858
+2,20000101,4992
+3,20130831,1
+4,20130901,0
+5,20130902,-1
+\end{Verbatim}
+\subsubsection*{Example 2: Compute the interval in terms of minutes}
+
+Compute the minutes between the value in the \verb|time| column and January 1, 2012 00 hours 00 minutes 00 seconds.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20120101000000
+2,20120101011112
+3,
+4,20111231235000
+5,20111231235000.123456
+$ mcal c='diffmonth(0t20120101000000,$t{time})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=diffmonth(0t20120101000000,$t{time}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,time,rsl
+1,20120101000000,0
+2,20120101011112,-1
+3,,
+4,20111231235000,0
+5,20111231235000.123456,0
+\end{Verbatim}
+\subsubsection*{Example 3: Compute the interval in terms of microseconds}
+
+Compute the seconds and microseconds between the value in the \verb|time| column and January 1, 2012 00 hours 00 minutes 00 seconds.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='diffsecond(0t20120101000000,$t{time})' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=diffsecond(0t20120101000000,$t{time}) i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,time,rsl
+1,20120101000000,0
+2,20120101011112,-4272
+3,,
+4,20111231235000,600
+5,20111231235000.123456,599
+$ mcal c='diffusecond(0t20120101000000,$t{time})' a=rsl i=dat2.csv o=rsl4.csv
+#END# kgcal a=rsl c=diffusecond(0t20120101000000,$t{time}) i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+id,time,rsl
+1,20120101000000,0
+2,20120101011112,-4272
+3,,
+4,20111231235000,600
+5,20111231235000.123456,599.876544
+\end{Verbatim}

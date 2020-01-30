@@ -1,0 +1,52 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,time
+1,000103
+2,235959
+3,235959.123
+4,000000
+$ mcal c='tseconds($t{time})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=tseconds($t{time}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,time,rsl
+1,000103,63
+2,235959,86399
+3,235959.123,86399
+4,000000,0
+\end{Verbatim}
+\subsubsection*{例2: 日付が異なっても結果は同じ}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20130901000103
+2,20130902000103
+3,20130902000103.123
+$ mcal c='tseconds($t{time})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=tseconds($t{time}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,time,rsl
+1,20130901000103,63
+2,20130902000103,63
+3,20130902000103.123,63
+\end{Verbatim}
+\subsubsection*{例3: マイクロ秒}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='tuseconds($t{time})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=tuseconds($t{time}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,time,rsl
+1,000103,63
+2,235959,86399
+3,235959.123,86399.123
+4,000000,0
+\end{Verbatim}

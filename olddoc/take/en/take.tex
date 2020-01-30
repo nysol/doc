@@ -1,0 +1,64 @@
+\documentclass[a4paper]{book}
+\usepackage{take}
+
+% ------------------- Title and Author -----------------------------
+%\title{mining Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge Data Mining Package TAKE(竹) Documentation}\\
+\vspace{10truept}
+{\normalsize version: 1.2,2.0}\\
+\vspace{1cm}
+
+Revision History:\\
+
+October 6, 2014 : added mclque2g.rb,mbiclique.rb; changed specification of edge file and node file. \\
+March 10, 2014 : changes in installation procedure with integration into nysol package\\
+March 10, 2014 : improved mitemset.rb, and added msequence.rb,mpolishing.rb\\
+February 28, 2014 : first release\\
+\vspace{18cm}
+{\small \today}
+
+{\small Copyright \copyright 2013 by NYSOL CORPORATION}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+
+
+\chapter{Introduction}
+
+\include{abstract}
+
+\chapter{Commands}
+
+\include{mitemset}
+\include{msequence}
+\include{mpolishing}
+\include{mtra2g}
+\include{mclique}
+\include{mclique2g}
+\include{mbiclique}
+\include{mgdiff}
+\include{mcliqueInfo}
+
+%\chapter{その他}
+
+%\bibliographystyle{plain-annote}
+%\bibliography{mybibliography}
+\include{bib}
+
+
+\end{document}
+\end
+

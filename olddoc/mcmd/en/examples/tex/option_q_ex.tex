@@ -1,0 +1,23 @@
+\subsubsection*{Example 1: Basic Example }
+
+Find out the cumulative value by \verb|id| field. When \verb|-q| option is specified, sorting by field specified at \verb|k=| parameter will be disabled.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+A,1
+B,1
+B,2
+A,2
+B,3
+$ maccum -q k=id f=val:val_accum i=dat1.csv o=rsl1.csv
+#END# kgaccum -q f=val:val_accum i=dat1.csv k=id o=rsl1.csv
+$ more rsl1.csv
+id,val,val_accum
+A,1,1
+B,1,1
+B,2,3
+A,2,2
+B,3,3
+\end{Verbatim}

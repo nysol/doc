@@ -1,0 +1,31 @@
+\subsubsection*{Example 1: Basic Example}
+
+Convert customer purchasing data in arff format to csv format. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.arff
+@RELATION       Customer Purchase Data
+
+@ATTRIBUTE      Customer    string
+@ATTRIBUTE      Date    date yyyymmdd
+@ATTRIBUTE      Quantity    numeric
+@ATTRIBUTE      Amount    numeric
+@ATTRIBUTE      Product    {A,B}
+
+@DATA
+No.1,20081201,1,10,A
+No.2,20081202,2,20,A
+No.3,20081203,3,30,A
+No.4,20081201,4,40,B
+No.5,20081203,5,50,B
+$ marff2csv i=dat1.arff  o=rsl1.csv
+#END# kgarff2csv i=dat1.arff o=rsl1.csv
+$ more rsl1.csv
+Customer,Date,Quantity,Amount,Product
+No.1,20081201,1,10,A
+No.2,20081202,2,20,A
+No.3,20081203,3,30,A
+No.4,20081201,4,40,B
+No.5,20081203,5,50,B
+\end{Verbatim}

@@ -1,0 +1,32 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{i= Input file name\label{sect:option_i}}
+Specify the name of input file.
+Most commands only allow a single file to be specified, with the exception of \verb|mcat| command where multiple files can be specified separated with a comma.
+Yet, certain commands such as \verb|mnewnumber| and \verb|mnewrand| do not require input data. 
+
+When this parameter is not defined, data is read from standard input by using pipeline. In the example below, \verb|i=| parameter is not specified for \verb|msum| command because the input data is the result of \verb|msortf|, which is read from standard input through the pipeline.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+However, it is difficult to identify errors when results are piped directly from one command to the next. 
+In the following example, \verb|i=| parameter is also specified for \verb|msum|. 
+The results of \verb|msortf| is sent to standard output, and msum reads input data from \verb|dat.csv|. 
+Since \verb|msortf| did not add meaning to the input for \verb|msum|, the results from this example is different from the above. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b i=dat.csv o=rsl.csv
+\end{Verbatim}
+
+\subsection*{Examples}
+\input{examples/tex/option_i_ex.tex}
+
+\subsubsection*{Related commands}
+The parameter can be used in all commands except for commands such as \verb|mnewnumber| and \verb|mnewrand|.
+
+%\end{document}
+

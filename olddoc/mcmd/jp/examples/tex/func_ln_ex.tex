@@ -1,0 +1,24 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,10
+2,2.718281828
+3,
+4,0
+5,1
+6,-8
+$ mcal c='ln(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=ln(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,10,2.302585093
+2,2.718281828,0.9999999998
+3,,
+4,0,
+5,1,0
+6,-8,
+\end{Verbatim}

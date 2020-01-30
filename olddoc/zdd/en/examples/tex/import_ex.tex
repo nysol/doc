@@ -1,0 +1,72 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c+3*a*b+2*b*c+c
+> f.show
+ 5 a b c + 3 a b + 2 b c + c
+> f.export("dat.zdd")
+# Contents in the export file dat.zdd are as follows. 
+# _i 3
+# _o 3
+# _n 7
+# 4 1 F T
+# 248 2 F 5
+# 276 3 4 248
+# 232 2 F 4
+# 2 2 F T
+# 272 3 232 2
+# 268 3 232 248
+# 276
+# 272
+# 268
+
+\end{Verbatim}
+\subsubsection*{Example 2: Example of correctly restored file}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# After sybmol is declared in order, import correctly restores the file. 
+> ZDD::symbol("a")
+> ZDD::symbol("b")
+> ZDD::symbol("c")
+> g1=ZDD::import("dat.zdd")
+> g1.show
+ 5 a b c + 3 a b + 2 b c + c
+\end{Verbatim}
+\subsubsection*{Example 3: Example of incorrectly restored file}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# If item b,c are not declared in order, b and c will be represented incorrectly
+# in the results.
+> ZDD::symbol("a")
+> ZDD::symbol("c")
+> ZDD::symbol("b")
+> g2=ZDD::import("dat.zdd")
+> g2.show
+ 5 a c b + 3 a c + 2 c b + b
+\end{Verbatim}
+\subsubsection*{Example 4: Restore file without symbol declaration}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# Item names such as x1,x2,x3 will be used if the symbols are not declared before import. 
+# In this case, the sequence number followed after x will be in reverse order
+# corresponding to the declaration order of the item.
+# In the following example, x1=c, x2=b, x3=c.
+> g3=ZDD::import("dat.zdd")
+> g3.show
+ 5 x3 x2 x1 + 3 x3 x2 + 2 x2 x1 + x1
+\end{Verbatim}

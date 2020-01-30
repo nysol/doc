@@ -1,0 +1,17 @@
+
+\section{same? : Same comparison operator \label{sect:same?}}
+\subsection*{Format}
+$obj$.same?($zdd$)  $\rightarrow$ $bool$ $\rightarrow$ $bool$
+
+$obj$ === $zdd$ $\rightarrow$ $bool$
+
+\subsection*{Description}
+Compare 2 ZDD objects $obj$ and $zdd$, returns true if the operands are the same, and false if they are different. 
+
+Two "=" operator (\hyperref[sect:eq]{== operator}) has a different definition, it is used to carry out equal to comparison of the terms within the expression, thus, take note that this operator is completely different. 
+
+\subsection*{Example}
+\input{examples/tex/same_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:diff?]{diff?} : Not equal to comparison operator

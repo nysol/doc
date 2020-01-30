@@ -1,0 +1,52 @@
+\subsubsection*{例1: 基本例}
+
+実数乱数を10行生成する。乱数の種は1に固定しているので、いつ実行しても乱数系列は同じになる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand a=rand S=1 o=rsl1.csv
+#END# kgnewrand S=1 a=rand o=rsl1.csv
+$ more rsl1.csv
+rand
+0.4170219984
+0.9971848081
+0.7203244893
+0.9325573612
+0.0001143810805
+0.1281244478
+0.3023325677
+0.9990405154
+0.1467558926
+0.2360889763
+\end{Verbatim}
+\subsubsection*{例2: 整数乱数}
+
+最小値が0、最大値が1000、乱数の種が1の整数乱数を5行作成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand a=rand -int max=1000 min=0 l=5 S=1 o=rsl2.csv
+#END# kgnewrand -int S=1 a=rand l=5 max=1000 min=0 o=rsl2.csv
+$ more rsl2.csv
+rand
+417
+998
+721
+933
+0
+\end{Verbatim}
+\subsubsection*{例3: ヘッダ行なしで出力}
+
+\verb|-nfn|でヘッダーなしのデータが生成される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand -nfn l=5 S=1 o=rsl3.csv
+#END# kgnewrand -nfn S=1 l=5 o=rsl3.csv
+$ more rsl3.csv
+0.4170219984
+0.9971848081
+0.7203244893
+0.9325573612
+0.0001143810805
+\end{Verbatim}

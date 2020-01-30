@@ -1,0 +1,158 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvuniq merge vector elements}
+
+【The output is dependent on application of the command, the results from this example may differ from the actual implementation. 】
+
+This command merges the elements in a vector. However, since the merging process uses hash structure, the sequence of output maybe not be in order. \verb|mvsort| command can be used to sort output elements in sequence.    
+
+ \verb|-n| option reads the vector as a sequential series. The vector series is scanned from the beginning of the string, and prints unique character strings in the vector. 
+
+The examples are highlighted in Table \ref{tbl:out1}, \ref{tbl:out2}.
+Table \ref{tbl:out1} shows all merged elements in the data series. When \verb|-n| option is specified, the same elements next to each other are merged in sequential order (see Table \ref{tbl:out2}). 
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lll}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&b a a \\
+2&a a b b b \\
+3&a b b a \\
+4&a b c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:out1}}
+\verb|vf=items i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b \\
+2&a b \\
+3&a b \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{Merge same elements adjacent to each other in a vector series \label{tbl:out2}}
+\verb|vf=items -n i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b a \\
+2&a b \\
+3&a b a \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{Format}
+\verb|mvuniq vf= |
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the field name(s) of vectors to merge elements. \\
+& Multiple field name(s) of vectors can be specified. 【required parameter】 \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Example}
+\subsubsection*{Example 1 Merges all elements in a vector}
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2
+b a c,1 1
+c c,2 2 3
+e a a,3 1
+
+$ mvuniq vf=items1,items2 i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items1,items2
+c b a,1
+c,2 3
+e a,3 1
+------------------------------------------------
+\end{verbatim}
+
+
+\subsection*{Related command}
+\begin{itemize}
+\item \href{run:mvsort.pdf}{mvsort} : Sorting vectors 
+\end{itemize}
+
+\end{document}

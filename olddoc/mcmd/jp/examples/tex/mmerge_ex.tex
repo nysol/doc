@@ -1,0 +1,41 @@
+\subsubsection*{例1: 文字列昇順ソートでファイル併合する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more in1
+fld1,fld2,fld3
+p,q,3
+x,y,1
+x,y,5
+$ more in2
+fld1,fld2,fld3
+a,c,2
+a,c,4
+$ mmerge k=fld1,fld2 i=in1,in2 o=rsl1.csv
+xxscp: line 3: mmerge: command not found
+$ more rsl1.csv
+rsl1.csv: No such file or directory
+\end{Verbatim}
+\subsubsection*{例2: 数字列昇順ソートでファイル併合する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more in3
+fld1,fld2,fld3
+p,q,2
+x,y,4
+x,y,5
+$ more in4
+fld1,fld2,fld3
+a,c,1
+a,c,3
+p,q,3
+x,y,5
+x,y,6
+$ mmerge k=fld3%n,fld1 i=in3,in4 o=rsl2.csv
+xxscp: line 3: mmerge: command not found
+$ more rsl2.csv
+rsl2.csv: No such file or directory
+\end{Verbatim}

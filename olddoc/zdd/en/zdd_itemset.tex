@@ -1,0 +1,29 @@
+
+\section{itemset : Construct ZDD object for itemset\label{sect:itemset}}
+\subsection*{Format}
+$obj$.itemset($is$) $\rightarrow$ $zdd$
+
+~~$is$ : string
+
+\subsection*{Description}
+Constuct the ZDD object $zdd$ for itemset specified at $is$. 
+Multiple items can be delimited by half-width space. 
+The weight do not need to be specified.  
+Empty character ("") is treated as empty itemset. The sum of products of the constant term is set as 1 (same as zdd.constant(1)).  
+
+Items which are not declared in the symbol method will be added to the end of the item order table.  
+The default value of item is set to 0.5. 
+Refer to \hyperref[sect:symbol]{symbol} for details on cost. 
+
+
+\subsection*{Examples}
+\input{examples/tex/itemset_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:symbol]{symbol} : Declare items
+
+\hyperref[sect:constant]{constant} : Construct ZDD constant object
+
+\hyperref[sect:cost]{cost} : Total cost of itemset 
+
+

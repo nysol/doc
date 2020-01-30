@@ -1,0 +1,70 @@
+
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mchkcsv CSVデータのチェック\label{sect:mchkcsv}}
+\index{mchkcsv@mchkcsv}
+\hyperref[sect:csv]{MCMDが前提とするCSVの仕様}を満たしていないデータを自動修復する(項目数の統一など)。
+また、\verb|-diag|オプションを指定することで、CSVデータのチェックのみ実行する。
+
+\subsection*{書式}
+\verb/mchkcsv [a=] [-diagl|-diag] [-r]/
+\hyperref[sect:option_o]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+             & このパラメータで指定したCSVデータに不備な箇所がないかチェックを行い、\\
+             & 不備がある場合その箇所を自動的に補完する。\\
+             & このパラメータが省略された時には標準入力が用いられる。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|a=|    & 入力データの項目名を無視し、ここで指定した項目名を出力する。\\
+             & ここで指定した項目数が入力データの項目数より少ない場合は、\\
+             & 入力データの左から順番に指定の個数分の項目が出力される。\\
+             & 逆に、ここで指定した項目数が入力データの項目数より多い場合、不足分はNULL値が出力される。\\
+\verb|-diagl| &このオプションを指定した場合、データの修正/補完は行わず、\\
+             & データ項目の統計情報を出力するとともに、CSVお妥当性チェックの結果を標準出力に出力する。\\
+             & チェックする内容は以下の通り。\\
+             & a): 同一項目名がないか。\\
+             & b): 項目名に不正な文字がないか。\\
+             & c): 改行がLFか。\\
+             & d): 最終行に改行が存在するか。\\
+             & e): データファイル内に\verb|\0|がないか。\\
+             & f): 一行の最大長を超過していないか。\\
+             & g): 全行同じ項目数か。\\
+             & h): 制御文字(0x01~0x1F,0x7F)が入り込んでいないか。\\
+             & i): TABが入っていないか。\\
+             & j): DQUOTEで囲われていない中でDQUOTEがない。\\
+             & k): DQUOTEで囲われている中で単一のDQUOTEがないか。\\
+             & l): 先頭にBOM(Bit Order Mark)が含まれていないか。\\
+\verb|-diag| & \verb|-diagl|の英語版\\
+\verb|-r|    & 制御文字を無視\\
+             & ここではASCII文字コードの0x00〜0x1f,0x7f(0x09,0x0a,0x0dは除く)を制御文字と定義している。\\
+             & このオプションを指定しなければ制御コードは自動的に\&\#xという文字列に変換される。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+%\if0 #no help# following sentences will not apear on the help document. \fi
+\input{examples/tex/mchkcsv_ex.tex}
+
+\subsection*{関連コマンド}
+
+%\end{document}

@@ -1,0 +1,490 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{burst.rb burst検知コマンド\label{sect:burst}}
+\index{burst@burst}
+与えられた系列データからburst状態を検知する．
+検知アルゴリズムにはHMM(Hidden Markov Model)を用いている．
+定常状態とバースト状態の２状態における確率分布を仮定し，与えられたデータから尤度が最大となるような状態遷移経路を出力する．
+確率分布としては，指数分布，ポアソン分布，正規分布，二項分布を指定できる．
+詳細は次節に示している．
+
+入力データとしては，表\ref{tbl:inp1}に示されるような数値系列データ(val項目)である．
+その他の項目(id項目のような項目)はburst検知には一切利用されない．
+ただし，出力結果は入力データにburst項目を追加して出力される(表\ref{tbl:rslPoi})ので必要な項目があれば入力データに含めておく．
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{llll}
+
+\begin{minipage}{0.12\hsize}
+\begin{center}
+\caption{入力\label{tbl:inp1}}
+{\small
+\begin{tabular}{cc}
+\hline
+id&val\\
+\hline
+a01&1\\
+a02&1\\
+a03&4\\
+a04&1\\
+a05&1\\
+a06&10\\
+a07&7\\
+a08&4\\
+a09&5\\
+a10&8\\
+a11&12\\
+a12&1\\
+a13&1\\
+a14&1\\
+a15&6\\
+a16&8\\
+a17&2\\
+a18&8\\
+a19&2\\
+a20&3\\
+a21&4\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{ポアソン分布burst\label{tbl:rslPoi}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&val&burst \\
+\hline
+a01&1&0 \\
+a02&1&0 \\
+a03&4&0 \\
+a04&1&0 \\
+a05&1&0 \\
+a06&10&1 \\
+a07&7&1 \\
+a08&4&0 \\
+a09&5&0 \\
+a10&8&1 \\
+a11&12&1 \\
+a12&1&0 \\
+a13&1&0 \\
+a14&1&0 \\
+a15&6&0 \\
+a16&8&1 \\
+a17&2&0 \\
+a18&8&1 \\
+a19&2&0 \\
+a20&3&0 \\
+a21&4&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{指数分布burst\label{tbl:rslExp}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&val&burst \\
+\hline
+a01&1&1 \\
+a02&1&1 \\
+a03&4&1 \\
+a04&1&1 \\
+a05&1&1 \\
+a06&10&0 \\
+a07&7&0 \\
+a08&4&0 \\
+a09&5&0 \\
+a10&8&0 \\
+a11&12&0 \\
+a12&1&1 \\
+a13&1&1 \\
+a14&1&1 \\
+a15&6&0 \\
+a16&8&0 \\
+a17&2&0 \\
+a18&8&0 \\
+a19&2&0 \\
+a20&3&0 \\
+a21&4&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{正規分布burst\label{tbl:rslGauss}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&value&burst \\
+\hline
+b01&1&0 \\
+b02&-4&0 \\
+b03&-2&0 \\
+b04&1&0 \\
+b05&1&0 \\
+b06&10&0 \\
+b07&7&0 \\
+b08&2&0 \\
+b09&5&0 \\
+b10&8&1 \\
+b11&10&1 \\
+b12&1&0 \\
+b13&1&0 \\
+b14&1&0 \\
+b15&7&0 \\
+b16&-8&-1 \\
+b17&-3&-1 \\
+b18&5&0 \\
+b19&1&0 \\
+b20&1&0 \\
+b21&1&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+この系列データを単位時間あたりのイベント発生数(例えば，１時間あたりのメールの到着数)
+と考えると，ポアソン分布を用いたburst検知を実施するればよい(表\ref{tbl:rslPoi})．
+また，イベントの発生間隔(例えば，メールの到着間隔秒数)と考えると，
+指数分布を用いたburst検知を実施すればよい(表\ref{tbl:rslExp})．
+さらに，このデータを何らかの誤差系列(例えば，株価推移)と考えれば正規分布を用いたburst検知を実施すればよい(表\ref{tbl:rslGauss})．
+このように，同じ入力データに対して，どのような分布を仮定するかによって，異なるburst検知を実施することが可能で，
+分布の選択は応用課題によって決まってくる．
+
+
+\subsection{書式}
+\begin{verbatim}
+burst.rb i= f= dist= [o=] [d=] [s=] [p=] [param=] [pf=] [n=] [nf=] [v=] [nv=] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|i=|     & : 入力ファイル名【必須】 \\
+\verb|o=|     & : 出力ファイル名【オプション:defaultは標準出力】 \\
+\verb|d=|     & : デバッグ情報を出力するファイル【オプション】 \\
+\verb|dist=|  & : 仮定する分布名称(exp:指数関数,poisson:ポアソン分布,gauss:正規分布,binom:二項分布)【必須】 \\
+\verb|f=|     & : burst検知対象となる数値項目名(i=上の項目名)【必須】 \\
+\verb|param=| & : 定常状態における分布のパラメータ．注1参照【オプション】 \\
+\verb|pf=|    & : 定常状態における分布のパラメータ項目名(i=上の項目名)注1参照【オプション】 \\
+\verb|s=|     & : burstスケール(この値を大きくすると極端なburstのみを検知できる．詳細は注1参照)【オプション:default=2.0】 \\
+\verb|p=|     & : 同一状態遷移確率(この値を高くすると異なる状態に遷移しにくくなる．詳細は注2参照)【オプション:default=0.6】 \\
+\verb|n=|     & : dist=binomの場合の試行回数【n= or nf=いずれかを指定】 \\
+\verb|nf=|    & : dist=binomの場合の試行回数の項目名 \\
+\verb|v=|     & : dist=gaussの場合の分散値(指定がなければf=項目のデータから推定) \\
+\verb|nv=|    & : dist=gaussの場合の分散の項目名 \\
+\verb|--help| & : ヘルプの表示 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection{注1}
+定常状態における分布のパラメータ(母数)の与え方は以下の３通りある．
+
+\begin{enumerate}
+\item \verb|param=|で指定した値とする．
+\item \verb|pf=|で指定した項目の値を用いる．時刻に依存してパラメータが異なることが仮定できる場合のため．
+\item \verb|para=|,\verb|pf=|の指定がなければ，\verb|f=|で指定した値から自動的に計算される．
+\end{enumerate}
+
+上記3.のデータから計算する方法は，分布ごとに異なり以下の通りである．
+ただし，$S$は\verb|s=|で指定した値，$n$はデータ件数，$x_i$は\verb|f=|で指定した項目の$i$行目の値とする．
+
+\begin{table}[htbp]
+{\small
+\begin{center}
+\begin{tabular}{lllll}
+\hline
+分布&確率(密度)関数&パラメータ& 定常状態パラメータ & burst状態パラメータ\\
+\hline
+exp & $f(x)=\lambda e^{-\lambda x}$
+    & $\lambda$:平均イベント発生回数
+    & $\lambda_0=N/\sum_{i}x_i$
+    & $\lambda_1=S \lambda_0$ \\
+poisson & $f(x)=\frac{\lambda^x e^{-λ}}{x!}$
+        & $\lambda$:平均イベント発生回数
+        & $\lambda_0=\frac{1}{N}\sum_i x_i$
+        & $\lambda_1=S \lambda_0$ \\
+gauss   & $f(x)= \frac{1}{\sqrt{2\pi \sigma^2}} e^{-(x-\mu)^2/2\sigma^2}$
+        & $\mu$:平均
+        & $\mu_0=\frac{1}{N}\sum_i x_i$
+        & $\mu_\pm =\mu_0 \pm S\sqrt{\sigma^2}$ * \\
+binom   &$f(x)={}_n C_x p^x(1-p)^{n-x}$
+        &$p$:成功確率
+        &$p_0=\frac{1}{Nn}\sum_i x_i$ **
+        &$p_1=S/(\frac{1-p_0}{p_0}+S)$ \\
+\hline
+\end{tabular} 
+\\
+ **$\sigma^2=\frac{\sum(x_i-m)^2}{N-1}$\\
+ ***$n$は\verb|n=|によって指定する．
+\end{center}
+}
+\end{table} 
+
+\subsubsection{注2}
+\verb|p=|で指定した確率を$p$とすると，状態遷移確率は以下の通り設定される．
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{exp, poisson, binomでの状態遷移確率\label{tbl:initProb}}
+{\small
+\begin{tabular}{ccc}
+\hline
+&定常&burst\\
+\hline
+定常  & $p$   & $1-p$ \\
+burst & $1-p$ & $p$   \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{gaussでの状態遷移確率\label{tbl:initProb}}
+{\small
+\begin{tabular}{cccc}
+\hline
+& burst- &定常&burst+\\
+\hline
+burst- & $p$                & $\frac{2}{3}(1-p)$ & $\frac{1}{3}(1-p)$ \\
+定常   & $\frac{1}{2}(1-p)$ & $p$                & $\frac{1}{2}(1-p)$ \\
+burst+ & $\frac{1}{3}(1-p)$ & $\frac{2}{3}(1-p)$ & $p$                \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+
+
+\subsection{解説}
+\subsubsection{定式化}
+HMM(Hidden Malkov Modelは，直接は観測できない隠れ状態がマルコフ過程に従って推移していることを仮定して構築される確率モデルである．
+HMMは確率的状態遷移モデルとデータ生成モデルから構成され，
+観測される系列データは，隠れ状態におけるデータ生成モデルに従うと考える．
+時刻$t$において観測されたデータ$x_t$は，
+隠れ状態$z_t\in \{1,2,\cdots,K\}$に定義された
+確率分布$p(x_t|z_t;\boldsymbol{\phi})$に従って
+生成されるようにモデル化される．
+ここで，$\boldsymbol{\phi}$は生成モデルのパラメータベクトルで，
+$t$に依存せず一定であると仮定する．
+また，隠れ状態$z_t$は直前の状態$z_{t-1}$にのみ依存して遷移し，
+その確率分布は$p(z_t|z_{t-1};\mathbf{A})$で表される．
+ここで$\mathbf{A}=\{a_{i,j}|i,j=1,2,\cdots,K\}$は，状態$i$から状態$j$への遷移確率表で，
+$t$に依存せず一定であると仮定する．
+ただし，$\sum_j a_{i,j}=1.0$で，また初期状態$z_1$は確率ベクトル$\boldsymbol{\pi}$に従うものとする．
+
+以上より，観測データ系列$X=x_1,x_2,\cdots,x_N$，および状態系列$Z=z_1,z_2,\cdots,z_N$
+の同時確率は式(\ref{eq:hmm})で与えられる\cite{Bishop2008}．
+%
+{\footnotesize
+\begin{equation}
+p(\mathbf{X},\mathbf{Z};\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi})=p(z_1;\boldsymbol{\pi})
+\left[\prod_{i=2}^N p(z_i|z_{i-1};\mathbf{A})\right]
+\prod_{j=1}^N p(x_j|z_j;\boldsymbol{\phi})
+\label{eq:hmm}
+\end{equation}
+}
+
+burst検知においては，$K=2$，すなわち定常状態とburst状態の2状態を仮定し，
+それぞれの状態において，異なるパラメータを持つ同一の確率分布から観測可能なデータ系列が得られると考える．
+そして，burst検知問題とは，パラメータ$\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi}$が与えられたなかで，
+データ系列$\mathbf{X}$を観測した時に，式(\ref{eq:hmm})で示された同時確率を最大化
+するような$\mathbf{Z}^*$を見つける問題である(式(\ref{eq:max}))．
+
+\begin{equation}
+\mathbf{Z}^*=\argmax_{\mathbf{Z}}\; p(\mathbf{X},\mathbf{Z};\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi})
+\label{eq:max}
+\end{equation}
+
+
+\subsubsection*{メールのburst検知例}
+以上の定式化に従い，以下では，メールの到着数(表\ref{tbl:inp1})に関するburst検知を例にとり解説する．
+ここでの目的は，
+表\ref{tbl:inp1}に示された数値列$\mathbf{X}=1,1,4,\cdots$から，
+最も尤もらしい隠れ状態列$\mathbf{Z}=z_1,z_2,\cdots,z_N$($z_i \in \{0,1|0は定常状態,1は$burst$状態\}$)を求めることである．
+
+メールの時間ごとの到着数を確率変数と考えた場合，ポアソン分布を仮定するのが妥当であろう．
+ポアソン分布は平均到着数$\lambda$をパラメータにとり，その確率関数は式(\ref{eq:poi})で示される．
+\begin{equation}
+f(x)=\frac{\lambda^x e^{-λ}}{x!}
+\label{eq:poi}
+\end{equation}
+
+ここで，定常状態におけるパラメータ$\lambda_0$は，
+コマンドパラメータ\verb|param=|や\verb|pf=|によっても与えるが，
+それらの指定がなければ\verb|i=|で指定したデータから平均到着数により与えられる．
+表\ref{tbl:inp1}の\verb|val|項目の平均値を計算すると$\lambda_0=4.29$となる．
+そして，burst状態におけるパラメータ$\lambda_1$は，特に指定がなければ平常状態の2倍(8.58)に設定される．
+この値は\verb|s=|を設定することで変更することができる．
+以上より，状態の確率分布のパラメータベクトルは$\boldsymbol{\phi}=(4.29,8.58)$となる．
+表\ref{tbl:poiProb}に，データ系列$\mathbf{X}$の数値が各状態から出力される確率が示されている．
+数値"1"や"4"は，定常状態から出力される確率の方が高く，数値"10"はburst状態から出力される確率の方が高いことがわかる．
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{llr}
+
+\begin{minipage}{0.45\hsize}
+\begin{center}
+\caption{ポアソン分布における各状態の確率\label{tbl:poiProb}}
+{\small
+\begin{tabular}{crrr}
+\hline
+id&val&定常($\lambda=4.29$)&burst($\lambda=8.58$) \\
+\hline
+a01& 1&0.0590 & 0.0016\\
+a02& 1&0.0590 & 0.0016\\
+a03& 4&0.1935 & 0.0426\\
+a04& 1&0.0590 & 0.0016\\
+a05& 1&0.0590 & 0.0016\\
+a06&10&0.0079 & 0.1117\\
+a07& 7&0.0725 & 0.1278\\
+a08& 4&0.1935 & 0.0426\\
+a09& 5&0.1658 & 0.0730\\
+a10& 8&0.0389 & 0.1369\\
+a11&12&0.0011 & 0.0622\\
+a12& 1&0.0590 & 0.0016\\
+a13& 1&0.0590 & 0.0016\\
+a14& 1&0.0590 & 0.0016\\
+a15& 6&0.1185 & 0.1043\\
+a16& 8&0.0389 & 0.1369\\
+a17& 2&0.1264 & 0.0070\\
+a18& 8&0.0389 & 0.1369\\
+a19& 2&0.1264 & 0.0070\\
+a20& 3&0.1806 & 0.0199\\
+a21& 4&0.1935 & 0.0426\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+
+次に状態遷移確率$p(z_i|z_{i-1};\mathbf{A})$について考える．
+2状態において遷移の組み合せは4通りあるが，
+本コマンドでは同一状態間の遷移確率に対して同一の確率値のみ与えることができ，
+特に指定しなければ0.6となる．
+すなわち$a_{0,0},a_{1,1}=0.6$である．
+そして，異なる状態遷移確率は，$a_{0,1},a_{1,0}=0.4$と計算される．
+状態遷移行列$\mathbf{A}$を式(\ref{eq:transMatrix})に示す．
+
+\begin{equation}
+\mathbf{A}=\left(
+\begin{array}{cc}
+a_{0,0}=0.6 &a_{0,1}=0.4 \\
+a_{1,0}=0.4 &a_{1,1}=0.6 \\
+\end{array}
+\right)
+\label{eq:transMatrix}
+\end{equation}
+
+そして最後に初期状態の確率ベクトルは$\pi=(1.0,0.0)$とし，
+初期状態は定常状態であることを前提とする．
+
+以上で，式(\ref{eq:hmm})のパラメータ$\mathbf{A},\boldsymbol{\phi},\boldsymbol{\pi}$が揃ったことになる．
+そこで次に式(\ref{eq:hmm})を最大化するような状態系列$\mathbf{Z}^*$を求める．
+データ系列$\mathbf{X}$のサイズは21で，考えうる状態系列の組み合せは，$2^{21}=約200万$通りあり，
+より長い系列になると，総当りで最適解を求める方法ではとても救解できなくなる．
+この問題は，Viterbiアルゴリズムと呼ばれる動的計画法により効率的に解くことができることが知られている．
+詳細は専門書に譲るとして，この方法で得られた状態系列が表\ref{tbl:rslPoi}に示される通り得られる．
+
+\subsection{利用例}
+\subsubsection{例1 上記「解説」の例}
+
+\begin{verbatim}
+------------------------------------------------
+# inp1.csv
+id,val
+a01,1
+a02,1
+a03,4
+a04,1
+a05,1
+a06,10
+a07,7
+a08,4
+a09,5
+a10,8
+a11,12
+a12,1
+a13,1
+a14,1
+a15,6
+a16,8
+a17,2
+a18,8
+a19,2
+a20,3
+a21,4
+
+$ burst.rb i=inp1.csv f=val dist=poisson o=out1.csv
+
+# out1.csv
+id,val,burst
+a01,1,0
+a02,1,0
+a03,4,0
+a04,1,0
+a05,1,0
+a06,10,1
+a07,7,1
+a08,4,0
+a09,5,0
+a10,8,1
+a11,12,1
+a12,1,0
+a13,1,0
+a14,1,0
+a15,6,0
+a16,8,1
+a17,2,0
+a18,8,1
+a19,2,0
+a20,3,0
+a21,4,0
+------------------------------------------------
+\end{verbatim}
+
+%\begin{thebibliography}{9}
+%\bibitem{Bishop2008}
+%C.M. ビショップ著, 元田浩, 栗田多喜夫, 樋口知之, 松本裕治, 村田昇（編）, パターン認識と機械学習（下）：ベイズ理論による統計的予測, 13章, pp.323--370, 2008.
+%\end{thebibliography}
+
+%\end{document}
+

@@ -1,0 +1,24 @@
+
+\section{hashout : Hash出力\label{sect:hashout}}
+\subsection*{書式}
+$obj$.hashout $\rightarrow$ $hash$
+
+\subsection*{説明}
+$zdd$の内容をrubyのHashオブジェクト$hash$に変換し、そのオブジェクトを返す。
+ハッシュキーはアイテム集合、対応する値は重み。
+ただし、出力できるアイテム集合数には上限があり、
+4,096,000アイテム集合を超えると、そこで強制的に出力を停止する。
+途中で停止したかどうかは、\hyperref[sect:partly]{partly}メソッドを使うことで確認できる。
+
+\subsection*{例}
+\input{examples/tex/hashout_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:partly]{partly} : 部分Hash出力フラグ
+
+\hyperref[sect:to_a]{to\_a} : アイテム集合配列への変換
+
+\hyperref[sect:csvout]{csvout} : CSVファイル出力
+
+\hyperref[sect:export]{export} : ZDDのシリアライズ出力
+

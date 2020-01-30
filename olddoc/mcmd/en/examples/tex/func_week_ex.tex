@@ -1,0 +1,56 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,20000101
+1,20000102
+1,20000103
+1,20000104
+1,20000105
+1,20000106
+1,20000107
+1,20000108
+1,20000109
+2,20121021
+3,
+4,19770812
+$ mcal c='week($d{date})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=week($d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,rsl
+1,20000101,52
+1,20000102,52
+1,20000103,1
+1,20000104,1
+1,20000105,1
+1,20000106,1
+1,20000107,1
+1,20000108,1
+1,20000109,1
+2,20121021,42
+3,,
+4,19770812,32
+\end{Verbatim}
+\subsubsection*{Example 2: Example of using time formatted data}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20000101000000
+2,20121021111213
+3,
+4,19770812122212
+$ mcal c='week($t{time})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=week($t{time}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,time,rsl
+1,20000101000000,52
+2,20121021111213,42
+3,,
+4,19770812122212,32
+\end{Verbatim}

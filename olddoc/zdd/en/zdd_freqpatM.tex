@@ -1,0 +1,20 @@
+
+\section{freqpatM : Enumerate maximal frequent itemsets\label{sect:freqpatM}}
+\subsection*{Format}
+ZDD Object $obj$.freqpatM($minsup$) $\rightarrow$ $zdd$
+
+~~$minsup$ : Ruby Integer
+
+\subsection*{Description}
+Enumerate all maximal itemsets from ZDD object $obj$ that is more than the minimum support $minsup$, and return the ZDD object as $zdd$. 
+
+
+\subsection*{Example}
+\input{examples/tex/freqpatM_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:freqpatA]{freqpatA} : Enumerate frequent itemsets 
+
+\hyperref[sect:freqpatC]{freqpatC} : Enumerate closed itemsets 
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD

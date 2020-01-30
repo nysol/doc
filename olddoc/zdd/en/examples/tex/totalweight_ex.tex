@@ -1,0 +1,21 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a + 3*b + c
+> f.show
+ 5 a + 3 b + c
+> puts f.totalweight
+9
+
+> g=f - 10
+> g.show
+ 5 a + 3 b + c - 10
+> puts g.totalweight
+-1
+\end{Verbatim}

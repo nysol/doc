@@ -1,0 +1,50 @@
+\subsubsection*{例1: 基本例}
+
+項目名の「顧客」を「cust」に、「10月」を「Oct.」に変更する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,itemID,10月
+a,xx,11
+b,yy,122
+c,zz,
+$ mfldname f=顧客:cust,10月:Oct. i=dat1.csv o=rsl1.csv
+#END# kgfldname f=顧客:cust,10月:Oct. i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+cust,itemID,Oct.
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}
+\subsubsection*{例2: 項目名変更}
+
+項目名を\verb|x,y,z|に変更する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mfldname n=x,y,z i=dat1.csv o=rsl2.csv
+#END# kgfldname i=dat1.csv n=x,y,z o=rsl2.csv
+$ more rsl2.csv
+x,y,z
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}
+\subsubsection*{例3: 項目名行がないデータ}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+a,xx,11
+b,yy,122
+c,zz,
+$ mfldname -nfni n=x,y,z i=dat2.csv o=rsl3.csv
+#END# kgfldname -nfni i=dat2.csv n=x,y,z o=rsl3.csv
+$ more rsl3.csv
+x,y,z
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}

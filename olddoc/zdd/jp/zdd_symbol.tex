@@ -1,0 +1,65 @@
+
+\section{symbol : アイテムの宣言\label{sect:symbol}}
+\subsection*{書式}
+
+\subsubsection{書式1)}
+$obj$.symbol($itemName,value,to$) $\rightarrow$ $Qtrue$
+
+~~$itemName$ : string
+
+~~$value$ : float
+
+~~$to$ : string
+
+\subsubsection{書式2)}
+$obj$.symbol $\rightarrow$ $itemList$
+
+~~$itemList$ : string
+
+\subsection*{説明}
+symbol関数が担う機能は以下の3つである。
+\begin{enumerate}
+\item ZDDで構築される2分決定グラフのルートから終端ノードまで変数(アイテム)順序を指定する。
+1回のsymbol関数の実行で1つのアイテムのみ宣言でき、内部で保持するアイテム順序表の先頭もしくは終端に追加することができる。
+\item アイテム名を設定する。アイテム名には任意の文字が利用できる。
+\item アイテムの属性としてコストを設定できる。
+\end{enumerate}
+
+\subsubsection{書式1)}
+
+$itemName$で指定したアイテム名のアイテムを宣言する。
+アイテム名として利用できる文字種に特に制限はない。また文字列長についても特に制限はない(メモリ容量制限のみ)。
+
+$value$は、そのアイテムに設定するコストで、\hyperref[sect:cost]{cost}や\hyperref[sect:maxcover]{maxcover}などのメソッドで利用される。
+省略時には0.5が設定される。
+
+$to$は宣言したアイテムを、アイテム順序表の先頭/終端いずれに追加するかを指定する("top" もしくは "bottom")。
+省略時には"bottom"が設定される。
+
+\subsubsection{書式2)}
+
+引数なしでこのメソッドを呼び出すと、シンボル変数の一覧がスペース区切りの文字列として返される。
+
+\subsection*{例}
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> ZDD.symbol("a",1.0)
+> ZDD.symbol("b",0.5)
+> ZDD.symbol("c",2.0,"top")
+> ZDD.symbol("d")
+> ZDD.symbol
+c a  b  d
+
+> (1..10).each{|i|
+>   ZDD.symbol("s_#{i}",i)
+> }
+> puts  ZDD.symbol
+c a b d s_1 s_2 s_3 s_4 s_5 s_6 s_7 s_8 s_9 s_10
+
+
+\end{Verbatim}
+
+\subsection*{関連}
+\hyperref[sect:itemset]{itemset} : アイテム集合のZDDオブジェクトの作成
+
+\hyperref[sect:cost]{cost} : アイテム集合のコスト合計
+

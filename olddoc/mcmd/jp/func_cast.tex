@@ -1,0 +1,24 @@
+
+%\begin{document}
+
+\section{型変換\label{sect:cast}}
+\index{cast@cast}
+
+書式:s2n($str$), n2s($num$), n2b($num$), s2n($str$), s2d($str$), s2t($str$)
+s2b($str$), d2s($date$), d2t($date$), t2s($time$), t2d($time$), b2n($bool$), b2s($bool$)
+
+型変換を行う関数群。
+mcalでは型の自動変換は行わないため、必要なときはユーザが明示的に型変換を指定しなければならない。
+
+n2b(s2b)関数は、1("1")を真に0("0")を偽に、それ以外をNULL値に変換する。
+b2n(b2s)関数は、真は1("1")に偽は0("0")に変換する。
+
+d2t関数は、日付型を時刻型に変換するが、そのとき時刻として12:00:00を自動的に補完する。
+d2s関数は、8文字固定長文字列("yyyymmdd")に変換し、t2s関数は14文字固定長文字列("yyyymmddHHMMSS")に変換する。
+日付/時刻についての詳細は「\ref{sect:datetime}日付型と時刻型」を参照のこと。
+
+\subsection*{利用例}
+\input{examples/tex/func_cast_ex}
+
+%\end{document}
+

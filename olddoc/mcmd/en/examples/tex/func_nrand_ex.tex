@@ -1,0 +1,21 @@
+\subsubsection*{Example 1: Basic Example}
+
+Create a set of random numbers with a standard deviation between 0 to 1  (standard normal distribution). Set the random seed as 10.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+4
+$ mcal c='nrand(0,1,10)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=nrand(0,1,10) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,1.161957445
+2,-0.7429729875
+3,-1.10165004
+4,1.03149223
+\end{Verbatim}

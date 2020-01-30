@@ -1,0 +1,46 @@
+\subsubsection*{例1: 基本例}
+
+「顧客」項目を単位に「数量」と「金額」項目の平均値を計算し、「数量平均」と「金額平均」という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,5
+A,2,20
+B,1,15
+B,,10
+B,5,20
+$ mavg k=顧客 f=数量:数量平均,金額:金額平均 i=dat1.csv o=rsl1.csv
+#END# kgavg f=数量:数量平均,金額:金額平均 i=dat1.csv k=顧客 o=rsl1.csv
+$ more rsl1.csv
+顧客%0,数量平均,金額平均
+A,1.5,12.5
+B,3,15
+\end{Verbatim}
+\subsubsection*{例2: NULL値がある場合の出力}
+
+「顧客」項目を単位に「数量」と「金額」項目の平均値を計算し、「数量平均」と「金額平均」という項目名で出力する。
+\verb|-n|オプションを指定することで、NULL値が含まれている場合は、結果もNULL値として出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mavg k=顧客 f=数量:数量平均,金額:金額平均 -n i=dat1.csv o=rsl2.csv
+#END# kgavg -n f=数量:数量平均,金額:金額平均 i=dat1.csv k=顧客 o=rsl2.csv
+$ more rsl2.csv
+顧客%0,数量平均,金額平均
+A,1.5,12.5
+B,,15
+\end{Verbatim}
+\subsubsection*{例3: 顧客項目を単位としない例}
+
+「数量」と「金額」項目の平均値を計算し、「数量平均」と「金額平均」という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mavg f=数量:数量平均,金額:金額平均 i=dat1.csv o=rsl3.csv
+#END# kgavg f=数量:数量平均,金額:金額平均 i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+顧客,数量平均,金額平均
+B,2.25,14
+\end{Verbatim}

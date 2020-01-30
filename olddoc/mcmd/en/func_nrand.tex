@@ -1,0 +1,16 @@
+
+%\begin{document}
+
+\section{nrand - Random Numbers in Normal Distribution\label{sect:nrand}}
+\index{nrand@nrand}
+Generate random numbers with specified mean and standard deviation. 
+
+The same random seed will generate the same sequence of random numbers. The random seed can be specified from -2147483648 to 2147483647. If the random seed is not defined, the random numbers will be seeded according to current time (1/1000 second). 
+
+This function uses Mersenne Twister as random number generator (\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Author’s original website}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library})
+
+
+\subsection*{Example}
+\input{examples/tex/func_nrand_ex.tex}
+

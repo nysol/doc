@@ -1,0 +1,65 @@
+
+%\begin{document}
+
+\section{d2julian: date-ユリウス通日変更\label{sect:d2julian}}
+\index{d2julian@d2julian}
+
+書式: d2julian($date$)
+
+日付からユリウス通日を求める 
+\begin{verbatim}
+ユリウス通日は紀元前4713年1月1日正午（世界標準時による）からの日数である。
+ただしグリゴリオ歴は1400-1-1～9999-12-31が有効範囲のため、
+それに対応するユリウス通日の有効値範囲は2232300～5373484となる。
+その範囲外ではNULL出力となる。
+\end{verbatim}
+
+\subsection*{利用方法}
+\begin{verbatim}
+c=d2julian(0d20080822)
+\end{verbatim}
+
+\subsection*{利用例}
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{入力データ}
+  \begin{tabular}{|c|c|c|} \hline
+日付&時間&数\\ \hline\hline
+20020824&20020824145408&10660\\ \hline
+20020622&20020622173449&22740\\ \hline
+20020824&20020824145408&14800\\ \hline
+20021009&20021009095743&54510\\ \hline
+20020121&20020121173449&18750\\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+
+上記のデータを用いて、それぞれの場合の利用例を以下に示す。
+
+\subsubsection*{実行例1)}
+"日付"項目を入力としてユリウス通日に変換し、
+新たに"ユリウス通日"をいう項目を作成して出力している。
+\begin{verbatim}
+------------------------------------------------
+mcal c='d2julian($d{日付})' a="ユリウス通日" i=date.csv o=od2julian.csv
+------------------------------------------------
+\end{verbatim}
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{出力ファイル(od2julian.csv)}
+  \begin{tabular}{|c|c|c|c|} \hline
+日付&時間&数&ユリウス通日\\ \hline\hline
+20020824&20020824145408&10660&2452511\\ \hline
+20020622&20020622173449&22740&2452448\\ \hline
+20020824&20020824145408&14800&2452511\\ \hline
+20021009&20021009095743&54510&2452557\\ \hline
+20020121&20020121173449&18750&2452296\\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+
+\href{run:hizuke.pdf}{mcal 日付時間関連へ戻る}\\
+%\end{document}
+

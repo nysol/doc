@@ -1,0 +1,62 @@
+\subsubsection*{Example 1: Convert csv format data to arff format}
+
+Convert data to arff format and define "customer" field as string type, "product" field as category type, "date" field as date type (exclude time), “quantity” and “amount” fields as numeric attributes.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,product,date,quantity,amount
+No.1,A,20081201,1,10
+No.2,A,20081202,2,20
+No.3,A,20081203,3,30
+No.4,B,20081201,4,40
+No.5,B,20081203,5,50
+$ mcsv2arff s=customer d=product D=date n=quantity,amount T=Purchase_Data i=dat1.csv  o=rsl1.csv
+#END# kgcsv2arff D=date T=Purchase_Data d=product i=dat1.csv n=quantity,amount o=rsl1.csv s=customer
+$ more rsl1.csv
+@RELATION	Purchase_Data
+
+@ATTRIBUTE	customer	string
+@ATTRIBUTE	date	date yyyyMMdd
+@ATTRIBUTE	quantity	numeric
+@ATTRIBUTE	amount	numeric
+@ATTRIBUTE	product	{A,B}
+
+@DATA
+No.1,20081201,1,10,A
+No.2,20081202,2,20,A
+No.3,20081203,3,30,A
+No.4,20081201,4,40,B
+No.5,20081203,5,50,B
+\end{Verbatim}
+\subsubsection*{Example 2: Convert csv format data to arff format (include time in the date attribute)}
+
+Specify the date with the time information by adding \verb|%t| such that \verb|D=date%t|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,product,date,quantity,amount
+No.1,A,20081201102030,1,10
+No.2,A,20081202123010,2,20
+No.3,A,20081203153010,3,30
+No.4,B,20081201174010,4,40
+No.5,B,20081203133010,5,50
+$ mcsv2arff s=customer d=product D=date%t n=quantity,amount T=Purchase_Data i=dat2.csv  o=rsl2.csv
+#END# kgcsv2arff D=date%t T=Purchase_Data d=product i=dat2.csv n=quantity,amount o=rsl2.csv s=customer
+$ more rsl2.csv
+@RELATION	Purchase_Data
+
+@ATTRIBUTE	customer	string
+@ATTRIBUTE	date	date yyyyMMddHHmmss
+@ATTRIBUTE	quantity	numeric
+@ATTRIBUTE	amount	numeric
+@ATTRIBUTE	product	{A,B}
+
+@DATA
+No.1,20081201102030,1,10,A
+No.2,20081202123010,2,20,A
+No.3,20081203153010,3,30,A
+No.4,20081201174010,4,40,B
+No.5,20081203133010,5,50,B
+\end{Verbatim}

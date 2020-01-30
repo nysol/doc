@@ -1,0 +1,108 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{レッスン 8: 重複するレコードを削除する}
+
+\verb|muniq| コマンドを使うと、指定した項目の重複を取り除くことができます。データからマスタ表を作るときによく使われるコマンドです。
+
+\subsection{ステップ 1: スクリプトを作成する}
+
+テキストエディタを使って、スクリプトファイル \verb|muniq.sh| を作成しましょう。作成したら、ファイルに実行権限を与えるのを忘れないようにしてください。\\
+
+このレッスンでは、日付の一覧表を作成します。\\
+
+そのために、まず「日付」列を \verb|mcut| コマンドで取り出し、パイプを介して \verb|muniq| コマンドに渡します。\verb|muniq| コマンドは重複する日付を1レコードにまとめ、結果を \verb|muniqout.csv| に書き出します。\\
+
+このレッスンでは、レッスン1で作成したdat.csv（スーパーマーケットのレシートデータ）を使います。
+
+\subsection{ステップ 2: パラメータを指定する}
+
+{\setlength{\parindent}{0cm}
+
+\verb|muniq| コマンドに与えるパラメータは次のようになります。\\
+
+キー項目: \verb|k=日付| \\
+説明: 重複を取り除きたい項目はk=パラメータで指定します。複数の項目を指定することもできます。
+}
+
+\begin{verbatim}
+#!/bin/bash
+#=========================================
+# MCMD bash script - Lesson 8: Remove Duplicate Rows
+#=========================================
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付 i=${inPath}/dat.csv |
+msortf f=日付 |   
+muniq k=日付 o=outdat/muniqout.csv
+#==========================================
+\end{verbatim}
+
+\subsection*{ステップ 3: シェルスクリプトを実行する}
+
+\begin{verbatim}
+$ ./muniq.sh 
+#END# kgcut f=日付 i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/19 13:39:12
+#END# kgsortf f=日付; IN=24737 OUT=24737; 2013/08/19 13:39:12
+#END# kguniq k=日付 o=outdat/muniqout.csv; IN=24737 OUT=324; 2013/08/19 13:39:12
+\end{verbatim}
+
+\noindent
+結果は次のようになります。
+
+\begin{verbatim}
+日付
+20010108
+20010110
+20010111
+20010116
+20010119
+20010123
+20010125
+20010128
+20010130
+20010131
+20010201
+20010203
+20010204
+20010205
+20010206
+20010208
+20010209
+20010211
+...
+..
+\end{verbatim}
+
+
+
+\subsection{練習問題}
+
+\verb|muniq| コマンドを使って、次のレポートを作成してみましょう。作成したら、出力ファイルとスクリプトを確認してください。
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{レポートの内容}   & \textbf{スクリプト名} & \textbf{出力ファイル名}  \\
+\hline
+1. 「ブランド」項目のマスタファイル & \href{exercise/muniq1.sh}{muniq1.sh} & \href{exercise/outdat/muniqout1.csv}{muniqout1.csv} \\
+2. 「メーカー」項目のマスタファイル & \href{exercise/muniq2.sh}{muniq2.sh} & \href{exercise/outdat/muniqout2.csv}{muniqout2.csv} \\
+
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

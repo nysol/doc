@@ -1,0 +1,313 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mcsvin - Read CSV Class \label{sect:mcsvinRB}}
+This class process CSV data file by row. The features are as follows. 
+
+\begin{itemize}
+%\setlength{\itemindent}{0mm}
+\item Implemented in C++ and thus operate at high speed.
+\item If the first row of data consists of field names, field names can be stored as key in hash data.
+\item Hash / Array can be used for the storage of data (Array is 2 times faster). 
+\item Key break processing can be handled easily.
+\item Loosely follow RFC 4180
+%\footnote{CSVの仕様についての詳しい情報は
+%http://kgmod.jp/mcmd/の「MCMDが扱うデータ構造について」を参照。}（カンマやダブルクォーテーションのエスケープなど)。
+\item Assumed that the number of items in each row is fixed.
+\end{itemize} 
+
+\subsection{Method}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::new(arguments){block}
+\end{verbatim}
+}
+
+Create Mcsvin object. Specify the list of arguments delimited by space in character string at “\verb|arguments|” as follows.  
+
+
+\begin{table}[htbp]
+%{\small
+\begin{tabular}{ll}
+\verb|i=|    & Input file name (String)  [required]\\
+\verb|k=|    & Detect key break in the list of fields. Multiple fields are delimited by comma. \\
+             & Note the specification of key depends on yield arguments from each method. \\
+\verb|-nfn|  & No field names in the first row. \\
+\verb|-array|& Store each data field by each method in Array. \\
+             & Data fields are stored in Hash by default if this is not specified.\\
+             & Storage in Array is 2 times more efficient than Hash (refer to benchmark for details). \\
+\verb|block| & Execute (yield) when block is specified. \\
+\end{tabular} 
+%}
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::each{|val| block}
+* MCMD::Mcsvin::each{|val,top,bot| block}
+\end{verbatim}
+}
+
+Process CSV file one row at a time. 
+1) val is set to the value when key (k=) is not specified. 
+2) when key is specified, key break information is set in top and bot variables with the exception of val.  
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[val ] Set value in field name as key in Hash (or Array). Values are stored in string format. 
+\item[top ] Set to true if the start of key is specified at k=,  otherwise, set to false. See remarks for more details. 
+\item[bot ] Set to true if the end of key is specified at k=, otherwise, set to false. See remarks for more details. 
+\end{description}
+
+%\begin{verbatim}
+%* Mcsvin::each_array{|val,top,bot| block}
+%\end{verbatim}
+%
+%Mcsvin::eachと同じ機能で、valがHashではなく配列に格納される。
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::names()
+\end{verbatim}
+}
+
+Return field name array. Return nil if \verb|-nfn| is specified. 
+
+\subsection{Remarks}
+\begin{itemize}
+\item Store data in Array if \verb|-nfn| is specified. Note that data cannot be stored in Hash.
+\item The specified field defined at \verb|k=| must be sorted beforehand. 
+\item Logic of key break:
+\begin{verbatim}
+MCMD::Mcsvin.new("i=input.dat k=key"){|csv|
+	csv.each{|val,top,bot|
+    :
+  }
+}
+\end{verbatim}
+In the above code, the logic of top and bot settings in bool type block variable is as follows.  \\
+Data row $i=1,2,\cdots,n$, value of key field ("key") in row $i$ where $k_i$ can simply be expressed as $k_0=k_{n+1}=\phi$. Given $k_i(1\le i \le n) \ne \phi$. 
+
+\begin{eqnarray}
+\verb/top/=\left\{
+\begin{array}{ll}
+true,  & {\rm if}\hspace{2mm} k_i \ne k_{i-1} \\
+false, & {\rm otherwise}\\
+\end{array} \right.
+\label{eq:retDisc}
+\end{eqnarray}
+
+\begin{eqnarray}
+\verb/bot/=\left\{
+\begin{array}{ll}
+true,  & {\rm if}\hspace{2mm} k_i \ne k_{i+1} \\
+false, & {\rm otherwise}\\
+\end{array} \right.
+\label{eq:retDisc}
+\end{eqnarray}
+
+\end{itemize}
+
+\subsection{Example}
+\subsubsection*{Example 1 Return the row number and values for corresponding field names}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+MCMD::Mcsvin.new("i=dat1.csv"){|csv|
+  puts csv.names.join(",")
+  csv.each{|val|
+    p val
+  }
+}
+# Output results
+customer,date,amount
+["customer"=>"A", "date"=>"20081201", "amount"=>"10"]
+["customer"=>"B", "date"=>"20081002", "amount"=>"40"]
+\end{Verbatim}
+
+\subsubsection*{Example 2 Key break processing}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date
+A,20081201
+A,20081202
+B,20081003
+C,20081004
+C,20081005
+C,20081006
+
+csv=MCMD::Mcsvin.new("i=dat1.csv k=customer")
+csv.each{|val,top,bot|
+  puts "#{val['customer']},#{val['date']} top=#{top} bot=#{bot}"
+}
+csv.close
+
+# Output results
+A,20081201 top=true bot=false
+A,20081202 top=false bot=true
+B,20081003 top=true bot=true
+C,20081004 top=true bot=false
+C,20081005 top=false bot=false
+C,20081006 top=false bot=true
+\end{Verbatim}
+
+\subsubsection*{Example 3 Data processing without field names}
+Data is stored in Array when \verb|-nfn| is specified. 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+A,20081201
+A,20081202
+
+MCMD::Mcsvin.new("i=dat1.csv k=1 -nfn"){|csv|
+  puts csv.names # -> nil
+  csv.each{|val|
+    p val
+  }
+}
+
+# Output results
+nil
+["A","20081201"]
+["A","20081202"]
+\end{Verbatim}
+
+\subsubsection*{Example 4 Example of storing data in Array}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+# Array storage with -array option 
+MCMD::Mcsvin.new("i=dat1.csv -array"){|csv|
+  puts csv.names.join(",")
+  csv.each{|val|
+    p val
+  }
+}
+
+# Output results
+customer,date,amount
+["A", "20081201", "10"]
+["B", "20081002", "40"]
+\end{Verbatim}
+
+\subsection*{Related Commands}
+\hyperref[sect:mcsvoutRB]{Mcsvout} : Write to CSV data. 
+
+\hyperref[sect:mtableRB]{Mtable} : Read data by cell from CSV file.
+
+\subsection{Benchmark Test}
+
+The processing speed for various Ruby extension library are benchmarked in terms of reading CSV data. 
+The benchmark test targets the following 4 libraries and mcut command. 
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[CSVScan] http://raa.ruby-lang.org/project/csvscan/
+\item[LightCsv] http://tmtm.org/ruby/lightcsv/
+\item[FasterCSV] http://www.gesource.jp/programming/ruby/database/fastercsv.html
+\item[CSV] http://www.ruby-lang.org/ja/old-man/html/CSV.html
+\item[mcut] Fields are extracted with M-Command (implemented in C++). Speed performance is shown as reference. 
+\end{description}
+
+The results of benchmark test is shown in Table \ref{tb:mcsvinRB_bench1}. In this experiment, 10,000 to 500 million rows of data is read. The performance of Mscvin is almost equivalent to CSVScan (implemented in C). The difference is more significant for other libraries implemented in Ruby native code. However, Mcsvin lags behind when compared with mcut. The same parsing logic for CSV is used for mcut and Mcsvin, the difference due to the cost incurred when data is store in Array in Ruby interface. An excerpt of the script used in the benchmark test is shown in Figure \ref{fig:mcsvinRB_script}. 
+
+
+\begin{table}[htpb]
+\begin{center}
+\caption{Comparison of execution speed among various CSV libraries (in seconds)
+ \label{tb:mcsvinRB_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+Number of rows      & 10K   & 100K  & 1000K & 2000K& 3000K & 4000K & 5000K\\ \hline
+Mcsvin    & 0.020 & 0.196 & 1.76  & 3.51 & 5.26  & 7.02  & 8.79 \\
+CSVScan   & 0.021 & 0.187 & 1.83  & 3.67 & 5.50  & 7.33  & 9.17 \\
+LightCsv  & 0.155 & 1.62  & 15.99 & --   &    -- & --    & --   \\
+FasterCSV & 0.196 & 1.96  & 19.50 & --   &    -- & --    & --   \\
+CSV       & 1.44  & 14.3  &  --   & --   &    -- & --    & --   \\
+mcut      & --    & --    & 0.095 & 0.177& 0.260 & 0.342 & 0.423\\
+\hline
+\end{tabular}  
+{\small
+\\The results show the average value (real time) of 10 benchmark tests. \\
+Benchmark is not measured in cells marked as “-” since the value is too big (or too small).\\
+10K number of rows refer to 10,000 rows. Data size of 1000K records is about 25MB. The data consists of 5 columns. \\
+Version: CSVScan 0.0.20070920, FasterCSV 1.5.1, LightCsv 0.2.2  CSV(Ruby 1.8.7)\\
+Test environment: Mac Book Pro, 2.66GHz Intel Core i7, 8GB memory, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+%\centering
+%\begin{minipage}{0.8\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'csv'
+require 'fastercsv'
+require 'lightcsv'
+require 'csvscan'
+require 'mcmd'
+
+require 'benchmark'
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # Case of Mcsvin
+    csv=MCMD::Mcsvin.new("i=data.csv -array"){|csv| csv.each{|val|}}
+
+    # Case of CSVScan
+    File.open("data.csv","r"){|fp| CSVScan.scan(fp){|row|}}
+
+    # Case of LightCsv
+    LightCsv.foreach("data.csv"){|row|}
+
+    # Case of FasterCSV
+    FasterCSV.foreach("data.csv"){|row|}
+
+    # Case of CSV
+    CSV.open("data.csv", 'r'){|row|}
+  }
+}
+\end{Verbatim}
+}
+%\end{minipage}
+\caption{Excerpt of benchmark test script \label{fig:mcsvinRB_script}}
+\end{figure}
+
+The next test looks at the difference in execution time corresponding to the types of data storage for data with or without key (Table \ref{tb:bench2}). There is minimal difference in speed for data with or without key, however, the speed of data stored in Array is twice as fast as Hash.   
+
+\begin{table}[htpb]
+\begin{center}
+\caption{Comparison of execution speed according to data types with and without key (in seconds) \label{tb:bench2}}
+%{\scriptsize 
+\begin{tabular}{c|c||r|r|r|r|r}
+\hline
+Key & Type     & 1000K & 2000K& 3000K & 4000K & 5000K\\ \hline\hline
+No & Array  & 1.76  & 3.51 & 5.26  & 7.02  & 8.79 \\
+No & Hash   & 3.52  & 6.99 & 10.50 & 14.00 & 17.52\\
+Yes & Array  & 1.97  & 3.92 & 5.88  & 7.84  & 9.83 \\
+Yes & Hash   & 3.68  & 7.34 & 11.01 & 14.73 & 18.34\\
+\hline
+\end{tabular}  
+{\small
+\\Size of key at an average of 10 rows. \\
+}
+%}
+\end{center}
+\end{table}  
+
+%\end{document}
+

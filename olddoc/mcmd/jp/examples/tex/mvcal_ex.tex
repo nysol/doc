@@ -1,0 +1,25 @@
+
+\subsubsection*{例1: 基本例}
+
+複数項目に対して結合する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+
+$ cat ref1.csv
+item,taxo
+a,X
+b,X
+c,X
+d,Y
+e,Y
+
+$ mvjoin vf=items1,items2 m=ref1.csv f=taxo i=dat1.csv o=rsl1.csv
+#ERROR# parameter K= is mandatory (kgVjoin)
+
+$ cat rsl1.csv
+\end{Verbatim}

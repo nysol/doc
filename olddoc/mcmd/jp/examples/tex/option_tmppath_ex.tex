@@ -1,0 +1,19 @@
+\subsubsection*{例1: 基本例}
+
+カレントディレクトの直下の\verb|tmp|ディレクトリを作業ファイル用のディレクトリとする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=val tmpPath=./tmp i=dat1.csv o=rsl1.csv
+#ERROR# internal error: cannot create temp file (kgsortf)
+\end{Verbatim}
+\subsubsection*{例2: 環境変数による指定}
+
+環境変数によって設定すると、それ以降全てのコマンドがその設定値を使う。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_TmpPath=~/tmp
+$ msortf f=val i=dat1.csv o=rsl1.csv
+#END# kgsortf f=val i=dat1.csv o=rsl1.csv
+\end{Verbatim}

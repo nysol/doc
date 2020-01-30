@@ -1,0 +1,26 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val,base
+1,100,10
+2,256,2
+3,,
+4,2,0
+5,0,2
+6,1,10
+7,-8,2
+$ mcal c='log(${val},${base})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=log(${val},${base}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,base,rsl
+1,100,10,2
+2,256,2,8
+3,,,
+4,2,0,-0
+5,0,2,
+6,1,10,0
+7,-8,2,
+\end{Verbatim}

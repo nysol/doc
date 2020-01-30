@@ -1,0 +1,129 @@
+
+%\begin{document}
+
+\section{mhashsum - Compute Total Sum Using Hash\label{sect:mhashsum}}
+\index{mhashsum@mhashsum}
+Calculate the hash total value of the column specified at the \verb|f=| parameter for each line item based on the key specified at the \verb|k=| parameter. \\
+The processing speed of this command is faster than \verb|msum| since key fields do not require prior sorting. However, variation in length of keys (different length of strings in field) will slow down the processing speed. \\
+User shall assess the usage of mhashsum and msum based on the contents of the data (Refer to "Benchmark" in the second half of this manual). \\
+
+\subsection*{Format}
+\verb|mhashsum f= [hs=] [k=] [-n] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{l p{15cm} l}
+\verb|f=|    & Compute the sum of of values in the column specified (Multiple fields can be specified) \\
+             & Specify the new field name after colon ":". Example f=Quantity:TotalQuantity. \\
+\verb|k=|   & Calculate the sum on the data series based on the key field(s)  (Multiple keys can be specified.)\\
+ 	& This command do not use \hyperref[sect:option_k]{aggregate key break processing}, prior sorting is not required.\\
+\verb|hs=|   & Hash size [Default value: 199999] \\
+             & User shall specify the key size for data processing based on speed and memory consumption optimisation requirements.  Prime number should be used as hash table size. \\
+             & The processing speed will slow down if the hash table is not big enough for data with large key size.  \\
+             & A larger hash table will speed up processing but will also require more memory (Refer to "Benchmark" in the second half of this manual). \\
+             &  Estimating memory requirements: K*(24+F*16) byte, K: key size, F: number of fields specified \verb|f=| parameter. \\
+\verb|-n|    & Return NULL in output if there are null values in \verb|f=|. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mhashsum_ex.tex}
+
+\subsection*{Overview of algorithm}
+\verb|mhashsum| command uses a hash method known as separate chaining. \\
+In this method, a M sequence or a list is created containing all the keys that hash to the same value. The hash function converts and stores the character string containing the keys into integer  (hash values) from 0 to M. Two or more keys with the same hash value (conflict keys) will be stored in a linked list from the conflicted slot of hash table.  The address of keys are stored in sequential order, but the list is searched in linear order. Thus, the lookup procedure will scan all its entries, and the processing speed decreases with more key conflicts. 
+The default hash size for \verb|mhashsum| is 199999, if the key size is up to 200,000, the average list size is 1 less of the key size. Multiple key conflicts may occur even if the key size is small depending on the data content and structure. The key size can be changed at the \verb|hs=| parameter (maximum value: 1999999). 
+
+\subsection*{Benchmark test}
+\subsubsection*{Method of Benchmark test}
+Compare the computation speed of mhashsum command (hash size: 199,999) and msum command (sort data using msort command beforehand) on 13 different types of data with 10 to 1,000,000 key sizes. 
+
+Sample data with two columns (key and fld ) and 500 million rows of random values is generated as shown in the following table. 
+The key is a 6 digit fixed-length numerical value and the fld is a 3 digit number. 
+
+\begin{table}[h]
+\begin{center}
+ \caption{Table 1: Sample data for Benchmark test }
+ \begin{tabular}{|c|c|}
+  \hline
+key & fld \\ \hline \hline
+100020&120 \\ \hline
+100007&107 \\ \hline
+100029&129 \\ \hline
+100065&165 \\ \hline
+100030&130 \\ \hline
+100088&188 \\ \hline
+100055&155 \\ \hline
+100093&193 \\ \hline
+100072&172 \\ \hline
+ \end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{Commands for benchmark}
+Using the mhashsum method\\
+\verb|$ time mhashsum k=key f=fld i=dat.csv o=/dev/null |
+
+Using the msort+msum method\\
+\verb|$ time msort i=dat.csv | msum k=key f=fld o=/dev/null |
+
+\subsubsection*{Experiment Results}
+
+The proceeding speed of \verb|mhashsum| is five times faster than sorting when the key size is small (~10,000). 
+As the key size increases, the difference between the two methods is reduced, the processing speed of the two methods are the same when the key size is more than 800,000.
+
+The following is a guideline on the usage of \verb|msum| or \verb|mhashsum|, actual results varies depending on the distribution of the key values.
+
+\begin{table}[h]
+\begin{center}
+ \caption{Table 2: Comparison of processing speed for mhashsum and msum(msort+msum)}
+ \begin{tabular}{|c|c|c|c|}
+  \hline
+key size & mhashsum(a)(second)&msort+msum(b)(second)&ratio(a/b)\\ \hline \hline
+100&0.672&2.955&0.227\\ \hline
+1,000&0.731&3.981&0.184\\ \hline
+10,000&0.814&4.201&0.194\\ \hline
+100,000&1.793&4.291&0.418\\ \hline
+200,000&2.241&4.336&0.517\\ \hline
+300,000&2.604&4.394&0.593\\ \hline
+400,000&2.993&4.448&0.673\\ \hline
+500,000&3.380&4.497&0.752\\ \hline
+600,000&3.793&4.579&0.828\\ \hline
+700,000&4.128&4.618&0.894\\ \hline
+800,000&4.514&4.667&0.967\\ \hline
+900,000&4.901&4.707&1.041\\ \hline
+1,000,000&5.352&4.771&1.122\\ \hline
+ \end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{Benchmark environment}
+
+iMac, Mac OS X 10.5 Leopard, 2.8GHz Intel Core 2 Duo, 4GB memory
+
+\subsection*{Related commands}
+\hyperref[sect:msum] {msum} : Same computation function but requires key break process. 
+
+\hyperref[sect:mhashavg]{mhashavg} : Compute average using the same hash function
+
+
+
+%\end{document}

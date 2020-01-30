@@ -1,0 +1,19 @@
+
+\section{freqpatC : 頻出飽和アイテム集合の列挙\label{sect:freqpatC}}
+\subsection*{書式}
+$obj$.freqpatC($minsup$) $\rightarrow$ $zdd$ 
+
+~~$minsup$ : integer
+
+\subsection*{説明}
+ZDDオブジェクト$zdd$から最小サポート$minsup$以上出現する頻出飽和アイテム集合を全て列挙し、そのZDDオブジェクト$zdd$を返す。
+
+\subsection*{例}
+\input{examples/tex/freqpatC_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:freqpatA]{freqpatA} : 頻出アイテム集合の列挙
+
+\hyperref[sect:freqpatM]{freqpatM} : 頻出極大アイテム集合の列挙
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD

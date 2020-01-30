@@ -1,0 +1,140 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mhashsum ハッシュ法による項目値の合計\label{sect:mhashsum}}
+\index{mhashsum@mhashsum}
+hash法を使って\verb|k=|パラメータで指定した項目を単位にして、\verb|f=|パラメータで指定した項目値を合計する。
+\hyperref[sect:msum]{msum}との違いは、キー項目の並べ替えが必要ないため、その分処理速度が速い。
+ただし、キーのサイズ(キー項目のとる値の種類数)が多い場合は処理速度が遅くなる。
+msumとmhashsumのどちらを利用するかはデータの内容からユーザーが判断する(後半に示す「ベンチマーク」参照)。
+
+\subsection*{書式}
+\verb|mhashsum f= [hs=] [k=] [-n] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定された項目(複数項目指定可)が合計される。\\
+             & :(コロン）で新項目名を指定可能。例）f=数量:数量合計\\
+\verb|k=|    & ここで指定された項目(複数項目指定可)をキーとして集計する。\\
+%             & \hyperref[sect:option_k]{集計キーブレイク処理}はしないので、事前に並べ替える必要はない。\\
+\verb|hs=|   & ハッシュサイズ【デフォルト:199999】 \\
+             & 処理対象データのキーサイズから，ユーザが消費メモリ量と速度を判断して指定する。指定する値としては素数がよい。 \\
+             & キーサイズが大きいデータに対してハッシュサイズが十分な大きさでなければ処理速度が遅くなる。 \\
+             & ハッシュサイズが十分に大きいと処理速度は速いが、\\
+             & その分多くのメモリが必要になる(後半に示す「ベンチマーク」参照)。\\
+             & 必要なメモリ量の目安: K*(24+F*16) byte, K:キーのサイズ, F:f=で指定した項目数  \\
+\verb|-n|    & NULL値が1つでも含まれていると結果もNULL値とする。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mhashsum_ex.tex}
+
+\subsection*{アルゴリズムの概要}
+mhashsumコマンドは分離連鎖法(separate chaining)によるハッシュ法を用いて実装されている。
+この方法では，キーを格納するM個の配列が用意される。キーを構成する文字列をハッシュ関数により0からMまでの整数(ハッシュ値)に変換し、
+配列の番地として利用する。2つ以上の異なるキーが同一のハッシュ値を持つ(キーが衝突する)場合は、リンクリストにより格納される。
+キーを格納すべき番地の探索は定数オーダーであるが、リストの探索は線形オーダーである。そのため、キーの衝突が多発するほど速度は低下する。
+mhashsumのハッシュサイズはデフォルトで199999であり、これはキーのサイズが20万までであればリストの平均サイズは1以下であることを意味する。
+実際には，データによっては、キーサイズが小さい場合であってもキーの衝突が多発するケースもあり得る。
+キーのサイズは\verb|hs=|パラメータで変更できる(上限:1999999）。
+
+\subsection*{ベンチマークテスト}
+\subsubsection*{ベンチマークテストの方法}
+mhashsumコマンド（ハッシュサイズ：199,999）とmsumコマンド（事前にmsortコマンドで並べ替えを行う）の計算速度を
+異なるキーのサイズのデータにおいて計算速度を比較する。
+キーのサイズとして100から100万までの13種類のデータを対象とした。
+利用データは，表\ref{tbl:mhashsum_dat}に示されるようなkeyとfldの2項目からなる500万行の乱数データである。
+key項目の値は6桁の数値からなる固定長データでfldは3桁の数字である。
+
+\begin{table}[hbt]
+\begin{center}
+\caption{ベンチマーク用データ(抜粋)\label{tbl:mhashsum_dat}}
+\begin{tabular}{c|c}
+\hline
+key & value \\ \hline
+100020&120 \\
+100007&107 \\
+100029&129 \\
+100065&165 \\
+100030&130 \\
+100088&188 \\
+100055&155 \\
+100093&193 \\
+100072&172 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{ベンチマークに利用したコマンド}
+mhashsumによる方法\\
+\verb/$ time mhashsum k=key f=fld i=dat.csv o=/dev/null/
+
+msort+msumによる方法\\
+\verb/$ time msort i=dat.csv | msum k=key f=fld o=/dev/null/
+
+\subsubsection*{実験結果}
+
+実験結果を表\ref{tbl:mhashsum_exp}に示す。
+キーのサイズが小さいとき(～10,000)の速度は、ソーティングする方法に比べて5倍程度高速である。
+キーのサイズが大きくなるに従ってその差は小さくなり、キーのサイズが80万を超えるあたりで逆転している。
+ハッシュサイズが20万であることから、リストの平均サイズが4の時に逆転していることになる。
+キーの値の分布によっても異なるが、この値をmhashsumとmsumを使い分ける目安とすればよいであろう。
+
+\begin{table}[hbt]
+\begin{center}
+\caption{mhashsumとmsum(msort+msum)の速度比較結果\label{tbl:mhashsum_exp}}
+\begin{tabular}{c|c|c|c}
+\hline
+キーサイズ&mhashsum(a)(秒)&msort+msum(b)(秒)&比(a/b)\\ \hline
+100&0.672&2.955&0.227\\
+1,000&0.731&3.981&0.184\\
+10,000&0.814&4.201&0.194\\
+100,000&1.793&4.291&0.418\\
+200,000&2.241&4.336&0.517\\
+300,000&2.604&4.394&0.593\\
+400,000&2.993&4.448&0.673\\
+500,000&3.380&4.497&0.752\\
+600,000&3.793&4.579&0.828\\
+700,000&4.128&4.618&0.894\\
+800,000&4.514&4.667&0.967\\
+900,000&4.901&4.707&1.041\\
+1,000,000&5.352&4.771&1.122\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{ベンチマーク環境}
+
+iMac, Mac OS X 10.5 Leopard, 2.8GHz Intel Core 2 Duo, 4GBメモリ
+
+\subsection*{関連コマンド}
+\hyperref[sect:msum] {msum} : 同じ機能をもつコマンドだが、内部的にキー項目の並べ替えを行う。
+
+\hyperref[sect:mhashavg]{mhashavg} : 同じくハッシュ法を用いた平均計算。
+
+%\end{document}

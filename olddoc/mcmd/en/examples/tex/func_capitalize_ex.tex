@@ -1,0 +1,21 @@
+\subsubsection*{Example 1: Basic Example}
+
+Convert the first character of $str$ field to uppercase.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abc
+2,aBd
+3,
+4,#abc
+$ mcal c='capitalize($s{str})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=capitalize($s{str}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abc,Abc
+2,aBd,ABd
+3,,
+4,#abc,#abc
+\end{Verbatim}

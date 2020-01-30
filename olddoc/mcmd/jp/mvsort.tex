@@ -1,0 +1,147 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvsort ベクトル要素のソート\label{sect:mvsort}}
+\index{mvsort@mvsort}
+ベクトル型の項目をソートする。
+ベクトル型の項目とは、表\ref{tbl:mvsort_input}のitems項目のように、
+スペースで区切られた複数の文字列を値として持つ項目である。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvsort_input}〜\ref{tbl:mvsort_out3}に示す。
+オプションに何も指定しなければ文字列昇順に並べられ(表\ref{tbl:mvsort_out1})、
+項目名の後ろに\verb|%|に続けて\verb|n|を付けることで数値順に並べられる(表\ref{tbl:mvsort_out2})。
+ただし、ベクトルにアルファベットや漢字が含まれる場合の動作は不定である。
+また項目名の後ろに\verb|r|を指定することで逆順に並べることもできる(表\ref{tbl:mvsort_out3})。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lrrr}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvsort_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&2 1 13 \\
+2&4 5 2 5 \\
+3&112 14 \\
+4&5 31 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{基本的な利用:ベクトルの要素を文字列昇順に並べる\label{tbl:mvsort_out1}}
+\verb|vf=items| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 13 2 \\
+2&2 4 5 5 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{数値昇順で並べる\label{tbl:mvsort_out2}}
+\verb|vf=items%n| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 2 13 \\
+2&2 4 5 5 \\
+3&14 112 \\
+4&5 31 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{数値降順として並べる\label{tbl:mvsort_out3}}
+\verb|vf=items%nr| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&13 2 1 \\
+2&5 5 4 2 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mvsort vf= [-A]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=|   & ソーティングするベクトル項目名を指定する。複数項目指定可能。 \\
+             & \verb|%|に続けて\verb|n|を指定すれば数値ソートに、 \\
+             & \verb|%|に続けて\verb|r|を指定すれば逆順ソートに、 \\
+             & また、\verb|n|と\verb|r|の両方を指定すれば数値逆順ソートとなる。\\
+			 & 結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。\\
+\verb|-A|    & \verb|vf=|で:(コロン)に続けて指定した項目名で、新たな項目が追加される。\\
+             & なお\verb|-A|オプションを指定した場合、\verb|vf=|パラメータで指定するすべての\\
+             & 項目に新項目名を指定しなければならない。\\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvsort_ex.tex}
+
+\subsection*{関連コマンド}
+
+%\end{document}

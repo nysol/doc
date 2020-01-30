@@ -1,0 +1,62 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mchgnum 数値範囲による置換\label{sect:mchgnum}}
+\index{mchgnum@mchgnum}
+\verb|f=|パラメータで指定した項目について、\verb|R=|パラメータで指定する
+数値範囲条件と\verb|v=|パラメータで指定する置換文字列により、項目の値を置換する。
+
+\subsection*{書式}
+\verb/mchgnum f= R= [O=|-F] [v=] [-A] [-r]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定した項目(複数項目指定可)の数値を\verb|R=|と\verb|v=|パラメータで指定した\\
+             & 数値範囲リストおよび置換文字列リストに従って置換する。\\
+\verb|R=|    & 置換対象となる数値範囲を指定(複数項目指定可)する(\verb|1.1,2.5| : 1.1以上2.5未満)。\\
+             & 最小値、最大値として\verb|MIN,MAX|を使うことができる(\verb|MIN,2.5| : 2.5未満)。\\
+\verb|O=|    & 範囲外文字列\\
+             & \verb|R=|パラメータで指定した数値範囲リストのいずれとも合致しない値を\\
+             & 置換するときの文字列(指定がなければNULL値となる)を指定する。\\
+\verb|-F|    & 範囲外を項目の値として出力\\
+             & \verb|R=|パラメータで指定した数値範囲リストのいずれとも\\
+             & 合致しない値は、その項目の値のまま出力する。\\
+\verb|v=|    & \verb|R=|パラメータで指定した数値範囲に対応する置換文字列を指定する。\\
+             & \verb|R=|で指定した値の個数より1つ少い個数でなければならない。\\
+\verb|-A|    & このオプションにより、指定した項目を置き換えるのではなく、新たに項目が追加される。\\
+\verb|-r|    & \verb|R=|パラメータの範囲を'〜より大きく〜以下'として扱う。\\
+             & 例えば、\verb|1.1_2.5|は「1.1より大きく2.5以下」として扱う。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mchgnum_ex.tex}
+\subsection*{関連コマンド}
+
+\hyperref[sect:mchgstr]{mchgstr} : 文字列の置換であればこちら。
+
+\hyperref[sect:msed]{msed} : 正規表現を使った置換が可能。
+
+%\end{document}

@@ -1,0 +1,30 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# Set the cost of each item. 
+> ZDD::symbol("a",1.0)
+> ZDD::symbol("b",0.5)
+> ZDD::symbol("c",2.0)
+
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+
+> f=a*b + b*c + c*a
+> f.show
+ a b + a c + b c
+# Cost of a b =1.0+0.5=1.5
+# Cost of b c =0.5+2.0=2.5
+# Cost of a c =1.0+2.0=3.0
+> puts f.maxcover
+a c
+> puts f.maxcost
+3.0
+> puts f.mincover
+a b
+> puts f.mincost
+1.5
+\end{Verbatim}

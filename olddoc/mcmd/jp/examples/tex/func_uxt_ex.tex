@@ -1,0 +1,57 @@
+\subsubsection*{例1: 基本例}
+
+日付型の\verb|date|項目を\verb|uxt|関数でUNIX時刻に変換し、\verb|uxt2d|関数でまたもとに戻す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,20000101
+2,20121021
+3,
+4,19700101
+$ mcal c='uxt($d{date})' a=uxt i=dat1.csv o=rsl1.csv
+#END# kgcal a=uxt c=uxt($d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,uxt
+1,20000101,946684800
+2,20121021,1350777600
+3,,
+4,19700101,0
+$ mcal c='uxt2d(${uxt})' a=date2 i=rsl1.csv o=rsl2.csv
+#END# kgcal a=date2 c=uxt2d(${uxt}) i=rsl1.csv o=rsl2.csv
+$ more rsl2.csv
+id,date,uxt,date2
+1,20000101,946684800,20000101
+2,20121021,1350777600,20121021
+3,,,
+4,19700101,0,19700101
+\end{Verbatim}
+\subsubsection*{例2: 時刻型も同様}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20000101000000
+2,20121021111213
+3,
+4,19700101000100
+$ mcal c='uxt($t{time})' a=uxt i=dat2.csv o=rsl3.csv
+#END# kgcal a=uxt c=uxt($t{time}) i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,time,uxt
+1,20000101000000,946684800
+2,20121021111213,1350817933
+3,,
+4,19700101000100,60
+$ mcal c='uxt2t(${uxt})' a=time2 i=rsl3.csv o=rsl4.csv
+#END# kgcal a=time2 c=uxt2t(${uxt}) i=rsl3.csv o=rsl4.csv
+$ more rsl4.csv
+id,time,uxt,time2
+1,20000101000000,946684800,20000101000000
+2,20121021111213,1350817933,20121021111213
+3,,,
+4,19700101000100,60,19700101000100
+\end{Verbatim}

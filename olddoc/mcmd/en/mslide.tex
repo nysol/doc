@@ -1,0 +1,149 @@
+
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+%\usepackage{comment}
+
+\section{mslide - Slide Data Series\label{sect:mslide}}
+\index{mslide@mslide}
+Shift data series in the specified column to a new column by specified number of times. 
+For example, the function can be used to calculate difference between data items in the same field such as deriving the rate of return using daily stock price data (today's stock price/previous day's stock price)
+
+%\begin{comment}
+Table \ref{tbl:mslide_input} - \ref{tbl:mslide_out3} below highlights a commonly used example.
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{input data\label{tbl:mslide_input}}
+{\small
+\begin{tabular}{cc}
+\hline
+date&val \\
+\hline
+4/6&1 \\
+4/7&2 \\
+4/8&3 \\
+4/9&4 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{f=val:nextVal\label{tbl:mslide_out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+date&val&nextVal \\
+\hline
+4/6&1&2 \\
+4/7&2&3 \\
+4/8&3&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{f=val:nextVal -r\label{tbl:mslide_out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+date&val&nextVal \\
+\hline
+4/7&2&1 \\
+4/8&3&2 \\
+4/9&4&3 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\caption{f=val t=2\label{tbl:mslide_out3}}
+{\small
+\begin{tabular}{cccc}
+\hline
+date&val&val1&val2 \\
+\hline
+4/6&1&2&3 \\
+4/7&2&3&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:mslide_input} shows the input data containing daily total values for four consecutive days. The figures could represent the changes in supermarket sales or stock price trends. 
+Calculate the rate of increase between two days (for simplicity, assume "rate of increase =  rate of day2/rate of day1").
+
+The input data contains data series from 4/6 to 4/9. In Table \ref{tbl:mslide_out1}, the data series is shifted up by one line and stored in a new column (newVal). The rate of increase is calculated from nextVal/val using mcal command. After the records have shifted, the last record in the input data dated 4/9 is not longer available. In this case, specify the \verb|-n| option to print NULL values.
+
+Table \ref{tbl:mslide_out1} shows the data output when sliding up the data series by one row, it is also possible to slide in reverse order by sliding the first row to a new column as shown in (Table \ref{tbl:mslide_out2}).
+
+Furthermore, \verb|t=| allows user to specify the number of times to slide up or down. Table\ref{tbl:mslide_out3} shows the result when t=2. The following function is the same as using mslide consecutively:
+ 
+"\verb|mslide f=val:val1 | mslide f=val1:val2|". 
+
+When \verb|t=| parameter is used, field names are created for each new column based on the field name specified at \verb|f=| followed by an incremental value. When \verb|t=| parameter is used with \verb|-l| option, data from the initial column and the last column is displayed. 
+
+The functions of mwindow and mslide are similar. The difference between the two is that mslide is used for calculation between data items, and the command is often followed by mcal or msel.  mwindow is used for calculation by row, which is usually followed by msum or mavg. 
+%\end{comment}
+
+\subsection*{Format}
+\verb|mslide f= [s=] [k=key] [t=] [-r] [-n] [-l] [i=] [o=]|
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name for sliding records. Multiple fields can be specified.  \\
+             & The If you do not specify \verb|t=|, the field name can be specified by f=fieldname:newfieldname. \\
+ \verb|s=|    & After the specified field is sorted (multiple fields can be specified), records are shifted.  \\
+             & \verb|s=| parameter is required when \verb|-q| option is not specified. \\
+\verb|k=|    & Specify the field for shifting of records. \\             
+\verb|t=|    & Number of times (rows) to shift. Default value is \verb|t=1| if this parameter is not defined. \\
+\verb|-r|    & Shift records in the opposite direction (shift the first record below).\\
+\verb|-n|    & Print a null value if next (or previous) line is not available. \\
+\verb|-l|    & Print results from the final shift.\\
+
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mslide_ex.tex}
+
+\subsection*{Related Command}
+
+
+%\end{document}

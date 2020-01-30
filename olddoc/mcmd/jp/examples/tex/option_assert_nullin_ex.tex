@@ -1,0 +1,24 @@
+\subsubsection*{(基本例) }
+例えば、maccum（累積計算）コマンドを利用することを想定した場合、maccumコマンドはf=パラメータで指定した項目の値がNULL値である場合は無視して計算を行う。f=パラメータで指定した項目の値にNULL値が含まれているかどうかを確認したい場合、-assert\_nullinパラメータを指定すると、f=パラメータで指定された入力項目の値にNULL値が含まれているかどうかのチェックを行い、NULL値が含まれていた場合に、\verb|「#WARNING# ; exist NULL in input data」|というメッセージを表示するのでNULL値が含まれていたかどうかを確認することができる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,
+A,2,20
+B,1,15
+B,3,10
+B,,20
+
+$ maccum s=顧客 f=数量:数量累計,金額:金額累計 -assert_nullin i=dat1.csv o=rsl1.csv
+#WARNING# ; exist NULL in input data
+#END# kgaccum -assert_nullin f=数量:数量累計,金額:金額累計 i=dat1.csv o=rsl1.csv s=顧客
+
+$ more rsl1.csv
+顧客%0,数量,金額,数量累計,金額累計
+A,1,,1,
+A,2,20,3,20
+B,1,15,4,35
+B,3,10,7,45
+B,,20,,65
+\end{Verbatim}

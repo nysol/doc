@@ -1,0 +1,87 @@
+\subsubsection*{例1: 基本例}
+
+time項目が数値として120000以下であれば"AM"、そうでなければ"PM"を出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,time
+1,101215
+2,210110
+3,
+4,120001
+$ mcal c='if(${time}<=120000,"AM","PM")' a=ampm i=dat1.csv o=rsl1.csv
+#END# kgcal a=ampm c=if(${time}<=120000,"AM","PM") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,time,ampm
+1,101215,AM
+2,210110,PM
+3,,
+4,120001,PM
+\end{Verbatim}
+\subsubsection*{例2: 異なる型を指定した場合}
+
+第2パラメータと第3パラメータに異なる型を指定するとエラーとなる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(${time}<=120000,"am",1)' a=ampm i=dat1.csv o=rsl2.csv
+#ERROR# unknown function or operator: if_BSN (kgcal)
+$ more rsl2.csv
+\end{Verbatim}
+\subsubsection*{例3: 真偽値による条件選択}
+
+\verb|$b{項目名}|によって、データ上の値"1"は真、
+"0"は偽、そしてその他の値はNULLとして解釈される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,val
+1,1
+2,0
+3,
+4,-2
+$ mcal c='if($b{val},"true","false")' a=bool i=dat2.csv o=rsl3.csv
+#END# kgcal a=bool c=if($b{val},"true","false") i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,bool
+1,1,true
+2,0,false
+3,,
+4,-2,
+\end{Verbatim}
+\subsubsection*{例4: 時刻型として比較}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if($t{time}<=0t120000,"am","pm")' a=ampm i=dat1.csv o=rsl4.csv
+#END# kgcal a=ampm c=if($t{time}<=0t120000,"am","pm") i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+id,time,ampm
+1,101215,am
+2,210110,pm
+3,,
+4,120001,pm
+\end{Verbatim}
+\subsubsection*{例5: if関数のネスト}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+id,val
+1,10
+2,0
+3,-5
+4,0
+$ mcal c='if(${val}>0,"plus",if(${val}<0,"minus","zero"))' a=sign i=dat3.csv o=rsl5.csv
+#END# kgcal a=sign c=if(${val}>0,"plus",if(${val}<0,"minus","zero")) i=dat3.csv o=rsl5.csv
+$ more rsl5.csv
+id,val,sign
+1,10,plus
+2,0,zero
+3,-5,minus
+4,0,zero
+\end{Verbatim}

@@ -1,0 +1,20 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,3.141592
+2,-1.047197
+3,
+4,6.283185
+$ mcal c='cosh(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=cosh(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,3.141592,11.59194573
+2,-1.047197,1.600286169
+3,,
+4,6.283185,267.7466792
+\end{Verbatim}

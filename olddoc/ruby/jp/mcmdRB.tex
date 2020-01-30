@@ -1,0 +1,69 @@
+\documentclass[a4paper]{jsbook}
+\usepackage{mcmdRB}
+
+% ------------------- Title and Author -----------------------------
+%\title{ZDD Ruby Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge MCMD Ruby Package Documentation}\\
+\vspace{10truept}
+{\normalsize mcmdRB version: 1.0.0}\\
+\vspace{1cm}
+
+revise history:\\
+November 2, 2013 : first release\\
+\vspace{18cm}
+{\small \today}
+
+{\small Copyright \copyright 2013 by NYSOL CORPORATION}
+%{\small JST-ERATO MINATO Discrete Structure Manipulation System Project}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+%\include{getstarted}
+
+%\include{tutorial}
+
+%\include{usage}
+
+\chapter{はじめに}
+\include{abstract}
+\include{install}
+
+\chapter{クラス}
+
+\include{mcsvinRB}
+\include{mcsvoutRB}
+\include{margsRB}
+\include{mtableRB}
+
+\chapter{モジュールメソッド}
+\include{meachRB}
+\include{mheaderRB}
+\include{mrecountRB}
+\include{mkdirRB}
+\include{endLogRB}
+\include{errorLogRB}
+\include{messageLogRB}
+
+\chapter{その他}
+\include{envRB}
+\include{envRB}
+
+%\bibliographystyle{plain-annote}
+%\bibliography{mybibliography}
+
+\end{document}
+\end
+

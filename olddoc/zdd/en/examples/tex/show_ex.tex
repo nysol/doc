@@ -1,0 +1,186 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + c
+> f.show
+ 5 a b c - 3 a b + 2 b c + c
+> ZDD::constant(0).show
+ 0
+\end{Verbatim}
+\subsubsection*{Example 2: bit}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + c
+> f.show
+ 5 a b c - 3 a b + 2 b c + c
+
+> f.bit
+NoMethodError: undefined method `bit' for 5 a b c +  - 3 a b + 2 b c + c:Module
+	from (irb):8
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+
+# "a b c" has weight of -5, expressed in (-2) base is 101. 
+# 1*(-2)^2+0*(-2)^1+1*(-2)^0 = 5
+# Therefore 0 digit and 2nd digit of itemset "a b c" is display. 
+# "a b" has weight of -3 expressed in (-2) base is 1101. 
+# 1*(-2)^3+1*(-2)^2+0*(-2)^1+1*(-2)^0 = -3
+# Therefore 0,2nd,3rd digit of itemset "a b" is displayed. 
+
+\end{Verbatim}
+\subsubsection*{Example 3: hex}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+
+> f=a*b+11*b*c+30*d+4
+> f.show
+ a b + 11 b c + 30 d + 4
+> f.hex
+NoMethodError: undefined method `hex' for a b + 11 b c + 30 d + 4 :Module
+	from (irb):9
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{Example 4: map}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+> f=2*a*b+3*b+4
+> f.show
+ 2 a b + 3 b + 4
+> f.map
+NoMethodError: undefined method `map' for 2 a b + 3 b + 4 :Module
+	from (irb):8
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+# Itemset is displayed with item a as the first sequence in the bit string,
+# and item b corresponds to the first row of the bit string.
+# Weight is displayed as the cell value. Upper left cell contains 0 in a, and 0 in b,
+# and constant term 4 is shown.
+
+# The 4 items are as follows. 
+> g=a*b + 2*b*c + 3*d + 4
+> g.show
+ a b + 2 b c + 3 d + 4
+> g.map
+NoMethodError: undefined method `map' for a b + 2 b c + 3 d + 4 :Module
+	from (irb):17
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{Example 5: rmap}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# Declare 4 items a,b,c,d
+> ZDD::symbol("a")
+> ZDD::symbol("b")
+> ZDD::symbol("c")
+> ZDD::symbol("d")
+
+> f=ZDD::itemset("a b") + 2*ZDD::itemset("b c") + 4
+> f.show
+ a b + 2 b c + 4
+
+# The following displays as map.
+> f.map
+NoMethodError: undefined method `map' for a b + 2 b c + 4 :Module
+	from (irb):12
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+
+# d is omitted when displayed as rmap. 
+> f.rmap
+NoMethodError: undefined method `rmap' for a b + 2 b c + 4 :Module
+	from (irb):15
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{Example 6: case}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + 5*c
+> f.show
+ 5 a b c - 3 a b + 2 b c + 5 c
+
+> f.case
+NoMethodError: undefined method `case' for 5 a b c +  - 3 a b + 2 b c + 5 c:Module
+	from (irb):8
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{Example 7: decomp}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+
+> f1=(a*b*c)
+> f1.show
+ a b c
+> f1.decomp
+NoMethodError: undefined method `decomp' for a b c:Module
+	from (irb):8
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+# AND of a,b,c is expressed as a*b*c=a b c
+
+> f2=((a*b*c)+(a*b))
+> f2.show
+ a b c + a b
+> f2.decomp
+NoMethodError: undefined method `decomp' for a b c + a b:Module
+	from (irb):13
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+# OR of c,1 is expressed as (c+1), in addition, AND of a b is expressed as (a b),
+# the complete expression becomes (a b)*(c+1)=a b c + a b
+
+> f3=((a*b*c)+(a*b)+(b*c))
+> f3.show
+ a b c + a b + b c
+> f3.decomp
+NoMethodError: undefined method `decomp' for a b c + a b + b c:Module
+	from (irb):19
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+# [ a c ] enumerates all combinations from a and c as (a c + a + c).
+# AND of b and the above expression becomes b*(a c + a + c) = a b c + a b + b c
+
+> f4=((a*b*c)+(a*b)+(b*c)+(c*a))
+> f4.show
+ a b c + a b + a c + b c
+> f4.decomp
+NoMethodError: undefined method `decomp' for a b c + a b + a c + b c:Module
+	from (irb):25
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/irb:16:in `<main>'
+# [ a b c ] enumerates all combinations from a,b,c as (a b c + a b + b c + c a)
+
+\end{Verbatim}

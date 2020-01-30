@@ -1,0 +1,97 @@
+
+%\begin{document}
+
+\section{msummary Calculate Statistics for 1 Variable \label{sect:msummary}}
+\index{msummary@msummary}
+Calculate the type of statistics specified at \verb|c=| parameter for fields specified at  \verb|f=| parameter. \\
+
+\subsection*{Format}
+\verb|msummary c= f= [a=] [k=] [-n] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Compute statistics based on the key field(s) specified (multiple fields can be specified). \\
+
+
+\verb|f=|    & Field lists for computation of statistical summary (multiple fields can be specified). \\
+
+			 & When \verb|-x|,\verb|-nfn| option is specified, specify the field number  (0~). \\
+\verb|c=|    & Statistics (multiple fields can be specified) \\
+             & Specify list of statistics delimited by comma. \\
+			 & Statistics list: \\
+			 & \verb|sum/mean/count/ucount/devsq/var/uvar/sd/usd/cv/min/qtile1/median/qtile3/max/| \\
+			 & \verb|range/qrange/mode/skew/uskew/kurt/ukurt| \\
+\verb|-a|    & New column name. \\
+             & Results from calculation on column(s) specified at \verb|f=| parameter (default is fld).  \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{List of Statistics }
+
+The list of statistics specified at \verb|c=| parameter is shown in Table \ref{tbl:msummary}. 
+
+\begin{table}[t]
+%\begin{center}
+\caption{List of Statistics \label{tbl:msummary}}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lp{4cm}lp{4cm}lp{3cm}l}
+\hline
+Value of \verb|c=| & Description & Equation & Remarks \\  
+\hline
+count  & Count (Except NULL value) & $n$: Number of non-NULL records & It can not be applied to character string field.\\
+ucount & Unique count     & $un$: Number of duplicate values removed &  It can not be applied to character string field. \\
+sum    & Total             & $sum=\sum_{i=1}^n x_i$ & \\
+mean   & Arithmetic mean           & $m=\frac{1}{n}\sum_{i=1}^n x_i$ & \\
+devsq  & Sum of squared deviation       & $S=\sum_{i=1}^n(x_i-m)^2$ & \\
+var    & Variance             & $s^2=\frac{1}{n}S$ & \\
+uvar   & Variance (unbiased estimate) & $u^2=\frac{1}{n-1}S$ & \\
+sd     & Standard deviation         & $s=\sqrt{s^2}$ & \\
+usd    & Standard deviation (sort of unbiased variance) & $u=\sqrt{u^2}$ & commonly used standard deviation \\  
+cv     & Coefficient of variation       & $cv=s/m100\%$ & \\
+mode   & Mode           & $mode$: Most frequent value & Print the value of the smaller value\\
+       &                  &                   & if the frequency is same. \\
+min    & Minimum value            & $min=\min_i x_i$ & \\
+max    & Maximum value          & $max=\max_i x_i$ & \\
+range  & Range            & $r=max-min$  & \\
+median & Median           & $Q2=Second quartile when sorted in ascending order$ & \\
+qtile1 & First quartile      & $Q1=First quartile when sorted in ascending order$ & \\
+%qtile1 & 第1四分位点      & $Q1$ 第1四分位順位が自然数でない場合:$Q1=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.25(n-1)$ & \\
+qtile3 & Third quartile      & $Q3=Third quartile when sorted in ascending order$ & \\
+% 第3四分位順位が自然数でない場合:$Q3=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.75(n-1)$ \\
+qrange & Interquartile range       & $rq=Q3-Q1$ & \\
+skew   & Skewness             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^3}{s^3}$ & \\
+uskew  & Skewness (unbiased estimate) & omitted & \\
+kurt   & Kurtosis             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^4}{s^4}-3.0$ & \\
+ukurt  & Kurtosis (unbiased estimate) & omitted & \\
+\hline \\
+\end{tabular}
+}
+\end{table}
+
+
+\subsection*{Examples}
+\input{examples/tex/msummary_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mstats]{mstats} : Compute one type of statistics. 
+
+%\end{document}

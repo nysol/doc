@@ -1,0 +1,38 @@
+\subsubsection*{Example 1: Basic Example}
+
+Select records where the transaction date is \verb|20080203| with transaction "Amount" greater than \verb|5| and less than \verb|15| or greater than \verb|40| and less than \verb|50|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Date,Amount
+20080123,10
+20080203,10
+20080203,20
+20080203,45
+200804l0,50
+$ more ref1.csv
+Date,AmountF,AmountT
+20080203,5,15
+20080203,40,50
+$ mnrcommon k=Date m=ref1.csv R=AmountF,AmountT r=Amount%n i=dat1.csv o=rsl1.csv
+#END# kgnrcommon R=AmountF,AmountT i=dat1.csv k=Date m=ref1.csv o=rsl1.csv r=Amount%n
+$ more rsl1.csv
+Date%0,Amount
+20080203,10
+20080203,45
+\end{Verbatim}
+\subsubsection*{Example 2: Reverse selection}
+
+Add \verb|-r| option to reverse selection criteria.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnrcommon k=Date m=ref1.csv R=AmountF,AmountT r=Amount%n -r i=dat1.csv o=rsl2.csv
+#END# kgnrcommon -r R=AmountF,AmountT i=dat1.csv k=Date m=ref1.csv o=rsl2.csv r=Amount%n
+$ more rsl2.csv
+Date%0,Amount
+20080123,10
+20080203,20
+200804l0,50
+\end{Verbatim}

@@ -1,0 +1,22 @@
+
+%\begin{document}
+
+\section{nrand 正規乱数\label{sect:nrand}}
+\index{nrand@nrand}
+指定された平均値と標準偏差による正規乱数を発生させる。
+
+書式:nrand ([正規乱数])
+
+同じ乱数の種を指定すれば、同じ乱数系列となる。
+指定可能な乱数の種の範囲は-2147483648〜2147483647である。
+乱数の種を省略すると、
+時刻(1/1000秒単位)に応じた異なる乱数の種が利用される。
+
+乱数の生成にはメルセンヌ・ツイスター法を利用している
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
+
+
+\subsection*{利用例}
+\input{examples/tex/func_nrand_ex}
+

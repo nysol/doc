@@ -1,0 +1,66 @@
+\subsubsection*{Example 1: Basic Example}
+
+Extract and convert time and date information from \verb|fld| field.
+Save the converted format as
+"a:yearmonthday:b:timeminutesecond", by specifying "\verb|a:%Y%m%d:b:%H%M%S|"
+in the \verb|c=| parameter.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+fld
+a:20120304:b:121212
+a:20101204:b:011309
+$ mdformat f=fld c=a:%Y%m%d:b:%H%M%S i=dat1.csv o=rsl1.csv
+#END# kgdformat c=a:%Y%m%d:b:%H%M%S f=fld i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+fld
+20120304121212
+20101204011309
+\end{Verbatim}
+\subsubsection*{Example 2: Add Results to New Column}
+
+Store results in \verb|fld2| from format conversion in \verb|fld1| field,
+specify the format by "\verb|%Y/%m/%d|" in \verb|c=| parameter.
+Use \verb|-A| option to save results in \verb|f2| field.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+fld,fld2
+2010/11/20,2010/11/21
+2010/1/1,2010/1/2
+2011/01/01,2010/01/02
+2010/1/01,2010/1/02
+$ mdformat f=fld:f1,fld2:f2 c=%Y/%m/%d i=dat2.csv -A o=rsl2.csv
+#END# kgdformat -A c=%Y/%m/%d f=fld:f1,fld2:f2 i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+fld,fld2,f1,f2
+2010/11/20,2010/11/21,20101120,20101121
+2010/1/1,2010/1/2,20100101,20100102
+2011/01/01,2010/01/02,20110101,20100102
+2010/1/01,2010/1/02,20100101,20100102
+\end{Verbatim}
+\subsubsection*{Example 3: Case of failed extraction}
+
+The date format in \verb|fld| field is saved as "Year Month Day Time:Minute:Second",
+"\verb|%Y %m %d %H:%M:%S|" is specified in \verb|c=| parameter.
+However, it failed since the format is different in different rows.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+fld
+2010 11 20 12:34:56
+
+2011 01 01 23:34:56
+2010  1 01 123455
+$ mdformat f=fld:f1 c='%Y %m %d %H:%M:%S' i=dat3.csv -A o=rsl3.csv
+#END# kgdformat -A c=%Y %m %d %H:%M:%S f=fld:f1 i=dat3.csv o=rsl3.csv
+$ more rsl3.csv
+fld,f1
+2010 11 20 12:34:56,20101120123456
+,
+2011 01 01 23:34:56,20110101233456
+2010  1 01 123455,
+\end{Verbatim}

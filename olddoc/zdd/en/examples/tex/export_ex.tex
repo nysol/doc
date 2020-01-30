@@ -1,0 +1,29 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c+3*a*b+2*b*c+c
+> f.show
+ 5 a b c + 3 a b + 2 b c + c
+
+> f.export
+
+_i 3
+_o 3
+_n 7
+4 1 F T
+248 2 F 5
+276 3 4 248
+232 2 F 4
+2 2 F T
+272 3 232 2
+268 3 232 248
+276
+272
+268
+\end{Verbatim}

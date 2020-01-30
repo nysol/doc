@@ -1,0 +1,70 @@
+\subsubsection*{例1: 配列として出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ mcsv2json f=v1,v2 i=dat1.csv
+[["1","a"],["2","b"],["3","c"],["4","d"],["5","e"]]
+#END# kgcsv2json f=v1,v2 i=dat1.csv
+\end{Verbatim}
+\subsubsection*{例2: オブジェクト(key-value)として出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json h=v1,v2 i=dat1.csv
+[{"v1":"1","v2":"a"},{"v1":"2","v2":"b"},{"v1":"3","v2":"c"},{"v1":"4","v2":"d"},{"v1":"5","v2":"e"}]
+#END# kgcsv2json h=v1,v2 i=dat1.csv
+\end{Verbatim}
+\subsubsection*{例3: 項目指定によってオブジェクトとして出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json p=v2:v1 i=dat1.csv
+[{"a":"1"},{"b":"2"},{"c":"3"},{"d":"4"},{"e":"5"}]
+#END# kgcsv2json i=dat1.csv p=v2:v1
+\end{Verbatim}
+\subsubsection*{例4: キー項目を指定する例}
+
+\verb|key1|項目が\verb|A|の3行が一つの配列として出力され、
+続いて\verb|key1=B|の2行が一つの配列として出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json k=key1 f=v1 i=dat1.csv
+[[["1"],["2"],["3"]],
+[["4"],["5"]]]
+#END# kgcsv2json f=v1 i=dat1.csv k=key1
+\end{Verbatim}
+\subsubsection*{例5: キー項目のネスト例}
+
+\verb|key1=A|かつ\verb|key2=X|の1行が一つの配列として出力され、
+\verb|key1=A|かつ\verb|key2=Y|の2行が一つの配列として出力され、
+それら2つの配列(すなわち\verb|key1=A|の行)がさらに一つの配列として括られる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json k=key1,key2 f=v1 i=dat1.csv
+[[[["1"]],
+[["2"],["3"]]],
+[[["4"]],
+[["5"]]]]
+#END# kgcsv2json f=v1 i=dat1.csv k=key1,key2
+\end{Verbatim}
+\subsubsection*{例6: 行を配列で括らずにフラットに出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json f=v1,v2 -flat i=dat1.csv
+["1","a","2","b","3","c","4","d","5","e"]
+#END# kgcsv2json -flat f=v1,v2 i=dat1.csv
+\end{Verbatim}

@@ -1,0 +1,36 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,time
+1,000103
+2,235959
+3,
+4,000000
+$ mcal c='tseconds($t{time})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=tseconds($t{time}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,time,rsl
+1,000103,63
+2,235959,86399
+3,,
+4,000000,0
+\end{Verbatim}
+\subsubsection*{Example 2: The result is the same using on date values}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,date
+1,20130901000103
+2,20130902000103
+$ mcal c='tseconds($t{date})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=tseconds($t{date}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,date,rsl
+1,20130901000103,63
+2,20130902000103,63
+\end{Verbatim}

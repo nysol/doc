@@ -1,0 +1,20 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,0.785398
+2,1.047197
+3,
+4,3.141593
+$ mcal c='tan(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=tan(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,0.785398,0.9999996732
+2,1.047197,1.732048603
+3,,
+4,3.141593,3.464102066e-07
+\end{Verbatim}

@@ -1,0 +1,201 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Lesson 1: Select columns using mcut command}
+
+{M-Command (MCMD) is a set of commands for flexible and effective data manipulation. These commands are used to process big data used in data mining.  The commands can be executed in form of a shell script or as individual commands at the UNIX / LINUX command prompt. 
+\\ 
+\\
+In this lesson, you will learn how to setup the environment by creating sample datasets and shell scripts to run M-Command.
+\\
+\\
+Afterwards, this tutorial will walk you through the process of creating a simple shell script to run the \verb|mcut| command. This command allows users to select relevant information and remove extraneous columns by specifying columns to extract in dataset for different data processing needs.  }
+
+\subsection{Step 1: Create your first script}
+
+\noindent Create a new script \verb|mcut.sh| with a text editor. Make sure the file permissions is changed to executable permission. 
+\\
+\\
+A script sample is shown below. The first line indicates the system which program to run the file. 
+It is a good practice to include comments to explain the code with a blank line in between to increase readability and future references. Comments in the script precedes with \verb|#| followed by comments.   
+\\
+\\
+If the data is stored in a separate directory, the input path can be defined as a variable in \verb|inPath| in the following sample script.  
+\\
+\\
+The parameter for mcut command "\verb|f=field_name|" shown below will be explained in the next section. 
+
+\begin{verbatim}
+#/bin/bash
+#================================
+# MCMD bash script - Lesson1: Select column(s) with mcut
+#================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+
+mcut f=fieldname i=${inPath}/dat.csv o=outdat/mcutout.csv
+#================================
+
+\end{verbatim}
+
+{\setlength{\parindent}{0cm}
+
+
+\textbf{Why is the input file stored as shell variable?} \\
+
+    
+The directory path of the input file is defined in variable \emph{inPath}. Alternatively, we can enter the path name directly at the \emph{i=} parameter when executing the command. The method of defining path information as variable is recommended since it is easier to locate the current dataset. \\
+
+When one or more input file(s) is required as shown in later lessons, defining the input files in \emph{inPath} indicate the location of the files used, and increase the readability of the script.\\
+
+This allows for easy maintenance in the future if we need to redefine the path of the input file, and or other users to follow up on the script.
+
+}
+
+\subsection{Step 2: Define attributes and options }
+
+There are 18 attributes / fields in dat.csv, let's use \verb|mcut| command to extract the columns \emph{date, quantity, amount}. \\
+Note: Header fields and filename are case sensitive, be sure the attributes defined in the command parameters matches with header fields in the dataset (dat.csv). \\
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters as follows: \\
+
+Fields: 		\verb|f=date,quantity,amount| \\
+Description: In this example, the parameter extracts date, quantity and amount from the dataset. \\
+Attribute name is case sensitive, spaces should be omitted between multiple field arguments.\\
+
+Input file: 		\verb|i=${inPath}/dat.csv| \\
+Description: \verb|inPath| variable saves the path of the data defined at the top of the script. \\
+You may also define the "path + filename" at \verb|inPath|: ./mcmd\_exercise/tutorial\_en/dat.csv\\
+
+Output file: 	\verb|o=outdat/mcutout.csv| \\
+Description: In the following example, the output file named mcutout.csv is created in the \verb|outdat| directory at \verb|./mcmd_exercise/outdat/|. 
+}
+
+\begin{verbatim}
+
+#/bin/bash
+#================================
+# MCMD bash script - Lesson1: mcut
+#================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+
+mcut f=date,quantity,amount i=${inPath}/dat.csv o=outdat/mcutout.csv
+#================================
+
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./mcut.sh
+\end{verbatim} 
+
+\noindent The following run-time message will appear as follows: 
+\begin{verbatim}
+
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv o=outdat/mcutout.csv; IN=24737 OUT=24737; 
+2013/08/12 15:37:32
+
+\end{verbatim}
+
+\subsection{Step 4: Error Handling }
+
+Scenario 1:  If the message \verb|#END#| didn't appear for a long time indicates a possible error where the script is incomplete. Terminate the process by "Ctrl+c", and edit the script again.\\
+\\Scenario 2: When you see \verb|#ERROR#|, refer to the run-time error message and revise the script accordingly. \\
+
+\subsection{Step 5: Results }
+
+When the script has been executed successfully, a new output file \verb|mcutout.csv| will be created. Review the content of the data and you will see three attributes: date, quantity, and amount as shown below: 
+
+\begin{verbatim}
+date,quantity,amount
+20010108,1,441
+20010108,1,372
+20010108,1,446
+20010110,5,1155
+20010110,6,1446
+20010110,1,271
+20010110,6,3198
+20010110,1,348
+20010110,1,461
+20010110,1,363
+20010111,1,290
+20010111,5,1165
+20010111,1,387
+20010111,1,375
+20010111,1,687
+20010111,1,500
+...
+..
+\end{verbatim}
+
+\vspace {5mm}
+
+{\setlength{\parindent}{0cm}
+\textbf{i= and o= parameters}\\
+
+\fbox{
+  \parbox{\textwidth}{
+    
+There are two ways to define input and output filenames for MCMD:
+\begin{itemize}
+\item By defining the file name at the parameter i= and o= 
+\item Use UNIX standard input and output
+\end{itemize}
+
+For example, the two commands below will return the same results.
+\begin{itemize}
+\item mcut f=date i=dat.csv o=output.csv
+\item mcut f=date $<$ dat.csv $>$ output.csv
+\end{itemize}
+
+  }
+} 
+
+\vspace {5mm}
+
+\textbf{File Extension}\\
+
+\fbox{
+  \parbox{\textwidth}{    
+Extension of a file name such as "csv" is not required. MCMD has the capability to recognize "csv" format data. The file extension is used to differentiate between the different type of files. \\
+
+A script file without "sh" extension will still be executable under the bash shell. \\
+\$ ./mcut
+  }
+}
+}
+
+\newpage
+\subsection{Exercise }
+
+Create the following reports by using script to extract specific columns from the sample data file. Save the output in a file.
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Extract manufacturer, brand and profit. & \href{exercise/mcut1.sh}{mcut1.sh} & \href{exercise/outdat/mcutout1.csv}{mcutout1.csv} \\
+2. Extract customer ID and receipt number. & \href{exercise/mcut2.sh}{mcut2.sh} & \href{exercise/outdat/mcutout2.csv}{mcutout2.csv} \\
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

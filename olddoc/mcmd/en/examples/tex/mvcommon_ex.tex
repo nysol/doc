@@ -1,0 +1,37 @@
+\subsubsection*{Example 1: Match common elements in multiple vectors}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+$ more ref1.csv
+item
+a
+c
+e
+$ mvcommon vf=items1,items2 K=item m=ref1.csv i=dat1.csv o=rsl1.csv
+#END# kgvcommon K=item i=dat1.csv m=ref1.csv o=rsl1.csv vf=items1,items2
+$ more rsl1.csv
+items1,items2
+a c,
+c c,a
+e a a,a a
+\end{Verbatim}
+\subsubsection*{Example 2: Print output to a new column}
+
+Define new column name for \verb|item2| as \verb|new2|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvcommon vf=items1,items2:new2 K=item m=ref1.csv i=dat1.csv o=rsl2.csv
+#END# kgvcommon K=item i=dat1.csv m=ref1.csv o=rsl2.csv vf=items1,items2:new2
+$ more rsl2.csv
+items1,new2
+a c,
+c c,a
+e a a,a a
+\end{Verbatim}

@@ -1,0 +1,52 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mnewnumber 連番データの新規生成\label{sect:mnewnumber}}
+\index{mnewnumber@mnewnumber}
+\verb|S=|パラメータで指定した開始数値もしくはアルファベットにより、
+\verb|I=|パラメータで指定した間隔で連番もしくはアルファベット連番を新規作成し、\verb|a=|パラメータで指定した項目名で出力する。
+アルファベット連番とは、AからZの26文字を用いた26進数のこと(A,B,$\cdots$,Z,AA,AB,$\cdots$,AZ,BA,BB,$\cdots$,ZZ,AAA,AAB,$\cdots$)。
+
+\subsection*{書式}
+\verb|mnewnumber a= [I=] [S=] [l=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|a=|    & 新規に作成する連番行の項目名を指定する。\\
+             & \verb|-nfn,-nfno|オプション指定時は指定の必要はない。\\
+\verb|I=|    & 連番をふる間隔を指定する。【デフォルト値:1】\\
+\verb|S=|    & 開始数値/アルファベット(大文字)【デフォルト値:1】\\
+             & 連番の開始数値もしくはアルファベットを指定する。\\
+             & 数値を指定した場合は数値の連番がふられる。\\
+             & アルファベットを指定した場合はアルファベット連番がふられる。(小文字は指定できない)\\
+\verb|l=|    & 作成するデータ行数を指定する。【デフォルト値:10】\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mnewnumber_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mnewrand] {mnewrand} : 新たに乱数を生成する。
+
+\hyperref[sect:mnewstr] {mnewstr} : 固定文字列を生成する。
+
+%\end{document}

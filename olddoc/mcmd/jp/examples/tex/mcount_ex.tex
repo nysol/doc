@@ -1,0 +1,32 @@
+\subsubsection*{例1: 基本例}
+
+\verb|date|項目を単位に行数をカウントし、\verb|count|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date
+20090109
+20090109
+20090110
+20090109
+20090110
+$ mcount k=date a=count i=dat1.csv o=rsl1.csv
+#END# kgcount a=count i=dat1.csv k=date o=rsl1.csv
+$ more rsl1.csv
+date%0,count
+20090109,3
+20090110,2
+\end{Verbatim}
+\subsubsection*{例2: 集計キーなし}
+
+集計キーを指定しなければ全体の行数をカウントする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcount a=count i=dat1.csv o=rsl2.csv
+#END# kgcount a=count i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+date,count
+20090110,5
+\end{Verbatim}

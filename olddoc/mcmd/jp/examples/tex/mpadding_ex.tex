@@ -1,0 +1,102 @@
+\subsubsection*{例1: 基本例}
+
+\verb|no|項目が整数(\%n)として連続するようにレコードをパディングする。
+\verb|1|とverb|4|の間に\verb|2,3|を、\verb|4|と\verb|2|の間に\verb|3|が挿入されている。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+no
+3
+6
+8
+$ mpadding f=no%n i=dat1.csv o=rsl1.csv
+#END# kgpadding f=no%n i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+no%0n
+3
+4
+5
+6
+7
+8
+\end{Verbatim}
+\subsubsection*{例2: 開始値、終了値の指定}
+
+行間のパディングだけでなく、先頭行/終端行の前後もパディングする。
+前後の範囲は\verb|S=,E=|で指定する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpadding f=no%n S=1 E=10 i=dat1.csv o=rsl2.csv
+#END# kgpadding E=10 S=1 f=no%n i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+no%0n
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+\end{Verbatim}
+\subsubsection*{例3: 日付パディング}
+
+\verb|date|項目が日付(\%d)として連続するようにレコードをパディングする。
+\verb|k=,f=|で指定した以外の項目は、直前の行の項目値でパディングする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+date,dummy
+20130929,a
+20131002,b
+20131004,c
+$ mpadding f=date%d i=dat2.csv o=rsl3.csv
+#END# kgpadding f=date%d i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+date%0,dummy
+20130929,a
+20130930,a
+20131001,a
+20131002,b
+20131003,b
+20131004,c
+\end{Verbatim}
+\subsubsection*{例4: パディング用文字列指定}
+
+\verb|v=|にてパディング文字列を指定することもできる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpadding f=date%d v=padding i=dat2.csv o=rsl4.csv
+#END# kgpadding f=date%d i=dat2.csv o=rsl4.csv v=padding
+$ more rsl4.csv
+date%0,dummy
+20130929,a
+20130930,padding
+20131001,padding
+20131002,b
+20131003,padding
+20131004,c
+\end{Verbatim}
+\subsubsection*{例5: パディングにNULL値を指定}
+
+\verb|-n|を指定してNULL値でパディングすることも可能。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpadding f=date%d -n i=dat2.csv o=rsl5.csv
+#END# kgpadding -n f=date%d i=dat2.csv o=rsl5.csv
+$ more rsl5.csv
+date%0,dummy
+20130929,a
+20130930,
+20131001,
+20131002,b
+20131003,
+20131004,c
+\end{Verbatim}

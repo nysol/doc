@@ -1,0 +1,66 @@
+\subsubsection*{Example 1: Basic Example}
+
+In the following, using items \verb|a,b,c|, find out the exclusive OR on itemsets
+\verb|2ab + a + 3b|, \verb|abc + 2ab + bc + 1|, \verb|ab+a|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# First, define the itemsets
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=2*a*b+a+3*b
+> f.show
+ 2 a b + a + 3 b
+\end{Verbatim}
+
+ \verb|(2ab + a + 3b)|$\oplus$\verb|a| = \verb|3ab + 2b + 1|
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f.delta(a).show
+ 3 a b + 2 b + 1
+\end{Verbatim}
+
+ \verb|(2ab + a + 3b)|$\oplus$\verb|b| = \verb|ab + 2a + 3|
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f.delta(b).show
+ a b + 2 a + 3
+\end{Verbatim}
+
+ \verb|(2ab + a + 3b)|$\oplus$\verb|ab| = \verb|3a + b + 2|
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f.delta(a*b).show
+ 3 a + b + 2
+\end{Verbatim}
+
+ \verb|(2ab + a + 3b)|$\oplus$\verb|1| = \verb|2ab+a+3b|
+ Since constant 1 is an empty itemset, it is remained in the original set for solving XOR operation.
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f.delta(1).show
+ 2 a b + a + 3 b
+\end{Verbatim}
+
+ The operation result of the each term in \verb|(abc + 2ab + bc + 1)|$\oplus$\verb|(2ab + a)|
+ are as follows:
+ \begin{itemize}
+ \item \verb|abc |$\oplus$\verb| 2ab = 2c|
+ \item \verb|2ab |$\oplus$\verb| 2ab = 4|
+ \item \verb|bc  |$\oplus$\verb| 2ab = 2ac|
+ \item \verb|1   |$\oplus$\verb| 2ab = 2ab|
+ \item \verb|abc |$\oplus$\verb| a   = bc|
+ \item \verb|2ab |$\oplus$\verb| a   = 2b|
+ \item \verb|bc  |$\oplus$\verb| a   = abc|
+ \item \verb|1   |$\oplus$\verb| a   = a|
+ \end{itemize}
+ 
+ The result is summarized as \verb|a b c + 2 a b + 2 a c + a + b c + 2 b + 2 c + 4|.
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> g=((a*b*c)+2*(a*b)+(b*c)+1)
+> h=2*a*b + a
+> g.show
+ a b c + 2 a b + b c + 1
+> h.show
+ 2 a b + a
+> g.delta(h).show
+ a b c + 2 a b + 2 a c + a + b c + 2 b + 2 c + 4
+\end{Verbatim}

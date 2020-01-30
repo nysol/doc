@@ -1,0 +1,65 @@
+\subsubsection*{例1: -nfn指定}
+
+\verb|-nfn|(no field names)を指定すると，先頭行を項目名行と見なさない。
+そして項目は必ず番号で指定する(番号は0から始まることに注意する)。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+a,2
+b,5
+b,4
+$ msum -nfn k=0 f=1 i=dat2.csv o=rsl1.csv
+#END# kgsum -nfn f=1 i=dat2.csv k=0 o=rsl1.csv
+$ more rsl1.csv
+a,2
+b,9
+\end{Verbatim}
+\subsubsection*{例2: -nfno指定}
+
+\verb|-nfno|(no field names for output)を指定すると，入力データの先頭行は項目名行として扱うが，出力データには項目名を出力しない．
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key,val
+a,2
+b,5
+b,4
+$ msum k=key f=val -nfno i=dat1.csv o=rsl2.csv
+#END# kgsum -nfno f=val i=dat1.csv k=key o=rsl2.csv
+$ more rsl2.csv
+a,2
+b,9
+\end{Verbatim}
+\subsubsection*{例3: -nfni指定}
+
+\verb|-nfni|(no field name for input)の指定はmcutでのみ可能であるオプションである．
+このオプションは-nfnoと逆の働きをする．
+すなわち，入力データの先頭行は項目名行として扱わないが，
+出力データには項目名を出力する．
+よって、入力項目番号に続けて出力項目名を":"に続けて指定する必要がある．
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=0:key,1:val -nfni i=dat2.csv o=rsl3.csv
+#END# kgcut -nfni f=0:key,1:val i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+key,val
+a,2
+b,5
+b,4
+\end{Verbatim}
+\subsubsection*{例4: -x指定}
+
+項目名行があるCSVデータに対して、項目番号で指定したい場合は\verb|-x|オプションを利用する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum -x k=0 f=1 i=dat1.csv o=rsl4.csv
+#END# kgsum -x f=1 i=dat1.csv k=0 o=rsl4.csv
+$ more rsl4.csv
+key%0,val
+a,2
+b,9
+\end{Verbatim}

@@ -1,0 +1,128 @@
+\subsubsection*{Example 1: Example 1: Basic example}
+
+The input file is partitioned into two, so that the rows are output to the same file as long as the value of the specified field (customer) is the same.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+C,20081003,60
+C,20081219,20
+$ mshuffle f=customer d=./dat/d n=2 i=dat2.csv
+#END# kgshuffle d=./dat/d f=customer i=dat2.csv n=2
+$ ls ./dat
+d_0
+d_1
+$ more ./dat/d_0
+customer,date,amount
+B,20081002,40
+B,20081209,50
+$ more ./dat/d_1
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+C,20081003,60
+C,20081219,20
+\end{Verbatim}
+\subsubsection*{Example 2: Example 2: Not specifying f=}
+
+The f= parameter is not specified and the input file is partitioned into two. As row number hash values are used, the two files will have almost the same numbers of rows.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+C,20081003,60
+C,20081219,20
+$ mshuffle d=./dat/d n=2 i=dat2.csv
+#END# kgshuffle d=./dat/d i=dat2.csv n=2
+$ ls ./dat
+d_0
+d_1
+$ more ./dat/d_0
+customer,date,amount
+A,20081207,20
+B,20081002,40
+C,20081003,60
+$ more ./dat/d_1
+customer,date,amount
+A,20081201,10
+A,20081213,30
+B,20081209,50
+C,20081219,20
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Specifying v=,f=}
+
+With v=2,1 specified, the input file is partitioned into two. Two hash values are allocated to file 0 (d\_0) and one hash value is allocated to file 1 (d\_1).
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+C,20081003,60
+C,20081219,20
+$ mshuffle f=customer d=./dat/d v=2,1 i=dat2.csv
+#END# kgshuffle d=./dat/d f=customer i=dat2.csv v=2,1
+$ ls ./dat
+d_0
+d_1
+$ more ./dat/d_0
+customer,date,amount
+B,20081002,40
+B,20081209,50
+C,20081003,60
+C,20081219,20
+$ more ./dat/d_1
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+\end{Verbatim}
+\subsubsection*{Example 4: Example 4: Specifying v=}
+
+The script of Example 3 is run without the f= parameter specified. As row number hash values are used, the ratio of the numbers of output rows will be almost the same as the ratio of the weights.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,date,amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+C,20081003,60
+C,20081219,20
+$ mshuffle d=./dat/d v=2,1 i=dat2.csv
+#END# kgshuffle d=./dat/d i=dat2.csv v=2,1
+$ ls ./dat
+d_0
+d_1
+$ more ./dat/d_0
+customer,date,amount
+A,20081201,10
+A,20081213,30
+B,20081002,40
+C,20081003,60
+C,20081219,20
+$ more ./dat/d_1
+customer,date,amount
+A,20081207,20
+B,20081209,50
+\end{Verbatim}

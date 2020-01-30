@@ -1,0 +1,47 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ head tweets.txt
+3年ぶりにウォークマンを買ったけど、育休中はあまり活躍の余地がないですね。
+待機児童解消の方がいい気がするけど。
+読売テレビ(日本テレビ系列)ウェークアップ！ぷらすに蓮舫ネクスト規制改革担当大臣が生出演！
+この学生さんは、仕事に不利じゃなかったら、3年育休取れるのも良いな、って思ってるよね。
+今の人事制度のまま育休3年とか、前以上に女性が締め出されるだけでは。
+女子大生でも分かる、3年間の育児休暇が最悪な結果をもたらす理由。(中嶋よしふみ)
+保育園を中心に期間とか決めるの、おかしいよな～。
+女性が必ず子育てしなきゃならない社会なら結婚絶対したくない…
+育休とかの前に、母親に育児に専念させるなら女性の雇用よりもまず、男性の雇用、給料なんだよね。
+安倍総理きた! 育児休暇三年は…女としては嬉しいけど、会社に申し訳ないよねえ
+$ mnewdic.rb i=tweets.txt O=newdic
+#MSG# start to parse each line...
+#MSG# working at line 0
+#MSG# working at line 100
+#MSG# working at line 200
+#MSG# working at line 300
+#MSG# working at line 400
+#MSG# working at line 500
+#MSG# working at line 600
+#MSG# working at line 700
+#MSG# working at line 800
+#MSG# working at line 900
+#MSG# working at line 1000
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mnewdic.rb i=tweets.txt O=newdic
+$ ls newdic
+corpus.csv
+corpus_sjis.csv
+words.csv
+words_sjis.csv
+$ head newdic/words.csv
+見出し語,品詞,読み,カテゴリ,ドメイン,pid,word1,word2,freq
+職場復帰,,,,,0,職場,復帰,31
+授業参観,,,,,1,授業,参観,28
+会議参加,,,,,2,会議,参加,26
+育休延長,,,,,3,育休,延長,19
+子育て支援,,,,,4,子育て,支援,18
+育児休暇３,,,,,5,育児休暇,３,18
+待機児童ゼロ,,,,,6,待機児童,ゼロ,17
+規制緩和,,,,,7,規制,緩和,16
+給付金,,,,,8,給付,金,15
+\end{Verbatim}

@@ -1,0 +1,162 @@
+\subsubsection*{例1: 数字の連番}
+
+Customer項目名順（昇順）に連番を振り「No」という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Val,Sum
+A,29,300
+B,35,250
+C,15,200
+D,23,150
+E,10,100
+$ mnumber s=Customer a=No i=dat1.csv o=rsl1.csv
+#END# kgnumber a=No i=dat1.csv o=rsl1.csv s=Customer
+$ more rsl1.csv
+Customer%0,Val,Sum,No
+A,29,300,0
+B,35,250,1
+C,15,200,2
+D,23,150,3
+E,10,100,4
+\end{Verbatim}
+\subsubsection*{例2: Date項目順の連番}
+
+Date項目順（昇順）に連番をふる。その際、同じDateには同じNoを振り「No」という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+Date
+20090101
+20090101
+20090102
+20090103
+20090103
+$ mnumber k=Date a=No -B i=dat2.csv o=rsl2.csv
+#END# kgnumber -B a=No i=dat2.csv k=Date o=rsl2.csv
+$ more rsl2.csv
+Date%0,No
+20090101,0
+20090101,0
+20090102,1
+20090103,2
+20090103,2
+\end{Verbatim}
+\subsubsection*{例3: Sum項目順の連番(同Rankは同じアルファベットをふる)}
+
+Sum項目の多い順（降順）にアルファベットのAから順に連文字を振り「Rank」という項目名で出力する。
+また、同Rankの場合は同じアルファベット文字を振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+Customer,Val,Sum
+A,3,300
+B,1,250
+C,2,250
+D,1,150
+E,1,100
+$ mnumber a=Rank e=same s=Sum%nr S=A  i=dat3.csv o=rsl3.csv
+#END# kgnumber S=A a=Rank e=same i=dat3.csv o=rsl3.csv s=Sum%nr
+$ more rsl3.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,A
+B,1,250,B
+C,2,250,B
+D,1,150,C
+E,1,100,D
+\end{Verbatim}
+\subsubsection*{例4: Sum項目順の連番(同Rankは並び順でNoをふる)}
+
+Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。
+その際、同Rankの場合は並び順でNoを振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=seq s=Sum%nr i=dat3.csv o=rsl4.csv
+#END# kgnumber a=Rank e=seq i=dat3.csv o=rsl4.csv s=Sum%nr
+$ more rsl4.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,2
+D,1,150,3
+E,1,100,4
+\end{Verbatim}
+\subsubsection*{例5: Sum項目順の連番(同Rankは同じNoをふる)}
+
+Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。
+その際、同Rankの場合は同じNoを振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=same s=Sum%nr i=dat3.csv o=rsl5.csv
+#END# kgnumber a=Rank e=same i=dat3.csv o=rsl5.csv s=Sum%nr
+$ more rsl5.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,1
+D,1,150,2
+E,1,100,3
+\end{Verbatim}
+\subsubsection*{例6: Sum項目順の連番(同Rankの場合は同じRankNoを振り、次のNoはスキップ)}
+
+Sum項目の多い順（降順）に連番を振り「Rank」という項目名で出力する。
+その際、同Rankの場合は同じRankNoを振り、次のNoはスキップするようにNoを振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Rank e=skip s=Sum%nr i=dat3.csv o=rsl6.csv
+#END# kgnumber a=Rank e=skip i=dat3.csv o=rsl6.csv s=Sum%nr
+$ more rsl6.csv
+Customer,Val,Sum%0nr,Rank
+A,3,300,0
+B,1,250,1
+C,2,250,1
+D,1,150,3
+E,1,100,4
+\end{Verbatim}
+\subsubsection*{例7: 10から始まる連番}
+
+Sum項目の小さい順（昇順）に10から始まる連番を振り「Score」という項目名で出力する。
+その際、同Rankの場合は同じRankNoを振り、次のNoはスキップするようにNoを振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat4.csv
+Customer,Val,Sum
+A,1,100
+B,1,150
+C,1,250
+D,2,250
+E,3,300
+$ mnumber a=Score e=same s=Sum%n S=10 i=dat4.csv o=rsl7.csv
+#END# kgnumber S=10 a=Score e=same i=dat4.csv o=rsl7.csv s=Sum%n
+$ more rsl7.csv
+Customer,Val,Sum%0n,Score
+A,1,100,10
+B,1,150,11
+C,1,250,12
+D,2,250,12
+E,3,300,13
+\end{Verbatim}
+\subsubsection*{例8: 10から始まる5つ飛びの連番}
+
+Sum項目の小さい順番（昇順）に10から始まる5つ飛びの連番を振り「Score」という項目名で出力する。
+また、同Rankの場合は同じNoを振ることにする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnumber a=Score e=same s=Sum%n S=10 I=5 i=dat4.csv o=rsl8.csv
+#END# kgnumber I=5 S=10 a=Score e=same i=dat4.csv o=rsl8.csv s=Sum%n
+$ more rsl8.csv
+Customer,Val,Sum%0n,Score
+A,1,100,10
+B,1,150,15
+C,1,250,20
+D,2,250,20
+E,3,300,25
+\end{Verbatim}

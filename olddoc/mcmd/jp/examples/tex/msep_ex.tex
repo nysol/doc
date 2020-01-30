@@ -1,0 +1,32 @@
+\subsubsection*{例1: 基本例}
+
+\verb|dat|という名前のディレクトリを作成し、
+そのディレクトリに日付項目値\verb|date|ごとに異なるファイルに出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,quantity,price
+A,20081201,1,10
+B,20081201,4,40
+A,20081202,2,20
+A,20081203,3,30
+B,20081203,5,50
+$ msep d='./dat/${date}.csv' -p i=dat1.csv
+#END# kgsep -p d=./dat/${date}.csv i=dat1.csv
+$ ls ./dat
+20081201.csv
+20081202.csv
+20081203.csv
+$ more ./dat/20081201.csv
+item,date%0,quantity,price
+A,20081201,1,10
+B,20081201,4,40
+$ more ./dat/20081202.csv
+item,date%0,quantity,price
+A,20081202,2,20
+$ more ./dat/20081203.csv
+item,date%0,quantity,price
+A,20081203,3,30
+B,20081203,5,50
+\end{Verbatim}

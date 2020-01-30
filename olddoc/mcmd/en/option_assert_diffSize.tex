@@ -1,0 +1,28 @@
+
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\subsection{-assert\_diffSize Compare numbers of inputs and outputs\label{sect:option_assert_diffSize}}
+
+Specify this option to compare the numbers of the input and output files. 
+When the numbers do not match, the \verb|“#WARNING# ; the number of lines is different”| message is shown.
+
+\subsection*{Example}
+\input{examples/tex/option_assert_diffSize_ex.tex}
+
+\subsubsection*{Related commands}
+This option can be used for all commands except for the following: \\
+\hyperref[sect:marff2csv]{marff2csv},
+\hyperref[sect:mchkcsv]{mchkcsv},
+\hyperref[sect:mcsv2arff]{mcsv2arff},
+\hyperref[sect:mnewnumber]{mnewnumber},
+\hyperref[sect:mnewrand]{mnewrand},
+\hyperref[sect:mnewstr]{mnewstr},
+\hyperref[sect:msep]{msep},
+\hyperref[sect:msep2]{msep2},
+\hyperref[sect:mtee]{mtee},
+\hyperref[sect:mxml2csv]{mxml2csv}\\
+
+%\end{document}

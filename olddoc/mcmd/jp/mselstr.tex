@@ -1,0 +1,206 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mselstr 文字列による行選択\label{sect:mselstr}}
+\index{mselstr@mselstr}
+\verb|f=|で指定した項目の値が、\verb|v=|で指定した文字列に一致すれば、その行を選択する。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型例を表\ref{tbl:mselstr_input}〜\ref{tbl:mselstr_out2}に示す。
+表\ref{tbl:mselstr_out1}では\verb|key|に関係なく\verb|val|が\verb|"y"|である行を選択する。
+表\ref{tbl:mselstr_out2}では、\verb|val|が\verb|"x"|の行を含んでいる同一キーの行全て、
+すなわち\verb|key|項目が\verb|"a"|である行全てを選択する。
+すなわち\verb|key|項目が\verb|"b"|の行はいずれも\verb|"x"|を含んでいないので選択されない。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.18\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mselstr_input}}
+{\small
+\begin{tabular}{cc}
+\hline
+key&val \\
+\hline
+a&x \\
+a&y \\
+b&y \\
+b&z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{f=val v=y\label{tbl:mselstr_out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&y \\
+b&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{k=key f=val v=x\label{tbl:mselstr_out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&x \\
+a&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+また、以下に示すように多様な選択条件を指定することも可能である。
+このコマンドで指定できない複雑な条件(例えば正規表現など)を設定するのであれば
+\hyperref[sect:msel]{msel}コマンドを利用すればよい。
+
+\begin{itemize}
+\item \verb|v=|に複数の文字列を指定すれば、いずれかの文字列にマッチすれば選択される。
+\item \verb|f=|に複数項目を指定すれば、いずれかの項目の値がマッチすれば選択される。
+\item 複数項目のマッチ条件をAND条件とすることも可能(\verb|-F|オプション)。
+\item 完全一致だけでなく、先頭一致、末尾一致、部分一致の指定も可能(\verb|-head,-tail,-sub|オプション)。
+\item \verb|k=|を指定することでキー単位で選択することが可能。
+\item キー単位選択の場合、複数レコードのAND条件を指定可能(\verb|-R|オプション)。
+\end{itemize}
+
+いま同じキーのデータとして２項目２行からなるデータ(表\ref{tbl:mselstr_input2})に対して、
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+mselstr k=key f=fld1,fld2 v=s1,s2
+\end{Verbatim}
+を実行した場合、
+オプション\verb|-R,-F|の指定の有無によるマッチ条件を表\ref{tbl:mselstr_cond}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+
+\caption{入力データ\label{tbl:mselstr_input2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+$\verb|key|$ & $\verb|fld1|$ & $\verb|fld2|$ \\
+\hline
+k & $v_{a1}$ & $v_{a2}$ \\
+k & $v_{b1}$ & $v_{b2}$ \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\caption{表\ref{tbl:mselstr_input2}で示されるデータに、
+mselstr k=key f=fld1,fld2 v=v1,v2を実行した時の、
+-R,-Fオプションの指定の有無によるマッチ条件の違い。
+条件にマッチすれば全行(２行)出力され、アンマッチなら
+１行も出力されない。\label{tbl:mselstr_cond}}
+{\footnotesize
+\begin{tabular}{ccl}
+\hline
+\verb|-F| & \verb|-R| & マッチ条件 \\
+\hline
+   &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+   & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+\hline
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mselstr f= v= [k=]  [u=] [-F] [-r] [-R] [-sub] [-head] [-tail] [-W]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|f=|    & 検索対象となる項目名リスト(複数項目指定可)を指定する。\\
+\verb|v=|    & \verb|f=|パラメータで指定した項目の値が、ここで指定した文字列リスト(複数項目指定可)の1つにマッチすれば選択される。 \\
+%\verb|k=|    & 選択する単位となるキー項目(複数項目指定可)を指定する。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|k=|    & 選択する単位となるキー項目(複数項目指定可)を指定する。\\
+\verb|o=|    & 指定の条件に一致する行を出力するファイル名を指定する。 \\
+\verb|u=|    & 指定の条件に一致しない行を出力するファイル名を指定する。\\
+\verb|-F|    & \verb|f=| パラメータで複数項目を指定した場合、その全ての値がマッチする行を撰択する。\\
+\verb|-r|    & 条件反転\\
+             & 選択ではなく削除する。\\
+\verb|-R|    & \verb|k=| パラメータを指定した場合、その全ての行がマッチすれば行を撰択する。\\
+\verb|-sub|  & 検索を完全一致ではなく部分文字列マッチで比較する。\\
+             & すなわち、\verb|f=|パラメータで指定した項目の値に、\\
+             & \verb|v=|パラメータで指定の文字列が部分文字列として含まれていればその行を撰択する。\\
+\verb|-head| & 先頭文字列マッチオプション\\
+\verb|-tail| & 末尾文字列マッチオプション\\
+\verb|-W|    & \verb|-sub|,\verb|-head|,\verb|-tail|オプションが指定されているときにワイド文字として部分文字列マッチをおこなう。\\
+\verb|bufcount=| & バッファのサイズ数を指定する。 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mselstr_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:msel] {msel} : より複雑な条件で行選択を行う。
+
+\hyperref[sect:mcommon] {mcommon} : 選択対象となる文字列の数が多いときは、参照ファイルを用意することで\verb|mcommon|コマンドが使える。
+
+%\end{document}

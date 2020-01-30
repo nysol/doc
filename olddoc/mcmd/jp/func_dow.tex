@@ -1,0 +1,30 @@
+
+%\begin{document}
+
+\section{dow 曜日\label{sect:dow}}
+\index{dow@dow}
+
+書式1: dow($date$) 曜日番号(1〜7)
+
+書式2: dow($time$) 曜日番号(1〜7)
+
+書式3: dowj($date$) 日本語曜日
+
+書式4: dowj($time$) 日本語曜日
+
+書式5: dowe($date$) 英語曜日
+
+書式6: dowe($time$) 英語曜日
+
+書式7: dowes($date$) 英語短縮曜日
+
+書式8: dowes($time$) 英語短縮曜日
+
+日付$date$もしくは時刻$time$から曜日を返す。
+曜日の表記によって書式1〜8を使い分ける。
+曜日番号は、ISO8601の規定に従い、1が月曜日で7が日曜日に対応する。
+\subsection*{利用例}
+\input{examples/tex/func_dow_ex}
+
+%\end{document}
+

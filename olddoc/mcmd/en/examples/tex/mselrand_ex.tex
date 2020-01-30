@@ -1,0 +1,66 @@
+\subsubsection*{Example 1: Basic Example}
+
+Randomly select 1 transaction for each customer.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+$ mselrand k=Customer c=1 S=1 i=dat1.csv o=rsl1.csv
+#END# kgselrand S=1 c=1 i=dat1.csv k=Customer o=rsl1.csv
+$ more rsl1.csv
+Customer%0,Date,Amount
+A,20081201,10
+B,20081002,40
+\end{Verbatim}
+\subsubsection*{Example 2: Randomly select a percentage of records}
+
+Select 50\% of each customers' records at random. Save other records to a separate file \verb|oth.csv|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mselrand k=Customer p=50 S=1 u=oth2.csv i=dat1.csv o=rsl2.csv
+#END# kgselrand S=1 i=dat1.csv k=Customer o=rsl2.csv p=50 u=oth2.csv
+$ more rsl2.csv
+Customer%0,Date,Amount
+A,20081201,10
+B,20081002,40
+$ more oth2.csv
+Customer%0,Date,Amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+\end{Verbatim}
+\subsubsection*{Example 3: Select records by same key}
+
+In the following example, select two out of the four customers \verb|A,B,C,D| at random.
+Customer \verb|C,D| is selected, and all records of customer \verb|C,D| is printed to the output.
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+C,20081210,60
+D,20081201,70
+D,20081205,80
+D,20081209,90
+$ mselrand k=Customer c=2 S=1 -B i=dat2.csv o=rsl3.csv
+#END# kgselrand -B S=1 c=2 i=dat2.csv k=Customer o=rsl3.csv
+$ more rsl3.csv
+Customer%0,Date,Amount
+C,20081210,60
+D,20081201,70
+D,20081205,80
+D,20081209,90
+\end{Verbatim}

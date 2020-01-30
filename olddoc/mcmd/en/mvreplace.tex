@@ -1,0 +1,151 @@
+
+%\begin{document}
+%\usepackage{comment}
+
+\section{mvreplace - Replace an Element in Vector\label{sect:mvreplace}}
+\index{mvreplace@mvreplace}
+Replace vector data with corresponding taxonomy character in the reference file joined by key. Table \ref{tbl:mvreplace_input} shows items in a vector with sequential elements separated by a space.
+
+%\begin{comment}
+ The examples are highlighted in Table \ref{tbl:mvreplace_input} - \ref{tbl:mvreplace_out3}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvreplace_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Reference file\label{tbl:mvreplace_ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{cc}
+\hline
+item&taxo \\
+\hline
+a&X \\
+b&Y \\
+c&Z \\
+e&X \\
+f&Z \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:mvreplace_out2}}
+\verb|vf=items m=ref.csv K=item f=taxo| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&X Y Z \\
+2&X d \\
+3&Y Z X Z \\
+4&Z Z d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.50\hsize}
+\begin{center}
+\caption{Define unmatched elements \label{tbl:mvreplace_out3}}
+\verb|vf=items m=ref.csv K=item f=taxo n=* | \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&X Y Z \\
+2&X * \\
+3&Y Z X Z \\
+4&Z Z * \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Since the \verb|mvreplace| command reads the whole reference file at once in memory, note that huge reference file may consume massive amount of memory, .
+%\end{comment}
+
+\subsection*{Format}
+\verb/mvreplace vf= K= f= [n=] m= [-A] /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the field name of vector (from input file \verb|i=|). \\
+           & Multiple fields can be specified. Sorting on vectors is not required. \\
+\verb|m=|  & Reference file  \\
+\verb|K=|  &  Key field in reference file (\verb|m=|) where corresponding taxonomy elements are joined with vector items. \\
+           & The sequence of the vector is unique, sorting is not required. \\
+           & The output may differ if the string sequence is not unique.  \\ 
+\verb|f=|  & Field name of vector for joining.\\
+\verb|n=|  & Specify the replacement character when the elements that do not match in \verb|vf=| and \verb|K=| . \\
+& The element will not be joined with the reference file when this option not specified.  \\
+\end{tabular}
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mvreplace_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:mvjoin]{mvjoin} : Use \verb|mvjoin| to combine the elements instead of replacing elements. 
+
+%\end{document}

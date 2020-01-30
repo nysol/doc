@@ -1,0 +1,139 @@
+\subsubsection*{Example 1: Basic Example}
+
+Replace the 4-digit substring in the \verb|zipCode| field starting 00 with \verb|####|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,zipCode
+A,6230041
+B,6240053
+C,6330032
+D,6230087
+E,6530095
+$ msed f=zipCode c=00.. v=#### i=dat1.csv o=rsl1.csv
+#END# kgsed c=00.. f=zipCode i=dat1.csv o=rsl1.csv v=####
+$ more rsl1.csv
+customer,zipCode
+A,623####
+B,624####
+C,633####
+D,623####
+E,653####
+\end{Verbatim}
+\subsubsection*{Example 2: Specify field name}
+
+Replace the 4-digit substring in the \verb|zipCode| field starting 00 with \verb|####|. Save output in column \verb|zipCode4|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=zipCode:zipCode4 c='00\d\d' v=#### i=dat1.csv o=rsl2.csv
+#END# kgsed c=00\d\d f=zipCode:zipCode4 i=dat1.csv o=rsl2.csv v=####
+$ more rsl2.csv
+customer,zipCode4
+A,623####
+B,624####
+C,633####
+D,623####
+E,653####
+\end{Verbatim}
+\subsubsection*{Example 3: Global replacement}
+
+Global search using the regular expression \verb|-| to replace value of \verb|0| in \verb|zipCode|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=zipCode c=0 v=- -g i=dat1.csv o=rsl3.csv
+#END# kgsed -g c=0 f=zipCode i=dat1.csv o=rsl3.csv v=-
+$ more rsl3.csv
+customer,zipCode
+A,623--41
+B,624--53
+C,633--32
+D,623--87
+E,653--95
+\end{Verbatim}
+\subsubsection*{Example 4: Replace substring}
+
+Delete \verb|fruit| from the beginning of the string in \verb|item|. Note that when first match (\verb|^|) is specified, the substring within the word \verb|grapefruit| in the last row is retained.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+item,price
+fruit:apple,100
+fruit:peach,250
+fruit:pineapple,300
+fruit:orange,450
+fruit:grapefruit,500
+$ msed f=item c='^fruit' v= -g i=dat2.csv o=rsl4.csv
+#END# kgsed -g c=^fruit f=item i=dat2.csv o=rsl4.csv v=
+$ more rsl4.csv
+item,price
+:apple,100
+:peach,250
+:pineapple,300
+:orange,450
+:grapefruit,500
+\end{Verbatim}
+\subsubsection*{Example 5: Substitution using match results}
+
+Replaced 1 or more consecutive character strings of \verb|b| using \verb|$&| is defined in the \verb|v=|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+str1
+abc
+abbc
+ac
+$ msed f=str1 c='b+' v='#$&#' i=dat3.csv o=rsl5.csv
+#END# kgsed c=b+ f=str1 i=dat3.csv o=rsl5.csv v=#$&#
+$ more rsl5.csv
+str1
+a#b#c
+a#bb#c
+ac
+\end{Verbatim}
+\subsubsection*{Example 6: Combination of the global match}
+
+When performing a global match, each match is evaluated against the contents defined at \verb|v=|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v='#$&#' -g i=dat3.csv o=rsl6.csv
+#END# kgsed -g c=b f=str1 i=dat3.csv o=rsl6.csv v=#$&#
+$ more rsl6.csv
+str1
+a#b#c
+a#b##b#c
+ac
+\end{Verbatim}
+\subsubsection*{Example 7: Prefix substitution}
+
+Replace the matching first character of b in the character string (prefix) using \verb|$`|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v='#$`#' i=dat3.csv o=rsl7.csv
+#END# kgsed c=b f=str1 i=dat3.csv o=rsl7.csv v=#$`#
+$ more rsl7.csv
+str1
+a#a#c
+a#a#bc
+ac
+\end{Verbatim}
+\subsubsection*{Example 8: Suffix substitution}
+
+Replace the matching last character of b in the character string (suffix) using \verb|$'|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v="#$'#" i=dat3.csv o=rsl8.csv
+#END# kgsed c=b f=str1 i=dat3.csv o=rsl8.csv v=#$'#
+$ more rsl8.csv
+str1
+a#c#c
+a#bc#bc
+ac
+\end{Verbatim}

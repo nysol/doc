@@ -1,0 +1,23 @@
+\subsubsection*{例1: 基本例}
+
+「顧客」項目を単位に「数量」と「金額」項目の中央値・平均値を求める。
+統計量を求めた項目名は「変数」という項目に出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ msummary k=顧客 f=数量,金額 c=median:中央値,mean:平均値 a=変数 i=dat1.csv o=rsl1.csv
+#END# kgsummary a=変数 c=median:中央値,mean:平均値 f=数量,金額 i=dat1.csv k=顧客 o=rsl1.csv
+$ more rsl1.csv
+顧客%0,変数,中央値,平均値
+A,数量,1.5,1.5
+A,金額,15,15
+B,数量,1,1.666666667
+B,金額,15,15
+\end{Verbatim}

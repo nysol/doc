@@ -1,0 +1,24 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{tmpPath= Path name of temporary file\label{sect:option_tmpPath}}
+
+Specify the name of the directory which stores the temporary files for use by the command.
+For example, the results from \verb|msortf| is saved as a temporary file during partitioned sort. If the path is not specified, the file is saved in \verb|/tmp|. The name of temporary files begins with \verb|__KGTMP|.
+
+The temporary files are deleted if the command terminates normally (includes termination by exit signal, or termination by signal from MCMD signal). Temporary files will be retained in the directory when the program is terminated unexpectedly by power outage or bug.
+
+Depending on the amount of data, enormous amount of temporary data may be generated (more than 1 million files). This will significantly slow down the execution of commands, therefore, clean out the files in the temporary path on a regular basis. Currently there is no plans to implement functions for garbage collection to remove objects no longer used by the program.
+
+The temporary directory can be changed by setting the environment variable \verb|KG_Tmp_Path|, however, the same variable applies to the execution of all commands. 
+
+
+\subsection*{Examples}
+\input{examples/tex/option_tmppath_ex.tex}
+
+\subsubsection*{Related commands}
+This applies to commands such as \hyperref[sect:msortf]{msortf} and \hyperref[sect:mselstr]{mdelnull} which select records by key field,  and commands such as \hyperref[mbucket]{mbucket}, \hyperref[mnjoin]{mnjoin}, and \hyperref[mshare]{mshare} that require multiple pass scanning based on key field.
+
+%\end{document}
+

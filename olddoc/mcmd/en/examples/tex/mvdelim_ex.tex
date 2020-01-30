@@ -1,0 +1,33 @@
+\subsubsection*{Example 1: Basic Example}
+
+Replace the default space delimiter to \verb|_|(underscore).
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item1
+b a c
+c c
+e a a
+$ mvdelim vf=item1 v=_ i=dat1.csv o=rsl1.csv
+#END# kgvdelim i=dat1.csv o=rsl1.csv v=_ vf=item1
+$ more rsl1.csv
+item1
+b_a_c
+c_c
+e_a_a
+\end{Verbatim}
+\subsubsection*{Example 2: Comma}
+
+In CSV data with comma delimited characters, when the delimiter of vector is replaced as comma, the entire vector is enclosed in double quotes to differentiate from the delimiter of CSV.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelim vf=item1 v=, i=dat1.csv o=rsl2.csv
+#END# kgvdelim i=dat1.csv o=rsl2.csv v=, vf=item1
+$ more rsl2.csv
+item1
+"b,a,c"
+"c,c"
+"e,a,a"
+\end{Verbatim}

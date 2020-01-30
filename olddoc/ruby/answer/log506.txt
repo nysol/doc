@@ -1,0 +1,5 @@
+a,b
+x,2
+x,5
+y,2
+test.rb:650:in `run': it cannot be executed just once RuntimeError

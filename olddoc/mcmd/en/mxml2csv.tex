@@ -1,0 +1,149 @@
+%\begin{document}
+
+\section{mxml2csv - Convert XML to CSV \label{sect:mxml2csv}}
+\index{mxml2csv@mxml2csv}
+Convert XML formatted data to CSV.
+The basic rule of conversion is by specifying the element as unit of each record (XML tag) and the element corresponding to the column (or attribute) at the parameters \verb|k=|, \verb|f=|.
+The value of the column can be specified in four ways :  text bounded by elements, presence of elements, the value of the attribute, presence of attributes.
+
+When SAX is used as the parser of XML, there is no size constraints of XML.
+If  other encoding besides UTF-8 is used in the XML file, the XML file is converted to UTF-8 and output as CSV.
+XML data should be structured in a complete, well-formed XML document. Otherwise, the program may return unexpected processing results.
+
+Table \ref{tbl:mxml2csv_input} shows a typical format of XML data.
+More details are explained in the next section, however, a brief outline is illustrated as follows.
+
+Table \ref{tbl:mxml2csv_out1} shows the returned output. Element  \verb|<b>| is used as the key unit of each record  (the element is referred to as "key element"). The column is defined by the attribute of element \verb|b| for the value of \verb|att|  (CSV column name \verb|b_att|). The attributes of element \verb|c| includes the value of \verb|p| (\verb|b_p|) and flag (\verb|b_p_f|), as well as the text inside element \verb|d| and \verb|a| (\verb|d|, \verb|a|).  
+
+Here, the flag indicates the presence of specified elements or attributes by the value 0-1 in the output.
+The text output of the element includes the concatenation of all strings in the range within specified element. However, note that the spaces and the control characters are not included in the output.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.4\hsize}
+\caption{input XML data\label{tbl:mxml2csv_input}}
+\begin{verbatim}
+<a att="aa">
+  <b att="bb1">
+    <c p="pp1" q="qq1"/>
+    <d>text1</d>
+  </b>
+  <b att="bb2">
+    <c q="qq2"></c>
+    <d>text2</d>
+  </b>
+  <b>
+    <c p="pp3"/>
+    <d>text3</d>
+  </b>
+</a>
+\end{verbatim}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{key:/a/b, item:b@att,c@p,d,/a\label{tbl:mxml2csv_out1}}
+{\small
+\begin{tabular}{lllll}
+\hline
+b\_att&c\_p&c\_p\_f&d&a \\
+\hline
+bb1&pp1&1&text1&text1 \\
+bb2&&&text2&text1text2 \\
+&pp3&1&text3&text1text2text3 \\
+
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{Specifying the key element}
+Specify the key element as the key unit of each record  (specified in the parameter \verb|k=|) with an absolute path.
+The absolute path is defined from the root directory starting from the symbol (\verb|'/'|), the hierarchy of elements is separated by the sign \verb|'/'|. The role of the key elements in this command is to perform the following two functions corresponding to the end tag of the key elements.
+
+\begin{itemize}
+\item Output one row of column data. In the example above, the end tag of the key elements \verb|</b>|  has appeared three times, one row of CSV data is inserted as a new line for every instance in the output.
+
+\item Initialize the column data. However, it does not initialize the column elements outside the key elements in the output data.
+In Table \ref{tbl:mxml2csv_out1},  the text in the output of element \verb|a| will be consolidated, even when the end tag of the key elements has emerged, the element \verb|/a| is outside the key elements \verb|/a/b|. As a result, the output data is not initialized.
+\end{itemize}
+
+\subsubsection*{Specifying the elements in output column }
+If the element defined at \verb|f=| is returned as a CSV field in the output, follow the format shown below. 
+
+\verb|Element path[%flag]: CSV field name|
+
+"Field name" is the column name in the CSV output which must be specified.
+
+There are two methods to display elements as columns in the output.
+The first method is to return the text enclosed by the opening and closing tags of the specified element.
+The other method is to return 0-1 value to indicate whether the specified element exists.
+The target element path is defined in the former method, and the the flag \verb|%f| is added when using the latter method.
+
+The two methods of specifying the element path include absolute and relative paths. 
+A relative path can be specified by defining the path from elements at k=.
+Table \ref{tbl:mxml2csv_input} shows examples on how to specify the element paths of the XML data. 
+
+\begin{itemize}
+\item Given \verb|k=/a/b|, when \verb|f=:B| is specified, the key elements is the same when relative path is nil. \verb|B| is the column name of CSV.
+
+\item Given \verb|k=/a/b|, \verb|f=c:C| and \verb|f=/a/b/c:C| performs the same function. The former is specified by relative path, while the latter by an absolute path. The CSV field name is defined as \verb|C| for both methods.
+
+\item \verb|f=d:D| returns the text within the element \verb|d|.
+\verb|f=d%f:D returns output when element \verb|d| exists. The field name of CSV is \verb|D|.
+
+\item When \verb|k=/a/b|, it is assumed that \verb|f=/a:A|, the column element is outside the key element, the text contained in the element \verb|a| are combined in sequential order.
+The end tag of the key element exists, however, the end tag of the field element does not exists, this is because data is not cleared at the time.
+\end{itemize}
+
+\subsubsection*{Specifying attributes in output column}
+If the attribute  defined at \verb|f=| is returned as a CSV column, use the format shown below.
+
+\verb|Element path@Element name[%flag]:CSV field name|
+
+"Field name" is the column name in the CSV output which must be specified.
+
+The method of specifying the element path is the same as specifying the elements in the output field. The attribute name is specified after the element path connected with \verb|@|. By adding \verb|%f| after the element name, the presence of the element can be indicated by 0-1 value in the output.
+
+\subsection*{Format}
+\verb|mxml2csv k= f= [i=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify the pathname from the root based on the element as the unit of records.\\
+             & The path starts from the root symbol '/', and the specified elements are connected with '/'.\\
+             & Example: /article/sentence/chunk \\
+\verb|f=|    & Specify the element or attribute as fields in the output by delimiting the field names with comma.\\
+             & Format is as follows. \\
+             & \verb|Element path[%flag]:CSV field name|\\
+             & \verb|Element path@Element name[%flag]:CSV field name|\\
+\verb|i=|    & Specify the file name of XML data. The input is read from standard input by default when the input file is not specified.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mxml2csv_ex.tex}
+\subsection*{Related command}
+
+%\end{document}

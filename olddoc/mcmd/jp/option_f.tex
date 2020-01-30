@@ -1,0 +1,24 @@
+
+%\begin{document}
+
+\subsection{f= 入出力項目名\label{sect:option_f}}
+
+処理対象となる入力項目名の指定をおこなう。
+例えば、mcutにおいては「選択される項目名」、maggにおいては「集計される項目名」、mjoinにおいては「結合される項目名」を指定する。
+また複数の項目名は、\verb|f=a,b,c|のようにカンマで区切って指定する。
+
+さらに、指定された項目毎に出力項目名を指定できるコマンドもある。
+出力項目名は、\verb|f=a:A,b:B|のように、入力項目名の後にコロンで区切って指定する。
+出力項目名が省略されたときは、入力項目名と同じ項目名が利用される。
+
+\subsection*{利用例}
+\input{examples/tex/option_f_ex.tex}
+
+\subsubsection*{対応コマンド}
+\hyperref[sect:mcut]{mcut},
+\hyperref[sect:msum]{msum},
+\hyperref[sect:mcat]{mcat},
+\hyperref[sect:mjoin]{mjoin}など
+
+%\end{document}
+

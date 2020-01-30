@@ -1,0 +1,23 @@
+
+%\begin{document}
+
+\section{uxt UNIX時刻変換\label{sect:uxt}}
+\index{uxt@uxt}
+
+書式1: uxt($date$)
+
+書式2: uxt($time$)
+
+書式3: uxt2d($num$)
+
+書式4: uxt2t($num$)
+
+書式1,2では、日付$date$もしくは時刻$time$をUNIX時刻に変換する。
+逆に書式3,4では、UNIX時刻を日付型もしくは時刻型に変換する。
+ここで、日付型が与えられたときは、その日の最初の時刻である\verb|00:00:00|として計算される。
+
+\subsection*{利用例}
+\input{examples/tex/func_uxt_ex}
+
+%\end{document}
+

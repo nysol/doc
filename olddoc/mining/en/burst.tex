@@ -1,0 +1,470 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+%\documentclass[a4paper]{article}
+
+
+
+\section{burst.rb - Burst Detection Command\label{sect:burst}} 
+
+\index{burst@burst}
+
+Detection of burst state is used for analyzing a given series of data, Hidden Markov Model (HMM) is used as the algorithm. 
+The phenomenon assumes probability distributions are used to describe the state transitions in two modes, namely steady-state and burst states, and returns the likelihood that maximizies all possible state sequences for the given data.
+Different types of probability distributions can be specified, such as Exponential distribution, Poisson distribution, Normal distribution, and Binomial distribution. Details is shown in the next section.
+
+The input data shown in Table \ref{tbl:inp1} is a numerical sequenced data (val item).
+Other fields (such as id)  are not used for burst detection.
+Since the burst column from the input data is included in the output data (Table \ref{tbl:rslPoi}), thus, only include necessary items in the input data.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{llll}
+
+\begin{minipage}{0.12\hsize}
+\begin{center}
+\caption{Input\label{tbl:inp1}}
+{\small
+\begin{tabular}{cc}
+\hline
+id&val\\
+\hline
+a01&1\\
+a02&1\\
+a03&4\\
+a04&1\\
+a05&1\\
+a06&10\\
+a07&7\\
+a08&4\\
+a09&5\\
+a10&8\\
+a11&12\\
+a12&1\\
+a13&1\\
+a14&1\\
+a15&6\\
+a16&8\\
+a17&2\\
+a18&8\\
+a19&2\\
+a20&3\\
+a21&4\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Poisson distribution burst\label{tbl:rslPoi}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&val&burst \\
+\hline
+a01&1&0 \\
+a02&1&0 \\
+a03&4&0 \\
+a04&1&0 \\
+a05&1&0 \\
+a06&10&1 \\
+a07&7&1 \\
+a08&4&0 \\
+a09&5&0 \\
+a10&8&1 \\
+a11&12&1 \\
+a12&1&0 \\
+a13&1&0 \\
+a14&1&0 \\
+a15&6&0 \\
+a16&8&1 \\
+a17&2&0 \\
+a18&8&1 \\
+a19&2&0 \\
+a20&3&0 \\
+a21&4&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{Exponential distribution burst\label{tbl:rslExp}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&val&burst \\
+\hline
+a01&1&1 \\
+a02&1&1 \\
+a03&4&1 \\
+a04&1&1 \\
+a05&1&1 \\
+a06&10&0 \\
+a07&7&0 \\
+a08&4&0 \\
+a09&5&0 \\
+a10&8&0 \\
+a11&12&0 \\
+a12&1&1 \\
+a13&1&1 \\
+a14&1&1 \\
+a15&6&0 \\
+a16&8&0 \\
+a17&2&0 \\
+a18&8&0 \\
+a19&2&0 \\
+a20&3&0 \\
+a21&4&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Normal distribution burst\label{tbl:rslGauss}}
+{\small
+\begin{tabular}{crc}
+\hline
+id&value&burst \\
+\hline
+b01&1&0 \\
+b02&-4&0 \\
+b03&-2&0 \\
+b04&1&0 \\
+b05&1&0 \\
+b06&10&0 \\
+b07&7&0 \\
+b08&2&0 \\
+b09&5&0 \\
+b10&8&1 \\
+b11&10&1 \\
+b12&1&0 \\
+b13&1&0 \\
+b14&1&0 \\
+b15&7&0 \\
+b16&-8&-1 \\
+b17&-3&-1 \\
+b18&5&0 \\
+b19&1&0 \\
+b20&1&0 \\
+b21&1&0 \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+Assume that the number of events in this data series is measured based on time factor (for example, the number email arrived per hour), burst detection can be generated from  Poisson distribution (Table \ref{tbl:rslPoi}).
+In addition, given intervals between events (For example, the interval of seconds of arrivals of mail), burst detection is typically generated from a exponential distribution (Table \ref{tbl:rslExp}).
+Furthermore, given an error series (such as stock price trends), burst detection could be generated from normal distribution (Table \ref{tbl:rslGauss}).
+Thus, it is possible to use the same input data to carry out different burst detections depending on the distribution methods. The choice of distribution method is determined by the application to the problem.
+
+\subsection*{Format}
+\begin{verbatim}
+burst.rb i= f= dist= [o=] [d=] [s=] [p=] [param=] [pf=] [n=] [nf=] [v=] [nv=] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|i=|     & : Input file name [required paramenter]  \\
+\verb|o=|     & : Output file name [optional: to standard output by default ]\\
+\verb|d=|     & :  Debug information file [optional] \\
+\verb|dist=|  & : Type of distribution (exp:exponential distribution,poisson:Poisson distribution,gauss:normal distribution,\\
+&   binom:binomial distribution) [required parameter] \\
+\verb|f=|     & : Numeric field name of the target for burst detection  (field names in i=) [required parameter]  \\
+\verb|param=| & : Parameters of distribution at steady-state. See note 1 [optional] \\
+\verb|pf=|    & : Field name(s) of the parameters of distribution at steady-state (field names in i=) See note 1 [optional] \\
+\verb|s=|     & : Burst scale (extreme burst can be detected if this value is increased. See note 1 for details) \\
+&   [optional : default value=2.0] \\
+\verb|p=|     & : Probability of same state transition (it is difficult to transition to a different state by increasing this value. \\
+	& See note 2 for details) [optional : default value =0.6] \\
+\verb|n=|     & : Number of trials when dist=binom [Specify n= or nf=] \\
+\verb|nf=|    & : Field name of the number of trials when  dist=binom \\
+\verb|v=|     & : Variance value when  dist=gauss (if the value is not specified, the default value is estimated from the data \\
+	&   where the fields is defined at f= ) \\
+\verb|nv=|    & : Field name of the variance when dist=gauss \\
+\verb|--help| & : Display help information \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection*{Note 1}
+There are three ways to define parameters of distribution at steady-state as follows.
+\begin{enumerate}
+\item Specify the value at \verb|param=|.
+\item Use the value from the field specified at \verb|pf=|. This assumes that the time dependent on the parameter is different. 
+\item If \verb|para=| and \verb|pf=| is not specified, the calculation is automatically derived from the value specified in \verb|f=|.
+\end{enumerate}
+
+The method of calculation from the data as mentioned in the third method above differs according to different distribution.
+Nevertheless, $S$ is the value specified by \verb|s=|, $n$= is the number of data, $x_i$ is the $i$-th row of value of the item specified by \verb|f=|.
+
+\begin{table}[htbp]
+{\small
+\begin{center}
+\begin{tabular}{lllll}
+\hline
+Distribution & Probability (density) function & Parameter (par) & Steady-state par & Burst state par\\
+\hline
+exp & $f(x)=\lambda e^{-\lambda x}$
+    & $\lambda$:Average number of events
+    & $\lambda_0=N/\sum_{i}x_i$
+    & $\lambda_1=S \lambda_0$ \\
+poisson & $f(x)=\frac{\lambda^x e^{-λ}}{x!}$ 
+        & $\lambda$:Average number of events
+        & $\lambda_0=\frac{1}{N}\sum_i x_i$
+        & $\lambda_1=S \lambda_0$ \\
+gauss   & $f(x)= \frac{1}{\sqrt{2\pi \sigma^2}} e^{-(x-\mu)^2/2\sigma^2}$
+        & $\mu$Average
+        & $\mu_0=\frac{1}{N}\sum_i x_i$
+        & $\mu_\pm =\mu_0 \pm S\sqrt{\sigma^2}$ * \\
+binom   &$f(x)={}_n C_x p^x(1-p)^{n-x}$
+        &$p$:Success probability
+        &$p_0=\frac{1}{Nn}\sum_i x_i$ **
+        &$p_1=S/(\frac{1-p_0}{p_0}+S)$ \\
+\hline
+\end{tabular} 
+\\
+ **$\sigma^2=\frac{\sum(x_i-m)^2}{N-1}$\\
+ ***$n$ is specified by \verb|n=|.
+\end{center}
+}
+\end{table} 
+
+\subsubsection*{Note 2}
+When $p$ is assumed as the probability specified by \verb|p=|, the probability of state transition is set as follows.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{State transition probability of exp, poisson, binom\label{tbl:initProb}}
+{\small
+\begin{tabular}{ccc}
+\hline
+&steady-state&burst\\
+\hline
+steady-state & $p$   & $1-p$ \\
+burst & $1-p$ & $p$   \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{State transition probability of ingauss\label{tbl:initProb}}
+{\small
+\begin{tabular}{cccc}
+\hline
+& burst- &Steady-state&burst+\\
+\hline
+burst- & $p$                & $\frac{2}{3}(1-p)$ & $\frac{1}{3}(1-p)$ \\
+steady-state   & $\frac{1}{2}(1-p)$ & $p$                & $\frac{1}{2}(1-p)$ \\
+burst+ & $\frac{1}{3}(1-p)$ & $\frac{2}{3}(1-p)$ & $p$                \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+
+
+\subsection*{Explanation}
+\subsubsection*{Formulation}
+HMM (Hidden Malkov Model) is a probabilistic model that is built on the assumption of Markov process with hidden state that can not be observed directly.
+HMM is comprised of stochastic state transition model and data generation model. The observed data series follow the data generation model in hidden state.
+
+Time $t$ observed in data $x_t$  will be modelled according to the probability distribution$p(x_t|z_t;\boldsymbol{\phi})$ 
+that is defined hidden state $z_t\in \{1,2,\cdots,K\}$.
+$\boldsymbol{\phi}$ is the vector parameter of generation model, with the assumption that it is constant and does not depend on $t$.
+Furthermore, hidden state $z_t$ transitions depend on the previous state $z_{t-1}$, the probability distribution is shown in $p(z_t|z_{t-1};\mathbf{A})$.
+
+$\mathbf{A}=\{a_{i,j}|i,j=1,2,\cdots,K\}$ is the transition probability table from state $i$ to $j$ with the assumption that it is constant and does not depend on $t$.
+However, in $\sum_j a_{i,j}=1.0$, the initial state $z_1$ is assumed to follow the probability vector $\boldsymbol{\pi}$.
+
+From the above, the joint probability of the observed data series $X=x_1,x_2,\cdots,x_N$ and state series $Z=z_1,z_2,\cdots,z_N$ are given by the formula (\ref{eq:hmm}).\cite{Bishop2008}
+%
+{\footnotesize
+\begin{equation}
+p(\mathbf{X},\mathbf{Z};\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi})=p(z_1;\boldsymbol{\pi})
+\left[\prod_{i=2}^N p(z_i|z_{i-1};\mathbf{A})\right]
+\prod_{j=1}^N p(x_j|z_j;\boldsymbol{\phi})
+\label{eq:hmm}
+\end{equation}
+}\\
+In burst detection, $K=2$, i.e. assuming two states: steady state and burst, the observable data series can be obtained from the same probability distribution with different parameters in each state.
+
+In the burst detection problem, given the parameter $\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi}$, find $\mathbf{Z}^*$ to maximize the joint probability shown in the formula(\ref{eq:hmm}) at the time of observing the data series $\mathbf{X}$ (formula(\ref{eq:max})).
+
+\begin{equation}
+\mathbf{Z}^*=\argmax_{\mathbf{Z}}\; p(\mathbf{X},\mathbf{Z};\boldsymbol{\pi},\mathbf{A},\boldsymbol{\phi})
+\label{eq:max}
+\end{equation}
+
+
+\subsubsection*{Burst detection example of email}
+Corresponding to the above formula, the following example explains burst detection in relation to the number of emails arrived (Table \ref{tbl:inp1}).
+The objective here is to seek the hidden state sequence $\mathbf{Z}=z_1,z_2,\cdots,z_N$ ($z_i \in \{0,1|0 is steady-state,1 is $burst$state\}$) from the numeric sequence $\mathbf{X}=1,1,4,\cdots$ shown in Table \ref{tbl:inp1}.
+
+Consider the number of email arrivals as random variable, it will be appropriate to assume as Poisson distribution.  
+Poisson distribution takes the average number of arrivals $\lambda$ as parameter, and the probability function represent by the formula (\ref{eq:poi}).
+ 
+\begin{equation}
+f(x)=\frac{\lambda^x e^{-λ}}{x!}
+\label{eq:poi}
+\end{equation}
+
+The parameter $\lambda_0$ in steady-state is defined by the command parameters at \verb|param=| or \verb|pf=|. When the parameters are not specified, the parameter is specified by the average arrivals from the data specified at \verb|i=|.
+The calculation result of the average value of the field \verb|val| in Table \ref{tbl:inp1} is $\lambda_0=4.29$.
+Further, the parameter $\lambda_1$ in burst state is set as 2 times the normal state (8.58) unless otherwise specified. 
+The value can be changed by defining the value at \verb|s=|.
+
+From the above, the probability distribution of the state of the parameter vector is $\boldsymbol{\phi}=(4.29,8.58)$.
+Table \ref{tbl:poiProb} shows the probability of the numeric value of data series $\mathbf{X}$ from each state. 
+The probability of steady-state for numeric value "1" and "4" is high, and the probability of burst state for "10" is high.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{llr}
+
+\begin{minipage}{0.45\hsize}
+\begin{center}
+\caption{Probability of each state in Poisson distribution\label{tbl:poiProb}}
+{\small
+\begin{tabular}{crrr}
+\hline
+id&val&steady-state($\lambda=4.29$)&burst($\lambda=8.58$) \\
+\hline
+a01& 1&0.0590 & 0.0016\\
+a02& 1&0.0590 & 0.0016\\
+a03& 4&0.1935 & 0.0426\\
+a04& 1&0.0590 & 0.0016\\
+a05& 1&0.0590 & 0.0016\\
+a06&10&0.0079 & 0.1117\\
+a07& 7&0.0725 & 0.1278\\
+a08& 4&0.1935 & 0.0426\\
+a09& 5&0.1658 & 0.0730\\
+a10& 8&0.0389 & 0.1369\\
+a11&12&0.0011 & 0.0622\\
+a12& 1&0.0590 & 0.0016\\
+a13& 1&0.0590 & 0.0016\\
+a14& 1&0.0590 & 0.0016\\
+a15& 6&0.1185 & 0.1043\\
+a16& 8&0.0389 & 0.1369\\
+a17& 2&0.1264 & 0.0070\\
+a18& 8&0.0389 & 0.1369\\
+a19& 2&0.1264 & 0.0070\\
+a20& 3&0.1806 & 0.0199\\
+a21& 4&0.1935 & 0.0426\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+Next, let's consider state transition probability $p(z_i|z_{i-1};\mathbf{A})$. There are four combinations of transition in the two state. In this command, it is possible to provide the same probability values for the transition probabilities between the same states, the default value is 0.6 unless otherwise stated.
+In other words, $a_{0,0},a_{1,1}=0.6$. Further, the transition probabilities of different states are calculated by $a_{0,1},a_{1,0}=0.4$. The state transition probability $\mathbf{A}$ is shown in the formula below (\ref{eq:transMatrix}).
+
+\begin{equation}
+\mathbf{A}=\left(
+\begin{array}{cc}
+a_{0,0}=0.6 &a_{0,1}=0.4 \\
+a_{1,0}=0.4 &a_{1,1}=0.6 \\
+\end{array}
+\right)
+\label{eq:transMatrix}
+\end{equation}
+
+The probability vector of the initial state at the end is $\pi=(1.0,0.0)$, assuming that the initial state is a steady-state.
+From the above, the parameters $\mathbf{A},\boldsymbol{\phi},\boldsymbol{\pi}$ of the formula(\ref{eq:hmm}) are met. Next, find out the series of state $\mathbf{Z}^*$ to maximize the formula(\ref{eq:hmm}).
+
+Given the size of the data series $\mathbf{X}$ is 21, there are about $2^{21}=2 million$  combinations of state sequences for consideration. The optimal solution of long sequences can not be solved by brute force.
+Viterbi algorithm is a dynamic programming method for finding the most likely sequence of hidden states. Refer to specialized textbooks for detailed theoretical explanation, however this method generates state sequence as shown in Table \ref{tbl:rslPoi}.
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Example from the "Explanation" section above}
+
+\begin{verbatim}
+------------------------------------------------
+# inp1.csv
+id,val
+a01,1
+a02,1
+a03,4
+a04,1
+a05,1
+a06,10
+a07,7
+a08,4
+a09,5
+a10,8
+a11,12
+a12,1
+a13,1
+a14,1
+a15,6
+a16,8
+a17,2
+a18,8
+a19,2
+a20,3
+a21,4
+
+$ burst.rb i=inp1.csv f=val dist=poisson o=out1.csv
+
+# out1.csv
+id,val,burst
+a01,1,0
+a02,1,0
+a03,4,0
+a04,1,0
+a05,1,0
+a06,10,1
+a07,7,1
+a08,4,0
+a09,5,0
+a10,8,1
+a11,12,1
+a12,1,0
+a13,1,0
+a14,1,0
+a15,6,0
+a16,8,1
+a17,2,0
+a18,8,1
+a19,2,0
+a20,3,0
+a21,4,0
+------------------------------------------------
+\end{verbatim}
+
+%\begin{thebibliography}{9}
+%\bibitem{Bishop2008}
+%Christopher M. Bishop (2008) "Pattern Recognition and Machine Learning" Hiroshi Motoda, Takio Kurita, Tomoyuki Higuchi, Yuji Matsumoto, Noboru Murata eds.,"Pattern Recognition and Machine Learning" Chapter13, pp.323--370.
+%\end{thebibliography}
+
+%\end{document}
+

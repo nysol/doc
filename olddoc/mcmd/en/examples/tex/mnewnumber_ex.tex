@@ -1,0 +1,69 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate a dataset with 5 sequential numbers starting from 1 incremented by 1. Name the sequence as \verb|No.|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=1 S=1 l=5 o=rsl1.csv
+#END# kgNewnumber I=1 S=1 a=No. l=5 o=rsl1.csv
+$ more rsl1.csv
+No.
+1
+2
+3
+4
+5
+\end{Verbatim}
+\subsubsection*{Example 2: Change the starting number and interval }
+
+Generate a dataset consisting of 5 sequential numbers starting from 10 with an incremental interval of 5. Name the sequence as \verb|No.|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=5 S=10 l=5 o=rsl2.csv
+#END# kgNewnumber I=5 S=10 a=No. l=5 o=rsl2.csv
+$ more rsl2.csv
+No.
+10
+15
+20
+25
+30
+\end{Verbatim}
+\subsubsection*{Example 3: Generate series of alphabet}
+
+Generate a dataset consisting of 5 alphabet sequence starting from A with 1 alphabet in between. Name the sequence as \verb|No.|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber a=No. I=1 S=A l=5 o=rsl3.csv
+#END# kgNewnumber I=1 S=A a=No. l=5 o=rsl3.csv
+$ more rsl3.csv
+No.
+A
+B
+C
+D
+E
+\end{Verbatim}
+\subsubsection*{Example 4: Generate data without header}
+
+Generate a dataset consisting of 11 alphabet sequence starting from B with 3 alphabets in between. Exclude the header from the output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewnumber  -nfn  I=3 l=11 S=B o=rsl4.csv
+#END# kgNewnumber -nfn I=3 S=B l=11 o=rsl4.csv
+$ more rsl4.csv
+B
+E
+H
+K
+N
+Q
+T
+W
+Z
+AC
+AF
+\end{Verbatim}

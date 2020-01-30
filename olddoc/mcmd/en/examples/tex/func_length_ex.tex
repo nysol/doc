@@ -1,0 +1,50 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abc
+2,3.1415
+3,
+4,hello world!
+$ mcal c='length($s{str})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=length($s{str}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abc,3
+2,3.1415,6
+3,,0
+4,hello world!,12
+\end{Verbatim}
+\subsubsection*{Example 2: Include multibyte character}
+
+The following example uses Japanese in UTF-8 encoding. Each UTF-8 Japanese character is encoded in 3 bytes, thus, the length function returns the number of bytes rather than the number of Japanese characters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,str
+1,こんにちは
+2,大阪
+$ mcal c='length($s{str})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=length($s{str}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,こんにちは,15
+2,大阪,6
+\end{Verbatim}
+\subsubsection*{Example 3: Initialize wide character}
+
+The \verb|lengthw| function converts each wide characters internally into multibyte character for computation.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='lengthw($s{str})' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=lengthw($s{str}) i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,str,rsl
+1,こんにちは,5
+2,大阪,2
+\end{Verbatim}

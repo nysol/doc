@@ -1,0 +1,117 @@
+\subsubsection*{Example 1: Basic Example}
+
+Replace values in the column from \verb|"01"| to \verb|"A"|, \verb|"03"| to \verb|"B"|, \verb|"04"| to \verb|"C"|. Other values that do not match the criteria are returned as NULL values in the output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,item
+1,01
+2,02
+3,03
+4,04
+5,05
+$ mchgstr f=item c=01:A,03:B,05:C i=dat1.csv o=rsl1.csv
+#END# kgchgstr c=01:A,03:B,05:C f=item i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,item
+1,A
+2,
+3,B
+4,
+5,C
+\end{Verbatim}
+\subsubsection*{Example 2: Replace values outside the criteria}
+
+Use the \verb|O=| parameter to replace character string that do not match the substitution criteria to \verb|"out of range"| in the output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgstr f=item c=01:A,03:B,05:C O="out of range" i=dat1.csv o=rsl2.csv
+#END# kgchgstr O=out of range c=01:A,03:B,05:C f=item i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,item
+1,A
+2,out of range
+3,B
+4,out of range
+5,C
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Add new column in output}
+
+Define the name of new column (\verb|item info|) in output with \verb|-A| option.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgstr f=item:"item info" c=01:A,03:B,05:C O="out of range" -A i=dat1.csv o=rsl3.csv
+#END# kgchgstr -A O=out of range c=01:A,03:B,05:C f=item:item info i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,item,item info
+1,01,A
+2,02,out of range
+3,03,B
+4,04,out of range
+5,05,C
+\end{Verbatim}
+\subsubsection*{Example 4: Display original value in field falls outside the criteria}
+
+When \verb|-F| option is specified, output value of the field remains the same if it does not match any of the substitution criteria.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgstr f=item c=01:A,03:B,05:C -F i=dat1.csv o=rsl4.csv
+#END# kgchgstr -F c=01:A,03:B,05:C f=item i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+id,item
+1,A
+2,02
+3,B
+4,04
+5,C
+\end{Verbatim}
+\subsubsection*{Example 5: Replace matching substrings}
+
+Replace substring with \verb|-sub| option specified. In following example, values where \verb|item| field contains \verb|"01"| will be substituted with \verb|"A"|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,item
+1,0111
+2,0121
+3,0231
+4,0241
+5,0151
+$ mchgstr f=item c=01:A -sub i=dat2.csv o=rsl5.csv
+#END# kgchgstr -sub c=01:A f=item i=dat2.csv o=rsl5.csv
+$ more rsl5.csv
+id,item
+1,A11
+2,A21
+3,
+4,
+5,A51
+\end{Verbatim}
+\subsubsection*{Example 6: Wide character substring match}
+
+Use the option \verb|-W| to replace wide-characters strings. However, if you are using UTF-8 encoding, it is not necessary to define \verb|-W|. Refer to the section "\hyperref[sect:multibyte]{Multibyte characters}" for details.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+id,city
+1,奈良市
+2,下市町
+3,十津川村
+4,五條市
+5,山添村
+$ mchgstr f=city c=市:01,町:02,村:02 -sub -W i=dat3.csv o=rsl6.csv
+#END# kgchgstr -W -sub c=市:01,町:02,村:02 f=city i=dat3.csv o=rsl6.csv
+$ more rsl6.csv
+id,city
+1,奈良01
+2,下0102
+3,十津川02
+4,五條01
+5,山添02
+\end{Verbatim}

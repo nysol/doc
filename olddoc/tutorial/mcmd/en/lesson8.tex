@@ -1,0 +1,111 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 8: Remove duplicate rows}
+
+This command returns distinct (unique) values from the specified field. This technique is often used to create a master file with unique keys in the dataset. 
+
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|muniq.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Create a dataset with unique dates in each row.     \\
+
+Methodology: Select \emph{date} with \verb|mcut|, the result is sent to \verb|muniq| command which combines records with same key values into one unique record. Save the results to the file \verb|muniqout.csv|. \\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1.
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+The parameters for \verb|muniq| command are as follows: \\
+
+Key: 		\verb|k=date| \\
+Description: 	Define the field(s) at the \verb|k=| parameter where duplicate values for each row within the defined key will be removed. Multiple fields can be specified. 
+
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 8: Remove Duplicate Rows
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date                     i=${inPath}/dat.csv |
+msortf f=date                   |
+muniq k=date                    o=outdat/muniqout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./muniq.sh 
+#END# kgcut f=date i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/19 13:39:12
+#END# kgsortf f=date; IN=24737 OUT=24737; 2013/08/19 13:39:12
+#END# kguniq k=date o=outdat/muniqout.csv; IN=24737 OUT=324; 2013/08/19 13:39:12
+\end{verbatim}
+
+\noindent
+The result is as follows: 
+
+\begin{verbatim}
+date
+20010108
+20010110
+20010111
+20010116
+20010119
+20010123
+20010125
+20010128
+20010130
+20010131
+20010201
+20010203
+20010204
+20010205
+20010206
+20010208
+20010209
+20010211
+...
+..
+\end{verbatim}
+
+
+
+\subsection{Exercise }
+
+Let's practice the \verb|muniq| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Create a brand code master file & \href{exercise/muniq1.sh}{muniq1.sh} & \href{exercise/outdat/muniqout1.csv}{muniqout1.csv} \\
+2. Create a manufacturer master file & \href{exercise/muniq2.sh}{muniq2.sh} & \href{exercise/outdat/muniqout2.csv}{muniqout2.csv} \\
+
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

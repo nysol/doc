@@ -1,0 +1,32 @@
+
+\section{mgdiff.rb - Graph Difference\label{sect:mgdiff}}
+
+This command returns the difference between two general graph. 
+However, as of this version, this command can be used to compare presence and absence of edge in undirected graph.  
+
+\subsection{Format}
+\begin{verbatim}
+Format) mgdiff.rb i= f= m= [F=] [o=] [T=] [--help]
+
+  Specify File Name 
+  i= : File name of graph in edge data (node pair)
+  f= : Field name of the 2 nodes in edge data
+  m= : File name of reference graph (return the difference with this graph)
+  F= : Field name of 2 nodes connected to the edge  in the reference file  (this parameter is not required if it is the same as f=)
+  o= : Output file name
+       Output the edge (node pair) from graph 1 data and graph 2 data based on the following values.  
+        Field name: content
+        i    :  file name specified at i=  if there is connected pair in the row 
+       m    : file name specified at m= if there is connected pair in the row 
+        diff : Classification of state
+                1: only exist in graph specified at i=
+                0: exist in graph in both i=,m=
+               -1: only exist in graph specified at m=
+  T= : Working directory (default:/tmp)
+  --help : Help information
+\end{verbatim}
+
+\subsection{Examples}
+\input{examples/tex/mgdiff_ex.tex}
+
+

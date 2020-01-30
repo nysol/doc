@@ -1,0 +1,11 @@
+
+%\begin{document}
+\section{binomdist Cumulative probability of binomial distribution\label{sect:binomdist}}
+\index{binomdist@binomdist}
+Format: binomdist(number of successes $k$, number of trials $n$, probability of success $p$)
+This command calculates cumulative probability $P[X  k]$ regarding probability variable $X$ that is in accordance with the binomial distribution $B(n,p)$ of the number of trials $n$ and the probability of success $p$. Parameters $k$, $n$, and $p$ can be specified as a constant for a field. The calculation results will be null where $k > n$, $p < 0$, or $p > 1$.
+
+\subsection*{Examples}
+\input{examples/tex/func_binomdist_ex}
+
+%\end{document}

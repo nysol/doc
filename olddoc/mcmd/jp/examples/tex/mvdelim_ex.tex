@@ -1,0 +1,34 @@
+\subsubsection*{例1: 基本例}
+
+ベクトル型要素のデフォルトの区切り文字である半角スペースを\verb|_|(アンダーバー)に置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item1
+b a c
+c c
+e a a
+$ mvdelim vf=item1 v=_ i=dat1.csv o=rsl1.csv
+#END# kgvdelim i=dat1.csv o=rsl1.csv v=_ vf=item1
+$ more rsl1.csv
+item1
+b_a_c
+c_c
+e_a_a
+\end{Verbatim}
+\subsubsection*{例2: カンマ}
+
+CSVの区切り文字であるカンマに置換すると、CSVの区切り文字との区別を付けるために、
+ベクトル全体がダブルクオーツで囲われる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelim vf=item1 v=, i=dat1.csv o=rsl2.csv
+#END# kgvdelim i=dat1.csv o=rsl2.csv v=, vf=item1
+$ more rsl2.csv
+item1
+"b,a,c"
+"c,c"
+"e,a,a"
+\end{Verbatim}

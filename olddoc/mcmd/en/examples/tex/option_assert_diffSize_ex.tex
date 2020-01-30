@@ -1,0 +1,29 @@
+\subsubsection*{(Basic example) }
+Assume, for instance, that you use the mjoin command (join fields from the reference file) and wish to check whether the key fields from the input file (the fields specified by the k= parameter) match the key fields from the reference file (the fields specified by the K= parameter). When the -n or -N option for outputting NULL values is not specified for the mjoin command, the numbers of input and output date items differ. This is because only the key fields that are common to the input and reference files are joined and the values of the other key fields are disregarded. Specify the -assert\_diffSize option to compare the numbers of the input and output files. When the numbers do not match, the \verb|“#WARNING# ; the number of lines is different”| message is shown, indicating that the key fields in the input and reference files do not match completely.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,price
+A,20081201,100
+A,20081213,98
+B,20081002,400
+B,20081209,450
+C,20081201,100
+
+$ more ref1.csv
+item,cost
+A,50
+B,300
+E,200
+
+$ mjoin k=item f=cost m=ref1.csv -assert_diffSize i=dat1.csv o=rsl1.csv
+#WARNING# ; the number of lines is different
+#END# kgjoin -assert_diffSize f=cost i=dat1.csv k=item m=ref1.csv o=rsl1.csv; IN=5 OUT=4
+
+$ more rsl1.csv
+item%0,date,price,cost
+A,20081201,100,50
+A,20081213,98,50
+B,20081002,400,300
+B,20081209,450,300
+\end{Verbatim}

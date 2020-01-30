@@ -1,0 +1,140 @@
+\subsubsection*{例1: 基本例}
+
+\verb|zipCode|項目の値が00から始まる4桁文字列を\verb|####|に置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,zipCode
+A,6230041
+B,6240053
+C,6330032
+D,6230087
+E,6530095
+$ msed f=zipCode c=00.. v=#### i=dat1.csv o=rsl1.csv
+#END# kgsed c=00.. f=zipCode i=dat1.csv o=rsl1.csv v=####
+$ more rsl1.csv
+customer,zipCode
+A,623####
+B,624####
+C,633####
+D,623####
+E,653####
+\end{Verbatim}
+\subsubsection*{例2: 項目名指定}
+
+\verb|zipCode|の値が00から始まる4桁の数字を\verb|####|に置換し、\verb|zipCode4|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=zipCode:zipCode4 c='00\d\d' v=#### i=dat1.csv o=rsl2.csv
+#END# kgsed c=00\d\d f=zipCode:zipCode4 i=dat1.csv o=rsl2.csv v=####
+$ more rsl2.csv
+customer,zipCode4
+A,623####
+B,624####
+C,633####
+D,623####
+E,653####
+\end{Verbatim}
+\subsubsection*{例3: グローバル置換}
+
+\verb|zipCode|の値が\verb|0|を全て\verb|-|にグローバル置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=zipCode c=0 v=- -g i=dat1.csv o=rsl3.csv
+#END# kgsed -g c=0 f=zipCode i=dat1.csv o=rsl3.csv v=-
+$ more rsl3.csv
+customer,zipCode
+A,623--41
+B,624--53
+C,633--32
+D,623--87
+E,653--95
+\end{Verbatim}
+\subsubsection*{例4: 部分置換}
+
+\verb|item|の先頭の\verb|fruit|を削除する。
+先頭一致(\verb|^|)を指定しているので、最後の行の\verb|grapefruit|は削除されていないことに注意する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+item,price
+fruit:apple,100
+fruit:peach,250
+fruit:pineapple,300
+fruit:orange,450
+fruit:grapefruit,500
+$ msed f=item c='^fruit' v= -g i=dat2.csv o=rsl4.csv
+#END# kgsed -g c=^fruit f=item i=dat2.csv o=rsl4.csv v=
+$ more rsl4.csv
+item,price
+:apple,100
+:peach,250
+:pineapple,300
+:orange,450
+:grapefruit,500
+\end{Verbatim}
+\subsubsection*{例5: マッチ結果を用いた置換}
+
+\verb|v=|の中で\verb|$&|を用いれば、マッチした文字列(連続した\verb|b|)に置き換わる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+str1
+abc
+abbc
+ac
+$ msed f=str1 c='b+' v='#$&#' i=dat3.csv o=rsl5.csv
+#END# kgsed c=b+ f=str1 i=dat3.csv o=rsl5.csv v=#$&#
+$ more rsl5.csv
+str1
+a#b#c
+a#bb#c
+ac
+\end{Verbatim}
+\subsubsection*{例6: グローバルマッチとの組み合せ}
+
+グローバルマッチにすると、個々のマッチ毎に\verb|v=|の内容が評価される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v='#$&#' -g i=dat3.csv o=rsl6.csv
+#END# kgsed -g c=b f=str1 i=dat3.csv o=rsl6.csv v=#$&#
+$ more rsl6.csv
+str1
+a#b#c
+a#b##b#c
+ac
+\end{Verbatim}
+\subsubsection*{例7: プレフィックス置換}
+
+\verb|$`|にて、マッチした箇所の前の文字列(プレフィックス)に置換される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v='#$`#' i=dat3.csv o=rsl7.csv
+#END# kgsed c=b f=str1 i=dat3.csv o=rsl7.csv v=#$`#
+$ more rsl7.csv
+str1
+a#a#c
+a#a#bc
+ac
+\end{Verbatim}
+\subsubsection*{例8: サフィックス置換}
+
+\verb|$'|にて、マッチした箇所の後の文字列(サフィックス)に置換される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msed f=str1 c=b v="#$'#" i=dat3.csv o=rsl8.csv
+#END# kgsed c=b f=str1 i=dat3.csv o=rsl8.csv v=#$'#
+$ more rsl8.csv
+str1
+a#c#c
+a#bc#bc
+ac
+\end{Verbatim}

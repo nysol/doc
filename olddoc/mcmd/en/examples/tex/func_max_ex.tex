@@ -1,0 +1,35 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,v1,v2,v3
+1,1,2,3
+2,-5,2,1
+3,1,,3
+4,,,
+$ mcal c='max(${v1},${v2},${v3})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=max(${v1},${v2},${v3}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,v1,v2,v3,rsl
+1,1,2,3,3
+2,-5,2,1,2
+3,1,,3,3
+4,,,,
+\end{Verbatim}
+\subsubsection*{Example 2: Example using wildcard}
+
+Specify columns starting from \verb|v| (\verb|v1,v2,v3|) using wildcard “\verb|v*|”.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='max(${v*})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=max(${v*}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,v1,v2,v3,rsl
+1,1,2,3,3
+2,-5,2,1,2
+3,1,,3,3
+4,,,,
+\end{Verbatim}

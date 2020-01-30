@@ -1,0 +1,23 @@
+
+%\begin{document}
+
+\section{julian ユリウス暦変換\label{sect:julian}}
+\index{julian@julian}
+
+書式1: julian($date$)
+
+書式2: julian($time$)
+
+書式3: julian2d($num$)
+
+書式4: julian2t($num$)
+
+書式1,2では、日付$date$もしくは時刻$time$をユリウス通日に変換する。
+逆に書式3,4では、ユリウス通日を日付型もしくは時刻型に変換する。
+ここで、日付型が与えられたときは、その日の最初の時刻である\verb|00:00:00|として計算される。
+
+\subsection*{利用例}
+\input{examples/tex/func_julian_ex}
+
+%\end{document}
+

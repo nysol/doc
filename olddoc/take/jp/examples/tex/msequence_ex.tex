@@ -1,0 +1,272 @@
+\subsubsection*{例1: 基本例}
+
+2件以上で出現する系列パターン。
+入力データの項目名は、全てデフォルトのものと同じなので省略していることに注意する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+tid,time,item
+T1,0,C
+T1,2,B
+T1,3,A
+T1,7,C
+T2,2,D
+T2,3,A
+T2,5,B
+T2,6,C
+T3,1,C
+T3,2,B
+T3,4,D
+T3,8,E
+T4,2,A
+T4,5,C
+T4,6,B
+T5,0,B
+T5,1,A
+T5,2,D
+T5,3,D
+T5,7,C
+T5,9,C
+T6,0,A
+T6,5,B
+T6,6,D
+T6,8,B
+T6,9,C
+$ msequence.rb  O=result1 i=dat1.csv S=2
+#MSG# lcm_seq_20140215 CIf /tmp/__MTEMP_96779_70117174398360_0 2 /tmp/__MTEMP_96779_701171
+74386400_0
+trsact: /tmp/__MTEMP_96779_70117174398360_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 4 ,size 25
+ output to: /tmp/__MTEMP_96779_70117174386400_0
+iters=20
+20
+1
+4
+10
+5
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 19
+#MSG# The final results are in the directory `result1'
+#END# /usr/bin/msequence.rb O=result1 i=dat1.csv S=2
+$ more result1/patterns.csv
+pid,pattern,size,count,total,support
+1,C,1,6,6,1
+4,B,1,6,6,1
+11,A C,2,5,6,0.8333333333
+10,A,1,5,6,0.8333333333
+16,D,1,4,6,0.6666666667
+7,B C,2,4,6,0.6666666667
+12,A B,2,3,6,0.5
+8,B D,2,3,6,0.5
+2,C B,2,3,6,0.5
+19,D C,2,3,6,0.5
+3,C C,2,2,6,0.3333333333
+18,D B C,3,2,6,0.3333333333
+13,A B C,3,2,6,0.3333333333
+14,A D,2,2,6,0.3333333333
+15,A D C,3,2,6,0.3333333333
+9,B D C,3,2,6,0.3333333333
+17,D B,2,2,6,0.3333333333
+6,B A C,3,2,6,0.3333333333
+5,B A,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{例2: パターン長の制限}
+
+出現頻度が3以上の長さが2の系列パターンのみを列挙する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result2 i=dat1.csv S=3 l=2 u=2
+#MSG# lcm_seq_20140215 CIf -l 2 -u 2 /tmp/__MTEMP_96838_70227485417240_0 3 /tmp/__MTEMP_96
+838_70227485416360_0
+trsact: /tmp/__MTEMP_96838_70227485417240_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 4 ,size 25
+ output to: /tmp/__MTEMP_96838_70227485416360_0
+iters=11
+6
+0
+0
+6
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 6
+#MSG# The final results are in the directory `result2'
+#END# /usr/bin/msequence.rb O=result2 i=dat1.csv S=3 l=2 u=2
+$ more result2/patterns.csv
+pid,pattern,size,count,total,support
+3,A C,2,5,6,0.8333333333
+1,B C,2,4,6,0.6666666667
+0,C B,2,3,6,0.5
+2,B D,2,3,6,0.5
+4,A B,2,3,6,0.5
+5,D C,2,3,6,0.5
+$ more result2/tid_pats.csv
+tid,pid
+T1,0
+T1,1
+T1,3
+T2,1
+T2,3
+T2,4
+T2,5
+T3,0
+T3,2
+T4,0
+T4,3
+T4,4
+T5,1
+T5,2
+T5,3
+T5,5
+T6,1
+T6,2
+T6,3
+T6,4
+T6,5
+\end{Verbatim}
+\subsubsection*{例3: gap長とwindowサイズの指定}
+
+出現頻度が2以上、長さが2以上の系列パターンのうち、gap長が2、windowサイズが4のパターンを列挙する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result3 i=dat1.csv S=2 l=2 gap=2 win=4
+#MSG# lcm_seq_20140215 CIf -l 2 -g 2 -G 4 /tmp/__MTEMP_96898_70310565879140_0 2 /tmp/__MTE
+MP_96898_70310565878100_0
+trsact: /tmp/__MTEMP_96898_70310565879140_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 5 ,size 26
+ output to: /tmp/__MTEMP_96898_70310565878100_0
+iters=15
+10
+0
+0
+9
+1
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 10
+#MSG# The final results are in the directory `result3'
+#END# /usr/bin/msequence.rb O=result3 i=dat1.csv S=2 l=2 gap=2 win=4
+$ more result3/patterns.csv
+pid,pattern,size,count,total,support
+0,C B,2,3,6,0.5
+2,B C,2,3,6,0.5
+3,B D,2,3,6,0.5
+4,A C,2,3,6,0.5
+5,A B,2,3,6,0.5
+1,B A,2,2,6,0.3333333333
+6,A D,2,2,6,0.3333333333
+7,D B,2,2,6,0.3333333333
+8,D B C,3,2,6,0.3333333333
+9,D C,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{例4: paddingにより時刻を考慮する}
+
+例3と同じ条件で、-paddingを指定することで、時間を考慮したgap長とwindowサイズ制約により系列パターンを列挙する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result4 i=dat1.csv S=2 l=2 gap=2 win=4 -padding
+#MSG# lcm_seq_zero_20140215 CIf -l 2 -g 2 -G 4 /tmp/__MTEMP_96957_70107510988120_0 2 /tmp/
+__MTEMP_96957_70107510987120_0
+trsact: /tmp/__MTEMP_96957_70107510988120_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 6 ,size 46
+ output to: /tmp/__MTEMP_96957_70107510987120_0
+iters=33
+4
+0
+0
+4
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 4
+#MSG# The final results are in the directory `result4'
+#END# /usr/bin/msequence.rb O=result4 i=dat1.csv S=2 l=2 gap=2 win=4 -padding
+$ more result4/patterns.csv
+pid,pattern,size,count,total,support
+0,C B,2,3,6,0.5
+3,B D,2,3,6,0.5
+1,B A,2,2,6,0.3333333333
+2,B C,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{例5: 顕在系列パターンの列挙\label{ex:ep1}}
+
+例1と同じ条件で、クラス項目を指定することで顕在パターンを列挙する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+tid,time,item,class
+T1,0,C,cls1
+T1,2,B,cls1
+T1,3,A,cls1
+T1,7,C,cls1
+T2,2,D,cls1
+T2,3,A,cls1
+T2,5,B,cls1
+T2,6,C,cls1
+T3,1,C,cls1
+T3,2,B,cls1
+T3,4,D,cls1
+T3,8,E,cls1
+T4,2,A,cls1
+T4,5,C,cls1
+T4,6,B,cls1
+T5,0,B,cls2
+T5,1,A,cls2
+T5,2,D,cls2
+T5,3,D,cls2
+T5,7,C,cls2
+T5,9,C,cls2
+T6,0,A,cls2
+T6,5,B,cls2
+T6,6,D,cls2
+T6,8,B,cls2
+T6,9,C,cls2
+$ msequence.rb  O=result5 i=dat2.csv S=2 class=class -padding
+#MSG# lcm_seq_zero_20140215 CIA -w /tmp/__MTEMP_97018_70131049887220_1 /tmp/__MTEMP_97018_
+70131049887220_0 1073741815 /tmp/__MTEMP_97018_70131049885920_0
+trsact: /tmp/__MTEMP_97018_70131049887220_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 5 ,size 45 ,weightfile /tmp/__MTEMP_97018_70131049887220
+_1
+ output to: /tmp/__MTEMP_97018_70131049885920_0
+iters=33
+9
+1
+4
+4
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls1' enumerated is 8
+#MSG# output tid-patterns ...
+#MSG# lcm_seq_zero_20140215 CIA -w /tmp/__MTEMP_97018_70131049887220_2 /tmp/__MTEMP_97018_
+70131049887220_0 2147483645 /tmp/__MTEMP_97018_70131049885920_2
+trsact: /tmp/__MTEMP_97018_70131049887220_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 5 ,size 45 ,weightfile /tmp/__MTEMP_97018_70131049887220
+_2
+ output to: /tmp/__MTEMP_97018_70131049885920_2
+iters=36
+5
+0
+0
+3
+2
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls2' enumerated is 5
+#MSG# output tid-patterns ...
+#MSG# the number of emerging sequence patterns enumerated is 13
+#MSG# The final results are in the directory `result5'
+#END# /usr/bin/msequence.rb O=result5 i=dat2.csv S=2 class=class -padding
+$ more result5/patterns.csv
+class,pid,pattern,size,pos,neg,posTotal,negTotal,total,support,growthRate,postProb
+cls1,1,B C,2,3,0,4,2,6,0.75,inf,1
+cls2,10,A D,2,2,0,2,4,6,1,inf,1
+cls2,9,B C D,3,2,0,2,4,6,1,inf,1
+cls2,11,A C D,3,2,0,2,4,6,1,inf,1
+cls1,0,C,1,4,2,4,2,6,1,1,0.6666666667
+cls1,2,B,1,4,2,4,2,6,1,1,0.6666666667
+cls1,6,A B,2,2,1,4,2,6,0.5,1,0.6666666667
+cls2,8,B D,2,2,1,2,4,6,1,4,0.6666666667
+cls2,12,C D,2,2,1,2,4,6,1,4,0.6666666667
+cls1,5,A C,2,3,2,4,2,6,0.75,0.75,0.6
+cls1,4,A,1,3,2,4,2,6,0.75,0.75,0.6
+cls1,7,D,1,2,2,4,2,6,0.5,0.5,0.5
+cls1,3,B C,2,2,2,4,2,6,0.5,0.5,0.5
+\end{Verbatim}

@@ -1,0 +1,104 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mstats 一変数の統計量算出\label{sect:mstats}}
+\index{mstats@mstats}
+\verb|f=|パラメータで指定した数値項目について
+\verb|c=|パラメータで指定した統計量の計算をする。
+\verb|k=|を指定することで、キー単位で集計することができる。
+\verb|f=|で指定した項目のNULL値は無視される。
+ただし、全行がNULL値であればNULL値が出力される。
+\verb|(注)|k=とf=パラメータで指定した項目以外については、どの行が出力されるか>は不定であることに注意してください。\\
+
+\subsection*{書式}
+\verb|mstats c= f= [k=] [-n] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+%\verb|k=|    & ここで指定された項目(複数項目指定可)を単位として集計する。【\hyperref[sect:option_k]{集計キーブレイク処理}】 \\
+%             & 集計の単位となる項目順に並べ替えておく必要がある。\\
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\ 
+\verb|k=|    & ここで指定された項目(複数項目指定可)を単位として集計する。 \\
+\verb|f=|    & ここで指定された項目(複数項目指定可)の値が集計される。\\
+\verb|c=|    & 統計量(以下のリストから一つだけ指定可)\\
+             & \verb/sum|mean|count|ucount|devsq|var|uvar|sd|usd|USD|cv|min|qtile1|/\\
+             & \verb/median|qtile3|max|range|qrange|mode|skew|uskew|kurt|ukurt/\\
+\verb|-n|    & NULL値が1つでも含まれていると結果もNULL値とする。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{統計量リスト}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{llll}
+\hline
+\verb|c=|の値 & 内容 & 式 & 備考 \\
+\hline
+count  & 件数(NULL値以外) & $n$: NULL値以外の件数 & 文字列項目に対しては適用できない。\\
+ucount & ユニーク件数     & $un$: 重複値を省いた件数 &  文字列項目に対しては適用できない。\\
+sum    & 合計             & $sum=\sum_{i=1}^n x_i$ & \\
+mean   & 算術平均         & $m=\frac{1}{n}\sum_{i=1}^n x_i$ & \\
+devsq  & 偏差平方和       & $S=\sum_{i=1}^n(x_i-m)^2$ & \\
+var    & 分散             & $s^2=\frac{1}{n}S$ & \\
+uvar   & 分散(不偏推定値) & $u^2=\frac{1}{n-1}S$ & \\
+sd     & 標準偏差         & $s=\sqrt{s^2}$ & \\
+usd    & 標準偏差(不偏分散のsqrt) & $u=\sqrt{u^2}$ & 一般的によく使われる標準偏差 \\
+USD    & 不偏標準偏差     & 省略               & 正確な不偏推定 \\
+cv     & 変動係数         & $cv=s/m×100\%$ & \\
+mode   & 最頻値           & $mode$: 最頻出の値& 全ての値が異なる場合はNULLを、同頻度\\
+       &                  &                   & の場合はより小さい方の値を出力する。\\
+min    & 最小値           & $min=\min_i x_i$ & \\
+max    & 最大値           & $max=\max_i x_i$ & \\
+range  & 範囲             & $r=max-min$  & \\
+median & 中央値           & $Q2=昇順に並べた時の第2四文位点$ & \\
+qtile1 & 第1四分位点      & $Q1=昇順に並べた時の第1四文位点$ & \\
+%qtile1 & 第1四分位点      & $Q1$ 第1四分位順位が自然数でない場合:$Q1=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.25(n-1)$ & \\
+qtile3 & 第1四分位点      & $Q3=昇順に並べた時の第3四文位点$ & \\
+% 第3四分位順位が自然数でない場合:$Q3=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.75(n-1)$ \\
+qrange & 四分位範囲       & $rq=Q3-Q1$ & \\
+skew   & 歪度             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^3}{s^3}$ & \\
+uskew  & 歪度(不偏推定値) & 省略 & \\
+kurt   & 尖度             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^4}{s^4}-3.0$ & \\
+ukurt  & 尖度(不偏推定値) & 省略 & \\
+\hline \\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{利用例}
+\input{examples/tex/mstats_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:msim]{msim} : 2変量の統計量を求める。
+
+\hyperref[sect:mavg] {mavg} : \verb|c=avg|に特化したコマンド。
+
+\hyperref[sect:msum] {msum} : \verb|c=sum|に特化したコマンド。
+
+\hyperref[sect:mcount] {mcount} : \verb|c=count|と異なり、集計キーの行数をカウントする。
+
+%\end{document}

@@ -1,0 +1,41 @@
+\subsubsection*{例1: 基本例}
+
+「数量」項目の値の数分、データを複写し複数行のデータを生成する。
+対象項目がNULL値の場合は複写しない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+store,val
+A,2
+B,
+C,5
+$ mduprec f=val i=dat1.csv o=rsl1.csv
+#END# kgduprec f=val i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+store,val
+A,2
+A,2
+C,5
+C,5
+C,5
+C,5
+C,5
+\end{Verbatim}
+\subsubsection*{例2: 複写行数の指定}
+
+データを2行づつ複写した(\verb|n=2|)データを生成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mduprec n=2 i=dat1.csv o=rsl2.csv
+#END# kgduprec i=dat1.csv n=2 o=rsl2.csv
+$ more rsl2.csv
+store,val
+A,2
+A,2
+B,
+B,
+C,5
+C,5
+\end{Verbatim}

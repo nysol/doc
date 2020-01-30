@@ -1,0 +1,204 @@
+
+%\begin{document}
+
+\section{ver.2での変更点\label{sect:changes}}
+\subsection{自動並べ替え機能の追加}
+
+MCMD Ver. 1.0 では、たとえば\verb|msum|コマンドでキー項目を指定して集計する場合や、\verb|mjoin|コマンドで
+複数のファイルをキー項目で結合する場合、事前に\verb|msortf|コマンドを使用してキー項目を並べ替えておく
+必要があった。
+
+多くのコマンドで事前の並べ替えが必要であり、また並べ替えを忘れてもエラーになることなく
+誤った結果を出力して処理を終えるため、スクリプトにバグを生みやすいという難点があった。
+そこで、\verb|k=|オプションでキー項目を指定するすべてのコマンドで、項目の並べ替えを自動的に行う
+機能を追加したのがVer. 2.0の最大の変更点である。
+どの項目で並べ替えられたのかがCSVヘッダの項目名にも追加されるため
+（詳細は\hyperref[sect:csv_sort]{項目の並べ替え情報}参照）
+、各コマンドは並べ替えが必要であるときのみ並べ替えを行う。
+
+\subsubsection*{Ver. 1.0 での実行例}
+
+\verb|msum k=顧客| コマンドを実行する前に、\verb|msortf|コマンドで\verb|顧客|項目を
+並べ替えておく必要があった。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,金額
+A,10
+B,10
+A,20
+B,15
+B,20
+$ msortf i=dat1.csv f=顧客 | msum k=顧客 f=金額:金額合計 o=rsl1.csv
+#END# kgsortf f=顧客 i=dat1.csv
+#END# kgsum f=金額:金額合計 k=顧客 o=rsl1.csv
+$ more rsl1.csv
+顧客,金額合計
+A,30
+B,45
+\end{Verbatim}
+
+\subsubsection*{Ver. 2.0 での実行例}
+
+\verb|msum|コマンドが並べ替えの要否を判断し、必要であれば自身で並べ替えるため、
+\verb|msortf|コマンドを省略しても正しい結果が得られる。
+\verb|msum|コマンドが\verb|顧客|項目で並べ替えた証左として、
+項目名に\verb|%0|が付加されている。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,金額
+A,10
+B,10
+A,20
+B,15
+B,20
+$ msum i=dat1.csv k=顧客 f=金額:金額合計 o=rsl1.csv
+#END# kgsum f=金額:金額合計 k=顧客 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+顧客%0,金額合計
+A,30
+B,45
+\end{Verbatim}
+%\input{examples/tex/changes2_ex.tex}
+
+\subsection{仕様が変更されたコマンド\label{sect:changedcommands}}
+
+表\ref{tbl:changed_commands}に、Ver. 1.0 から仕様が変更されたコマンドを示す
+(\verb|k=|パラメータに自動並べ替え機能が追加されたのみのコマンドを除く)。
+行の順序が処理結果に影響するコマンドに\verb|s=|パラメータが追加されたほか、
+いずれも行の並べ替えに関する仕様の変更である。
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{仕様が変更されたコマンド\label{tbl:changed_commands}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+コマンド                             & 説明               & 変更内容 \\ \hline
+\hyperref[sect:maccum]{maccum}       & 累積計算           & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mbest]{mbest}         & 指定行の選択       & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mcombi]{mcombi}       & 組合せ計算         & \verb|s=|パラメータを追加 \\
+\hyperref[sect:mkeybreak]{mkeybreak} & キーブレイク箇所   & \verb|s=|パラメータを追加 \\
+\hyperref[sect:mmvavg]{mmvavg}       & 移動平均の算出     & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mmvsim]{mmvsim}       & 移動窓の類似度計算 & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mmvstats]{mmvstats}   & 移動窓の統計量の計算 & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mnumber]{mnumber}     & 連番               & \verb|-B|使用時以外は\verb|s=|パラメータ必須に \\
+\hyperref[sect:mpadding]{mpadding}   & 行補完コマンド     & \verb|type=|パラメータがなくなり、 \\
+                                     &                    & 補完方法は\verb|f=|で指定するように \\
+\hyperref[sect:mrjoin]{mrjoin}       & 参照ファイルの範囲条件による結合 & \verb|r=|パラメータで並べ替え方法を指定するように \\
+\hyperref[sect:mslide]{mslide}       & 行ずらし           & \verb|s=|パラメータを追加(必須) \\
+\hyperref[sect:mtra]{mtra}           & 縦型データをベクトル項目に変換 & \verb|s=|パラメータを追加 \\
+\hyperref[sect:mwindow]{mwindow}     & スライド窓の生成   & \verb|wk=|パラメータで並べ替え方法を指定するように \\
+
+\hline
+  \end{tabular}
+  }
+  \end{center}
+\end{table}
+
+\subsection{従来のスクリプトを実行するには\label{sect:howtomodify}}
+
+\verb|-q|オプションを使用すると、\verb|k=|パラメータで指定した項目の自動並べ替えが無効化される。
+表\ref{tbl:changed_commands}で\verb|s=|パラメータが必須とされたコマンドで\verb|s=|パラメータを
+省略できるようにもなるため、各コマンドはVer. 1.0と同等の動作をする。
+よって、Ver. 1.0で使用していたスクリプトについては、\verb|k=|パラメータが指定された全コマンドに
+\verb|-q|オプションを付加することでVer. 2.0でも同等の結果が得られる
+(ただし\hyperref[sect:mpadding]{mpadding}コマンドについては、\verb|type=|パラメータが
+なくなっているので、\verb|f=|パラメータでの指定に変更する必要がある)。
+
+\subsubsection*{修正前のスクリプト}
+Ver. 2.0環境で実行すると、\verb|maccum|コマンドに\verb|s=|パラメータがないというエラーが出る。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+msortf i=customer.csv f=custID,date |
+maccum k=custID f=amount o=accum.csv
+#ERROR# parameter s= is mandatory without -q (kgaccum); kgaccum f=amount i=test.csv k=custID
+\end{Verbatim}
+
+\subsubsection*{修正例}
+\verb|maccum|コマンドは\verb|s=|パラメータが必須となったが、
+\verb|-q|オプションを追加することでVer. 1.0と同等の使い方ができる。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+msortf i=customer.csv f=custID,date |
+maccum -q k=custID f=amount o=accum.csv
+\end{Verbatim}
+
+\section{ver.3での変更点\label{sect:changes}}
+
+MCMDをNYSOLパッケージから独立させGitHuBに登録したことにより、
+バージョンを2.xから3.0へ上げた。
+コマンド仕様の大きな変更はなく、以下に示す細かな点が改善されている。
+また入力系コマンドを始めとして幾つかの新たなコマンドが追加されている。
+
+\subsection{-paramsパラメータの追加}
+全コマンド共通で-paramsパラメータを追加した。
+主にシステム利用を目的としたもので、指定できるパラメータの一覧を標準出力に出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -params
+-assert_diffSize
+-assert_nullin
+-nfn
+-nfni
+-nfno
+-params
+-r
+-x
+f=
+i=
+o=
+precision=
+tmpPath=
+\end{Verbatim}
+
+\subsection{環境変数KG\_msgTimebyfsec追加}
+この環境変数をtrueに設定すると終了メッセージの時刻がマイクロ秒単位で表示される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_msgTimebyfsec=true
+\end{Verbatim}
+
+\subsection{mchkcsvの機能強化}
+
+\begin{itemize}
+ \item UTF BOMを自動的に除去する。
+ \item -diagで内容が英語で出力され、-diaglで日本語で出力されるように変更。
+\end{itemize}
+
+\subsection{mcalの機能強化}
+\begin{itemize}
+ \item c=,a=に複数指定できるように変更。
+ \item \verb|$t{},#t{},0t|でマイクロ秒までを扱えるように変更。
+小数点(6桁)でマイクロ秒を表現している。
+それに伴い、\verb|diffusecond(T,T),tuseconds(T),usecond(T),useconds(T),unow()|関数を追加。
+ \item \verb|if(B,B,B)|のように、ブール値を返す使い方ができるようにする。
+\end{itemize}
+
+\subsection{mcatの機能強化}
+\begin{itemize}
+ \item \verb|-skip_zero|を指定することで、\verb|-nfn|を指定していない場合でも0バイトファイルでエラーにならない。
+ \item \verb|flist=|を指定することで、併合するファイルリストをCSVデータとして指定することができるようにした。
+        flist=fileName:fldNameで指定する。
+ \item \verb|kv=|を指定することで、パス名に含めた"key-value"の文字列を抜き出し項目名とその値としてデータに付加する機能を追加。
+\end{itemize}
+
+\subsection{追加コマンド}
+以下に示す画面入力系のコマンドが5つ追加された。
+ただし、これらのコマンドは開発バージョンであり、今後仕様が変更される可能性がある。
+\begin{itemize}
+\item \hyperref[sect:minput] {minput} :入力画面を表示する。
+\item \hyperref[sect:mminput] {mminput} : 複数入力枠による入力画面を表示する。
+\item \hyperref[sect:mdsp] {mdsp} : 画面の指定位置に文字列を表示する。
+\item \hyperref[sect:mseldsp] {mseldsp} : 画面に単一選択入力窓を表示する。
+\item \hyperref[sect:mmseldsp] {mmseldsp} : 画面に複数選択入力窓を表示する。
+\end{itemize}
+
+その他にも以下に示すコマンドが追加された。
+\begin{itemize}
+\item \hyperref[sect:mshuffle] {mshuffle} :ハッシュキーによるファイル分割
+\item \hyperref[sect:mcsvconv] {mcsvconv} : CSVを多様なフォーマットに変換
+\item \hyperref[sect:mcsv2json] {mcsv2json} : CSVをjsonに変換
+\end{itemize}
+
+%\end{document}
+

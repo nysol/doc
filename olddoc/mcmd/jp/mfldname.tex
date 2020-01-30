@@ -1,0 +1,47 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mfldname 項目名の変更\label{sect:mfldname}}
+\index{mfldname@mfldname}
+\verb|f=|で指定した項目名を変更する。又、\verb|n=|で項目名を新規設定する。
+
+\subsection*{書式}
+\verb/mfldname f=|n= [-nfni]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定された項目名のみを変更する。(現項目名:新項目名)\\
+             & 指定していない項目名は変更せずに元の項目名が出力される。\\
+\verb|n=|    & ここで指定された項目名が新たに採用される。\\
+             & データ項目数と同じ数の項目名を指定する必要がある。\\
+\verb|-nfni| & 入力データの１行目を項目名行とみなさない。このオプションが指定された場合は\verb|f=|は利用できない。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mfldname_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mcut]{mcut} : \verb|mfldname|と同じことができるが、一部の項目名を変更するには少し面倒。また\verb|mfldname|の方が少しだけ高速。
+
+%\end{document}

@@ -1,0 +1,46 @@
+\subsubsection*{Example 1: Basic Example}
+
+Print NULL values to column \verb|rsl|. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+$ mcal c='nulls()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=nulls() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,
+2,
+3,
+\end{Verbatim}
+\subsubsection*{Example 2: Use of if statement}
+
+Use nulln() function to match the value specified in the second parameter.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(${id}==1,1,nulln())' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=if(${id}==1,1,nulln()) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,rsl
+1,1
+2,
+3,
+\end{Verbatim}
+\subsubsection*{Example 3: Equivalent to isnull function}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(${val}==nulln(),"null","notNull")' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=if(${val}==nulln(),"null","notNull") i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,rsl
+1,a,
+2,,
+3,b,
+\end{Verbatim}

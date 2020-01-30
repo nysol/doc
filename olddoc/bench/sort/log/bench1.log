@@ -1,0 +1,1280 @@
+R msortf 100_2
+
+real	0m4.542s
+user	0m0.619s
+sys	0m0.232s
+R xtsort 100_2
+#END# 1934 2013/11/08 18:43:18 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m2.107s
+user	0m0.992s
+sys	0m0.127s
+R sort 100_2
+
+real	0m26.066s
+user	0m25.971s
+sys	0m0.072s
+R msortf 100_10
+
+real	0m1.585s
+user	0m1.369s
+sys	0m0.215s
+R xtsort 100_10
+#END# 1952 2013/11/08 18:43:49 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.563s
+user	0m0.984s
+sys	0m0.123s
+R sort 100_10
+
+real	0m25.432s
+user	0m25.359s
+sys	0m0.072s
+R msortf 100_100
+
+real	0m1.396s
+user	0m1.896s
+sys	0m0.209s
+R xtsort 100_100
+#END# 1970 2013/11/08 18:44:19 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.263s
+user	0m0.957s
+sys	0m0.111s
+R sort 100_100
+
+real	0m24.675s
+user	0m24.601s
+sys	0m0.073s
+R msortf 100_1000
+
+real	0m1.347s
+user	0m2.104s
+sys	0m0.204s
+R xtsort 100_1000
+#END# 1988 2013/11/08 18:44:48 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.123s
+user	0m0.938s
+sys	0m0.108s
+R sort 100_1000
+
+real	0m23.928s
+user	0m23.858s
+sys	0m0.069s
+R msortf 100_10000
+
+real	0m1.165s
+user	0m2.220s
+sys	0m0.189s
+R xtsort 100_10000
+#END# 2006 2013/11/08 18:45:15 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.101s
+user	0m0.928s
+sys	0m0.107s
+R sort 100_10000
+
+real	0m23.266s
+user	0m23.195s
+sys	0m0.070s
+R msortf 100_rand
+
+real	0m1.445s
+user	0m1.973s
+sys	0m0.219s
+R xtsort 100_rand
+#END# 2022 2013/11/08 18:45:43 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.108s
+user	0m0.937s
+sys	0m0.109s
+R sort 100_rand
+
+real	0m21.175s
+user	0m21.103s
+sys	0m0.070s
+R msortf 100_rand_asc
+
+real	0m1.335s
+user	0m0.506s
+sys	0m0.202s
+R xtsort 100_rand_asc
+#END# 2040 2013/11/08 18:46:08 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.112s
+user	0m0.632s
+sys	0m0.116s
+R sort 100_rand_asc
+
+real	0m10.804s
+user	0m10.738s
+sys	0m0.065s
+R msortf 100_rand_dec
+
+real	0m1.014s
+user	0m0.508s
+sys	0m0.219s
+R xtsort 100_rand_dec
+#END# 2054 2013/11/08 18:46:22 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.138s
+user	0m0.805s
+sys	0m0.109s
+R sort 100_rand_dec
+
+real	0m11.239s
+user	0m11.171s
+sys	0m0.067s
+R msortf 100_2
+
+real	0m1.645s
+user	0m0.606s
+sys	0m0.223s
+R xtsort 100_2
+#END# 2070 2013/11/08 18:46:37 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.069s
+user	0m0.950s
+sys	0m0.108s
+R sort 100_2
+
+real	0m25.994s
+user	0m25.922s
+sys	0m0.072s
+R msortf 100_10
+
+real	0m1.242s
+user	0m1.363s
+sys	0m0.201s
+R xtsort 100_10
+#END# 2088 2013/11/08 18:47:06 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m2.087s
+user	0m0.961s
+sys	0m0.121s
+R sort 100_10
+
+real	0m25.509s
+user	0m25.438s
+sys	0m0.070s
+R msortf 100_100
+
+real	0m1.312s
+user	0m1.860s
+sys	0m0.195s
+R xtsort 100_100
+#END# 2106 2013/11/08 18:47:34 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.204s
+user	0m0.946s
+sys	0m0.108s
+R sort 100_100
+
+real	0m24.669s
+user	0m24.600s
+sys	0m0.068s
+R msortf 100_1000
+
+real	0m1.524s
+user	0m2.091s
+sys	0m0.192s
+R xtsort 100_1000
+#END# 2122 2013/11/08 18:48:02 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.335s
+user	0m0.946s
+sys	0m0.109s
+R sort 100_1000
+
+real	0m23.909s
+user	0m23.836s
+sys	0m0.072s
+R msortf 100_10000
+
+real	0m1.584s
+user	0m2.216s
+sys	0m0.192s
+R xtsort 100_10000
+#END# 2140 2013/11/08 18:48:29 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.248s
+user	0m0.940s
+sys	0m0.107s
+R sort 100_10000
+
+real	0m23.269s
+user	0m23.198s
+sys	0m0.070s
+R msortf 100_rand
+
+real	0m1.335s
+user	0m1.976s
+sys	0m0.194s
+R xtsort 100_rand
+#END# 2158 2013/11/08 18:48:55 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.255s
+user	0m0.954s
+sys	0m0.108s
+R sort 100_rand
+
+real	0m21.153s
+user	0m21.081s
+sys	0m0.071s
+R msortf 100_rand_asc
+
+real	0m1.127s
+user	0m0.500s
+sys	0m0.192s
+R xtsort 100_rand_asc
+#END# 2174 2013/11/08 18:49:18 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.289s
+user	0m0.614s
+sys	0m0.111s
+R sort 100_rand_asc
+
+real	0m10.816s
+user	0m10.752s
+sys	0m0.064s
+R msortf 100_rand_dec
+
+real	0m1.155s
+user	0m0.525s
+sys	0m0.199s
+R xtsort 100_rand_dec
+#END# 2188 2013/11/08 18:49:31 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.124s
+user	0m0.803s
+sys	0m0.107s
+R sort 100_rand_dec
+
+real	0m11.256s
+user	0m11.187s
+sys	0m0.068s
+R msortf 100_2
+
+real	0m1.235s
+user	0m0.617s
+sys	0m0.200s
+R xtsort 100_2
+#END# 2204 2013/11/08 18:49:45 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.269s
+user	0m0.967s
+sys	0m0.108s
+R sort 100_2
+
+real	0m26.068s
+user	0m25.995s
+sys	0m0.072s
+R msortf 100_10
+
+real	0m1.262s
+user	0m1.365s
+sys	0m0.193s
+R xtsort 100_10
+#END# 2220 2013/11/08 18:50:14 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.294s
+user	0m0.967s
+sys	0m0.110s
+R sort 100_10
+
+real	0m25.405s
+user	0m25.333s
+sys	0m0.071s
+R msortf 100_100
+
+real	0m1.358s
+user	0m1.919s
+sys	0m0.191s
+R xtsort 100_100
+#END# 2238 2013/11/08 18:50:42 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.257s
+user	0m0.945s
+sys	0m0.107s
+R sort 100_100
+
+real	0m24.708s
+user	0m24.639s
+sys	0m0.068s
+R msortf 100_1000
+
+real	0m1.236s
+user	0m2.104s
+sys	0m0.187s
+R xtsort 100_1000
+#END# 2256 2013/11/08 18:51:09 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.168s
+user	0m0.946s
+sys	0m0.108s
+R sort 100_1000
+
+real	0m23.959s
+user	0m23.887s
+sys	0m0.072s
+R msortf 100_10000
+
+real	0m1.276s
+user	0m2.229s
+sys	0m0.188s
+R xtsort 100_10000
+#END# 2274 2013/11/08 18:51:36 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.194s
+user	0m0.954s
+sys	0m0.109s
+R sort 100_10000
+
+real	0m23.261s
+user	0m23.188s
+sys	0m0.072s
+R msortf 100_rand
+
+real	0m2.071s
+user	0m1.977s
+sys	0m0.202s
+R xtsort 100_rand
+#END# 2290 2013/11/08 18:52:04 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.945s
+user	0m0.966s
+sys	0m0.119s
+R sort 100_rand
+
+real	0m21.201s
+user	0m21.131s
+sys	0m0.069s
+R msortf 100_rand_asc
+
+real	0m0.934s
+user	0m0.500s
+sys	0m0.192s
+R xtsort 100_rand_asc
+#END# 2308 2013/11/08 18:52:27 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.203s
+user	0m0.608s
+sys	0m0.107s
+R sort 100_rand_asc
+
+real	0m10.796s
+user	0m10.729s
+sys	0m0.066s
+R msortf 100_rand_dec
+
+real	0m1.319s
+user	0m0.519s
+sys	0m0.189s
+R xtsort 100_rand_dec
+#END# 2322 2013/11/08 18:52:40 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.183s
+user	0m0.809s
+sys	0m0.107s
+R sort 100_rand_dec
+
+real	0m11.250s
+user	0m11.184s
+sys	0m0.066s
+R msortf 100_2
+
+real	0m1.021s
+user	0m0.612s
+sys	0m0.192s
+R xtsort 100_2
+#END# 2338 2013/11/08 18:52:54 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.179s
+user	0m0.971s
+sys	0m0.109s
+R sort 100_2
+
+real	0m26.027s
+user	0m25.956s
+sys	0m0.070s
+R msortf 100_10
+
+real	0m1.156s
+user	0m1.364s
+sys	0m0.194s
+R xtsort 100_10
+#END# 2354 2013/11/08 18:53:22 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.294s
+user	0m0.960s
+sys	0m0.109s
+R sort 100_10
+
+real	0m25.448s
+user	0m25.376s
+sys	0m0.071s
+R msortf 100_100
+
+real	0m1.383s
+user	0m1.906s
+sys	0m0.195s
+R xtsort 100_100
+#END# 2373 2013/11/08 18:53:51 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.619s
+user	0m0.968s
+sys	0m0.111s
+R sort 100_100
+
+real	0m24.661s
+user	0m24.586s
+sys	0m0.074s
+R msortf 100_1000
+
+real	0m1.314s
+user	0m2.110s
+sys	0m0.191s
+R xtsort 100_1000
+#END# 2391 2013/11/08 18:54:18 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.273s
+user	0m0.962s
+sys	0m0.108s
+R sort 100_1000
+
+real	0m23.975s
+user	0m23.901s
+sys	0m0.073s
+R msortf 100_10000
+
+real	0m1.265s
+user	0m2.224s
+sys	0m0.187s
+R xtsort 100_10000
+#END# 2409 2013/11/08 18:54:45 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.256s
+user	0m0.951s
+sys	0m0.109s
+R sort 100_10000
+
+real	0m23.280s
+user	0m23.208s
+sys	0m0.071s
+R msortf 100_rand
+
+real	0m1.315s
+user	0m1.970s
+sys	0m0.195s
+R xtsort 100_rand
+#END# 2425 2013/11/08 18:55:11 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.290s
+user	0m0.956s
+sys	0m0.110s
+R sort 100_rand
+
+real	0m21.217s
+user	0m21.149s
+sys	0m0.067s
+R msortf 100_rand_asc
+
+real	0m1.315s
+user	0m0.510s
+sys	0m0.198s
+R xtsort 100_rand_asc
+#END# 2443 2013/11/08 18:55:35 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.218s
+user	0m0.616s
+sys	0m0.110s
+R sort 100_rand_asc
+
+real	0m10.796s
+user	0m10.728s
+sys	0m0.067s
+R msortf 100_rand_dec
+
+real	0m1.326s
+user	0m0.520s
+sys	0m0.196s
+R xtsort 100_rand_dec
+#END# 2457 2013/11/08 18:55:48 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.236s
+user	0m0.800s
+sys	0m0.106s
+R sort 100_rand_dec
+
+real	0m11.256s
+user	0m11.191s
+sys	0m0.064s
+R msortf 100_2
+
+real	0m1.355s
+user	0m0.619s
+sys	0m0.194s
+R xtsort 100_2
+#END# 2471 2013/11/08 18:56:02 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.338s
+user	0m0.994s
+sys	0m0.111s
+R sort 100_2
+
+real	0m26.095s
+user	0m26.019s
+sys	0m0.074s
+R msortf 100_10
+
+real	0m1.134s
+user	0m1.371s
+sys	0m0.191s
+R xtsort 100_10
+#END# 2489 2013/11/08 18:56:36 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m6.991s
+user	0m1.032s
+sys	0m0.158s
+R sort 100_10
+
+real	0m25.489s
+user	0m25.415s
+sys	0m0.073s
+R msortf 100_100
+
+real	0m1.405s
+user	0m1.901s
+sys	0m0.202s
+R xtsort 100_100
+#END# 2509 2013/11/08 18:57:05 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.257s
+user	0m0.944s
+sys	0m0.108s
+R sort 100_100
+
+real	0m24.702s
+user	0m24.628s
+sys	0m0.073s
+R msortf 100_1000
+
+real	0m1.312s
+user	0m2.098s
+sys	0m0.197s
+R xtsort 100_1000
+#END# 2525 2013/11/08 18:57:32 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.269s
+user	0m0.951s
+sys	0m0.108s
+R sort 100_1000
+
+real	0m23.967s
+user	0m23.893s
+sys	0m0.073s
+R msortf 100_10000
+
+real	0m1.373s
+user	0m2.226s
+sys	0m0.196s
+R xtsort 100_10000
+#END# 2543 2013/11/08 18:57:59 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.308s
+user	0m0.952s
+sys	0m0.108s
+R sort 100_10000
+
+real	0m23.280s
+user	0m23.208s
+sys	0m0.071s
+R msortf 100_rand
+
+real	0m1.645s
+user	0m1.980s
+sys	0m0.190s
+R xtsort 100_rand
+#END# 2561 2013/11/08 18:58:25 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.244s
+user	0m0.933s
+sys	0m0.107s
+R sort 100_rand
+
+real	0m21.187s
+user	0m21.115s
+sys	0m0.071s
+R msortf 100_rand_asc
+
+real	0m1.340s
+user	0m0.514s
+sys	0m0.206s
+R xtsort 100_rand_asc
+#END# 2577 2013/11/08 18:58:49 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.266s
+user	0m0.612s
+sys	0m0.109s
+R sort 100_rand_asc
+
+real	0m10.824s
+user	0m10.757s
+sys	0m0.066s
+R msortf 100_rand_dec
+
+real	0m1.098s
+user	0m0.525s
+sys	0m0.193s
+R xtsort 100_rand_dec
+#END# 2591 2013/11/08 18:59:02 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.208s
+user	0m0.799s
+sys	0m0.106s
+R sort 100_rand_dec
+
+real	0m11.242s
+user	0m11.174s
+sys	0m0.067s
+R msortf 100_2
+
+real	0m1.142s
+user	0m0.615s
+sys	0m0.189s
+R xtsort 100_2
+#END# 2607 2013/11/08 18:59:16 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.288s
+user	0m0.975s
+sys	0m0.108s
+R sort 100_2
+
+real	0m26.050s
+user	0m25.980s
+sys	0m0.069s
+R msortf 100_10
+
+real	0m1.437s
+user	0m1.373s
+sys	0m0.188s
+R xtsort 100_10
+#END# 2625 2013/11/08 18:59:45 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.361s
+user	0m0.971s
+sys	0m0.111s
+R sort 100_10
+
+real	0m25.485s
+user	0m25.413s
+sys	0m0.072s
+R msortf 100_100
+
+real	0m1.232s
+user	0m1.904s
+sys	0m0.189s
+R xtsort 100_100
+#END# 2641 2013/11/08 19:00:13 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.190s
+user	0m0.956s
+sys	0m0.110s
+R sort 100_100
+
+real	0m24.665s
+user	0m24.594s
+sys	0m0.070s
+R msortf 100_1000
+
+real	0m1.258s
+user	0m2.110s
+sys	0m0.189s
+R xtsort 100_1000
+#END# 2659 2013/11/08 19:00:40 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.278s
+user	0m0.967s
+sys	0m0.110s
+R sort 100_1000
+
+real	0m23.953s
+user	0m23.883s
+sys	0m0.070s
+R msortf 100_10000
+
+real	0m1.293s
+user	0m2.215s
+sys	0m0.192s
+R xtsort 100_10000
+#END# 2677 2013/11/08 19:01:06 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.162s
+user	0m0.948s
+sys	0m0.110s
+R sort 100_10000
+
+real	0m23.254s
+user	0m23.183s
+sys	0m0.070s
+R msortf 100_rand
+
+real	0m1.732s
+user	0m1.984s
+sys	0m0.194s
+R xtsort 100_rand
+#END# 2693 2013/11/08 19:01:34 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m2.414s
+user	0m0.959s
+sys	0m0.120s
+R sort 100_rand
+
+real	0m21.185s
+user	0m21.113s
+sys	0m0.071s
+R msortf 100_rand_asc
+
+real	0m1.141s
+user	0m0.503s
+sys	0m0.200s
+R xtsort 100_rand_asc
+#END# 2711 2013/11/08 19:01:58 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.270s
+user	0m0.612s
+sys	0m0.111s
+R sort 100_rand_asc
+
+real	0m10.821s
+user	0m10.753s
+sys	0m0.067s
+R msortf 100_rand_dec
+
+real	0m1.353s
+user	0m0.521s
+sys	0m0.193s
+R xtsort 100_rand_dec
+#END# 2725 2013/11/08 19:02:11 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.285s
+user	0m0.806s
+sys	0m0.107s
+R sort 100_rand_dec
+
+real	0m11.238s
+user	0m11.168s
+sys	0m0.069s
+R msortf 100_2
+
+real	0m1.369s
+user	0m0.620s
+sys	0m0.196s
+R xtsort 100_2
+#END# 2741 2013/11/08 19:02:25 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.271s
+user	0m0.974s
+sys	0m0.110s
+R sort 100_2
+
+real	0m26.070s
+user	0m25.994s
+sys	0m0.075s
+R msortf 100_10
+
+real	0m1.406s
+user	0m1.365s
+sys	0m0.198s
+R xtsort 100_10
+#END# 2759 2013/11/08 19:02:54 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.292s
+user	0m0.966s
+sys	0m0.109s
+R sort 100_10
+
+real	0m25.488s
+user	0m25.413s
+sys	0m0.074s
+R msortf 100_100
+
+real	0m1.453s
+user	0m1.893s
+sys	0m0.197s
+R xtsort 100_100
+#END# 2775 2013/11/08 19:03:22 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.247s
+user	0m0.958s
+sys	0m0.109s
+R sort 100_100
+
+real	0m24.670s
+user	0m24.595s
+sys	0m0.074s
+R msortf 100_1000
+
+real	0m1.217s
+user	0m2.107s
+sys	0m0.188s
+R xtsort 100_1000
+#END# 2793 2013/11/08 19:03:50 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.206s
+user	0m0.957s
+sys	0m0.109s
+R sort 100_1000
+
+real	0m23.970s
+user	0m23.899s
+sys	0m0.070s
+R msortf 100_10000
+
+real	0m1.371s
+user	0m2.215s
+sys	0m0.194s
+R xtsort 100_10000
+#END# 2811 2013/11/08 19:04:16 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.279s
+user	0m0.955s
+sys	0m0.112s
+R sort 100_10000
+
+real	0m23.272s
+user	0m23.197s
+sys	0m0.074s
+R msortf 100_rand
+
+real	0m1.489s
+user	0m1.971s
+sys	0m0.201s
+R xtsort 100_rand
+#END# 2827 2013/11/08 19:04:42 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.257s
+user	0m0.952s
+sys	0m0.109s
+R sort 100_rand
+
+real	0m21.232s
+user	0m21.160s
+sys	0m0.071s
+R msortf 100_rand_asc
+
+real	0m1.145s
+user	0m0.514s
+sys	0m0.193s
+R xtsort 100_rand_asc
+#END# 2845 2013/11/08 19:05:06 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.268s
+user	0m0.617s
+sys	0m0.108s
+R sort 100_rand_asc
+
+real	0m10.830s
+user	0m10.761s
+sys	0m0.068s
+R msortf 100_rand_dec
+
+real	0m1.118s
+user	0m0.513s
+sys	0m0.193s
+R xtsort 100_rand_dec
+#END# 2859 2013/11/08 19:05:19 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.218s
+user	0m0.804s
+sys	0m0.108s
+R sort 100_rand_dec
+
+real	0m11.248s
+user	0m11.182s
+sys	0m0.065s
+R msortf 100_2
+
+real	0m1.139s
+user	0m0.632s
+sys	0m0.197s
+R xtsort 100_2
+#END# 2873 2013/11/08 19:05:36 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m4.137s
+user	0m0.991s
+sys	0m0.126s
+R sort 100_2
+
+real	0m26.074s
+user	0m25.999s
+sys	0m0.074s
+R msortf 100_10
+
+real	0m1.707s
+user	0m1.370s
+sys	0m0.179s
+R xtsort 100_10
+#END# 2893 2013/11/08 19:06:06 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.582s
+user	0m0.958s
+sys	0m0.108s
+R sort 100_10
+
+real	0m25.463s
+user	0m25.392s
+sys	0m0.071s
+R msortf 100_100
+
+real	0m1.219s
+user	0m1.906s
+sys	0m0.190s
+R xtsort 100_100
+#END# 2909 2013/11/08 19:06:34 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.293s
+user	0m0.948s
+sys	0m0.108s
+R sort 100_100
+
+real	0m24.681s
+user	0m24.607s
+sys	0m0.073s
+R msortf 100_1000
+
+real	0m1.355s
+user	0m2.104s
+sys	0m0.197s
+R xtsort 100_1000
+#END# 2927 2013/11/08 19:07:01 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.231s
+user	0m0.943s
+sys	0m0.108s
+R sort 100_1000
+
+real	0m23.951s
+user	0m23.879s
+sys	0m0.071s
+R msortf 100_10000
+
+real	0m1.448s
+user	0m2.220s
+sys	0m0.197s
+R xtsort 100_10000
+#END# 2945 2013/11/08 19:07:28 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.278s
+user	0m0.957s
+sys	0m0.109s
+R sort 100_10000
+
+real	0m23.244s
+user	0m23.173s
+sys	0m0.069s
+R msortf 100_rand
+
+real	0m1.364s
+user	0m1.976s
+sys	0m0.202s
+R xtsort 100_rand
+#END# 2961 2013/11/08 19:07:54 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.186s
+user	0m0.955s
+sys	0m0.109s
+R sort 100_rand
+
+real	0m21.213s
+user	0m21.140s
+sys	0m0.072s
+R msortf 100_rand_asc
+
+real	0m1.011s
+user	0m0.514s
+sys	0m0.203s
+R xtsort 100_rand_asc
+#END# 2979 2013/11/08 19:08:17 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.103s
+user	0m0.611s
+sys	0m0.109s
+R sort 100_rand_asc
+
+real	0m10.814s
+user	0m10.746s
+sys	0m0.067s
+R msortf 100_rand_dec
+
+real	0m1.019s
+user	0m0.534s
+sys	0m0.197s
+R xtsort 100_rand_dec
+#END# 2993 2013/11/08 19:08:31 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.149s
+user	0m0.808s
+sys	0m0.107s
+R sort 100_rand_dec
+
+real	0m11.242s
+user	0m11.175s
+sys	0m0.066s
+R msortf 100_2
+
+real	0m1.380s
+user	0m0.616s
+sys	0m0.190s
+R xtsort 100_2
+#END# 3009 2013/11/08 19:08:45 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.264s
+user	0m0.976s
+sys	0m0.111s
+R sort 100_2
+
+real	0m26.050s
+user	0m25.975s
+sys	0m0.074s
+R msortf 100_10
+
+real	0m1.287s
+user	0m1.370s
+sys	0m0.192s
+R xtsort 100_10
+#END# 3025 2013/11/08 19:09:13 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.251s
+user	0m0.958s
+sys	0m0.108s
+R sort 100_10
+
+real	0m25.444s
+user	0m25.372s
+sys	0m0.071s
+R msortf 100_100
+
+real	0m1.239s
+user	0m1.910s
+sys	0m0.186s
+R xtsort 100_100
+#END# 3043 2013/11/08 19:09:41 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.200s
+user	0m0.950s
+sys	0m0.109s
+R sort 100_100
+
+real	0m24.705s
+user	0m24.632s
+sys	0m0.072s
+R msortf 100_1000
+
+real	0m1.312s
+user	0m2.108s
+sys	0m0.192s
+R xtsort 100_1000
+#END# 3061 2013/11/08 19:10:09 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.630s
+user	0m0.960s
+sys	0m0.114s
+R sort 100_1000
+
+real	0m23.980s
+user	0m23.907s
+sys	0m0.072s
+R msortf 100_10000
+
+real	0m1.328s
+user	0m2.216s
+sys	0m0.191s
+R xtsort 100_10000
+#END# 3079 2013/11/08 19:10:36 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.269s
+user	0m0.943s
+sys	0m0.113s
+R sort 100_10000
+
+real	0m23.264s
+user	0m23.195s
+sys	0m0.068s
+R msortf 100_rand
+
+real	0m1.486s
+user	0m1.980s
+sys	0m0.193s
+R xtsort 100_rand
+#END# 3095 2013/11/08 19:11:02 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.206s
+user	0m0.949s
+sys	0m0.109s
+R sort 100_rand
+
+real	0m21.204s
+user	0m21.134s
+sys	0m0.069s
+R msortf 100_rand_asc
+
+real	0m1.320s
+user	0m0.504s
+sys	0m0.190s
+R xtsort 100_rand_asc
+#END# 3113 2013/11/08 19:11:25 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.202s
+user	0m0.611s
+sys	0m0.111s
+R sort 100_rand_asc
+
+real	0m10.818s
+user	0m10.749s
+sys	0m0.068s
+R msortf 100_rand_dec
+
+real	0m0.932s
+user	0m0.523s
+sys	0m0.196s
+R xtsort 100_rand_dec
+#END# 3127 2013/11/08 19:11:38 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.255s
+user	0m0.805s
+sys	0m0.109s
+R sort 100_rand_dec
+
+real	0m11.249s
+user	0m11.182s
+sys	0m0.067s
+R msortf 100_2
+
+real	0m1.372s
+user	0m0.624s
+sys	0m0.194s
+R xtsort 100_2
+#END# 3141 2013/11/08 19:11:52 "xtsort -k key -i indat/100_2_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.252s
+user	0m0.985s
+sys	0m0.111s
+R sort 100_2
+
+real	0m26.067s
+user	0m25.992s
+sys	0m0.074s
+R msortf 100_10
+
+real	0m1.339s
+user	0m1.370s
+sys	0m0.196s
+R xtsort 100_10
+#END# 3159 2013/11/08 19:12:21 "xtsort -k key -i indat/100_10_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.248s
+user	0m0.953s
+sys	0m0.109s
+R sort 100_10
+
+real	0m25.463s
+user	0m25.389s
+sys	0m0.073s
+R msortf 100_100
+
+real	0m1.403s
+user	0m1.900s
+sys	0m0.193s
+R xtsort 100_100
+#END# 3177 2013/11/08 19:12:49 "xtsort -k key -i indat/100_100_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.264s
+user	0m0.958s
+sys	0m0.111s
+R sort 100_100
+
+real	0m24.684s
+user	0m24.612s
+sys	0m0.071s
+R msortf 100_1000
+
+real	0m1.232s
+user	0m2.111s
+sys	0m0.188s
+R xtsort 100_1000
+#END# 3195 2013/11/08 19:13:17 "xtsort -k key -i indat/100_1000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.316s
+user	0m0.960s
+sys	0m0.111s
+R sort 100_1000
+
+real	0m23.957s
+user	0m23.884s
+sys	0m0.072s
+R msortf 100_10000
+
+real	0m1.240s
+user	0m2.221s
+sys	0m0.182s
+R xtsort 100_10000
+#END# 3211 2013/11/08 19:13:43 "xtsort -k key -i indat/100_10000_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.151s
+user	0m0.947s
+sys	0m0.109s
+R sort 100_10000
+
+real	0m23.327s
+user	0m23.251s
+sys	0m0.074s
+R msortf 100_rand
+
+real	0m4.552s
+user	0m1.982s
+sys	0m0.216s
+R xtsort 100_rand
+#END# 3230 2013/11/08 19:14:13 "xtsort -k key -i indat/100_rand_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m2.187s
+user	0m1.008s
+sys	0m0.149s
+R sort 100_rand
+
+real	0m21.217s
+user	0m21.146s
+sys	0m0.070s
+R msortf 100_rand_asc
+
+real	0m1.714s
+user	0m0.515s
+sys	0m0.205s
+R xtsort 100_rand_asc
+#END# 3248 2013/11/08 19:14:39 "xtsort -k key -i indat/100_rand_asc_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m2.679s
+user	0m0.627s
+sys	0m0.123s
+R sort 100_rand_asc
+
+real	0m10.884s
+user	0m10.815s
+sys	0m0.068s
+R msortf 100_rand_dec
+
+real	0m1.783s
+user	0m0.536s
+sys	0m0.197s
+R xtsort 100_rand_dec
+#END# 3269 2013/11/08 19:14:53 "xtsort -k key -i indat/100_rand_dec_xtsort.xt -o /dev/null" in=1000000 out=1000000
+
+real	0m1.436s
+user	0m0.808s
+sys	0m0.114s
+R sort 100_rand_dec
+
+real	0m11.249s
+user	0m11.180s
+sys	0m0.069s

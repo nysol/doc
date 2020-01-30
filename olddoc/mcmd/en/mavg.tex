@@ -1,0 +1,49 @@
+
+%\begin{document}
+\section{mavg - Calculate Average\label{sect:mavg}}
+\index{mavg@mavg}
+Calculates the average values in column specified by the \verb|f=| parameter. 
+
+\subsection*{Format}
+\verb|mavg f= [k=] [-n]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the field(s) (multiple fields can be specified) with the values to be aggregated.\\
+             & Use : (colon) to specify the new field name. Example: \verb|f=|Quantity:AverageQuantity\\
+\verb|k=|    & Specify the set of field name(s) (Multiple fields can be specified) as unit of aggregation. \\
+\verb|-n|    & Output as NULL if the data consist at least one NULL value. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mavg_ex.tex}
+\subsection*{Related Commands}
+
+\hyperref[sect:mhashavg]{mhashavg} : Aggregate calculation does not require prior sorting on the key field.
+
+\hyperref[sect:msum]{msum} : Command to calculate sum. 
+
+\hyperref[sect:mstats]{mstats} : Calculate a variety of statistics. 
+
+%\end{document}

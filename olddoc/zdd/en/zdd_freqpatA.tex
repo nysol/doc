@@ -1,0 +1,24 @@
+
+\section{freqpatA : Enumerate frequent itemsets\label{sect:freqpatA}}
+\subsection*{Format}
+$obj$.freqpatA($minsup$) $\rightarrow$ $zdd$
+
+~~$minsup$ : integer
+
+\subsection*{Description}
+Enumerate all frequent itemsets from ZDD object $obj$ that is more than the minimum support $minsup$, and return the ZDD object as $zdd$. 
+
+This is a similar \hyperref[sect:lcm]{LCM} function which reads the transaction data from a file and enumerates frequent itemset by LCM algorithm, which is much faster than this function. 
+However,  the item name must be specified in whole integers, and the items must be arranged in order, thus if efficiency is not required, this function is sufficient. 
+
+
+\subsection*{Example}
+\input{examples/tex/freqpatA_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:freqpatM]{freqpatM} : Enumerate maximal itemsets 
+
+\hyperref[sect:freqpatC]{freqpatC} : Enumerate closed itmesets
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD
+

@@ -1,0 +1,66 @@
+\subsubsection*{例1: csv形式のデータをarff形式のデータへ変換}
+
+「顧客」項目は文字列型、
+「商品」項目はカテゴリ型、
+「日付」項目は日付型(時刻は含まない)、
+そして「数量」と「金額」項目は数値型として、
+arff形式のデータへ変換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,商品,日付,数量,金額
+No.1,A,20081201,1,10
+No.2,A,20081202,2,20
+No.3,A,20081203,3,30
+No.4,B,20081201,4,40
+No.5,B,20081203,5,50
+$ mcsv2arff s=顧客 d=商品 D=日付 n=数量,金額 T=顧客購買データ i=dat1.csv  o=rsl1.csv
+#END# kgcsv2arff D=日付 T=顧客購買データ d=商品 i=dat1.csv n=数量,金額 o=rsl1.csv s=顧客
+$ more rsl1.csv
+@RELATION	顧客購買データ
+
+@ATTRIBUTE	顧客	string
+@ATTRIBUTE	日付	date yyyyMMdd
+@ATTRIBUTE	数量	numeric
+@ATTRIBUTE	金額	numeric
+@ATTRIBUTE	商品	{A,B}
+
+@DATA
+No.1,20081201,1,10,A
+No.2,20081202,2,20,A
+No.3,20081203,3,30,A
+No.4,20081201,4,40,B
+No.5,20081203,5,50,B
+\end{Verbatim}
+\subsubsection*{例2: csv形式のデータをarff形式のデータへ変換(時刻を含む日付データ指定)}
+
+時刻を伴うデータは\verb|D=日付%t|のように\verb|%t|を加えて指定する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+顧客,商品,日付,数量,金額
+No.1,A,20081201102030,1,10
+No.2,A,20081202123010,2,20
+No.3,A,20081203153010,3,30
+No.4,B,20081201174010,4,40
+No.5,B,20081203133010,5,50
+$ mcsv2arff s=顧客 d=商品 D=日付%t n=数量,金額 T=顧客購買データ i=dat2.csv  o=rsl2.csv
+#END# kgcsv2arff D=日付%t T=顧客購買データ d=商品 i=dat2.csv n=数量,金額 o=rsl2.csv s=顧客
+$ more rsl2.csv
+@RELATION	顧客購買データ
+
+@ATTRIBUTE	顧客	string
+@ATTRIBUTE	日付	date yyyyMMddHHmmss
+@ATTRIBUTE	数量	numeric
+@ATTRIBUTE	金額	numeric
+@ATTRIBUTE	商品	{A,B}
+
+@DATA
+No.1,20081201102030,1,10,A
+No.2,20081202123010,2,20,A
+No.3,20081203153010,3,30,A
+No.4,20081201174010,4,40,B
+No.5,20081203133010,5,50,B
+\end{Verbatim}

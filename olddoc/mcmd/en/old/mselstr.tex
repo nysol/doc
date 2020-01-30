@@ -1,0 +1,490 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mselstr},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mselstr (select records matching query string) command}
+\verb|f=| field name of column.
+\verb|v=| query string. Records matching query string will be selected. 
+
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+{\small
+\begin{tabular}{cc}
+\hline
+key & val \\
+\hline
+a & x \\
+a & y \\
+b & y \\
+b & z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{f=val v=y\label{tbl:out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&y \\
+b&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\caption{k=key f=val v=x\label{tbl:out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&x \\
+a&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{mavg+mcut\label{tbl:out3}}
+{\small
+\begin{tabular}{cc}
+\hline
+win&val \\
+\hline
+4\slash7&1.5 \\
+4\slash8&2.5 \\
+4\slash9&3.5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Supplementary selection criteria for this command are listed below. 
+The \href{run:msel.pdf}{msel} command allows you to build complex conditions using regular expressions and operators. 
+
+\begin{itemize}
+\item v=match any character string from the list of string(s) specified. 
+\item f=match character string from the column(s) specified. 
+\item  \verb|-F| option: query returns rows that match all character strings specified.
+\item \verb|-head,-tail,-sub| option: match with start, middle, or part of string.
+\item k=select records in related to the defined key. 
+\item \verb|-R| option: select records that matches all conditions by the key field. 
+\end{itemize}
+
+Table \ref{tbl:input} below shows the input data for the command \verb|mselstr k=key f=fld1,fld2 v=s1,s2|. The query conditions with \verb|-R,-F| options are shown in \ref{tbl:cond}. 
+
+\begin{table}[htbp]
+\begin{center}
+
+\caption{Input data\label{tbl:input}}
+{\small
+\begin{tabular}{ccc}
+\hline
+$\verb|key|$ & $\verb|fld1|$ & $\verb|fld2|$ \\
+\hline
+k & $v_{a1}$ & $v_{a2}$ \\
+k & $v_{b1}$ & $v_{b2}$ \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Using the input data shown in Table \ref{tbl:input}, when running the command 
+mselstr k=key f=fld1,fld2 v=v1,v2 with -R and F options, the query results differs accordingly.  
+If query matches all conditions, the output will print both rows, and no row returns when there is no matched records. \label{tbl:cond}}
+
+{\small
+\begin{tabular}{ccl}
+\hline
+\verb|-F| & \verb|-R| & Matching conditions  \\
+\hline
+   &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+   & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+\hline
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+
+\subsection*{Format}
+mselstr f= v= [k=]  [u=] [-F] [-r] [-R] [-sub] [-head] [-tail] [-w]
+[\href{run:option.pdf}{bufcount=}]
+[\href{run:option.pdf}{-nfn}]
+[\href{run:option.pdf}{-nfno}]
+[\href{run:option.pdf}{-x}]
+[\href{run:option.pdf}{i=}]
+[\href{run:option.pdf}{o=}]
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name (allow multiple fields)【required parameter】\\
+& Specify field that contains the query character string. \\
+\verb|v=|    & Query string  (allow multiple fields)【required parameter】 \\
+& Select rows(s) where the specified value matches with the string in the column specified at the \emph{f=} parameter. \\
+\verb|k=|    & Key field name (allow multiple fields)【required parameter】 \\
+& Select records based on the defined key. \\
+& Note: Sort data by key field(s) as specified in the \emph{k =} parameter prior to the command. \\
+\verb|o=|    & Output file name of query results  \\
+& Print record(s) matching query to specified output file.  \\
+\verb|u=|    & Output file name of unmatched records.  \\
+& Print unmatched record(s) to this output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-F|    &  Query with 'AND' condition for multiple fields  \\
+& match all character strings specified in the fields specified at the \emph{f=} parameter. \\
+\verb|-r|    & Reverse selection \\
+& Select records that do not match the condition. \\
+\verb|-R|    & Query with 'AND' condition for multiple records \\
+&  query returns rows that match all character strings specified at the \emph{k=} parameter. \\
+\verb|-sub|  & Substring match  \\
+& Search for substring that matches the specified string pattern.  \\
+& Select records based on substring match specified in \emph{v=} parameter against the string specified column(s) at the \emph{f=} parameter. \\
+\verb|-head| & Match beginning of string \\
+\verb|-tail| & Match end of string  \\
+\verb|-w|    & Match a sequence of wide-character substring when \verb|-sub|,\verb|-head|,\verb|-tail| option is specified. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\newpage
+\subsection*{Examples}
+\subsubsection*{Example 1 Select records with exact keyword matching "apple" and "orange" in the Product field. }
+Select records matching "apple" and "orange" in the Product field , print matching results to rsl.csv file. Unmatched records including pineapplejuice, milk and wine will be saved to other.csv file using the parameter \verb|u=oth.csv|. 
+
+
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+Product,Amount
+apple,100
+milk,350
+orange,100
+pineapplejuice,500
+wine,1000
+
+$ mselstr f="Product" v=apple,orange u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Product,Amount
+apple,100
+orange,100
+
+# Output file2(oth.csv)
+Product,Amount
+milk,350
+pineapplejuice,500
+wine,1000
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Remove records containing keywords "apple" and "orange" in the Product field using the \emph{-r} option}
+Contrary to example 1, records in the \verb|Product| field matching "apple" and "orange" are removed, and the rest of the records are saved to rsl.csv file. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Product,Amount
+apple,100
+milk,350
+orange,100
+pineapplejuce,500
+wine,1000
+
+$ mselstr f="Product"  v=apple,orange -r i=dat.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Product,Amount
+milk,350
+pineapple,500
+wine,1000
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Find out all transactions of customer(s) who brought oranges. }
+Select all records of customer who have purchased oranges by specifying \verb|Customer| at the \emph{k=} parameter. Save other records in oth.csv file. 
+\\Note: Sort data according to \verb|Customer| prior to this command. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat2.csv
+Customer,Product,Amount
+A,apple,100
+A,milk,350
+B,orange,100
+B,orange,100
+B,pineapple,500
+B,wine,1000
+C,apple,100
+C,orange,100
+
+$ mselstr k="Customer" f="Product" v=orange u=oth.csv i=dat2.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Customer,Product,Amount
+B,orange,100
+B,orange,100
+B,pineapple,500
+B,wine,1000
+C,apple,100
+C,orange,100
+
+#Output file2(oth.csv)
+Customer,Product,Amount
+A,apple,100
+A,milk,350
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Select records with Product containing the string "apple". }
+Select records where the \verb|Product| field contain the keyword "apple", and save the output to a file named  rsl.csv. Records with partial match such as pine(apple)juice will be saved in the output file rsl.csv.
+
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+Product, Amount
+apple,100
+milk,350
+orange,100
+pineapplejuice,500
+wine,1000
+
+$ mselstr f="Product" v=apple -sub i=dat.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Product, Amount
+apple,100
+pineapplejuice,500
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 5 Select records where the Product field contains wide characters  "柿", "桃", and "葡萄" }
+
+Matching with wide character in the query string maybe handled as multibyte character string. Thus,  matching maybe based on single byte character if the query string includes wide character. Thus it is necessary indicate wide character is used in the query string with \emph{-w} option. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat3.csv
+Product,Amount
+fruit:柿,100
+fruit:桃,250
+fruit:葡萄,300
+fruit:梨,450
+fruit:苺,500
+
+$ mselstr f="Product" v="柿","桃","葡萄" -sub -w i=dat3.csv o=rsl.csv
+
+#Output file (rsl.csv)
+Product,Amount
+fruit:柿,100
+fruit:桃,250
+fruit:葡萄,300
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 6 Select product(s) with consecutive purchases in 2013. }
+Use the \emph{-F} option to select transactions where the date of purchase and date of previous purchase for the product both took place in 2013.  Save the query results to an output file rsl.csv, and save unmatched records to oth.csv. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr f="Date","PreviousDate" -F -sub v=2013 u=oth.csv i=dat4.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+B,pineapple,500,2,2013/04/15,2013/04/01
+C,orange,100,2,2013/02/14,2013/01/31
+
+# Output file2(oth.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 7 Select customers who purchased the same product(s) consecutively in 2013. }
+Use \emph{k=} parameter to select customers who purchased a product with date of purchase and date of previous purchase both took place in 2013. Save unmatched records to a file oth.csv. \\ 
+Note: Sort data according to \verb|Customer| prior to this command. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr k="Customer" f="Date","PreviousDate" -F -sub v=2013 u=oth.csv i=dat4.csv o=rsl.csv
+
+# Output file1 (rsl.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+
+# Output file2(oth.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 8 Select new customer(s) who purchased in 2013}
+Use the \emph{-R} option to select new customer(s) who made their first purchase in 2013, and a null value for date of previous purchase. 
+Write the query results to an output file rsl.csv, and save unmatched records to oth.csv. \\
+Note: Sort data according to \verb|Customer| prior to this command. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr k="Customer" f="Date","PreviousDate" -F -R -sub v=2013,null u=oth.csv i=dat4.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+
+# Output file2(oth.csv)
+Customer,Product,Amount,Gender,Date,PreviousDate
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Related Commands}
+\noindent
+\href{run:msel.pdf}{msel}: select records with conditions\\
+\href{run:mcommon.pdf}{mcommon}: select common records in reference file
+
+\end{document}

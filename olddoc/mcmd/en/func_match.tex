@@ -1,0 +1,48 @@
+
+%\begin{document}
+
+\section{match - Search\label{sect:match}}
+\index{match@match}
+
+Format 1: match(search string ,$str_1,str_2,\cdots$)
+
+Format 2: matcha(search string ,$str_1,str_2,\cdots$)
+
+Format 3: matchs(search string ,$str_1,str_2,\cdots$)
+
+Format 4: matchas(search string ,$str_1,str_2,\cdots$)
+
+Search for the search string in $str_1,str_2,\cdots$, and returns true if there is a match and false otherwise.
+
+OR search and AND search returns partial match and exact match of string. The corresponding functions are shown in Table \ref{tbl:func_match_cond}. 
+
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Input Data\label{tbl:func_match_cond}}
+{\small
+\begin{tabular}{l|ll}
+\hline
+& OR search & AND search \\
+\hline
+Exact match & match  & matcha  \\
+Partial match & matchs & matchas \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+The \verb|match| function returns true if there is an exact match of the specified character string with any of the string in $str_1,str_2,\cdots$. 
+The \verb|matcha| function returns true if there is an exact match with all strings in  $str_1,str_2,\cdots$. 
+\verb|matchs| function returns true if there is partial match with any of the string in $str_1,str_2,\cdots$.  
+\verb|matchas| function returns true if there is partial match with all strings in $str_1,str_2,\cdots$.  
+Refer to Table \ref{tbl:mcal_and} on the boolean table of OR/AND logical operation for NULL values. 
+
+
+\subsection*{Examples}
+\input{examples/tex/func_match_ex}
+
+%\end{document}
+

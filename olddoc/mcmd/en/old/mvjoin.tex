@@ -1,0 +1,223 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvjoin join reference element to vector }
+Join vector elements with corresponding taxonomy elements from reference file with the same key. A vector includes multiple elements separated by a space delimiter (see Table \ref{tbl:input} ). 
+
+Table \ref{tbl:input}〜\ref{tbl:out3} highlights some examples.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Reference file\label{tbl:ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{cc}
+\hline
+item&taxo \\
+\hline
+a&X \\
+b&Y \\
+c&Z \\
+e&X \\
+f&Z \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:out2}}
+\verb|vf=items m=ref.csv K=item f=taxo| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.50\hsize}
+\begin{center}
+\caption{An example to define unmatched taxonomy elements
+\label{tbl:out3}}
+\verb|vf=items m=ref.csv K=item f=taxo n=* | \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X * \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z * \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+
+Take note that the \verb|mvjoin| common read the whole reference file at once into memory, thus huge  reference file may use massive amounts of memory.
+
+
+\subsection*{Format}
+\verb|mvjoin vf= [K=] m= f= [n=]|
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Field name of vector (from \emph{i=} input file) as join key. 【required parameter】\\
+           & Multiple fields can be specified. Sorting of the vectors is not required. \\
+\verb|m=|  & Reference file. \\
+\verb|K=|  &  Specify key field in reference file (\verb|m=|) where corresponding taxonomy elements are joined to the vector. 【required parameter】 \\
+           & The sequence of the vector is unique, sorting is not required. \\
+           & The output may differ if the string sequence is not unique. \\
+\verb|f=|  &  Field name of vector to join with reference file. 【required parameter】\\
+\verb|n=|  & Specify the replacement character when the key elements do not match in \emph{vf=} and \emph{K=} . \\
+& The element will not be joined with the reference file when this option not specified.  \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Combine vector with elements from reference file }
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items
+b a c
+c c
+e a a
+
+# ref.csv
+item,taxo
+a,X Y
+b,X
+c,Z Z
+
+$ mvjoin vf=items m=ref.csv K=item f=taxo i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items
+b a c X X Y Z Z
+c c Z Z Z Z
+e X Y X Y
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Join multiple fields.  }
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+
+# ref.csv
+item,taxo
+a,X
+b,X
+c,Y
+d,Y
+
+$ mvjoin vf=items1,items2 m=ref.csv K=item f=taxo i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items1,items2
+b a c X X Y,b b X X
+c c Y Y,a d X Y
+e a a X X,a a X X
+------------------------------------------------
+\end{verbatim}
+
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mvcommon.pdf}{mvcommon}: select common elements of vector 
+\end{itemize}
+
+\end{document}

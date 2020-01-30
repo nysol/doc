@@ -1,0 +1,19 @@
+
+\section{freqpatC : Enumerate closed itemsets \label{sect:freqpatC}}
+\subsection*{Format}
+$obj$.freqpatC($minsup$) $\rightarrow$ $zdd$ 
+
+~~$minsup$ : integer
+
+\subsection*{Description}
+Enumerate all closed itemsets from ZDD object $obj$ that is more than the minimum support $minsup$, and return the ZDD object as $zdd$. 
+
+\subsection*{Example}
+\input{examples/tex/freqpatC_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:freqpatA]{freqpatA} : Enumerate frequent itemsets
+
+\hyperref[sect:freqpatM]{freqpatM} : Enumerate closed itemsets 
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD

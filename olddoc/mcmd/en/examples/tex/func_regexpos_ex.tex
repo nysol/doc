@@ -1,0 +1,57 @@
+\subsubsection*{Example 1: Basic Example}
+
+Find out the position of the longest substring that matches the regular expression \verb|c.*a|. Note that the first character starts at position 0. Since the same input data and substring are used in the \verb|regexstr| function, it is easy to compare the results and understand the differences.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,xcbbbayy
+2,xxcbaay
+3,
+4,bacabbca
+$ mcal c='regexpos($s{str},"c.*a")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=regexpos($s{str},"c.*a") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,xcbbbayy,1
+2,xxcbaay,2
+3,,
+4,bacabbca,2
+\end{Verbatim}
+\subsubsection*{Example 2: Multibyte character}
+
+Find out the longest substring that matches the regular expression \verb|"い.*あ"|. However, since regexpos does not support multibyte characters, the function returns the position of bytes instead of characters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,str
+1,漢漢あbbbいyy
+2,漢あbいいy
+3,
+4,bあいあbbいあ
+$ mcal c='regexpos($s{str},"あ.*い")' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=regexpos($s{str},"あ.*い") i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,漢漢あbbbいyy,6
+2,漢あbいいy,3
+3,,
+4,bあいあbbいあ,1
+\end{Verbatim}
+\subsubsection*{Example 3: Multibyte character 2}
+
+Find out the longest substring that matches the regular expression \verb|"い.*あ"|. The regexposw function is able to process multibyte characters accurately.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='regexposw($s{str},"あ.*い")' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=regexposw($s{str},"あ.*い") i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,str,rsl
+1,漢漢あbbbいyy,2
+2,漢あbいいy,1
+3,,
+4,bあいあbbいあ,1
+\end{Verbatim}

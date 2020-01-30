@@ -1,0 +1,12 @@
+class,pid,pattern,size,pos,neg,posTotal,negTotal,total,support,growthRate,postProb
+cls2,13,A E,2,2,0,2,4,6,1,inf,1
+cls2,15,A B E,3,2,0,2,4,6,1,inf,1
+cls2,10,A B D E,4,2,0,2,4,6,1,inf,1
+cls2,14,B E,2,2,0,2,4,6,1,inf,1
+cls2,17,A D E,3,2,0,2,4,6,1,inf,1
+cls2,18,B D E,3,2,0,2,4,6,1,inf,1
+cls2,12,A B D,3,2,1,2,4,6,1,4,0.6666666667
+cls2,11,A D,2,2,1,2,4,6,1,4,0.6666666667
+cls2,16,D E,2,2,1,2,4,6,1,4,0.6666666667
+cls2,9,A B,2,2,1,2,4,6,1,4,0.6666666667
+cls2,8,A,1,2,1,2,4,6,1,4,0.6666666667

@@ -1,0 +1,1 @@
+test.rb:295:in `func17': uninitialized constant Mtemp NameError

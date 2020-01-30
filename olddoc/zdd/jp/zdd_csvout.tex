@@ -1,0 +1,24 @@
+
+\section{csvout : CSVファイル出力\label{sect:csvout}}
+\subsection*{書式}
+$obj$.csvout($fileName$) $\rightarrow$ $self$ 
+
+~~$fileName$ : string
+
+\subsection*{説明}
+ZDDオブジェクト$obj$の内容を$fileName$で指定したファイルにCSV形式で出力する。
+重みとアイテム集合の2項目が出力される。
+アイテム集合は、アイテムをスペースで区切ることで出力される。
+ただし、空のアイテム集合(重みだけの項)は、重みだけ出力され、
+CSVの第2項はnull出力となる。
+また、nullのZDDオブジェクト(重み0の空のアイテム集合)を出力すると0バイトファイルとなる。
+
+項目名は出力されない。
+返り値はself(自分自身)。
+
+\subsection*{例}
+\input{examples/tex/csvout_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:hashout]{hashout} : Hash変換
+

@@ -1,0 +1,33 @@
+\subsubsection*{Example 1: Basic Example}
+
+Calculate the average \verb|Quantity| and average \verb|Amount| for each \verb|Customer|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Quantity,Amount
+A,1,
+B,,15
+A,2,20
+B,3,10
+B,1,20
+$ mhashavg k=Customer f=Quantity,Amount i=dat1.csv o=rsl1.csv
+#END# kghashavg f=Quantity,Amount i=dat1.csv k=Customer o=rsl1.csv
+$ more rsl1.csv
+Customer,Quantity,Amount
+A,1.5,20
+B,2,15
+\end{Verbatim}
+\subsubsection*{Example 2: NULL value in output}
+
+The output returns NULL if there NULL value is present in \verb|Quantity| and \verb|Amount|. Use \verb|-n| option to print the null value.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mhashavg k=Customer f=Quantity,Amount -n i=dat1.csv o=rsl2.csv
+#END# kghashavg -n f=Quantity,Amount i=dat1.csv k=Customer o=rsl2.csv
+$ more rsl2.csv
+Customer,Quantity,Amount
+A,1.5,
+B,,15
+\end{Verbatim}

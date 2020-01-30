@@ -1,0 +1,23 @@
+\subsubsection*{Example 1: Basic Example}
+
+Find out the median and average "quantity" and "amount" by each customer.
+Save the output in a new column named "type".
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ msummary k=customer f=quantity,amount c=median:medianval,mean:meanval a=type i=dat1.csv o=rsl1.csv
+#END# kgsummary a=type c=median:medianval,mean:meanval f=quantity,amount i=dat1.csv k=customer o=rsl1.csv
+$ more rsl1.csv
+customer%0,type,medianval,meanval
+A,quantity,1.5,1.5
+A,amount,15,15
+B,quantity,1,1.666666667
+B,amount,15,15
+\end{Verbatim}

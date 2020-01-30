@@ -1,0 +1,31 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> c=ZDD::constant(10)
+> c.show
+ 10
+# ZDD重みオブジェクトとruby文字列との演算では、
+# ruby文字列はアイテム集合と見なされ自動でZDDオブジェクトにキャストされる。
+> (c*"a").show
+ 10 a
+
+# ZDD重みオブジェクトとruby整数との演算では、ruby整数はZDD重みオブジェクトと見なされる。
+> (0*c).show
+ 0
+
+# ZDD重みオブジェクトをruby整数に変換し、ruby整数として演算する。
+> puts c.to_i*10
+100
+
+# 以下のように、0の重みを定義しておくと、そのオブジェクトとの演算においては、
+# RubyStringを自動的にキャストしてくれるので便利である。
+> a=ZDD::constant(0)
+> a+="x"
+> a+="x z"
+> a+="z"
+> a.show
+ x z + x + z
+\end{Verbatim}

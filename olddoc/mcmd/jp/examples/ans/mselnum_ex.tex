@@ -1,0 +1,22 @@
+
+\subsubsection*{例1: 基本例}
+
+val項目が2以上5以下の行、すなわち2行目と5行目を選択する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,val
+1,5.1
+2,5
+3,-2.0
+4,
+5,2.0
+
+$ mselnum f=val c='[2,5]' i=dat1.csv o=rsl1.csv
+#END# kgselnum c=[2,5] f=val i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,val
+2,5
+5,2.0
+\end{Verbatim}

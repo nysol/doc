@@ -1,0 +1,2 @@
+msum -nfn k=0 f=1,2 i=dat1.csv o=rsl3.csv
+more rsl3.csv

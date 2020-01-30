@@ -1,0 +1,55 @@
+
+%\begin{document}
+
+\section{mnewrand - Generate Dataset with Random Numbers\label{sect:mnewrand}}
+\index{mnewrand@mnewrand}
+Generate real random numbers from the range of 0.0 to 1.0. 
+Use the \verb|-int| option to generate randomized sequences of integers.
+
+
+This command uses Mersenne Twister to generate random numbers. 
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Webpage of author}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library})。
+
+
+\subsection*{Format}
+\verb|mnewrand a= [max=] [min=] [S=] [l=] [-int]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|      & Name of column in the new dataset created. \\
+               & This parameter is not required when \verb|-nfn,-nfno| options are specified. \\
+\verb|max=|    & Maximum value of random number [default value: INT\_MAX]\\
+               & \verb|-int| must be specified with this parameter. \\
+\verb|min=|    & Minimum value of random number [default value: 0]\\
+               &  \verb|-int| must be specified with this parameter. \\
+\verb|S=|      & Random seed [default value: current time]\\
+\verb|l=|      & Number of lines [default value: 10]\\
+               & Generate a new dataset with random numbers according to the number of rows specified. \\
+\verb|-int|    & Generate random integers.\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mnewrand_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mnewnumber] {mnewnumber} : Generate list of sequential numbers. 
+
+\hyperref[sect:mnewstr] {mnewstr} : Generate a list of character strings. 
+
+%\end{document}

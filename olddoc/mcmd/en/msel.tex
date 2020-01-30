@@ -1,0 +1,51 @@
+
+%\begin{document}
+
+\section{msel - Select Records with Conditions\label{sect:msel}}
+\index{msel@msel}
+Define the computation criteria at \verb|c=| parameter, the record is selected if condition returns true. 
+All operators and functions available in mcal command can be used in the conditional function. For more details, please refer to \hyperref[sect:mcal]{mcal}.
+
+\subsection*{Format}
+\verb|msel c=  [u=] [-r]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|c=|    & Define the expression using combinations of operators and functions.  \\
+             & Refer to \hyperref[sect:mcal]{mcal} for more details. \\
+\verb|o=|    & Records matching the condition will be printed to this output file. \\
+\verb|u=|    & Records that do not match the condition will be printed to this output file.\\
+\verb|-r|    & Reverse selection\\
+             & Select records excluded from the selection condition defined in \verb|c=|\\
+\end{tabular} 
+}
+\end{table} 
+
+
+
+\subsection*{Examples}
+\input{examples/tex/msel_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mselnum]{mselnum} : Select records with simple numeric range. 
+
+\hyperref[sect:mselstr]{mselstr} : Select records matching query string
+
+\hyperref[sect:mcal]{mcal} : Return the calculated results instead of selecting records. 
+
+%\end{document}

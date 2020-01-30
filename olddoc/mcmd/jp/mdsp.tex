@@ -1,0 +1,118 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mdsp 画面表示\label{sect:mdsp}}
+\index{mdsp@mdsp}
+\underline{注)本コマンドは開発バージョンであり、仕様が変更される可能性があります。}
+
+座標\verb|x=,y=|で指定したターミナル上の位置に\verb|str=|で指定した文字列を表示する。
+\verb|i=|でファイル名を指定すると、その内容を表示する。
+\verb|str=|と\verb|i=|の両方が指定されればi=が優先される。
+\verb|i=|が複数行ある場合、全ての行が\verb|x=|で指定した座標位置から表示される。
+
+\verb|fc=|で文字列の色を指定でき、また\verb|bg=|で文字列の背景の色を指定できる。
+指定できる色は、black, red, green, yellow, blue, magenda, cyan, white、の8色である。
+\verb|fc=|のデフォルトはblackで、\verb|bg=|のデフォルトはwhiteである。
+また\verb|-bold|を指定することで強調表示が可能である。
+
+\subsection*{書式}
+\verb/mdsp x= y= str=|i= [fc=] [bg=] [-bold] /
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|x=|   & x軸(左から右への横方向)表示開始位置(1以上の値)を指定する。\\
+\verb|y=|   & y軸(上から下への縦方向)表示開始位置(1以上の値)を指定する。\\
+\verb|str=| & 表示する文字列 \\
+\verb|i=|   & 表示する内容のファイル名 \\
+\verb|fc=|  & 文字色\\
+\verb|bg=|  & 背景色\\
+\verb|-bold|& 強調表示\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+
+\subsubsection*{例1: 基本例}
+
+ターミナルの\verb|x=10,y=5|の位置に文字列\verb|abcd|を表示する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdsp x=10 y=5 str=abcd
+
+以下、画面イメージ
++--------------------------------------
+|
+|
+|
+|
+|          abcd
+|
+|
+\end{Verbatim}
+
+\subsubsection*{例2: ファイルで指定する場合}
+
+ターミナルの\verb|x=10,y=5|の位置に\verb|dat.txt|の内容を表示する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat.txt
+abcd
+efg
+$ mdsp x=10 y=5 i=dat.txt
+
+以下、画面イメージ
++--------------------------------------
+|
+|
+|
+|
+|          abcd
+|          efg
+|
+\end{Verbatim}
+
+\subsubsection*{例3: 色をつける例}
+
+ターミナルの\verb|x=10,y=5|の位置に文字列\verb|abcd|を、
+文字の色を赤、背景を青にして表示する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+$ mdsp x=10 y=5 str=abcd fc=red bc=blue
+
+以下、画面イメージ
++--------------------------------------
+|
+|
+|
+|
+|          \textColor{blue}{red}{abcd}
+|
+|
+\end{Verbatim}
+
+\subsection*{関連コマンド}
+\hyperref[sect:minput] {minput} :入力画面を表示する。
+
+\hyperref[sect:mminput] {mminput} : 複数入力枠による入力画面を表示する。
+
+\hyperref[sect:mseldsp] {mseldsp} : 画面に単一選択入力窓を表示する。
+
+\hyperref[sect:mmseldsp] {mmseldsp} : 画面に複数選択入力窓を表示する。
+
+%\end{document}

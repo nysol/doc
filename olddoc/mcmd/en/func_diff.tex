@@ -1,0 +1,35 @@
+
+%\begin{document}
+
+\section{diff - Calculate Interval\label{sect:diff}}
+\index{diff@diff}
+
+Format 1: diffyear($date_1,date_2$)
+
+Format 2: diffyear($time_1,time_2$)
+
+Format 3: diffmonth($date_1,date_2$)
+
+Format 4: diffmonth($time_1,time_2$)
+
+Format 5: diffday($date_1,date_2$)
+
+Format 6: diffday($time_1,time_2$)
+
+Format 7: diffhour($time_1,time_2$)
+
+Format 8: diffminute($time_1,time_2$)
+
+Format 9: diffsecond($time_1,time_2$)
+
+Format 10: diffusecond($time_1,time_2$)
+
+If the two arguments are date types, compute the interval between $date_1$ and $date_2$ ($date_1$ - $date_2$), where the interval is measured in terms of years (diffyear), months (diffmonth), days (diffday). 
+If the two arguments are time types, compute the interval between $time_1$ and $time_2$ ($time_1$ - $time_2$), where the interval is measured in terms of years (diffyear), months (diffmonth), days (diffday), hours (diffhour), minutes (diffminute) , seconds (diffsecond), and microseconds (diffusecond).
+Fractions are rounded up.
+
+\subsection*{Examples}
+\input{examples/tex/func_diff_ex}
+
+%\end{document}
+

@@ -1,0 +1,58 @@
+
+%\begin{document}
+
+\section{mjoin - Join field(s) from Reference File\label{sect:mjoin}}
+\index{mjoin@mjoin}
+Compare the key field(s) from the input file specified at the \verb|k=| parameter with the ones from the reference file, field from the reference file specified at \verb|f=| parameter are joined for records with common key values in both files. The key fields from the reference file must be unique. Use the \hyperref[sect:mnjoin]{mnjoin} command when there are more than one record with the same key values in the reference file. If \verb|f=| is not set, all columns are joined except the key field in reference file.  
+
+
+\subsection*{Format}
+\verb/mjoin k= [f=] [K=] [-n] [-N] m=|/ 
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify the key field name from input data field and at the \verb|K=| parameter. \\
+             & Join records with the same field(s) from reference data.  \\
+             & Set to NULL value when key fields do not match with the fields from reference file specified at \verb|K=|. \\
+\verb|f=|    & Field name of the reference file to join.\\
+             & When this parameter is not set, all fields except the key field will be joined. \\
+\verb|m=|    & Specify list of reference file(s). \\
+             & Read from standard input when this parameter is not set (used when input data is specified at \verb|i=|).\\
+\verb|K=|    & List of field names from reference data for matching.\\
+             & Specify key field(s) from reference data to join with records with the key field from \\
+             &  the input data defined at the \verb|k=| parameter. \\
+             & Set to NULL value when key fields do not match with the fields from input file specified at \verb|k=|.\\
+             & The key field(s) name from the reference file does not need to be the same as the \verb|k=| parameter.  \\
+\verb|-n|    & Output NULL values when reference data does not consist of input data. \\
+\verb|-N|    & Output NULL values when input data does not consist of reference data.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mjoin_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:mnjoin]{mnjoin} : Use \verb|mnjoin| to duplicate key from reference file.  
+\hyperref[sect:mpaste]{mpaste} :  Join according to row number. 
+
+\hyperref[sect:mcommon]{mcommon} : Use \verb|mcommon| to select records instead of joining. 
+
+%\end{document}

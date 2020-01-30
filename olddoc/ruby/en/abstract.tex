@@ -1,0 +1,37 @@
+
+\section{Overview}
+This Ruby library contains powerful functions to handle large CSV data efficiently, and is comparably more efficient than similar libraries with the same functions. 
+The main functions comprised of sequential read (Mcsvin) and write (Mcsvout) functions from CSV data, as well as random access to each cell within the CSV data table (Mtable). These functions treats newline and comma in strings according to the standard specification of CSV data compliant to RCF 4180. In addition, key fields can be used for Hash access to the data, and field numbers can represented as Array. 
+Figure \ref{fig:mcmdRB_cp} below shows a sample script to copy CSV data using the functions Mcsvin and Mcsvout. 
+
+\begin{figure}[!hbt]
+%\begin{center}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+require "mcmd"
+
+# input.csv
+# customer,date
+# A,20081201
+# A,20081202
+MCMD::Mcsvin.new("i=input.csv -array"){|iCSV|
+  MCMD::Mcsvout.new("o=output.csv f=customer,date"){|oCSV|
+    iCSV.each{|flds|
+      oCsv.write(flds)
+    }
+  }
+}
+\end{Verbatim}
+%\end{center}
+\caption{Ruby script to copy CSV file using mcmd library \label{fig:mcmdRB_cp}}
+\end{figure}
+
+Other than using mcmd library to copy CSV file using Ruby script, NYSOL has developed other commands using this library to be executed by Ruby script. 
+This library provides the interface to basic functions similar to mcmd. Margs is used to process command line arguments, while the endMsg and errorMsg functions can be used to return status message or error message upon completion. 
+The function Mtemp can be used to set the same environment variables as in mcmd such as generation and removal of temporary files. 
+
+
+This library is tested on Ruby version 1.9.2 or later.  
+
+

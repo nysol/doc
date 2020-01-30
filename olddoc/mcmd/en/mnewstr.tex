@@ -1,0 +1,46 @@
+
+%\begin{document}
+
+\section{mnewstr - Generate Fixed String Data\label{sect:mnewstr}}
+\index{mnewstr@mnewstr}
+Define the character string to generate at \verb|v=| parameter, and pass the new column name at \verb|a=| parameter. Multiple columns can be generated at a time. 
+
+
+\subsection*{Format}
+\verb|mnewstr a= [v=] [l=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & Field name(s) of the new data. \\
+             & Define multiple field names separated with a comma in between the field names. \\
+             & This argument is not required when  \verb|-nfn,-nfno| options are specified.\\
+\verb|v=|    & Specify the new character string to generate. \\
+             & Define multiple field separated with a comma in between the values. \\
+             & The number of fields must be the same as the number of field names defined at \verb|a=|.  \\
+\verb|l=|    & Number of rows of random data to generate [default value:10]. \\
+
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mnewstr_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mnewnumber] {mnewnumber} : Generate list of sequential numbers in a new dataset. 
+
+\hyperref[sect:mnewrand] {mnewrand} : Generate random numbers in a new dataset. 
+
+%\end{document}

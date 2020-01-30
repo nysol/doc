@@ -1,0 +1,126 @@
+
+
+%\begin{document}
+%\usepackage{comment}
+
+\section{mvcat - Combine Vectors\label{sect:mvcat}}
+\index{mvcat@mvcat}
+Merge multiple vectors into one vector. 
+
+%\begin{comment}
+Examples are shown in Table \ref{tbl:mvcat_input},  \ref{tbl:mvcat_out1} and \ref{tbl:mvcat_out2}. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvcat_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items1,items2 \\
+\hline
+1&a c,b \\
+2&a d,a e \\
+3&b f, \\
+4&e,e \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:mvcat_out1}}
+\verb|mvcat vf=item1,items2 a=catItems i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&catItems \\
+\hline
+1&a c b \\
+2&a d a e \\
+3&b f \\
+4&e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Retain original vectors before merging\label{tbl:mvcat_out2}}
+\verb|mvcat vf=item1,items2 -A i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&items1,items2,new \\
+\hline
+1&a c,b,a c b \\
+2&a d,a e,a d a e \\
+3&b f,,b f \\
+4&e,e,e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+%\end{comment}
+
+\subsection*{Format}
+\verb|mvcat vf= a= [-A]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Merge specified field names of vectors (from the input file \verb|i=|).\\
+           & Wildcard can be substituted for a character within the field name.\\
+\verb|a=|  & Field name of the merged vector. \\
+\verb|-A|  & Add results as a new field. If this option is not specified, the original field (\verb|vf=|) will be removed. \\
+\end{tabular}
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mvcat_ex.tex}
+
+\subsection*{Related command}
+
+
+%\end{document}

@@ -1,0 +1,36 @@
+\subsubsection*{Example 1: Basic Example}
+
+Format \verb|val| as real number with 3 decimal places.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,0.00726
+2,123.456789
+3,
+4,-0.335
+$ mcal c='format(${val},"%8.3f")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=format(${val},"%8.3f") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,0.00726,   0.007
+2,123.456789, 123.457
+3,,
+4,-0.335,  -0.335
+\end{Verbatim}
+\subsubsection*{Example 2: Display the exponent}
+
+Format \verb|val| in exponential notation.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='format(${val},"%e")' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=format(${val},"%e") i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,val,rsl
+1,0.00726,7.260000e-03
+2,123.456789,1.234568e+02
+3,,
+4,-0.335,-3.350000e-01
+\end{Verbatim}

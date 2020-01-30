@@ -1,0 +1,316 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Margs 引数操作クラス\label{sect:margsRB}}
+コマンドライン引数を扱うクラス。
+以下のような特徴を持つ。
+\begin{itemize}
+	\setlength{\itemindent}{-5mm}
+	\item \verb|keyword=value| および \verb|-keyword| の二つのフォーマットの引数を扱う。
+	\item \verb|-keyword|はオプションで、Bool型(true/false)に変換される。
+	\item \verb|value|の型としては、Rubyの原型として、String配列、Fixnum配列、Float配列を扱うことができる。
+	\item その他の特殊な型として、ファイル型や項目名型を提供する。
+	\item デフォルト値や値の範囲を指定することができる。
+	\item 指定が正しくなければエラーメッセージを表示して終了する。
+	\item \verb|--help|が指定されればhelp()を呼び出し終了する。またヘルプ関数名を指定することも可能。\verb|--help|は、一般のオプションとは違い、マイナス記号が2つであることに注意する。
+\end{itemize}
+
+\subsection{メソッド}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.new(ARGV[,allKeyWords][,mandatoryKeyWords][,helpFunction)
+\end{verbatim}
+}
+
+Margsオブジェクトを生成する。
+「keyword=値」もしくは「-keyword」の形式で与えられたコマンドライン引数が、クラス内部のHashもしくはArray変数にセットされる。
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/ARGV /} RubyのARGV変数。
+	\item {\large \verb/allKeyWords /} \verb/key=value/もしくは\verb/-key/による引数キーワードリスト。
+	                   ここで指定した以外の引数がARGVに指定されていないことをチェックし、
+	                   指定されていればエラー終了してくれる。
+	                   \verb/allKeyWords/を省略した場合はこのチェックをしない。
+	\item {\large \verb/mandatoryKeyWords /} \verb/key=value/による引数キーワードリスト。
+	                         ここで指定した引数がコマンドラインで指定されていなければ
+	                         エラー終了してくれる。
+	                         \verb/mandatoryKeyWords/を省略した場合はこのチェックをしない。
+	\item {\large \verb/helpFunction/} \verb/--help/が指定されたときに呼び出される関数名。
+
+\end{description}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb i=dat.csv -abc
+
+# test.rbの内容
+args=Margs.new(ARGV, "i=,v=,-abc") # OK
+args=Margs.new(ARGV, "i=,v=") # -abcは指定できないのでエラー終了
+args=Margs.new(ARGV, "i=,v=,-abc","i=,v=") # v=は必須だが指定されてないのでエラー終了
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.file(keyWord,mode): ファイル名の取得
+\end{verbatim}
+}
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/keyWord/} \verb/key=/形式のキーワード(String)
+	\item {\large \verb/mode/} "r"(readableのチェック)、もしくは"w"(writableのチェック)を指定する。(String)
+\end{description}
+
+keywordで指定された値を入力ファイル名とみなし、modeが"r"の場合、
+そのファイルが読み取り可能であればそのファイル名を返す。
+読み取りが可能でなければエラー終了する。
+modeが"w"の場合は、書き込みを行うディレクトリに書き込み可能かどうかチェックし、
+書き込み可能であればそのファイル名を返す。
+書き込み可能でなければエラー終了する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb i=dat.csv
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.file("i=","r") # dat.csvがreadableであれば"dat.csv"
+puts args.file("i=","w") # カレントディレクトリがwritableであれば"dat.csv"
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.field(keyWord,fileName)
+\end{verbatim}
+}
+\verb/keyWord/で指定した項目名について、\verb/fileName/で指定されたファイルの項目
+と関連付けて各種情報を返す。
+
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/keyWord /} \verb/"key="/形式のキーワード(String)。
+	\item {\large \verb/fileName /} ファイル名。
+\end{description}
+
+コマンドラインでの項目名の指定は以下のフォーマットに従わなければならない。
+\begin{equation}
+\verb/key=/name_1\verb/[:/newName_1\verb/%/option_1\verb/],/name_2\verb/[:/newName_2\verb/%/option_2\verb/],/\ldots
+\end{equation}
+
+複数の項目名はカンマで区切って指定する。
+$name_i$は、\verb/fileName/で指定されたCSVファイルの項目名でなければならない。
+さもなければ\verb/"field name not found"/のエラーにて終了する。
+
+項目名$name_i$には二つの属性$newName_i$と$option_i$を指定できる(省略可)。
+それぞれ用途は自由であるが、\verb/:/と\verb/%/で区切らなければならない。
+
+一般的な用途としては、ある項目$name_i$に対する演算結果を
+新しい項目名$newName_i$として追加出力することを想定している。
+そして$option_i$は処理内容を制御するオプションとして利用する。
+
+このメソッドは、以下に示す各種情報をHashで返す。太字はHashキー。
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/names /} 項目名\verb/names/の配列(String Array)。
+	\item {\large \verb/newNames /} 新項目名\verb/newNames/の配列(String Array)。指定がなければnil。
+	\item {\large \verb/options /} オプション\verb/options/の配列(String Array)。指定がなければnil。
+	\item {\large \verb/fld2csv /} \verb/"key="/で指定された項目に対応するCSVファイル(\verb/fileName/)の項目番号(0から始まる)(String Array)。
+	\item {\large \verb/csv2fld /} CSVファイルの項目番号を要素番号とした\verb/"key="/で指定された項目の指定順序番号(0から始まる)(String Array)。
+指定のない項目はnil。
+\end{description}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# test.csvの内容
+fld1,fld2,fld3
+1,2,3
+4,5,6
+
+# コマンドライン
+$ ruby test.rb f=fld1,fld3
+
+# test.rbの内容
+args=Margs.new(ARGV)
+fld=args.field("f=","test.csv")
+p fld["names"]   # -> ["fld1","fld3"]
+p fld["fld2csv"] # -> [0,2] fld1,fld3はtest.csvの0番目と2番目の項目に対応
+p fld["csv2fld"] # -> [0,nil,1] test.csvの0番目の項目はf=の0番目に指定された
+
+# コマンドライン
+$ ruby test.rb f=fld3:newFld3%n,fld2%nr
+
+# test.rbの内容
+args=Margs.new(ARGV)
+fld=args.field("f=","test.csv")
+p fld["names"]    # -> ["fld3", "fld2"]
+p fld["newNames"] # -> ["newFld3", nil]
+p fld["options"]  # -> ["n", "nr"]
+p fld["fld2csv"]  # -> [2, 1]
+p fld["csv2fld"]  # -> [nil, 1, 0]
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.str(keyWord[,default][,token1][,token2])
+\end{verbatim}
+}
+文字列引数の取得
+\begin{description}
+	\setlength{\itemindent}{0mm}
+	\item {\large \verb/keyWord /} \verb/"key="/形式のキーワード(String)
+	\item {\large \verb/default /} 指定がなかったときのデフォルト値。省略時はnil。
+	\item {\large \verb/token1 /} 複数の文字列を指定する場合の区切り文字。省略時は区切りは無いものと見なす。
+	\item {\large \verb/token2 /} token1で切り出された文字列をさらにtoken2を区切りとする文字列で区切る。省略時は区切りは無いものと見なす。
+\end{description}
+
+コマンドライン上で指定された引数のうち、\verb/keyWord/とマッチする値を文字列として返す。
+コマンドラインで指定されていなければ\verb/default/の文字列を返す。
+この時\verb/default/が\verb/nil/であればnilを返す。
+
+\verb/token1/が指定されていれば区切られた文字列を要素とする配列を返す。
+さらに\verb/token2/が指定されていれば、配列の配列を返す。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb v=abc
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.str("v=") # ->"abc"
+puts args.str("w=") # -> nil
+puts args.str("w=","xyz") # -> "xyz"
+\end{Verbatim}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb v=abc,efg:xyz,hij
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.str("v=") # ->"abc,efg:xyz,hij"
+puts args.str("v=",nil,",") # ->["abc", "efg:xyz", "hij"]
+puts args.str("v=",nil,",",":") # ->[["abc"], ["efg","xyz"], ["hij"]]
+\end{Verbatim}
+
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.float(keyWord[,default][,from][,to]): Float型数値引数の取得
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /} ``key=''のキーワード(String)
+\item {\large \verb/default /} 指定がなかったときのデフォルト値(Float)。省略時はnil。
+\item {\large \verb/from /} 範囲チェックの下限値(Float)。省略時は下限値チェックをしない。
+\item {\large \verb/to /} 範囲チェックの上限値(Float)。省略時は上限値チェックをしない。
+\end{description}
+
+コマンドライン上で指定された引数のうち、\verb/keyWord/とマッチする値をFloatに変換して返す。
+コマンドラインで指定されていなければ\verb/default/の値を返す。
+範囲チェックにパスしなければエラー終了する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb v=0.12
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.float("v=") # -> 0.12
+puts args.float("v=",nil,0.2,0.3) # -> 範囲エラー
+puts args.float("w=") # -> nil
+puts args.float("w=",0.1) # -> 0.1
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.int(keyWord[,default][,from][,to]) Fixnum型数値引数の取得
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /} \verb/key=/のキーワード(String)
+\item {\large \verb/default /} 指定がなかったときのデフォルト値(Float)。省略時はnil。
+\item {\large \verb/from /} 範囲チェックの下限値(Float)。省略時は下限値チェックをしない。
+\item {\large \verb/to /} 範囲チェックの上限値(Float)。省略時は上限値チェックをしない。
+\end{description}
+
+コマンドライン上で指定された引数のうち、\verb/keyWord/とマッチする値をFloatに変換して返す。
+コマンドラインで指定されていなければ\verb/default/の値を返す。
+範囲チェックにパスしなければエラー終了する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb v=10
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.int("v=") # -> 10
+puts args.int("v=",,20,30) # -> 範囲エラー
+puts args.int("w=") # -> nil
+puts args.int("w=",15) # -> 15
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.bool(keyWord) Bool型引数の取得
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /} "-key"によるキーワード(String)
+\end{description}
+
+コマンドライン上で指定された引数のうち、\verb/keyWord/とマッチする引数があればtrueを、なければfalseを返す。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb -flag
+
+# test.rbの内容
+args=Margs.new(ARGV)
+puts args.bool("-flag") # -> true
+puts args.bool("-x") # -> false
+\end{Verbatim}
+
+
+%\subsection{備考}
+%\begin{itemize}
+%\item 
+%\end{itemize}
+
+\subsection{利用例}
+\subsubsection*{例1}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# コマンドライン
+$ ruby test.rb i=dat.csv v=value -abc
+
+# test.rbの内容
+args=Margs.new(ARGV, "i=,o=,w=,-flag,-x", "i=,w=")
+iFileName = args.file("i=") # -> "dat.csv"
+oFileName = args.str("o=","result.csv") # -> "result.csv"
+weight    = args.float("w=",0.1,0.0,1.0) # -> 0.1
+flag      = args.bool("-abc") # -> true
+wFlag     = args.bool("-w") # -> false
+\end{Verbatim}
+
+\subsection{関連コマンド}
+
+%\hyperlink{mtableRB.pdf}{Table} : 全データのメモリ読み込み
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+
+%\end{document}
+

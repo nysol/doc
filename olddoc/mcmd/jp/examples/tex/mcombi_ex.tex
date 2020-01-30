@@ -1,0 +1,84 @@
+\subsubsection*{例1: 基本例}
+
+\verb|customer|項目を単位に、\verb|item|項目の2アイテムの組み合わせを求め、
+\verb|item1,item2|という項目名で出力する。
+\verb|k=,f=|で指定していない項目(ここでは\verb|item|項目)は、キーの最終行の値が出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,item
+A,a1
+A,a2
+A,a3
+B,a4
+B,a5
+$ mcombi k=customer f=item n=2 a=item1,item2 i=dat1.csv o=rsl1.csv
+#END# kgcombi a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl1.csv
+$ more rsl1.csv
+customer%0,item,item1,item2
+A,a3,a1,a2
+A,a3,a1,a3
+A,a3,a2,a3
+B,a5,a4,a5
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+\verb|-dup|オプションを指定すると同一のアイテムの組み合せも出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi k=customer f=item n=2 a=item1,item2 i=dat1.csv o=rsl2.csv -dup
+#END# kgcombi -dup a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl2.csv
+$ more rsl2.csv
+customer%0,item,item1,item2
+A,a3,a1,a1
+A,a3,a1,a2
+A,a3,a1,a3
+A,a3,a2,a2
+A,a3,a2,a3
+A,a3,a3,a3
+B,a5,a4,a4
+B,a5,a4,a5
+B,a5,a5,a5
+\end{Verbatim}
+\subsubsection*{例3: 順列を求める例}
+
+\verb|customer|項目を単位に、\verb|item|項目の2アイテムの順列を求め、
+\verb|item1,item2|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi k=customer f=item n=2 a=item1,item2 -p i=dat1.csv o=rsl3.csv
+#END# kgcombi -p a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl3.csv
+$ more rsl3.csv
+customer%0,item,item1,item2
+A,a3,a1,a2
+A,a3,a2,a1
+A,a3,a1,a3
+A,a3,a3,a1
+A,a3,a2,a3
+A,a3,a3,a2
+B,a5,a4,a5
+B,a5,a5,a4
+\end{Verbatim}
+\subsubsection*{例4: 順列を求める例}
+
+\verb|item|項目を降順に並べ替えた後、
+\verb|item|項目の2アイテムの順列を求める。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi k=customer f=item n=2 s=item%r a=item1,item2 -p i=dat1.csv o=rsl4.csv
+#END# kgcombi -p a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl4.csv s=item%r
+$ more rsl4.csv
+customer%0,item%1r,item1,item2
+A,a1,a3,a2
+A,a1,a2,a3
+A,a1,a3,a1
+A,a1,a1,a3
+A,a1,a2,a1
+A,a1,a1,a2
+B,a4,a5,a4
+B,a4,a4,a5
+\end{Verbatim}

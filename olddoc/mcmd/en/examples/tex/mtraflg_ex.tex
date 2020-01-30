@@ -1,0 +1,51 @@
+\subsubsection*{Example 1: Basic Example}
+
+Create a string of vector from the list of non-null values in column \verb|egg| and \verb|milk|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,egg,milk
+A,1,1
+B,,1
+C,1,
+D,1,1
+$ mtraflg f=egg,milk a=transaction i=dat1.csv o=rsl1.csv
+#END# kgtraflg a=transaction f=egg,milk i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,transaction
+A,egg milk
+B,milk
+C,egg
+D,egg milk
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+Use \verb|-r| option to revert the output results back to the original data.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtraflg -r f=egg,milk a=transaction i=rsl1.csv o=rsl2.csv
+#END# kgtraflg -r a=transaction f=egg,milk i=rsl1.csv o=rsl2.csv
+$ more rsl2.csv
+customer,egg,milk
+A,1,1
+B,,1
+C,1,
+D,1,1
+\end{Verbatim}
+\subsubsection*{Example 3: Specify the delimiter}
+
+Combine items using the “-” (hyphen) as delimiter. Save output in column named \verb|transaction|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtraflg f=egg,milk a=transaction delim=- i=dat1.csv o=rsl3.csv
+#END# kgtraflg a=transaction delim=- f=egg,milk i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+customer,transaction
+A,egg-milk
+B,milk
+C,egg
+D,egg-milk
+\end{Verbatim}

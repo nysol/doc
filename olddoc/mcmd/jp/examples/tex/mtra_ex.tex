@@ -1,0 +1,45 @@
+\subsubsection*{例1: 基本例}
+
+\verb|customer|を単位に\verb|item|をスペース区切りで結合し、
+\verb|transaction|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,item
+A,a
+A,b
+B,c
+B,d
+B,e
+$ mtra k=customer f=item:transaction i=dat1.csv o=rsl1.csv
+#END# kgtra f=item:transaction i=dat1.csv k=customer o=rsl1.csv
+$ more rsl1.csv
+customer%0,transaction
+A,a b
+B,c d e
+\end{Verbatim}
+\subsubsection*{例2: アイテムの区切り文字を-(ハイフン）で実行}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtra k=customer f=item:transaction delim=- i=dat1.csv o=rsl2.csv
+#END# kgtra delim=- f=item:transaction i=dat1.csv k=customer o=rsl2.csv
+$ more rsl2.csv
+customer%0,transaction
+A,a-b
+B,c-d-e
+\end{Verbatim}
+\subsubsection*{例3: アイテムを降順に並べ替えてから変換}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtra k=customer s=item%r f=item:transaction i=dat1.csv o=rsl3.csv
+#END# kgtra f=item:transaction i=dat1.csv k=customer o=rsl3.csv s=item%r
+$ more rsl3.csv
+customer%0,transaction
+A,b a
+B,e d c
+\end{Verbatim}

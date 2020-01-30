@@ -1,0 +1,68 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+$ mslide s=date f=val:newVal i=dat1.csv o=rsl1.csv
+#END# kgslide f=val:newVal i=dat1.csv o=rsl1.csv s=date
+$ more rsl1.csv
+date%0,val,newVal
+20130406,1,2
+20130407,2,3
+20130408,3,4
+\end{Verbatim}
+\subsubsection*{例2: 逆にずらした例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mslide s=date f=val:newVal -r i=dat1.csv o=rsl2.csv
+#END# kgslide -r f=val:newVal i=dat1.csv o=rsl2.csv s=date
+$ more rsl2.csv
+date%0,val,newVal
+20130407,2,1
+20130408,3,2
+20130409,4,3
+\end{Verbatim}
+\subsubsection*{例3: 複数回指定した場合}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mslide s=date f=val t=2 i=dat1.csv o=rsl3.csv
+#END# kgslide f=val i=dat1.csv o=rsl3.csv s=date t=2
+$ more rsl3.csv
+date%0,val,val1,val2
+20130406,1,2,3
+20130407,2,3,4
+\end{Verbatim}
+\subsubsection*{例4: 最後にずらした項目だけを出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mslide s=date f=val t=2 -l i=dat1.csv o=rsl4.csv
+#END# kgslide -l f=val i=dat1.csv o=rsl4.csv s=date t=2
+$ more rsl4.csv
+date%0,val,val2
+20130406,1,3
+20130407,2,4
+\end{Verbatim}
+\subsubsection*{例5: 複数項目名を変更して出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mslide s=date f=date:d_,val:v_ t=2 i=dat1.csv o=rsl5.csv
+#END# kgslide f=date:d_,val:v_ i=dat1.csv o=rsl5.csv s=date t=2
+$ more rsl5.csv
+date%0,val,d_1,d_2,v_1,v_2
+20130406,1,20130407,20130408,2,3
+20130407,2,20130408,20130409,3,4
+\end{Verbatim}

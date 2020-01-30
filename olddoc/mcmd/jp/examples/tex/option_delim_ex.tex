@@ -1,0 +1,48 @@
+\subsubsection*{例1: 基本例}
+
+コロンを区切り文字として、ベクトル項目\verb|vec|の要素を並べ替える。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+vec
+b:a:c
+x:p
+$ mvsort vf=vec delim=: i=dat1.csv o=rsl1.csv
+#END# kgvsort delim=: i=dat1.csv o=rsl1.csv vf=vec
+$ more rsl1.csv
+vec
+a:b:c
+p:x
+\end{Verbatim}
+\subsubsection*{例2: delimを指定しないと}
+
+delimを指定していないので\verb|b:a:c|や\verb|x:p|は一つの要素として解釈される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvsort vf=vec i=dat1.csv o=rsl2.csv
+#END# kgvsort i=dat1.csv o=rsl2.csv vf=vec
+$ more rsl2.csv
+vec
+b:a:c
+x:p
+\end{Verbatim}
+\subsubsection*{例3: カンマを区切り文字にする}
+
+区切り文字をカンマにした場合は、ベクトル全体がダブルクオーテーションで囲われることで
+CSVの区切り文字との区別がつけられる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,vec1,vec2
+1,a,b
+2,p,q
+$ mvcat vf=vec1,vec2 a=vec3 delim=, i=dat2.csv o=rsl3.csv
+#END# kgvcat a=vec3 delim=, i=dat2.csv o=rsl3.csv vf=vec1,vec2
+$ more rsl3.csv
+id,vec3
+1,"a,b"
+2,"p,q"
+\end{Verbatim}

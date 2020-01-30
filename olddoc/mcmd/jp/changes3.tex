@@ -1,0 +1,81 @@
+
+%\begin{document}
+
+\section{自動並べ替え機能の追加\label{sect:changes3}}
+%\section{GitHuB自動並べ替え機能の追加\label{sect:changes}}
+
+MCMDをNYSOLパッケージから独立させGitHuBに登録したことにより、
+バージョンを2.xから3.0へ上げた。
+コマンド仕様の大きな変更はなく、以下に示す細かな点が改善されている。
+
+\subsection{-paramsパラメータの追加}
+全コマンド共通で-paramsパラメータを追加した。
+主にシステム利用を目的としたもので、指定できるパラメータの一覧を標準出力に出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -params
+-assert_diffSize
+-assert_nullin
+-nfn
+-nfni
+-nfno
+-params
+-r
+-x
+f=
+i=
+o=
+precision=
+tmpPath=
+\end{Verbatim}
+
+\if0
+　・環境変数 KG_msgTimebyfsec追加
+　　　=> この環境変数を設定するとEND等の時間が
+　　　      マイクロ秒（ミリ秒）まで表示されます
+
+○ mchkcsv
+  ・BOM対応
+　   => UTF BOMが除去されます
+  ・diag英語版
+　　 => -diagの内容が英語で出力されます
+　　 => 日本語は-diaglで出力されます(いままでのもの)
+
+○ mcal
+  ・複数項目対応
+         => c=に複数指定できるように変更
+            (a=に指定した分の項目名が必要）
+  ・マイクロ秒対応
+       => $t{},#t{},0tでマイクロ秒までを扱えるように変更
+          20120101121212.123456 のような小数
+          (小数点以下6桁まで)を含むものを扱えます
+          それに伴って
+          diffusecond(T,T)
+          tuseconds(T)
+          usecond(T)
+          useconds(T)
+          unow()
+          の関数が追加されています
+          (機能は"u"を除いた関数と同じで
+          マイクロ秒（ミリ秒）まで計算されます)
+  ・if(B,B,B)
+         => マニュアルには書いてあるが使えていなかったので修正
+
+○ mcat
+  ・-skip_zero
+      =>-nfnを指定していない場合でも０バイトファイルでエラーにならない
+  ・flist=
+      =>ファイルリストが保存されているCSVファイルを指定してmcatする
+        flist=xxx:fldで指定する fldはファイル名のある項目名
+
+  ・kv=
+      => kv=1,2のように指定し、パス名自体からkey-value抜き出し
+　　    データとして付加する
+           mcat i=./k_1_f_1/v_1/dat.csv kv=1,2の場合だと
+           v,k,f
+           1,1,1
+           が元のデータに付加される
+           (_がkeyとvalueの区切りになります)
+
+\fi
+%\end{document}

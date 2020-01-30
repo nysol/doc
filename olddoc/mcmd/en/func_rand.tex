@@ -1,0 +1,19 @@
+
+%\begin{document}
+
+\section{rand - Uniformly distributed random numbers\label{sect:rand}}
+\index{rand@rand}
+
+Format: ([Random seed])
+
+Generate uniformly distributed random number from 0.0 to 1.0. This function returns the same result as using mrand command without \verb|-int| option.
+The same random seed will generate the same sequence of random numbers. The random seed can be specified from -2147483648 to 2147483647. If the random seed is not defined, the random numbers will be seeded according to current time (1/1000 second). 
+This function uses Mersenne Twister as random number generator (\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Author’s original website}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library}). 
+
+
+
+\subsection*{Examples}
+\input{examples/tex/func_rand_ex}
+
+%\end{document}

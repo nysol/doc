@@ -1,0 +1,48 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{meach - Execution method for simple parallel processing \label{sect:meachRB}}
+Method of Array class for simple parallel processing without exclusive control. 
+It is a simple implementation to initiate multiple processes asynchronously.
+
+
+\subsection{Format}
+{\Large
+\begin{verbatim}
+1) Array::meach(mpcount){|value| block}
+2) Array::meach(mpcount){|value,count| block}
+\end{verbatim}
+} 
+
+Process the code in parallel by \verb|block| when \verb|value| is given as the block parameter of an element in an array. 
+If \verb|count| is given as a block parameter, set the array element number (integer from 0) being processed. 
+
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/mpcount /} - Number of parallel processes. 
+\end{description}
+
+
+\subsection{Examples}
+\subsubsection*{Example 1 Print row number and value from field name}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Process five elements from 10 to 6 (integer) in two parallel threads. 
+# Processing content is as simple as displaying the value of element and the element 
+number of the array. 
+> [10,9,8,7,6].meach(2){|value,count|
+>   puts "#{value},#{count}"
+> }
+10,0
+9,1
+8,2
+7,3
+6,4
+\end{Verbatim}
+
+\subsection{Related Command}
+
+%\end{document}
+

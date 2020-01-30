@@ -1,0 +1,110 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mrecount CSVデータの行数計算メソッド\label{sect:mrecountRB}}
+CSVデータファイルを行単位で処理するためのクラス。以下のような特徴を持つ。
+\begin{itemize}
+\setlength{\itemindent}{0mm}
+\item C++で実装されており非常に高速に動作する(wc -lより若干高速)。
+\item 一行目の項目名行を除いたデータの行数のみカウントする。
+\item 単純に改行charをカウントしているだけなので、ダブルクォーテーションでエスケープされた改行もカウントしてしまう。
+この問題を避けたい場合はMCMD::Mtableを利用する。
+\end{itemize}
+
+\subsection{書式}
+
+{\large
+\begin{verbatim}
+MCMD::mrecount(arguments)
+\end{verbatim}
+}
+
+\verb|arguments|に、以下の引数をスペースで区切った文字列として指定する。
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名(String)\\
+\verb|-nfn|  & 1行目を項目名と見なさない。\\
+\end{tabular} 
+\end{table} 
+
+\subsection{利用例}
+\subsubsection*{例1 項目名の出力と行番号・値の出力}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+
+p MCMD::mrecount("i=dat1.csv")      # -> 2
+p MCMD::mrecount("i=dat1.csv -nfn") # -> 3
+\end{Verbatim}
+
+\subsection{関連コマンド}
+\hyperref{sect:mtableRB}{Mtable} : CSVデータのセル単位での読み込み操作
+
+\subsection{ベンチマークテスト}
+
+CSVデータの行数カウント処理について、UNIXコマンド\verb/wc/と\verb/Mtable/をベンチマークにした速度比較を行う。
+表\ref{tb:mrecount_bench1}にベンチマークテストの結果を示す。
+100万,200万,300万,400万行,500万行のデータについて実験を行った。
+図\ref{fig:mrecount_script}には、ベンチマークテストで利用したスクリプトの抜粋が示されている。
+\verb/mrecount/は\verb/wc/に比べて若干高速である。
+また\verb/Mtable/は行数をカウントすることのみを目的としたクラスではないが、
+比較すると、5〜6倍高速である。
+
+\begin{table}[htpb]
+\begin{center}
+\caption{各種CSVライブラリの実行速度比較(単位:秒)\label{tb:mrecount_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+行数      & 1000K & 2000K & 3000K & 4000K & 5000K \\ \hline
+mrecount  & 0.034 & 0.066 & 0.097 & 0.129 & 0.161 \\
+wc -l     & 0.038 & 0.070 & 0.103 & 0.133 & 0.169 \\
+Mtable    & 0.231 & 0.407 & 0.503 & 0.731 & 0.828 \\
+\hline
+\end{tabular}  
+{\small
+\\10回実行した結果の平均値(real time)を示している。\\
+行数1000Kは100万行の意味。データのサイズは行数が1000Kで約25Mバイト。項目数は5つ。\\
+テスト環境: Mac Book Pro, 2.66GHz Intel Core i7, 8GB メモリ, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+\centering
+\begin{minipage}{.6\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'mtools'
+
+require 'benchmark'
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # mrecountの場合
+    p MCMD::mrecount("i=data.csv")
+
+    # wcの場合
+    system "wc -l data.csv"
+
+    # Mtableの場合
+    MCMD::Mtable("i=data.csv -array"){|tbl|
+			p tbl.recordSize
+    }
+  }
+}
+\end{Verbatim}
+}
+\end{minipage}
+\caption{ベンチマークテストのスクリプト(抜粋)\label{fig:mrecount_script}}
+\end{figure}
+
+%\end{document}
+

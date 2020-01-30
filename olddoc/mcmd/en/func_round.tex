@@ -1,0 +1,18 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+
+%\begin{document}
+
+\section{round - Rounding\label{sect:round}}
+\index{round@round}
+
+Format: round($num$,base)
+
+Rounding $num$ to the specified base.
+The number will be rounded to the nearest integer close to the multiple of the base. For example, in the expression (3.82,0.5), the decimal digits of 3.82 is above 0.5, thus rounding to the nearest 0.5 returns 4.0. The default value of the base is 1 if the argument is not specified. This is equivalent to rounding an integer value to the first digit after decimal.
+
+\subsection*{Example}
+\input{examples/tex/func_round_ex.tex}
+
+%\end{document}
+

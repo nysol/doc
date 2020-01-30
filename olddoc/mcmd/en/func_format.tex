@@ -1,0 +1,31 @@
+
+%\begin{document}
+
+\section{format - Formatted Output\label{sect:format}}
+\index{format@format}
+
+Format: format($num$, output format)
+
+mcal internally manages floating point numbers. This function changes the output format of the number by specifying the output format available in the C language printf function. The 3 available formats are as follows. 
+
+\begin{itemize}
+\item \%f: Decimal format
+\item \%e,\%E: Exponent format (Specify \%E to use uppercase E as exponent notation)
+\item \%g,\%G: Automatically select output format of f or e (Specify \%G for uppercase notation)
+\end{itemize}
+
+For example, the decimal format is expressed as \verb|0.00726| can be expressed as \verb|7.260000e-03| in exponent format, similarly, the exponent format of \verb|1265| is represented as \verb|1.265000e+03|. 
+
+By specifying the \verb|%| or plus sign after the number, the function formats the decimal digits and characters. The number format can be specified in the format of “\verb|whole number.decimal|”. For example, the number \verb|123.456789| with the format specifier of \verb|%5.2f| becomes \verb|123.46|, and the format specifier of \verb|%8.3f| print number as \verb|123.458| with a floating point of 8 characters and 3 characters after decimal. 
+
+Add a plus sign before the number to display the plus sign before the number. For example, \verb|123.456789| with the format specifier of \verb|%+5.2f| format the number as \verb|+123.46|. 
+
+Besides the format highlighted above, it is possible to include any character string in the format. For example, the number \verb|250| can be formatted as \verb|“Total 250 Yen”| using the format specifier of “Total %g Yen”. Use the format specifier of “%%” to display the symbol \%. The number \verb|15| can be formatted as \verb|15%| using the format specifier of \verb|"%g%%"|.    
+
+
+
+\subsection*{Examples}
+\input{examples/tex/func_format_ex.tex}
+
+%\end{document}
+

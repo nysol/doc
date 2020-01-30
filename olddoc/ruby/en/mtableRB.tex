@@ -1,0 +1,128 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mtable - Read CSV data into cell class \label{sect:mtableRB}}
+This class read specified CSV data into random access memory by cell. 
+Its features are as follows. 
+
+\begin{itemize}
+%\setlength{\itemindent}{0mm}
+\item Access cells in random order by the specified row and column.
+\item Data is read-only and cannot insert or update records. 
+\item All data is read as character string. Corresponding type conversion (ex. to\_i) is necessary for other usage. 
+\item Read data into available memory. The program terminates with an error when there is insufficient space.
+\end{itemize} 
+
+\subsection{Method}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::new(arguments)
+\end{verbatim}
+}
+
+Generate Mtable object. 
+At the \verb|arguments| parameter, specify the following arguments in character string separated with a space.
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & Input file name (String)\\
+\verb|-nfn|  & No field name in the first row. \\
+\end{tabular} 
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::cell(col=0, row=0) -> String
+\end{verbatim}
+}
+
+Return the value of cell to the corresponding \verb|row| and \verb|col| (column). 
+\verb|row| and \verb|col| is assigned by sequential row and column number. 
+Both row and column number are expressed in integer starting from 0 (Column number of Mcsvin starts from 1). Returns nil if \verb|row| and \verb|col| are out of range.
+
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[row ] Row number. Positive integer value including 0. Default value is 0. 
+\item[col ] Column number. Positive integer value including 0. Field name cannot be specified. Default value is 0.
+\end{description}
+
+Returns the value of  col number of the column as \verb|col|. It is equivalent to specifying cell(col, 0). However, if both \verb|col| and \verb|row| is not specified, it returns 0th item of 0th row. It is equivalent to specifying cell(0,0).
+
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::names() -> String Array
+\end{verbatim}
+}
+
+Return the field name array.
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::name2num() -> String=>Fixnum Hash
+\end{verbatim}
+}
+
+Return Hash of key of field name and the the corresponding field number.
+
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::size() -> Fixnum
+\end{verbatim}
+}
+
+Return the number of rows.
+
+%\subsection{備考}
+%\begin{itemize}
+%\item k=を指定する場合は、そこで指定した項目で並べ替えておく必要はない(内部ではHash型変数で管理するため)。
+%\end{itemize}
+
+\subsection{Examples}
+\subsubsection*{Example 1}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+tbl=MCMD::Mtable.new("i=dat1.csv")
+p tbl.names     # -> ["customer", "date", "amount"]
+p tbl.name2num  # -> {"amount"=>2, "date"=>1, "customer"=>0}
+p tbl.size      # -> 2
+p tbl.cell(0,0) # -> "A"
+p tbl.cell(0,1) # -> "B"
+p tbl.cell(1,1) # -> "20081202"
+p tbl.cell(1)   # -> "20081201"
+p tbl.cell      # -> "A"
+\end{Verbatim}
+
+\subsubsection*{Example 2 Without column names in the first row}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+tbl=MCMD::Mtable.new("i=dat1.csv -nfn") # Treats the first row as data.
+p tbl.names     # -> nil
+p tbl.name2num  # -> nil
+p tbl.size      # -> 3
+p tbl.cell(0,0) # -> "customer"
+p tbl.cell(0,1) # -> "A"
+p tbl.cell(1,1) # -> "20081201"
+p tbl.cell(1)   # -> "date"
+p tbl.cell      # -> "customer"
+\end{Verbatim}
+
+\subsection{Related Command}
+\hyperref[sect:mcsvinRB]{Mcsvin} : Read CSV data. 
+
+%\end{document}
+

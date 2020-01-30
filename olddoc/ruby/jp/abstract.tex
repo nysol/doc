@@ -1,0 +1,51 @@
+
+\section{概要}
+本ライブラリは、Ruby上でCSVデータを効率的に扱うための関数を提供する。
+主な関数として、CSVデータのシーケンシャルな読み込み関数(Mcsvin)、
+および書き込み関数(Mcsvout)、
+そしてCSVデータを表とみなしたセル単位でのランダムアクセスを可能とする
+関数(Mtable)がある。
+いずれの関数もCSVの標準仕様であるRFC4180に概ね準拠しており
+カンマや改行を含む文字列を扱うことができる。
+データへのアクセスは、項目名をキーとするHashでも可能であるし、
+項目番号によるArrayでも可能である。
+さらに同等の機能を有する他のライブラリよりも効率的である。
+図\ref{fig:mcmdRB_cp}に、CSVデータをコピーする
+サンプルスクリプトを示す。
+
+\begin{figure}[!hbt]
+\begin{center}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+require "mcmd"
+
+# input.csv
+# customer,date
+# A,20081201
+# A,20081202
+MCMD::Mcsvin.new("i=input.csv -array"){|iCSV|
+  MCMD::Mcsvout.new("o=output.csv f=customer,date"){|oCSV|
+    iCSV.each{|flds|
+      oCsv.write(flds)
+    }
+  }
+}
+\end{Verbatim}
+\end{center}
+\caption{mcmdライブラリを用いCSVファイルをコピーするRubyスクリプト\label{fig:mcmdRB_cp}}
+\end{figure}
+
+CSVデータの操作以外にも、
+NYSOLで提供されるコマンドのいくつかは、
+本ライブラリを利用したRubyスクリプトにより実装されている。
+そこにmcmdと同等のインターフェースや基本機能を持たせるための
+関数をいくつか用意している。
+インターフェースとしてはコマンドライン引数を処理するためのMargs、
+そして完了メッセージやエラーメッセージの出力を行う
+endMsg、errorMsgなどの関数がある。
+また基本機能としては、作業ファイル名の自動生成/削除を行うMtemp、
+そしてmcmdと同じ環境変数の設定も可能である。
+
+なお、Rubyのバージョンは1.9.2以降のみ動作確認している。
+

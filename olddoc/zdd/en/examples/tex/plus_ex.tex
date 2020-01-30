@@ -1,0 +1,18 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> x=3*a + 2*b
+> y=2*a + 2*b + 4*c
+> x.show
+ 3 a + 2 b
+> y.show
+ 2 a + 2 b + 4 c
+> (x+y).show
+ 5 a + 4 b + 4 c
+\end{Verbatim}

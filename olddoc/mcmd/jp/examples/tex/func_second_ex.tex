@@ -1,0 +1,56 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,time
+1,20000101121103
+2,20121021111209.123
+3,211209
+4,211209.123
+$ mcal c='second($t{time})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=second($t{time}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,time,rsl
+1,20000101121103,3
+2,20121021111209.123,9
+3,211209,9
+4,211209.123,9
+\end{Verbatim}
+\subsubsection*{例2: 文字列とし出力}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='seconds($t{time})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=seconds($t{time}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,time,rsl
+1,20000101121103,03
+2,20121021111209.123,09
+3,211209,09
+4,211209.123,09
+\end{Verbatim}
+\subsubsection*{例3: マイクロ秒を出力}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='usecond($t{time})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=usecond($t{time}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,time,rsl
+1,20000101121103,3
+2,20121021111209.123,9.123
+3,211209,9
+4,211209.123,9.123
+$ mcal c='useconds($t{time})' a=rsl i=dat1.csv o=rsl4.csv
+#END# kgcal a=rsl c=useconds($t{time}) i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+id,time,rsl
+1,20000101121103,03.000000
+2,20121021111209.123,09.123000
+3,211209,09.000000
+4,211209.123,09.123000
+\end{Verbatim}

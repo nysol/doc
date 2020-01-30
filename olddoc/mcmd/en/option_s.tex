@@ -1,0 +1,28 @@
+
+%\begin{document}
+
+\subsection{s= Sort Field Name\label{sect:option_s}}
+
+Specify the field name for sorting (multiple fields can be specified). 
+
+The order of records affects the process results for some commands such as \verb|maccum|. 
+When \verb|s=| parameter is specified, sorting is carried out on the specified fields before the processing command. 
+
+There are four combinations of sorting methods (order), including numeric / string, and ascending / descending order. 
+The sorting methods can be specified by appending \verb|%| followed by \verb|n| or \verb|r| after the column name. The examples are as follows. 
+
+Character string ascending order: \verb|field|  (\verb|%| not required), character string descending order: \verb|f=field%r|, numeric ascending order: \verb|f=field%n|, numeric descending order:\verb|f=field%nr|.
+
+
+\subsection*{Example}
+\input{examples/tex/option_s_ex.tex}
+
+\subsubsection*{Corresponding Commands}
+\hyperref[sect:maccum]{maccum},
+\hyperref[sect:mbest]{mbest},
+\hyperref[sect:mmvavg]{mmvavg},
+\hyperref[sect:mnumber]{mnumber},
+\hyperref[sect:mslide]{mslide}, etc. 
+
+%\end{document}
+

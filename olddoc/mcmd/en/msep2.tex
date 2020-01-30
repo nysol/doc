@@ -1,0 +1,45 @@
+
+%\begin{document}
+
+\section{msep2 - Separate Records And Return Fields Table \label{sect:msep2}}
+\index{msep2@msep2}
+Separate the data according to the value of the field(s) specified in \verb|k=|. Partitioned data is automatically stored in numbered file name sequence. A table is created with the list of keys specified at \verb|k=|  and the corresponding file name for each key. 
+
+
+\subsection*{Format}
+\verb|msep2 k= O= a= [-p]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & List of field name(s) as unit of division. \\
+\verb|O=|    & Create list of sequentially numbered file (serial number starting from 0) in the specified directory.\\
+\verb|o=|    & Correspondence table with sequentially numbered file names and  values specified as key at \verb|k=| is output as CSV file. \\
+		& Output is printed to standard output if this parameter is not specified. \\
+\verb|a=|    & Field name of the path of output specified at \verb|o=|.\\
+\verb|-p|    & Force create directory specified by pathname at  \verb|O=|.\\
+
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/msep2_ex.tex}
+\subsection*{Related Command}
+\hyperref[sect:msep] {msep} : Use this command to include the field header name in file name.
+
+%\end{document}

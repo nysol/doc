@@ -1,0 +1,39 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more g1.csv
+node1,node2
+a,b
+b,c
+c,d
+$ more g2.csv
+node1,node2
+b,a
+c,d
+d,e
+$ mgdiff.rb ei=g1.csv eI=g2.csv eo=result1.csv ef=node1,node2
+#END# /usr/bin/mgdiff.rb ei=g1.csv eI=g2.csv eo=result1.csv ef=node1,node2
+$ more result1.csv
+node1,node2,ei,eI,diff
+a,b,g1.csv,g2.csv,0
+b,c,g1.csv,,1
+c,d,g1.csv,g2.csv,0
+d,e,,g2.csv,-1
+\end{Verbatim}
+\subsubsection*{例2: 有向グラフとしての比較}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mgdiff.rb ei=g1.csv eI=g2.csv eo=result2.csv ef=node1,node2 -dir
+#END# /usr/bin/mgdiff.rb ei=g1.csv eI=g2.csv eo=result2.csv ef=node1,node2 -dir
+$ more result2.csv
+node1,node2,ei,eI,diff
+a,b,g1.csv,,1
+b,a,,g2.csv,-1
+b,c,g1.csv,,1
+c,d,g1.csv,g2.csv,0
+d,e,,g2.csv,-1
+\end{Verbatim}

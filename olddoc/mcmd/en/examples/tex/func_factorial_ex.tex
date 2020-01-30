@@ -1,0 +1,35 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,1
+2,5
+3,
+4,10000
+$ mcal c='factorial(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=factorial(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,1,1
+2,5,120
+3,,
+4,10000,
+\end{Verbatim}
+\subsubsection*{Example 2: Example of using constants}
+
+Calculate the factorial of 5. When constants is used as an argument, all rows will return the same result.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='factorial(5)' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=factorial(5) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,val,rsl
+1,1,120
+2,5,120
+3,,120
+4,10000,120
+\end{Verbatim}

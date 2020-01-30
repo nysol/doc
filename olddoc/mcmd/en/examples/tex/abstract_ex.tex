@@ -1,0 +1,20 @@
+\subsubsection*{Example 1: Total amount by each customer}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more input.csv
+customer,amount
+A,5200 
+B,4000   
+B,3500 
+A,2000 
+B,800 
+$ msortf f=customer i=input.csv | msum k=customer f=amount o=output.csv
+#END# kgsortf f=customer i=input.csv
+#END# kgsum f=amount k=customer o=output.csv
+$ more output.csv
+customer%0,amount
+A,7200
+B,8300
+\end{Verbatim}

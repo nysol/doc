@@ -1,0 +1,51 @@
+
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\subsection{-assert\_nullout Check NULL value in output fields\label{sect:option_assert_nullout}}
+
+Specify this option to check whether an output field contains a NULL value. When a NULL value is contained, the \verb|“#WARNING# ; exist NULL in output data”| message is shown. This option does not work on fields in which the input data is output as is, such as the calculation field.
+
+\subsection*{Example}
+\input{examples/tex/option_assert_nullout_ex.tex}
+
+\subsubsection*{Related commands}
+This option can be used for all commands except for the following: \\
+\hyperref[sect:mbest]{mbest},
+\hyperref[sect:mcat]{mcat},
+\hyperref[sect:mcombi]{mcombi},
+\hyperref[sect:mcommon]{mcommon},
+\hyperref[sect:mcount]{mcount},
+\hyperref[sect:mcsv2arff]{mcsv2arff},
+\hyperref[sect:mcut]{mcut},
+\hyperref[sect:mdelnull]{mdelnull},
+\hyperref[sect:mduprec]{mduprec},
+\hyperref[sect:mfldname]{mfldname},
+\hyperref[sect:mfsort]{mfsort},
+\hyperref[sect:mnewnumber]{mnewnumber},
+\hyperref[sect:mnewrand]{mnewrand},
+\hyperref[sect:mnewstr]{mnewstr},
+\hyperref[sect:mnrcommon]{mnrcommon},
+\hyperref[sect:mnullto]{mnullto},
+\hyperref[sect:mnumber]{mnumber},
+\hyperref[sect:mproduct]{mproduct},
+\hyperref[sect:mrand]{mrand},
+\hyperref[sect:msel]{msel},
+\hyperref[sect:mselnum]{mselnum},
+\hyperref[sect:mselrand]{mselrand},
+\hyperref[sect:mselstr]{mselstr},
+\hyperref[sect:msep]{msep},
+\hyperref[sect:msep2]{msep2},
+\hyperref[sect:msetstr]{msetstr},
+\hyperref[sect:msortf]{msortf},
+\hyperref[sect:mtee]{mtee},
+\hyperref[sect:mtonull]{mtonull},
+\hyperref[sect:muniq]{muniq},
+\hyperref[sect:mvcount]{mvcount},
+\hyperref[sect:mwindow]{mwindow},
+\hyperref[sect:mxml2csv]{mxml2csv}\\
+
+%\end{document}
+

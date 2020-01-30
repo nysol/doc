@@ -1,0 +1,82 @@
+
+
+\chapter[Usage]{Common Usages of ZDD}
+
+\section{Overview}
+
+The following are some commonly used methods to learn about different usages of ZDD library. 
+
+\subsection {Use itemset method to declare symbol} 
+
+Items used is declared using ZDD.symbol method. When the symbol is not declared, items will be arranged according to the order of symbol defined using the itemset method.  
+\begin{verbatim}
+ > a=ZDD.itemset("a")
+ > b=ZDD.itemset("b")
+ > c=ZDD.itemset("c")
+ > ZDD.symbol # If there are no arguments in the itemset method, items will be declared in 
+ ascending order. 
+ a b c
+
+ > a=ZDD.itemset("a")
+ > c=ZDD.itemset("c")
+ > b=ZDD.itemset("b")
+ > ZDD.symbol
+ a c b
+\end{verbatim}
+
+\subsection {Create a row of itemset using ZDD object} 
+
+Use ZDD.itemset method to create a list of item names separated with space delimiter assigned to a ZDD object. 
+ \begin{verbatim}
+ # ZDD object is represented by item set {a,b,c} consisting of 3 items `a',`b',`c'. The object 
+ is assigned to a Ruby variable 'a'.
+ > a=ZDD.itemset("a b c")
+ > a.show
+  a b c
+\end{verbatim}
+ 
+ \subsection{Define weight}
+ 
+Use constant method to define an integer constant weight (weight of empty item set).
+ \begin{verbatim}
+ > a=ZDD.itemset("a b c")
+ > q=ZDD.constant(4) # Weight of 4 is assigned to the empty item set ZDD object 
+ and stored in Ruby variable 'q'. 
+ > (q*a).show
+  4 a b c
+ \end{verbatim}
+ 
+ \subsection{Operations on ZDD Object}
+ 
+ ZDD object with one or more operators in the argument overloads the ZDD operator. 
+ \begin{verbatim}
+ > a=ZDD.itemset("a b c")  # Assign ZDD object to Ruby variable `a'.
+ > (4*a).show              # Since '*" is ZDD operator function, Ruby integer '4' is automatically converted to a ZDD object. 
+  4 a b c                  # (ZDD.constant(4)*a).show is processed in the background.
+ > (a+"a b").show          # Automatic conversion of Ruby string "a b" to a ZDD object. 
+  a b c + a b              # (a+ZDD.itemset("a b")).show is processed in the background.
+ > a="a b"+"c d"           # This operator combines two arguments as a string of Ruby string object. 
+ \end{verbatim}
+ 
+\subsection{Conditional statements for combinations}
+
+Conditional statements for combinations can be written as follows: 
+ \begin{verbatim}
+ > z=ZDD.constant(0)
+ > ["a","b","c"].each{|item|
+ >    z += item  # Since 'z' is a ZDD object, '+' is used as a ZDD operator.
+ > }
+ > z.show
+  a + b + c
+
+ > z=ZDD.constant(0)
+ > (1..5).each{|i|
+ >   z += "item_#{i}"
+ > }
+ > z.show
+  item_1 + item_2 + item_3 + item_4 + item_5
+ \end{verbatim}
+
+
+
+

@@ -1,0 +1,22 @@
+\subsubsection*{例1: 項目名行ありデータ}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+A,B,C
+$ msetstr v="string" a=X i=dat1.csv o=rsl1.csv
+#END# kgsetstr a=X i=dat1.csv o=rsl1.csv v=string
+$ more rsl1.csv
+A,B,C,X
+\end{Verbatim}
+\subsubsection*{例2: 項目名行なしデータ}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+$ msetstr v="string" -nfn i=dat2.csv o=rsl2.csv
+#END# kgsetstr -nfn i=dat2.csv o=rsl2.csv v=string
+$ more rsl2.csv
+\end{Verbatim}

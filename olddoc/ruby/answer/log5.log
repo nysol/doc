@@ -1,0 +1,1 @@
+#END# kgcut -x f=1,2 i=indat/dat0.csv IN=0 OUT=0

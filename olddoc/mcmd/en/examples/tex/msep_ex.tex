@@ -1,0 +1,33 @@
+\subsubsection*{Example 1: Basic Example}
+
+Create a directory named \verb|dat|, and separate the data according to the \verb|date| value in the directory.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,quantity,price
+A,20081201,1,10
+B,20081201,4,40
+A,20081202,2,20
+A,20081203,3,30
+B,20081203,5,50
+$ msep d='./dat/${date}.csv' -p i=dat1.csv
+#END# kgsep -p d=./dat/${date}.csv i=dat1.csv
+$ ls ./dat
+20081201.csv
+20081202.csv
+20081203.csv
+$ more ./dat/20081201.csv
+item,date%0,quantity,price
+A,20081201,1,10
+B,20081201,4,40
+$ more ./dat/20081202.csv
+item,date%0,quantity,price
+A,20081202,2,20
+$ more ./dat/20081203.csv
+item,date%0,quantity,price
+A,20081203,3,30
+B,20081203,5,50
+$ more ./dat/B.csv
+./dat/B.csv: No such file or directory
+\end{Verbatim}

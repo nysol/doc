@@ -1,0 +1,67 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcross クロス集計\label{sect:mcross}}
+\index{mcross@mcross}
+クロス集計を行う。
+\verb|s=|で指定した項目の値が項目名となるように横に展開され、
+\verb|k=|で指定した値が行idとなり、
+\verb|f=|で指定した項目がセルとして出力される。
+
+\subsection*{書式}
+\verb|mcross f= s= [a=] [k=] [v=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定された項目の値がセルの値として出力される。\\
+             & 複数項目指定すると、複数行に展開される。\\
+             & それら複数行を識別するための項目として\verb|fld|項目が出力され、\\
+             & \verb|f=|で指定した項目名が値として出力される。 \\
+             & この\verb|fld|という項目名を変更したい場合は\verb|a=|パラメータを使う。\\
+\verb|s=|    & 列項目名に展開する項目を指定する。\\
+             & ここで指定された項目の値が項目名として出力される。\\
+             %& ここで指定する項目の値は単一化(ユニーク)されていなければならない。\\
+             %& \verb|-r|オプションを指定した場合は、複数の列項目名を指定し、\\
+             %& それらの項目名が\verb|fld|という項目名のデータとして出力される。\\
+             %& また、\verb|fld|項目の項目値名を変更したい場合は:(コロン）で項目値名を変更することができる。\\
+             %& 例）\verb|s="2008*:日付&"| \\
+\verb|a=|    & \verb|f=|で指定した項目名がデータとして展開される項目名を指定する。\\
+             & 省略した場合は\verb|fld|という項目名で出力される。\\
+\verb|k=|    & キー項目名リスト\\
+             & ここで指定した項目を単位に横展開をおこなう。\\
+\verb|v=|    & NULL値置換文字列\\
+             & NULL値があった場合、\verb|v=|パラメータで指定する置換文字列により、項目の値を置換する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mcross_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mtra]{mtra} : 横展開するイメージは同じだが、\verb|mtra|は1つのベクトル項目として出力する。
+
+%\end{document}

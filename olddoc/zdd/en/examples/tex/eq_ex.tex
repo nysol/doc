@@ -1,0 +1,43 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> x=3*a + 2*b + 2*c
+> y=2*a + 2*b + 4*c
+> x.show
+ 3 a + 2 b + 2 c
+> y.show
+ 2 a + 2 b + 4 c
+# (x,y is defined above)
+
+# Compare x and y, select itemsets with equal weight.
+> (x==y).show
+ b
+
+# Compare x and y, select itemsets with weight that is greater than or equal to y.
+> (x>=y).show
+ a + b
+
+# Compare x and y, select itemsets with unequal weights.
+> (x.ne?(y)).show
+ a + c
+
+# For itemsets present in zdd1 but absent in zdd2 (or vice versa),
+# the weight is considered as 0.
+> z=2*a + 2*b
+> z.show
+ 2 a + 2 b
+
+# Since itemset c does not exists in z, the weight is considered as 0. 
+> (x>z).show
+ a + c
+> (x.ne?(z)).show
+ a + c
+> (x==z).show
+ b
+\end{Verbatim}

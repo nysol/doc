@@ -1,0 +1,48 @@
+
+%\begin{document}
+
+\section{msep - Partition Records\label{sect:msep}}
+\index{msep@msep}
+
+Define the file name and location the save the separate records at the \verb|d=| parameter. Since it is possible to embed the \verb|${fieldname}| in the file name specified, as a result, the data can be split into separate files for corresponding fields. For example, the argument \verb|d=./out/${date}.csv| specifies the \verb|out| directory in the current directory, and the file is created from corresponding values in the \verb|date| field.
+
+%Value of embedded field name is recognized as a key internally, since the output file is opened upon each keybreak, it is necessary to sort the input data by the embedded field in advance.
+
+
+
+\subsection*{Format}
+\verb|msep d= [-p] [f=] |  
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|d=|    & Specify the field name used for splitting to different data files.\\
+             & String specify here will be added as file name for each record. \\
+             & Embed field name as \verb|${field name}|.\\
+\verb|-p|    & Create the new directory name specify at the \verb|d=| parameter which does not currently exist.\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples }
+\input{examples/tex/msep_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:msep2]{msep2} : While the functionality is similar with \verb|msep|, serial number is used to name the output file, and prints a list of corresponding key and file name to a separate file. 
+
+\hyperref[sect:mcat] {mcat} : This command restore and merge all the partitioned files by \verb|sep| to the original file.
+
+%\end{document}

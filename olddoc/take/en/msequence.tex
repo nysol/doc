@@ -1,0 +1,342 @@
+
+\section{msequence.rb - Enumerate Frequent Sequential Patterns\label{sect:msequence}}
+Enumerate frequent sequential pattern from time series data items. Sequential item data is a set of item arranged in sequential order. This command enumerates partial sequential patterns that appears frequently in sequential item data. 
+
+Sequential data emerging (or matching) in a data series refers to all items that make up the pattern are arranged in order according to series.  LCMseq is used as the core algorithm for enumeration (LCM algorithm for enumerating all frequently emerging sequences). This command has the following characteristics.
+
+\begin{itemize}
+% \item 他のパターンに含まれないパターン(極大パターン)を列挙することができる。
+%\item 同一の出現件数における極大パターン(飽和パターン)を列挙することができる。
+ \item Define gap length and window width constraint (upper limit).
+ \item Define gap length and window width constraint (upper limit) as computation time limit. 
+ \item Use  item taxonomy for  hierarchical classification.  
+ \item When classification class is specified, it is possible to enumerate patterns with specific characteristics  (emerging sequential pattern) for a certain class. 3 or more classes can be defined. 
+ \item Cannot handle multiple sequential itemsets (different items with same time sequence).
+\end{itemize}
+
+Table \ref{tbl:seqDB} shows the examples of input data used in this command. 
+Each unique sequence is identified by tid, data in time column and item column are displayed in order. The command do not support data with multiple items with the same time stamp (The operation result is undefined when there are multiple items with the same time stamp). However, time is basically used to determine the order of items. When the \verb|-padding| option is specified, it is possible to set the  gap length and the window width corresponding to the specified time value as integer value (refer to later section).
+Data shown in Table \ref{tbl:seqDB}  is arranged by item sequence in \ref{tbl:seqvDB} and by time sequence in \ref{tbl:seqtimeDB}. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{Data Series\label{tbl:seqDB}}
+{\small
+\begin{tabular}{ccc}
+\hline
+tid&time&item\\
+\hline
+T1&0&C\\
+T1&2&B\\
+T1&3&A\\
+T1&7&C\\
+T2&2&D\\
+  &:&\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Display as vector\label{tbl:seqvDB}}
+{\small
+\begin{tabular}{cl}
+\hline
+  &シーケンス \\
+\hline
+T1&C B A C\\
+T2&D A B C\\
+T3&C B D E\\
+T4&A C B\\
+T5&B A D D C C\\
+T6&A B D B C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Display based on time \label{tbl:seqtimeDB}}
+{\small
+\begin{tabular}{ccccccccccc}
+\hline
+  &0&1&2&3&4&5&6&7&8&9 \\
+\hline
+T1&C& &B&A& & & &C& & \\
+T2& & &D&A& &B&C& & & \\
+T3& &C&B& &D& & & &E& \\
+T4& & &A& & & &C& & &B\\
+T5&B&A&D&D& & & &C& &C\\
+T6&A& & & & &B&D& &B&C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+
+In this data, sequential patterns that appear 2 or more times include (AC), (BC), further (DBC) surfaced for 20 or more times (refer to Example 1). The sequential pattern (BC) appear in records with tid T1, T2, T5, T6. Although T3, T4 contains item B and C, they are not included due to the difference in sequential order. 
+
+
+\subsubsection*{Frequent Sequential Pattern}
+
+Frequent sequential pattern refers to sequence patterns with a frequency of occurrence (support)  greater than the minimum support defined by the user. Given a minimum supports of 3, sequential pattern (BD) is frequent since the sequential data T3, T5, T6 appeared 3 times. 
+
+On contrary, (BDC) is not frequent since it only appeared 2 times in T5, T6. Table 2.16 shows all  frequent sequential patterns which meet the minimum support of 3 and its occurrence. When  the sequential pattern is reversed (DB), sequential data T2, T6 only appeared 2 times and thus is not a frequent sequential pattern since it does not meet the minimum support.  
+
+Table \ref{tbl:freqSeq} displays all frequent sequential patterns that meet the minimum support of 3. 
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Shows all frequent sequential patterns and the respective transactions that meet the minimum support of 3. \label{tbl:freqSeq}}
+\begin{tabular}{lcl}
+\hline
+Sequential Pattern & Occurrence & Transaction \\
+\hline
+C   & 6 & T1,T2,T3,T4,T5,T6\\
+B   & 6 & T1,T2,T3,T4,T5,T6\\
+A   & 5 & T1,T2,T4,T5,T6 \\
+A C & 5 & T1,T2,T4,T5,T6 \\
+B C & 4 & T1,T2,T5,T6 \\
+D   & 4 & T2,T3,T5,T6\\
+A B & 3 & T2,T4,T6\\
+B D & 3 & T3,T5,T6\\
+C B & 3 & T1,T3,T4\\
+D C & 3 & T2,T5,T6\\
+\hline
+\end{tabular} 
+\end{center}
+\end{table} 
+
+\vspace{1em}
+
+\subsubsection*{Emerging Sequential Pattern}
+Use  "class" to classify corresponding data, and enumerate sequential patterns with specific feature for each class. "Feature" is unique characteristics frequently found in one class but not in other classes. For instance, this technique can be used to identify the difference of the order of items purchased by men and women in supermarket purchase data.  
+The examples of enumerating emerging sequential patterns are illustrated in \hyperref[ex:ep1]{Example 5}. In addition, growth rate and posterior probability is used as an index  to evaluate emerging sequential patterns as discussed in \hyperref[sect:ep]{Appendix 1} in \hyperref[sect:mitemset]{mitemset.rb} command. 
+
+
+\subsubsection*{Hierarchical Classification}
+An item can be expressed in terms of hierarchical classification. Please refer to \hyperref[sect:mitemset]{mitemset.rb} command for more details.
+
+
+\subsubsection*{Upper Limit of Gap}
+%列挙する系列パターンの系列データへのマッチの判定条件を制約することでができる。
+%そのことにより、同じパターンであっても出現数が異なってくるため、
+%結果として異なるパターンが列挙されることになる。
+
+
+The gap length between two items of any adjacent sequential pattern is defined as the distance  between partial sequences matching the serial data (number of items between 2 items $-1$). 
+For example, given the sequential pattern (ABC) and sequential data (ADDDBDC), the gap length between 2 adjacent items AB in the sequential pattern is 4, and the gap length between BC is 2. According to the definition of "emergence", specifying the maximum gap length constrains the gap length below the user specified value.  When there are multiple matches, any matches that satisfy the constraint are considered.  When the gap length limit is set as 1, adjacent frequent sequential patterns in the data will be enumerated. 
+
+Example of computation of gap length is shown in Table \ref{tbl:gapwin}. 
+
+
+\subsubsection*{Upper Limit of Window}
+
+The window width is the length  (number of items) of partial sequence on matched sequential data from the starting point to the ending point. For example, given the pattern (ABC) and sequential data (CADCBDC), the starting point for matching starts from the second item, and the ending point is at the seventh item, with a window width of 6. By specifying the upper limit of window width, the emerging  pattern is constrained to any matches below the specified limit. 
+When there are multiple matches, any match that satisfy the constraint is considered.  Table \ref{tbl:gapwin} shows an example to calculate window width. 
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption{ 
+The matching position of patterns (ABC), the gap length and window width. Below shows four matching records in the sequential data AAABCC, and the corresponding gap length and window width. Gap length and window with for all matches are shown. 
+For example, when the upper limit of window is set to 3 results in emerging pattern ABC. When the upper limit of window is set to 2 results in no emerging pattern. \label{tbl:gapwin} }
+
+\begin{tabular}{lccc}
+\hline
+Sequential Data & Gap length bet. A-B & Gap length bet. B-C & Window \\
+\hline
+{\bf A} D D D D {\bf B} D {\bf C} D & 5 & 2 & 8 \\
+{\bf A B C} D & 1 & 1 & 3 \\
+C {\bf A} A C {\bf B} A {\bf C} C & 3 & 2 & 6\\
+C {\bf A} C {\bf B} B A {\bf C} B C & 2 & 3 & 6\\
+\hline
+{\bf A} A {\bf B} {\bf C} C & 2 & 1 & 4\\
+A {\bf A} {\bf B} {\bf C} C & 1 & 1 & 3\\
+{\bf A} A {\bf B} C {\bf C} & 2 & 2 & 5\\
+A {\bf A} {\bf B} C {\bf C} & 1 & 2 & 4\\
+\hline
+\end{tabular} 
+\end{center}
+\end{table} 
+
+\subsubsection*{Time limit}
+In LCMseq, it is not possible to specify a gap length  and a window width by directly defining the time of occurrence of the item. Therefore, the time limit is realized by the introducing a fictitious item ("!": exclamation mark) during pre-processing stage to represent the absence of time for the item.
+
+\footnote{
+Thus, "!" cannot be use as a character string of an item.
+} 
+For example, the sequential data shown in Table \ref{tbl:seqtimeDB} is converted to the data shown in Table \ref{tbl:paddingDB}. In addition, the sequential pattern is enumerated with gap length and window width constrains and the inclusion of fictitious items. Finally, the sequential pattern including fictitious items is suppressed in the output. 
+
+\begin{table}[htbp]
+\begin{center}
+\caption{To diagnose gap length and window constraints based on time considerations, replace empty item with the fictitious item "!".\label{tbl:paddingDB}}
+{\small
+\begin{tabular}{cl}
+\hline
+  &Sequence \\
+\hline
+T1&C ! B A ! ! ! C\\
+T2&D A ! B C\\
+T3&C B ! D ! ! ! E\\
+T4&A ! ! ! C ! ! B\\
+T5&B A D D ! ! ! C ! C\\
+T6&A ! ! ! ! B D B ! C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\subsubsection{Output}
+This command returns two sets of output data, the first set is the enumerated sequential pattern data (\verb|patterns.csv|), the second set of data contains the corresponding transaction information of the pattern  (\verb|tid_pats.csv|).
+Note that the CSV fields in pattern data output  will be returned for emerging patterns. 
+The samples are shown in Table \ref{tbl:qpat} to Table \ref{tbl:qep_pat}. \\
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.6\hsize}
+\begin{center}
+\caption{Example of patterns.csv data\label{tbl:qpat}. Column pid contains ID which identifies individual sequential pattern, size refers to the number of items that make up the item set pattern, count refers to the number of patterns in the sequential data, and total refers to the number of sequential data.  
+Support is the probability of occurrence, calculated by count/total. Finally, pattern is the sequential pattern, with items delimited by single space character.}
+\vspace{1em}
+{\small
+\begin{tabular}{crrrrl}
+\hline
+Pid&Pattern&Size&Count&Total&Support \\
+\hline
+1  & C  &1&6&6&1\\
+4  & B  &1&6&6&1\\
+11 & A C&2&5&6&0.8333333333\\
+10 & A  &1&5&6&0.8333333333\\
+16 & D  &1&4&6&0.6666666667\\
+7  & B C&2&4&6&0.6666666667\\
+12 & A B&2&3&6&0.5\\
+2  & C B&2&3&6&0.5\\
+19 & D C&2&3&6&0.5\\
+3  & C C&2&2&6&0.3333333333\\
+:  & :  &:&:&:&:\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{Snapshot of data in tidpats.csv\label{tbl:qtid_pats}. Tid is the ID of sequential data, it corresponds to the input field specified at the tid= parameter. 
+The ID of sequential pattens in the sequential data is represented by Pid. 
+}
+\vspace{1em}
+{\small
+\begin{tabular}{cr}
+\hline
+Tid&Pid \\
+\hline
+T1&0 \\
+T1&1 \\
+T1&10 \\
+T1&2 \\
+T2&0 \\
+T2&1 \\
+T2&10 \\
+T2&11 \\
+T3&0 \\
+T3&1 \\
+:&: \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+\vspace{1em} 
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Example of emerging patterns in patterns.csv\label{tbl:qep_pat}.
+The class field indicates the target class based on the characteristics shown in emerging patterns. 
+Attributes pid,pattern,size,total shown in Table \ref{tbl:qpat} are defined in the previous table. 
+Pos refers to the number of target class appeared in the transaction, neg is the number of other classes in the transaction.  
+The total transaction numbers of target and and non target classes are indicated in posTotal and negTotal respectively. 
+Support is the probability of occurrence, calculated by pos/posTotal.
+The change is represented by growthRate, calculated by support/(neg/negTotal). 
+The result is shown as inf when the denominator is 0.
+As this value increases, the key feature for target class emerges. Posterior probability of the target class is represented by postProb, as with growthRate, as the value grow larger, it shows the key feature for the target class. Detailed definition is illustrated in  \hyperref[sect:ep]{Appendix 1} in mitemset.rb command manual. 
+}
+\vspace{1em} 
+{\small
+\begin{tabular}{cclrrrrrrrrr}
+\hline
+class&pid&pattern&size&pos&neg&posTotal&negTotal&total&support&growthRate&postProb\\
+\hline
+cls1&1&B C&2&3&0&4&2&6&0.75&inf&1\\
+cls2&9&B C D&3&2&0&2&4&6&1&inf&1\\
+cls2&10&A D&2&2&0&2&4&6&1&inf&1\\
+cls2&11&A C D&3&2&0&2&4&6&1&inf&1\\
+cls2&8&B D&2&2&1&2&4&6&1&4&0.6666666667\\
+cls2&12&C D&2&2&1&2&4&6&1&4&0.6666666667\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\vspace{1em} 
+
+\subsection{Format}
+\begin{verbatim}
+msequence.rb i= [x=] [O=] [tid=] [item=] [class=] [taxo=] [s=|S=] [sx=|SX=] [l=] [u=]
+             [gap=] [win=] [p=] [g=] [top=] [-padding] [T=] [--help]
+
+  i=       File name of key type transaction data [required parameter]
+  x=       File name of hierarchical classification data [optional parameter] 
+  O=       Output path name  [optional: default=./take_#{DateTime}]
+  tid=     Field name of transaction ID [required parameter]
+  time=    Field name of transaction ID [required parameter]
+  item=    Time based field name (field name in i=) [optional: default="time"] 
+  class=   Field name of class (field name in c=) [optional parameter] 
+           Emerging patterns is enumerated based on the class field defined. 
+  taxo=    Field name of taxonomy [required parameter with conditions: x=]
+  s=       Minimum support (probability) [select either one parameter: s=, S=]
+  S=       Minimum support (hits)  [select either one parameter: s=, S=]
+  sx=      Maximum support (probability) [optional parameter] 
+  SX=      Maximum support (hits)  [optional parameter] 
+  l=       Minimum itemset size [optional parameter] 
+  u=       Maximum itemset size [optional parameter] 
+  gap=     Upper limit of pattern gap length (integer above 0) [optional: 0=without limit, default:0]
+  win=     Upper limit of window size of pattern (integer above 0)  
+  [optional: 0=without limit, default:0]
+  p=       Minimum posterior probability for emerging patterns.  [optional: default=0.5] 
+  g=       Minimum growth rate for emerging patterns  [optional parameter] 
+  top=     Upper limit of number of patterns to enumerate [optional: default: without limit] 
+  -padding Assume time is an integer, emulate special items which are not in time series. 
+          This will affect the definition of gap= and win= parameter. 
+  T=       Working directory [optional parameter] 
+  --help   Show help information 
+\end{verbatim}
+
+\subsection{Example}
+\input{examples/tex/msequence_ex.tex}
+
+

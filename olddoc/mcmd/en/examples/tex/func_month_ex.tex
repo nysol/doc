@@ -1,0 +1,82 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,20000101
+2,20121021
+3,
+4,19770812
+$ mcal c='month($d{date})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=month($d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,rsl
+1,20000101,1
+2,20121021,10
+3,,
+4,19770812,8
+\end{Verbatim}
+\subsubsection*{Example 2: Fixed length character string}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='months($d{date})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=months($d{date}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,date,rsl
+1,20000101,01
+2,20121021,10
+3,,
+4,19770812,08
+\end{Verbatim}
+\subsubsection*{Example 3: Month in English}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='monthe($d{date})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=monthe($d{date}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,date,rsl
+1,20000101,January
+2,20121021,October
+3,,
+4,19770812,August
+\end{Verbatim}
+\subsubsection*{Example 4: Abbreviation of month in English}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='monthes($d{date})' a=rsl i=dat1.csv o=rsl4.csv
+#END# kgcal a=rsl c=monthes($d{date}) i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+id,date,rsl
+1,20000101,Jan
+2,20121021,Oct
+3,,
+4,19770812,Aug
+\end{Verbatim}
+\subsubsection*{Example 5: Extract month from time formatted data}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20000101000000
+2,20121021111213
+3,
+4,19770812122212
+$ mcal c='month($t{time})' a=rsl i=dat2.csv o=rsl5.csv
+#END# kgcal a=rsl c=month($t{time}) i=dat2.csv o=rsl5.csv
+$ more rsl5.csv
+id,time,rsl
+1,20000101000000,1
+2,20121021111213,10
+3,,
+4,19770812122212,8
+\end{Verbatim}

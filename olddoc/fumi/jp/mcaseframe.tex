@@ -1,0 +1,103 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mcaseframe.rb 格フレームの抽出\label{sect:mcaseframe}}
+\index{mcaseframe@mcaseframe}
+
+KNPの解析結果から、格フレームを抽出し出力する。
+
+格フレームとは、用言とそれに係る格助詞句からなる組をいい、
+「リンゴ（が）」+「好き」、「望遠鏡（で）」+「見る」のように表現される。
+本コマンドは、\verb|mknp.rb|コマンドが出力した構文解析結果
+（XML）を読み込み、格フレームを抽出してCSVに出力する。
+
+\subsection{書式}
+\begin{verbatim}
+mcaseframe.rb I= o= [-key] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|I=|        & : mknp.rbでparsingした結果xmlファイルが格納されたパス名 \\
+\verb|o=|        & : 出力する格フレームファイル名 \\
+\verb|-key|      & : key型フォーマットで出力する。 \\
+\verb|-mcmdenv|  & : 内部で利用しているMCMDのメッセージ出力レベルを環境変数に任せる。 \\
+                 &   省略時は警告とエラーメッセージのみ出力(KG\_VerboseLevel=2)。 \\
+\verb|--help|    & : ヘルプメッセージの表示 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection{格フレームの抽出}
+
+\verb|mknp.rb|コマンドの出力するXMLは次のようになっている（抜粋）。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+ <sentence id='0' text='子どもはリンゴがすきです。'>
+  <chunk id='0' link='2' phraseType='格助詞句' caseType='ガ２格' phrase='子供' phraseTok='子
+   <token id='0' class1='名詞' class2='普通名詞' word='子ども' orgWord='子ども' daiWord='子供
+   <token id='1' class1='助詞' class2='副助詞' word='は' orgWord='は'/>
+  </chunk>
+  <chunk id='1' link='2' phraseType='格助詞句' caseType='ガ格' phrase='林檎' phraseTok='リン
+   <token id='2' class1='名詞' class2='普通名詞' word='リンゴ' orgWord='リンゴ' daiWord='林檎
+   <token id='3' class1='助詞' class2='格助詞' word='が' orgWord='が'/>
+  </chunk>
+  <chunk id='2' link='-1' phraseType='用言句' phraseTok='すきだ' rawPhrase='すきです。' phrase
+   <token id='4' class1='形容詞' class3='ナ形容詞' class4='デス列基本形' word='すきだ' orgWord
+   <token id='5' class1='特殊' class2='句点' word='。' orgWord='。'/>
+  </chunk>
+ </sentence>
+\end{Verbatim}
+
+上の例だと、
+chunk id='0'「子どもは」はlink='2'に、
+chunk id='1'「リンゴが」もlink='2'になっており、
+いずれもchunk id='2'「すきです」に係っていることがわかる。
+図にすると次のような係り受け関係である。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+子どもは──┐　
+リンゴが──┤　
+      すきです。
+\end{Verbatim}
+
+本コマンドを利用すると、係り受け関係は次のようなCSVとして抽出される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+aid,sid,cid,contrastConj,denial,declinableWord,lid,caseWord,case
+test.txt,0,2,,,すきだ,0,子ども,ガ２
+test.txt,0,2,,,すきだ,1,リンゴ,ガ
+\end{Verbatim}
+
+CSVの各項目の意味を以下に示す。
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|aid|            & : 入力ファイル名 \\  
+\verb|sid|            & : 行番号（センテンスID） \\  
+\verb|cid|            & : チャンクID \\  
+\verb|contrastConj|   & : 逆接接続詞 \\  
+\verb|denial|         & : 否定語を伴うチャンクのとき1 \\  
+\verb|declinableWord| & : 用言句 \\  
+\verb|lid|            & : 格助詞句のチャンクID \\  
+\verb|caseWord|       & : 格助詞句 \\  
+\verb|case|           & : 格助詞句の種類 \\  
+\end{tabular} 
+}
+\end{table} 
+
+\vspace{3cm}
+
+
+
+
+
+\subsection{利用例}
+\input{examples/tex/mcaseframe_ex.tex}
+
+%\end{document}
+

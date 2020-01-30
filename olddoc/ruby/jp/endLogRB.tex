@@ -1,0 +1,43 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{endLog 終了ログメッセージの出力\label{sect:endLog}}
+MCMDの正常終了と同様のフォーマットのログメッセージを出力する。
+フォーマットは以下の通りである。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#END# メッセージ; 日時
+\end{Verbatim}
+
+
+\subsection{書式}
+
+{\Large
+\begin{verbatim}
+* MCMD::endLog(msg[,fileObject])
+\end{verbatim}
+} 
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/msg /} 表示するメッセージ。
+	\item {\large \verb/fileObject /} 出力するファイルオブジェクト。省略すれば標準エラー出力(STDERR)に出力される。
+\end{description}
+
+\subsection{利用例}
+\subsubsection*{例1 基本例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# 標準エラー出力に終了メッセージを表示する。
+> MCMD::endLog("mburst.rb 正常に終了しました")
+#END# mburst.rb  正常に終了しました。; 2013/11/01 19:09:50
+\end{Verbatim}
+
+\subsection{関連コマンド}
+\hyperref[sect:errorLogRB]{errorLog} : エラーログメッセージの出力
+
+\hyperref[sect:messageRB]{messageLog} : 一般ログメッセージの出力
+
+%\end{document}
+

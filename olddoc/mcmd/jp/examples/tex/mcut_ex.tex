@@ -1,0 +1,62 @@
+\subsubsection*{例1: 基本例}
+
+「顧客」と「金額」項目を選択する。ただし、「金額」項目は「売上」と名前を変更して出力している。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ mcut f=顧客,金額:売上 i=dat1.csv o=rsl1.csv
+#END# kgcut f=顧客,金額:売上 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+顧客,売上
+A,10
+A,20
+B,15
+B,10
+B,20
+\end{Verbatim}
+\subsubsection*{例2: 項目削除}
+
+\verb|-r|を指定することで、項目を削除できる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=顧客,金額 -r i=dat1.csv o=rsl2.csv
+#END# kgcut -r f=顧客,金額 i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+数量
+1
+2
+1
+3
+1
+\end{Verbatim}
+\subsubsection*{例3: 項目名なしデータ}
+
+ヘッダなし入力ファイルから、0,2番目の項目を選択し、
+「顧客」と「金額」という名前で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ mcut f=0:顧客,2:金額 -nfni i=dat2.csv o=rsl3.csv
+#END# kgcut -nfni f=0:顧客,2:金額 i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+顧客,金額
+A,10
+A,20
+B,15
+B,10
+B,20
+\end{Verbatim}

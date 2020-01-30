@@ -1,0 +1,47 @@
+\subsubsection*{例1: 基本例}
+
+\verb|id|項目別に\verb|val|項目の値を合計する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+A,1
+B,1
+B,2
+A,2
+B,3
+$ msum i=dat1.csv k=id f=val o=rsl1.csv
+#END# kgsum f=val i=dat1.csv k=id o=rsl1.csv
+$ more rsl1.csv
+id%0,val
+A,3
+B,6
+\end{Verbatim}
+\subsubsection*{例2: 結合処理}
+
+\verb|dat1.csv|の\verb|id|を結合キーに、\verb|ref1.csv|の\verb|name|項目を結合する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+A,1
+B,1
+B,2
+A,2
+B,3
+$ more ref1.csv
+id,name
+A,nysol
+B,mcmd
+$ mjoin i=dat1.csv k=id m=ref1.csv f=name o=rsl4.csv
+#END# kgjoin f=name i=dat1.csv k=id m=ref1.csv o=rsl4.csv
+$ more rsl4.csv
+id%0,val,name
+A,1,nysol
+A,2,nysol
+B,1,mcmd
+B,2,mcmd
+B,3,mcmd
+\end{Verbatim}

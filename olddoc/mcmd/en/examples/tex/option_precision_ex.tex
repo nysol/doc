@@ -1,0 +1,58 @@
+\subsubsection*{Example 1: Basic Example}
+
+The exponential notation of id=1 is 1.2345678e +08, the exponent bits is more than 6 significant figures when the significant figures of mantissa is set at 6.   
+The exponential notation of id=2 is 1.23456789e +03, the exponent bits is more than 7 significant figures when the significant figures of integer bits + decimal bits is set at 6. 
+The exponential notation of id=4 is 1.23456789e-04, the exponent bits is less than -4 when the significant figures is set at 6. 
+The exponential notation of id=5 is 1.23456789e-05, the exponent bits is less than -4 when the significant figures of mantissa is set at 6. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,123456789
+2,1234.56789
+3,0.123456789
+4,0.000123456789
+5,0.0000123456789
+$ mcal c='${val}' a=result precision=6 i=dat1.csv o=rsl1.csv
+#END# kgcal a=result c=${val} i=dat1.csv o=rsl1.csv precision=6
+$ more rsl1.csv
+id,val,result
+1,123456789,1.23457e+08
+2,1234.56789,1234.57
+3,0.123456789,0.123457
+4,0.000123456789,0.000123457
+5,0.0000123456789,1.23457e-05
+\end{Verbatim}
+\subsubsection*{Example 2: Case when precision=2}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='${val}' a=result precision=2 i=dat1.csv o=rsl2.csv
+#END# kgcal a=result c=${val} i=dat1.csv o=rsl2.csv precision=2
+$ more rsl2.csv
+id,val,result
+1,123456789,1.2e+08
+2,1234.56789,1.2e+03
+3,0.123456789,0.12
+4,0.000123456789,0.00012
+5,0.0000123456789,1.2e-05
+\end{Verbatim}
+\subsubsection*{Example 3: Specify the environment variable}
+
+When the environment variable is set, the setting will be applied to all commands in subsequent processes.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_Precision=4
+$ mcal c='${val}' a=result i=dat1.csv o=rsl3.csv
+#END# kgcal a=result c=${val} i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,result
+1,123456789,1.235e+08
+2,1234.56789,1235
+3,0.123456789,0.1235
+4,0.000123456789,0.0001235
+5,0.0000123456789,1.235e-05
+\end{Verbatim}

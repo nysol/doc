@@ -1,0 +1,33 @@
+\subsubsection*{例1: 基本例}
+
+精算日という新しい項目を追加する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+A
+B
+C
+$ msetstr v=20070101 a=精算日 i=dat1.csv o=rsl1.csv
+#END# kgsetstr a=精算日 i=dat1.csv o=rsl1.csv v=20070101
+$ more rsl1.csv
+id,精算日
+A,20070101
+B,20070101
+C,20070101
+\end{Verbatim}
+\subsubsection*{例2: 複数項目を追加}
+
+id項目のデータ\verb|A,B,C|の2つの組合わせを2つの項目(id1,id2)として出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi f=id n=2 a=id1,id2 i=dat1.csv o=rsl2.csv
+#END# kgcombi a=id1,id2 f=id i=dat1.csv n=2 o=rsl2.csv
+$ more rsl2.csv
+id,id1,id2
+C,A,B
+C,A,C
+C,B,C
+\end{Verbatim}

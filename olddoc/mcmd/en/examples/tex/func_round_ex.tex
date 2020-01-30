@@ -1,0 +1,72 @@
+\subsubsection*{Example 1: Basic Example}
+
+Round to the nearest digit after decimal.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,3.28
+2,3.82
+3,
+4,-0.6
+$ mcal c='round(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=round(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,3.28,3
+2,3.82,4
+3,,
+4,-0.6,-1
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example}
+
+Round to the first decimal.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='round(${val},0.1)' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=round(${val},0.1) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,val,rsl
+1,3.28,3.3
+2,3.82,3.8
+3,,
+4,-0.6,-0.6
+\end{Verbatim}
+\subsubsection*{Example 3: Example using base of 0.5}
+
+Round to the nearest 0.5.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='round(${val},0.5)' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=round(${val},0.5) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,rsl
+1,3.28,3.5
+2,3.82,4
+3,,
+4,-0.6,-0.5
+\end{Verbatim}
+\subsubsection*{Example 4: Example using base 10}
+
+Round to the nearest 10th digit.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,val
+1,1341.28
+2,188
+3,1.235E+3
+4,-1.235E+3
+$ mcal c='round(${val},10)' a=rsl i=dat2.csv o=rsl4.csv
+#END# kgcal a=rsl c=round(${val},10) i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+id,val,rsl
+1,1341.28,1340
+2,188,190
+3,1.235E+3,1240
+4,-1.235E+3,-1230
+\end{Verbatim}

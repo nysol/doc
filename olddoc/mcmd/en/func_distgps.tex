@@ -1,0 +1,32 @@
+
+%\documentclass{article}
+%\begin{document} 
+
+\section{distgps - GPS Distance\label{sect:distgps}}
+\index{distgps@distgps}
+
+Format: distgps(latitude1,longitude1,latitude2,longitude2[,orientation])
+
+Find out the straight-line / direct distance (km unit) between two points based on the latitude and longtitude coordinates. The latitude and longitude can be expressed in signed decimal degrees without compass direction, where positive indicates north/east, negative indicates west/south, on the basis of a spherical earth.  The latitude and longtitude is represent in heading of 60 degrees, and the format is expressed as degree, minute, second ($d,m,s$). The values must be converted to base of 10 for use with this function. 
+Base of 10 coordinates can be calculated by $d+m/60+s/60/60$.  
+
+For example, the distance between Osaka (north latitude 34.702398,east longitude 135.495188) and Tokyo (north latitude 35.681391,east longitude 139.766103) is calculated as follows. 
+
+\begin{verbatim}
+distgps(34.702398,135.495188,35.681391,139.766103)
+\end{verbatim}
+In addition, the distance from Everest (north latitude 32.655556,east longitude 79.015833) to Aconcagua (southern latitude 27.987778,west longitude 86.944444) is specified as follows. 
+\begin{verbatim}
+distgps(32.655556,79.015833,-27.987778,-86.944444)
+\end{verbatim}
+
+%Fuji        & 35$^\circ$21'38"N & 138-43-39E & 35.360628N & 138.727365E
+%Kilimanjaro & 03$^\circ$04'33"S &  37-21-12E &  3.07583S  &  37.35333E
+%Denali      & 63-4-10N  & 151-0-26W 
+%Aconcagua   & 32.39.20S & 79.00.57W
+
+\subsection*{Example}
+\input{examples/tex/func_distgps_ex}
+
+%\end{document}
+

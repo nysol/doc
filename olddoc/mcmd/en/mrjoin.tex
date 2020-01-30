@@ -1,0 +1,75 @@
+
+%\begin{document}
+
+\section{mrjoin - Join Reference File According to Specified Range\label{sect:mrjoin}}
+\index{mrjoin@mrjoin}
+
+Join fields from reference file according to specified range. 
+
+The value specified at \verb|r=| parameter from the input data is matched with the range (value that falls above the first row and less than the next row) from the reference file, and subsequently joined with the value from the field specified at \verb|f=| parameter. 
+Use \verb|mnrjoin| to join with complex conditions using range values. Consider using \verb|chgnum| if there are not a lot of range. 
+
+
+\subsection*{Format}
+\verb/mrjoin r= [k=] [K=] [R=] [f=] [-n] [-lo] [m=] /
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & The field name(s) (multiple fields can be specified) to join from the reference file.\\
+             & When this is not defined, the all fields except the key specified at \verb|K=| will be joined.\\
+\verb|m=|    & Reference file name.\\
+             & Read from standard input if this parameter is not set (when \verb|i=| is specified). \\
+\verb|r=|    & Field name of the range for comparison [\%n] \\
+             & Specify the field name from the input file.\\
+             & After the specified field is sorted (multiple fields can be specified), fields are joined \\
+             & The value is interpreted as numeric range when \%n is specified, otherwise, \\
+             & it is treated as character  range. \\
+             & The specified field should not contain NULL values or the data may not be processed properly. \\
+\verb|R=|    & Field name containing range values in the reference file. \\
+             & When this parameter is not defined, the range is processed at \verb|r=| parameter by default.\\
+\verb|k=|    & Key field name(s) (multiple fields can be specified) from the input data for comparison \\
+	             & Join records with same key fields in the input data \verb|k=| and reference data \verb|K=|.\\
+\verb|K=|    & Key field name(s) (multiple fields can be specified) from the reference data for comparison \\
+             & This key field(s) from reference data is compared with the key field(s) from the input data specified at \verb|k=| parameter, \\
+             &  fields where records with common key are joined.\\
+   & This parameter is not required if the field name name is the same as the one defined at the \verb|k=| parameter. \\
+%\verb|v=|パラメータと同名の場合は指定する必要はない。\\
+%             & 範囲項目名の範囲条件：項目値以上、次行の項目値未満。\\
+\verb|-n|    & Output NULL values when reference data does not consist of input data.\\
+\verb|-lo|   & left-open interval\\
+             & The range with left open interval specified at \verb|R=| parameter (greater than - below).\\
+\end{tabular} 
+}
+\end{table} 
+
+%\subsection*{Sort Criteria}
+%The fields defined at \verb|r=| and \verb|R=| must be sorted beforehand. However, when the numeric value is compared with the numeric range, the values in the columns defined at \verb|r=| and \verb|R=| parameter must sorted by numerical ascending order. When \verb|k=| and \verb|K=| is specified, the values in the columns defined at \verb|k=| and \verb|K=| parameter must be sorted in ascending alphabetical order. 
+
+%For example, given the parameters \verb|k=key K=Key r=val%n R=range i=dat.csv m=ref.csv|, if the sort criteria for the input data \verb|dat.csv| is carried out by \verb|msortf f=key,val%n|, the sort criteria for \verb|ref.csv| should follow accordingly as \verb|msortf f=Key,range%n|. 
+
+\subsection*{Examples}
+\input{examples/tex/mrjoin_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mchgnum]{mchgnum} : Specify a number range to replace / add value.
+
+\hyperref[sect:mjoin]{mjoin} : Use this command to join matching strings instead of using numeric range. 
+
+\hyperref[sect:mnrcommon]{mnrcommon} : Use this command to select records rather than to join fields. 
+%\end{document}

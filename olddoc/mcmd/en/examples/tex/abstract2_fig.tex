@@ -1,0 +1,68 @@
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdata man1 >man1.csv
+#END# kgData -man1
+$ more man1.csv
+顧客,日付,商品
+A,20130916,a
+A,20130916,c
+A,20130917,a
+A,20130917,e
+B,20130916,d
+B,20130917,a
+B,20130917,d
+B,20130917,f
+$ mcut f=顧客:customer,日付:date,商品:product i=man1.csv |
+$ mcut f=customer,product o=xxa
+#END# kgcut f=顧客:customer,日付:date,商品:product i=man1.csv
+#END# kgcut f=customer,product o=xxa
+$ more xxa
+customer,product
+A,a
+A,c
+A,a
+A,e
+B,d
+B,a
+B,d
+B,f
+$ msortf f=customer,product i=xxa o=xxb
+#END# kgsortf f=customer,product i=xxa o=xxb
+$ more xxb
+customer%0,product%1
+A,a
+A,a
+A,c
+A,e
+B,a
+B,d
+B,d
+B,f
+# Count the number of rows by customer and product.
+$ mcount k=customer,product a="number of items" i=xxb o=xxc
+#END# kgcount a=number of items i=xxb k=customer,product o=xxc
+$ more xxc
+customer%0,product%1,number of items
+A,a,2
+A,c,1
+A,e,1
+B,a,1
+B,d,2
+B,f,1
+# Perform a cross tabulation by the item of product. The number of the product that is not purchased gives 0.
+$ mcross k=customer s=product f="number of items" v=0 i=xxc o=xxd
+#END# kgcross f=number of items i=xxc k=customer o=xxd s=product v=0
+$ more xxd
+customer%0,fld,a,c,d,e,f
+A,number of items,2,1,0,1,0
+B,number of items,1,0,2,0,1
+# remove extra item "fld".
+$ mcut f=fld -r i=xxd o=output.csv
+#END# kgcut -r f=fld i=xxd o=output.csv
+$ more output.csv
+customer%0,a,c,d,e,f
+A,2,1,0,1,0
+B,1,0,2,0,1
+\end{Verbatim}
+\caption{Customer-based product-quantity matrix\label{fig:abstract2_1}}
+\end{figure}

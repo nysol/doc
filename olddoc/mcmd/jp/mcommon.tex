@@ -1,0 +1,62 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcommon 参照ファイルによる行選択\label{sect:mcommon}}
+\index{mcommon@mcommon}
+\verb|k=|パラメータで指定した入力ファイルの項目値と\verb|m=|パラメータで指定した参照ファイルの項目値を比較し、同じ値を持つ入力ファイルの行を選択する。
+
+\subsection*{書式}
+\verb/mcommon  k= [K=] [u=] [-r] m=|/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & 入力データ上の突き合わせる項目名リスト(複数項目指定可)\\
+             & ここで指定した入力データの項目と\verb|K=|パラメータで指定された参照データの項目が同じ行が選択される。\\
+             & 同じ値が複数行連続していてもよい。\\
+\verb|m=|    & 参照ファイル名を指定する。\\
+             & またこのパラメータが省略された時には標準入力が用いられる。(\verb|i=|指定ありの場合)\\
+\verb|K=|    & 参照データ上の突き合わせる項目名リスト(複数項目指定可)\\
+             & ここで指定した参照データの項目と\verb|k=|パラメータで指定された入力データの項目が同じ行が選択される。\\
+             & 参照データ上に\verb|k=|パラメータで指定した入力データ上の項目と同名の項目が存在する場合は指定する必要はない。\\
+             & 同じ値が複数行連続していてもよい。\\
+\verb|u=|    & 指定の条件に一致しない行を出力するファイル名。\\
+\verb|-r|    & 条件反転\\
+             & \verb|k=|パラメータで指定した入力ファイルの項目値と\\
+             & \verb|m=|パラメータで指定した参照ファイルの項目値を比較し、\\
+             & 同じ値を持たない入力ファイルの行を選択する。 
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mcommon_ex.tex}
+\subsection*{関連コマンド}
+
+\hyperref[sect:mselstr]{mselstr} : 参照ファイルの結合キーの種類数が少なければこのコマンドでも対応できる。
+
+\hyperref[sect:mnrcommon]{mnrcommon} : 参照ファイルの結合キーがユニークでなければこちらを使う。
+
+\hyperref[sect:mjoin]{mjoin} : 選択だけでなく、項目を結合したい場合はこのコマンド。
+
+%\end{document}

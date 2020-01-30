@@ -1,0 +1,36 @@
+\subsubsection*{例1: 基本例}
+
+\verb|id=1,id=2|共に、正規表現で示された\verb|c|に続く\verb|aa|を含んでいるので真を返す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,caabaa
+2,acabaaa
+3,
+4,cbcbcc
+$ mcal c='regexs($s{str},"c.*aa")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=regexs($s{str},"c.*aa") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,caabaa,1
+2,acabaaa,1
+3,,0
+4,cbcbcc,0
+\end{Verbatim}
+\subsubsection*{例2: 先頭一致}
+
+正規表現\verb|.*c|を$str$項目が含むのは\verb|id=3|以外全ての行である。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='regexs($s{str},".*c")' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=regexs($s{str},".*c") i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,caabaa,1
+2,acabaaa,1
+3,,0
+4,cbcbcc,1
+\end{Verbatim}

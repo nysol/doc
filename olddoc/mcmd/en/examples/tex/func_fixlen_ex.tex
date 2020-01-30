@@ -1,0 +1,52 @@
+\subsubsection*{Example 1: Basic Example}
+
+Convert values in the \verb|str| column to 5 character fixed-length string. Right justified (\verb|"R"|) the strings and fill the empty positions with \verb|"#"| for strings with less than 5 characters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abc
+2,123
+3,
+4,1234567
+$ mcal c='fixlen($s{str},5,"R","#")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=fixlen($s{str},5,"R","#") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abc,##abc
+2,123,##123
+3,,#####
+4,1234567,34567
+\end{Verbatim}
+\subsubsection*{Example 2: Left justified}
+
+Fill empty positions for left justified (\verb|"L"|) text with \verb|"#"|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='fixlen($s{str},5,"L","#")' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=fixlen($s{str},5,"L","#") i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,abc,abc##
+2,123,123##
+3,,#####
+4,1234567,12345
+\end{Verbatim}
+\subsubsection*{Example 3: Multibyte string}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,str
+1,こんにちは
+2,大阪
+$ mcal c='fixlenw($s{str},4,"R","埋")' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=fixlenw($s{str},4,"R","埋") i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,str,rsl
+1,こんにちは,んにちは
+2,大阪,埋埋大阪
+\end{Verbatim}

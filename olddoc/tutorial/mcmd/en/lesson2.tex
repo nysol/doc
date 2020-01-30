@@ -1,0 +1,141 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\setlength{\baselineskip}{4mm}
+
+\section{Lesson 2: Sort}
+
+The \verb|msortf| command sorts the records based on the defined sort keys from each record in the specified order.
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|msortf.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Create a report with daily total amount and total quantity, and sort the results by date with most recent transactions shown first.  \\
+
+Methodology: Extract \emph{date, quantity, amount} from the dataset with \verb|mcut| command. Next, redirect the output to \verb|msortf| with pipe (\textbar) and sort according to \verb|date| in descending order. Pipe output to \verb|msum| command and calculate the total amount and total quantity for each date. Finally, send the output to a file \verb|msortfout.csv|.
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameter for \verb|msortf| as follows: \\
+
+Field: 		\verb|f=date%r| \\
+Description: 	Data is sorted according to the \emph{date} field. Custom options including "\%r" , "\%n" and "\%nr"  can be added after the field name to define the sort order and data type. By default, data is sorted as character string in ascending order. When the \verb|f=date%r| option is specified, data will be sorted in descending order. The msortf command allows you to sort by multiple columns at the same time,  the list of columns can be defined at the \verb|f=| parameter separated by comma. } \\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 2: Sort 
+
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount                               i=${inPath}/dat.csv |
+msortf f=date%r                         |       
+msum k=date f=quantity:totalQuantity,amount:totalAmount       o=outdat/msortfout.csv
+
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./msortf.sh 
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/14 18:01:51
+#END# kgsortf f=date%r; IN=24737 OUT=24737; 2013/08/14 18:01:51
+#END# kgsum f=quantity:totalQuantity,amount:totalAmount k=date o=outdat/msortfout.csv; 
+IN=24737 OUT=324; 2013/08/14 18:01:51
+\end{verbatim}
+
+\noindent
+The result is as follows. Note that \verb|date| attribute is sorted according to descending order.  
+
+\begin{verbatim}
+date,totalQuantity,totalAmount
+20011230,93,58331
+20011229,300,151488
+20011228,292,162534
+20011227,112,61542
+20011226,73,34360
+20011225,202,109219
+20011224,305,141597
+20011222,121,71352
+20011221,156,93305
+20011220,153,77793
+20011219,168,91842
+20011218,251,125010
+20011217,19,8687
+20011216,154,76426
+20011215,160,74503
+20011214,71,32422
+20011213,124,67817
+20011212,80,32682
+20011211,251,133119
+20011210,55,31919
+20011209,47,23439
+20011208,442,218180
+20011207,285,134496
+20011206,70,39913
+20011205,175,85918
+20011204,26,10297
+20011203,99,45827
+20011202,285,129702
+20011201,117,73060
+...
+..
+\end{verbatim}
+
+\subsection{Additional Examples}
+
+\noindent
+Additional ways of sorting data with msortf are listed as follows:  \\
+
+Example 1: Sort according to lowest purchase amount to highest purchase amount (ascending order). Use the \verb|%n| option in the field parameter. 
+\begin{verbatim}
+msortf f=amount%n
+\end{verbatim}
+
+Example 2: Sort according to the highest purchase amount to the lowest purchase amount (descending order). Use the \verb|%nr| option in the field parameter. 
+\begin{verbatim}
+msortf f=amount%nr
+\end{verbatim}
+
+Example 3: Sort the data starting from latest purchase date to first purchase date, and lowest purchase amount to the highest for each date. Use the \verb|%nr and %n| option in the field parameter. The results will be arranged in descending order by date, for records with the same date, the highest purchase amount will come first.  
+\begin{verbatim}
+msortf f=date%nr,amount%n
+\end{verbatim}
+
+\newpage
+
+\subsection{Exercise }
+
+Let's practice msortf on the reports below. Check your results with the corresponding scripts and output files. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Daily total quantity and total amount of items sold. Sort the total amount \\in ascending order.  & \href{exercise/msortf1.sh}{msortf1.sh} & \href{exercise/outdat/msortfout1.csv}{msortfout1.csv} \\
+2. Daily total quantity and total amount of items sold. Sort the total amount in \\descending order.  & \href{exercise/msortf2.sh}{msortf2.sh} & \href{exercise/outdat/msortfout2.csv}{msortfout2.csv} \\
+3. Daily total quantity and total amount of items sold for each 4-digit \\category code. Sort results by date and total quantity in ascending order. & \href{exercise/msortf3.sh}{msortf3.sh} & \href{exercise/outdat/msortfout3.csv}{msortfout3.csv} \\
+4. Daily total quantity and total amount of items sold for each 4-digit category code. \\Sort results by date and  total quantity in descending order. & \href{exercise/msortf4.sh}{msortft4.sh} & \href{exercise/outdat/msortfout4.csv}{msortfout4.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

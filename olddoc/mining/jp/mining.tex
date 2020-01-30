@@ -1,0 +1,54 @@
+\documentclass[a4paper]{jsbook}
+\usepackage{mining}
+
+% ------------------- Title and Author -----------------------------
+%\title{mining Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge Mining Package Documentation}\\
+\vspace{10truept}
+{\normalsize 対応 NYSOL パッケージ: Ver. 1.2,2.0}\\
+\vspace{1cm}
+
+revise history:\\
+October 6, 2014 : mbonsai,mgpmetis.rbコマンドの追加\\
+January 17, 2014 : first release\\
+\vspace{18cm}
+{\small \today}
+
+{\small Copyright \copyright 2013 by NYSOL CORPORATION}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+\chapter{はじめに}
+\include{abstract}
+\include{install}
+
+\chapter{マイニングコマンド}
+\include{burst}
+\include{nb}
+\include{mbonsai}
+\include{mgpmetis}
+%\include{mglmnet}
+
+%\chapter{その他}
+
+%\bibliographystyle{plain-annote}
+%\bibliography{mybibliography}
+\include{bib}
+
+
+\end{document}
+\end
+

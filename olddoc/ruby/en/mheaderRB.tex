@@ -1,0 +1,57 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mheader - Acqusition method for field name array in CSV data \label{sect:mheaderRB}}
+
+Return the field names (in the first row) of the CSV data file in an array. 
+For files without field names in the first row, return the value of each field in the first row in an array.
+ 
+
+\subsection{Format}
+
+{\large
+\begin{verbatim}
+MCMD::mheader(arguments)
+\end{verbatim}
+} 
+
+Specify the following arguments in character string separated with space at \verb|arguments|.
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & Input file name (String)\\
+\end{tabular} 
+\end{table} 
+
+\subsection{Example }
+\subsubsection*{Example 1}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+# customer,date,amount
+# A,20081201,10
+# B,20081002,40
+
+> p MCMD::mheader("i=dat1.csv")
+ => ["customer", "date", "amount"] 
+\end{Verbatim}
+
+\subsubsection*{Example 2}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+# A,20081201,10
+# B,20081002,40
+
+> p MCMD::mheader("i=dat1.csv")
+ => ["A", "20081201", "10"] 
+\end{Verbatim}
+
+\subsection{Related Commands}
+\hyperref[sect:mcsvinRB]{Mcsvin} : Class for reading CSV data.
+
+\hyperref[sect:mtableRB]{Mtable} : Class for reading CSV data into cell. 
+
+%\end{document}
+

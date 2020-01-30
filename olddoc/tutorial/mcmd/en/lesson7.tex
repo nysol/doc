@@ -1,0 +1,123 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 7: Select records with mselstr command}
+
+Another related command for record selection is \verb|mselstr| command. It allows users to define more details on the information to extract. The command is more efficient for matching multiple values in the same column. 
+
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|mselstr.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Select transactions that occurred on January 10, 23, or 30 in 2001.     \\
+
+Methodology: Select \emph{date, quantity, amount} by \verb|mcut|, the result is piped to \verb|mselstr|. Records that matches the date \emph{20010110, 20010123, 20010130} are extracted and output is saved to the file \verb|mselstrout.csv|. \\ 
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+The parameters for \verb|mselstr| command are as follows: \\
+
+Field: 		\verb|f=date| \\
+Description: 	Define the field(s) that has values which match the query conditions at the \verb|f=| parameter. In this case, date will be specified as the parameter. Multiple fields can be specified. \\
+
+Value: 		\verb|v=20010110,20010123, 20010130 | \\
+Description: 	Specify the list of substring(s) for matching with the values in the field parameter at the \verb|v=| parameter. Multiple values can be specified separated by ",". 
+
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 7: Select Records 
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount                      					i=${inPath}/dat.csv |
+mselstr f=date v=20010110,20010123, 20010130  			o=outdat/mselstrout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./mselstr.sh 
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/19 11:26:13
+#END# kgselstr f=date o=outdat/mselstrout.csv v=20010110,20010123,20010130; IN=24737 OUT=148; \\ 2013/08/19 11:26:13
+\end{verbatim}
+
+\noindent
+The result is as follows: 
+
+\begin{verbatim}
+date,quantity,amount
+20010110,5,1155
+20010110,6,1446
+20010110,1,271
+20010110,6,3198
+20010110,1,348
+20010110,1,461
+20010110,1,363
+20010123,2,564
+20010123,1,401
+20010123,1,528
+20010123,1,436
+20010123,3,813
+20010123,1,419
+20010130,1,362
+20010130,1,294
+20010130,2,544
+...
+..
+\end{verbatim}
+
+The character strings are stored in a hash table, thus the order of character strings and the length of strings do not affect the efficiency of the \verb|mselstr| command. \\
+
+{\setlength{\parindent}{0cm}
+\textbf{Other functions in select command  }\\
+
+\fbox{
+  \parbox{\textwidth}{
+Besides the above examples illustrated in this lesson, "msel" and "mselstr" have other ways to select records. Nevertheless, the declaration of the key value is important as it groups multiple records with the same key attribute as one group for data processing. This will be further explained in the Advanced Techniques in the tutorial.
+
+  }
+} 
+
+}
+
+
+\subsection{Exercise }
+
+Let's practice the \verb|mselstr| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Total quantity and total amount for manufacturer 0054,0085, and 1110. & \href{exercise/mselstr1.sh}{mselstr1.sh} & \href{exercise/outdat/mselstrout1.csv}{mselstrout1.csv} \\
+2. Total quantity and total amount for 4-digit classification code matching \\1101,1111,1115,1401,1403, and 1406. & \href{exercise/mselstr2.sh}{mselstr2.sh} & \href{exercise/outdat/mselstrout2.csv}{mselstrout2.csv} \\
+3. Report on the total quantity and total amount for transactions with amount matching \\ 199, 299 and 399. & \href{exercise/mselstr3.sh}{mselstr3.sh} & \href{exercise/outdat/mselstrout3.csv}{mselstrout3.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

@@ -1,0 +1,52 @@
+
+%\begin{document}
+
+\section{mchkcsv - Check CSV Data\label{sect:mchkcsv}}
+\index{mchkcsv@mchkcsv}
+
+Automatically repair (standardize the number of fields for all rows) comma-separated-values (CSV) data that do not meet the f[sect:csv]{CSV format for MCMD}. Use the \verb|-diag| option to perform checking on CSV data.
+
+
+\subsection*{Format}
+\verb|mchkcsv [a=] [-diag] [-r]|
+\hyperref[sect:option_o]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & Input file name\\
+             & The CSV data defined here is checked for incomplete lines. \\
+             & Issues identified in this file is automatically repaired. \\
+             & If this parameter is omitted, the standard input is used. \\
+\verb|a=|   & Substitute the field name(s) in the input data with the field name(s) specified at this parameter.\\
+		& If the number of fields specified is less than the number of fields in the header, \\
+		& the output will only yield portion of columns from the input data starting from the left. \\
+		& Conversely, if the number of fields specified here is greater than the number of fields in input data, \\
+		& data items in the extra fields are expressed as NULL values in the output.\\
+\verb|-diag| & Execute check. \\
+             & When this option is specified, write result to standard output.\\
+\verb|-r|    & Exclude control characters\\
+             & This defines the control character as ASCII character code 0x00-0x1f,0x7f (remove 0x09,0x0a,0x0d).\\
+             & Control code is automatically converted to the string \&\#x when this option is not specified. \\\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+%\if0 #no help# following sentences will not apear on the help document. \fi
+\input{examples/tex/mchkcsv_ex.tex}
+
+\subsection*{Related Command}
+
+%\end{document}

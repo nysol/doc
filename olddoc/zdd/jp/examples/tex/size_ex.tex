@@ -1,0 +1,13 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+
+> f=5*ZDD::itemset("a b c")-3*ZDD::itemset("a b")+2*ZDD::itemset("b c")+1*ZDD::itemset("c")
+> f.show
+ 5 a b c - 3 a b + 2 b c + c
+> puts f.size
+10
+\end{Verbatim}

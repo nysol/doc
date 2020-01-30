@@ -1,0 +1,183 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + c
+> f.show
+ 5 a b c - 3 a b + 2 b c + c
+> ZDD::constant(0).show
+ 0
+\end{Verbatim}
+\subsubsection*{例2: bit}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + c
+> f.show
+ 5 a b c - 3 a b + 2 b c + c
+
+> f.bit
+NoMethodError: undefined method `bit' for 5 a b c +  - 3 a b + 2 b c + c:Module
+	from (irb):8
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+
+# "a b c"の重み5の(-2)進数は101となる。
+# 1*(-2)^2+0*(-2)^1+1*(-2)^0 = 5
+# よって0桁目と2桁目にアイテム集合"a b c"が表示されている。
+# "a b"の重み-3の(-2)進数は1101となる。
+# 1*(-2)^3+1*(-2)^2+0*(-2)^1+1*(-2)^0 = -3
+# よって0,2,3桁目にアイテム集合"a b"が表示されている。
+
+\end{Verbatim}
+\subsubsection*{例3: hex}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+
+> f=a*b+11*b*c+30*d+4
+> f.show
+ a b + 11 b c + 30 d + 4
+> f.hex
+NoMethodError: undefined method `hex' for a b + 11 b c + 30 d + 4 :Module
+	from (irb):9
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{例4: map}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+> f=2*a*b+3*b+4
+> f.show
+ 2 a b + 3 b + 4
+> f.map
+NoMethodError: undefined method `map' for 2 a b + 3 b + 4 :Module
+	from (irb):8
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+# アイテムaが１列目のビット列に、アイテムbが１行目のビット列に対応してアイテム集合が表現されている。
+# セルの値は重みを表す。左上のセルはaが0、bが0、すなわち定数項が4であることが示されている。
+
+# 4アイテムでは以下の通り。
+> g=a*b + 2*b*c + 3*d + 4
+> g.show
+ a b + 2 b c + 3 d + 4
+> g.map
+NoMethodError: undefined method `map' for a b + 2 b c + 3 d + 4 :Module
+	from (irb):15
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{例5: rmap}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# 4つのアイテムa,b,c,dを宣言
+> ZDD::symbol("a")
+> ZDD::symbol("b")
+> ZDD::symbol("c")
+> ZDD::symbol("d")
+
+> f=ZDD::itemset("a b") + 2*ZDD::itemset("b c") + 4
+> f.show
+ a b + 2 b c + 4
+
+# mapで表示させると以下の通り。
+> f.map
+NoMethodError: undefined method `map' for a b + 2 b c + 4 :Module
+	from (irb):12
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+
+# rmapで表示させるとdが省かれて表示される。
+> f.rmap
+NoMethodError: undefined method `rmap' for a b + 2 b c + 4 :Module
+	from (irb):15
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{例6: case}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a*b*c - 3*a*b + 2*b*c + 5*c
+> f.show
+ 5 a b c - 3 a b + 2 b c + 5 c
+
+> f.case
+NoMethodError: undefined method `case' for 5 a b c +  - 3 a b + 2 b c + 5 c:Module
+	from (irb):8
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+\end{Verbatim}
+\subsubsection*{例7: decomp}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+
+> f1=(a*b*c)
+> f1.show
+ a b c
+> f1.decomp
+NoMethodError: undefined method `decomp' for a b c:Module
+	from (irb):8
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+# a,b,cのANDということでa*b*c=a b c
+
+> f2=((a*b*c)+(a*b))
+> f2.show
+ a b c + a b
+> f2.decomp
+NoMethodError: undefined method `decomp' for a b c + a b:Module
+	from (irb):13
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+# c,1のORにて(c+1)、それとa bとのANDで(a b)*(c+1)=a b c + a b
+
+> f3=((a*b*c)+(a*b)+(b*c))
+> f3.show
+ a b c + a b + b c
+> f3.decomp
+NoMethodError: undefined method `decomp' for a b c + a b + b c:Module
+	from (irb):18
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+# [ a c ]はaとcによる全組合せ集合、すなわち(a c + a + c)。
+# それとbとのANDで b*(a c + a + c) = a b c + a b + b c
+
+> f4=((a*b*c)+(a*b)+(b*c)+(c*a))
+> f4.show
+ a b c + a b + a c + b c
+> f4.decomp
+NoMethodError: undefined method `decomp' for a b c + a b + a c + b c:Module
+	from (irb):24
+	from /Users/hamuro/.rvm/rubies/ruby-1.9.3-p362/bin/irb:16:in `<main>'
+# [ a b c ]はa,b,cによる全組合せ集合、すなわち(a b c + a b + b c + c a)
+
+\end{Verbatim}

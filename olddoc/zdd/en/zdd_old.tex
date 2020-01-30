@@ -1,0 +1,62 @@
+ \documentclass[a4paper]{book}
+\usepackage{zdd}
+
+%\usepackage{verbatim}
+%\usepackage[parfill]{parskip}
+%\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, 
+%            citecolor=blue, urlcolor=blue]{hyperref}
+
+
+
+
+
+% ------------------- Title and Author -----------------------------
+%\title{ZDD Ruby Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge ZDD Ruby Package Documentation}\\
+\vspace{10truept}
+{\normalsize zdd version: 1.1.0}\\
+\vspace{1cm}
+
+revise history:\\
+October 10, 2013 : first release\\
+\vspace{18cm}
+{\small \today}
+
+%{\small Copyright \copyright 2013 by NYSOL CORPORATION}
+{\small JST-ERATO MINATO Discrete Structure Manipulation System Project}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+\tableofcontents
+
+\include{getstarted}
+
+\include{tutorial}
+
+\include{usage}
+
+\chapter[Methods]{Public Class Methods}
+
+\include{vsop_remainder}
+\include{vsop_multiply}
+\include{vsop_plus}
+
+\bibliographystyle{plain-annote}
+\bibliography{mybibliography}
+
+\end{document}
+\end
+

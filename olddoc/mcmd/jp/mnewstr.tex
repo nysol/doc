@@ -1,0 +1,46 @@
+
+%\begin{document}
+
+\section{mnewstr 固定文字列データの新規生成\label{sect:mnewstr}}
+\index{mnewstr@mnewstr}
+\verb|v=|パラメータで指定した文字列データを新規作成し、\verb|a=|パラメータで指定した項目名で出力する。
+一度に複数の項目を生成することも可能。
+
+\subsection*{書式}
+\verb|mnewstr a= [v=] [l=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|a=|    & 新規に作成するデータの項目名を指定する。\\
+             & 複数の項目を生成する場合は、項目名をカンマで区切る。\\
+             & \verb|-nfn,-nfno|オプション指定時は指定の必要はない。\\
+\verb|v=|    & 新しく作成する文字列を指定する。\\
+             & 複数の項目を生成する場合は、値をカンマで区切る。\verb|a=|で指定した個数と同数でなければならない。\\
+\verb|l=|    & 新規作成する乱数データの行数を指定する。【デフォルト値:10】\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mnewstr_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mnewnumber] {mnewnumber} : 連番を生成する。
+
+\hyperref[sect:mnewrand] {mnewrand} : 乱数を生成する。
+
+%\end{document}

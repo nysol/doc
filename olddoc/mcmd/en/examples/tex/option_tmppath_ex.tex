@@ -1,0 +1,19 @@
+\subsubsection*{Example 1: Basic Example}
+
+Set the \verb|tmp| directory under the current directory for temporary files.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=val tmpPath=./tmp i=dat1.csv o=rsl1.csv
+#ERROR# internal error: cannot create temp file (kgsortf)
+\end{Verbatim}
+\subsubsection*{Example 2: Specify the environment variable}
+
+The settings of the environment variable will be applied to subsequent commands.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_TmpPath=~/tmp
+$ msortf f=val i=dat1.csv o=rsl1.csv
+#END# kgsortf f=val i=dat1.csv o=rsl1.csv
+\end{Verbatim}

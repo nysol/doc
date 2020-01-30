@@ -1,0 +1,52 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate 10 rows of random integers. Use a fixed random seed so that it will always return the same sequence of random numbers.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand a=rand S=1 o=rsl1.csv
+#END# kgnewrand S=1 a=rand o=rsl1.csv
+$ more rsl1.csv
+rand
+0.4170219984
+0.9971848081
+0.7203244893
+0.9325573612
+0.0001143810805
+0.1281244478
+0.3023325677
+0.9990405154
+0.1467558926
+0.2360889763
+\end{Verbatim}
+\subsubsection*{Example 2: Random Integers}
+
+Use random seed 1 to generate 5 rows of random integers with minimum value of 10 and maximum value of 100.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand a=rand -int max=1000 min=0 l=5 S=1 o=rsl2.csv
+#END# kgnewrand -int S=1 a=rand l=5 max=1000 min=0 o=rsl2.csv
+$ more rsl2.csv
+rand
+417
+998
+721
+933
+0
+\end{Verbatim}
+\subsubsection*{Example 3: Generate Output without Header}
+
+Specify \verb|-nfn| option to generate random number data without header.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewrand -nfn l=5 S=1 o=rsl3.csv
+#END# kgnewrand -nfn S=1 l=5 o=rsl3.csv
+$ more rsl3.csv
+0.4170219984
+0.9971848081
+0.7203244893
+0.9325573612
+0.0001143810805
+\end{Verbatim}

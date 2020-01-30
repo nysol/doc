@@ -1,0 +1,60 @@
+\subsubsection*{Example 1: Specify -nfn}
+
+When \verb|-nfn| (no field name) is specified, the first row in the data will not be considered as field names. Thus, each field is specified as a number (note that the number starts from 0). 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+a,2
+b,5
+b,4
+$ msum -nfn k=0 f=1 i=dat2.csv o=rsl1.csv
+#END# kgsum -nfn f=1 i=dat2.csv k=0 o=rsl1.csv
+$ more rsl1.csv
+a,2
+b,9
+\end{Verbatim}
+\subsubsection*{Example 2: Specify -nfno}
+
+When \verb|-nfno| (no field name for output) is specified, the first row of input data is initialized as field names, but the field names is removed from the output data.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key,val
+a,2
+b,5
+b,4
+$ msum k=key f=val -nfno i=dat1.csv o=rsl2.csv
+#END# kgsum -nfno f=val i=dat1.csv k=key o=rsl2.csv
+$ more rsl2.csv
+a,2
+b,9
+\end{Verbatim}
+\subsubsection*{Example 3: Specify -nfni}
+
+The option \verb|-nfni| (no field names or input) is only available in the mcut command. This option does the opposite of - nfno; the first row of input data is not treated as a fieldname row, but the fieldnames will be shown in the output data. Thus, you need to specify an output fieldname after a colon (:) following an input field number.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=0:key,1:val -nfni i=dat2.csv o=rsl3.csv
+#END# kgcut -nfni f=0:key,1:val i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+key,val
+a,2
+b,5
+b,4
+\end{Verbatim}
+\subsubsection*{Example 4: Specify -x}
+
+For CSV data with a field names, use the \verb|-x| option to specify the field number.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum -x k=0 f=1 i=dat1.csv o=rsl4.csv
+#END# kgsum -x f=1 i=dat1.csv k=0 o=rsl4.csv
+$ more rsl4.csv
+key%0,val
+a,2
+b,9
+\end{Verbatim}

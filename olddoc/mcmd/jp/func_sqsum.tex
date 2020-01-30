@@ -1,0 +1,22 @@
+
+%\begin{document}
+
+\section{sqsum 平方和\label{sect:sqsum}}
+\index{sqsum@sqsum}
+
+書式1: sqsum($num_1,num_2,\cdots$)
+
+書式2: sqsum($num_1,num_2,\cdots,str$)
+
+$num_i$で与えられた数値の平方和を計算する。
+書式1では、NULL値は無視されるが、全てがNULL値であれば結果もNULLとなる。
+
+書式2において最後の引数として"-n"を与えると、
+NULL値に対する扱いが変わり、
+項目値に一つでもNULL値がある場合は、結果もNULL値となる。
+
+\subsection*{利用例}
+\input{examples/tex/func_sqsum_ex}
+
+%\end{document}
+

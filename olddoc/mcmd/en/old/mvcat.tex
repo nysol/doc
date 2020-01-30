@@ -1,0 +1,158 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvcat combine vectors}
+Merge multiple vectors into one vector. 
+
+Examples are shown in Table \ref{tbl:input}〜\ref{tbl:out2}. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items1,items2 \\
+\hline
+1&a c,b \\
+2&a d,a e \\
+3&b f, \\
+4&e,e \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:out1}}
+\verb|mvcat vf=item1,items2 a=catItems i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&catItems \\
+\hline
+1&a c b \\
+2&a d a e \\
+3&b f \\
+4&e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Retain original vectors in the input file with the merged vectors shown in Table \label{tbl:out2}}
+\verb|mvcat vf=item1,items2 -A i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&items1,items2,new \\
+\hline
+1&a c,b,a c b \\
+2&a d,a e,a d a e \\
+3&b f,,b f \\
+4&e,e,e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{Format}
+\verb|mvcat vf= [-A]|
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Merge specified field names of vectors from the input file (i=)【required parameter】\\
+           & Wildcard can be substituted for a character within the field name.\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Example}
+\subsubsection*{Example 1 Merge vectors using a wildcard character}
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2,items3,items4
+b a c,b,x,y
+c c,,x,y
+e a a,a a a,x,y
+
+$ mvcat vf=items* a=items i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items
+b a c b x y
+c c x y
+e a a a a a x y
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Related command}
+%\begin{itemize}
+%\item \href{run:mvjoin.pdf}{mvjoin}:ベクトル要素の参照結合
+%\end{itemize}
+
+\end{document}

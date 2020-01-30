@@ -1,0 +1,31 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+a,b,c,d
+1,,3,4
+1,,,
+,,,
+$ mcal c='countnull(${a},${b},${c},${d})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=countnull(${a},${b},${c},${d}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+a,b,c,d,rsl
+1,,3,4,1
+1,,,,3
+,,,,4
+\end{Verbatim}
+\subsubsection*{例2: 他の項目型として項目名をワイルドカードで指定}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='countnull($s{*})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=countnull($s{*}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+a,b,c,d,rsl
+1,,3,4,1
+1,,,,3
+,,,,4
+\end{Verbatim}

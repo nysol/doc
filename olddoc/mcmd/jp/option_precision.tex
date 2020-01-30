@@ -1,0 +1,25 @@
+
+%\begin{document}
+
+\subsection{precision= 有効桁数\label{sect:option_precision}}
+内部的にはC言語におけるsprintfの書式「\verb|"%.|$n$\verb|g"|」を用いている。
+この書式は、データの桁数と指定した有効桁数によって、標準標記(整数部.小数部: ex. \verb|123.456|)と、
+指数表記(仮数部e$\pm$指数部: ex. \verb|1.23456e+02|)を切り替える。
+切り替えの基準であるが、データを指数表記で表したときに、指数部が指定の有効桁数を超えるか、
+もしくは-5以下の場合(すなわち、小数点以下に0が4つ以上続く場合)に指数表記を採用する。
+
+$n$は1〜16の整数が指定可能で、デフォルトは10である。
+$n<1$の場合は$n=1$にセットされ、$n>16$の場合は$n=16$にセットされる。
+
+また、環境変数\verb|KG_Precision|を設定することでも有効桁数を変更できる。
+ただし、環境変数を変更すると、それ以降に実行するコマンド全てに反映されることに注意する。
+
+\subsection*{利用例}
+\input{examples/tex/option_precision_ex.tex}
+
+\subsubsection*{対応コマンド}
+\hyperref[sect:msum]{msum},
+\hyperref[sect:mcal]{mcal}などの実数値の演算を伴うコマンド全てで利用できる。
+
+%\end{document}
+

@@ -1,0 +1,102 @@
+
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{color}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mdsp Display character strings on screen\label{sect:mdsp}}
+\index{mdsp@mdsp}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command displays the character string specified by the \verb|str=| parameter at the position on the terminal specified by coordinate \verb|x=|,\verb|y=|. Use the \verb|i=| parameter to specify a filename, and its contents will be displayed. When both \verb|str=| and \verb|i=| are specified, \verb|i=| will prevail. If multiple rows are specified for the \verb|i=| parameter, all rows will be displayed from the coordinate specified by \verb|x=|.
+Use the \verb|fc=| parameter to specify the color of the character string. Use the \verb|bg=| parameter to specify the background color of the character string. You can choose from eight colors: black, red, green, yellow, blue, magenta, cyan, and white. By default, \verb|fc=black| and \verb|bg=white| are assumed. Specify the \verb|-bold| option to display the character string in bold letters.
+
+\subsection*{Format}
+\verb/mdsp x= y= str=|i= [fc=] [bg=] [-bold] /
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|x=|   & Specify the display start position (1 or greater) on the x axis (horizontal, left to right).\\
+\verb|y=|   & Specify the display start position (1 or greater) on the y axis (vertical, top to bottom).\\
+\verb|str=| & Character string to be displayed\\
+\verb|i=|   & Filename of the contents to be displayed\\
+\verb|fc=|  & Character color\\
+\verb|bg=|  & Background color\\
+\verb|-bold|& Bold letter\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+
+\subsubsection*{Example 1:  Basic example}
+Character string \verb|abcd| is displayed at \verb|x=10,y=5| on the terminal.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdsp x=10 y=5 str=abcd
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|
+|
+|          abcd
+|
+|
+\end{Verbatim}
+
+\subsubsection*{Example 2: Using a filename to specify what to display}
+The contents of \verb|dat.txt| are displayed at \verb|x=10,y=5| on the terminal.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat.txt
+abcd
+efg
+$ mdsp x=10 y=5 i=dat.txt
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|
+|
+|          abcd
+|          efg
+|
+\end{Verbatim}
+
+\subsubsection*{Example 3: Using colors}
+Character string \verb|abcd| is displayed at \verb|x=10,y=5| on the terminal, with the characters inbeing red and the background inbeing blue.
+
+%\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdsp x=10 y=5 str=abcd fc=red bc=blue
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|
+|
+|          \textColor{blue}{red}{abcd}
+|
+|
+\end{Verbatim}
+
+\subsection*{Related Commands}
+\hyperref[sect:minput] {minput} : Displays the input screen.
+\hyperref[sect:mminput] {mminput} : Displays the input screen consisting of multiple input frames.
+\hyperref[sect:mseldsp] {mseldsp} : Displays a single-choice input window on the screen.
+\hyperref[sect:mmseldsp] {mmseldsp} : Displays a multiple-choice input window on the screen.
+
+%\end{document}
+

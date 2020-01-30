@@ -1,0 +1,54 @@
+
+%\begin{document}
+
+\section{mtonull - Substitute Value for NULL\label{sect:mtonull}}
+\index{mtonull@mtonull}
+Specify the target field parameter at \verb|f=| , substitute the value at the \verb|v=| parameter with NULL in the data. Select the methods for finding patterns using exact string matching (the default) or substring matching (\verb|-sub| option). 
+
+
+\subsection*{Format}
+\verb|mtonull f= v= [-sub] [-W]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|  & specify list of field name(s) (multiple fields can be specified) where the values are replaced .\\
+\verb|v=|  & Specify the character string value (multiple items can be specified) for matching the field defined at \verb|f=| parameter. \\
+           & Replace the matched values with NULL.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-sub|    & Rather than matching the exact string, \\
+		& compare character substring with the values in the field specified in the \verb|f=| parameter \\
+		& and replace the value defined in the \verb|v=| parameter containing the substring with NULL value.\\
+\verb|-W|      & Substring match for wide character strings when the \verb|-sub| option is specified. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mtonull_ex.tex}
+\subsection*{Related Command}
+\hyperref[sect:mnullto]{mnullto} : Reversely, replace NULL value with a character string.
+
+%\end{document}

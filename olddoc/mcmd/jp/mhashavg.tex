@@ -1,0 +1,59 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mhashavg ハッシュ法による項目値の平均\label{sect:mhashavg}}
+\index{mhashavg@mhashavg}
+hash法を使って\verb|k=|パラメータで指定した項目を単位にして、\verb|f=|パラメータで指定した項目値の平均を計算する。
+\hyperref[sect:avg]{mavg}との違いは、キー項目の並べ変えが必要ないため、その分処理速度が速い。
+ただし、キーのサイズ(キー項目のとる値の種類数)が多い場合は処理速度が遅くなる。
+
+\subsection*{書式}
+\verb|mhashavg f= [hs=] [k=] [-n] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定された項目(複数項目指定可)の平均が計算される。\\
+             & :(コロン）で新項目名を指定可能。例）\verb|f=|数量:数量平均\\
+\verb|k=|    & ここで指定された項目をキーとして集計する(複数項目指定可)。\\
+%             & \hyperref[sect:option_k]{集計キーブレイク処理}はしないので、事前に並べ替える必要はない。\\
+\verb|hs=|   & ハッシュサイズ【デフォルト値:199999】 \\
+             & ハッシュサイズを指定する。【デフォルト値:199999】\\
+             & 詳細に関しては\hyperref[sect:mhashsum]{mhashsum}参照 \\
+\verb|-n|    & NULL値が1つでも含まれていると結果もNULL値とする。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mhashavg_ex.tex}
+\subsection*{備考}
+動作速度に関しては、\hyperref[sect:mhashsum]{mhashsum}のページにあるベンチマークの項を参照のこと。
+
+\subsection*{関連コマンド}
+\hyperref[sect:mavg] {mavg} : 同じ機能をもつコマンドだが、内部的にキー項目の並べ替えを行う。
+
+\hyperref[sect:mhashsum]{mhashsum} : 同じくハッシュ法を用いた合計計算。
+
+%\end{document}

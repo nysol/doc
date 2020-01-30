@@ -1,0 +1,30 @@
+\subsubsection*{Example 1: Basic Example}
+
+The result of \verb|mcut| is saved to \verb|rsl1.csv| as specified in \verb|o=| parameter.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,10
+A,2,20
+$ mcut f=customer,amount i=dat1.csv o=rsl1.csv
+#END# kgcut f=customer,amount i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,amount
+A,10
+A,20
+\end{Verbatim}
+\subsubsection*{Example 2: Redirect}
+
+Write to standard input using redirection (\verb|">"|).
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=customer,amount i=dat1.csv >rsl2.csv
+#END# kgcut f=customer,amount i=dat1.csv
+$ more rsl2.csv
+customer,amount
+A,10
+A,20
+\end{Verbatim}

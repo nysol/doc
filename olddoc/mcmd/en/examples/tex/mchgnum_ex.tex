@@ -1,0 +1,87 @@
+\subsubsection*{Example 1: Basic Example}
+
+Encodes the numeric values in \verb|quantity| column to character strings where values of less than but not equal to 10 are treated as \verb|low|, 10 or more but less than 20 are treated as \verb|middle|, values of 20 or more is treated as \verb|high|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity
+A,5
+B,10
+C,15
+D,2
+E,50
+$ mchgnum f=quantity R=MIN,10,20,MAX v=low,middle,high i=dat1.csv o=rsl1.csv
+#END# kgchgnum R=MIN,10,20,MAX f=quantity i=dat1.csv o=rsl1.csv v=low,middle,high
+$ more rsl1.csv
+customer,quantity
+A,low
+B,middle
+C,middle
+D,low
+E,high
+\end{Verbatim}
+\subsubsection*{Example 2: Equal to paramter range}
+
+Replace the numeric values in \verb|quantity| column to character strings where 10 or below is treated as \verb|low|, more than 10 but less than or equal to 20 is treated as \verb|middle|, more than 20 is treated as \verb|high|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=MIN,10,20,MAX v=low,middle,high -r i=dat1.csv o=rsl2.csv
+#END# kgchgnum -r R=MIN,10,20,MAX f=quantity i=dat1.csv o=rsl2.csv v=low,middle,high
+$ more rsl2.csv
+customer,quantity
+A,low
+B,low
+C,middle
+D,low
+E,high
+\end{Verbatim}
+\subsubsection*{Example 3: Replace values out of the list of numeric range}
+
+Replace numeric values in \verb|quantity| column to character strings  where 10 or above and less than 20 is coded as \verb|low|, 20 or above and less than 30 is coded as \verb|middle|, 30 or more is coded as \verb|high|, values that are less than 10 is coded as \verb|OutOfRange|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=10,20,30,MAX v=low,middle,high O="OutOfRange" i=dat1.csv o=rsl3.csv
+#END# kgchgnum O=OutOfRange R=10,20,30,MAX f=quantity i=dat1.csv o=rsl3.csv v=low,middle,high
+$ more rsl3.csv
+customer,quantity
+A,OutOfRange
+B,low
+C,low
+D,OutOfRange
+E,high
+\end{Verbatim}
+\subsubsection*{Example 4: Add a new column}
+
+Replace the numeric values in \verb|quantity| column to character strings where values less than 10  is treated as \verb|low|, 10 or above but less than 20 is treated as \verb|middle|, 20 or above is treated as \verb|high|. Store the output of replacement strings in a new column as \verb|evaluate|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity:evaluate R=MIN,10,20,MAX v=low,middle,high -A i=dat1.csv o=rsl4.csv
+#END# kgchgnum -A R=MIN,10,20,MAX f=quantity:evaluate i=dat1.csv o=rsl4.csv v=low,middle,high
+$ more rsl4.csv
+customer,quantity,evaluate
+A,5,low
+B,10,middle
+C,15,middle
+D,2,low
+E,50,high
+\end{Verbatim}
+\subsubsection*{Example 5: Display original values in column if out of defined range}
+
+Replace the numeric values in \verb|quantity| column to character strings where values of 10 or above but less than 20 is coded as \verb|low|, 20 or above but less than 30 is coded as \verb|middle|, 30 or above is coded as \verb|high|. Retain original values in the output if the value is less than 10.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=10,20,30,MAX v=low,middle,high -F i=dat1.csv o=rsl5.csv
+#END# kgchgnum -F R=10,20,30,MAX f=quantity i=dat1.csv o=rsl5.csv v=low,middle,high
+$ more rsl5.csv
+customer,quantity
+A,5
+B,low
+C,low
+D,2
+E,high
+\end{Verbatim}

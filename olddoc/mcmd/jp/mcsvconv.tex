@@ -1,0 +1,70 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcsvconv CSVを多様なフォーマットに変換\label{sect:mcsvconv}}
+\index{mcsvconv@mcsvconv}
+\underline{注)本コマンドは開発バージョンであり、仕様が変更される可能性があります。}
+
+CSVデータを多様なフォーマットに変換する。
+変換したいデータフォーマットのルールを記述したテキストファイルを用意し、
+ルールキーワードに従って指定したCSVのデータ項目を出力する。
+ルールファイルに記述できる項目名指定や出力タイミング指定は以下のとおりである。
+
+\begin{description}
+ \item[項目名キーワード] 項目名を\verb|%|で括ると、CSV上の対応する項目の値に置き換えられる。ex. \verb|%項目名%|
+ \item[出力タイミングキーワード] CSVデータの出力タイミングを決めるためのキーワードは以下の3種類ある。
+ \item[LINEDATA] \verb|%LINEDATA|〜\verb|%LINEEND|で囲われた項目名キーワード及びその他の文字列は、CSVの各行が読み込まれる度に出力される。
+ \item[KEYHEAD] \verb|%KEYHEAD|〜\verb|%KEYEND|で囲われた項目名キーワード及びその他の文字列は、\verb|k=|で指定されたキー項目がキーブレイクした時にのみ出力される。LINEDATAより前に出力される。
+ \item[KEYFOOT] \verb|%KEYFOOT|〜\verb|%KEYEND|で囲われた項目名キーワード及びその他の文字列は、\verb|k=|で指定されたキー項目がキーブレイクした時にのみ出力される。LINEDATAより後に出力される。
+ \item[キーワド前後] 上述の出力タイミングキーワードで囲われたブロックが出現する前の文字列、および最後のブロック以降の文字列は、CSVの読み込み前、および読み込み後に一度だけ出力される。
+\end{description}
+
+\verb|k=|で複数の項目を指定した場合、KEYHADとKEYFOOTは更に細かなタイミング制御も可能である。
+\verb|%KEYHEAD1|のように、番号を後ろに付けることで、\verb|k=|の何番目の項目がキーブレイクしたかを指定できる。
+例えば、\verb|k=A,B,C|において\verb|%KEYHEAD1|であれば、
+キー項目\verb|A|がキーブレイクしたタイミングで出力され、
+また\verb|%KEYHEAD2|であれば、キー項目\verb|A,B|がキーブレイクしたタイミングで出力される。
+そして\verb|%KEYHEAD3|もしくは単に\verb|%KEYHEAD|であれば、全てのキー項目\verb|A,B,C|がキーブレイクしたタイミングで出力される。
+
+出力タイミング制御キーワードを記載した行は、それ以外の文字を記述することはできない。
+
+\subsection*{書式}
+\verb/mcsvconv [k=] [s=] m= /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & キー項目名リスト。\\
+\verb|s=|    & \verb|k=|で指定した項目の値が同じ行の中での並べ替え順を決める項目名リスト。\\
+\verb|m=|    & ルールファイル名\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mcsvconv_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mcsv2arff]{mcsv2arff} : CSV形式のデータからarff形式(WEKA用のデータフォーマット)のデータへ変換する。\\
+\hyperref[sect:mcsv2json]{mcsv2json} : CSVデータをJavaScriptのオブジェクト表記構文であるJSON形式に変換する。\\
+
+%\end{document}

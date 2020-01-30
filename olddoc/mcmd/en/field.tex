@@ -1,0 +1,63 @@
+
+%\begin{document}
+
+\section{Specify Fields\label{sect:fieldname}}
+MCMD reads the field names in the first row of CSV data; the field can also be specified with a field number without the field names. There are four options for handling the row of field names, which are: -nfn,-nfno,-nfni and -x. Its usage will be illustrated with examples as follows. In addition, note that the field number starts at 0 from the left such as 0, 1, 2.
+
+\input{examples/tex/field_name1_ex.tex}
+
+\subsection{Valid fieldnames}
+Fieldnames can contain the characters stated as follows:
+
+\begin{itemize}
+\item Alphabetic characters (a-z, A-Z)
+\item Numerals (0-9)
+\item Multibyte characters (such as UTF-8)
+\item Symbols
+\end{itemize}
+
+However, it is recommended to avoid using the following symbols. Using the symbols will not return an error; however, the symbols may be used as special characters in MCMD and the special character function may not be available if it is used as a field name.
+
+\begin{itemize}
+\item \verb|,| Comma
+\item \verb|:| Colon
+\item \verb|%| Percent
+\item \verb|*| Asterisk
+\item \verb|?| Question mark
+\item \verb|&| And
+\item \verb|\| Backslash
+\item \verb|]| Square brackets, right
+\item \verb|[| Square brackets, left
+\end{itemize}
+
+\subsection{Valid item number}
+When specifying field number, the field numbers can be listed with a comma delimiter. Alternatively, it is also possible to specify the number at the end of the field name (add \verb|"L"|) or specify the range (\verb|-|).
+
+For example, the argument \verb|0L| specifies the last field, and \verb|2L| specifies the 2nd field from the end (note that field number starts from 0). Furthermore, when \verb|0-5| is specified, six fields starting from 0 to 5 are selected, which is equivalent to \verb|0,1,2,3,4,5|.
+
+\input{examples/tex/field_number_ex.tex}
+
+\subsection{Input and output fields}
+The \verb|f=| parameter is used to specify the field(s) in many commands. The format of \verb|f=| is defined as “ input field:output field”. If an output fieldname is not specified, the input fieldname will be used as the output fieldname. In addition, you can specify the \verb|-x| option to combine a fieldname with a number, like \verb|f=0:Quantity|.
+
+\input{examples/tex/field_io_ex.tex}
+
+\subsection{Wildcard}
+The wildcard characters  \verb|"*"| and  \verb|"?"|  can be used to specify multiple field names.
+The asterisk sign \verb|"*"| matches 0 or more characters, and the question mark \verb|"?"| matches a single character.
+Note that the order of evaluation of wildcard characters follows the order of the fields in the input data.
+For example, if the order of the fields in input data is \verb|A5,A3,A4,A2,A1|, the parameter \verb|f=A*| is evaluated as \verb|f=A5,A3,A4,A2,A1|.
+
+\input{examples/tex/field_wc_ex.tex}
+
+\subsection{Replace the name of an output field}
+The special character \verb|"&"| specified in the output field name can be replaced with the current field name.
+For example, the parameter \verb|f=abc:xx&xx| returns \verb|xxabcxx| as the output field name.
+The \verb|"&"| character can be specified at any position as many times as required in the output field name.
+However, the ampersand is a special character in shell which is interpreted as "background execution". Thus, it is necessary to escape and enclose the field name in double quotes when including \verb|"&"| in field name.
+
+\input{examples/tex/field_rep_ex.tex}
+
+\subsection{Notes on summation commands}
+A summation command sums records in specified fields for each key field. When one row is output per key field, records to be output are indefinite for non-specified fields. Take the msum command, for example, where there are four fields: customer, date, product, and amount. To sum the amounts for each customer, you would specify \verb|msum k=customer f=amount|. Regarding the records in the date and product fields, the output is indefinite.
+%\end{document}

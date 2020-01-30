@@ -1,0 +1,44 @@
+\subsubsection*{Example 1: Basic Example}
+
+Join the field \verb|cost| from the reference file for records where the values of the \verb|item| column from the input file is the same as the values in \verb|item| column in the reference file.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,price
+A,20081201,100
+A,20081213,98
+B,20081002,400
+B,20081209,450
+C,20081201,100
+$ more ref1.csv
+item,cost
+A,50
+B,300
+E,200
+$ mjoin k=item f=cost m=ref1.csv i=dat1.csv o=rsl1.csv
+#END# kgjoin f=cost i=dat1.csv k=item m=ref1.csv o=rsl1.csv
+$ more rsl1.csv
+item%0,date,price,cost
+A,20081201,100,50
+A,20081213,98,50
+B,20081002,400,300
+B,20081209,450,300
+\end{Verbatim}
+\subsubsection*{Example 2: Output unmatched data}
+
+Join the \verb|cost| field for records with common key values in the \verb|item| field from the input file and reference file, join \verb|cost| item. At the same time, join all keys from the reference file if the value in the reference file is not in input data range, and set as NULL values.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mjoin k=item f=cost m=ref1.csv -n -N i=dat1.csv o=rsl2.csv
+#END# kgjoin -N -n f=cost i=dat1.csv k=item m=ref1.csv o=rsl2.csv
+$ more rsl2.csv
+item%0,date,price,cost
+A,20081201,100,50
+A,20081213,98,50
+B,20081002,400,300
+B,20081209,450,300
+C,20081201,100,
+E,,,200
+\end{Verbatim}

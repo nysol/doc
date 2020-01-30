@@ -1,0 +1,77 @@
+%\documentclass[a4paper]{book}
+%\usepackage{zdd}
+%\begin{document}
+
+\section{Summary\label{sect:abstract}}
+ZDD (Zero-suppressed Binary Decision Diagrams) is a data structure used for efficient manipulation of weighted item combinations based on reduction rules. ZDD VSOP (Valued-Sum-of-Products calculator)\cite{minato2005} is implemented as a Ruby Extension Library for the computation of item combinations. 
+
+The founder of ZDD, Professor Shin-ichi Minato, developed a ZDD program which is made available for extended development in Ruby language. The Ruby Extension Library for ZDD is therefore developed in collaboration with \href{http://www-erato.ist.hokudai.ac.jp/index.php?language=jp}{ERATO Minato Discrete Structure Manipulation System Project}.
+
+ZDD can enumerate huge number of combinations represented in a compact structure. For example, to enumerate all possible combinations of the products (frequent itemsets) purchased from the supermarket in the purchase history at a defined minimum support, in most cases, the number of combinations generated will grow exponentially. The ZDD data structure therefore is designed to provide a powerful framework to store all possible combinations in an unique and compact form efficiently.
+
+Various calculations can be applied directly on ZDD objects where large scale itemsets are stored in a compact form for efficient processing.  
+For example, users will be able to select the patterns containing "natto" from millions of enumerated frequent itemsets, or identify the differences of frequent itemset patterns between male and female. It is also possible to compute the ratio of size of ZDD. For details on theoretical context, please refer to \hyperref[sect:bib]{the reference} at the end of this document.
+
+In this package, ZDD is handled as (known as {\bf ZDD object}) Ruby object.  Various functions for the ZDD objects correspond to class methods, operator overloading is used for ZDD objects using operands for ZDD object (\verb|+,-,==| etc.), to enable seamlessly integration of functions between Ruby and ZDD.
+
+The ZDD package also supports automatic type conversion designed to reduce stress on   programming.
+
+\section{Installation\label{sect:install}}
+ZDD package is distributed as part of the mining package distribution by Nysol. Installation can be done by compiling from source or by installing rubygem.  Refer to mining package manual at \href{http://www.nysol.jp}{NYSOL} for details on the installation.
+
+\section{Modify the maximum number of nodes}
+The maximum number of ZDD nodes in this package is set to 40 million by default.
+The program terminates with an error if the number of nodes exceeds this value.
+The maximum number of nodes can be modified by setting the environment variable at \verb|ZDDLimitNode|.
+For example, the maximum number of nodes can be set to 100 million nodes in the  bash shell as follows.
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export ZDDLimitNode=100000000
+\end{Verbatim}
+
+The memory consumption per node is about 21-25 bytes on a 32bit OS machine. The program will consume about 1GB of main memory when the default limit of 40 million nodes is used. 
+
+On a 64bit OS machine, the memory allocation is twice of the normal 32bit OS implementation, with 30\%percent increase in speed, and each node takes up to 28 to 32 bytes. Approximately 1.3GB of main memory is consumed when the program runs up to the default limit of 40 million nodes. By changing the maximum number of nodes according to the processing environment, the scale of ZDD structure can be increased.
+
+\section{Terminologies\label{sect:terminology}}
+The following section explains the terminologies used in this manual.
+Note that there may be differences of the terms used in the \hyperref[sect:bib]{reference} at the end of this manual.
+
+\subsubsection*{Item, Itemset, Term, Valued sum of products set, Expression}
+
+An element in a set is referred to as "{\bf item}", and an "{\bf itemset}" contains a group of item elements.
+
+The concept is easier to understand when these terms are set into context in a supermarket scenario. Commodity products are considered as items, and the combination of the products are referred to as itemset. When weight is attached to a "{\bf term}" in the itemset, it is known as "{\bf valued sum of products set}".
+For example, the valued sum of products for 3 items a,b,c is represented as "\verb|abc+3ab+4bc+7c|" (this notation is referred to as "valued sum of products format"). It consists of four terms \verb|abc,3ab,4bc,7c|. In this case, \verb|3ab| consists of weight of \verb|3| for itemset \{a,b\}. Back to the supermarket scenario, this means that one customer purchased 3 products \verb|a,b,c| at the same time, and there are three customers who bought \verb|a,b| at the same time.
+
+\subsubsection*{Empty itemset, ZDD constant object}
+The itemset without element is referred to as "{\bf empty itemset}". Considering the valued sum of products set "\verb|abc+3ab+4bc+7c+3|", the a weight of \verb|3|  is attached to an empty itemset and thus it is shown as 3.
+
+In supermarket scenario, it means that there are three customers did not purchase anything. 
+Thus, empty itemsets of ZDD object is referred to as {\bf ZDD constant object}.
+
+\subsubsection*{Item order table}
+ZDD is a binary decision tree that contains a compact decision tree graph, and the level of the decision tree (depth) corresponds to the item. Further, this level, the order from  root to the leaves is managed by the table known as "{\bf item order table}".
+
+It is important to manage item order since the order significantly impacts the size of ZDD (number of nodes). When the size of the ZDD increases, the processing speed will be reduced accordingly.
+The item order table can be registered at any time using the \hyperref[sect:symbol]{symbol} function. If the number of combinations is extremely large, it is necessary to use the order table to register order of items.
+
+\section{Notation\label{sect:notation}}
+
+\subsubsection*{Notation of itemset}
+The execution results in Ruby present the itemset which contains items and weight separated by space. Itemsets are displayed as character strings within text or comments, spaces between items are removed for simplicity.  For example, itemset \{a,b,c\} with weight of 3 is displayed as "\verb|3 a b c|" in the results. However, it will be displayed as "\verb|3abc|" in text or comment.
+
+\subsubsection*{Example}
+
+Multiple examples are included in this manual. The meaning of symbols used in the examples are as follows.\begin{itemize}
+\item \verb|>| : Display Ruby input method.
+\item \verb|$| : Display shell command line input.
+\item \verb|#| : Display comments.
+\item No symbol : Display the execution results.
+\end{itemize}
+
+The example contains the execution results log from the basic Ruby command line tool \verb|irb|. 
+
+
+%\end{document}
+
+

@@ -1,0 +1,68 @@
+\subsubsection*{Example 1: Basic Example}
+
+Change column name from “customer” to “cust”, and “october” to “oct”.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,itemID,october
+a,xx,11
+b,yy,122
+c,zz,
+$ mfldname f=customer:cust,october:oct. i=dat1.csv o=rsl1.csv
+#END# kgfldname f=customer:cust,october:oct. i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+cust,itemID,oct.
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}
+\subsubsection*{Example 2: Rename column}
+
+Change field names to \verb|x,y,z|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mfldname n=x,y,z i=dat1.csv o=rsl2.csv
+#END# kgfldname i=dat1.csv n=x,y,z o=rsl2.csv
+$ more rsl2.csv
+x,y,z
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}
+\subsubsection*{Example 3: Data without field names}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+a,xx,11
+b,yy,122
+c,zz,
+$ mfldname -nfni n=x,y,z i=dat2.csv o=rsl3.csv
+#END# kgfldname -nfni i=dat2.csv n=x,y,z o=rsl3.csv
+$ more rsl3.csv
+x,y,z
+a,xx,11
+b,yy,122
+c,zz,
+\end{Verbatim}
+\subsubsection*{Example 4: Remove sort order symbols in field names}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+customer%r,itemID,october
+c,zz,
+b,yy,122
+a,xx,11
+$ mfldname -q  i=dat3.csv o=rsl4.csv
+#END# kgfldname -q i=dat3.csv o=rsl4.csv
+$ more rsl4.csv
+customer,itemID,october
+c,zz,
+b,yy,122
+a,xx,11
+\end{Verbatim}

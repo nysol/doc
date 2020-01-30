@@ -1,0 +1,50 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mshuffle Partition records\label{sect:mshuffle}}
+\index{mshuffle@mshuffle}
+This command partitions the input file into multiple files. The number of files is determined by the hash value of the field specified by the \verb|f=| parameter. With the number of divisions (hash size) being $n$, the hash value of the field value $v$ specified by \verb|f=| is calculated as the remainder of $n$ ($v$\ mod\ $n$). The field value is calculated as the total value of the character codes in bytes, with the data considered as character strings. When \verb|f=| is not specified, the row number is used as the field value. Then, each row is output to the file whose name contains the obtained hash value. This scheme ensures that the rows containing the same field data are output to the same file. 
+You can assign multiple hash values to the partitioned files by using the \verb|v=| parameter to specify a weight. For instance, specify \verb|n=3,v=2,1,3|. The hash size will be $6$, which is the total of the weights ($2+1+3=6$). Two hash values (0 and 1) will be output to partitioned file 0, one hash value (2) to partitioned file 1, and three hash values (3, 4, and 5) to partitioned file 2. Note that the weight refers to the number of hash value allocations, not to the number of output rows.
+
+\subsection*{Format}
+\verb/mshuffle n=|v= d= [f=]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_tmpPath]{[tmpPath=]} 
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|d=|      & Specify the prefix to the output filename.\\
+               & The actual output filename will be the value specified here + a serial number (hash value).\\
+\verb|f=|      & Specify the key used as the unit of partitioning.\\
+               & Those that have the same values in the field specified here are output to the same file.\\
+\verb|n=|      & Specify the number of partitioned files.\\
+\verb|v=|      & Specify the weight of the data amount for each of the partitioned files.\\
+\end{tabular} 
+}
+\end{table} 
+
+%\subsection*{備考}
+%\begin{itemize}
+%\item 重みを指定しなかった場合すべて同じ重みとなる。f=に指定した項目値によっては指定した重み通りの結果にならない場合がある
+%\end{itemize}
+
+\subsection*{Examples}
+\input{examples/tex/mshuffle_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:msep]{msep}: Partitions records according to field values.
+
+%\end{document}
+

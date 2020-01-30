@@ -1,0 +1,26 @@
+
+\section{export : ZDDのシリアライズ出力\label{sect:export}}
+\subsection*{書式}
+$obj$.export($fileName$)
+
+~~$fileName$ : string
+
+\subsection*{説明}
+$obj$のZDD内部構造をテキストでシリアライズ出力する。
+$fileName$を指定すれば、そのファイルに出力する。
+省略すれば標準出力に出力する。
+
+symbol関数によって宣言された内容、およびアイテム順序はシリアライズされないので、
+import関数によってZDDオブジェクトを復元するとき、
+アイテムの宣言を再度同じように実行する必要があることに注意する。
+具体例は\hyperref[sect:import]{import}関数の例を参照のこと。
+
+\subsection*{例}
+\input{examples/tex/export_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:import]{import} : ZDDのシリアライズ入力
+
+\hyperref[sect:csvout]{csvout} : CSVファイル出力
+
+\hyperref[sect:hashout]{hashout} : Hash変換

@@ -1,0 +1,14 @@
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{Working with Data Without Field Names\label{sect:nulldata}}
+
+If fields names are included in CSV input data, the set of field names are usually included in the output corresponding to the context of data processing. 
+
+On the other hand, if the CSV input data do not include field names, and data is 0 byte file, the result will also return 0 byte file. Both the number of input and output records are 0.
+
+\input{examples/tex/nulldata_ex.tex}
+
+%\end{document}
+

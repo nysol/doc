@@ -1,0 +1,54 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mdelnull NULL値行の削除\label{sect:mdelnull}}
+\index{mdelnull@mdelnull}
+\verb|f=|パラメータで指定した項目について、NULL値が含まれる行を削除(撰択)する。\\
+
+\subsection*{書式}
+\verb|mdelnull f= [k=] [u=] [-F] [-r] [-R]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & NULL値の検索対象となる項目名（複数項目指定可）を指定する。 \\
+\verb|k=|    & 削除(撰択)する単位となるキー項目名（複数項目指定可）を指定する。\\
+\verb|u=|    & 不一致データ出力ファイル名を指定する。\\
+\verb|bufcount=| & バッファのサイズ数を指定する。 \\
+\verb|-F|    & 項目間AND条件\\
+             & \verb|f=|パラメータで複数項目を指定した場合、その全ての値がNULL値の行を削除(撰択)する。\\
+\verb|-r|    & 条件反転\\
+             & 削除ではなく選択する。\\
+\verb|-R|    & レコード間AND条件\\
+             & \verb|k=|パラメータを指定した場合、その全ての行がNULL値の行を削除(撰択)する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mdelnull_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mnullto]{mnullto} : NULL値を含む行を削除するのではなく、NULL値を指定の文字列に変換する。
+
+%\end{document}

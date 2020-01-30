@@ -1,0 +1,62 @@
+\subsubsection*{例1: nullを削除する基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items
+b a  c
+ c c
+e a   b 
+$ mvdelnull vf=items i=dat1.csv o=rsl1.csv
+#END# kgvdelnull i=dat1.csv o=rsl1.csv vf=items
+$ more rsl1.csv
+items
+b a c
+c c
+e a b
+\end{Verbatim}
+\subsubsection*{例2: 分かりやすく区切り文字を.(ドット)にした例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+items
+b.a..c
+.c.c
+e.a...b.
+$ mvdelnull vf=items delim=. i=dat2.csv o=rsl2.csv
+#END# kgvdelnull delim=. i=dat2.csv o=rsl2.csv vf=items
+$ more rsl2.csv
+items
+b.a.c
+c.c
+e.a.b
+\end{Verbatim}
+\subsubsection*{例3: 項目名を変更して出力}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelnull vf=items:new i=dat1.csv o=rsl3.csv
+#END# kgvdelnull i=dat1.csv o=rsl3.csv vf=items:new
+$ more rsl3.csv
+new
+b a c
+c c
+e a b
+\end{Verbatim}
+\subsubsection*{例4: -Aを指定することで追加項目として出力}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelnull vf=items:new -A i=dat1.csv o=rsl4.csv
+#END# kgvdelnull -A i=dat1.csv o=rsl4.csv vf=items:new
+$ more rsl4.csv
+items,new
+b a  c,b a c
+ c c,c c
+e a   b ,e a b
+\end{Verbatim}

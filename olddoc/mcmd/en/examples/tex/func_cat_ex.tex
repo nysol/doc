@@ -1,0 +1,50 @@
+\subsubsection*{Example 1: Basic Example}
+
+Concatenate 3 columns \verb|str1,str2,str3| with the inclusion of \verb|"#"| as delimiter token in between characters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str1,str2,str3
+1,abc,def,ghi
+2,A,,CDE
+3,,,
+4,,,XY
+$ mcal c='cat("#",$s{str1},$s{str2},$s{str3})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=cat("#",$s{str1},$s{str2},$s{str3}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abc#def#ghi
+2,A,,CDE,A##CDE
+3,,,,##
+4,,,XY,##XY
+\end{Verbatim}
+\subsubsection*{Example 2: Empty token}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='cat("",$s{str1},$s{str2},$s{str3})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=cat("",$s{str1},$s{str2},$s{str3}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abcdefghi
+2,A,,CDE,ACDE
+3,,,,
+4,,,XY,XY
+\end{Verbatim}
+\subsubsection*{Example 3: Example using wildcard}
+
+Use wildcard to specify columns names that start with \verb|str| (\verb|str1,str2,str3|) such as \verb|str*|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='cat("",$s{str*})' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=cat("",$s{str*}) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,str1,str2,str3,rsl
+1,abc,def,ghi,abcdefghi
+2,A,,CDE,ACDE
+3,,,,
+4,,,XY,XY
+\end{Verbatim}

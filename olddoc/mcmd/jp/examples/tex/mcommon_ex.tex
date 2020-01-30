@@ -1,0 +1,88 @@
+\subsubsection*{例1: 基本例}
+
+入力ファイルにある「顧客」項目と、参照ファイルにある「顧客」項目が同じ値を持つ入力ファイルの行を選択する。
+それ以外のデータは\verb|oth.csv|に出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量
+A,1
+B,2
+C,1
+D,3
+E,1
+$ more ref1.csv
+顧客,性別
+A,女性
+B,男性
+E,女性
+$ mcommon k=顧客 m=ref1.csv u=oth.csv i=dat1.csv o=rsl1.csv
+#END# kgcommon i=dat1.csv k=顧客 m=ref1.csv o=rsl1.csv u=oth.csv
+$ more rsl1.csv
+顧客%0,数量
+A,1
+B,2
+E,1
+$ more oth.csv
+顧客%0,数量
+C,1
+D,3
+\end{Verbatim}
+\subsubsection*{例2: 同じ値を持たない入力ファイルの行選択}
+
+\verb|-r|オプションを付けることで、条件が逆転し、参照ファイルにない「顧客」を選択することになる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcommon k=顧客 m=ref1.csv -r i=dat1.csv o=rsl2.csv
+#END# kgcommon -r i=dat1.csv k=顧客 m=ref1.csv o=rsl2.csv
+$ more rsl2.csv
+顧客%0,数量
+C,1
+D,3
+\end{Verbatim}
+\subsubsection*{例3: 結合キー項目名が異なる場合}
+
+結合キーの項目名が異なる場合は、\verb|K=|で指定する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more ref2.csv
+顧客ID,性別
+A,女性
+B,男性
+E,女性
+$ mcommon k=顧客 K=顧客ID i=dat1.csv m=ref2.csv o=rsl3.csv
+#END# kgcommon K=顧客ID i=dat1.csv k=顧客 m=ref2.csv o=rsl3.csv
+$ more rsl3.csv
+顧客%0,数量
+A,1
+B,2
+E,1
+\end{Verbatim}
+\subsubsection*{例4: キー項目に重複行がある場合の例}
+
+参照ファイルと入力ファイルのキー項目に重複行があっても選択可能。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+顧客,数量
+A,1
+A,2
+A,3
+B,1
+D,1
+D,2
+$ more ref3.csv
+顧客
+A
+A
+D
+$ mcommon k=顧客 m=ref3.csv -r i=dat3.csv o=rsl4.csv
+#END# kgcommon -r i=dat3.csv k=顧客 m=ref3.csv o=rsl4.csv
+$ more rsl4.csv
+顧客%0,数量
+B,1
+\end{Verbatim}

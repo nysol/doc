@@ -1,0 +1,139 @@
+
+%\usepackage{comment}
+%\begin{document}
+
+\section{mvsort - Sort Vectors\label{sect:mvsort}}
+\index{mvsort@mvsort}
+This command sort series of vectors in column. 
+The vector in the fields shown in Table \ref{tbl:mvsort_input} shows multiple character strings separated by space delimiter. 
+Table \ref{tbl:mvsort_input} - \ref{tbl:mvsort_out3} highlight examples sorting vectors. 
+
+%\begin{comment}
+In Table \ref{tbl:mvsort_out1}, character strings are arranged in ascending order by default. The character strings can be sorted in numerical ascending order by attaching \verb|%|  after the item name followed by \verb|n| (see Table \ref{tbl:mvsort_out2}), and in reverse order by specifying \verb|r| after an item name (Table \ref{tbl:mvsort_out3}).  
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lrrr}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvsort_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&2 1 13 \\
+2&4 5 2 5 \\
+3&112 14 \\
+4&5 31 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Basic usage: Sort vector elements in character string ascending order \label{tbl:mvsort_out1}}
+\verb|vf=items| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 13 2 \\
+2&2 4 5 5 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Sort numerical in ascending order \label{tbl:mvsort_out2}}
+\verb|vf=items%n| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 2 13 \\
+2&2 4 5 5 \\
+3&14 112 \\
+4&5 31 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Sort in numerical  descending order \label{tbl:mvsort_out3}}
+\verb|vf=items%nr| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&13 2 \\
+2&5 5 4 2 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+%\end{comment}
+
+\subsection*{Format}
+\verb|mvsort vf= [-A] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=|   &  Specify the field name(s) of vectors for sorting. Multiple fields can be specified.\\
+             & Add \verb|n| after \verb|%| after field name to sort in ascending numerical order. \\
+             & Add \verb|r| after \verb|%| after field name to sort in reverse order. \\
+             & Add both \verb|n| and \verb|r| to sort in descending numerical order. \\
+\end{tabular}
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mvsort_ex.tex}
+
+\subsection*{Related Command}
+%\begin{itemize}
+%\item \href{run:mvselstr.pdf}{mvselstr} : select a vector element 
+%\end{itemize}
+
+%\end{document}

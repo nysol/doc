@@ -1,0 +1,46 @@
+\subsubsection*{例1: 基本例}
+
+\verb|str|項目に空白類文字列が含まれていれば真を返す。
+\verb|id=1|の行は半角スペース文字が含まれ、
+\verb|id=2|の行はtab文字が含まれ、
+そして\verb|id=4|の行は改行文字が含まれているために真となっている。
+ここで、\verb|id=3|の行は全角スペースのため、検知できていない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,a b
+2,ab	c
+3,ab　c
+4,
+5,"aa
+bb"
+$ mcal c='hasspace($s{str})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=hasspace($s{str}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,a b,1
+2,ab	c,1
+3,ab　c,0
+4,,0
+5,"aa
+bb",1
+\end{Verbatim}
+\subsubsection*{例2: マルチバイト文字}
+
+hasspacew関数を使えば全角スペースも正しく検知できる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='hasspacew($s{str})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=hasspacew($s{str}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,a b,1
+2,ab	c,1
+3,ab　c,1
+4,,0
+5,"aa
+bb",1
+\end{Verbatim}

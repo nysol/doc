@@ -1,0 +1,131 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 14: Join data}
+
+Data often comes from multiple sources, thus, the join operation is a common data pre-processing task. The \verb|mjoin| command joins datasets based on common key values. If datasets are joined with a common key, the records should be sorted according to the common key to ensure rows with same key values are matched and new columns are merged in the same order.  This lesson will cover M-Command's function to join records. 
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|mjoin.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Report:  Find out the total quantity and total amount for each 4-digit classification code and include the description of each classification code from the 4-digit classification code master file.    \\ 
+
+Methodology: Extract \verb|CategoryCode4,quantity,amount| by \verb|mcut|, calculate the total quantity and total amount for each 4-digit category code by \verb|msum|. Then, join the category code description from the master file to the output using the 4-digit classification code as join key. Write the results to the file \verb|mjoinout.csv|.\\
+
+This lesson will use the dataset \verb|dat.csv, jicsf2.csv, jicsf4.csv, jicsf6.csv| generated from the \verb|mdata| command in lesson 1. 
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters for \verb|mjoin| as follows: \\
+
+Key: 			\verb|k=CategoryCode4| \\
+Description: 	 The 4-digit classification code is the common field between both files. The CategoryCode4 in dat.csv refers to the 4-digit category code in the 4-digit category master file (jicfs4.csv). Common relationship between the two datasets is CategoryCode4. \\
+
+Field: 		\verb|f=Category4| \\ 
+Description: 	This parameter defines the column(s) in the master file to be joined to the primary dataset. \\
+
+Master file: 	\verb|m=${inPath}/jicfs4.csv | \\ 
+Description:	This parameter defines the name of the master file from which the selected columns will be joined to the current data. 
+
+The format of the data in the master file is as follows:  \\ 
+
+\begin{verbatim}
+CategoryCode4,Category4
+1101,Seasoning
+1102,Edible_Oil
+1103,Spreads
+1104,Dairy_Product
+1105,Condiements
+1106,Soup
+1107,Frozen_Food
+1108,Canned_Goods
+1110,Powder
+1111,Homemaking_Material
+1112,Noodles
+1113,Bread
+...
+..
+\end{verbatim}
+}
+
+The script will look like the following: \\
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 14: Join 
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=CategoryCode4,quantity,amount                i=${inPath}/dat.csv | 
+msortf f=CategoryCode4                                              |
+msum k=CategoryCode4 f=quantity:totalQuantity,amount:totalAmount    |
+mjoin k=CategoryCode4 f=Category4 m=${inPath}/jicfs4.csv         o=outdat/mjoinout.csv
+#==========================================
+\end{verbatim}
+
+ \subsection{Step 3: Run the shell script}
+ 
+Save and run the script. The run-time message is as follows: \\
+
+\begin{verbatim}
+$ ./mjoin.sh
+#END# kgcut f=CategoryCode4,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 
+2013/08/21 16:04:13
+#END# kgsortf f=CategoryCode4; IN=24737 OUT=24737; 2013/08/21 16:04:13
+#END# kgsum f=quantity:totalQuantity,amount:totalAmount k=Category4; IN=24737 OUT=35; 2013/08/21 
+16:04:13
+#END# kgjoin f=Category4 k=CategoryCode4 m=tutorial_en/jicfs4.csv o=outdat/mjoinout.csv; IN=35 OUT=35; 2013/08/21 16:04:13
+
+The result is shown below: 
+CategoryCode4,totalQuantity,totalAmount,Category4
+1101,3758,1526511,Seasoning
+1102,1698,732146,Edible_Oil
+1103,1160,500887,Spreads
+1104,2019,1024216,Dairy_Product
+1105,2847,1611468,Condiements
+1106,1100,484361,Soup
+1107,1946,911273,Frozen_Food
+1108,1157,410367,Canned_Goods
+1110,1478,577858,Powder
+1111,1768,744427,Homemaking_Material
+1112,1450,732630,Noodles
+1113,1150,445836,Bread
+...
+..
+\end{verbatim}
+
+
+\subsection{Exercise }
+
+Let's practice the \verb|mjoin| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Calculate the total quantity and total amount for each 2-digit category code, \\add the category code name to the output.  & \href{exercise/mjoin1.sh}{mjoin1.sh} & \href{exercise/outdat/mjoinout1.csv}{mjoinout1.csv} \\
+2. Calculate the total quantity and total amount for each 6-digit category code, \\ add the category code name to the output.  & \href{exercise/mjoin2.sh}{mjoin2.sh} & \href{exercise/outdat/mjoinout2.csv}{mjoinout2.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

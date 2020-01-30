@@ -1,0 +1,164 @@
+
+%\begin{document}
+
+%\newcommand{\ctab2}{\fcolorbox{red}{yellow}{TABを2回}}
+
+\section{bash completion\label{sect:whatis}}
+コマンドラインでのコマンド入力を支援するツールである
+\href{https://github.com/scop/bash-completion}{bash-completion}
+のMCMD用設定ファイルをインストールすることにより、
+以下に示す入力補完機能が利用できるようになり、
+コマンドライン上でのMCMDの利用が格段に便利になる。
+\begin{itemize}
+\item コマンド別に指定可能なパラメータ一覧と補完入力
+\item 入出力ファイル名の補完
+\item 入力CSVデータ上の項目名補完
+\item 選択肢パラメータの値補完
+\end{itemize}
+
+\subsection{インストール\label{sect:bash_comp_install}}
+bash-completionがインストールされているかどうかは、
+以下に示すように\verb|complete|コマンドが利用できるかどうかで確認できる。
+もしインストールされていないようであれば、
+\href{https://github.com/scop/bash-completion}{開発のページ}
+を参照してインストールする。
+もしくはネット上から、OS別により簡易なインストール方法の情報も得られるであろう。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ complete --help
+-bash: complete: --: invalid option
+complete: usage: complete [-abcdefgjksuv] [-pr] [-o option] [-A action]
+[-G globpat] [-W wordlist] [-P prefix] [-S suffix] [-X filterpat] [-F function]
+[-C command] [name ...]
+\end{Verbatim}
+
+MCMD用設定ファイルは、MCMDソースツリー\verb|mcmd/unitilies|の直下にある
+\verb|bash_completion_mcmd.sh|ファイルを、\verb|home|ディレクトリ直下に名前を変えてコピーする。
+
+%\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cp mcmd/unitilies/bash_completion_mcmd.sh ~/.bash_completion_mcmd.sh
+\end{Verbatim}
+%\caption{bash completionのMCMD用設定ファイルのインストール\label{fig:bash_comp_install}}
+%\end{figure}
+そして、以下に示す用に、そのスクリプトの実行指示を\verb|~/.bash_profile|に追加しておけば、
+ログインする度に自動的に設定が読み込まれるようになる。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+. ~/.bash_completion_mcmd.sh
+\end{Verbatim}
+
+\subsection{パラメータ補完\label{sect:bash_comp_param}}
+コマンド名を入力した後に\verb|TAB|キーを2回押すと、そのコマンドで設定可能な
+パラメータ一覧が表示される。
+以下では\verb|msum|コマンドを入力した後にTABキーを二度押した時の状態が示されている。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum [TABキーを2回押す]
+-assert_diffSize  -assert_nullkey   -n      -nfno     -q      f=      k=      precision=
+-assert_nullin    -assert_nullout   -nfn    -params   -x      i=      o=      tmpPath=
+\end{Verbatim}
+
+上記の状態で、\verb|p|を入力し\verb|TAB|キーを押すと、
+\verb|p|から始まるパラメータは\verb|precision=|しかないので、そのキーワード文字列が補完される。
+なお、補完後はキーワードの後ろにスペース挿入されるので、
+続けて値を入力したければ一文字戻って入力する必要があることに注意する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum p[TABキーを押す]
+# 以下の通り補完される。
+$ msum precision= 
+\end{Verbatim}
+
+同様に、\verb|-a|を入力後にTABキーを押しても、-aから始まるパラメータは一意に決まらないため、
+一意に決まる部分である\verb|-assert_|までが補完され、
+再度TABキーを押すと、\verb|-assert_|始まる4つのパラメータが画面に表示される。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum -a[TABキーを押す]
+-assert_diffSize  -assert_nullin    -assert_nullkey   -assert_nullout   
+\end{Verbatim}
+
+\subsection{入出力ファイル名の補完\label{sect:bash_comp_file}}
+MCMDでは、ファイル名もしくはディレクトリ名を指定するパラメータとして\verb|i=,m=,o=|などがあるが、
+それらのパラメータを入力した後にTABキーを押すと、ファイル名の補完が可能となる。
+何も入力せず\verb|=|に続けてTABキーを押すとカレントディレクトリの直下にあるファイル一覧が表示される。
+何らかの文字列を入力後にTABキーを押すと、その文字列から始まるファイル名が補完され、
+一意に決まらなければマッチする複数のファイル名が表示される。
+保管可能なファイル名は1つのみであるが、例外的に\verb|mcat|コマンドは、
+カンマに続けてファイル名を複数補完入力することが可能である。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum i=[TABキーを2回押す]
+test1.csv   test2.csv ...
+
+$ mcat i=test1.csv,[TABキーを2回押す]
+test1.csv   test2.csv ...
+\end{Verbatim}
+
+\subsection{項目名の補完\label{sect:bash_comp_field}}
+MCMDでは項目名を指定するパラメータが多いが、入力ファイルが入力済みであれば、
+そのファイル上の項目名を補完入力することが可能となる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat test1.csv 
+codeA,codeB,date,value1,value2
+A,aaa,20170101,3,120
+A,bbb,20170102,6,100
+
+$ msum i=test1.csv k=[TABキーを2回押す]
+codeA   codeB   date    value1  value2  
+~ $ msum i=test1.csv k=c[TABキーを押す]
+# 以下の通り補完される。
+~ $ msum i=test1.csv k=code[TABキーを押す]
+codeA  codeB
+~ $ msum i=test1.csv k=codeA f=value[TABキーを2回押す]
+value1  value2
+~ $ msum i=test1.csv k=codeA f=value*
+codeA%0,codeB,date,value1,value2
+A,bbb,20170102,9,220
+#END# kgsum f=value* i=test1.csv k=codeA; IN=2 OUT=1; 2017/04/28 13:09:13
+\end{Verbatim}
+
+\verb|mjoin|のように入力ファイルの指定が2つある場合、
+項目指定のキーワード毎にどちらのファイルを利用するかが決まっているため、
+キーワードに対応するファイル上の項目名が補完される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat test1.csv 
+codeA,codeB,date,value1,value2
+A,aaa,20170101,3,120
+A,bbb,20170102,6,100
+
+$ cat test2.csv
+code,name
+A,aaa
+B,bbb
+
+$ mjoin i=test1.csv m=test2.csv k=[TABキーを2回押す]
+codeA   codeB   date    value1  value2
+$ mjoin i=test1.csv m=test2.csv k=codeA K=[TABキーを2回押す]
+codeA  name
+$ mjoin i=test1.csv m=test2.csv k=codeA K=code f=[TABキーを2回押す]
+codeA  name
+$ mjoin i=test1.csv m=test2.csv k=codeA K=code f=name
+codeA%0,codeB,date,value1,value2,name
+A,aaa,20170101,3,120,aaa
+A,bbb,20170102,6,100,aaa
+#END# kgjoin K=code f=name i=test1.csv k=codeA m=test2.csv; IN=2 OUT=2; 2017/04/28 13:46:08
+\end{Verbatim}
+
+\subsection{選択肢の補完\label{sect:bash_comp_items}}
+\verb|mstats|の\verb|c=|など、決まった選択肢の中から一つを選択するタイプのパラメータについて補完入力が可能である。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msim c=[TABキーを2回押す]
+chi       confMax convMax cosine euclid  jaccard kendall oddsRatio phi      supportr yuleQ
+cityblock confMin convMin covar  hamming kappa   lift    pearson   spearman ucovar   yuleY
+
+~ $ mstats c=[TABキーを2回押す]
+USD     cv      kurt    mean    min     qrange  qtile3  sd      sum     ukurt   uskew   var
+count   devsq   max     median  mode    qtile1  range   skew    ucount  usd     uvar
+
+\end{Verbatim}
+
+
+%\end{document}
+

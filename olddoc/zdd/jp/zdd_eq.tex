@@ -1,0 +1,40 @@
+
+\section{== : 等価比較演算子\label{sect:eq}}
+\subsection*{書式}
+$zdd1$ == $zdd2$ $\rightarrow$ $zdd3$
+
+\subsection*{説明}
+$zdd1$の項と$zdd2$の項について、一致する項(重みとアイテム集合が同じ項)を選択し、そのアイテム集合を返す。
+アイテム集合のみを返し、重みは1となることに注意する。
+重みも含めて選択したい場合は、\hyperref[sect:iif]{iif}関数と組み合わせることで実現可能である。
+
+本パッケージで扱える比較演算子(関数)は以下の通り。
+\begin{itemize}
+\item zdd1 == zdd2   : 等価演算子
+\item zdd1 $>$= zdd2   : 以上演算子
+\item zdd1 $>$  zdd2   : 大なり演算子
+\item zdd1 $<$= zdd2   : 以下演算子
+\item zdd1 $<$  zdd2   : 小なり演算子
+\item zdd1.ne?(zdd2) : 不等関数
+\end{itemize}
+
+また、式全体の等価判定には\hyperref[sect:same?]{same?}(\hyperref[sect:same?]{==})
+もしくは\hyperref[sect:diff?]{diff?}を使う。
+
+\subsection*{例}
+\input{examples/tex/eq_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:eq]{==},
+\hyperref[sect:lt]{$<$},
+\hyperref[sect:le]{$<=$},
+\hyperref[sect:gt]{$>$},
+\hyperref[sect:ge]{$>=$},
+\hyperref[sect:ne]{ne?} : 各種比較演算
+
+\hyperref[sect:iif]{iif} : アイテム比較による選択
+
+\hyperref[sect:same?]{same?} : 式の等価比較
+
+\hyperref[sect:diff?]{diff?} : 式の不等価比較
+

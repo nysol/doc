@@ -1,0 +1,18 @@
+\subsubsection*{例1: 複数項目に対して適用する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items1,items2
+b a c,b
+c c,
+e a a,a a a
+$ mvcount vf=items1:size1,items2:size2 i=dat1.csv o=rsl1.csv
+#END# kgvcount i=dat1.csv o=rsl1.csv vf=items1:size1,items2:size2
+$ more rsl1.csv
+items1,items2,size1,size2
+b a c,b,3,1
+c c,,2,0
+e a a,a a a,3,3
+\end{Verbatim}

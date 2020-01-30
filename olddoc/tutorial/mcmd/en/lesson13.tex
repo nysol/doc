@@ -1,0 +1,148 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 13: Concatenate records }
+
+In data processing, we often encounter situations where large volumes of data is stored in multiple data files classified by time, region, categories, and other attributes. The \verb|mcat| command allow users to combine separate files or combine specified columns from separate files for data processing. 
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|mcat.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective:  Merge all datasets for year 2001.  \\ 
+
+Methodology: Merge 12 datasets for year 2001 using the \verb|mcat| command. The files are located in the same input data directory "\~/tutorial\_en/".  The output dataset \verb|mcatout.csv| can be found in the tutorial\_en directory. \\
+
+
+This lesson will use the monthly datasets generated from the \verb|msep| command in lesson 12. The files are stored in "\~/tutorial\_en/" directory.
+
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters as follows: \\
+
+Input: 		\verb|i=${inPath}/dat2001*.csv| \\
+Description: 	This parameter defines the input file names for merging. The file names are separated by comma but it is not efficient when there are a large number of files. Thus, we can use wildcard character to match character strings in the input file name. 
+
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 13: Merge files
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcat               i=${inPath}/dat2001*.csv  o=outdat/mcatout.csv
+#==========================================
+\end{verbatim}
+
+All files in year 2001 and concatenated and saved to \verb|mcatout.csv|.  \\
+
+Let's calculate the total quantity and total amount for all transactions in 2001. Assuming the monthly datasets has the same structure, we would only need to extract \emph{date,quantity,amount} column and concatenate the column from all 12 monthly datasets. Afterwards, compute the total sum for quantity and amount for each unique date with \verb|msum|, and save the results to the file \verb|mcatout.csv|.  \\
+
+Define the field parameter to extract from all input datasets as follows: \\
+
+Field: 		\verb|f=date,quantity,amount| \\
+Description: 	This parameter defines the common fields to extract from all input datasets for merging. The fields names are separated by comma. 
+
+ \subsection{Step 3: Modify and run the shell script}
+ 
+ \begin{verbatim}
+ #/bin/bash
+#=========================================
+# MCMD bash script - Lesson 13: Merge files
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcat f=date,quantity,amount             i=${inPath}/dat2001*.csv | 
+msortf f=date%n                                   |
+msum k=date f=quantity:totalQuantity,amount:totalAmount o=outdat/mcatout.csv
+ #==========================================
+ 
+Save and run the script. The run-time message is as follows: \\
+
+$ ./mcat.sh 
+#END# kgcat f=date,quantity,amount i=tutorial_en/dat2001*.csv; IN=24737 OUT=24737; 2013/08/24 10:48:52
+#END# kgsortf f=date%n; IN=24737 OUT=24737; 2013/08/24 10:48:53
+#END# kgsum f=quantity:totalQuantity,amount:totalAmount k=date o=outdat/mcatout.csv; IN=24737 OUT=324; 
+2013/08/24 10:48:53
+
+The result is shown below: 
+date,totalQuantity,totalAmount
+20010108,21,8680
+20010110,67,23495
+20010111,94,38261
+20010116,65,28333
+20010119,210,93586
+20010123,54,19476
+20010125,43,14516
+20010128,43,15448
+20010130,157,60577
+20010131,14,1806
+20010201,8,1024
+20010203,13,2236
+20010204,132,52936
+20010205,62,24132
+20010206,82,29950
+20010208,78,24906
+20010209,50,21776
+20010211,58,23650
+20010212,82,35368
+20010213,65,24974
+20010216,245,89800
+20010217,64,21223
+20010220,30,9774
+20010222,78,32783
+20010223,118,45828
+20010224,182,82685
+20010226,107,40550
+20010227,252,96736
+...
+..
+\end{verbatim}
+
+
+\subsection{Directory Index }
+
+Directories can be used to index multiple files in the database to increase the efficiency for data processing and data analysis. The \verb|mcat| command can retrieve certain files from the selected the directory where the file structure is indexed based on certain categories. \\
+
+In this lesson, sales transaction data of a retail stores are organized in separate files classified by month. For instance, to generate a sales report for store A in January, 2001, it is much faster to select the transaction data file \verb|tutorial_en/a/dat20011.csv| according to the file name in the directory index. It will be a more data processing to extract  transaction data for January from all transactions in the entire dataset.  \\
+
+Wildcard characters can be used to select datasets which matches a search string.  For example, to merge sales data from October, November, and December you can specify \verb|~/20011*/dat.csv|.\\
+
+
+\subsection{Exercise }
+
+Let's practice the \verb|mcat| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+Daily total quantity and total amount from April, May, July & \href{exercise/mcat1.sh}{mcat1.sh} & \href{exercise/outdat/mcatout1.csv}{mcatout1.csv} \\
+Daily total quantity and total amount on April, October-December & \href{exercise/mcat2.sh}{mcat2.sh} & \href{exercise/outdat/mcatout2.csv}{mcatout2.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

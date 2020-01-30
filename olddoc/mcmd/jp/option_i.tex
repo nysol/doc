@@ -1,0 +1,34 @@
+
+%\begin{document}
+
+\subsection{i= 入力ファイル名\label{sect:option_i}}
+入力ファイル名を指定する。
+多くのコマンドでは単一のファイルのみ指定可能で、例外として\verb|mcat|コマンドは複数のファイル名をカンマで区切って指定できる。
+また入力データを必要としないコマンド、例えば、\verb|mnewrand|や\verb|mnewnumber|などもある。
+
+このパラメータが省略された時には標準入力からデータを読み込む。
+この機能があるために、パイプラインによる接続が可能となる。
+例えば、以下の例では、\verb|msum|で\verb|i=|を指定していないが、
+これは\verb|msortf|の結果がパイプラインを介して標準入力としてデータが入力されるためである。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+また、上記と同様の処理を行うに当たって、気づきにくい間違いを以下に示そう。
+上記との違いは\verb|msum|に\verb|i=|パラメータが指定されている点である。
+この例は残念ながらエラーとはならない。
+\verb|msortf| の結果は標準出力に出力され、\verb|msum|は\verb|dat.csv|から読み込んで処理を行う。
+よって、\verb|msortf|を実行している意味が全くなくなっており、得られる結果も異なったものとなるであろう。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b i=dat.csv o=rsl.csv
+\end{Verbatim}
+
+\subsection*{利用例}
+\input{examples/tex/option_i_ex.tex}
+
+\subsubsection*{対応コマンド}
+\verb|mnewnumber|,\verb|mnewrand|など一部のコマンドを除いて全てのコマンドで利用できる。
+
+%\end{document}
+

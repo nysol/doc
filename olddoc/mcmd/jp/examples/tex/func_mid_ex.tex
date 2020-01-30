@@ -1,0 +1,42 @@
+\subsubsection*{例1: 基本例}
+
+str項目の2文字目からから3文字を切り出す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abcdefg
+2,12345678
+3,
+4,12
+$ mcal c='mid($s{str},2,3)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=mid($s{str},2,3) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abcdefg,cde
+2,12345678,345
+3,,
+4,12,
+\end{Verbatim}
+\subsubsection*{例2: 基本例}
+
+マルチバイト文字を含む場合はmidwを使う。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,str
+1,あいうえお
+2,1234567あ8
+3,1あ
+4,ああ
+$ mcal c='midw($s{str},2,3)' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=midw($s{str},2,3) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,あいうえお,うえお
+2,1234567あ8,345
+3,1あ,
+4,ああ,
+\end{Verbatim}

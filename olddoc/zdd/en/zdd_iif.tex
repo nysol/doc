@@ -1,0 +1,23 @@
+
+\section{iif : Select by comparison of items\label{sect:iif}}
+\subsection*{Format}
+$obj$.iif(zdd1,zdd2) $\rightarrow$ $zdd3$
+
+\subsection*{Description}
+
+Select terms in itemset included in $obj$ from $zdd1$, 
+select terms in itemset not included in $obj$ from $zdd2$, 
+and return the selected term which created the ZDD object as $zdd3$. 
+
+The weight of the itemset in $obj$ does not affect the operation. 
+
+\subsection*{Examples}
+\input{examples/tex/iif_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:eq]{==},
+\hyperref[sect:lt]{$<$},
+\hyperref[sect:le]{$<=$},
+\hyperref[sect:gt]{$>$},
+\hyperref[sect:ge]{$>=$},
+\hyperref[sect:ne]{ne?} : Various comparison operations 

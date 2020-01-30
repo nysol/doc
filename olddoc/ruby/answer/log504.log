@@ -1,0 +1,4 @@
+#END# kgcut f=a,b i=indat/dat1.csv o=/tmp/__KGTMP_0x2903cc_36610_kgtp_0 IN=3 OUT=3
+#ERROR# field name not found: `c' in /tmp/__KGTMP_0x2903cc_36610_kgtp_0 (kgsum) : kgsum f=c i=/tmp/__KGTMP_0x2903cc_36610_kgtp_0 k=a IN=0 OUT=0 
+#ERROR# field name not found: `c' in /tmp/__KGTMP_0x2903cc_36610_kgtp_0 (kgsum) (kgtp) : kgtp 
+#ERROR# field name not found: `c' in /tmp/__KGTMP_0x2903cc_36610_kgtp_0 (kgsum) (kgtp)

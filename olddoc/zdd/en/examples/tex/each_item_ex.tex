@@ -1,0 +1,38 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=2*a+2*b+4*a*c
+> f.each_item{|weight,item,top,bottom|
+>   puts weight
+>   item.show
+>   puts top
+>   puts bottom
+>   puts "----------"
+> }
+4
+ a
+true
+false
+----------
+4
+ c
+false
+true
+----------
+2
+ a
+true
+true
+----------
+2
+ b
+true
+true
+----------
+\end{Verbatim}

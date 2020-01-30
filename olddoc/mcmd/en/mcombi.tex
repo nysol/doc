@@ -1,0 +1,45 @@
+
+%\begin{document}
+
+\section{mcombi - Compute Combination\label{sect:mcombi}}
+\index{mcombi@mcombi}
+\verb|f=| parameter specifys the set of fields, \verb|n=| parameter defines the combination, and \verb|a=|parameter specifies the output field name. Permutation output is possible by specifying  \verb|-p| option. 
+
+\subsection*{Format}
+\verb/mcombi a= f= n= [s=] [k=] [-p] [-dup]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & Name of the field to be added.\\
+\verb|f=|    & Compute the combinations for the set of field name(s) (multiple fields can be specified) specified .\\
+             & Enumerate all combinations of the array of values in the fields specified.\\
+\verb|n=|    & Number of combinations.\\
+             & When you increase the number of combinations, note that the number of output records will increase exponentially.\\
+         \verb|s=|    & After sorted by specified field  (multiple fields can be specified), combinations of items specified in field \verb|f=| are enumerated. \\
+\verb|k=|    & List of key field name(s) (multiple fields can be specified)\\
+             & Compute  combinations based on the list of key field name(s). \\
+\verb|-p|    & Compute the permutations. \\
+\verb|-dup|  & Output combinations with the same value. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mcombi_ex.tex}
+\subsection*{Related Command}
+%\end{document}

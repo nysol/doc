@@ -1,0 +1,54 @@
+
+%\begin{document}
+
+\section{mtra - Convert Vertical Data to Vector\label{sect:mtra}}
+\index{mtra@mtra}
+Connect the items from the specified fields in \verb|f=|,  and save the string of items as a vector in a new column (referred to as transaction field). 
+Specify the delimiter character of the items at \verb|delim=|.
+
+
+\subsection*{Format}
+\verb|mtra f= [s=] [k=] [delim=] [-r]  | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|        & Specify field(s) (multiple fields can be specified) where the transaction fields are connected as an item.\\
+                 & NULL values will not be included in the vector.\\
+\verb|k=|        &  Key field name(s) (multiple items can be specified) of the character string pattern. \\
+                 & \verb|-r| option cannot be specified with this parameter. \\
+\verb|delim=|    & Specify the delimiting character (Space is used as the default delimiter).\\
+\verb|-r|        & Reverse conversion\\
+                 & Convert transaction items column to vertically structured data.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mtra_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mvsort]{mvsort} : Vector based transaction data can be processed by a set of commands  (with \verb|mv| as prefix) which handles vector data. 
+
+\hyperref[sect:mcross]{mcross} : Rather than converting as transaction data, every item is saved separately as individual field in the output. 
+
+\hyperref[sect:mtrafld]{mtrafld} :  Create transaction data using “field name=value”.
+
+\hyperref[sect:mtraflg]{mtraflg} : Create transaction data as item with field names.
+
+%\end{document}

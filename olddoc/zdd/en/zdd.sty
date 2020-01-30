@@ -1,0 +1,43 @@
+
+% 幅方向のレイアウト
+
+\setlength{\topmargin}{15mm}
+\addtolength{\topmargin}{-1in}
+\addtolength{\footskip}{5mm}			% 下余白
+
+\setlength{\oddsidemargin}{15mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+
+%\setlength{\textwidth}{\fullwidth}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{48\baselineskip} % 基本40文字入るようにする
+\addtolength{\textheight}{30mm}
+
+\usepackage{makeidx}
+\usepackage{here}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{fancyvrb} % Verbatim
+%\usepackage{hyperref}
+\usepackage[parfill]{parskip}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+
+
+
+%-- hyperref package
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true]{hyperref}
+
+%--しおりの文字化け対策
+\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
+
+\vfuzz=900pt % 表組みの一行あたりのoverfullを許容するpoint数
+
+\newdimen\verbatimbaselineskip \verbatimbaselineskip=1mm %\baselineskip
+

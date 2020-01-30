@@ -1,0 +1,219 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvreplace replace an element in the vector }
+Replace vector data with corresponding taxonomy character in the reference file joined by key. Table \ref{tbl:input} shows items in a vector with sequential elements separated by a space. The examples are highlighted in Table \ref{tbl:input}〜\ref{tbl:out3}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Reference file\label{tbl:ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{cc}
+\hline
+item&taxo \\
+\hline
+a&X \\
+b&Y \\
+c&Z \\
+e&X \\
+f&Z \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:out2}}
+\verb|vf=items m=ref.csv K=item f=taxo| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&X Y Z \\
+2&X d \\
+3&Y Z X Z \\
+4&Z Z d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.50\hsize}
+\begin{center}
+\caption{Define unmatched elements 
+\label{tbl:out3}}
+\verb|vf=items m=ref.csv K=item f=taxo n=* | \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&X Y Z \\
+2&X * \\
+3&Y Z X Z \\
+4&Z Z * \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+ Take note that huge reference file may use massive amount of memory, since the \verb|mvreplace| command reads the whole reference file at once in memory.
+
+
+\subsection*{Format}
+\verb|mvjoin vf= [K=] m= f= [n=]|
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the field name of vector as join key (from the input file specified in the \emph{i=} parameter) is specified. 【required parameter】\\
+           & Multiple fields can be specified. Sorting on vectors is not required. \\
+\verb|m=|  & Reference file  \\
+\verb|K=|  &  Key field in reference file where corresponding taxonomy elements are joined with vector items in defined in \emph{vf=}. 【required parameter】\\
+           & The sequence of the vector is unique, sorting is not required. \\
+           & The output may differ if the string sequence is not unique.  \\ 
+\verb|f=|  & Field name of vector to join with reference file. 【required parameter】\\
+\verb|n=|  & Specify the replacement character when the elements that do not match in \emph{vf=} and \emph{K=} . \\
+& The element will not be joined with the reference file when this option not specified.  \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Replace elements in a vector}
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items
+b a c
+c c
+e a a
+
+# ref.csv
+item,taxo
+a,X Y
+b,X
+c,Z Z
+
+$ mvreplace vf=items m=ref.csv K=item f=taxo i=dat1.csv o=rsl1.csv 
+
+# rsl1.csv
+items
+X X Y Z Z
+Z Z Z Z
+e X Y X Y
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Replace character on multiple elements}
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+
+# ref.csv
+item,taxo
+a,X
+b,X
+c,Y
+d,Y
+
+$ mvreplace vf=items1,items2 m=ref.csv K=item f=taxo i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items1,items2
+X X Y,X X
+Y Y,X Y
+e X X,X X
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mvjoin.pdf}{mvjoin}: join reference of vector element
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,33 @@
+\subsubsection*{Example 1: Basic Example}
+
+Arrange the values in \verb|v1,v2,v3| in ascending order for each record, and output the data items in sequential order corresponding to fields \verb|v1,v2,v3|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,v1,v2,v3
+1,b,a,c
+2,a,b,a
+3,b,,e
+$ mfsort f=v* i=dat1.csv o=rsl1.csv
+#END# kgfsort f=v* i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,v1,v2,v3
+1,a,b,c
+2,a,a,b
+3,,b,e
+\end{Verbatim}
+\subsubsection*{Example 2: Descending Order}
+
+Add \verb|-r| to arrange in descending order.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mfsort f=v* -r i=dat1.csv o=rsl2.csv
+#END# kgfsort -r f=v* i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,v1,v2,v3
+1,c,b,a
+2,b,a,a
+3,e,b,
+\end{Verbatim}

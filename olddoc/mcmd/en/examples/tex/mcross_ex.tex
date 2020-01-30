@@ -1,0 +1,72 @@
+\subsubsection*{Example 1: Basic Example}
+
+Expand the array of \verb|date| horizontally and itemize \verb|quantity|
+to the corresponding \verb|item|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,quantity,price
+A,20081201,1,10
+A,20081202,2,20
+A,20081203,3,30
+B,20081201,4,40
+B,20081203,5,50
+$ mcross k=item f=quantity s=date i=dat1.csv o=rsl1.csv
+#END# kgcross f=quantity i=dat1.csv k=item o=rsl1.csv s=date
+$ more rsl1.csv
+item%0,fld,20081201,20081202,20081203
+A,quantity,1,2,3
+B,quantity,4,,5
+\end{Verbatim}
+\subsubsection*{Example 2: Restore the original input data}
+
+Restore the output from Example 1 to the original input data with \verb|mcross|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more rsl1.csv
+item%0,fld,20081201,20081202,20081203
+A,quantity,1,2,3
+B,quantity,4,,5
+$ mcross k=item f=2008* s=fld a=date i=rsl1.csv o=rsl2.csv
+#END# kgcross a=date f=2008* i=rsl1.csv k=item o=rsl2.csv s=fld
+$ more rsl2.csv
+item%0,date,quantity
+A,20081201,1
+A,20081202,2
+A,20081203,3
+B,20081201,4
+B,20081202,
+B,20081203,5
+\end{Verbatim}
+\subsubsection*{Example 3: Crosstab with multiple fields}
+
+Display crosstab results on two fields \verb|quantity,price|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcross k=item f=quantity,price s=date i=dat1.csv o=rsl3.csv
+#END# kgcross f=quantity,price i=dat1.csv k=item o=rsl3.csv s=date
+$ more rsl3.csv
+item%0,fld,20081201,20081202,20081203
+A,quantity,1,2,3
+A,price,10,20,30
+B,quantity,4,,5
+B,price,40,,50
+\end{Verbatim}
+\subsubsection*{Example 4: Reverse data sequence}
+
+Restore the sequence of the items that was expanded horizontally.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcross k=item f=quantity,price s=date%r i=dat1.csv o=rsl4.csv
+#END# kgcross f=quantity,price i=dat1.csv k=item o=rsl4.csv s=date%r
+$ more rsl4.csv
+item%0,fld,20081203,20081202,20081201
+A,quantity,3,2,1
+A,price,30,20,10
+B,quantity,5,,4
+B,price,50,,40
+\end{Verbatim}

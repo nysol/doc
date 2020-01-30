@@ -1,0 +1,17 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> c=ZDD::constant(10)
+> c.show           # ZDD constant object
+ 10
+> puts c.to_i      # ruby integer
+10
+
+# Return nil if not ZDD constant object. 
+> a=ZDD::itemset("a")
+> p a.to_i
+nil
+\end{Verbatim}

@@ -1,0 +1,42 @@
+\subsubsection*{Example 1: Basic Example}
+
+Returns true if \verb|str| column contains white space characters. The first row where \verb|id=1|contains single-byte space character, in addition, the second row where \verb|id=2| contains tab character, thus, these two rows return true. However, records where the function returns false are \verb|id=4| which contains carriage return, and \verb|id=3| which contains double-byte space character.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,a b
+2,ab	c
+3,ab　c
+4,
+5,"aa
+bb"
+$ mcal c='hasspace($s{str})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=hasspace($s{str}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,a b,1
+2,ab	c,1
+3,ab　c,0
+4,,0
+5,"aa
+bb",1
+\end{Verbatim}
+\subsubsection*{Example 2: Multibyte character}
+
+Use \verb|hasspacew| function to detect double character space.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='hasspacew($s{str})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=hasspacew($s{str}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,a b,1
+2,ab	c,1
+3,ab　c,1
+4,,0
+5,"aa
+bb",1
+\end{Verbatim}

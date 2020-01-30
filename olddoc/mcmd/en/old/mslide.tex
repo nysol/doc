@@ -1,0 +1,264 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mslide (slide data series) command}
+Shift data series in a column to a new column by specified number of times. 
+For example, the function can be used to calculate difference between data items in the same field such as deriving the rate of return using daily stock price data (today's stock price/previous day's stock price)
+
+Table \ref{tbl:input}〜\ref{tbl:out3} below highlights a typical example.
+
+\renewcommand{\tablename}{Table.}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{input data\label{tbl:input}}
+{\small
+\begin{tabular}{cc}
+\hline
+date&val \\
+\hline
+4/6&1 \\
+4/7&2 \\
+4/8&3 \\
+4/9&4 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{f=val:nextVal\label{tbl:out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+date&val&nextVal \\
+\hline
+4/6&1&2 \\
+4/7&2&3 \\
+4/8&3&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{f=val:nextVal -r\label{tbl:out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+date&val&nextVal \\
+\hline
+4/7&2&1 \\
+4/8&3&2 \\
+4/9&4&3 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\caption{f=val t=2\label{tbl:out3}}
+{\small
+\begin{tabular}{cccc}
+\hline
+date&val&val1&val2 \\
+\hline
+4/6&1&2&3 \\
+4/7&2&3&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:input} shows the input data which contains total daily values of four consecutive days. The figures could represent the changes in supermarket sales  and stock price trends. 
+Calculate the rate of increase between two days (for simplicity, assume \emph{ rate of increase =  rate of day2/rate of day1}).
+
+The input data contains data series from 4/6 to 4/9. In Table \ref{tbl:out1}, the data series is shifted up by one line and stored in a new column (newVal). The rate of increase is calculated from nextVal/val using mcal command. After the records have shifted, the last record in the input data dated 4/9 is not longer available. In this case, the \emph{-n} parameter can be used to print a null value.
+
+Table \ref{tbl:out1} shows the data output when sliding up the data series by one row, it is also possible to slide in reverse order by sliding the first row to a new column as shown in (Table \ref{tbl:out2}).
+
+Furthermore, \emph{t=} allows user to specify the number of times to slide up or down. Table \ref{tbl:out3} shows how the data looks like when t=2. The function is the same as using mslide consecutively:
+ 
+"\verb&mslide f=val:val1 | mslide f=val1:val2&". 
+
+When \emph{t=} parameter is used, field names are created for each new column based on the field name specified at \emph{f=} followed by an incremental value. When \emph{t=} parameter is used with \emph{-l} option, data from the initial column and the last column is displayed. 
+
+Function of mwindow and mslide are similar. The difference between the two is that mslide is used for calculation between data items, and the command is often followed by mcal and msel.  mwindow is used for calculation by row, which is usually followed by msum and mavg commands. 
+
+
+\subsection*{Format}
+
+mslide f= [k=key] [t=] [-r] [-n] [-l] [i=] [o=] [\href{run:nfn.pdf}{-nfn}] [\href{run:nfno.pdf}{-nfno}] [\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name for sliding records. Multiple fields can be specified. 【required parameter】 \\
+             & The If you do not specify \verb|t=|, the new field name can be specified by f=fieldname:newfieldname. \\
+\verb|t=|    & Number of times (rows) to shift. Default value is 1 if \emph{t=} is not defined. \\
+\verb|-r|    & Shift records in the opposite direction (shift the first record to a new column).\\
+\verb|-n|    & Print a null value if next (previous) line is not available. \\
+\verb|-l|    & Print results from the final shift (if t is more than 1) .\\
+\verb|k=|    & Shift records based on key item. \\
+\verb|i=|    & Input file name \\
+\verb|-nfn|  & Data without header.  Field names not available in the first line of input data.  \\
+\verb|-nfno| & Header in the input file will be removed in the output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Basic application}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=val:newVal i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+date,val,newVal
+20130406,1,2
+20130407,2,3
+20130408,3,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Slide rows in reverse direction}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=val:newVal -r i=dat1.csv o=rsl2.csv
+
+# rsl2.csv
+date,val,newVal
+20130407,2,1
+20130408,3,2
+20130409,4,3
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Slide records more than once}
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=val t=2 i=dat1.csv o=rsl3.csv
+
+# rsl3.csv
+date,val,val1,val2
+20130406,1,2,3
+20130407,2,3,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Display output from the last column }
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=val t=2 -l i=dat1.csv o=rsl4.csv
+
+# rsl4.csv
+date,val,val2
+20130406,1,3
+20130407,2,4
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 5 Slide records more than once and change multiple field names }
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+date,val
+20130406,1
+20130407,2
+20130408,3
+20130409,4
+
+$ mslide f=date:d_,val:v_ t=2 i=dat1.csv o=rsl5.csv
+
+# rsl5.csv
+date,val,d_1,d_2,v_1,v_2
+20130406,1,20130407,20130408,2,3
+20130407,2,20130408,20130409,3,4
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mwindow.pdf}{mwindow}: generate sliding window
+\end{itemize}
+
+\end{document}

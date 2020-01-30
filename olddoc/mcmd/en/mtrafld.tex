@@ -1,0 +1,59 @@
+
+%\begin{document}
+
+\section{mtrafld - Convert Transaction Field to Cross (pivot) Table\label{sect:mtrafld}}
+\index{mtrafld@mtrafld}
+Create item pairs from the fields specified at \verb|f=|, concatenate the item pairs and save as a new vector field (also referred to as transaction field).
+
+
+\subsection*{Format}
+\verb|mtrafld a= [f=] [delim=] [delim2=] [-r] [-valOnly] |   
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|      & Specify the transaction field name.\\
+\verb|f=|      & List of field name(s) (Multiple fields can be specified) [required when \verb|-r| is specified, \\
+		&  otherwise, this parameter is optional]\\
+               & The field names specified here will be created as connected items and saved in the transaction field.\\
+               & When -r option is specified, specify the field name to extract from the transaction data.\\
+               & This parameter is optional when \verb|-r| option is specified.\\
+               & If the parameter is not specified, all field names are processed as value pairs. \\
+               & However, when\verb|f=| is not defined, this command cannot read standard input (using pipe). \\
+\verb|delim=|  & Specify the character to separate each transaction field item (default delimiter: \\
+		& space if this parameter is not defined).\\
+\verb|delim2=| & Specify the character to separate value pairs and field name (default character: =).\\
+\verb|-r|      & Reverse conversion\\
+               & Convert transaction field to cross table. \\
+\verb|-valOnly|& When this option is specified, the item do not return the prefix "field name=" in the output. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mtrafld_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mvsort] {mvsort} : Vector based transaction data can be processed by a set of commands  (with mv as prefix) which handles vector data.
+
+\hyperref[sect:mcross] {mcross} : Rather than converting as transaction data, every item is saved separately as individual field in the output. 
+
+\hyperref[sect:mtra] {mtra} : Create transaction data using values in the field.
+
+\hyperref[sect:mtraflg] {mtraflg} :  Create transaction data with field names.
+
+%\end{document}

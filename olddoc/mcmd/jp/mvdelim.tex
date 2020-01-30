@@ -1,0 +1,177 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvdelim ベクトル要素の区切り文字変更\label{sect:mvdelim}}
+\index{mvdelim@mvdelim}
+ベクトル型の要素を区切る文字列を変更する。
+ただし、区切り文字に空文字を指定すれば区切り文字を削除することになる。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvdelim_input}〜\ref{tbl:mvdelim_out4}に示す。
+カンマも指定することはできるが、
+ダブルクォーテーションで括られ 一つの項目となる (表\ref{tbl:mvdelim_out2})。
+\verb|v=|のように値を指定しなければ空文字と見なされ、
+結果として区切り文字が消去される(表\ref{tbl:mvdelim_out3})。
+文字列や漢字も指定することは可能であるが(表\ref{tbl:mvdelim_out4})、
+ベクトルを扱うコマンド(mvsortなど)で指定できる区切り文字
+(\verb|delim=|によって指定)はアルファベット１文字であるため、
+もはやベクトルとして利用することはできなくなることに注意する。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvdelim_input}}
+\verb|in.csv|\\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&b a a \\
+2&a a b b \\
+3&a b b a \\
+4&a b c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{基本例:区切りをマイナス記号に置換\label{tbl:mvdelim_out1}}
+\verb|vf=items v=- i=in.csv|\\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b-a-a \\
+2&a-a-b-b \\
+3&a-b-b-a \\
+4&a-b-c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{区切り文字にカンマを指定すると。。\label{tbl:mvdelim_out2}}
+\verb|vf=items v=, i=in.csv|\\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&"b,a,a" \\
+2&"a,a,b,b" \\
+3&"a,b,b,a" \\
+4&"a,b,c" \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ll}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{空文字を指定すると区切りが消える\label{tbl:mvdelim_out3}}
+\verb|vf=items v= i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&baa \\
+2&aabb \\
+3&abba \\
+4&abc \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{複数文字も指定できるが。。\label{tbl:mvdelim_out4}}
+\verb|vf=items v=xx i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&bxxaxxa \\
+2&axxaxxbxxb \\
+3&axxbxxbxxa \\
+4&axxbxxc \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mvdelim vf= v= [-A] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=|   & 区切り文字を変更するベクトル項目名を指定する。複数項目指定可能。 \\
+             & 結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。\\
+\verb|v=|    & 新しい区切り文字を指定する。何も指定しなければ空文字として扱われる。 \\
+\verb|-A|    & \verb|vf=|で:(コロン)に続けて指定した項目名で、新たな項目が追加される。\\
+             & なお\verb|-A|オプションを指定した場合、\verb|vf=|パラメータで指定するすべての\\
+             & 項目に新項目名を指定しなければならない。\\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvdelim_ex.tex}
+
+\subsection*{関連コマンド}
+
+%\end{document}

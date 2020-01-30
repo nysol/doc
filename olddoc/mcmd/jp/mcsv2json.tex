@@ -1,0 +1,64 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcsv2json CSVをJSON形式へ変換\label{sect:mcsv2json}}
+\index{mcsv2json@mcsv2json}
+\underline{注)本コマンドは開発バージョンであり、仕様が変更される可能性があります。}
+
+CSVデータをJavaScriptのオブジェクト表記構文であるJSON形式に変換する。
+本コマンドは以下のような特徴を持つ。
+詳細は例を参照のこと。
+
+\begin{itemize}
+ \item JSON上のデータ型は文字列のみに対応
+ \item 配列とオブジェクト(key-valueのペア)による出力が可能
+ \item キー項目を指定することで、配列の入れ子構造で出力可能
+\end{itemize}
+
+\subsection*{書式}
+\verb/mcsv2json [k=] [s=] f=|h=|p= [-flat] /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & JSON上で配列をネストさせる項目名リスト。\\
+             & 3つの項目を指定すれば、3重のJSON配列となる。\\
+\verb|s=|    & 値を並べる順序項目。\verb|%n|(数値順),\verb|%r|(逆順)も指定可能。\\
+\verb|f=|    & 指定した項目の値をJSONの配列として出力する\\
+\verb|h=|    & 指定した項目名をキーにしたJSONオブジェクト(hash構造)として出力する。\\
+\verb|p=|    & JSONオブジェクトのキーと値の項目名を2つ指定する。\\
+             & 2項目は次のようにコロンで区切る。\verb|p=key項目名1:value項目名1,key項目名2:value項目名2,...|\\
+\verb|-flat| & 配列で括らずにフラットに出力する。\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mcsv2json_ex.tex}
+\subsection*{関連コマンド}
+
+\subsection*{参考資料}
+http://www.rfc-editor.org/rfc/rfc4627.txt
+
+%\end{document}

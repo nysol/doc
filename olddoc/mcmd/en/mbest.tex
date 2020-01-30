@@ -1,0 +1,62 @@
+
+%\begin{document}
+
+\section{mbest - Select Rows \label{sect:mbest}}
+\index{mbest@mbest}
+Select records based on the specified row numbers.  Note that row number starts at 0 (the first row of data starts at row 0 excluding the row of field names). Define the row numbers at from= and to= parameters (and size= parameter in some instances).   
+
+\subsection*{Format}
+\verb/mbest s= [R=] [from=] [to=|size=] [k=] [u=] [-r]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|s=|    & After sorted by specified field(s) (multiple fields can be specified), the rows are selected.  \\
+             & \verb|s=| parameter is required if \verb|-q| option is not specified. \\
+\verb|from=| & Define the start of row number (integers greater than 0) [default value: 0] \\
+\verb|to=|   & Define the end of row number (integers greater than 0) [default value: 0] \\
+             & Where [value of \verb|from=| ] $\le$ [value of \verb|to=|] . \\
+\verb|size=| & Number of rows to select [default value: 1]\\
+             & \verb|to=| and \verb|size=| cannot be specified at the same time. \\
+\verb|R=|    & Range list (accept multiple fields)【required parameter】* Method of specifying the range that was used in the previous version\\
+             & Set the range using line numbers.\\
+             & Use \_(underscore) to specify the range in the format of MIN (start of row)\_MAX (end of row).\\
+             & ※Note: Sort the data in advance based on user's preference.  \\
+\verb|k=|    & Key field (accept multiple key fields) [aggregate key break processing] \\
+             & Records with same key values will be selected based on the defined rows at \verb|from=|,\verb|to=|,\verb|size=|. \\
+		& \verb|-x|,\verb|-nfn| options can be used to specify the field number (0〜). \\
+\verb|u=|    & Output file of unmatched records. \\
+             & Unmatched records the do not match the criteria is written to the defined file.\\
+\verb|-r|    & Reverse selection\\
+             & Select the rows other than the ones defined at the parameter \verb|from=,to=(size=)|.\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mbest_ex.tex}
+
+\subsection*{Related commands}
+
+\hyperref[sect:msel]{msel} : The \verb|line()| function can be specified in the condition parameter to carry out similar processing functions. 
+
+\hyperref[sect:muniq]{muniq} : Returns unique values in key field.
+
+\hyperref[sect:mselnum]{mselnum} :Select rows within a numeric range. 
+
+%\end{document}

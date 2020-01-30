@@ -1,0 +1,19 @@
+
+%\begin{document}
+
+\section{fixlen - Convert of Fixed Length String\label{sect:fixlen}}
+\index{fixlen@fixlen}
+
+Format 1: length($str$,length,position,padding character)
+
+Format 2: lengthw($str$,length,position,padding character)
+
+Convert $str$ to fixed length string. Specify padding characters for left justified or right justified $str$ if it is less than specified length. Specify the justification using \verb|"L"| or \verb|"R"| in the “position” parameter. Define the character to be embedded in the “padding character” parameter. Note that if the length of $str$ exceeds the defined length, the ending characters for right justified character strings or beginning characters for left justified character strings will be cut off. 
+
+Use \verb|fixlenw| function for fixed-length conversion on multi-byte characters. 
+
+\subsection*{Examples}
+\input{examples/tex/func_fixlen_ex.tex}
+
+%\end{document}
+

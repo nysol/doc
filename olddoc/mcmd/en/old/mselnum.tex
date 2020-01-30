@@ -1,0 +1,548 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mselnum},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mselnum (select records matching a range) command}
+This command selects records that matches the range specified at \verb|c=| with the values in the column specified at the \verb|f=| parameter. Various selection criteria can be specified as arguments in the parameters as follows. Use \href{run:msel.pdf}{msel} command to query complex selection criteria such as matching against a combination of string characters. 
+
+\begin{itemize}
+\item Range types include open range, closed range, inclusive and exclusive bounds and infinite range.
+\item c=specify multiple range and select records that matches either range (OR condition).
+\item f=specify multiple fields at which the values matches either range (OR condition).
+\item f=change the logical operator from OR to AND with the \verb|-F| option.  
+\item k=specify key value as the selection unit. 
+ \item Apply AND logical operator when selecting records based on the key value with the \verb|-R| option.
+
+\end{itemize}
+
+A typical example is shown in Table\ref{tbl:input}〜\ref{tbl:out3}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{Input Data\label{tbl:input}}
+{\small
+\begin{tabular}{cc}
+\hline
+key&val \\
+\hline
+a&1 \\
+a&-3 \\
+b&3 \\
+b&6 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Select rows if the values in the val column falls on the range of 1 to 3\label{tbl:out1}}
+\verb|mselnum f=val c=[1,3]| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+b&3 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Select rows with values greater than or equal to 1 but less than 3\label{tbl:out2}}
+\verb|mselnum f=val c=[1,3)| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Select rows greater than or equal to 5\label{tbl:out3}}
+\verb|mselnum f=val c=[5,)| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+b&6 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Select rows less than or equal to 1 or greater than or equal to 5\label{tbl:out4}}
+\verb|mselnum f=val c=(,1],[5,)| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+b&6 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Using the same input data (Table\ref{tbl:input}), the statement \verb|mselstr k=key f=fld1,fld2 v=s1,s2| returns two rows of records with two columns with the same key. The conditions for matching depends on the presence or absence of option \verb|-R,-F| show in Table\ref{tbl:cond}.
+
+\begin{table}[htbp]
+\begin{center}
+
+\caption{Input Data\label{tbl:input}}
+{\small
+\begin{tabular}{ccc}
+\hline
+$\verb|key|$ & $\verb|fld1|$ & $\verb|fld2|$ \\
+\hline
+k & $v_{a1}$ & $v_{a2}$ \\
+k & $v_{b1}$ & $v_{b2}$ \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+
+\begin{table}[htbp]
+\begin{center}
+When running the statement mselstr k=key f=fld1,fld2 c=(rf1,rt1),(rf2,rt2) based on the input data from \caption{Table\ref{tbl:input}, the matching condition is dependent on the logical operators specified by -R, -F option. If all conditions are true, the output will return all rows from the input data. 
+If it matches the conditions, all of the two rows is outputted. Otherwise, if the input did not match the specified condition, the command will not return any rows. \label{tbl:cond}}
+
+
+
+{\small
+\begin{tabular}{ccl}
+\hline
+\verb|-F| & \verb|-R| & Match condition \\
+\hline
+   &    &
+(($v_{a1}$ \verb|==| r1 or $v_{a1}$ \verb|==| r2)  or
+ ($v_{a2}$ \verb|==| r1 or $v_{a2}$ \verb|==| r2)) or
+(($v_{b1}$ \verb|==| r1 or $v_{b1}$ \verb|==| r2)  or
+ ($v_{b2}$ \verb|==| r1 or $v_{b2}$ \verb|==| r2)) \\
+-F &    &
+(($v_{a1}$ \verb|==| r1 or $v_{a1}$ \verb|==| r2)  and
+ ($v_{a2}$ \verb|==| r1 or $v_{a2}$ \verb|==| r2)) or
+(($v_{b1}$ \verb|==| r1 or $v_{b1}$ \verb|==| r2)  and
+ ($v_{b2}$ \verb|==| r1 or $v_{b2}$ \verb|==| r2)) \\
+   & -R & 
+(($v_{a1}$ \verb|==| r1 or $v_{a1}$ \verb|==| r2)  or
+ ($v_{a2}$ \verb|==| r1 or $v_{a2}$ \verb|==| r2)) and
+(($v_{b1}$ \verb|==| r1 or $v_{b1}$ \verb|==| r2)  or
+ ($v_{b2}$ \verb|==| r1 or $v_{b2}$ \verb|==| r2)) \\
+-F & -R & 
+(($v_{a1}$ \verb|==| r1 or $v_{a1}$ \verb|==| r2)  and
+ ($v_{a2}$ \verb|==| r1 or $v_{a2}$ \verb|==| r2)) and
+(($v_{b1}$ \verb|==| r1 or $v_{b1}$ \verb|==| r2)  and
+ ($v_{b2}$ \verb|==| r1 or $v_{b2}$ \verb|==| r2)) \\
+\hline
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+
+
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption The matching condition depends on the -R,-F option specified. 
+When running the statement mselstr k=key f=fld1,fld2 v=v1,v2 based on the input data in {Table\ref{tbl:input}.
+If all conditions are true, the output will return all rows from the input data. 
+If it matches the conditions, all of the two rows is outputted. Otherwise, if the input did not match the specified condition, the command will not return any rows. \label{tbl:cond}}
+
+{\small
+\begin{tabular}{ccl}
+\hline
+\verb|-F| & \verb|-R| & match condition \\
+\hline
+   &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+   & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+\hline
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+
+\subsection*{Format}
+mselnum f= c= [k=]  [u=] [-F] [-r] [-R] [-tail] [-w]
+[\href{run:option.pdf}{-nfn}]
+[\href{run:option.pdf}{-nfno}]
+[\href{run:option.pdf}{-x}]
+[\href{run:option.pdf}{i=}]
+[\href{run:option.pdf}{o=}]
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name (allow multiple fields)【required parameter】\\
+& Specify field that contains the query character string. \\
+\verb|c=|    & Query range (allow multiple ranges)【required parameter】 \\
+& Select row(s) where the data array specified at "f=" parameter matches with the specified range at this parameter matches. \\
+\verb|k=|    & Key item list (Multiple range can be specified.)【required parameter】 \\
+& Specify the key item that becomes a unit to be selected.\\
+& (Note）It is necessary to sort order of items as a unit of selection that one specifies in the "k =" parameter in advance.\\
+\verb|o=|    & The name of condition matching data output file \\
+& Specify the file name that outputs the rows according with the specified criteria. \\
+\verb|u=|    &Mismatched data output file name \\
+& Specify the file name that outputs the rows disagree with the specified criteria.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-F|    & Between-item AND condition\\
+& If one specifies multiple items in the "f =" parameter, select the rows that all the value matches.\\
+\verb|-r|    & Inversion of condition\\
+& Not select, but delete.\\
+\verb|-R|    & Between-record AND condition\\
+& In case "k=" parameter is specified, select the row if all the row matches. \\
+\verb|-sub|  & Character\UTF{00A0} substring  match options\\
+& Compare a search by a character string match instead of an exact match.\\
+& More specifically, select the row, if the value of the specified item in the "f =" parameter  includes the specified character string as a character substring in the "v =" parameter.\\
+\verb|-head| & The first character string match option\\
+\verb|-tail| & The trailing  character string match option\\
+\verb|-w|    & Execute a substring match as a wide character at the time of specifying \verb|-sub|,\verb|-head|,\verb|-tail| options.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Usage examples}
+\subsubsection*{Example 1 Select the row of the value of the product item "apple" and "orange" (exact match).}
+Select the row to exact match "apple" and "orange" of the value of the product item and output the file of rsl.csv.
+While u = oth.csv is specified, the other rows are outputted in the oth.csv. 
+Therefore, pineapplejuice is outputted in the oth.csv because it is not an exact match.
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+product, amount
+apple,100
+milk,350
+orange,100
+pineapplejuice,500
+wine,1000
+
+$ mselstr f="product" v=apple,orange u=oth.csv i=dat.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+product, amount
+apple,100
+orange,100
+
+# output file 2(oth.csv)
+product, amount
+milk,350
+pineapplejuice,500
+wine,1000
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Delete the row of the value of the product item "apple" and "orange"(-r)}
+By specifying the -r option, contrary to Example 1, delete the row of an exact match of "apple" and "orange" and output the file of rsl.csv.
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+product, amount
+apple,100
+milk,350
+orange,100
+pineapplejuce,500
+wine,1000
+
+$ mselstr f="product"  v=apple,orange -r i=dat.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+product, amount
+milk,350
+pineapple,500
+wine,1000
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Select the customers who have ever purchased a orange}
+By specifying the k = customer, select the rows including the products purchased, along with customers who have ever bought orange. Output the other rows to the file of oth.csv.
+\\(Note) In this example, it is assumed that items has been sorted in customer order as a unit of selection in advance.
+\begin{verbatim}
+------------------------------------------------
+# dat2.csv
+customer, product, amount
+A,apple,100
+A,milk,350
+B,orange,100
+B,orange,100
+B,pineapple,500
+B,wine,1000
+C,apple,100
+C,orange,100
+
+$ mselstr k="customer" f="product" v=orange u=oth.csv i=dat2.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+customer, product, amount
+B,orange,100
+B,orange,100
+B,pineapple,500
+B,wine,1000
+C,apple,100
+C,orange,100
+
+#output file 2(oth.csv)
+customer, product, amount
+A,apple,100
+A,milk,350
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Select the row of "apple" of the value of the product item(partial match)}
+Select the row which partially corresponds to the value of the product item of "apple", and output in the file of rsl.csv. Because of a partial match, pine(apple)juice is also outputted in the rsl.csv.
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+product, amount
+apple,100
+milk,350
+orange,100
+pineapplejuice,500
+wine,1000
+
+$ mselstr f="product" v=apple -sub i=dat.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+product, amount
+apple,100
+pineapplejuice,500
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 5 Select the row of the wide characters of the value of the product item of "柿 (persimmon)", "桃 (peach)", and "葡萄 (grape)"(partial match).}
+If one uses a matching as a unit of byte at the time of being used a wide character for a selection item, there is a possibility that it matches for the character string across  multibyte characters.Therefore, it is necessary to show intentionally using  wide characters with the -w option when the wide characters are included in the selection item.
+
+\begin{verbatim}
+------------------------------------------------
+# dat3.csv
+product, amount
+果物(fruit):柿(persimmon),100
+果物(fruit):桃 (peach),250
+果物(fruit):葡萄(grape),300
+果物(fruit):梨(pear),450
+果物(fruit):苺(strawberry),500
+
+$ mselstr f="product" v="柿(persimmon)","桃 (peach)","葡萄(grape)" -sub -w i=dat3.csv o=rsl.csv
+
+#output file (rsl.csv)
+product, amount
+果物(fruit):柿(persimmon),100
+果物(fruit):桃 (peach),250
+果物(fruit):葡萄(grape),300
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 6 Extraction of the product data that have the purchase date of the product both of this time and last time are in 2013.}
+By specifying F option, select the rows of product that one had purchased the same products within 2013 and output it to the file rsl.csv. The others are outputted to the file oth.csv.
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr f="the date of purchase","the last date of purchase" -F -sub v=2013 u=oth.csv i=dat4.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+B,pineapple,500,2,2013/04/15,2013/04/01
+C,orange,100,2,2013/02/14,2013/01/31
+
+# output file 2(oth.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 7 Extraction of the customer data that have the purchase date of the product both of this time and last time are in 2013.}
+By specifying the k = customer, select the rows including the row of the product purchased, along with the customer who had ever purchased the same product within 2013. Output the other rows to the file of oth.csv.\\
+(Note) In this example, it is assumed that items has been sorted in customer order as a unit of selection in advance.
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr k="customer" f="the date of purchase","the last date of purchase" -F -sub v=2013 u=oth.csv i=dat4.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+
+# output file 2(oth.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 8 Extraction of new customer information of 2013}
+
+By specifying R option, extract the customer information which both 2013 of the date of purchase and the previous date of purchase, and null (no prior purchase).
+That is, select the new customer data of 2013 and output to the file of rsl.csv. 
+Output the other rows are outputted to the file of oth.csv.\\
+(Note) In this example, it is assumed that items has been sorted in customer order as a unit of selection in advance.
+\begin{verbatim}
+------------------------------------------------
+# dat4.csv
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+D,orange,100,2,2011/10/28,null
+
+$ mselstr k="customer" f="the date of purchase","the last date of purchase" -F -R -sub v=2013,null u=oth.csv i=dat4.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+C,apple,100,2,2013/02/14,null
+C,orange,100,2,2013/02/14,2013/01/31
+
+# output file 2(oth.csv)
+customer, product, amount, sex, the date of purchase, the last date of purchase
+A,apple,100,1,2013/01/04,2013/01/01
+A,milk,350,1,2013/04/04,2011/05/06
+B,orange,100,2,2012/11/11,2011/12/12
+B,orange,100,2,2013/05/30,2012/11/11
+B,pineapple,500,2,2013/04/15,2013/04/01
+B,wine,1000,2,2012/12/24,2011/12/24
+D,orange,100,2,2011/10/28,null
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\noindent
+\href{run:msel.pdf}{msel}: Selection of row by conditional expression\\
+\href{run:mcommon.pdf}{mcommon}: Selection of row by reference file
+
+\end{document}

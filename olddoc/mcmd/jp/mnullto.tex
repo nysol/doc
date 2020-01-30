@@ -1,0 +1,57 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mnullto NULL値の置換\label{sect:mnullto}}
+\index{mnullto@mnullto}
+\verb|f=|パラメータで指定した項目について
+NULL値を\verb|v=|パラメータで指定した文字列に置換する。 
+
+\subsection*{書式}
+\verb/mnullto f= [k=] [s=] rv=|-p] [O=] [-A]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|  & ここで指定した項目(複数項目指定可)のNULL値が置換される。\\
+\verb|v=|  & ここで指定した文字列にNULL値を置換する。\\
+\verb|-p|  & 前の行の値で置換する。\\
+           & \verb|v=|パラメータと同時に指定できない。\\
+\verb|k=|  & \verb|-p|を指定した時にのみ意味があり、ここで指定した項目値の単位で置換処理を行なう。\\
+\verb|s=|  & \verb|-p|を指定した時にのみ意味があり、\verb|k=|項目内での並び順を指定する。\\
+\verb|O=|  & NULL値以外を置換したい場合は、ここで値を指定する。
+             指定しなければNULL値以外は置換しない。\\
+\verb|-A|  & このオプションにより、指定した項目を置き換えるのではなく、
+             新たに項目が追加される。\\
+           & \verb|-A|オプションを指定した場合は必ず、\\
+           & :(コロン）で新項目名を指定する必要がある。例）f=数量:置換後の項目名\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mnullto_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mdelnull]{mdelnull} : 置換ではなく、行を削除したい場合はこちら。
+
+\hyperref[sect:mchgstr]{mchgstr} : NULL値でなく文字列を置換したい場合に使用する。
+
+%\end{document}

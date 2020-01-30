@@ -1,0 +1,17 @@
+
+\section{import : ZDDのインポート\label{sect:import}}
+\subsection*{書式}
+$obj$.import($fileName$) $\rightarrow zdd$
+
+~~$fileName$ : string
+
+\subsection*{説明}
+exportメソッドでシリアライズ出力されたZDDファイル(fileNameで指定)をインポートしZDDオブジェクト$zdd$を復元する。
+exportする時のsymbolによるアイテムの宣言順序とimportする時の宣言順序は同じでなければならない。
+
+\subsection*{例}
+\input{examples/tex/import_ex}
+
+\subsection*{関連}
+\hyperref[sect:export]{export} : ZDDのシリアライズ出力
+

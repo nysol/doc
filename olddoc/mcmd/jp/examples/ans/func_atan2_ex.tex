@@ -1,0 +1,24 @@
+
+\subsubsection*{例1: 基本例}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,x,y
+1,5,10
+2,10,20
+3,-1,0
+4,0,0
+5,,
+
+$ mcal c='atan2(${x},${y})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=atan2(${x},${y}) i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,x,y,rsl
+1,5,10,1.107148718
+2,10,20,1.107148718
+3,-1,0,3.141592654
+4,0,0,0
+5,,,
+\end{Verbatim}

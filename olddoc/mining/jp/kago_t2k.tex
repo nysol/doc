@@ -1,0 +1,242 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{kago\_t2k.rb コマンド}
+籠(kago)で使うトランザクションデータは図\ref{tbl:key}に例示されるような
+トランザクションキーとアイテムのペアをレコードとするCSVデータである(以下、key型CSVと呼ぶ)。
+本コマンドは図\ref{tbl:tra}に示されるような、アイテムをスペースで区切って一つの項目とした
+フォーマット(tra型CSVと呼ぶ)をkey型CSVに変換する。
+アイテムに重複があれば単一化される。
+
+クラス項目を含むデータ(図\ref{tbl:traClass})であれば、
+クラス項目名と出力するクラスファイル名を指定することで、
+key型CSVファイルとクラスファイルに分割出力できる。
+詳細は利用例を参照のこと。
+
+さらに、アイテム系列のデータに変換することも可能で、
+その場合、tra型データのアイテムの出現順序に応じて系列番号を出力する。
+詳細は利用例を参照のこと。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{key型データ\label{tbl:key}}
+{\small
+\begin{tabular}{ll}
+\hline
+key&item \\
+\hline
+a&P \\
+a&Q \\
+b&R \\
+b&Q \\
+b&S \\ \hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{tra型データ\label{tbl:tra}}
+{\small
+\begin{tabular}{ll}
+\hline
+id&item \\
+\hline
+a&P Q \\
+b&R Q S \\
+\hline
+\\
+\\
+\\
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{クラス項目を持つtra型データ\label{tbl:traClass}}
+{\small
+\begin{tabular}{lll}
+\hline
+id&class&item \\
+\hline
+a&c1&P Q \\
+b&c2&R Q S \\
+\hline
+\\
+\\
+\\
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+%\begin{minipage}{0.4\hsize}
+%\begin{center}
+%\caption{matrix型データ\label{tbl:matrix}}
+%{\small
+%\begin{tabular}{lllll}
+%\hline
+%id&apple&orange&grape&pine \\
+%\hline
+%a&1&1&&\\
+%b&&1&1&1\\
+%\hline
+%\\
+%\\
+%\\
+%\end{tabular} 
+%}
+%\end{center}
+%\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+
+
+\subsection*{書式}
+\begin{verbatim}
+kago\_t2k.rb tid= item= [seq=] [class=] i= o= [c=] [--help]
+\end{verbatim}
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[i=    ] tra型データファイル名【必須】
+\item[tid=  ] トランザクションID項目名【必須】
+\item[item= ] アイテム項目名【必須】
+\item[seq=  ] 新たに生成される系列項目名【オプション】
+\item[class=] クラス項目名【c=を指定した時のみ必須】
+\item[o=    ] 出力ファイル名【必須】
+\item[c=    ] 出力クラスファイル名【オプション】
+
+\end{description}
+
+\subsection*{備考}
+\begin{itemize}
+\item 
+\end{itemize}
+
+\subsection*{利用例}
+\subsubsection*{例1 基本例}
+
+\begin{verbatim}
+------------------------------------------------
+# tra1.csv
+user,fruit
+Tom,apple orange
+Mary,orange grape pine
+Jim,pine apple
+
+$ kago_t2k.rb tid=user item=fruit i=tra1.csv o=tra1out.csv
+
+# tra1out.csv
+user,fruit
+Jim,apple
+Jim,pine
+Mary,grape
+Mary,orange
+Mary,pine
+Tom,apple
+Tom,orange
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{例2 クラス項目を持ったtra型データからkey型ファイルとclassデータに分割する例}
+
+\begin{verbatim}
+------------------------------------------------
+# tra2.csv
+user,gender,fruit
+Tom,male,apple orange
+Mary,female,orange grape pine
+Jim,male,pine apple
+
+$ kago_t2k.rb tid=user item=fruit class=gender i=tra2.csv o=dat1.csv c=tra2out.csv
+
+# tra2out.csv
+user,fruit
+Jim,apple
+Jim,pine
+Mary,grape
+Mary,orange
+Mary,pine
+Tom,apple
+Tom,orange
+
+# tra2class.csv
+user,gender
+Jim,male
+Mary,female
+Tom,male
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{例3 系列データとして出力する例}
+
+\begin{verbatim}
+------------------------------------------------
+# tra3.csv
+user,fruit
+Tom,apple orange apple
+Mary,orange grape pine
+Jim,pine apple
+
+$ kago_t2k.rb tid=user item=fruit seq=time i=tra3.csv o=tra3out.csv
+
+# tra3out.csv
+user,time,fruit
+Jim,1,pine
+Jim,2,apple
+Mary,1,orange
+Mary,2,grape
+Mary,3,pine
+Tom,1,apple
+Tom,2,orange
+Tom,3,apple
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{関連コマンド}
+
+\hyperlink{kago\_m2k.pdf}{kago\_m2k} : matrix型データの変換
+
+\end{document}
+

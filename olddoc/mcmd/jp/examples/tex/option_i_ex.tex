@@ -1,0 +1,30 @@
+\subsubsection*{例1: 基本例}
+
+\verb|dat1.csv|を入力データとして\verb|mcut|は実行される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+A,2,20
+$ mcut f=顧客,金額 i=dat1.csv o=rsl1.csv
+#END# kgcut f=顧客,金額 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+顧客,金額
+A,10
+A,20
+\end{Verbatim}
+\subsubsection*{例2: 出力項目名の指定}
+
+標準入力をリダイレクト(\verb|"<"|記号)して読み込む。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=顧客,金額 o=rsl2.csv <dat1.csv
+#END# kgcut f=顧客,金額 o=rsl2.csv
+$ more rsl2.csv
+顧客,金額
+A,10
+A,20
+\end{Verbatim}

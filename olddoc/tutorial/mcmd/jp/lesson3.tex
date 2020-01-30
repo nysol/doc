@@ -1,0 +1,222 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{レッスン 3: 集計（その１）}
+
+\verb|msum、mavg、mstats| コマンドを使うと、数値の合計や平均、最小値や最大値を求めることができます。
+
+\subsection{ステップ 1: スクリプトを作成する}
+
+テキストエディタを使って、スクリプトファイル \verb|msum.sh| を作成しましょう。作成したら、ファイルに実行権限を与えるのを忘れないようにしてください。\\
+
+このレッスンでは、トランザクションデータ（スーパーのレシートデータ）から日別の数量合計・金額合計を求めます。\\
+
+そのためには、まず日付、数量、金額の3項目を\verb|mcut| コマンドを使って取り出し、その結果はパイプ（｜）を介して \verb|msortf| コマンドに渡します。パイプを使うと、コマンドの出力を次のコマンドに引き渡すことができます。\\
+集計コマンドを使うには、あらかじめ集計のキー項目（今回の例では日付）でレコードをソートしておく必要があります。最後に \verb|msum| コマンドが数量と金額を日別で合計し、その結果を \verb|msum.csv| ファイルに書き出します。
+
+\subsection{ステップ 2: パラメータを指定する}
+
+{\setlength{\parindent}{0cm}
+
+\verb|msum| コマンドに与えるパラメータは次のようになります。
+
+キー項目: 		\verb|k=日付| \\
+説明: 集計単位となる列を指定します（複数の列を指定することもできます）。このレッスンでは日別に集計を行うので、「日付」列を指定します。\\
+
+項目: 	\verb|f=数量,金額| \\
+説明: どの列の値を合計するのかを指定します。ここでは数量合計と金額合計を求めたいので、「数量」「金額」の2列を指定します。\\
+
+このレッスンでは、レッスン1で作成した \verb|dat.csv| （スーパーマーケットのレシートデータ）を使います。
+}
+
+\begin{verbatim}
+#!/bin/bash
+#========================================
+# MCMD bash script - Lesson 3: Aggregate functions I
+#========================================
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+msortf k=日付 |
+msum k=日付 f=数量,金額 o=outdat/msumout.csv
+
+#========================================
+\end{verbatim}
+
+\subsection{ステップ 3: シェルスクリプトを実行する}
+
+\begin{verbatim}
+$ ./msum.sh
+#END# kgcut f=日付,数量,金額 i=tutorial_jp/dat.csv; IN=24737 OUT=24737; 2013/08/13 12:20:37
+#END# kgsortf f=日付; IN=24737 OUT=24737; 2013/08/13 12:20:37
+#END# kgsum f=数量,金額 k=日付 o=outdat/msumout.csv; IN=24737 OUT=324; 2013/08/13 12:20:37
+\end{verbatim}
+
+\noindent
+結果は次の通りです。
+
+\begin{verbatim}
+日付,数量,金額
+20010108,21,8680
+20010110,67,23495
+20010111,94,38261
+20010116,65,28333
+20010119,210,93586
+20010123,54,19476
+20010125,43,14516
+20010128,43,15448
+20010130,157,60577
+20010131,14,1806
+20010201,8,1024
+20010203,13,2236
+20010204,132,52936
+20010205,62,24132
+20010206,82,29950
+20010208,78,24906
+20010209,50,21776
+20010211,58,23650
+20010212,82,35368
+20010213,65,24974
+20010216,245,89800
+20010217,64,21223
+20010220,30,9774
+20010222,78,32783
+20010223,118,45828
+20010224,182,82685
+20010226,107,40550
+20010227,252,96736
+20010228,137,58384
+20010301,108,40948
+..
+.
+\end{verbatim}
+
+\subsection{ステップ 4: 項目の名前を変更する}
+
+\verb|msum、mavg、mstats| コマンドは、集計した列の名前を変更することができます。たとえば、数量を合計した列は「数量合計」、金額を合計した列は「金額合計」という名前にすることができます。
+具体的には、これらのコマンドでf=パラメータを指定する際、コロン（:）で区切ってf=項目名:新しい項目名のように指定します。:の前後に空白を開けてはいけません。\\
+
+\begin{verbatim}
+#!/bin/bash
+#========================================
+# MCMD bash script - Lesson 3: Aggregate Functions
+#========================================
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+msortf k=日付 |
+msum k=日付 f=数量:数量合計,金額:金額合計 o=outdat/msumout.csv
+
+#========================================
+\end{verbatim}
+
+出力結果の見出し行を確認しておきましょう。
+
+\begin{verbatim}
+日付,数量合計,金額合計
+20010108,21,8680
+20010110,67,23495
+20010111,94,38261
+20010116,65,28333
+20010119,210,93586
+20010123,54,19476
+20010125,43,14516
+20010128,43,15448
+20010130,157,60577
+...
+..
+\end{verbatim}
+
+\subsection{数値データの整形} 
+    
+データに含まれる数値が、たとえば\$99,111,000のように貨幣記号やカンマを含んでいる場合があります。\verb|msum| コマンドなどを使って数値の集計を行うには、事前にこれら貨幣記号やカンマを取り除いておく必要があります。\verb|msed| コマンドは指定した文字を簡単に取り除くことができるので、\$99,111,000から99111000への変換が可能です。\\
+
+\verb|msed| コマンドでは、まず変換したい項目をf=、どのような文字列を探したいかをc=、そしてどのような文字に変換したいかをv=で指定します（今回は特定の文字を取り除きたいので、v=には何も指定しません）。-gオプションを使うと、正規表現にマッチした文字をすべて変換します（-gを付けないと、最初にマッチした文字列のみ変換します）。\\
+
+以下の例は、金額列の変換をしたのちその合計を求めています。\\
+
+ \begin{verbatim}
+# データセット (金額は US$)
+ 日付,商品,金額
+ 20010101,laptop,"$4,000"
+ 20010110,keyboard,"$50"
+ 20010310,lcd,"$10,000"
+ 
+# コマンドの例
+msed f=金額 v= c=[$,] -g  i=dat.csv  |
+msum  f=金額:金額合計   |
+mcut f=金額合計 o=outdat.csv
+
+# 出力結果
+金額合計
+14050
+ \end{verbatim}
+
+{\setlength{\parindent}{0cm}
+
+\subsection{平均を求める}
+
+\verb|mavg| コマンドを使うと、数値の平均を求めることができます。パラメータの与え方は \verb|msum| コマンドと同じです。以下の例は、日別の数量平均を求めています。\\
+
+\begin{verbatim}
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+msort k=日付 |
+mavg k=日付 f=数量:数量平均o=outdat/mavgout.csv
+\end{verbatim}
+
+
+\subsection{mstatsコマンドの使い方}
+
+\verb|mstats| コマンドを使うと、合計や平均に加えて、レコード件数、最小値、最大値、分散、標準偏差を求めることができます。mstatsコマンドを用いて数量と金額の日別合計を求めるスクリプトは、次のようになります。
+
+\begin{verbatim}
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+msort k=日付                     |
+mstats k=日付 f=数量:数量合計,金額:金額合計 c=sum o=outdat/mstatsout.csv
+\end{verbatim}
+
+\verb|mstats| コマンドのc=パラメータで指定できる統計量は1つのみです。次の例は、数量と金額の日別標準偏差を求めています。
+\begin{verbatim}
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+msort k=日付 |
+mstats k=日付 f=数量:数量標準偏差,金額:金額標準偏差 c=sd o=outdat/mstatsout.csv
+\end{verbatim}
+
+
+\subsection{練習問題}
+
+\verb|msum、mavg、mstats| コマンドを使って、次の集計をしてみましょう。出力ファイルとスクリプトを確認してください。
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{レポートの内容}   & \textbf{スクリプト名} & \textbf{出力ファイル名}  \\
+\hline
+1. 日別の数量平均と金額平均 & \href{exercise/agg1.sh}{agg1.sh} & \href{exercise/outdat/aggout1.csv}{aggout1.csv} \\
+2. 日別の数量最大値と金額最大値 & \href{exercise/agg2.sh}{agg2.sh} & \href{exercise/outdat/aggout2.csv}{aggout2.csv} \\
+3. 日別の数量最小値と金額最小値 & \href{exercise/agg3.sh}{agg3.sh} & \href{exercise/outdat/aggout3.csv}{aggout3.csv} \\
+4. 中分類で集計した数量合計と金額合計 & \href{exercise/agg4.sh}{agg4.sh} & \href{exercise/outdat/aggout4.csv}{aggout4.csv} \\
+5. 中分類で集計した数量平均と金額平均 & \href{exercise/agg5.sh}{agg5.sh} & \href{exercise/outdat/aggout5.csv}{aggout5.csv} \\
+6. メーカーと小分類で集計した数量合計と金額合計
+ & \href{exercise/agg6.sh}{agg6.sh} & \href{exercise/outdat/aggout6.csv}{aggout6.csv} \\
+7. メーカーと小分類で集計した数量平均と金額平均
+ & \href{exercise/agg7.sh}{agg7.sh} & \href{exercise/outdat/aggout7.csv}{aggout7.csv} \\
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

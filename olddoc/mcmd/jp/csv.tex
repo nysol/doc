@@ -1,0 +1,196 @@
+
+%\begin{document}
+
+\section{CSV\label{sect:csv}}
+MCMDが処理する表構造データは図\ref{fig:csv_exp1}に例示されるようなCSV(Comma Separated Values)フォーマットである。
+CSVは表構造データのフォーマットのデファクトスタンダードであり、アプリケーションプログラム間でのデータ交換用フォーマットとして 広く利用されている。
+
+\begin{figure}[hbt]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+商品コード,商品名,分類,価格
+0899781,パン,食品,128
+8879674,オレンジジュース,飲料,98
+3244565,チーズ,食品,350
+6711298,茶碗,食器,168
+\end{Verbatim}
+\caption{CSVデータの例\label{fig:csv_exp1}}
+\end{figure}
+
+しかしながら、CSVは標準化協会や企業主導で作成された標準フォーマットではなく、 それ故にベンダー毎にCSV の扱い方法が異なっているのが現状である。
+その中で2005年10月にインターネット標準であるRFC4180としてCSVフォーマットが 提案されたのは注目すべき動きである。
+図\ref{fig:csv_abnf}、RFC4180の中でABNF表現によるCSVの定義を示す。
+
+\begin{figure}[hbt]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+(A) file = [header CRLF] record *(CRLF record) [CRLF]
+(B) header = name *(COMMA name)
+(C) record = field *(COMMA field)
+(D) name = field
+(E) field = (escaped / non-escaped)
+(F) escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+(G) non-escaped = *TEXTDATA
+(H) COMMA = %x2C
+(I) CR = %x0D ;as per section 6.1 of RFC 2234 [2]
+(J) DQUOTE = %x22 ;as per section 6.1 of RFC 2234 [2]
+(K) LF = %x0A ;as per section 6.1 of RFC 2234 [2]
+(L) CRLF = CR LF ;as per section 6.1 of RFC 2234 [2]
+(M) TEXTDATA = %x20-21 / %x23-2B / %x2D-7E
+日本語翻訳：
+\end{Verbatim}
+\caption{CSV のABNF による定義\label{fig:csv_abnf}}
+\end{figure}
+
+図\ref{fig:csv_abnf}中の各行の意味は以下のとおりである。
+
+\begin{itemize}
+\item (A) ファイル(file)は，ヘッダ(header)と1行以上のレコード(record)から構成される。ヘッダはなくてもよい。ヘッダとレコードの末尾には改行(CRLF)が付く。最終レコードの改行(CRLF)は任意である。
+\item (B) ヘッダ(header)は1つ以上の名前(name)で構成され，カンマ(COMMA)で区切られる。
+\item (C) レコード(record)は一つ以上の項目(field)で構成されており，
+\item (D) 名前(name)は項目(field)である。
+\item (E) 項目(field)はエスケープ(escaped)か，非エスケープ(non-escaped)のいずれかである。
+\item (F) エスケープ(escaped)は，ダブルクォーツで囲まれた0個以上のテキスト文字(TEXTDATA)，カンマ(COMMA)，改行文字(CRもしくはLF)，もしくは2つの連続したダブルクォーツである。
+\item (G) 非エスケープ(non-escaped)は0個以上のテキスト文字(TEXTDATA)である。
+\item (H) コンマは16進数アスキーコード2Cである。
+\item (I) キャリッジリターン(CR)は16進数アスキーコード0Dである。
+\item (J) ダブルクォーツ(DQUOTE)は16進数アスキーコード22である。
+\item (K) ラインフィード(LF)は16進数アスキーコード0Aである。
+\item (L) 改行ラインフィードはキャリッジリターン+ラインフィードである。
+\item (M) テキスト文字(TEXTDATA)は16進数アスキーコードで20〜21，23〜2B，もしくは2D〜7Eである。
+\end{itemize}
+
+
+\subsection{Mコマンド独自の定義}
+
+Mコマンドでは上記のCSVの定義に対して以下の制約を追加している。
+
+\begin{itemize}
+\item 項目数は全行同じでなければならない。
+\item 1行の最大長に制限を設ける(デフォルトでは1024000バイト(1MB),10MBまで拡張可能,ただしソースコードkgConfig.hの\verb|KG_LimitRecLen|の値を変更すれば拡張可能)。
+\item 改行はLFのみとする。
+\item 最終レコードであっても改行は必須とする。
+\item テキスト文字として80〜FFを付け加える(マルチバイト文字を扱うため)。 
+\end{itemize}
+
+利用するCSVファイルが上記の定義を満たしているかどうかを確かめるには
+\hyperref[sect:mchkcsv]{mchkcsv}コマンドを利用すればよい。
+
+\subsection{コマンドに共通した入出力の手順}
+
+多くのMCMDで行われるCSVファイルの入出力の手順は概ね以下に示す手順に従っている。
+
+\begin{enumerate}
+\item ファイルからブロック単位でメモリに読み込む。
+\item エスケープ文字を考慮しながらカンマ区切りの項目単位の文字列に分解する。
+\item エスケープ文字を解釈しオリジナルデータに変換する(DQUOTEを外す)。
+\item コマンドの特有の処理を実行し，出力バッファに書き込む。
+\item エスケープが必要であれば，エスケープを付加する。
+\item バッファが一杯になればファイルに出力する。
+\end{enumerate}
+
+
+\subsection{項目の並べ替え情報\label{sect:csv_sort}}
+
+msortfコマンドを使用して項目の並べ替えを行った場合や、
+他のコマンドで\verb|s=|パラメータや\verb|k=|パラメータを使用した場合、
+指定の項目でデータが並べ替えられる。
+その時、出力されるCSVファイルの項目名には、並べ替えに関する情報が付加される。
+具体的には、並べ替え項目として指定した順に\verb|%0|、\verb|%1|、\ldots
+と0から始まる番号が付加される。
+数値として並べ替えたときには\verb|n|が、降順で並べ替えたときには\verb|r|がそれぞれ追加される。
+これらの付加情報はコマンドが効率的な処理のために内部的に利用するものであり、
+ユーザが項目名の一部として指定してはならない。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,item,price
+2,b2,200
+1,a1,100
+2,b1,120
+$ msortf f=id,price%n i=dat1.csv
+id%0,item,price%1n
+1,a1,100
+2,b1,120
+2,b2,200
+$ msum k=id f=price i=dat1.csv
+id%0,item,price
+1,a1,100
+2,b1,320
+\end{Verbatim}
+
+なお、これらの付加情報を削除したければ、以下に示すように\verb|mfldname -q|を実行すればよい。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat2.csv
+id%0,item,price%1n
+1,a1,100
+2,b1,120
+2,b2,200
+$ mfldname i=dat2.csv
+id,item,price
+1,a1,100
+2,b1,120
+2,b2,200
+\end{Verbatim}
+
+なお、項目名の並べ替え情報と実際のデータの並び順が整合していない場合
+（実際には並べ替えられていないのに、項目名に\verb|%0|が付加されているなど）、
+各コマンドの動作は不定となる。
+
+
+\subsection{注意点}
+
+以下にCSVデータで注意すべき点について、例を交えながら説明する。
+
+\subsubsection{カンマを含むデータ}
+カンマを含むデータはダブルクォーツで囲われる。
+以下は、\verb|f1,f2|の2項目から構成されるCSVファイルで、0行目\footnote{MCMDでは統一的に先頭行(項目名行を除いた最初の行)を0行目と呼称する。}
+の\verb|f1|項目はカンマを含んでいるのでダブルクォーツで囲われている。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc,def",2
+xyz,2
+\end{Verbatim}
+
+\subsubsection{ダブルクォーツを含むデータ}
+
+ダブルクォーツを含むデータはダブルクォーツで囲われ，かつ連続するダブルクォーツとして表現される。
+以下は、\verb|f1,f2|の2項目から構成されるCSVファイルで、
+0行目と1行目の\verb|f1|項目はダブルクォーツを含んでおり、
+オリジナルのデータはそれぞれ「\verb|abc"def|」，「\verb|"|」である。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc""def",2
+"""",2
+\end{Verbatim}
+
+\subsubsection{改行を含むデータ}
+
+改行を含むデータもダブルクオーツで囲うことで処理可能である。
+以下の例の0行目の\verb|f1|項目は、\verb|abc|の後に改行が含まれているが、ダブルクオーツで囲われているため、
+行末ではなくデータの一部として識別される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc
+def",1
+\end{Verbatim}
+
+\subsubsection{必要のないダブルクオーツ}
+
+以下のようにダブルクオーツで囲う必要ないデータをダブルクオーツで囲っていた場合、コマンドの出力時には外される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more data.csv
+f1,f2
+"abc",efg
+abc,"efg"
+$ mcut f=f1,f2 i=data.csv
+f1,f2
+abc,efg
+abc,efg
+\end{Verbatim}
+
+%\end{document}
+

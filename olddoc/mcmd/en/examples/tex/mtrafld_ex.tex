@@ -1,0 +1,109 @@
+\subsubsection*{Example 1: Basic Example}
+
+Join the fields \verb|price| and \verb|quantity| to a string, rename output field as \verb|transaction|.
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,price,quantity
+A,198,1
+B,325,2
+C,200,3
+D,450,2
+E,100,1
+$ mtrafld a=transaction f=price,quantity i=dat1.csv o=rsl1.csv
+#END# kgtrafld a=transaction f=price,quantity i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,transaction
+A,price=198 quantity=1
+B,price=325 quantity=2
+C,price=200 quantity=3
+D,price=450 quantity=2
+E,price=100 quantity=1
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+Use \verb|-r| option to revert the output results back to the original data.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -r a=transaction f=price,quantity i=rsl1.csv o=rsl2.csv
+#END# kgtrafld -r a=transaction f=price,quantity i=rsl1.csv o=rsl2.csv
+$ more rsl2.csv
+customer,price,quantity
+A,198,1
+B,325,2
+C,200,3
+D,450,2
+E,100,1
+\end{Verbatim}
+\subsubsection*{Example 3: Specify the delimiter}
+
+\verb|Price| and \verb|quantity| field is separated by “\_” (underscore) character and connected by 1 character string. Use colon and name the output field as \verb|transaction|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld a=transaction f=price,quantity delim=_ delim2=':' i=dat1.csv o=rsl3.csv
+#END# kgtrafld a=transaction delim2=: delim=_ f=price,quantity i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+customer,transaction
+A,price:198_quantity:1
+B,price:325_quantity:2
+C,price:200_quantity:3
+D,price:450_quantity:2
+E,price:100_quantity:1
+\end{Verbatim}
+\subsubsection*{Example 4: When data contains NULL value}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,price,quantity
+A,198,1
+B,,2
+C,200,
+D,450,2
+E,,
+$ mtrafld a=transaction f=price,quantity i=dat2.csv o=rsl4.csv
+#END# kgtrafld a=transaction f=price,quantity i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+customer,transaction
+A,price=198 quantity=1
+B,quantity=2
+C,price=200
+D,price=450 quantity=2
+E,
+\end{Verbatim}
+\subsubsection*{Example 5: When data contains NULL value 2}
+
+Use \verb|-r| option to revert the output results back to the original data.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -r a=transaction f=price,quantity i=rsl4.csv o=rsl5.csv
+#END# kgtrafld -r a=transaction f=price,quantity i=rsl4.csv o=rsl5.csv
+$ more rsl5.csv
+customer,price,quantity
+A,198,1
+B,,2
+C,200,
+D,450,2
+E,,
+\end{Verbatim}
+\subsubsection*{Example 6: Specify -valOnly option}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -valOnly f=price,quantity a=transaction i=dat2.csv o=rsl6.csv
+#END# kgtrafld -valOnly a=transaction f=price,quantity i=dat2.csv o=rsl6.csv
+$ more rsl6.csv
+customer,transaction
+A,198 1
+B,2
+C,200
+D,450 2
+E,
+\end{Verbatim}

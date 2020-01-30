@@ -1,0 +1,167 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[fleqn,a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcal},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mcal (Calculation of between the items or between the inter-record) command}
+Calculate by the formula that is specified in the "c=" parameter, and outputs it to the item name that you specified in the "a =" parameter. The functions include date-time-related, number-related, character string-related, regular expression-related, logic-related and line item-related.
+
+\subsection*{Format}
+mcal a= c= [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}]  [\href{run:option.pdf}{-x}] [\href{run:option.pdf}{precision=}] [\href{run:option.pdf}{i=}] [\href{run:option.pdf}{o=}] [--help]\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & New item name. This parameter is mandatory.\\
+& Specify the name of the item to be added as an output of the calculation results.\\
+& At the time of the x,nfn option use, it can be specified it with an item number ( 0... ). \\
+\verb|c=|    & Formula. None required.\\
+& Specify a formula to be calculated combining of functions arranged.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Data form}
+
+mcal is a command that can calculate flexibly by combining functions arranged.\\
+At that time, it is necessary to be careful on the type of data input and output.\\
+For example, to the date value which represents  "August 15, 2008" as "20080815", if 17 days are added, a result will be set to "20080901", but it is because a result will be set to "20080832" if 17 is added as a numerical value.\\
+mcal has five types : number, character, date(for example, "20080815"), time (for example, "200808155959") and authenticity
+("True" or "False").\\
+
+\subsection*{Constant}
+\noindent
+Number:20 0.55 1.5*e10\\
+Character:"abc" "Japanese"\\
+Date:0d20080923 (0dyyyymmdd)\\
+Time:0t20080923121115 (0tyyyymmddhhmmss)\\
+　(Note) It is possible to be specified by omitting the date. It is complemented by today's date in that case.\\
+　 0t121115 -complementary-> dtyyyymmddhh20080923121115(yyyymmdd is today's date)\\
+Authenticity: 0b1(True) , 0b0(False) \\
+
+\subsection*{Item}
+\noindent
+Number: \$\{Item name\}\\
+Character: \$s\{Item name\}\\
+Date: \$d\{Item name\}\\
+Time: \$t\{Item name\}\\
+　(Note) It is used today's date, in case the value on the data is hhmmss.\\
+Authenticity: \$b\{Item name\}\\
+　(Note) It is interpreted as the first letter of the item value is "1" to True, "0" to False and others to null.\\
+
+\subsection*{Item of the previous line}
+\noindent
+It is possible to use\#\{Item name\} in order to obtain the item value of the previous line. It has the following five different types by the data type as well as \$\{Item name\}.\\
+Number: \#\{Item name\}\\
+Character: \#s\{Item name\}\\
+Date: \#d\{Item name\}\\
+Time: \#t\{Item name\}\\
+Authenticity: \#b\{Item name\}\\
+As a specialty item, it is possible to specify a result item of the previous line by omitting an item name. With combining the if function and it is available to cumulative computation.\\
+The following example is the cumulative computation of the amount item.\\
+
+mcal c='if(top(),\$\{Amount\},\$\{Amount\}+\#\{\})' a=Cumulative amount
+ 
+\subsection*{Operator}
+\noindent
+It exists the four arithmetic operations (only addition and subtraction except numerical value), the comparison operation (including the if function) and the logical operation in common on the five data type.\\
+
+\noindent
+\href{run:sisoku.pdf}{Four arithmetic operations}\\
+\href{run:hikaku.pdf}{Comparison operation}\\
+\href{run:ronri.pdf}{Logical operation}\\
+
+\subsection*{Data type conversion}
+\noindent
+To convert it into a data type for input, it has conversion function as follows :\\
+For example, to convert the data of the date type into the character type, it is used as d2s(0d20080815).\\
+
+\noindent
+\href{run:katahenkan.pdf}{Type conversion function}\\
+
+\subsection*{Function}
+\noindent
+The functions for mcal, it is necessary to make a conscious use the type of input and output values.\\
+The function is divided into the five items:number-related, character string-related, regular expression-related, date-time-related and line item-related as follows.\\
+
+\noindent
+\href{run:sutikanren.pdf}{mcal Number-related}(The function that mainly performs the calculation of regular numerical value  such as sum().)\\
+\href{run:sankakukansu.pdf}{mcal Trigonometric function-related}(The function that mainly performs the calculation related trigonometric function such as sin()).\\
+\href{run:mojiretu.pdf}{mcal Character string-related}(The functions that mainly perform calculations related to the character-string manipulation such as extraction of a substring.)\\
+\href{run:seikihyougen.pdf}{mcal Regular expression-related}(The function that perform calculations related to match with a regular expression.)\\
+\href{run:hizuke.pdf}{mcal Date-time-related}(The function that perform calculations of the type of date-time such as among the dates.)\\
+\href{run:gyoukoumoku.pdf}{mcal Line item-related}(The function that perform calculations related to the three different lines such as top(),line(),fldcnt())\\
+
+\subsection*{Note}
+\noindent
+In case of using a shell such as bash the OS of UNIX system, it is essential to be enclosed in single quotation. Otherwise, those symbols are being interpreted to the shell.\\
+In case of specifying an item, it is required to be enclosed the item name in curly brackets with the symbol of "\$d" which specifies the data type to the top.(Example:\$d\{date\})\\
+To specify it by a regular expression, it is necessary to use an asterisk such as \$s\{date*\}.\\
+
+\subsection*{Error message}
+\noindent
+  \begin{itemize}
+   \item unknown function or operator\\
+    
+  \end{itemize}
+When this error message comes out, there is a mistake in the specification of designation of the operator or function.
+For example, consider the error message for associative function(cat) of character string as follows.
+\begin{verbatim}   
+ ./mcal c='cat("-",1,2)'
+ERROR : unknown function or operator: cat_SNN(cat_SN) (kgcal)
+\end{verbatim}
+\noindent
+cat in front of the underscore of "cat\_SNN" indicates the function name, subsequent SNN shows the type of the argument.
+As for S is a type of strings. N is of the number. D is of date. T is of time. B is of boolean. Since three arguments are specified, they are three characters (SNN).The error message means "the function called cat that takes the SNN as arguments " has not been registered. At that time, the second and third arguments turn to a character string type as follows. \begin{verbatim}   
+ ./mcal c='cat("-","1","2")'
+ \end{verbatim}   
+\noindent
+ex)
+\begin{verbatim}   
+$ mcal c='cat(${productID},${price},"-")' a=productID-price i=dat.csv o=rsl1.csv
+\end{verbatim}
+
+
+\subsection*{related command}
+
+
+\end{document}

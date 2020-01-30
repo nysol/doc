@@ -1,0 +1,64 @@
+\subsubsection*{Example 1: Basic Example}
+
+Split the data by corresponding values in \verb|item| field. Output file names are sequential numbers starting from 0. The key and corresponding number is printed to \verb|table.csv|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,no
+A,1
+A,1
+A,2
+B,1
+B,2
+$ msep2 k=item O=./output a=fileName o=table.csv i=dat1.csv
+#END# kgsep2 O=./output a=fileName i=dat1.csv k=item o=table.csv
+$ ls ./output
+0
+1
+$ more table.csv
+item%0,fileName
+A,./output/0
+B,./output/1
+$ more output/0
+item%0,no
+A,1
+A,1
+A,2
+$ more output/1
+item%0,no
+B,1
+B,2
+\end{Verbatim}
+\subsubsection*{Example 2: Multiple key fields}
+
+Each file name is created according to the sequential number using \verb|item,no| as the composite key field. The key field and its corresponding sequential file names are printed to \verb|table.csv|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,no
+A,1
+A,1
+A,2
+B,1
+B,2
+$ msep2 k=item,no O=./output2 a=fileName o=table.csv i=dat1.csv
+#END# kgsep2 O=./output2 a=fileName i=dat1.csv k=item,no o=table.csv
+$ ls ./output2
+0
+1
+2
+3
+$ more table.csv
+item%0,no%1,fileName
+A,1,./output2/0
+A,2,./output2/1
+B,1,./output2/2
+B,2,./output2/3
+$ more output/0
+item%0,no
+A,1
+A,1
+A,2
+\end{Verbatim}

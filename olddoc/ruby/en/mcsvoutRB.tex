@@ -1,0 +1,218 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mcsvout - Write CSV Class \label{sect:mcsvoutRB}}
+This class returns CSV data file with the following features. 
+
+\begin{itemize}
+%\setlength{\itemindent}{0mm}
+\item Implemented in C++ and thus operate at high speed.
+\item Handle any format with or without field names.
+\item Loosely follow RFC 4180.
+%\footnote{CSVの仕様についての詳しい情報は
+%http://nysol.jp/mcmd/の「MCMDが扱うデータ構造について」を参照。}（カンマやダブルクォーテーションのエスケープなど)。
+\item Assumed that the number of items in each row is fixed.
+\end{itemize}
+
+ 
+\subsection{Method}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvout::new(arguments){block}
+\end{verbatim}
+}
+
+Create Mcsvout object.  Specify the following arguments as character string delimited by space at \verb|arguments|. 
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|o=|    & Output file name (String)\\
+\verb|f=|    & Set the array of field names in character string as header (first line) of CSV output data. \\
+             &  When \verb/size=/ is specified without \verb|f=|, the CSV output will not include field names.\\
+\verb|size=| & Specify the number (Fixnum) of columns in CSV when field names is not present in output. \\
+\verb|precision= | & Specify the number of significant digits as floating variable. Default value is 10 digits. \\
+                   & Value in C language output format \verb/"%.ng"/の\verb|n|の値。\\
+                   & Round 100/3 to significant digits of 5 becomes 33.333, and significant digits of 2 becomes 33. \\
+\verb|bool=| & Specify the true and false output value separated by comma. Default value is "1,0".\\
+\end{tabular} 
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvout::write(values)
+\end{verbatim}
+}
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[values ] Return CSV data stored in array. Data classes that can be stored in the array includes String, Fixnum, Bignum, Float, nil, true, false. 
+All other classes will be treated as nil. 
+If the size of array is less than the number of field names, null value is added to the output. 
+If the size of array is greater than the number of field names, the excess will not be included in the output. 
+\end{description}
+
+\subsection{Remarks}
+\begin{itemize}
+\item If comma is included in character string, the value is automatically enclosed in double quotes. Double quotes in a character string is replaced by two double quote characters.
+
+\end{itemize}
+
+\subsection{Example}
+\subsubsection*{Example 1 Example of including row of field names in CSV output data}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+csv=MCMD::Mcsvout.new("o=rsl.csv f=a,b,c"){|csv|
+  csv.write(["1",2,3.4])
+  csv.write([1,2,3,4,5])
+  csv.write([1,2])
+}
+
+# Output results (rsl.csv)
+a,b,c
+1,2,3.4
+1,2,3
+1,2,
+\end{Verbatim}
+
+\subsubsection*{Example 2 Example of excluding row of fields names in CSV output data}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+csv=MCMD::Mcsvout.new("o=rsl.csv size=3"){|csv|
+  csv.write(["1",2,3.4])
+  csv.write([true,nil,false])
+  csv.write(["4\"5","","6,7"])
+}
+
+# Output results (rsl.csv)
+1,2,3.4
+1,,0
+"4""5",,"6,7"
+\end{Verbatim}
+
+\subsubsection*{Example 3 Specify option (significant digit,bool value)}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+MCMD::Mcsvout.new("o=rsl.csv size=3 precision=3 bools=T,F"){|csv|
+  csv.write([0.123456,123456.0]) # Note that the decimals beyond the specified significant digits are not displayed. 
+  csv.write([123456,0])  # Specifying the number of significant digits does not affect  Fixnum
+  csv.write([true,false])
+}
+
+# Output results (rsl.csv)
+0.123,1.23e+05
+123456,0
+T,F
+\end{Verbatim}
+
+\subsubsection*{Example 4 Copy data}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date
+A,20081201
+B,20081002
+
+MCMD::Mcsvin.new("i=dat1.csv -array"){|csvIn|
+  MCMD::Mcsvout.new("o=rsl.csv f=#{csvIn.names.join(",")}){|csvOut|
+    csvIn.each{|val|
+      csvOut.write(val)
+    }
+  }
+}
+
+# rsl.csv
+customer,date
+A,20081201
+B,20081002
+\end{Verbatim}
+
+\subsection{Benchmark Test}
+
+The processing speed for various Ruby extension library are benchmarked in terms of writing CSV data. Two libraries are benchmarked as follows. 
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[FasterCSV] http://www.gesource.jp/programming/ruby/database/fastercsv.html
+\item[CSV] http://www.ruby-lang.org/ja/old-man/html/CSV.html
+\end{description}
+
+The results of benchmark test is shown in Table \ref{tb:mcsvoutRB_bench1}. 
+1 million rows, 10 million rows, and 100 million rows of data is written for the experiment. However, the data is not written to an actual file, instead, it is printed to null device (/dev/null). An excerpt of the benchmark test script is shown in Figure \ref{fig:mcsvoutRB_script}. 
+Since Mcsvout is implemented in C++, its processing speed is faster than the other two libraries. The difference is because the other two libraries are implemented in Ruby native code. 
+
+
+\begin{table}[htpb]
+\begin{center}
+\caption{Comparison of execution speed among various CSV libraries (in seconds) \label{tb:mcsvoutRB_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r}
+\hline
+Number of rows      & 10K    & 100K  & 1000K \\ \hline
+Mcsvout   & 0.0158 & 0.150 & 1.50  \\
+FasterCSV & 0.232  & 1.90  & 20.0  \\
+CSV       & 0.279  & 2.80  & 27.9  \\
+\hline
+\end{tabular}  
+{\small
+\\The results show the average value (real time) of 10 benchmark tests. \\
+10K number of rows refers to 10,000 rows. 6 types of values including String, Fixnum, Float, true, false, nil are returned in output. \\
+Version: FasterCSV 1.5.1 CSV(Ruby 1.8.7) \\
+Test environment: Mac Book Pro, 2.66GHz Intel Core i7, 8GB memory, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+%\centering
+%\begin{minipage}{.7\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'csv'
+require 'fastercsv'
+require 'mtools'
+
+require 'benchmark'
+
+$data = ["12345678", 10, 1.1, true, nil, false]
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # Case of Mcsvout
+    MCMD::Mcsvout.new("o=/dev/null size=6){|csv|
+      (0...10000).each{|j|
+        csv.write($data)
+      }
+    }
+
+    # Case of FasterCSV
+    FasterCSV.open("/dev/null", 'w'){|csv|
+      (0...10000).each{|j|
+        csv << $data
+      }
+    }
+
+    # Case of CSV
+    CSV.open("/dev/null", 'w'){|csv|
+      (0...10000).each{|j|
+        csv << $data
+      }
+    }
+  }
+}
+\end{Verbatim}
+}
+%\end{minipage}
+\caption{Excerpt of benchmark test script \label{fig:mcsvoutRB_script}}
+\end{figure}
+
+
+\subsection{Related Command}
+
+\hyperref[sect:mcsvinRB]{Mcsvin} : Read from CSV data.
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+

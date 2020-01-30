@@ -1,0 +1,51 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcut 項目の選択\label{sect:mcut}}
+\index{mcut@mcut}
+指定した項目を選択する。
+\verb|-r|オプションを付けると、指定した項目を削除する。
+
+\subsection*{書式}
+\verb|mcut f= [-r] [-nfni]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & 抜き出す項目名\\
+             & 項目名をコロンで区切ることで、出力項目名を変更することができる。\\
+             & ex. \verb|f=a:A,b:B| \\
+\verb|-r|    & 項目削除スイッチ\\
+             & \verb|f=|で指定した項目を削除し、それ以外の項目が抜き出される。\\
+\verb|-nfni| & 入力データの１行目を項目名行とみなさない。よって項目番号で指定しなければならない。\\
+             & 以下のように、新項目名を組み合わせて指定することで項目名行を追加出力することが可能となる。\\
+             & 例）f=0:日付,2:店,3:数量 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mcut_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mfldname]{mfldname} : 項目名を変更したいだけの場合は\verb|mfldname|を使う。
+
+%\end{document}

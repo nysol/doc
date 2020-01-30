@@ -1,0 +1,37 @@
+
+%\begin{document}
+
+\section{mtee - Copy to Multiple Output Files\label{sect:mtee}}
+Contents of input data are copied directly to multiple files and standard output. 
+
+
+\subsection*{Format}
+\verb|mtee [o=] [-nostdout]|
+[\hyperref[sect:option_i]{i=}] 
+[\hyperref[sect:option_nfn]{-nfn}] 
+[\hyperref[sect:option_nfno]{-nfno}]  
+[\hyperref[sect:option_x]{-x}] 
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|        & Output file names. The contents in the input file is duplicated into multiple files. \\
+			& When this parameter is not defined, \verb|mtee| copies input to standard output.\\
+\verb|-nostdout| & Copy to output file but not to standard output.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mtee_ex.tex}
+
+\subsection*{Related Command}
+
+%\end{document}

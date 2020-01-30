@@ -1,0 +1,56 @@
+\subsubsection*{例1: 基本例}
+
+「数量：売上数量」の指定により、項目名が「数量」から「売上数量」に変換されて出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+ブランド,数量
+A,10
+B,20
+C,30
+D,40
+$ mcut f=ブランド,数量:売上数量 i=dat1.csv o=rsl1.csv
+#END# kgcut f=ブランド,数量:売上数量 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+ブランド,売上数量
+A,10
+B,20
+C,30
+D,40
+\end{Verbatim}
+\subsubsection*{例2: 追加項目名}
+
+以下のmaccumコマンドでは、「ブランド」項目で並べ替えた後、
+「数量」項目の値を累積し、「累積数量」項目として追加出力する。
+もし、「f=数量」とだけすれば、累積結果も「数量」という名の項目となり、
+オリジナルの「数量」項目とダブってしまいエラーとなる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ maccum s=ブランド f=数量:累積数量 i=dat1.csv o=rsl2.csv
+#END# kgaccum f=数量:累積数量 i=dat1.csv o=rsl2.csv s=ブランド
+$ more rsl2.csv
+ブランド%0,数量,累積数量
+A,10,10
+B,20,30
+C,30,60
+D,40,100
+$ maccum s=ブランド f=数量 i=dat1.csv o=rsl2.csv
+#ERROR# same field name is specified: 数量 (kgaccum)
+\end{Verbatim}
+\subsubsection*{例3: 番号指定との混在}
+
+番号指定と出力項目名指定を混在させることも可能である。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=0,1:売上数量 -x i=dat1.csv o=rsl3.csv
+#END# kgcut -x f=0,1:売上数量 i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+ブランド,売上数量
+A,10
+B,20
+C,30
+D,40
+\end{Verbatim}

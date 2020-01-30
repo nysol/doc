@@ -1,0 +1,232 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 3: Aggregate functions I }
+
+The \verb|msum, mavg, mstats| commands include aggregate functions to calculate the sum, average, minimum and maximum values based on columns of data. The calculated values are derived from array of data values in each row from the specified column/field.
+
+%\section*{Usage of aggregate commands}
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|msum.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Calculate the total quantity and total amount of goods sold on each unique date. \\
+
+Methodology: Select \emph{date, quantity, amount} with \verb|mcut| command. The output result is redirected as input to the next command \verb|msortf| using pipe. To pipe the output of a command, simply use the vertical line character  \textbar. All rows are sorted by the key value - unique \emph{date} before the aggregate function. The \verb|msum| command then computes the total value of quantity and amount based on the key value \emph{date}. The final result will be saved in file \verb|msum.csv|.
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters as follows: \\
+
+Key: 		\verb|k=date| \\
+Description: 	Key is a column or set of columns that is uniquely identified in the data in any given row, and it also help establish and enforce referential integrity. \verb|date| will become the key where the unit of aggregation is based on.\\
+
+Fields: 	\verb|f=quantity,amount| \\
+Description:  		The \verb|f=| parameter specifies the attributes \verb|quantity| and \verb|amount| to compute sum aggregation.  Note that attribute name is case sensitive, spaces should be omitted between multiple fields.\\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+}
+
+\begin{verbatim}
+#/bin/bash
+#========================================
+# MCMD bash script - Lesson 3: Aggregate functions I
+#========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount     i=${inPath}/dat.csv |
+msortf k=date                    |
+msum k=date f=quantity,amount =outdat/msumout.csv
+
+#========================================
+\end{verbatim}
+
+\subsection*{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./msum.scp
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 
+2013/08/13 12:20:37
+#END# kgsortf f=date; IN=24737 OUT=24737; 2013/08/13 12:20:37
+#END# kgsum f=quantity,amount k=date o=outdat/msumout.csv; IN=24737 OUT=324; 
+2013/08/13 12:20:37
+
+\end{verbatim}
+
+\noindent
+The result looks like the following: 
+
+\begin{verbatim}
+date,quantity,amount
+20010108,21,8680
+20010110,67,23495
+20010111,94,38261
+20010116,65,28333
+20010119,210,93586
+20010123,54,19476
+20010125,43,14516
+20010128,43,15448
+20010130,157,60577
+20010131,14,1806
+20010201,8,1024
+20010203,13,2236
+20010204,132,52936
+20010205,62,24132
+20010206,82,29950
+20010208,78,24906
+20010209,50,21776
+20010211,58,23650
+20010212,82,35368
+20010213,65,24974
+20010216,245,89800
+20010217,64,21223
+20010220,30,9774
+20010222,78,32783
+20010223,118,45828
+20010224,182,82685
+20010226,107,40550
+20010227,252,96736
+20010228,137,58384
+20010301,108,40948
+..
+.
+\end{verbatim}
+
+\subsection{Step 4: Renaming field name / header }
+
+\verb|msum, mavg, mstats| command support renaming of computed field names which can be passed as an argument. \\
+
+Let us rename the attributes \emph{quantity \emph{and} amount} to \emph{totalQuantity \emph{and} totalAmount}. Specify which column the aggregate function is calculated for at the \verb|f=| parameter, followed by a colon, then the new attribute name \verb|f=field:field_newname|. Ensure there are no spaces in between the arguments and attribute names. See the script as follows:
+\\
+
+\begin{verbatim}
+#/bin/bash
+#========================================
+# MCMD bash script - Lesson 3: Aggregate Functions
+#========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount     i=${inPath}/dat.csv |
+msortf k=date                    |
+msum k=date f=quantity:totalQuantity,amount:totalAmount  o=outdat/msumout.csv
+
+#========================================
+\end{verbatim}
+
+The field headers looks as follows: 
+
+\begin{verbatim}
+date,totalQuantity,totalAmount
+20010108,21,8680
+20010110,67,23495
+20010111,94,38261
+20010116,65,28333
+20010119,210,93586
+20010123,54,19476
+20010125,43,14516
+20010128,43,15448
+20010130,157,60577
+...
+..
+\end{verbatim}
+
+\subsection{Formatting numerical data before computation} 
+    
+At times, the dataset includes values in currency format appeared as \$99,111,000. \\
+
+In order to compute aggregate values on these data items, they need to be formatted to numeric data before the operation, thus the currency symbol and digit divider should be removed. The verb|msed| command allow users to remove specified characters in the field and converts numeric values such as \$99,111,000 to 99111000. \\
+
+In \verb|msed| command, specify the target fields to transform at f= parameter, the characters to match at the c= parameter, and the replacement string at v= parameter.  Use to -g option to indicate replacement of substring that matches regular expression specified. \\
+
+Calculate the total sum of all transactions in the following example: 
+
+ \begin{verbatim}
+# Data Set (price in US$)
+ date,description,amount
+ 20010101,laptop,"$4,000"
+ 20010110,keyboard,"$50"
+ 20010310,lcd,"$10,000"
+ 
+# Command
+msed f=amount v= c=[$,] -g 	i=dat.csv 	|
+msum  f=amount:totalAmount  			| 
+mcut f=totalAmount o=outdat.csv
+
+# Output 
+totalAmount
+14050
+ \end{verbatim}
+
+{\setlength{\parindent}{0cm}
+
+\subsection{Use aggregate function to calculate average}
+
+The command \verb|mavg| is similar to \verb|msum|, where \verb|mavg| returns the average of a set of numbers. \\
+The following example shows the calculation of average quantity for each unique date: 
+
+\begin{verbatim}
+mcut f=date,quantity,amount     i=${inPath}/dat.csv |
+msort k=date                    		|
+mavg k=date f=quantity:avgQuantity   o=outdat/mavgout.csv
+\end{verbatim}
+
+
+\subsection{Usage of mstats command }
+
+The command \verb|mstats| includes aggregate functions such as "sum" and "avg", with expanded functionality to various statistics such as count, min, max, variation and standard deviation. An example to calculate total amount and total quantity is as follows: 
+
+\begin{verbatim}
+mcut f=date,quantity,amount     i=${inPath}/dat.csv |
+msort k=date                    		|
+mstats k=date f=quantity:totalQuantity,amount:totalAmount c=sum         o=outdat/mstatsout.csv
+\end{verbatim}
+
+The \verb|mstats| command allow specification of one stats functions at the parameter. The following example computes the standard deviation on quantity and amount for each date, and stores the computed values in sdQuantity and sdAmount. 
+\begin{verbatim}
+mcut f=date,quantity,amount     i=${inPath}/dat.csv |
+msort k=date                    		|
+mstats k=date f=quantity:sdQuanity,amount:sdAmount c=sd      o=outdat/mstatsout.csv
+\end{verbatim}
+
+
+\subsection{Exercise }
+
+Let's create the following reports with \verb|msum, mavg, mstats| command. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Average quantity and average amount for each date. & \href{exercise/agg1.sh}{agg1.sh} & \href{exercise/outdat/aggout1.csv}{aggout1.csv} \\
+2. Maximum quantity and maximum amount for each date. & \href{exercise/agg2.sh}{agg2.sh} & \href{exercise/outdat/aggout2.csv}{aggout2.csv} \\
+3. Minimum quantity and minimum amount for each date & \href{exercise/agg3.sh}{agg3.sh} & \href{exercise/outdat/aggout3.csv}{aggout3.csv} \\
+4. Total quantity and total amount for each 2-digit category code  & \href{exercise/agg4.sh}{agg4.sh} & \href{exercise/outdat/aggout4.csv}{aggout4.csv} \\
+5. Average quantity and average amount for each 2-digit category code  & \href{exercise/agg5.sh}{agg5.sh} & \href{exercise/outdat/aggout5.csv}{aggout5.csv} \\
+6. Total quantity and total amount for each 4-digit category code \\ for each manufacturer
+ & \href{exercise/agg6.sh}{agg6.sh} & \href{exercise/outdat/aggout6.csv}{aggout6.csv} \\
+7. Average quantity and average amount for each 4-digit category code \\ for each manufacturer
+ & \href{exercise/agg7.sh}{agg7.sh} & \href{exercise/outdat/aggout7.csv}{aggout7.csv} \\
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

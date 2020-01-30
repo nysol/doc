@@ -1,0 +1,34 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+
+# a,b,cの3アイテムを使った全組合せ数は8通り。
+# 以下で、fにはそのすべての組合せが格納されているので濃度は1.0となる。
+> f=(a+1)*(b+1)*(c+1)
+> f.show
+ a b c + a b + a c + a + b c + b + c + 1
+> puts f.density
+1.0
+
+# 以下で、fには1通りの組合せ(a b)が格納されているので濃度は1/8=0.125となる。
+> f=a*b
+> f.show
+ a b
+
+> puts f.density
+0.125
+
+# 以下で、fには3通りの組合せ(a b,a,b)が格納されているので濃度は3/8=0.375となる。
+> f+=a
+> f+=b
+> f.show
+ a b + a + b
+> puts f.density
+0.375
+\end{Verbatim}

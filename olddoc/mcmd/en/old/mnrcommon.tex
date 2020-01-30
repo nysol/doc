@@ -1,0 +1,159 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mnrcommon},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mnrcommon (select records within specified range(s) from reference file) command}
+Select the record in the input file that matches the records within the defined range(s) defined from the reference file.
+ \emph{k=} parameter specifies the key field name from the input file to match with the key defined in \emph{K=} in the reference file. The selection criteria is based on the data series from the input file defined in \emph{v=} parameter for records that falls within the data range in the reference file defined in the \emph{R= } parameter. 
+Add \verb|%n| after the item name if the field defined at \emph{v=} parameter is a numerical value.  
+
+\subsection*{Format}
+mnrcommon  k= m= R= v= [K=] [u=] [-r] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{i=}] 
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Key item(s) to match in the input file. (Multiple keys can be specified)【required parameter】\\
+& The key(s) specified will be matched with the key field(s) defined in \emph{K=} parameter from the reference file. \\
+& Sort data by key field(s) as specified in the "k =" parameter prior to the command.  \\
+& Use the x,nfn option to pecify item number (0〜). \\
+
+\verb|m=|    & Reference file【required parameter】\\
+& Specify name of reference file. \\
+\verb|R=|    & Values of data range 【required parameter】\\
+& Define start and end values of data range in reference file. \\
+& If the start value of the data range is null, the end value will be treated as null. \\
+\verb|v=|    & Field name of data series for matching [\%{n}] 【required parameter】\\
+&  Records in the input file that matches the key field specified in the \emph{k=} parameter in the reference data is selected.  \\
+& This parameter specifies the field name for matching based on the key field.  \\
+\verb|K=|    &  Key field(s) in the reference data (Multiple keys can be specified). 【optional parameter】\\
+& The key specified will be matched with the key field defined in \emph{k=} parameter from the input file.  \\
+& Records in the input file that matches the key field specified in the \emph{k=} parameter in the reference data is selected. \\
+& ※Note: Sort data by key field(s) specified in the "K=" parameter prior to the command. \\
+& Use x,nfn option to specify the item number (0...). \\
+\verb|u=|    & Output file containing unmatched records. 【optional parameter】\\
+&  Write the unmatched records to this output file.  \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-r|  & Reverse selection\\
+& Select records that is not within the data range defined in the \emph{R=} parameter. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Select records where the transaction date is 20080203 with transaction amount [greater than 10 and less than 35] or [greater than 5 and less than 40].   \\Print all records that fall outside the defined range to a separate file oth.csv. }
+\noindent
+※Note: Input file and reference file should be sorted according to date beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Date,Quantity,Amount
+20080123,1,10
+20080123,2,20
+20080203,1,10
+20080203,3,35
+200804l0,1,50
+
+# Reference file (ref.csv)
+Date,AmountF,AmountT,AverageAmount
+20080203,10,35,25
+20080203,5,40,35
+
+$ mnrcommon k=Date m=ref.csv R=AmountF,AmountT v=Amount%n u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file(rsl.csv)
+Date,Quantity,Amount
+20080203,1,10
+20080203,3,35
+
+#Output file2 (oth.csv)
+Date,Quantity,Amount
+20080123,1,10
+20080123,2,20
+200804l0,1,50
+
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Select records where the transaction date is 20080203 with transaction amount greater than 10 and less than 35, or records outside the range that is above 5 and below 40. }
+\noindent
+※Note：Input file and reference file should be sorted according to date beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Date,Quantity,Amount
+20080123,1,10
+20080123,2,20
+20080203,1,10
+20080203,3,35
+200804l0,1,50
+
+# Reference file(ref.csv)
+Date,AmountF,AmountT,AverageAmount
+20080203,10,35,25
+20080203,5,40,35
+
+$ mnrcommon k=Date m=ref.csv R=AmountF,AmountT v=Amount%n -r i=dat.csv o=rsl2.csv
+
+# Output file1(rsl2.csv)
+Date,Quantity,Amount
+20080123,1,10
+20080123,2,20
+200804l0,1,50
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Related commands}
+\noindent
+\href{run:mcommon.pdf}{mcommon}:Select common records in reference file\\
+\href{run:mnrjoin.pdf}{mnrjoin}:Natural join data from the reference file with multiple ranges. 参照ファイルの複数範囲条件による自然結合\\
+\href{run:mrjoin.pdf}{mrjoin}:Join data from reference file within data range \\
+
+
+\end{document}

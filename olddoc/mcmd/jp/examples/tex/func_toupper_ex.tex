@@ -1,0 +1,21 @@
+\subsubsection*{例1: 基本例}
+
+$str$項目のアルファベット小文字を全て大文字に変換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abc
+2,Ab$12!cD
+3,
+4,Cba
+$ mcal c='toupper($s{str})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=toupper($s{str}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abc,ABC
+2,Ab$12!cD,AB$12!CD
+3,,
+4,Cba,CBA
+\end{Verbatim}

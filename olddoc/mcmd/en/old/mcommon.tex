@@ -1,0 +1,237 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcommon},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mcommon (select common records in reference file) command}
+Compare the records in the input file with the records in the reference file specified by the \emph{m=} parameter. Select the records that are common in both files based on the key specified in the \emph{k=} parameter. 
+
+\subsection*{Format}
+mcommon  k= m= [K=] [u=] [-r] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{i=}] 
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Key field(s) in input file  (Multiple keys can be specified)【required parameter】\\
+& Records in the reference file that matches the key field specified in the \emph{k=} parameter in the input data is selected.   \\
+& Note: Sort data by key field(s) as specified in the "k =" parameter prior to the command. \\
+& Records with same key values will therefore appear in consecutive rows.  \\
+& Specify in the item number (0〜) when using the x,nfn option. \\
+\verb|m=|    & Reference file【required parameter】\\
+& Name of reference file \\
+& Standard input specified by \emph{i=} option is used when reference file is not defined. \\
+\verb|K=|    & Key field(s) in the reference data (Multiple keys can be specified). 【optional parameter】\\
+& Records in the input file that matches the key field specified in the \emph{k=} parameter in the reference data is selected.   \\
+& The parameter is not required if the key field is the same on both input data and reference file. \\
+&  ※Note: Sort data by key field(s) as specified in the "K=" parameter prior to the command. \\
+& Records with same key values will therefore appear in consecutive rows. \\
+& Use x,nfn option to specify the item number (0...). \\
+\verb|u=|    & Output file containing unmatched records. 【optional parameter】\\
+& Write the unmatched records to this output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-r|  & Reverse selection\\
+& The field(s) specified in \emph{k=} parameter from the input file is compared with the same field(s) specified in the \emph{m=} paramater. \\
+& Select unmatched records defined at specified fields in both input and output files. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Remarks}
+Key field in reference file
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Select records with common customers in both input file and reference file. Save the records that did not exist in the reference file to a separate file oth.csv.}
+\noindent
+※Note: Data is sorted by customer in ascending order in both input file and reference file beforehand.
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer, Quantity, Amount
+A,1,10
+B,2,20
+C,1,15
+D,3,10
+E,1,20
+
+# Reference file(ref.csv)
+Customer, Sex
+A,Female
+B,Male
+E,Female
+
+$ mcommon k=Customer m=ref.csv u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file (rsl.csv)
+Customer, Quantity, Amount
+A,1,10
+B,2,20
+E,1,20
+
+#Output file2(oth.csv)
+Customer, Quantity, Amount
+C,1,15
+D,3,10
+
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Select the customers in the input file that are not in the reference file.}
+\noindent
+※Note: Data is sorted by customer in ascending order in both input file and reference file beforehand.
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer, Quantity, Amount
+A,1,10
+B,2,20
+C,1,15
+D,3,10
+E,1,20
+
+# Reference file(ref.csv)
+Customer, Sex
+A,Female
+B,Male
+E,Female
+
+$ mcommon k=Customer m=ref.csv -r i=dat.csv o=rsl2.csv
+
+# Output file1(rsl2.csv)
+Customer, Quantity, Amount
+C,1,15
+D,3,10
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Select records with the same customer and date in both input file and reference file. }
+\noindent
+※Note: Data is sorted by customer in ascending order in both input file and reference file beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat2.csv)
+Customer, Quantity, Amount, Date
+A,1,10,2012/01/01
+A,1,10,2012/01/01
+A,1,10,2012/01/02
+A,1,10,2012/01/03
+B,2,20,2012/01/01
+B,2,20,2012/01/01
+C,1,15,2012/01/01
+C,1,15,2012/01/03
+C,1,15,2012/01/04
+C,1,15,2012/01/05
+D,3,10,2012/01/01
+D,3,10,2012/01/01
+E,1,20,2012/01/02
+
+# Reference file(ref2.csv)
+Customer ID, Sex, Date of coming
+A,Female,2012/01/01
+A,Female,2012/01/02
+B,Male,2012/01/01
+B,Male,2012/01/02
+B,Male,2012/01/03
+E,Female,2012/01/01
+E,Female,2012/01/02
+
+$ mcommon k=Customer,Date K=Customer ID, Date of coming i=dat2.csv m=ref2.csv  o=rsl3.csv
+
+# Output file(rsl3.csv)
+Customer, Quantity, Amount, Date
+A,1,10,2012/01/01
+A,1,10,2012/01/01
+A,1,10,2012/01/02
+B,2,20,2012/01/01
+B,2,20,2012/01/01
+E,1,20,2012/01/02
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Select records with duplicate common key fields from input file and reference file.  }
+\noindent
+※Note: Data is sorted by customer in ascending order in both input file and reference file beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat4.csv)
+Customer,Quantity 
+A,1
+A,2
+A,3
+B,1
+D,1
+D,2
+
+# Reference file (ref4.csv)
+Customer
+A
+A
+D
+
+$ mcommon k=Customer m=ref4.csv i=dat4.csv o=rsl4.csv
+
+# Output file 4(rsl4.csv)
+Customer,Quantity
+A,1
+A,2
+A,3
+D,1
+D,2
+------------------------------------------------
+\end{verbatim}
+
+
+\subsection*{Related commands}
+\noindent
+\href{run:mselstr.pdf}{mselstr}: Select records by character string\\
+\href{run:msel.pdf}{msel}:Select records with condition\
+\href{run:mjoin.pdf}{mjoin}:Join data from the reference file \\
+\href{run:mnjoin.pdf}{mnjoin}:Natural join with data from reference file \\
+
+\end{document}

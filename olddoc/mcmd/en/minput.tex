@@ -1,0 +1,102 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{minput Enable on-screen input\label{sect:minput}}
+\index{minput@minput}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command displays an input frame of the length specified by the \verb|len=| parameter at a position on the terminal specified by coordinate \verb|x=,y=|, and outputs the input contents to the file specified by the \verb|o=| parameter. When the Enter key is pressed on the input screen, the command returns end status 0 and ends. When the ESC key is pressed on the screen, the command returns end status 1 and ends. In either case, the contents that have been entered that far are output to the file.
+The output CSV file contains one row and one field. When the command ends with nothing entered in the input frame, null is output (that is, only a line feed is output). To output a fieldname, use the \verb|f=| parameter. With \verb|f=| omitted, no fieldname header is output. 
+In the coordinate system, the top left is \verb|x=1,y=1| (escape sequence specifications). If the value specified for \verb|x=| or \verb|y=| is smaller than 1, the command assumes 1. The operation is indefinite if the specified coordinate is outside the scope of the terminal.
+
+\subsection*{Format}
+\verb/minput x= y= len= [f=] /
+\hyperref[sect:option_o]{o=}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|x=|   & Specify the display start position (1 or greater) on the x axis (horizontal, left to right).\\
+\verb|y=|   & Specify the display start position (1 or greater) on the y axis (vertical, top to bottom).\\
+\verb|len=| & Specify the length by the number of single-byte characters in the input area.\\
+\verb|f=|   & Specify the output fieldname.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+
+\subsubsection*{Example 1: Basic example}
+A 12-character input area is displayed at x=10,y=5 on the terminal. The user types abcd in the input frame and presses Enter. The input results are saved as rsl1.csv.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ minput x=10 y=5 len=12 o=rsl1.csv
+$ more rsl1.csv
+abcd
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|
+|
+|          [abcd        ]
+|
+|
+\end{Verbatim}
+
+\subsubsection*{Example 2: Basic example, with a fieldname specified}
+Operation is the same as in Example 1, with an addition of the f= parameter to specify a fieldname.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ minput x=10 y=5 len=12 f=name o=rsl1.csv
+$ more rsl1.csv
+name
+abcd
+\end{Verbatim}
+
+
+\subsubsection*{Example 3: Judging end status}
+The parameters are the same as in Example 1. This script judges the end status and performs different operations accordingly.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more scp.sh
+rm -f rsl2.csv
+clear
+minput x=10 y=5 len=12 o=rsl2.csv
+if [ $? = 0 ] ; then
+  clear ; echo "end by enter key"
+else
+  clear ; echo "end by escape key"
+fi
+
+# Result of typing abcd and pressing Enter
+$ bash scp.sh
+end by enter key
+$ more rsl2.csv
+abcd
+
+# Result of typing abcd and pressing ESC key
+$ bash scp.sh
+end by escape key
+$ more rsl2.csv
+abcd
+\end{Verbatim}
+
+\subsection*{Related Commands}
+\hyperref[sect:mminput] {mminput} : Displays the input screen consisting of multiple input frames.
+\hyperref[sect:mdsp] {mdsp} : Displays a character string at the specified position on the screen.
+\hyperref[sect:mseldsp] {mseldsp} : Displays a single-choice input window on the screen.
+\hyperref[sect:mmseldsp] {mmseldsp} : Displays a multiple-choice input window on the screen.
+
+%\end{document}

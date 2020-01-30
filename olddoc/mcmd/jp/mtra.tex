@@ -1,0 +1,61 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mtra 縦型データをベクトル項目に変換\label{sect:mtra}}
+\index{mtra@mtra}
+\verb|f=|パラメータで指定した項目値をアイテムとし、それらのアイテムを連結し新しいベクトル項目(トランザクション項目とも呼ぶ)として出力する。
+アイテムの区切り文字は\verb|delim=|パラメータで指定する。
+
+\subsection*{書式}
+\verb|mtra f= [s=] [k=] [delim=] [-r]  | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|        & 入力ファイル名を指定する。\\
+\verb|o=|        & 出力ファイル名を指定する。\\
+\verb|f=|        & ここで指定した項目(複数項目指定可)の値がアイテムとして連結されトランザクション項目となる。\\
+                 & NULL値は無視される。\\
+\verb|s=|        & ここで指定した項目(複数項目指定可)で並べ替えられた後、変換が行われる。\\
+%\verb|k=|        & 文字列パターンの単位となる項目名(複数項目指定可)リスト。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|k=|        & 文字列パターンの単位となる項目名(複数項目指定可)リスト。\\
+                 & \verb|-r|オプションが指定された時は指定できない。\\
+\verb|delim=|    & ここで指定した文字を区切り文字とする（省略時はスペース）。\\
+\verb|-r|        & 条件反転\\
+                 & トランザクション項目を縦型データに変換する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mtra_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mvsort]{mvsort} : トランザクションデータは、ベクトル型データを処理する一連の処理コマンド(\verb|mv|から始まる)によって加工できる。
+
+\hyperref[sect:mcross]{mcross} : トランザクションデータとしてではなく、個々のアイテムを独立した項目として出力し、その出現件数を出力する。
+
+\hyperref[sect:mtrafld]{mtrafld} : 「項目名=値」の形式でトランザクションデータを作成する。
+
+\hyperref[sect:mtraflg]{mtraflg} : 項目名をアイテムとしてトランザクションデータを作成する。
+
+%\end{document}

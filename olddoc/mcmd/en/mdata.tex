@@ -1,0 +1,149 @@
+
+%\documentclass{jarticle}
+%\begin{document}
+
+\section{mdata Generate datasets\label{sect:mdata}}
+\index{mdata@mdata}
+This command generates various datasets. For details of the datasets, see the descriptions below.
+
+\subsection*{Format}
+\verb/mdata [O=] -iris|-man0|-man1|-tutorial_en|-tutorial_jp|-yakiniku_en|-yakiniku_jp/
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|O=|    & Output filename. By default, data is output to the standard output.\\
+             & When \verb|-tutorial_jp| or \verb|-tutorial_en| is specified, it is a directory name.\\
+             & By default, \verb|O=tutorial_jp| or \verb|O=tutorial_en| is assumed.\\
+\verb|-iris| & A data set designed for building a classification model for the species of irises based on the sepal and petal sizes\\
+             & Fieldnames: SepalLength, SepalWidth, PetalLength, PetalWidth, Species\\
+             & \href{http://archive.ics.uci.edu/ml/datasets/Iris?ref=datanews.io}{http://archive.ics.uci.edu/ml/datasets/Iris?ref=datanews.io} \\
+\verb|man0|  & 5-row data used in Figure \ref{fig:abstract0_1} of this manual\\
+             & Fieldnames: customer, amount\\
+\verb|man1|  & 8-row data used in Figure \ref{fig:abstract2_1} of this manual\\
+             & Fieldnames: customer, date, product\\
+\verb|yakiniku_jp| & Sales data from a rotisserie \verb|(|sales data from Rotisserie \href{https://r.gnavi.co.jp/c032802/}{Fukugyu} provided by \href{http://okayamafs.com/}{Okayama Food Service}\verb|)|\\
+                   & \verb|Fieldnames: 日付(date),時間(time),レシート(receipt),商品(product),単価(unit price),数量(quantity),金額(totalAmount)|\\
+                   & \verb|Note 1: The 日付(date) field holds the order time. Even on the same receipt, a different time is recorded for each additional order.|\\
+                   & \verb|Note 2: 金額(totalAmount)=単価(unit price)×数量(quantity)|\\
+\verb|yakiniku_en| & English version of the rotisserie order data\\
+                   & Fieldnames: date,time,receipt,item,price,quantity,totalAmount \\
+\verb|tutorial_jp| & Pseudo purchase data of a supermarket used in the tutorial\\
+                   & \verb|dat.csv|: Purchase history data\\
+                   & \verb|Fieldnames:店(store),日付(date),時間(time),レシート(receipt),顧客(customer),商品(product),大分類(CategoryCode1),中分類(CategoryCode2),小分類(CategoryCode4),細分類(CategoryCode6),メーカー(maker),ブランド(brand),|\\
+                   & \verb|仕入単価(purchase price),単価(unit price),数量(quantity),金額(totalAmount),仕入金額(purchase amount),粗利金額(gross profit amount)|\\
+                   & \verb|syo.csv|: product master\\
+                   & \verb| Fieldnames: 商品(product),商品名(product name),大分類(CategoryCode1),中分類(CategoryCode2),小分類(CategoryCode4),細分類(CategoryCode6),メーカー(maker),ブランド(brand),仕入単価(purchase price)|\\
+                   & \verb|cust.csv|: Customer master\\
+                   & \verb|Fieldnames: 顧客(customer),生年月日(birthday),性別(sex)|\\
+                   & \verb|jicfs1,2,4,6.csv|: Product category master\\
+                   &   Fieldnames: 大分類(CategoryCode1),大分類名(Category1),中分類(CategoryCode2),中分類名(Category2),小分類(CategoryCode4),小分類(Category4),細分類(CategoryCode6),細分類名(Category6)\\
+\verb|tutorial_en| & English version of the tutorial\_jp dataset\\
+                   & \verb|dat.csv|: Purchase history data\\
+                   &   Fieldnames: shop,date,time,receipt,customer,product,CategoryCode1,CategoryCode2,CategoryCode4,\\
+                   & CategoryCode6,manufacturer,brand,unitCost,unitPrice,quantity,amount,costAmount,profit\\
+                   & \verb|syo.csv|: product master\\
+                   &   Fieldnames: product,productName,CategoryCode1,CategoryCode2,CategoryCode4,CategoryCode6,\\
+                   & manufacturer,brand,unitCost \\
+                   & \verb|cust.csv|: customer master\\
+                   &   Fieldnames: customer,dob,gender \\
+                   & \verb|jicfs1,2,4,6.csv|: product category master\\
+                   &   Fieldnames: CategoryCode1,Category1(CategoryCode2,Category2)(CategoryCode4,Category4)\\
+                   & (CategoryCode6,Category6)\\
+\end{tabular} 
+}
+\end{table} 
+
+%データセット名とそれに対するパラメータを"/"で区切ることで指定する。
+%データセットの一覧と内容は表\ref{tbl:mdata_dataset}に示すとおりである。
+%パラメータの与え方はそれぞれのデータセットによって異なり、その方法も同表に示されている。
+
+%\begin{table}[hbt]
+%\begin{center}
+%\caption{データセット名とその内容\label{tbl:mdata_dataset}}
+%{\small
+%\begin{tabular}{l|l|l}
+%\hline
+%データセット名 & 内容 & パラメータ \\ \hline \hline
+%\verb|iris| & 萼片と花びらの大きさによって、アヤメの種類の   & なし \\
+%            & 分類モデルの構築を目的に構成されるデータセット &\\ \hline
+%\verb|man0| & 本マニュアルの図\ref{fig:abstract0_1}で使われているデータ & なし \\ \hline
+%\verb|man1| & 本マニュアルの図\ref{fig:abstract2_1}で使われているデータ & なし \\ \hline
+%\verb|yakiniku_jp| & 焼肉店の注文データ & なし \\ \hline
+%\verb|yakiniku_en| & 焼肉店の注文データの英語版 & なし \\ \hline
+%\verb|tutorial_jp| & チュートリアルで利用されるスーパーマーケットの & データ名を指定すると各データが標準出力に出力される。\\
+%                   & 擬似購買データ。顧客マスターや商品マスターなど & 指定しないと全てのファイルが\verb|tutorial_jp|\\
+%                   & 複数のデータファイルから構成される。           & ディレクトリの下に生成される。\\
+%                   &                                                & データ名とその内容は以下のとおり。\\
+%                   &                                                & \verb|dat|:購買データ \\
+%                   &                                                & \verb|syo|:商品マスター \\
+%                   &                                                & \verb|cust|:顧客マスター \\
+%                   &                                                & \verb|jicfs1,jicfs2,jicfs4,jicfs6|:商品分類マスター \\ \hline
+%\verb|tutorial_en| & \verb|tutorial_jp|データセットの英語版 & \verb|tutorial_jp|に同じ \\ \hline
+%\end{tabular}
+%}
+%\end{center}
+%\end{table}
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Generating iris dataset}
+The iris dataset is generated and sent to the standard output.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -iris
+SepalLength,SepalWidth,PetalLength,PetalWidth,Species
+5.1,3.5,1.4,0.2,setosa
+4.9,3,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+         :
+\end{Verbatim}
+
+\subsubsection*{Example 2 Creating tutorial datasets}
+All tutorial datasets are output to a file.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -tutorial_en
+#END# mdata -tutorial_en
+
+$ ls -l tutorial_en
+total 4704
+-rw-r--r--  1 nysol  staff    20673  8 22 08:14 cust.csv
+-rw-r--r--  1 nysol  staff  2281312  8 22 08:14 dat.csv
+-rw-r--r--  1 nysol  staff      128  8 22 08:14 jicfs1.csv
+-rw-r--r--  1 nysol  staff      529  8 22 08:14 jicfs2.csv
+-rw-r--r--  1 nysol  staff     6630  8 22 08:14 jicfs4.csv
+-rw-r--r--  1 nysol  staff    36400  8 22 08:14 jicfs6.csv
+-rw-r--r--  1 nysol  staff    46466  8 22 08:14 syo.csv
+
+$ more tutorial_en/dat.csv
+customer,dob,gender
+00000A,19711107,female
+00000B,19461025,female
+00000C,19660307,female
+         :
+\end{Verbatim}
+
+\subsubsection*{Example 3 Generating rotisserie data}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+$ mdata -yakiniku_jp
+日付,時間,レシート,商品,単価,数量,金額
+20070701,1123,10000,焼肉ヘルシーセット,1410,1,1410
+20070701,1152,10001,和牛焼肉弁当,1240,1,1240
+20070701,1202,10002,ランチコーヒー,130,2,260
+             :
+$ mdata -yakiniku_en
+date,time,receipt,item,price,quantity,totalAmount
+20070701,1123,10000,Low-fat BBQ set,1410,1,1410
+20070701,1152,10001,Japanese grilled beef lunch box,1240,1,1240
+20070701,1202,10002,Lunchtime coffee,130,2,260
+         :
+\end{Verbatim}
+
+%\end{document}

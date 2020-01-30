@@ -1,0 +1,20 @@
+
+%\begin{document}
+
+\subsection{bufcount= バッファの数\label{sect:option_bufcount}}
+mbucket,mnjoin,mshareなど、キー単位の処理において、データを複数パス走査する必要のあるコマンドにおいて
+利用する内部バッファの数(ブロック数)を指定する。
+一つのバッファは4MBで、デフォルトでは10ブロック(40MB)である。
+データがバッファに収まらない場合は一時ファイルに書き出されるため、
+キーのサイズが非常に大きい場合は、メモリに余裕があれば、このパラメータを調整することで処理速度の向上が期待できる。
+
+\subsection*{利用例}
+\input{examples/tex/option_bufcount_ex.tex}
+
+\subsubsection*{対応コマンド}
+\hyperref[sect:mbucket]{mbucket},
+\hyperref[sect:mnjoin]{mnjoin},
+\hyperref[sect:mshare]{mshare}など、キー単位の処理において、データを複数パス走査する必要のあるコマンド。
+
+%\end{document}
+

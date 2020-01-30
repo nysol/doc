@@ -1,0 +1,45 @@
+\subsubsection*{Example 1: Basic Example}
+
+Calculate the date by setting a reference date  (defined as January 01, 2007)  and add the string “\verb|20070101|” in all lines and save the output as a new column named “ReferenceDate”.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,date
+A,20081202
+A,20081204
+B,20081203
+$ msetstr v=20070101 a=ReferenceDate i=dat1.csv o=rsl1.csv
+#END# kgsetstr a=ReferenceDate i=dat1.csv o=rsl1.csv v=20070101
+$ more rsl1.csv
+customer,date,ReferenceDate
+A,20081202,20070101
+A,20081204,20070101
+B,20081203,20070101
+\end{Verbatim}
+\subsubsection*{Example 2: Add multiple fields}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msetstr v=20070101,20070201 a=RefDate1,RefDate2 i=dat1.csv o=rsl2.csv
+#END# kgsetstr a=RefDate1,RefDate2 i=dat1.csv o=rsl2.csv v=20070101,20070201
+$ more rsl2.csv
+customer,date,RefDate1,RefDate2
+A,20081202,20070101,20070201
+A,20081204,20070101,20070201
+B,20081203,20070101,20070201
+\end{Verbatim}
+\subsubsection*{Example 3: Add column with null values}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msetstr v= a=NewColumn i=dat1.csv o=rsl3.csv
+#END# kgsetstr a=NewColumn i=dat1.csv o=rsl3.csv v=
+$ more rsl3.csv
+customer,date,NewColumn
+A,20081202,
+A,20081204,
+B,20081203,
+\end{Verbatim}

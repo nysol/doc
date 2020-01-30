@@ -1,0 +1,415 @@
+
+%\documentclass[a4paper]{jarticle}
+
+\section{mnb.rb Na{\"i}ve Bayes分類器\label{sect:nb}}
+\index{nb@nb}
+ベイズの定理による確率モデルを用いた教師あり学習の分類器を構築する．
+アイテムの出現を条件としたときの各クラスに属する確率が計算され，テストデータに対しては予測されたクラスが返される．
+本コマンドの特徴は以下の通りである。
+
+\begin{itemize}
+ \item アイテムの頻度情報を扱えるようにMultinomial Na{\"i}ive Bayesを用いている。
+ \item 未知データで初めてアイテムが出現した場合、そのアイテムを含む確率がゼロになる問題をラプラススムージングによって回避している。
+ \item Complement Na{\"i}ve Bayesが利用可能である。
+ \item 交差検証を用いてモデルの判別精度が評価できる。
+ \item モデルの構築モードと未知データを与えての予測モードがある。
+\end{itemize}
+
+
+\subsection{解説}
+
+Na{\"i}ve Bayesモデルは，独立性の仮定とベイズの定理を利用した確率モデルである．
+特徴値の出現を$w_i=0,1$とする特徴ベクトル${\bf w}=(w_1,w_2,\cdots,w_n)^\top$を考える．
+${\bf w}$の出現を条件とした
+各クラス$c$の確率$p(c|{\bf w})$は，
+ベイズの定理により式(\ref{eqn:bayes})で表される．
+
+%----------------------------------
+\begin{equation}
+p(c|{\bf w})=\frac{p({\bf w}|c)p(c)}{p({\bf w})}
+\label{eqn:bayes}
+\end{equation}
+%----------------------------------
+
+分母の$p({\bf w})$は，$c$によらず一定である．そこで，分子について見ると，
+$p(c)$はクラス$c$の事前確率で，この確率が
+クラスの中で特徴ベクトル${\bf w}$の出現確率である尤度$p({\bf w}|c)$によって，
+事後確率$p(c|{\bf w})$へと更新される．
+これがベイズの定理が意味することである．
+
+${\bf w}$の次元が高くなると，単語の同時確率$p({\bf w}|c)$の推定が困難となるため，
+Na{\"i}ve Bayes法は，式(\ref{eq:ind})に示されるように，
+全ての単語の出現は独立であるというナイーブな仮定をおくことで，$p({\bf w}|c)$を計算する．
+\begin{equation}
+p({\bf w} | c)=\prod p(w_i|c)
+\label{eq:ind}
+\end{equation}
+
+以上のことを踏まえると$p(c|{\bf w})$は式(\ref{eqn:bayes2})で表され，
+そして，分類器を構築するために，最も尤もらしい仮説を採用する最大事後確率（MAP）決定規則を用いて，
+推定クラス${\hat c}$は式(\ref{eqn:bayesCal})によって求めることができる．
+
+\begin{equation}
+p(c|{\bf w}) \propto \sum_i \ln{p(w_i|c)}
+\label{eqn:bayes2}
+\end{equation}
+%
+\begin{equation}
+{\hat c}=\argmax_{c} \; p(c)\sum_i \ln{p(w_i|c)}
+\label{eqn:bayesCal}
+\end{equation}
+
+ナイーブベイズ分類器が実際に利用される場合には，
+特徴ベクトルは，例えば，単語やアイテムなどであり，
+それらには，単語の出現回数や，アイテムの購買回数など頻度情報を伴う場合が多い．
+そこで特徴ベクトル${\bf f}$の要素$f_i$を特徴値$i$の出現頻度とすると，
+各推定クラス${\hat c}$は，式(\ref{eq:bayesMul})に示されるように，
+尤度に頻度$f_i$を乗じて計算される．
+これがMultinomial Na{\"i}ve Bayesモデルである．
+
+\begin{equation}
+{\hat c}=\argmax_{c} \; p(c)\sum_i f_i \ln{p(w_i|c})
+\label{eq:bayesMul}
+\end{equation}
+
+\subsubsection{ゼロ頻度問題}
+あるクラスとある特徴値の組合せが訓練例に出現しない場合に確率推定はゼロとなり，乗算に用いると積がゼロになってしまう．
+このゼロ頻度問題を回避するために，スムージングを行うことで確率値の推定をわずかに修正して，
+どの組合せの確率値もゼロにならないように調整する．
+ここでは特徴値の出現回数に1を加えるラプラススムージングを採用している．
+
+\subsubsection{Complement Na{\"i}ve Bayes}
+ナイーブベイズ分類器で，あるクラスに属さない補集合を用いて学習させる拡張をComplement Na{\"i}ve Bayesという．クラスに属さない特徴ベクトを用いて学習するため，クラスを予測する際には，属さない確率が最も低いクラスを割り当てることになる．
+2値の分類問題では同じ結果になるため意味がなく，多値の分類問題で各クラスのバラつきが多い場合には効果がある．
+-cオプションを指定するとComplement Na{\"i}ve Bayesとして実行される．
+
+\subsection{書式1:モデル構築モード}
+\begin{verbatim}
+
+  mnb.rb [tid=] [item=] [w=] [class=] i= O= [seed=] [-complement] [ts=|cv=] [T=] [-mcmdenv] [--help]
+
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+
+\verb|tid=|        &: 1つのサンプルを表す項目名【デフォルト:''tid''】 \\
+\verb|item=|       &: 1つの変数を表す項目名【デフォルト:''item''】 \\
+\verb|w=|          &: 変数の重み項目名 【オプション】 \\
+                   &: 指定しなければ、全行1とする。 \\
+\verb|class=|      &: 目的変数の項目名(i=上の項目名)【デフォルト:``class``】\\
+\verb|i=|          &: 入力データのファイル名【必須】\\
+\verb|O=|          &: 出力ディレクト名 【必須】\\
+\verb|seed=|       &: 乱数の種(0以上の整数,交差検証に影響)【オプション:default=-1(時間依存)】\\
+\verb|-complement| &: complement Na{\"i}ve Bayesで実行【オプション】\\
+\verb|ts=|         &: テストサンプル法によるテストデータの割合をパーセントで指定する。\\
+                   &: 値を省略して”ts=”と指定すると 33.3 が用いられる。\\
+\verb|cv=|         &: 交差検証法によるデータの分割数を指定する。値を省略して”cv=”と指定すると 10 が用いられる。 \\
+                   &: ts=,cv=のいずれも指定されていない場合は、i=で指定されたファイルを用いてモデルを作成する。\\
+\verb|T=|          &: 作業ディレクトリ【デフォルト:``/tmp''】\\
+\verb|-mcmdenv|    &: 内部のMCMDのコマンドメッセージを表示\\
+\verb|--help|      &: ヘルプの表示 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection{書式2:予測モード}
+\begin{verbatim}
+
+   mnb.rb -predict i= I= o= [-complement] [T=] [-mcmdenv] [--help] 
+
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+
+\verb|-predict|    &: 予測モード \\
+\verb|i=|          &: 入力データのファイル名【必須】\\
+\verb|I=|          &: モデル構築モードでの出力先ディレクトリパス 【必須】 \\
+\verb|o=|          &: 予測結果出力ファイル名 [必須] \\
+\verb|-complement| &: complement Na{\"i}ve Bayesで実行【オプション】\\
+\verb|T=|          &: 作業ディレクトリ【デフォルト:``/tmp''】\\
+\verb|-mcmdenv|    &: 内部のMCMDのコマンドメッセージを表示\\
+\verb|--help|      &: ヘルプの表示 \\
+&tid=,item=,w= については、モデル構築モードと同じ項目名を持つ入力ファイルが必要である。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection{本コマンドがモデル構築時に出力するデータ一覧}
+本コマンドがモデル構築時に出力するデータの一覧を表\ref{tbl:rslfile}に示す。
+
+
+\begin{table}[h]
+\begin{center}
+{\small
+\begin{tabular}{ll}
+\hline
+ファイル名&内容\\
+\hline
+\verb|category.csv|      & モデル構築時のword種類数(予測モードで利用) \\
+\verb|clsProb.csv|       & モデル構築時の事前確率(予測モードで利用) \\
+\verb|clsWord.csv|       & モデル構築時のword出現頻度(予測モードで利用) \\
+\verb|acclist.csv|       & 検証毎の予測精度 \\
+\verb|acc.csv|           & 予測精度 \\
+\verb|rsl_model.csv|     & 入力データに対する予測結果 \\
+\verb|rsl_acc_train.csv| & 入力データに対する正解率 \\
+\verb|param.csv|         & 実行パラメータ一覧 \\
+\hline
+\end{tabular}
+}
+
+\caption{本コマンドがモデル構築時に出力するデータ一覧}
+\label{tbl:rslfile}
+
+\end{center}
+\end{table}
+
+%-----------------------------
+\paragraph{category.csv}
+モデル構築時にi=で指定されたデータに含まれているitem=で指定した項目の種類数を示している。
+以下の例では訓練データに3種類の単語が含まれていることを示している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+wCategory
+3
+\end{Verbatim}
+
+%-----------------------------
+\paragraph{clsProb.csv}
+
+モデル構築時にi=で指定されたデータに含まれるクラス別の件数とその出現確率を示している。
+以下の例では、class項目はFとMで、memberNumはFとMそれぞれ10件のデータがあることを
+示しており、prob項目は、出現確率(10/20)の自然対数を示している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+class,memberNum,totalId,prob
+F,10,20,-0.6931471806
+M,10,20,-0.6931471806
+\end{Verbatim}
+
+%-----------------------------
+\paragraph{clsWord.csv}
+モデル構築時にi=で指定されたデータに含まれる単語の出現頻度をカウントしたもので、
+クラス毎にitem=で指定した項目のw=で指定した出現頻度の合計を示している。
+以下の例では、wCnt項目は、3種類の単語w1,w2,w3の出現頻度をクラスごとに示している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+word,class,wCnt
+w1,F,13
+w1,M,33
+w2,F,13
+w2,M,28
+w3,F,5
+w3,M,15
+\end{Verbatim}
+
+%-----------------------------
+\paragraph{acclist.csv}
+モデル構築時の精度を示したもので、cv=を指定した場合は、
+交差検証の回数分の予測精度が一覧として出力される。
+ts=を指定した場合は1回の予測精度が出力される。
+以下の例は、5回の交差検証を実施した場合の結果であり、
+test項目には実施回数、cnt項目は正解数、
+totalCntは検証したデータ数、そしてaccRateはその予測精度を示している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+test,ans,cnt,totalCnt,accRate
+1,Match,4,4,1
+2,Match,2,4,0.5
+3,Match,3,4,0.75
+4,Match,4,4,1
+5,Match,4,4,1
+
+\end{Verbatim}
+
+
+%-----------------------------
+\paragraph{acc.csv}
+acclist.csvに含まれる予測精度の平均値を出力したものである。
+以下の例は、acclist.csvの例の値を平均したものである。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+accRate
+0.85
+\end{Verbatim}
+
+
+%-----------------------------
+\paragraph{rsl\_model.csv}
+ モデル構築時にi=で指定されたデータのtid=で指定したサンプル毎に、
+各クラスに属する確率とpredictClsによって最終的に予測されたクラス項目が
+出力される。classはcls=で指定されたオリジナルのクラスを示している。
+-complementが指定された場合は、属さない確率が最も低いクラスを予測クラスとして出力している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+tid,F,M,class,predictCls
+1,0.5149523047,0.4850476955,M,F
+10,0.4929065867,0.5070934133,F,M
+11,0.5019607343,0.4980392657,F,F
+12,0.5089038694,0.4910961304,M,F
+13,0.4918393826,0.5081606174,M,M
+14,0.4966021486,0.5033978514,M,M
+15,0.4929065867,0.5070934133,F,M
+16,0.5019607343,0.4980392657,F,F
+17,0.5019607343,0.4980392657,M,F
+18,0.5149523047,0.4850476955,F,F
+19,0.4932580133,0.5067419868,F,M
+2,0.4922318437,0.5077681563,M,M
+20,0.5008042081,0.4991957921,F,F
+3,0.5070546328,0.4929453672,F,F
+4,0.4983186364,0.5016813634,M,M
+5,0.4929065867,0.5070934133,F,M
+6,0.5070546328,0.4929453672,F,F
+7,0.5115578733,0.4884421266,M,F
+8,0.4918393826,0.5081606174,M,M
+9,0.4983186364,0.5016813634,M,M
+\end{Verbatim}
+
+%-----------------------------
+\paragraph{rsl\_acc\_train.csv}
+モデル構築時にi=で指定されたデータを対象にした予測精度を出力している。
+以下の例は、rsl\_model.csvの例で出力したclassとpredictCls項目を利用して
+計算したものである。ans項目はオリジナルのクラスと予測クラスの一致、
+不一致を示しておりaccRate項目は正解率と不正解率を示している。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+ans,cnt,totalCnt,accRate
+Match,12,20,0.6
+Unmatch,8,20,0.4
+\end{Verbatim}
+
+
+\subsection{投稿者の性別判定に関する利用例}
+mnb.rbの利用例として、以下のtrain.csvデータを用いて投稿内容に含まれる単語から性別の判定を行うケースを示す。
+ここでの目的は，train.csvに含まれるそれぞれのwordを特徴ベクトルとして，
+classで指定された性別を判定するためのナイーブベイズモデルを構築し、
+test.csvの検証データ上のtidが，MとFのどちらになるかそのクラスを予測する。
+
+train.csvを利用してまずはmnb.rbをモデル構築モードで実行すると、rsl\_model.csvが出力される。
+それ以外の出力ファイルについては表\ref{tbl:rslfile}で示した通りである。
+次に未知データに対する予測を実施するために、
+test.csvに対して，mnb.rbを-predictを付けて実行する。
+最終的にrsl\_predict\_mode.csvが予測された結果である。
+
+\vspace{1cm}
+
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+
+$ more train.csv
+tid,word,freq,class
+1,w1,2,M
+1,w2,4,M
+10,w1,1,F
+11,w2,1,F
+11,w1,2,F
+12,w1,4,M
+12,w2,4,M
+13,w3,3,M
+13,w2,2,M
+13,w1,4,M
+14,w1,5,M
+14,w2,3,M
+14,w3,2,M
+15,w1,1,F
+16,w1,2,F
+16,w2,1,F
+18,w2,4,F
+18,w1,2,F
+19,w2,2,F
+19,w1,1,F
+19,w3,3,F
+2,w2,2,M
+2,w1,3,M
+2,w3,3,M
+20,w1,1,F
+20,w2,3,F
+20,w3,2,F
+4,w3,2,M
+4,w2,3,M
+4,w1,3,M
+5,w1,1,F
+6,w2,1,F
+6,w1,1,F
+7,w1,3,M
+7,w2,4,M
+8,w2,2,M
+8,w3,3,M
+8,w1,4,M
+9,w1,3,M
+9,w3,2,M
+9,w2,3,M
+17,w2,1,M
+17,w1,2,M
+3,w1,1,F
+3,w2,1,F
+
+$ more test.csv
+tid,word,freq
+21,w1,1
+21,w2,2
+22,w1,3
+22,w2,1
+
+$ mnb.rb tid=tid item=word w=freq class=class i=train.csv O=rsl1 seed=1 cv=
+
+#MSG# separating data 1; 2014/08/19 00:42:10
+#MSG# separating data 2; 2014/08/19 00:42:10
+#MSG# separating data 3; 2014/08/19 00:42:10
+#MSG# separating data 4; 2014/08/19 00:42:10
+#MSG# separating data 5; 2014/08/19 00:42:10
+#MSG# separating data 6; 2014/08/19 00:42:10
+#MSG# separating data 7; 2014/08/19 00:42:10
+#MSG# separating data 8; 2014/08/19 00:42:10
+#MSG# separating data 9; 2014/08/19 00:42:10
+#MSG# separating data 10; 2014/08/19 00:42:10
+#MSG# Naive Bayes start using training data 1; 2014/08/19 00:42:10
+#MSG# Naive Bayes start using test data 1; 2014/08/19 00:42:10
+#END# mnb.rb tid=tid item=word w=freq class=class i=train.csv O=rsl1 seed=1 cv=; 2014/08/19 00:42:11
+#MSG# Naive Bayes start using original data; 2014/08/19 00:42:11
+#END# mnb.rb tid=tid item=word w=freq class=class i=train.csv O=rsl1 seed=1 cv=; 2014/08/19 00:42:11
+
+
+$ mnb.rb i=test.csv I=rsl1 o=rsl_predict_model -predict
+#MSG# Naive Bayes start using test data; 2014/08/19 00:43:31
+#END# mnb.rb i=test.csv I=rsl1 o=rsl_predict_model -predict; 2014/08/19 00:43:31
+
+
+$ more rsl1/rsl_model.csv 
+tid,F,M,class,predictCls
+1,0.5149523047,0.4850476955,M,F
+10,0.4929065867,0.5070934133,F,M
+11,0.5019607343,0.4980392657,F,F
+12,0.5089038694,0.4910961304,M,F
+13,0.4918393826,0.5081606174,M,M
+14,0.4966021486,0.5033978514,M,M
+15,0.4929065867,0.5070934133,F,M
+16,0.5019607343,0.4980392657,F,F
+17,0.5019607343,0.4980392657,M,F
+18,0.5149523047,0.4850476955,F,F
+19,0.4932580133,0.5067419868,F,M
+2,0.4922318437,0.5077681563,M,M
+20,0.5008042081,0.4991957921,F,F
+3,0.5070546328,0.4929453672,F,F
+4,0.4983186364,0.5016813634,M,M
+5,0.4929065867,0.5070934133,F,M
+6,0.5070546328,0.4929453672,F,F
+7,0.5115578733,0.4884421266,M,F
+8,0.4918393826,0.5081606174,M,M
+9,0.4983186364,0.5016813634,M,M
+
+
+$ more rsl1/rsl_predict_model 
+tid,F,M,predictCls
+21,0.5134492948,0.4865507052,F
+22,0.4989489229,0.5010510771,M
+
+\end{Verbatim}
+}
+
+
+%\end{document}
+

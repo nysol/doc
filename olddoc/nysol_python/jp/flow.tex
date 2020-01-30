@@ -1,0 +1,446 @@
+
+%\begin{document}
+
+\section{処理フロー(data processing flow)\label{sect:csv}}
+nysol\_pythonでは、単一機能に特化した80以上のメソッドを自由に組み合わせることで、
+データ処理の複雑なフローを構築することができ、その実行には最適な並列処理が適用される。
+このようなフロー全体のことをデータ処理フローと呼ぶ。
+そして処理フローを扱うパッケージがnysol.shellである。
+以下では、単純な例から始め、nysol.shellがデータ処理フローをどのように扱うかについて説明する。
+
+単純なデータ処理フローから始めよう。
+図\ref{code:flow1}は、チュートリアルで示した図xを少し修正したフローである。
+リストで表現された\verb|customer|と\verb|amount|の2項目3行のデータを読み込み、\verb|amount|項目のみを切り出し、
+\verb|amount|項目を合計してリスト変数\verb|result|にセットするというものである。
+チュートリアルとの違いは、全てのメソッドにソケット名を指定している点である。
+nysolが提供するほとんどのメソッドには、他のメソッドとのデータのやりとりをするための口をもっており、それを{\bf ソケット}と呼ぶ。
+ソケットには入力ソケットと出力ソケットがあり、それら入力と出力のソケットを接続することで処理フローを構成していく。
+
+多くのメソッドにとって、パラメータ\verb|i=|と\verb|o=|は特殊な意味を持ち、
+対象のメソッドに対する入力ソケット名、および出力ソケット名を指定するパラメータである。
+ある処理Aの出力ソケット名と別の処理Bの入力ソケット名を同じにすることによりにより、
+処理Aの出力データを処理Bの入力データに接続することができる。
+図\ref{code:flow1}では、\verb|read|メソッドの出力ソケット(\verb|o=|)が\verb|mcut|メソッドの
+入力ソケット(\verb|i=|)に\verb|p1|という名称にて接続されている。
+ソケット名には任意の文字を用いることが可能であるが、\verb|_ns.|で始まる文字列はシステムによって予約されており利用できない。
+
+データ処理フロー全体の接続関係を表示したければ、nysol.shellの\verb|topology|メソッドを用いれば良い(図\ref{code:flow1_topo}の1行目)。
+\verb|name=|でhtmlファイル名を指定すれば図\ref{fig:flow1}のようなネットワーク図が出力される。
+このネットワーク図には、ノードにメソッドが示され、エッジにソケットの接続関係が示される。
+\verb|read|メソッドと\verb|mcut|メソッドを連結する有向エッジにラベル\verb|p1:o >> i|と示されているが、
+これは、連結元の\verb|read|メソッドの出力ソケット\verb|o=|が\verb|mcut|メソッドの入力ソケット\verb|i=|に連結されていることを示している。
+さらに、ノードにカーソルを合わせると、各メソッドに指定されたパラメータがポップアップで表示される。
+ただしリストデータの内容は、省略表示される。
+
+また\verb|topology|メソッドをパラメータなしで実行すれば、ネットワーク情報が辞書型データとして出力される。
+図\ref{code:flow1_topo}に示されたネットワークの情報全てを含んでおり、
+辞書のキーワードの意味を表\ref{tbl:flow_dic}に示す。
+
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import nysol.mod as nm
+>>> import nysol.flow as nf
+>>> result=[]
+>>> f=nf.new()
+>>> f << nm.read(i=[["customer","amount"],["A",10],["B",50],["C",40]],o="p1")
+>>> f << nm.mcut(f="amount",i="p1",o="p2")
+>>> f << nm.msum(f="amount",i="p2",o="p3")
+>>> f << nm.write(i="p3",o=result)
+>>> f.run()
+>>> print(result)
+["amount"],[100]]
+\end{Verbatim}
+\caption{データ処理フローの例\label{code:flow1}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> f.topology(name="flow1.html")
+>>> g=f.topology()
+>>> print(g["nodes"])
+[0,1,2,3]
+>>> print(g["methods"])
+["read","mcut","msum","write"]
+>>> print(g["params"])
+[[("i",[]),("o","p1")],[("f","amount"),("i","p1"),("o","p2")],...]
+>>> print(g["edges"])
+[(0,1),(1,2),(2,3)]
+>>> print(g["sockets"]
+[("p1","o=","i="),("p2","o=","i="),("p3","o=","i=")]
+\end{Verbatim}
+\caption{データ処理フローのネットワーク情報を出力する\label{code:flow1_topo}}
+\end{figure}
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{topologyメソッドで出力されるデータ処理フローのネットワークデータ\label{tbl:flow_dic}}
+{\footnotesize
+	\begin{tabular}{l|l|p{4cm}|p{8cm}}
+\hline
+キー & 内容 & 備考 & 図\ref{code:flow1_topo},\ref{fig:flow1}での例 \\
+\hline
+nodes   & ノードID   & 登録順に0から採番される。& \verb|[0,1,2,3]|: readメソッドのノードIDが0で、次のmcutメソッドのIDが1、以下同様。 \\
+methods & メソッド名 & ノードIDに対応したメソッド名。& \verb|["read","mcut","msum","write"]|: ノードIDが0のメソッド名は\verb|read|で、IDが3のメソッド名は\verb|write|である。\\
+params  & パラメータ & パラメータは(key,value)のタップルを要素に持ったリスト。& \verb|[[("i",[]),("o","p1")],...]|ノードIDが0のパラメータは\verb|i=[]|と\verb|o="p1"|である。ただし、データとして指定されたリストの内容は省略表記されることに注意する。\\
+edgess  & エッジ     & 接続元ノードID(出力)と接続先ノードID(入力)のタップル & \verb|[(0,1),(1,2),(2,3)]|: ノードIDが0の\verb|read|の結合先はノードIDが1の\verb|mcut|である。\\
+sockets & ソケット   & エッジに対応したソケットを、ソケット名、出力ソケット、入力ソケットのタップルで出力。 & \verb|[("p1","o=","i="),...]|: エッジ\verb|(0,1)|の接続ソケット名は\verb|p1|で、出力ソケットが\verb|o=|で、入力ソケットが\verb|i=|である。\\
+\hline
+ \end{tabular}
+}
+\end{center}
+\end{table}
+
+\verb|i=|であってもソケット名として解釈されないメソッドもある。
+その一つが\verb|read|メソッドである。
+\verb|read|メソッドの\verb|i=|に文字列を指定しても、それは入力ソケット名ではなくCSVファイル名として解釈される。
+また同様に、\verb|write|メソッドの\verb|o=|に文字列を指定すれば、CSVファイル名として解釈される。
+
+また、\verb|i=|と\verb|o=|以外にもソケットは存在し、
+例えば\verb|mjoin|メソッドは入力ソケット\verb|i=|の他にもう一つ入力ソケット\verb|m=|を持っており、
+結合対象となる参照データを指定することができる。
+また、\verb|mselstr|メソッドは、出力ソケット\verb|o=|の他にもう一つ出力ソケット\verb|u=|を持っており、
+条件にマッチしなかったデータの出力先を指定することができる。
+このようにnysol.modでは、ソケット名を指定するパラメータはコマンドによって規定されている(表\ref{tbl:nysol.mod_socket})。
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{nysol.modが提供するメソッドのソケット指定パラメータ\label{tbl:nysol.mod_socket}}
+{\footnotesize
+	\begin{tabular}{l|p{10cm}|p{5cm}}
+\hline
+パラメータ & メソッド & 備考 \\
+\hline
+i=, o=    & m2tee$_*$, maccum, marff2csv, mavg, mbest, mbucket, mchgnum, mchgstr, mcombi, mcount, mcross, m2cross, mcsv2arff, mcut, mdformat, mduprec, mfldname, mfsort, mhashavg, mhashsum, mkeybreak, mmbucket, mmvavg, mmvsim, , , vstats, mnormalize, mnullto, mnumber, mpadding, mrand, msed, msetstr, mshare, msim, mslide, msortf, msplit, mstats, msum, msummary, mtab2csv, mtonull, mtra, mtrafld, mtraflg, muniq, mvcat, mvcount, mvdelim, mvdelnull, mvjoin, mvnullto, mvreplace, mvsort, mvuniq, mwindow, mxml2csv &
+$_*$ m2teeは、o=に感まで区切って複数の出力ソケット名を記述できる。\\
+i=, m=, o= & mcommon, mjoin, mnjoin, mnrcommon, mnrjoin, mpaste, mproduct, mrjoin, mvcommon &  \\
+i=, u=, o= & mdelnull, mdata, msel, mselnum, mselrand, mselstr \\
+o=       & mcat, mnewnumber, mnewrand, mnewstr \\
+i=       & msep, msep2, mshuffle &
+これら3つのメソッドは、\verb|o=|で実ファイルを指定しなければならない。
+すなわち、次の接続のないメソッドである。\\
+\hline
+ \end{tabular}
+}
+\end{center}
+\end{table}
+
+図\ref{code:flow2}に、２つの入力ソケットを用いる例を示す。
+この処理は図\ref{code:flow1}で計算した\verb|amount|の合計を元の3行データに結合(\verb|mproduct|)し、
+各顧客の\verb|amount|の構成比を計算したものである。
+ポイントは、\verb|read|メソッドの出力ソケット\verb|o=|が、２つのメソッド\verb|mcut,mproduct|に分岐して接続されており、
+また、\verb|mproduct|メソッドが２つの入力ソケットにより接続されていることである。
+データ処理フローのトポロジーの出力方法を図\ref{code:flow2_topo}に、その結果を\ref{fig:flow3}に示す。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import nysol.mod as nm
+>>> import nysol.flow as nf
+>>> result=[]
+>>> f=nf.new()
+>>> f << nm.read(i=[["customer","amount"],["A",10],["B",50],["C",40]],o="p1")
+>>> f << nm.mcut(f="amount",i="p1",o="p2")
+>>> f << nm.msum(f="amount:total",i="p2",o="p3")
+>>> f << nm.mproduct(m="p3",f="total",i="p1",o="p4")
+>>> f << nm.mcal(c="${amount}/${total}",a="share",i="p4",o="p5")
+>>> f << nm.write(i="p5",o=result)
+>>> f.run()
+>>> print(result)
+>>> [["customer","amount","total","share"],["A",10,100,0.1],["B",50,100,0.5],["C",40,100,0.4]]
+\end{Verbatim}
+\caption{フローが分岐する例\label{code:flow2}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> f.topology(name="flow2.html")
+>>> g=f.topology()
+>>> print(g["nodes"])
+[0,1,2,3,4,5]
+>>> print(g["methods"])
+["read","mcut","msum","mproduct","mcal","write"]
+>>> print(g["params"])
+[[("i",[]),("type","CSV"),("o","p1")],[("f","amount"),("i","p1"),("o","p2")],...]
+>>> print(g["edges"])
+[(0,1),(1,2),(2,3),(0,3),(3,4),(4,5)]
+>>> print(g["sockets"]
+[("p1","o=","i="),("p2","o=","i="),("p3","o=","i="),("p1","o=","i="),("p4","o=","i="),("p5","o=","i=")]
+\end{Verbatim}
+\caption{フローが分岐する場合のトポロジーの出力\label{code:flow2_topo}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{c}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\includegraphics[scale=.25]{figure/flow/flow1.eps}
+\end{center}
+\caption{図\ref{code:flow1}のフロー図(flow1.html)\label{fig:flow1}}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\includegraphics[scale=.25]{figure/flow/flow2.eps}
+\end{center}
+\caption{図\ref{code:flow2}のフロー図(flow2.html)\label{fig:flow1}}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\includegraphics[scale=.25]{figure/flow/flow3.eps}
+\end{center}
+\caption{図\ref{code:flow2}の拡張フロー図(flow3.html)\label{fig:flow3}}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{figure}
+
+このフローを実現させるために、nysol.shellは2つのメソッドを追加している。
+まず、\verb|read|メソッドの出力を2つのフローに分岐させる\verb|mtee|メソッドを追加し、
+\verb|mcut|へつながる流れと\verb|mproduct|へつながる流れを作る。
+
+次に、バッファの機能を担う\verb|buffer|を挿入する。
+nysol.shellでは、個々のメソッドはスレッドで実行され、２つのメソッドの接続にはパイプ(FIFOキュー)を用いている。
+そしてデータの読み込みは基本的にはシーケンシャルreadによって実現している。
+そのため、データ処理フローのトポロジーによってはデッドロックを起こす可能性がある。
+例えば図\ref{code:flow2}の処理で、もし\verb|read|メソッドの入力データのサイズが非常に大きかった場合、
+最終的に\verb|msum|が合計金額を計算するためには\verb|read|メソッドから全てのデータを読み切る必要がある。
+一方で\verb|mproduct|メソッドは、その\verb|total|が\verb|m=|ソケットを通して届かない限り、
+\verb|read|メソッドからのデータを読み込みできない状態が続く。
+パイプのバッファサイズは通常さほど大きくはないのでデッドロックを起こしてしまう。
+そのため、\verb|nysol.sell|では、そのようなデッドロックが起こる可能性のある箇所に巨大バッファをメソッドとして挿入する。
+
+最終的に\verb|nysol.shell|が追加修正したフロー図({\bf 拡張フロー図}と呼ぶ)を表示したければ、
+図\ref{code:flow3}にあるように、\verb|topology|メソッドに\verb|extention=True|を指定すればよい。
+すると図\ref{fig:flow3}のように、nysol.shellによって\verb|buffer|メソッドが追加されたフローを確認できるであろう。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> f.topology(name="flow3.html",extention=True)
+\end{Verbatim}
+\caption{拡張フロー図の表示例\label{code:flow3}}
+\end{figure}
+
+\subsection{ソケット名の省略}
+前節では、説明のために全てのメソッドに入出力ソケット名を指定したが、
+多くの場合、ソケット名は省略することが可能である。
+
+2つの連続するメソッドをA,Bとすると、
+
+A,B共にAにo=がなく、Bにi=がない: A(o=\_ns.num)
+Aの
+
+よって、図\ref{code:flow1}のフローは図\ref{code:flow1_omit}のように全てのソケット名を省略することができる。
+一方で図\ref{code:flow2}のフローは、\verb|mproduct|の入力ソケット\verb|p1|が3行前の\verb|read|であるため省略できない。
+m=を省略できる
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import nysol.mod as nm
+>>> import nysol.flow as nf
+>>> result=[]
+>>> f=nf.new()
+>>> f << nm.read(i=[["customer","amount"],["A",10],["B",50],["C",40]],o="p1")
+>>> f << nm.mcut(f="amount",i="p1",o="p2")
+>>> f << nm.msum(f="amount:total",i="p2",o="p3")
+>>> f << nm.mproduct(m="p3",f="total",i="p1",o="p4")
+>>> f << nm.mcal(c="${amount}/${total}",a="share",i="p4")
+>>> f << nm.write(o=result)
+>>> f.run()
+>>> print(result)
+>>> [["customer","amount","total","share"],["A",10,100,0.1],["B",50,100,0.5],["C",40,100,0.4]]
+\end{Verbatim}
+\caption{フローが分岐する例\label{code:flow2}}
+\end{figure}
+
+\subsection{I/Oメソッド}
+処理フローの中では、データはCSV形式のバイトストリームとして流れていく。
+一方で、処理対象とするデータとしては、例えばCSVファイルや、
+pythonのリスト、pandasパッケージのデータフレームなど多様なタイプのデータがあるであろう。
+nysol.shellにとって\verb|read|と\verb|write|メソッドは、それらの様々なデータタイプとデータストリームを相互に変換する機能を担っている。
+\verb|read,write|メソッドが扱えるデータタイプは以下のとおりで、いずれも固定数の列と可変数の行を備えたデータある。
+特定のデータタイプの選択は\verb|type=|パラメータで指定する。
+最後の項目のパラメータについては、他のデータタイプとは異なり、データを指定せずに後に\verb|run|メソッドの中で指定する方式で、
+これは処理フローを新たなメソッドとして登録する方法であり、後の節で詳述する。
+
+\begin{table}[hbt]
+\begin{center}
+ \caption{read,writeメソッドが扱うことのできるデータタイプ一覧\label{tbl:nysol.mod_socket}}
+{\footnotesize
+	\begin{tabular}{l|l|l}
+\hline
+データタイプ名 & \verb|type=|で指定する値 & 説明 \\
+\hline
+CSVファイル & \verb|"csv"|    & 複数の同一構造のCSVファイル \\
+ディレクトリ& \verb|"dir"|    & 複数のCSVファイルを含んだディレクトリ階層 \\
+リストデータ& \verb|"list"|   & pythonのリスト型データ \\
+辞書型データ& \verb|"dic"|    & pythonの辞書型データ \\
+pandasデータ& \verb|"pandas"| & pandasパッケージが扱うデータフレーム \\
+numpyデータ & \verb|"numpy"|  & numpyパッケージが扱う2階テンソル \\
+パラメータ  & \verb|"param"|  & ユーザが\verb|run|メソッドでデータを与える \\
+\hline
+ \end{tabular}
+}
+\end{center}
+\end{table}
+
+\subsubsection*{CSVファイル}
+同一の項目名を備えた複数のCSVファイルを指定できる。
+図\ref{code:io_csv1}は、単一のCSVファイル\verb|input.csv|を読み込み、\verb|mcut|メソッドで全項目を選択し、
+CSVファイル\verb|output.csv|に書き込む例である。
+\verb|output.csv|の内容は\verb|input.csv|の内容と同じになる。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> # input.csvの内容(pythonを実行したディレクトリに存在するものとする)
+>>> # a,b,c
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> f=nf.new()
+>>> f << nm.read(i="input.csv",type="csv")
+>>> f << nm.mcut(f="a,b,c")
+>>> f << nm.write(o="output.csv",type="csv")
+>>> f.run()
+\end{Verbatim}
+\caption{CSVファイルの読み込みと書き込み(nm,nsのimport文は省略している)\label{code:io_csv1}}
+\end{figure}
+
+複数のファイルを行方向に併合して読み込むには、複数のCSVファイル名をリストに格納して\verb|i=|に指定してやれば良い
+(一つのファイル名を指定した先程の例でもリストにファイル名を一つ格納して与えてもよい)。
+図\ref{code:io_csv2}では、２つのファイルを併合して、先程の例と同様にそのままCSVファイルとして出力している。
+入力ファイルが多数ある場合は、\verb|glob|パッケージ等を用いて事前にファイル名一覧をリストにセットしておけばよい(図\ref{code:io_csv3})。
+複数のCSVファイルを指定する場合に項目名が異なる場合は、
+リストの最初に指定したCSVの項目が採用され、それ以降のCSVデータに項目がなければNULL値が出力され、
+また余分な項目は無視される。
+ただし、\verb|name=|パラメータに必要な項目名を指定すれば、それらの項目名が併合対象として優先される。
+なお、ファイル名にワイルドカードを使って複数ファイルを指定することはできない。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> # input1.csv,input2.csvの内容は以下の通り同じものとする。
+>>> # a,b,c
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> f=nf.new()
+>>> f << nm.read(i=["input1.csv","input2.csv"],type="csv")
+>>> f << nm.mcut(f="a,b,c")
+>>> f << nm.write(o="output.csv",type="csv")
+>>> # output.csvの内容は以下の通り。
+>>> # a,b,c
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> f.run()
+\end{Verbatim}
+\caption{複数のCSVファイルの読み込みと書き込み\label{code:io_csv2}}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import glob
+>>> f=nf.new()
+>>> f << nm.read(i=glob.glob("input*.csv"),type="csv")
+>>> f << nm.mcut(f="a,b,c")
+>>> f << nm.write(o="output.csv",type="csv")
+>>> f.run()
+\end{Verbatim}
+\caption{図\ref{code:io_csv2}の例をワイルドカードを使って実行する例\label{code:io_csv3}}
+\end{figure}
+
+
+\subsubsection*{ディレクトリ}
+ディレクトリ名を指定すれば、そのディレクトリ内にある全てのCSVファイルを併合してデータストリームに変換する。
+ディレクトリは階層になっていてもよく、指定したディレクトリの下に存在する全てのCSVデータが対象となる。
+これらのCSVデータの併合順序は不定である。
+図\ref{code:io_dir}では、\verb|inputs|ディレクトリにある２つのファイルを併合して読み込む例である。
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> # 以下の同じ内容を持つinput1.csv,input2.csvがinputsディレクトリに存在するとする。
+>>> # a,b,c
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> f=nf.new()
+>>> f << nm.read(i="inputs",type="dir",name="a,b,c")
+>>> f << nm.mcut(f="a,b,c")
+>>> f << nm.write(o="output.csv",type="csv")
+>>> f.run()
+>>> # output.csvの内容は以下の通り。
+>>> # a,b,c
+>>> # x,1,0.1
+>>> # y,2,0.2
+>>> # x,1,0.1
+>>> # y,2,0.2
+\end{Verbatim}
+\caption{ディレクトリ名を指定して実行する例\label{code:io_dir}}
+\end{figure}
+
+\subsubsection{リストデータ}
+\subsubsection{辞書型データ}
+\subsubsection{pandasデータ}
+\subsubsection{numpyデータ}
+
+\subsection{パラメータ}
+
+\subsection{処理フローのネットワークに島ができる場合}
+島(連結成分)ができるということは、処理順序に依存関係がないということである。
+
+登録順に実行される。
+独立した処理フローをわざわざ一つのフローの中に入れて実行するメリットは並列処理にある。
+nysol.shellでは、処理フローの中に島になったフローが複数あれば、それらを並列で実行する。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import nysol.mod as nm
+>>> import nysol.flow as nf
+>>> results={}
+>>> f=nf.new()
+>>> for tax_rate in [0.05,0.08,0.1]:
+>>>   results[tax_rate]=[]
+>>>   f << nm.read(i=[["amount"],[100]])
+>>>   f << nm.mcal(c="${amount}*%g"%(tax_rate), a="tax")
+>>>   f << nm.write(o=results[tax_rate])
+>>> f.run()
+>>> print(results)
+{0.05:[["amount","tax"],["100","5"]] ,0.08:[["amount","tax"],["100","8"]] , 0.1:[["amount","tax"],["100","10"]]}
+\end{Verbatim}
+\caption{独立の処理フローを並列処理する例\label{code:flow_para1}}
+\end{figure}
+
+図\ref{code:flow_para2}は、図\ref{code:flow_para1}の処理を逐次実行するように変更したものである。
+変更点は一箇所、\verb|f.run()|を\verb|for|文の中に入れた点である。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+>>> import nysol.mod as nm
+>>> import nysol.flow as nf
+>>> results={}
+>>> f=nf.new()
+>>> for tax_rate in [0.05,0.08,0.1]:
+>>> 	results[tax_rate]=[]
+>>>   f << nm.read(i=[["amount"],[100]])
+>>>   f << nm.mcal(c="${amount}*%g"%(tax_rate), a="tax")
+>>>   f << nm.write(o=results[tax_rate])
+>>>   f.run()
+>>> print(results)
+{0.05:[["amount","tax"],["100","5"]] ,0.08:[["amount","tax"],["100","8"]] , 0.1:[["amount","tax"],["100","10"]]}
+\end{Verbatim}
+\caption{独立の処理フローを逐次処理する例\label{code:flow_para2}}
+\end{figure}
+
+\subsubsection{制限}
+処理フローは時に非常に大きくなる可能性がある。
+店別のデータがあって、全ての店に同じ処理を実行したい場合、
+一つの処理フローの中に店の数だけ独立したフローができることになる。
+10万店あるチェーン店であった場合、それらを並列処理して大丈夫であろうか？
+
+pipeで2
+ソートが走ると32
+macの場合の制限10240
+
+
+%\end{document}
+

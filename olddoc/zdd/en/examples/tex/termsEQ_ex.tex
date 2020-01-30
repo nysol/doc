@@ -1,0 +1,29 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=5*a + 3*b + c
+> f.show
+ 5 a + 3 b + c
+
+# Select terms with weight of 3. 
+> f.termsEQ(3).show
+ 3 b
+
+# Select terms with weight greater than or equal to 3.
+> f.termsGE(3).show
+ 5 a + 3 b
+
+# Select terms with weight not equal to 3.
+> f.termsNE(3).show
+ 5 a + c
+
+# Return 0 if none of the terms herein matches the condition. 
+> f.termsGT(10).show
+ 0
+\end{Verbatim}

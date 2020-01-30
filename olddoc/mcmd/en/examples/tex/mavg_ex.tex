@@ -1,0 +1,47 @@
+\subsubsection*{Example 1: Basic Example}
+
+Calculate the average values of "Quantity" and "Amount" fields for each "Customer", save the computed output in new columns named "AverageVolume" and "AverageAmount".
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Quantity,Amount
+A,1,5
+A,2,20
+B,1,15
+B,,10
+B,5,20
+$ mavg k=Customer f=Quantity:AvgQuantity,Amount:AvgAmount i=dat1.csv o=rsl1.csv
+#END# kgavg f=Quantity:AvgQuantity,Amount:AvgAmount i=dat1.csv k=Customer o=rsl1.csv
+$ more rsl1.csv
+Customer%0,AvgQuantity,AvgAmount
+A,1.5,12.5
+B,3,15
+\end{Verbatim}
+\subsubsection*{Example 2: Output consisting of NULL values}
+
+Calculate the average values of "Quantity" and "Amount" fields for each "Customer", save output in a new columns named "AverageVolume" and "AverageAmount".
+When specifying the \verb|-n| option, if a NULL value is included in the input, the result will return NULL value.
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mavg k=Customer f=Quantity:AvgQuantity,Amount:AvgAmount -n i=dat1.csv o=rsl2.csv
+#END# kgavg -n f=Quantity:AvgQuantity,Amount:AvgAmount i=dat1.csv k=Customer o=rsl2.csv
+$ more rsl2.csv
+Customer%0,AvgQuantity,AvgAmount
+A,1.5,12.5
+B,,15
+\end{Verbatim}
+\subsubsection*{Example 3: Calculate sum without key field}
+
+Calculate the average values of "Quantity" and "Amount" fields, and save the outputs in columns "AvgQuantity" and "AvgAmount".
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mavg f=Quantity:AvgQuantity,Amount:AvgAmount i=dat1.csv o=rsl3.csv
+#END# kgavg f=Quantity:AvgQuantity,Amount:AvgAmount i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+Customer,AvgQuantity,AvgAmount
+B,2.25,14
+\end{Verbatim}

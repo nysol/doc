@@ -1,0 +1,42 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> x=3*a + 2*b + 2*c
+> y=2*a + 2*b + 4*c
+> x.show
+ 3 a + 2 b + 2 c
+> y.show
+ 2 a + 2 b + 4 c
+# (x,yが上記の通り定義されていたとする)
+
+# xとyを比較し、同じ重みを持つアイテム集合を選択する。
+> (x==y).show
+ b
+
+# xとyを比較し、y以上の重みを持つアイテム集合を選択する。
+> (x>=y).show
+ a + b
+
+# xとyを比較し、異なる重みを持つアイテム集合を選択する。
+> (x.ne?(y)).show
+ a + c
+
+# zdd1にあってzdd2にない(もしくはその逆)アイテム集合の重みは0と考えればよい。
+> z=2*a + 2*b
+> z.show
+ 2 a + 2 b
+
+# アイテム集合cはzにないので項0cを考えればよい。
+> (x>z).show
+ a + c
+> (x.ne?(z)).show
+ a + c
+> (x==z).show
+ b
+\end{Verbatim}

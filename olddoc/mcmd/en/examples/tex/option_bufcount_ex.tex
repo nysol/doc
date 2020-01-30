@@ -1,0 +1,9 @@
+\subsubsection*{Example 1: Basic Example}
+
+If the key size of the reference file is less than 80MB (4MB × 20), the temporary file will not be used.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnjoin k=id m=ref.csv f=name i=dat.csv o=rsl.csv bufcount=20
+#END# kgnjoin bufcount=20 f=name i=dat.csv k=id m=ref.csv o=rsl.csv
+\end{Verbatim}

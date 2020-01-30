@@ -1,0 +1,319 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mcsvin CSVの読み込みクラス\label{sect:mcsvinRB}}
+CSVデータファイルを行単位で処理するためのクラス。以下のような特徴を持つ。
+\begin{itemize}
+\setlength{\itemindent}{0mm}
+\item C++で実装されており高速に動作する。
+\item 一行目が項目名行であれば、項目名をkeyとするHashにデータを格納できる。
+\item データの格納はHash/Arrayを選択可能(Arrayの方が2倍高速)。
+\item キーブレイク処理を容易に扱える。
+\item RFC4180にほぼ準拠
+%\footnote{CSVの仕様についての詳しい情報は
+%http://kgmod.jp/mcmd/の「MCMDが扱うデータ構造について」を参照。}（カンマやダブルクォーテーションのエスケープなど)。
+\item 一行の項目数は固定であることを前提とする。
+\end{itemize}
+
+\subsection{メソッド}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::new(arguments){block}
+\end{verbatim}
+}
+
+Mcsvinオブジェクトを生成する。
+\verb|arguments|に、以下の引数をスペースで区切った文字列として指定する。
+
+\begin{table}[htbp]
+%{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名(String) 【必須】\\
+\verb|k=|    & キーブレイクを検知する項目リスト。複数項目はカンマで区切る。\\
+             & キー指定の有無によってeachメソッドのyield引数が異なることに注意する。\\
+\verb|-nfn|  & 1行目を項目名と見なさない。\\
+\verb|-array|& eachメソッドで各データ項目をArrayに格納する。\\
+             & 指定がなければHashに格納する。\\
+             & ArrayはHashに比べ、約2倍効率的である(詳細は「ベンチマーク」を参照)。\\
+\verb|block| & ブロックが指定されていれば実行(yield)する。\\
+\end{tabular} 
+%}
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::each{|val| block}
+* MCMD::Mcsvin::each{|val,top,bot| block}
+\end{verbatim}
+}
+
+CSVファイルを一行ずつ処理する。
+1)の書式はキー(k=)を指定しなかった場合で、valに値が設定される。
+2)の書式はキーを指定した場合で、val以外にもキーブレイク情報top,botの変数も設定される。
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[val ] 項目名をキーとして値を格納したHash(もしくはArray)。値は全てString型で格納。
+\item[top ] k=で指定したキーの先頭であればtrue、さもなければfalseがセットされる。詳細は備考を参照。
+\item[bot ] k=で指定したキーの終端であればtrue、さもなければfalseがセットされる。詳細は備考を参照。
+\end{description}
+
+%\begin{verbatim}
+%* Mcsvin::each_array{|val,top,bot| block}
+%\end{verbatim}
+%
+%Mcsvin::eachと同じ機能で、valがHashではなく配列に格納される。
+
+{\Large
+\begin{verbatim}
+* MCMD::Mcsvin::names()
+\end{verbatim}
+}
+
+項目名配列を返す。\verb|-nfn|が指定されていればnilを返す。
+
+\subsection{備考}
+\begin{itemize}
+\item \verb|-nfn|が指定された場合、データはArrayに格納される。Hashでは格納できない。
+\item \verb|k=|を指定する場合は、そこで指定した項目で並べ替えておかなければならない。
+\item キーブレイクのロジック:
+\begin{verbatim}
+MCMD::Mcsvin.new("i=input.dat k=key"){|csv|
+	csv.each{|val,top,bot|
+    :
+  }
+}
+\end{verbatim}
+上記のコードにおいて、bool型のブロック変数topおよびbotの設定ロジックは以下のとおり。\\
+データ行を$i=1,2,\cdots,n$、$i$行目のキー項目(``key'')の値を$k_i$とし、便宜上$k_0=k_{n+1}=\phi$とする。ただし、$k_i(1\le i \le n) \ne \phi$である。
+
+\begin{eqnarray}
+\verb/top/=\left\{
+\begin{array}{ll}
+true,  & {\rm if}\hspace{2mm} k_i \ne k_{i-1} \\
+false, & {\rm otherwise}\\
+\end{array} \right.
+\label{eq:retDisc}
+\end{eqnarray}
+
+\begin{eqnarray}
+\verb/bot/=\left\{
+\begin{array}{ll}
+true,  & {\rm if}\hspace{2mm} k_i \ne k_{i+1} \\
+false, & {\rm otherwise}\\
+\end{array} \right.
+\label{eq:retDisc}
+\end{eqnarray}
+
+\end{itemize}
+
+\subsection{利用例}
+\subsubsection*{例1 項目名の出力と行番号・値の出力}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+
+MCMD::Mcsvin.new("i=dat1.csv"){|csv|
+  puts csv.names.join(",")
+  csv.each{|val|
+    p val
+  }
+}
+# 出力結果
+顧客,日付,金額
+["顧客"=>"A", "日付"=>"20081201", "金額"=>"10"]
+["顧客"=>"B", "日付"=>"20081002", "金額"=>"40"]
+\end{Verbatim}
+
+\subsubsection*{例2 キーブレイク処理}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+顧客,日付
+A,20081201
+A,20081202
+B,20081003
+C,20081004
+C,20081005
+C,20081006
+
+csv=MCMD::Mcsvin.new("i=dat1.csv k=顧客")
+csv.each{|val,top,bot|
+  puts "#{val['顧客']},#{val['日付']} top=#{top} bot=#{bot}"
+}
+csv.close
+
+# 出力結果
+A,20081201 top=true bot=false
+A,20081202 top=false bot=true
+B,20081003 top=true bot=true
+C,20081004 top=true bot=false
+C,20081005 top=false bot=false
+C,20081006 top=false bot=true
+\end{Verbatim}
+
+\subsubsection*{例3 項目名行のないデータの処理}
+\verb|-nfn|を指定するとArrayに格納される。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+A,20081201
+A,20081202
+
+MCMD::Mcsvin.new("i=dat1.csv k=1 -nfn"){|csv|
+  puts csv.names # -> nil
+  csv.each{|val|
+    p val
+  }
+}
+
+# 出力結果
+nil
+["A","20081201"]
+["A","20081202"]
+\end{Verbatim}
+
+\subsubsection*{例4 Arrayに格納する例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+
+# -arrayオプションでArray格納
+MCMD::Mcsvin.new("i=dat1.csv -array"){|csv|
+  puts csv.names.join(",")
+  csv.each{|val|
+    p val
+  }
+}
+
+# 出力結果
+顧客,日付,金額
+["A", "20081201", "10"]
+["B", "20081002", "40"]
+\end{Verbatim}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mcsvoutRB]{Mcsvout} : CSVデータの書き込み
+
+\hyperref[sect:mtableRB]{Mtable} : セル単位読み込み操作
+
+\subsection{ベンチマークテスト}
+
+CSVデータの読み込み処理について、Rubyの拡張ライブラリとして提供されている
+各種ライブラリをベンチマークとして処理速度の比較を行う。
+ベンチマーク対象は以下の4つのライブラリと1つのコマンドである。
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[CSVScan] http://raa.ruby-lang.org/project/csvscan/
+\item[LightCsv] http://tmtm.org/ruby/lightcsv/
+\item[FasterCSV] http://www.gesource.jp/programming/ruby/database/fastercsv.html
+\item[CSV] http://www.ruby-lang.org/ja/old-man/html/CSV.html
+\item[mcut] 項目を切り出すMコマンド(全てC++で実装)。参考までに掲載。
+\end{description}
+
+表\ref{tb:mcsvinRB_bench1}にベンチマークテストの結果を示す。
+1万行〜500万行のデータについて読み込み実験を行った。
+図\ref{fig:mcsvinRB_script}には、ベンチマークテストで利用したスクリプトの抜粋が示されている。
+McsvinはCSVScan(Cによる実装)とほぼ同等性能である。
+その他はいずれもRubyネイティブコードによる実装なのでその差があらわれていることがわかる。
+ただし、mcutとの比較においては、Mcsvinも到底及ばない。
+mcutとMcsvinで採用しているCSVのparsingロジックおよびその実装は全く同じであるので、
+データをArrayに格納するなどのRubyとのインターフェースにまつわるコストによって、
+ここまでの差が出ていることになる。図\ref{fig:mcsvinRB_script}に、ベンチマークテストで利用したスクリプトの抜粋を示す。
+\begin{table}[htpb]
+\begin{center}
+\caption{各種CSVライブラリの実行速度比較(単位:秒)\label{tb:mcsvinRB_bench1}}
+%{\scriptsize 
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+行数      & 10K   & 100K  & 1000K & 2000K& 3000K & 4000K & 5000K\\ \hline
+Mcsvin    & 0.020 & 0.196 & 1.76  & 3.51 & 5.26  & 7.02  & 8.79 \\
+CSVScan   & 0.021 & 0.187 & 1.83  & 3.67 & 5.50  & 7.33  & 9.17 \\
+LightCsv  & 0.155 & 1.62  & 15.99 & --   &    -- & --    & --   \\
+FasterCSV & 0.196 & 1.96  & 19.50 & --   &    -- & --    & --   \\
+CSV       & 1.44  & 14.3  &  --   & --   &    -- & --    & --   \\
+mcut      & --    & --    & 0.095 & 0.177& 0.260 & 0.342 & 0.423\\
+\hline
+\end{tabular}  
+{\small
+\\10回実行した結果の平均値(real time)を示している。\\
+-- は値が大き(小さ)過ぎるために計測していないことを意味する。\\
+行数10Kは10000行の意味。データのサイズは行数が1000Kで約25Mバイト。項目数は5つ。\\
+バージョン: CSVScan 0.0.20070920, FasterCSV 1.5.1, LightCsv 0.2.2  CSV(Ruby 1.8.7)\\
+テスト環境: Mac Book Pro, 2.66GHz Intel Core i7, 8GB メモリ, Mac OS X 10.6.8
+}
+%}
+\end{center}
+\end{table}  
+
+\begin{figure}[htpb]
+\centering
+\begin{minipage}{0.8\textwidth}
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'rubygems'
+require 'csv'
+require 'fastercsv'
+require 'lightcsv'
+require 'csvscan'
+require 'mcmd'
+
+require 'benchmark'
+
+puts Benchmark.measure{
+  (0...10).each{|i|
+    # Mcsvinの場合
+    csv=MCMD::Mcsvin.new("i=data.csv -array"){|csv| csv.each{|val|}}
+
+    # CSVScanの場合
+    File.open("data.csv","r"){|fp| CSVScan.scan(fp){|row|}}
+
+    # LightCsvの場合
+    LightCsv.foreach("data.csv"){|row|}
+
+    # FasterCSVの場合
+    FasterCSV.foreach("data.csv"){|row|}
+
+    # CSVの場合
+    CSV.open("data.csv", 'r'){|row|}
+  }
+}
+\end{Verbatim}
+}
+\end{minipage}
+\caption{ベンチマークテストのスクリプト(抜粋)\label{fig:mcsvinRB_script}}
+\end{figure}
+
+次に、Mcsvinにおいて、キー指定の有無およびデータを格納する型による実行時間の差について見てみる(表\ref{tb:bench2})。
+キー指定の有無による速度には、さほど大きな違いはないが、データの格納型については、
+ArrayがHashより2倍ほど効率的である。
+
+\begin{table}[htpb]
+\begin{center}
+\caption{キーの有無とデータ格納型による実行速度比較(単位:秒)\label{tb:bench2}}
+%{\scriptsize 
+\begin{tabular}{c|c||r|r|r|r|r}
+\hline
+キー & 型     & 1000K & 2000K& 3000K & 4000K & 5000K\\ \hline\hline
+なし & Array  & 1.76  & 3.51 & 5.26  & 7.02  & 8.79 \\
+なし & Hash   & 3.52  & 6.99 & 10.50 & 14.00 & 17.52\\
+あり & Array  & 1.97  & 3.92 & 5.88  & 7.84  & 9.83 \\
+あり & Hash   & 3.68  & 7.34 & 11.01 & 14.73 & 18.34\\
+\hline
+\end{tabular}  
+{\small
+\\キーのサイズは平均10行程度。\\
+}
+%}
+\end{center}
+\end{table}  
+
+%\end{document}
+

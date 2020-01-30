@@ -1,0 +1,66 @@
+
+\section{symbol : Declare item\label{sect:symbol}}
+\subsection*{Format}
+
+\subsubsection{Format 1)}
+$obj$.symbol($itemName,value,to$) $\rightarrow$ $Qtrue$
+
+~~$itemName$ : string
+
+~~$value$ : float
+
+~~$to$ : string
+
+\subsubsection{Format 2)}
+$obj$.symbol $\rightarrow$ $itemList$
+
+~~$itemList$ : string
+
+\subsection*{Description}
+The 3 features of the symbol function are as follows. 
+\begin{enumerate}
+\item Specify the variable (item) in corresponding order from the root of the binary decision graph to the end node in the ZDD structure. 
+1 item can be declared by the symbol function each time, and can be added to the end or  beginning of the item table stored internally.
+\item Set name of item. Any characters can be used in item name. 
+\item Set the cost of item attribute. 
+\end{enumerate}
+
+\subsubsection{Format 1)}
+
+Declare the name of item at $itemName$. 
+There is no particular restriction to the character type for item name nor the length of character string (except for limitation in memory capacity). 
+
+$value$ assigns cost to an item used in \hyperref[sect:cost]{cost} and \hyperref[sect:maxcover]{maxcover}  methods. 
+When not specified, the default value is set at 0.5. 
+
+$to$ specifies whether to add the declared item to the top or bottom of the item order table ("top" or "bottom").   
+ When the value is not specified, default value is set to "bottom".
+
+\subsubsection{Format 2)}
+
+When the symbol method is used without arguments, it returns a list of space delimited symbol variables. 
+
+
+\subsection*{Example}
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> ZDD.symbol("a",1.0)
+> ZDD.symbol("b",0.5)
+> ZDD.symbol("c",2.0,"top")
+> ZDD.symbol("d")
+> ZDD.symbol
+c a  b  d
+
+> (1..10).each{|i|
+>   ZDD.symbol("s_#{i}",i)
+> }
+> puts  ZDD.symbol
+c a b d s_1 s_2 s_3 s_4 s_5 s_6 s_7 s_8 s_9 s_10
+
+
+\end{Verbatim}
+
+\subsection*{See Also}
+\hyperref[sect:itemset]{itemset} : Create ZDD objects for itemsets. 
+
+\hyperref[sect:cost]{cost} : Calculate total cost of itemsets. 
+

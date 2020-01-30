@@ -1,0 +1,62 @@
+\subsubsection*{Example 1: Example 1: Basic example of removing null characters}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items
+b a  c
+ c c
+e a   b 
+$ mvdelnull vf=items i=dat1.csv o=rsl1.csv
+#END# kgvdelnull i=dat1.csv o=rsl1.csv vf=items
+$ more rsl1.csv
+items
+b a c
+c c
+e a b
+\end{Verbatim}
+\subsubsection*{Example 2: Example 2: Example of using .(dot) as delimiting character}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+items
+b.a..c
+.c.c
+e.a...b.
+$ mvdelnull vf=items delim=. i=dat2.csv o=rsl2.csv
+#END# kgvdelnull delim=. i=dat2.csv o=rsl2.csv vf=items
+$ more rsl2.csv
+items
+b.a.c
+c.c
+e.a.b
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Change field name and output }
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelnull vf=items:new i=dat1.csv o=rsl3.csv
+#END# kgvdelnull i=dat1.csv o=rsl3.csv vf=items:new
+$ more rsl3.csv
+new
+b a c
+c c
+e a b
+\end{Verbatim}
+\subsubsection*{Example 4: Example 3: Add output as an new field by specifying -A}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvdelnull vf=items:new -A i=dat1.csv o=rsl4.csv
+#END# kgvdelnull -A i=dat1.csv o=rsl4.csv vf=items:new
+$ more rsl4.csv
+items,new
+b a  c,b a c
+ c c,c c
+e a   b ,e a b
+\end{Verbatim}

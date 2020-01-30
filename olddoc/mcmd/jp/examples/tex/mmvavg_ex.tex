@@ -1,0 +1,127 @@
+\subsubsection*{例1: 基本例}
+
+最初の行は期数に満たないため出力されない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,value
+1,5
+2,1
+3,3
+4,4
+5,4
+6,6
+7,1
+8,4
+9,7
+$ mmvavg s=id f=value t=2 i=dat1.csv o=rsl1.csv
+#END# kgmvavg f=value i=dat1.csv o=rsl1.csv s=id t=2
+$ more rsl1.csv
+id%0,value
+2,3
+3,2
+4,3.5
+5,4
+6,5
+7,3.5
+8,2.5
+9,5.5
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+最初の行は期数に満たないため出力されない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mmvavg s=id f=value t=2 -w i=dat1.csv o=rsl2.csv
+#END# kgmvavg -w f=value i=dat1.csv o=rsl2.csv s=id t=2
+$ more rsl2.csv
+id%0,value
+2,2.333333333
+3,2.333333333
+4,3.666666667
+5,4
+6,5.333333333
+7,2.666666667
+8,3
+9,6
+\end{Verbatim}
+\subsubsection*{例3: 基本例3}
+
+指数平滑移動平均(\verb|-exp|)の場合は最初の行から出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mmvavg s=id f=value t=2 -exp i=dat1.csv o=rsl3.csv
+#END# kgmvavg -exp f=value i=dat1.csv o=rsl3.csv s=id t=2
+$ more rsl3.csv
+id%0,value
+1,5
+2,2.333333333
+3,2.777777778
+4,3.592592593
+5,3.864197531
+6,5.288065844
+7,2.429355281
+8,3.47645176
+9,5.82548392
+\end{Verbatim}
+\subsubsection*{例4: キーを指定する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,key,value
+1,a,5
+2,a,1
+3,a,3
+4,a,4
+5,a,4
+6,b,6
+7,b,1
+8,b,4
+9,b,7
+$ mmvavg s=key,id k=key f=value t=2 i=dat2.csv o=rsl4.csv
+#END# kgmvavg f=value i=dat2.csv k=key o=rsl4.csv s=key,id t=2
+$ more rsl4.csv
+id,key,value
+2,a,3
+3,a,2
+4,a,3.5
+5,a,4
+7,b,3.5
+8,b,2.5
+9,b,5.5
+\end{Verbatim}
+\subsubsection*{例5: 指定した期に満たなくても出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+key,value
+a,1
+a,2
+a,3
+a,4
+a,5
+b,6
+b,1
+b,4
+b,7
+$ mmvavg -q k=key f=value t=2 skip=0 i=dat3.csv o=rsl5.csv
+#END# kgmvavg -q f=value i=dat3.csv k=key o=rsl5.csv skip=0 t=2
+$ more rsl5.csv
+key,value
+a,1
+a,1.5
+a,2.5
+a,3.5
+a,4.5
+b,6
+b,3.5
+b,2.5
+b,5.5
+\end{Verbatim}

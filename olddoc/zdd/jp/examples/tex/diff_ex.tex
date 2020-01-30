@@ -1,0 +1,18 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> puts a.diff?(b)
+true
+> puts a.diff?(a)
+false
+> puts (a+b).diff?(a+c)
+true
+> puts (a+b).diff?(a+b)
+false
+\end{Verbatim}

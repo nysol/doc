@@ -1,0 +1,50 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mduprec レコードの複写\label{sect:mduprec}}
+\index{mduprec@mduprec}
+各レコードを複写する。
+複写する行数は\verb|n=|で固定値を与えるか、
+もしくは\verb|f=|で指定した項目の値により与える。
+
+\subsection*{書式}
+\verb/mduprec f=|n=/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & 複写行数をもつ項目名\\
+             & ここで指定した項目の値の数分、その行を複写する。\\
+\verb|n=|    & 複写行数の指定\\
+             & ここで指定した値の数分、行を複写する。\\
+\end{tabular} 
+}
+\end{table} 
+\subsection*{利用例}
+\input{examples/tex/mduprec_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mcount]{mcount} : \verb|mduprec|と逆の動きをする。
+
+\hyperref[sect:mwindow]{mwindow} : 一定数のレコードをずらしながら複写する。
+
+%\end{document}

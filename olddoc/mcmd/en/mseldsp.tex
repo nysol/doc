@@ -1,0 +1,121 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mseldsp Display option selection screen\label{sect:mseldsp}}
+\index{mseldsp@mseldsp}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command displays a list of character strings to choose from at the position on the terminal specified by coordinate \verb|x=,y=|. The list is specified by the \verb|i=| or \verb|seldata=| parameter. 
+The user can choose only one from the list. To allow multiple choice, use the \hyperref[sect:mmseldsp]{mmseldsp} command. 
+The output CSV file contains one row and one field. When the command ends with nothing entered in the input frame, null is output (that is, only a line feed is output). To output a fieldname, use the \verb|f=| parameter. With \verb|f=| omitted, no fieldname header is output. 
+If there are too many choices to fit into the screen, use the \verb|height=| parameter to specify the number of rows shown in a scroll window.
+When the Enter key is pressed on the selection screen, the command returns end status 0 and ends. When the ESC key is pressed on the screen, the command returns end status 1 and ends. In either case, the choice made on the selection screen is output to a file.
+In the coordinate system, the top left is \verb|x=1,y=1| (escape sequence specifications). If the value specified for \verb|x=| or \verb|y=| is smaller than 1, the command assumes 1 and operates. The operation is indefinite if the specified coordinate is outside the scope of the terminal.
+
+\subsection*{Format}
+\verb/mseldsp x= y= [height=] i=|seldata=/
+\hyperref[sect:option_o]{o=}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|x=|   & Specify the display start position (1 or greater) on the x axis (horizontal, left to right)\\
+\verb|y=|   & Specify the display start position (1 or greater) on the y axis (vertical, top to bottom)\\
+\verb|height=| & Specify the number of rows in which the choices are shown.\\
+\verb|i=|   & Specify the name of the CSV file containing the choice character strings as fields.\\
+\verb|f=|   & Specify the name of the CSV file containing the choice character strings as fields.\\
+\verb|seldata=| & Specify the list of character strings to choose from, using commas ad delimiters.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+
+\subsubsection*{Example 1: Basic example}
+The contents of \verb|sel.txt| are displayed at x=10,y=3 on the terminal, and the character string selected by the user is output to \verb|rsl1.txt|.
+
+%\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more sel.txt
+1:I agree.
+2:I do not know.
+3:I disagree.
+$ mseldsp x=10 y=3 i=sel.txt o=rsl1.txt
+# Assume that the user has selected the first row.
+$ mose rsl1.txt
+1:I agree.
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|          \textColor{red}{black}{1:I agree.}
+|          \textColor{white}{black}{2:I do not know.}
+|          \textColor{white}{black}{3:I disagree.}
+|
+\end{Verbatim}
+
+\subsubsection*{Example 2: Using arguments to specify the character strings}
+This script works in the same way as Example 1, but the option character strings are specified by \verb|seldata=|.
+
+%\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mseldsp x=10 y=3 seldata=1:I agree.,2:I do not know.,3:I disagree. o=rsl2.txt
+# Assume that the user has selected the second row.
+$ mose rsl2.txt
+2:I do not know.
+
+The following will be displayed:
++--------------------------------------
+|
+|
+|          \textColor{white}{black}{1:I agree.}
+|          \textColor{red}{black}{2:I do not know.}
+|          \textColor{white}{black}{3:I disagree.}
+|
+\end{Verbatim}
+
+\subsubsection*{Example 3: Judging end status}
+The parameters are the same as in Example 1. This script judges the end status and performs different operations accordingly.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more scp.sh
+rm -f rsl3.csv
+clear
+mseldsp x=10 y=3 seldata=aaaa,bbbb,cccc o=rsl3.csv
+if [ $? = 0 ] ; then
+  clear ; echo "end by enter key"
+else
+  clear ; echo "end by escape key"
+fi
+
+# Result of selecting aaaa and pressing Enter
+$ bash scp.sh
+end by enter key
+$ more rsl3.csv
+aaaa
+
+# Result of selecting bbbb and pressing ESC
+$ bash scp.sh
+end by escape key
+$ more rsl3.csv
+bbbb
+\end{Verbatim}
+
+\subsection*{Related Commands}
+\hyperref[sect:minput] {minput} : Displays the input screen.
+\hyperref[sect:mminput] {mminput} :Displays the input screen with multiple input frames.
+\hyperref[sect:mdsp] {mdsp} : Displays a character string at a specified position on the screen.
+\hyperref[sect:mmseldsp] {mmseldsp} : Displays a multiple-choice input window on the screen.
+
+%\end{document}

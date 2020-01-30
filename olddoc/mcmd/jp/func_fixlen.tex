@@ -1,0 +1,25 @@
+
+%\begin{document}
+
+\section{fixlen 固定長変換\label{sect:fixlen}}
+\index{fixlen@fixlen}
+
+書式1: fixlen($str$,長さ,位置,padding文字)
+
+書式2: fixlenw($str$,長さ,位置,padding文字)
+
+$str$を固定の長さの文字列に変換する。
+$str$が指定の長さに満たない場合は、
+右詰もしくは左詰めで指定した文字を埋め込む。
+左右の選択では、「位置」パラメータに\verb|"L"|もしくは\verb|"R"|を指定する。
+埋め込む文字は「padding文字」パラメータに任意の文字を指定する。
+また、$str$の長さが、指定した固定長の長さを超えた場合、
+右詰の場合は先頭側が、左詰めの場合は末尾側の文字列が削られることに注意する。
+
+マルチバイト文字を対象とした固定長変換については\verb|fixlenw|関数を利用する。
+
+\subsection*{利用例}
+\input{examples/tex/func_fixlen_ex.tex}
+
+%\end{document}
+

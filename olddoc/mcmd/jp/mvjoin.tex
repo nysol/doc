@@ -1,0 +1,162 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvjoin ベクトル要素の参照結合\label{sect:mvjoin}}
+\index{mvjoin@mvjoin}
+ベクトル要素をキーにして参照ファイル上のベクトル型データを結合する。
+ベクトル型の項目とは、表\ref{tbl:mvjoin_input}のitems項目のように、
+スペースで区切られた複数の文字列を値として持つ項目である。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvjoin_input}〜\ref{tbl:mvjoin_out3}に示す。
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvjoin_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{参照ファイル\label{tbl:mvjoin_ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{cc}
+\hline
+item&taxo \\
+\hline
+a&X \\
+b&Y \\
+c&Z \\
+e&X \\
+f&Z \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{基本例\label{tbl:mvjoin_out2}}
+\verb|vf=items m=ref.csv K=item f=taxo| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{アンマッチ要素の指定例\label{tbl:mvjoin_out3}}
+\verb|vf=items m=ref.csv K=item f=taxo n=* | \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X * \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z * \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\verb|mvjoin|コマンドは、参照ファイルデータを一旦全てメモリにセットするので、
+巨大な参照ファイルを指定した場合はメモリを使い果たす可能性があることに注意する。
+
+\subsection*{書式}
+\verb/mvjoin vf= [-A] K= f= [n=] m=|/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=| & 結合キーとなるベクトルの項目名(\verb|i=|ファイル上)を指定する。\\
+           & 複数項目指定可能。ベクトル要素はソーティングされている必要はない。 \\
+		   & 結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。\\
+\verb|-A|  & \verb|vf=|で:(コロン)に続けて指定した項目名で、新たな項目が追加される。\\
+           & なお\verb|-A|オプションを指定した場合、\verb|vf=|パラメータで指定するすべての\\
+           & 項目に新項目名を指定しなければならない。\\
+\verb|m=|  & 参照ファイルを指定する。\\
+\verb|K=|  & 参照ファイル(\verb|m=|)上の結合キーとなるベクトル要素の項目名を指定する。\\
+           & 並べ変わっている必要はないが、ベクトル要素は単一化されていなければならない。\\
+           & 単一化されていない時の動作は不定である。\\
+\verb|f=|  & 結合するベクトル(要素)項目名を指定する。 \\
+\verb|n=|  & \verb|vf=|と\verb|K=|のベクトル要素がマッチしなかった場合に結合する文字列を指定する。 \\
+           & 省略した場合、対象のベクトル(要素)の結合は行われない。 \\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvjoin_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mvcommon]{mvcommon} : 結合ではなく、要素を選択するだけならこのコマンドを利用する。
+
+%\end{document}

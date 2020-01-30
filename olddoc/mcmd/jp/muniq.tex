@@ -1,0 +1,45 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{muniq レコードの単一化\label{sect:muniq}}
+\index{muniq@muniq}
+値が重複した行を単一化する。
+
+\subsection*{書式}
+\verb|muniq [k=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+%\verb|k=|    & 行を単一化する単位となる項目名リストを指定する。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & 行を単一化する単位となる項目名リストを指定する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/muniq_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mbest]{mbest} : 同一キーの中で何番目の行を選択するかを指定したい場合は\verb|mbest|コマンドを使う。
+
+%\end{document}

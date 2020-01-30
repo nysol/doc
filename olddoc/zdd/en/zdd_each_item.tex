@@ -1,0 +1,16 @@
+
+\section{each\_item : Iterate for each item\label{sect:each_item}}
+\subsection*{Format}
+$obj$.each\_item\{$|weight,item,top,bottom|\dots$\} $\rightarrow$ $Qtrue$
+
+\subsection*{Description}
+Read itemset from ZDD object $obj$ one at a time, each set of weight and item are returned as $weight$ and $item$ correspondingly for the specified block. 
+
+When the itemsets are processed, if item is the first item, $top$ will return as true, if item is the last item, $bottom$ will return false.  
+
+
+\subsection*{Example}
+\input{examples/tex/each_item_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:each]{each} : Return by itemset

@@ -1,0 +1,20 @@
+
+%\begin{document}
+
+\section{hasspace 空白類文字検索\label{sect:hasspace}}
+\index{hasspace@hasspace}
+
+書式1: hasspace($str$, 長さ)
+
+書式2: hasspacew($str$, 長さ)
+
+文字列$str$に空白類文字列が含まれていれば真を、含まれていなければ偽を返す。
+空白類文字とは、ASCIIコードの0x20および0x09〜0x0dまでの事をいう。
+それぞれ、半角スペース(0x20)、水平tab(0x09)、改行(0x0a)、垂直タブ(0x0b)、改ページ(0x0c)、復帰(0x0d)である。
+マルチバイト文字における空白類文字を検索したければhasspacewを使うこと。
+
+\subsection*{利用例}
+\input{examples/tex/func_hasspace_ex.tex}
+
+%\end{document}
+

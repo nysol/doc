@@ -1,0 +1,16 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+$ mcal c='e()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=e() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,2.718281828
+2,2.718281828
+\end{Verbatim}

@@ -1,0 +1,158 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 9: Calculation among rows with mshare command}
+
+This command computes individual share out of the total value in the defined field.  The share is derived by: valueonerecord / valueallrecords.
+
+
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|mshare.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective:  Calculate the share of total quantity and total amount for each transaction. \\
+
+Methodology: Select \emph{date,quantity,amount} with \verb|mcut| command, pipe the results to \verb|msum| command to compute the total quantity and total amount based on each unique date. Next, the output is forwarded to \verb|mshare| command to calculate the share of quantity and amount for each date out of the total quantity and total amount. Save the results to the file \verb|mshareout.csv|.   \\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+The parameters for \verb|mshare| command are as follows: \\
+
+Key: 		\verb|k=| \\
+Description: 	Since the ratio is calculated against all records in the dataset, the key parameter do not need to be specified in this case. \\
+
+Attributes: 	\verb|f=quantity:quantityShare,amount:amountShare|\\
+Description: 	Define the attributes where the percentages will be computed. For arguments with multiple attributes, use comma as delimiters to separate the field names without spaces in between. Rename the calculated fields using a colon followed by the name of new attribute. 
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 9: Calculation among rows with mshare
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount             i=${inPath}/dat.csv |
+msortf f=date                           |
+msum k=date f=quantity,amount           |
+mshare f=quantity:quantityShare,amount:amountShare o=outdat/mshareout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./mshare.sh 
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/19 14:42:10
+#END# kgsortf f=date; IN=24737 OUT=24737; 2013/08/19 14:42:10
+#END# kgsum f=quantity,amount k=date; IN=24737 OUT=324; 2013/08/19 14:42:10
+#END# kgshare f=quantity:quantityShare,amount:amountShare o=outdat/mshareout.csv; IN=324 OUT=324; 2013/08/19 14:42:10
+\end{verbatim}
+
+\noindent
+The result is as follows: 
+
+\begin{verbatim}
+date,quantity,amount,quantityShare,amountShare
+20010108,21,8680,0.0004130687071,0.0003729484345
+20010110,67,23495,0.001317885875,0.001009495791
+20010111,94,38261,0.001848974213,0.001643937794
+20010116,65,28333,0.001278545998,0.001217367281
+20010119,210,93586,0.004130687071,0.0040210544
+20010123,54,19476,0.001062176675,0.0008368137915
+20010125,43,14516,0.0008458073526,0.0006237004004
+20010128,43,15448,0.0008458073526,0.000663745094
+20010130,157,60577,0.003088180334,0.002602776189
+20010131,14,1806,0.0002753791381,7.759733557e-05
+20010201,8,1024,0.0001573595075,4.399760333e-05...
+..
+\end{verbatim}
+
+\subsection{Step 4: Modify the shell script }
+
+After we have verified the share of quantity and amount, let's modify the script to find out the share of quantity and amount for each 4-digit classification code within every 2-digit classification code. \\
+
+Methodology: Select \emph{CategoryCode2,CategoryCode4,quantity,amount} with \verb|mcut| command. Compute the total quantity and amount based on each unique \emph{CategoryCode2,CategoryCode4} with \verb|msum|. Use the results to calculate the share of total quantity and total amount for each 4-digit category in their parent category. Write the results to the file \verb|mshareout0.csv|. \\
+
+Your script should look as follows:\\
+
+\begin{verbatim}
+mcut f=CategoryCode2,CategoryCode4,quantity,amount      i=${inPath}/dat.csv |
+msortf f=CategoryCode2,CategoryCode4                            |       
+msum k=CategoryCode2,CategoryCode4 f=quantity:totalQuantity,amount:totalAmount  |
+mshare k=CategoryCode2 f=totalQuantity:quantityShare,totalAmount:amountShare o=outdat/mshareout0.csv
+
+Save and execute your script. The result should be as follows:
+
+Code2Desc,Code4Desc,totalQuantity,totalAmount,quantityShare,amountShare
+11,1101,3758,1526511,0.111655822,0.09960763423
+11,1102,1698,732146,0.05045012925,0.04777386535
+11,1103,1160,500887,0.03446534153,0.03268379271
+11,1104,2019,1024216,0.05998752117,0.06683196695
+11,1105,2847,1611468,0.08458864426,0.1051512338
+11,1106,1100,484361,0.03268265145,0.03160544098
+11,1107,1946,911273,0.05781858157,0.05946222966
+11,1108,1157,410367,0.03437620703,0.02677719717
+11,1110,1478,577858,0.04391359895,0.03770629121
+11,1111,1768,744427,0.05252993434,0.04857522306
+11,1112,1450,732630,0.04308167692,0.04780544724
+11,1113,1150,445836,0.03416822652,0.02909161429
+11,1114,212,80084,0.00629883828,0.005225627447
+11,1115,2194,1106249,0.0651870339,0.07218477021
+11,1116,1144,542858,0.03398995751,0.03542247721
+11,1117,938,489566,0.02786938824,0.03194507675
+\end{verbatim}
+
+\vspace {5mm}
+
+{\setlength{\parindent}{0cm}
+
+\textbf{Validating interim results}\\
+
+    
+You may want to check the interim results when more commands are used in the script as in the above example or when the final result is not what you expected. Alternatively, you can use the "tee" UNIX command to copy the standard input to standard output. An example is shown below:  \\
+
+}
+\begin{verbatim}
+mcut f=date,quantity,amount             i=${inPath}/dat.csv | tee checkdat.csv |
+msortf f=date                           		|
+msum k=date...
+..         
+\end{verbatim}
+
+\subsection{Exercise }
+
+Let's practice the \verb|mshare| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Shares of total quantity and total amount for each manufacturer. & \href{exercise/mshare1.sh}{mshare1.sh} & \href{exercise/outdat/mshareout1.csv}{mshareout1.csv} \\
+2. Shares of total quantity and total amount for each manufacturer in each \\ 2-digit classification code. & \href{exercise/mshare2.sh}{mshare2.sh} & \href{exercise/outdat/mshareout2.csv}{mshareout2.csv} \\
+
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

@@ -1,0 +1,142 @@
+
+%\begin{document}
+
+\section{msed - Replace String Matching Regular Expression\label{sect:msed}}
+\index{msed@msed}
+Replace string in the fields specified in the \verb|f=| parameter with a string specified in the \verb|v=| parameter for content that matches the regular expression specified in the \verb|c=| parameter . 
+
+
+\subsection*{Format}
+\verb|msed c= f= v= [-A] [-g] [-W] |     
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|  & specify the target list of field name(s) (multiple fields can be specified) for parsing.\\
+\verb|c=|  & Define the regular expression for string substitution. \\
+           & Refer to usage of  regular expressions.\\
+\verb|v=|  & Specify the string to replace the substring that matches with the regular expression specified in the \verb|c=| parameter. \\
+           & It is possible to substitute match result with the following methods: \\
+           & \verb|$&| : Matched string\\
+           & \verb|$`| : Search for the string from the beginning of the target replacement character string, until a  string is matched. \\
+           & \verb|$'| : After a matched string, substitute target replacement string with matched string till the end. \\
+           & \verb|$N| : partial string match for the N-th occurrance (\verb|N>=1|).\\
+\verb|-A|  & Instead of replacing the specified field, add field as a new column. \\
+\verb|-g|  & Replace all matches of the regular expression. \\
+\verb|-W|  & Replace wide character matches of the regular expression. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Using regular expressions}
+List of regular expression specified in the \verb|c=| parameter  is shown from Table \ref{tbl:msed_regex1}  to Table \ref{tbl:msed_regex4}.
+
+\begin{table}[htbp]
+\begin{center}
+{\small
+\caption{Regular expression match with 1 character\label{tbl:msed_regex1}}
+\begin{tabular}{l|l|l|l|l}
+\hline
+Regular expression      & Description                                      & Example of pattern             & Example of \verb|c=,v=|        & Result \\
+\hline
+\verb|.|      & Any character                              & \verb|abbbcc|   & \verb|c=. v=X -g|      & \verb|XXXXXX| \\
+\verb|[abc]|	& either \verb|a,b, or c| character              & \verb|abbbcc|   & \verb|c=[ac] v=X -g|   & \verb|XbbbXX| \\
+\verb|[^abc]| & Any character other than \verb|a,b,c|             & \verb|abbbcc|   & \verb|c=[^ac] v=X -g|  & \verb|aXXXcc| \\
+\verb|[a-z]|  & Any character from \verb|a| to \verb|z|   & \verb|abbbcc|   & \verb|c=[a-b] v=X -g|  & \verb|XXXXcc| \\
+\verb|[^a-z]| & Any character outside the range of \verb|a| to \verb|z| & \verb|abbbcc|   & \verb|c=[^a-b] v=X -g| & \verb|abbbXX| \\
+\verb|\t|     & Tab character                                   &                 &                        & \\
+\verb|\w|     & Word string (\verb|[0-9a-zA-Z_]|)          & \verb|ab#cd&ef| & \verb|c=\w v=X -g|     & \verb|XX#XX&XX| \\
+\verb|\W|     & Characters other than Word string                           & \verb|ab#cd&ef| & \verb|c=\w v=X -g|     & \verb|abXcdXef| \\
+\verb|\s|     & Space character (\verb|[ \t]|)                     & \verb|ab cd ef| & \verb|c=\s v=X -g|     & \verb|abXcdXef|\\
+\verb|\S|     & Non-whitespace character                              & \verb|ab cd ef| & \verb|c=\s v=X -g|     & \verb|XX XX XX|\\
+\verb|\d|     & Numeric constituent characters (\verb|[0-9]|)             & \verb|ab12c0|   & \verb|c=\d v=X -g|     & \verb|abXXcX|\\
+\verb|\D|     & Non-numeric constituent characters                       & \verb|ab12c0|   & \verb|c=\d v=X -g|     & \verb|XX12X0|\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+
+\begin{table}[htbp]
+\begin{center}
+{\small
+\caption{Repetition of regular expressions\label{tbl:msed_regex2}}
+\begin{tabular}{l|l|l|l|l}
+\hline
+Regular expression      & Description                                 & Example of pattern           & Example of \verb|c=,v=|          & Result\\
+\hline
+\verb|a*|     & Zero or more repetition of \verb|a|          & \verb|abbbcc|   & \verb|c=ab* v=X|        & \verb|Xcc|   \\
+\verb|a+|     & Repetition of one or more \verb|a|          & \verb|abbbcc|   & \verb|c=ab+ v=X|        & \verb|Xcc|   \\
+\verb|a?|     & Single occurrence of \verb|a|        & \verb|abbbcc|   & \verb|c=ab? v=X|        & \verb|Xbbcc| \\
+\verb|a{M,N}| & Repetition of \verb|a| more than M and less than N   & \verb|abbbbbcc| & \verb|c=ab{3,4} v=X|    & \verb|Xbcc|  \\
+\verb|a{M}|   & Repetition of \verb|a| more than M times          & \verb|abbbbbcc| & \verb|c=ab{3} v=X|      & \verb|Xbbcc| \\
+\verb/a｜b/   & \verb|a| or \verb|b|               & \verb|abbbc|    & \verb/c=(ab)｜(bc) v=X/ & \verb|XbX|   \\
+\verb|?|      & Shortest match after the repeat sign & \verb|abbbc|    & \verb|c=ab*? v=X|       & \verb|Xbbbc| \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\begin{table}[htbp]
+\begin{center}
+{\small
+\caption{Position of regular expression\label{tbl:msed_regex3}}
+\begin{tabular}{l|l|l|l|l}
+\hline
+Regular expression  & Description                      & Example of pattern                 & Example of \verb|c=,v=|      & Result\\
+\hline
+\verb|^|  & Match from the beginning          & \verb|abac|          & \verb|c=^a v=X -g|  & \verb|Xbac|\\
+\verb|$|  & Match till the end        & \verb|acac|          & \verb|c=c$ v=X -g|  & \verb|acaX|\\
+\verb|\b| & Match starting characters of string & \verb|aac ba ac bac| & \verb|c=\ba v=X -g| & \verb|Xac bX Xc bac|\\
+\verb|\B| & Match within the string             & \verb|aac ba ac bac| & \verb|c=\Ba v=X -g| & \verb|aXc ba ac bXc|\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\begin{table}[htbp]
+\begin{center}
+{\small
+\caption{Others\label{tbl:msed_regex4}}
+\begin{tabular}{l|l|l|l|l}
+\hline
+Regular expression        & Description                                      & Example of pattern            & Example of \verb|c=,v=|         & Result \\
+\hline
+(expr)          & Grouping                                &&& \\			
+\verb|\1,..,\9| & Back reference                                  & \verb|abbcababc| &\verb|c=(ab)(bc)\1 v=x| & \verb|Xabc| \\
+\verb|(?=expr)| & Position before matched string at \verb|expr|   &&& \\
+\verb|(?!expr)| & Position before unmatched string at \verb|expr|  &&& \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/msed_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mchgstr] {mchgstr} : Use this command to replace with a simple string match.
+
+\hyperref[sect:mcal] {mcal} :  Include several functions to handle the regular expression.
+
+%\end{document}

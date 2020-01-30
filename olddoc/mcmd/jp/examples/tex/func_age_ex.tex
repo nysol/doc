@@ -1,0 +1,21 @@
+\subsubsection*{例1: 基本例}
+
+2013年9月1日における年令を求める。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,dob
+1,19641010
+2,20000101
+3,
+4,19770812
+$ mcal c='age($d{dob},0d20130901)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=age($d{dob},0d20130901) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,dob,rsl
+1,19641010,48
+2,20000101,13
+3,,
+4,19770812,36
+\end{Verbatim}

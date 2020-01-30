@@ -1,0 +1,44 @@
+%\begin{document}
+
+%\section{Format of MCMD\label{sect:format}}
+The format for all commands is explained in this section. 
+The format of all command references is shown as in the following example.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{l}
+\hline
+{\large Format} \\
+\verb/  mjoin k= [f=] [K=] [-n] [-N] m=|/ 
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\verb|[--help]|
+\verb|[--version]|\\
+
+\\
+{\large Parameters} \\
+\verb|  k=   List of field name(s) to match with the input data |\\
+\verb|      [join key break processing: character string in ascending order]. |\\
+\verb|      The field(s) in the input data is specified at the K= parameter.|\\
+\verb|      Field in the reference data will be combined with same field in the record. |\\
+\verb|      If the field(s) specified at K= from reference file do not match any values,|\\
+\verb|      it is treated as a NULL value.|\\
+\verb|  f=  Specify the list of field name(s) to join from the reference file. |\\
+\verb|      When the f= parameter is not defined, all fields except the key field(s) | \\
+\verb|      in the reference file will be joined to the input file. |\\
+\verb|      :   :|\\
+\hline
+\end{tabular} 
+\end{center}
+\end{table} 
+
+Command options and parameter can be specified after the command name. The parameter takes a value and the parameter name and value is separated by an “=” sign. An option begins with one dash “-” or two dash “--”. Command options and parameters that are common in most commands include \verb|i=,-nfn|. The link to that section is appended in a separate section. The description of each parameter is described in the format below.
+
+Parameters enclosed in square brackets like \verb|[f=]| means that it is optional. On the other hand, parameters that are not enclosed in square brackets like \verb|k=| means that it is a required parameter. Parameters separated by a vertical bar enclosed in square parentheses, such as \verb/[to=|size=]/ means that the command will only read either to= or size=  (e.g. \hyperref[sect:mbest]{mbest command}). On the other hand, if the parameters separated by \verb/"|"/ is not enclosed in square brackets such as \verb/m=|i=/, one of these parameters is required and must be specified (e.g. mjoin command. See above).
+
+Further, parameters or options are only required when specifying certain options, there are also more complex parameter conditions which is described in the description field of each parameter.
+
+%\end{document}

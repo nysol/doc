@@ -1,0 +1,270 @@
+\subsubsection*{Example 1: Basic Example}
+
+Display sequential patterns which occured more than 2 times.
+Note that the field names in the input data are the same as default parameters and thus the specification of field names is not required.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+tid,time,item
+T1,0,C
+T1,2,B
+T1,3,A
+T1,7,C
+T2,2,D
+T2,3,A
+T2,5,B
+T2,6,C
+T3,1,C
+T3,2,B
+T3,4,D
+T3,8,E
+T4,2,A
+T4,5,C
+T4,6,B
+T5,0,B
+T5,1,A
+T5,2,D
+T5,3,D
+T5,7,C
+T5,9,C
+T6,0,A
+T6,5,B
+T6,6,D
+T6,8,B
+T6,9,C
+$ msequence.rb  O=result1 i=dat1.csv S=2
+#MSG# lcm_seq_20140215 CIf /tmp/__MTEMP_19670_70131942364220_0 2 /tmp/__MTEMP_19670_701319
+42378600_0
+trsact: /tmp/__MTEMP_19670_70131942364220_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 4 ,size 25
+ output to: /tmp/__MTEMP_19670_70131942378600_0
+iters=20
+20
+1
+4
+10
+5
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 19
+#MSG# The final results are in the directory `result1'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/msequence.rb O=result1 i=dat1.csv S=
+2
+$ more result1/patterns.csv
+pid,pattern,size,count,total,support
+1,C,1,6,6,1
+4,B,1,6,6,1
+11,A C,2,5,6,0.8333333333
+10,A,1,5,6,0.8333333333
+16,D,1,4,6,0.6666666667
+7,B C,2,4,6,0.6666666667
+12,A B,2,3,6,0.5
+8,B D,2,3,6,0.5
+2,C B,2,3,6,0.5
+19,D C,2,3,6,0.5
+3,C C,2,2,6,0.3333333333
+18,D B C,3,2,6,0.3333333333
+13,A B C,3,2,6,0.3333333333
+14,A D,2,2,6,0.3333333333
+15,A D C,3,2,6,0.3333333333
+9,B D C,3,2,6,0.3333333333
+17,D B,2,2,6,0.3333333333
+6,B A C,3,2,6,0.3333333333
+5,B A,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{Example 2: Limit of pattern length}
+
+Enumerate sequential patterns with length of 2 which occurred more than 3 or more times.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result2 i=dat1.csv S=3 l=2 u=2
+#MSG# lcm_seq_20140215 CIf -l 2 -u 2 /tmp/__MTEMP_19729_70097587586600_0 3 /tmp/__MTEMP_19
+729_70097587584720_0
+trsact: /tmp/__MTEMP_19729_70097587586600_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 4 ,size 25
+ output to: /tmp/__MTEMP_19729_70097587584720_0
+iters=11
+6
+0
+0
+6
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 6
+#MSG# The final results are in the directory `result2'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/msequence.rb O=result2 i=dat1.csv S=
+3 l=2 u=2
+$ more result2/patterns.csv
+pid,pattern,size,count,total,support
+3,A C,2,5,6,0.8333333333
+1,B C,2,4,6,0.6666666667
+0,C B,2,3,6,0.5
+2,B D,2,3,6,0.5
+4,A B,2,3,6,0.5
+5,D C,2,3,6,0.5
+$ more result2/tid_pats.csv
+tid,pid
+T1,0
+T1,1
+T1,3
+T2,1
+T2,3
+T2,4
+T2,5
+T3,0
+T3,2
+T4,0
+T4,3
+T4,4
+T5,1
+T5,2
+T5,3
+T5,5
+T6,1
+T6,2
+T6,3
+T6,4
+T6,5
+\end{Verbatim}
+\subsubsection*{Example 3: Specify gap length and window size}
+
+Enumerate sequential patterns with length above 2 which occurred more than 2 or more times, with gap length at 2 and window size at 4.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result3 i=dat1.csv S=2 l=2 gap=2 win=4
+#MSG# lcm_seq_20140215 CIf -l 2 -g 2 -G 4 /tmp/__MTEMP_19789_70106029991460_0 2 /tmp/__MTE
+MP_19789_70106029989580_0
+trsact: /tmp/__MTEMP_19789_70106029991460_0 ,#transactions 6 ,#items 5 ,size 26 extracted 
+database: #transactions 6 ,#items 5 ,size 26
+ output to: /tmp/__MTEMP_19789_70106029989580_0
+iters=15
+10
+0
+0
+9
+1
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 10
+#MSG# The final results are in the directory `result3'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/msequence.rb O=result3 i=dat1.csv S=
+2 l=2 gap=2 win=4
+$ more result3/patterns.csv
+pid,pattern,size,count,total,support
+0,C B,2,3,6,0.5
+2,B C,2,3,6,0.5
+3,B D,2,3,6,0.5
+4,A C,2,3,6,0.5
+5,A B,2,3,6,0.5
+1,B A,2,2,6,0.3333333333
+6,A D,2,2,6,0.3333333333
+7,D B,2,2,6,0.3333333333
+8,D B C,3,2,6,0.3333333333
+9,D C,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{Example 4: Dealing with time with padding}
+
+Given the same criteria as example 3, when -padding is specified, enumerate sequential patterns in consideration of time based on gap length and window size constraints.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msequence.rb  O=result4 i=dat1.csv S=2 l=2 gap=2 win=4 -padding
+#MSG# lcm_seq_zero_20140215 CIf -l 2 -g 2 -G 4 /tmp/__MTEMP_19848_70219658610980_0 2 /tmp/
+__MTEMP_19848_70219658608980_0
+trsact: /tmp/__MTEMP_19848_70219658610980_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 6 ,size 46
+ output to: /tmp/__MTEMP_19848_70219658608980_0
+iters=33
+4
+0
+0
+4
+#MSG# output tid-patterns ...
+#MSG# the number of contrast patterns enumerated is 4
+#MSG# The final results are in the directory `result4'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/msequence.rb O=result4 i=dat1.csv S=
+2 l=2 gap=2 win=4 -padding
+$ more result4/patterns.csv
+pid,pattern,size,count,total,support
+0,C B,2,3,6,0.5
+3,B D,2,3,6,0.5
+1,B A,2,2,6,0.3333333333
+2,B C,2,2,6,0.3333333333
+\end{Verbatim}
+\subsubsection*{Example 5: Enumerate emerging patterns\label{ex:ep1}}
+
+Given the same criteria as in example 1, enumerate emerging patterns by specifying class field. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+tid,time,item,class
+T1,0,C,cls1
+T1,2,B,cls1
+T1,3,A,cls1
+T1,7,C,cls1
+T2,2,D,cls1
+T2,3,A,cls1
+T2,5,B,cls1
+T2,6,C,cls1
+T3,1,C,cls1
+T3,2,B,cls1
+T3,4,D,cls1
+T3,8,E,cls1
+T4,2,A,cls1
+T4,5,C,cls1
+T4,6,B,cls1
+T5,0,B,cls2
+T5,1,A,cls2
+T5,2,D,cls2
+T5,3,D,cls2
+T5,7,C,cls2
+T5,9,C,cls2
+T6,0,A,cls2
+T6,5,B,cls2
+T6,6,D,cls2
+T6,8,B,cls2
+T6,9,C,cls2
+$ msequence.rb  O=result5 i=dat2.csv S=2 class=class -padding
+#MSG# lcm_seq_zero_20140215 CIA -w /tmp/__MTEMP_19909_70295357403720_1 /tmp/__MTEMP_19909_
+70295357403720_0 1073741815 /tmp/__MTEMP_19909_70295357416500_0
+trsact: /tmp/__MTEMP_19909_70295357403720_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 5 ,size 45 ,weightfile /tmp/__MTEMP_19909_70295357403720
+_1
+ output to: /tmp/__MTEMP_19909_70295357416500_0
+iters=33
+9
+1
+4
+4
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls1' enumerated is 8
+#MSG# output tid-patterns ...
+#MSG# lcm_seq_zero_20140215 CIA -w /tmp/__MTEMP_19909_70295357403720_2 /tmp/__MTEMP_19909_
+70295357403720_0 2147483645 /tmp/__MTEMP_19909_70295357416500_2
+trsact: /tmp/__MTEMP_19909_70295357403720_0 ,#transactions 6 ,#items 6 ,size 46 extracted 
+database: #transactions 6 ,#items 5 ,size 45 ,weightfile /tmp/__MTEMP_19909_70295357403720
+_2
+ output to: /tmp/__MTEMP_19909_70295357416500_2
+iters=36
+5
+0
+0
+3
+2
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls2' enumerated is 5
+#MSG# output tid-patterns ...
+#MSG# the number of emerging sequence patterns enumerated is 6
+#MSG# The final results are in the directory `result5'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/msequence.rb O=result5 i=dat2.csv S=
+2 class=class -padding
+$ more result5/patterns.csv
+class,pid,pattern,size,pos,neg,posTotal,negTotal,total,support,growthRate,postProb
+cls1,1,B C,2,3,0,4,2,6,0.75,inf,1
+cls2,9,B C D,3,2,0,2,4,6,1,inf,1
+cls2,10,A D,2,2,0,2,4,6,1,inf,1
+cls2,11,A C D,3,2,0,2,4,6,1,inf,1
+cls2,8,B D,2,2,1,2,4,6,1,4,0.6666666667
+cls2,12,C D,2,2,1,2,4,6,1,4,0.6666666667
+\end{Verbatim}

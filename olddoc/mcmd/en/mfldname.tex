@@ -1,0 +1,41 @@
+
+%\begin{document}
+
+\section{mfldname - Rename Field\label{sect:mfldname}}
+\index{mfldname@mfldname}
+Specify the field to rename at \verb|f=|, and the new column name at \verb|n=|. Add the -q option to revert to the field header names as appeared in  Ver. 1, and removes the sort order symbols appended to field names in output for  2.0 commands. 
+
+\subsection*{Format}
+\verb/mfldname f=|n= [-nfni]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the field name to change (current field name:new field name). \\
+             & The original field name will not change if this parameter is not set. \\
+\verb|n=|    & Specify the new target column name. \\
+             & The number of item names must be the same as the number of columns in the data. \\
+\verb|-nfni| & Field name not present in input data. This option cannot be used with \verb|f=|. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mfldname_ex.tex}
+\subsection*{Related Command}
+\hyperref[sect:mcut]{mcut} : Performs similar function to \verb|mfldname|, however, the operation is more complicated to rename certain items. Nevertheless, the operation is slightly faster using \verb|mfldname|. 
+
+%\end{document}

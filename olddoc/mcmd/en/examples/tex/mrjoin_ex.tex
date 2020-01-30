@@ -1,0 +1,87 @@
+\subsubsection*{Example 1: Basic Example}
+
+Join category field \verb|low, middle,high| to corresponding \verb|price| range.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+price
+8
+15
+35
+50
+90
+200
+$ more ref1.csv
+range,category
+10,low
+35,middle
+80,high
+100,
+$ mrjoin r=price%n m=ref1.csv R=range f=category i=dat1.csv o=rsl1.csv
+#END# kgrjoin R=range f=category i=dat1.csv m=ref1.csv o=rsl1.csv r=price%n
+$ more rsl1.csv
+price%0n,category
+15,low
+35,middle
+50,middle
+90,high
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mrjoin -lo r=price%n m=ref1.csv R=range f=category i=dat1.csv o=rsl2.csv
+#END# kgrjoin -lo R=range f=category i=dat1.csv m=ref1.csv o=rsl2.csv r=price%n
+$ more rsl2.csv
+price%0n,category
+15,low
+35,low
+50,middle
+90,high
+\end{Verbatim}
+\subsubsection*{Example 3: Basic Example 3}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mrjoin -n r=price%n m=ref1.csv R=range f=category i=dat1.csv o=rsl3.csv
+#END# kgrjoin -n R=range f=category i=dat1.csv m=ref1.csv o=rsl3.csv r=price%n
+$ more rsl3.csv
+price%0n,category
+8,
+15,low
+35,middle
+50,middle
+90,high
+200,
+\end{Verbatim}
+\subsubsection*{Example 4: Join with different ranges for corresponding products}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+item,price
+A,10
+A,20
+B,10
+B,20
+$ more ref2.csv
+item,price,category
+A,10,low
+A,15,high
+A,100,
+B,10,low
+B,35,high
+B,100,
+$ mrjoin k=item r=price%n m=ref2.csv f=category i=dat2.csv o=rsl4.csv
+#END# kgrjoin f=category i=dat2.csv k=item m=ref2.csv o=rsl4.csv r=price%n
+$ more rsl4.csv
+item%0,price%1n,category
+A,10,low
+A,20,high
+B,10,low
+B,20,low
+\end{Verbatim}

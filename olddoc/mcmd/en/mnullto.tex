@@ -1,0 +1,46 @@
+
+%\begin{document}
+
+\section{mnullto - Replace NULL Values\label{sect:mnullto}}
+\index{mnullto@mnullto}
+Replace NULL values in the field(s) specified at \verb|f=| parameter with a character string defined at \verb|v=| parameter. 
+
+
+\subsection*{Format}
+\verb/mnullto f= [v=|-p] [O=] [-A]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|  & Replace null values in the field(s) (multiple fields can be specified). \\
+\verb|v=|  & Replace null values with this string. \\
+\verb|-p|  & Replace null values in the previous row. \\
+           &  This option cannot be specified with \verb|v=| parameter. \\
+\verb|O=|  & String to replace non-null values. \\
+		& When this parameter is not specified, non-null values will not be replaced. \\
+\verb|-A|  & Add replacement string as new column. \\
+           & When \verb|-A| option is specified, define the new field name using a colon (:) after the field name.\\
+           & Example: f=quantity:ReplacementFieldName. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mnullto_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mdelnull]{mdelnull} : Remove rows containing NULL values. 
+
+\hyperref[sect:mchgstr]{mchgstr} : Replace NULL value with character strings. 
+%\end{document}

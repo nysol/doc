@@ -1,0 +1,16 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+$ mcal c='pi()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=pi() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,3.141592654
+2,3.141592654
+\end{Verbatim}

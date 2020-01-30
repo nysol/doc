@@ -1,0 +1,46 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+$ mcal c='now()' a=rsl i=dat1.csv o=rsl1-1.csv
+#END# kgcal a=rsl c=now() i=dat1.csv o=rsl1-1.csv
+$ more rsl1-1.csv
+id,rsl
+1,20171112181545
+2,20171112181545
+$ mcal c='unow()' a=rsl i=dat1.csv o=rsl1-2.csv
+#END# kgcal a=rsl c=unow() i=dat1.csv o=rsl1-2.csv
+$ more rsl1-2.csv
+id,rsl
+1,20171112181545.956027
+2,20171112181545.956027
+\end{Verbatim}
+\subsubsection*{例2: 時刻のみ切り出し}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='time(now())' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=time(now()) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,rsl
+1,181545
+2,181545
+\end{Verbatim}
+\subsubsection*{例3: 日付のみ切り出し}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='date(now())' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=date(now()) i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,rsl
+1,20171112
+2,20171112
+\end{Verbatim}

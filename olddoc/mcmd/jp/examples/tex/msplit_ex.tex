@@ -1,0 +1,86 @@
+\subsubsection*{例1: 基本例}
+
+ 半角スペースで分割
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,data
+A,1 10 2
+A,2 20 3
+B,1 15 5
+B,3 10 4
+B,1 20 6
+$ msplit f=data a=d1,d2,d3 i=dat1.csv o=rsl1.csv
+#END# kgsplit a=d1,d2,d3 f=data i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,data,d1,d2,d3
+A,1 10 2,1,10,2
+A,2 20 3,2,20,3
+B,1 15 5,1,15,5
+B,3 10 4,3,10,4
+B,1 20 6,1,20,6
+\end{Verbatim}
+\subsubsection*{例2: -r利用}
+
+\verb|-r|を指定することで、\verb|f=|で項目を削除できる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msplit f=data a=d1,d2,d3 -r i=dat1.csv o=rsl2.csv
+#END# kgsplit -r a=d1,d2,d3 f=data i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,d1,d2,d3
+A,1,10,2
+A,2,20,3
+B,1,15,5
+B,3,10,4
+B,1,20,6
+\end{Verbatim}
+\subsubsection*{例3: 分割数不一致}
+
+\verb|a=|で指定した項目数よりも分割できる項目数が少ない場合は、NULLが追加され、
+多い場合、先頭から指定した分割数まで出力する
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,data
+A,1 10 2
+A,2 20 3
+B,1 15 5
+B,3 4
+B,1
+$ msplit f=data a=d1,d2 i=dat2.csv o=rsl3.csv
+#END# kgsplit a=d1,d2 f=data i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,data,d1,d2
+A,1 10 2,1,10
+A,2 20 3,2,20
+B,1 15 5,1,15
+B,3 4,3,4
+B,1,1,
+\end{Verbatim}
+\subsubsection*{例4: delim指定}
+
+\verb|delim=|を使用して半角スペース以外の文字で分割する
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+id,data
+A,1_10_3
+A,2_20_5
+B,1_15_6
+B,3_10_7
+B,1_20_8
+$ msplit f=data a=d1,d2,d3 delim=_ i=dat3.csv o=rsl4.csv
+#END# kgsplit a=d1,d2,d3 delim=_ f=data i=dat3.csv o=rsl4.csv
+$ more rsl4.csv
+id,data,d1,d2,d3
+A,1_10_3,1,10,3
+A,2_20_5,2,20,5
+B,1_15_6,1,15,6
+B,3_10_7,3,10,7
+B,1_20_8,1,20,8
+\end{Verbatim}

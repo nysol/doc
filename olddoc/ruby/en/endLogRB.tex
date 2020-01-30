@@ -1,0 +1,42 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{endLog - Output log message upon completion \label{sect:endLog}}
+Display log message which is similar to the format of regular output log messages of MCMD. The format is as follows.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#END# message; date and time
+\end{Verbatim}
+
+
+\subsection{Format}
+
+{\Large
+\begin{verbatim}
+* MCMD::endLog(msg[,fileObject])
+\end{verbatim}
+} 
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/msg /} - Message to be displayed. 
+	\item {\large \verb/fileObject /} - Output file object. Returns standard error (STDERR) when this is not specified.
+\end{description}
+
+\subsection{Examples}
+\subsubsection*{Example 1 Basic Example }
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Display ending error message to standard error. 
+> MCMD::endLog("mburst.rb ended normally")
+#END# mburst.rb  ended normally.; 2013/11/01 19:09:50
+\end{Verbatim}
+
+\subsection{Related Commands}
+\hyperref[sect:errorLogRB]{errorLog} : Output error log message.
+
+\hyperref[sect:messageRB]{messageLog} :  Output general log message.
+
+%\end{document}
+

@@ -1,0 +1,48 @@
+\documentclass[a4paper]{jsbook}
+\usepackage{view}
+
+% ------------------- Title and Author -----------------------------
+%\title{View Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge View Package Documentation}\\
+\vspace{10truept}
+{\normalsize 対応NYSOLバージョン: Ver. 1.2, 2.0}\\
+\vspace{1cm}
+
+revise history:\\
+October 6, 2014 : first release\\
+\vspace{18cm}
+{\small \today}
+
+{\small Copyright \copyright 2014 by NYSOL CORPORATION}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+\chapter{はじめに}
+\include{abstract}
+\include{install}
+
+\chapter{視覚化コマンド}
+\include{sankey}
+\include{pie}
+\include{bar}
+\include{mgv}
+
+\include{mdtree}
+%\include{bib}
+
+\end{document}
+\end
+

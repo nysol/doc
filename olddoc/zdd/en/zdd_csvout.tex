@@ -1,0 +1,25 @@
+
+\section{csvout : Output CSV file\label{sect:csvout}}
+\subsection*{Format}
+$obj$.csvout($fileName$) $\rightarrow$ $self$ 
+
+~~$fileName$ : string
+
+\subsection*{Description}
+
+Return the contents of ZDD object $obj$ for the file specified at $fileName$ in CSV format. 
+The output returns 2 fields including weight and itemset. 
+The output of the items in the itemset is delimited by space.  
+However, for empty itemset (terms with weight only), the output will only return the weight in the first field, and null will be printed to the second field in CSV.  
+Nevertheless, null ZDD object (empty itemset with weight of 0) returns file with 0 byte. 
+
+
+The field name will not be printed to the output. Value of self is returned.
+
+
+\subsection*{Example}
+\input{examples/tex/csvout_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:hashout]{hashout} : Hash output
+

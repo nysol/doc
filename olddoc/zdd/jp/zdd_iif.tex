@@ -1,0 +1,21 @@
+
+\section{iif : アイテム比較による選択\label{sect:iif}}
+\subsection*{書式}
+$obj$.iif(zdd1,zdd2) $\rightarrow$ $zdd3$
+
+\subsection*{説明}
+$zdd1$から$obj$に含まれるアイテム集合の項を選択し、
+$zdd2$から$obj$に含まれないアイテム集合の項を選択し、
+それら選択された項で構成されるZDDオブジェクト$zdd3$を返す。
+$obj$に含まれるアイテム集合の重みは動作に影響しない。
+
+\subsection*{例}
+\input{examples/tex/iif_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:eq]{==},
+\hyperref[sect:lt]{$<$},
+\hyperref[sect:le]{$<=$},
+\hyperref[sect:gt]{$>$},
+\hyperref[sect:ge]{$>=$},
+\hyperref[sect:ne]{ne?} : 各種比較演算

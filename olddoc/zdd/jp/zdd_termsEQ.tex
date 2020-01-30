@@ -1,0 +1,34 @@
+
+\section{termsEQ : 重み比較による項選択(等価比較)\label{sect:termsEQ}}
+\subsection*{書式}
+$obj$.termsEQ($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{説明}
+$obj$に含まれる項のうち、$zdd1$で与えられた定数と同じ重みを持つ項(重み+アイテム集合)を選択する。
+$zdd1$にはconstantメソッドにより生成されたZDD定数オブジェクト、もしくはrubyの整数で指定する。
+
+本パッケージで扱える項選択メソッドは以下の通り。
+\begin{itemize}
+\item zdd1.termsEQ(zdd2) : 等価比較
+\item zdd1.termsGE(zdd2) : 以上比較
+\item zdd1.termsGT(zdd2) : 大なり比較
+\item zdd1.termsLE(zdd2) : 以下比較
+\item zdd1.termsLT(zdd2) : 小なり比較
+\item zdd1.termsNE(zdd2) : 不等比較
+\end{itemize}
+
+
+\subsection*{例}
+\input{examples/tex/termsEQ_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:termsGE]{termsGE} : 重み比較による項選択(以上比較)
+
+\hyperref[sect:termsGT]{termsGT} : 重み比較による項選択(大なり比較)
+
+\hyperref[sect:termsLE]{termsLE} : 重み比較による項選択(以下比較)
+
+\hyperref[sect:termsLT]{termsLT} : 重み比較による項選択(小なり比較)
+
+\hyperref[sect:termsNE]{termsNE} : 重み比較による項選択(不等比較)
+

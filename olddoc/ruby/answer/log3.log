@@ -1,0 +1,1 @@
+#END# kgcut -nfn f=1,2 i=indat/dat1nfn.csv IN=3 OUT=3

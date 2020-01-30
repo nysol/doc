@@ -1,0 +1,89 @@
+\subsubsection*{Example 1: Basic Example}
+
+Remove records where \verb|Quantity| and \verb|Amount| contain null values. Save records with null values to a separate file \verb|oth.csv|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+$ mdelnull f=Quantity,Amount u=oth.csv i=dat1.csv o=rsl1.csv
+#END# kgdelnull f=Quantity,Amount i=dat1.csv o=rsl1.csv u=oth.csv
+$ more rsl1.csv
+Customer,Quantity,Amount
+A,1,10
+B,1,15
+C,1,20
+$ more oth.csv
+Customer,Quantity,Amount
+A,,20
+B,3,
+\end{Verbatim}
+\subsubsection*{Example 2: Select rows with NULL values}
+
+Select records with NULL values by specifying \verb|-r|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull f=Quantity,Amount -r i=dat1.csv o=rsl2.csv
+#END# kgdelnull -r f=Quantity,Amount i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+Customer,Quantity,Amount
+A,,20
+B,3,
+\end{Verbatim}
+\subsubsection*{Example 3: Remove records with the same key if any record contains NULL values}
+
+Remove based on the aggregate key specified at \verb|k=|.
+Remove records where \verb|Quantity| and \verb|Amount| contain null values for each customer.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull k=Customer f=Quantity,Amount i=dat1.csv o=rsl3.csv
+#END# kgdelnull f=Quantity,Amount i=dat1.csv k=Customer o=rsl3.csv
+$ more rsl3.csv
+Customer%0,Quantity,Amount
+C,1,20
+\end{Verbatim}
+\subsubsection*{Example 4: AND condition between fields}
+
+Remove the record where both \verb|Quantity| and \verb|Amount| fields contain null values.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+Customer,Quantity,Amount
+A,1,10
+A,,
+B,1,15
+B,3,
+C,1,20
+$ mdelnull f=Quantity,Amount -F i=dat2.csv o=rsl4.csv
+#END# kgdelnull -F f=Quantity,Amount i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+Customer,Quantity,Amount
+A,1,10
+B,1,15
+B,3,
+C,1,20
+\end{Verbatim}
+\subsubsection*{Example 5: AND condition between records}
+
+Remove the \verb|Customer| record if all values in \verb|Quantity| is NULL.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull k=Customer f=Quantity -R i=dat1.csv o=rsl5.csv
+#END# kgdelnull -R f=Quantity i=dat1.csv k=Customer o=rsl5.csv
+$ more rsl5.csv
+Customer%0,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+\end{Verbatim}

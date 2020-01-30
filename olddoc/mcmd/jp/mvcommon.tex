@@ -1,0 +1,156 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvcommon ベクトル要素の参照選択\label{sect:mvcommon}}
+\index{mvcommon@mvcommon}
+ベクトルから、参照ファイルで指定された要素を選択する。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvcommon_input}〜\ref{tbl:mvcommon_out3}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvcommon_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{参照ファイル\label{tbl:mvcommon_ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{c}
+\hline
+item \\
+\hline
+a \\
+c \\
+e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.48\hsize}
+\begin{center}
+\caption{基本例\label{tbl:mvcommon_out2}}
+\verb|vf=items m=ref.csv K=item| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a c \\
+2&a \\
+3&e \\
+4&c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.48\hsize}
+\begin{center}
+\caption{アンマッチアイテムの選択例\label{tbl:mvcommon_out3}}
+\verb|vf=items m=ref.csv K=item -r| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b \\
+2&d \\
+3&b f f \\
+4&f d \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\verb|mvcommon|コマンドは、参照ファイルデータを一旦全てメモリにセットするので、
+巨大な参照ファイルを指定した場合はメモリを使い果たす可能性があることに注意する。
+
+\subsection*{書式}
+\verb/mvcommon vf= [-A] K= [-r] m=|/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|  & 入力ファイル名を指定する。\\
+\verb|o=|  & 出力ファイル名を指定する。\\
+\verb|vf=| & 結合キーとなるアイテム集合の項目名(\verb|i=|ファイル上)を指定する。\\
+           & 複数項目指定可能。アイテムはソーティングされている必要はない。 \\
+           & 結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。\\
+		   & 例) f=数量:置換後の項目名 \\
+\verb|-A|  & \verb|vf=|で:(コロン)に続けて指定した項目名で、新たな項目が追加される。\\
+           & なお\verb|-A|オプションを指定した場合、\verb|vf=|パラメータで指定するすべての\\
+		   & 項目に新項目名を指定しなければならない。\\
+\verb|m=|  & 参照ファイルを指定する。\\
+           & このパラメータが省略された時には標準入力が用いられる。(\verb|i=|指定ありの場合)\\
+\verb|K=|  & 参照ファイル(\verb|m=|)上の結合キーとなるアイテムの項目名を指定する。\\
+\verb|-r|  & \verb|vf=|と\verb|K=|の要素がマッチしない要素を選択する。 \\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvcommon_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mvjoin]{mvjoin} : 選択でなくベクトル要素を結合する。
+
+%\end{document}

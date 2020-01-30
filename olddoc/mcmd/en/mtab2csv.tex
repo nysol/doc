@@ -1,0 +1,43 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mtab2csv Convert TSV data into CSV data\label{sect:mtab2csv}}
+\index{mtab2csv@mtab2csv}
+This command converts tab-separated values into comma-separated values. The data in the source text file does not have to be tab-separated; use the \verb|d=| parameter to specify a delimiter other than the tab. If the numbers of fields differ before and after the conversion, the data is output until the immediately preceding row and the command abends.
+
+\subsection*{Format}
+\verb|mtab2csv [d=] [-r] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|d=|    & Specify a delimiter. (Only a single-byte character can be specified.)\\
+\verb|-r|    & Use this option to remove carriage return codes (\verb|CR:\r|).\\
+             & When handling CSV data, MCMD recognizes only LF(\verb|\n|) as the line feed code. If the CSV data\\
+             & contains Windows text return codes CR+LF(\verb|\r\n|) or Mac text return codes CR(\verb|\r|), conversion can\\
+             & result in an error because MCMD handles them as mere characters. This option is for avoiding this\\
+             & issue.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mtab2csv_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mxml2csv]{mxml2csv}: Converts XML data into CSV data.
+\hyperref[sect:msplit]{msplit}: Partitions fields by delimiters.
+%\end{document}

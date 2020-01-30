@@ -1,0 +1,51 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+# a. Multiplication of constants.
+# Weight is attached to sum of products term x by the expression x*c, the weight
+# of each term in x is multiplied by c times.
+# The computation is similar to general polynomial.
+> a=ZDD::itemset('a')
+> b=ZDD::itemset('b')
+> c=ZDD::itemset('c')
+> d=ZDD::itemset('d')
+> (a*3).show
+ 3 a
+> (-2*a).show
+ - 2 a
+> ((a+2*b+3*c)*4).show
+ 4 a + 8 b + 12 c
+
+# b. Multiplication by 1 itemset
+# Weight is attached to sum of products term y by the expression x*y,
+# y is added to the weight of each term in x.
+# However, note that the multiplication beteween same items is expressed as a*a=a.
+> x=a+2*a*b+3*c
+> x.show
+ 2 a b + a + 3 c
+> (x*c).show
+ 2 a b c + a c + 3 c
+> (x*b).show
+ 3 a b + 3 b c
+> (4*x*a).show
+ 8 a b + 12 a c + 4 a
+
+# c. Multiplication of 2 or more itemsets
+# Multiplication of the sum of products x,y which is attached with weight is computed
+# by the expression x*y,
+# The operation enumerates all possible combinations on the two product terms.
+# Like terms such as a,b itemset are multiplied.
+# The resulting expression includes addition and subtraction operations between
+# enumerated item sets.
+> ((a+b)*(c+d)).show
+ a c + a d + b c + b d
+> ((a+b)*(b+c)).show
+ a b + a c + b c + b
+> ((a+b)*(a+b)).show
+ 2 a b + a + b
+> ((a+b)*(a-b)).show
+ a - b
+\end{Verbatim}

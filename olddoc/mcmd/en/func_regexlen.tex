@@ -1,0 +1,22 @@
+
+%\begin{document}
+
+\section{regexlen - Match Length of Character String\label{sect:regexlen}}
+\index{regexlen@regexlen}
+
+Format 1: regexlen($str$,regular expression)
+
+Format 2: regexlenw($str$,regular expression)
+
+
+Returns the length of substring where the defined regular expression matches the string $str$. The function returns 0 if no match is found, in other words, 0 character match. 
+
+Use regexlenw function if $str$ or regular expression contain multibyte characters. 
+
+
+
+\subsection*{Examples}
+\input{examples/tex/func_regexlen_ex.tex}
+
+%\end{document}
+

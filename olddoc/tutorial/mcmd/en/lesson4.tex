@@ -1,0 +1,166 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+
+\section{Lesson 4: Aggregate functions II }
+
+The \verb|mcount| command incorporates aggregate function to count the number of records in a column for a group of records classified based on the defined key value. Common usage includes finding out the occurrences for a specific category, products, date, etc. 
+
+%\section{Usage of mcount}
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|mcount.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Count the number of transactions on each unique date.  \\
+
+Methodology: Select \emph{date} with \verb|mcut| command, the output result is piped to the next command mcount. The \verb|mcount| command computes the number of transaction records for each unique date. Finally, save the output to the file \verb|mcountout.csv|.
+
+
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters as follows: \\
+
+Key: 		\verb|k=date| \\
+Description: 	\verb|date| is the key field where the unit of counting is based on.\\
+
+New attribute (count results): 	\verb|a=numTransactions| \\
+Description:  		The \verb|a=| parameter defines the new column where the computed values is saved. The new field  \verb|numTransactions| stores the number of times products are scanned at the point of sales register for each day. \\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 4: Aggregate functions II
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date			     	i=${inPath}/dat.csv |
+msortf k=date				|
+mcount k=date a=numTransactions   o=outdat/mcountout.csv
+
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Run the shell script }
+
+\begin{verbatim}
+$ ./mcount.sh
+#END# kgcut f=date i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/23 11:51:14
+#END# kgsortf f=date; IN=24737 OUT=24737; 2013/08/23 11:51:14
+#END# kgcount a=numTransactions k=date o=outdat/mcountout.csv; IN=24737 OUT=324; 2013/08/23 11:51:14
+\end{verbatim}
+
+\noindent
+The result looks like the following: 
+
+\begin{verbatim}
+date,numTransactions
+20010108,12
+20010110,28
+20010111,48
+20010116,28
+20010119,84
+20010123,24
+20010125,20
+20010128,20
+20010130,96
+20010131,4
+20010201,4
+20010203,4
+20010204,71
+20010205,32
+20010206,36
+20010208,52
+20010209,20
+20010211,36
+20010212,36
+20010213,36
+20010216,122
+20010217,36
+...
+..
+\end{verbatim}
+
+\subsection{Step 4: Redefining attributes }
+
+\noindent
+This key parameter \verb|k=|  is not required when counting can be based on the number of records in the whole datatset. \\
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 4: Aggregate functions II
+#=========================================
+
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date			     	i=${inPath}/dat.csv |
+mcount a=numTransactions   o=outdat/mcountout.csv
+
+#==========================================
+\end{verbatim}
+
+\noindent
+The result shows there are 24,737 transactions in this dataset. 
+
+\begin{verbatim}
+date,numTransactions
+20011230,24737
+\end{verbatim}
+
+
+{\setlength{\parindent}{0cm}
+\textbf{How is aggregation carried out? }\\
+
+\fbox{
+  \parbox{\textwidth}{
+    
+In the above example, the attribute \emph{numTransactions} is created which contains information on the number of transactions for each date. When aggregation is carried out with msum, mavg, mcount commands, the computed values are stored in the existing column defined in "f=" argument. The key field will therefore display the last key value in the dataset corresponding to each count result. The date value in the example corresponds to "20011230". 
+  }
+} 
+
+}
+
+\newpage 
+
+\subsection{Exercise }
+
+Let's practice \verb|mcount| on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Number of transactions for each manufacturer. & \href{exercise/mcount1.sh}{mcount1.sh} & \href{exercise/outdat/mcountout1.csv}{mcountout1.csv} \\
+2. Number of transactions for each brand. & \href{exercise/mcount2.sh}{mcount2.sh} & \href{exercise/outdat/mcountout2.csv}{mcountout2.csv} \\
+3. Number of transactions for each 1-digit classification code. & \href{exercise/mcount3.sh}{mcount3.sh} & \href{exercise/outdat/mcountout3.csv}{mcountout3.csv} \\
+4. Number of transactions for each 2-digit classification code. & \href{exercise/mcount4.sh}{mcount4.sh} & \href{exercise/outdat/mcountout4.csv}{mcountout4.csv} \\
+5. Number of transactions for each 4-digit classification code. & \href{exercise/mcount5.sh}{mcount5.sh} & \href{exercise/outdat/mcountout5.csv}{mcountout5.csv} \\
+6. Number of transactions for each 2-digit classification code for each manufacturer. & \href{exercise/mcount6.sh}{mcount6.sh} & \href{exercise/outdat/mcountout6.csv}{mcountout6.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

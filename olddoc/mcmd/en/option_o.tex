@@ -1,0 +1,37 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{o= Output file name\label{sect:option_o}}
+Specify the name of output file.
+Most commands only allow specification of a single file name, with the exception of \verb|mtee| command where multiple files can be specified. There is also the command that does not require output data, for example, \verb|msep|.
+
+When this parameter is not defined, data is read from standard input through pipeline. 
+In the following example \verb|o=| is not specified in \verb|msortf| because the output data is sent to standard output through pipeline.
+ 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+The example below is similar to the above. The difference is that o= parameter is specified for the \verb|msortf| and the result of \verb|msortf| is saved to \verb|tmp.csv|. Even though the two commands are connected with pipeline, there is no data stream from standard output to \verb|msum|, the receiving process could not read data from pipeline and stays idle. 
+ 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv o=tmp.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+Below is a more complicated example by using \verb|mtee| to connect the data streams between the two commands.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=a i=dat.csv | mtee o=tmp.csv | msum k=a f=b o=rsl.csv
+\end{Verbatim}
+
+The \verb|mtee| command writes to a standard input file specified at \verb|o=| and send the data to standard output concurrently. The results of \verb|msortf| is written to \verb|tmp.csv|, at the same time, \verb|msum| receives the data stream through pipeline from \verb|mtee|. The final result is saved to \verb|rsl.csv|.
+
+\subsection*{Examples}
+\input{examples/tex/option_o_ex.tex}
+
+\subsubsection*{Related commands}
+This parameter can be used in all commands except for certain commands such as \verb|sep|.
+
+%\end{document}
+

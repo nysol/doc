@@ -1,0 +1,54 @@
+
+%\begin{document}
+
+\section{mmerge マッチング併合\label{sect:mmerge}}
+\index{mmerge@mmerge}
+指定した複数のファイルについて、指定した項目(「併合キー項目」と呼ぶ)の順序を保ちながら併合する。
+それぞれのファイルは指定した項目で事前に並べ替えておかなければならない。
+項目ごとに文字の昇順ソート,文字の降順ソート,数値の昇順ソート、数値の降順ソートが可能。
+
+\subsection*{書式}
+\verb|mmerge [k=] [pways=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_tmpPath]{[tmpPath=]} 
+\verb|[--help]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|      & 併合キー項目名リスト(複数項目指定可能)を指定する。\\
+               & 併合キー項目の並び順は、数値/文字列、昇順/降順の組み合せで4通り指定できる。\\
+               & 指定方法は\hyperref[sect:msortf]{msortf}コマンドと同様に\verb|%|に続けて\verb|n|と\verb|r|を以下の通り組み合わせる。\\
+               & 文字列昇順:\verb|項目名|(\verb|%|指定なし)、文字列逆順:\verb|項目名%r|、数値昇順:\verb|項目名%n|、数値降順:\verb|項目名%nr|。\\
+               & 【重要】\verb|i=|で指定したファイルは全てここで指定した項目/並び順で並べ替えておかなければならない。\\
+%               & また、多重ソートを行う場合は、ソートの優先順位にしたがって\\
+%               & (,)カンマ区切りで項目名を指定する。\\
+%               & NULL値は，数値としても文字列としても、最も小さい値として扱われる。\\
+\verb|pways=|  & 複数ファイルをマージする場合に、同時にオープンするファイル数を指定できる。【デフォルト値:32】\\
+               & 2以上100以下の範囲で指定可能。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{備考}
+\begin{enumerate}
+\item \verb|k=|で、文字列項目に対して\verb|%n|を指定した場合の動作は不定である。
+\item \verb|k=|を省略した場合は\verb|i=|で指定したファイルを順番に併合する(\hyperref[sect:mcat]{mcat}と同様)。
+\item キー項目ににNULL値が含まれる場合、NULL値はどのような値よりも小さい値として扱われる。
+\item \verb|i=|で指定したファイルは全て存在し、また項目名は全て同じであることを前提としており、\verb|mcat|のような柔軟な指定はできない。
+\end{enumerate}
+
+\subsection*{利用例}
+\input{examples/tex/mmerge_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mcat]{mcat} : 単純に指定したファイルを順番に併合する。
+
+%\end{document}
+

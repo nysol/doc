@@ -1,0 +1,21 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> f=((a*b*c)+(a*b)+(b*c))
+> f.show
+ a b c + a b + b c
+
+# ZDD object f is made up of 3 items a, b, c. 
+# The weight of each item is computed as follows. 
+# The terms "a b c" and "2 a b" contains item a, the total weight is 3. 
+# All terms contains item b, the total weight is 4.
+# The terms "a b c" and "b c" contains item c, the total weight is 2. 
+> f.items.show
+ 2 a + 3 b + 2 c
+\end{Verbatim}

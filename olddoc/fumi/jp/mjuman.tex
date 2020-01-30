@@ -1,0 +1,83 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mjuman.rb JUMANによる形態素解析\label{sect:mjuman}}
+\index{mjuman@mjuman}
+
+テキストファイルで与えられた文書ファイルをJUMANで形態素解析し、
+その結果をCSVで出力する。
+複数の文書ファイルをまとめて指定できるほか、
+OSのマルチタスク機能を用いた並列処理も可能である。
+
+\subsection{書式}
+\begin{verbatim}
+mjuman.rb I= O= [P=] [mp=] [log=] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|I=|       & : 文書ファイルが格納されたパス名 \\
+\verb|O=|       & : 解析結果のCSVファイルを格納するパス名 \\
+\verb|P=|       & : JUMANが直接出力する結果を格納するパス名(省略時は出力しない) \\
+\verb|mp=|      & : 並列処理の数。デフォルト値は2 \\
+\verb|log=|     & : JUMANが出力するエラーログを格納するファイル名 \\
+\verb|-mcmdenv| & : 内部で利用しているMCMDのメッセージ出力レベルを環境変数に任せる。 \\
+                & : 省略時は警告とエラーメッセージのみ出力(KG\_VerboseLevel=2)。 \\
+\verb|--help|   & : ヘルプメッセージの表示 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection*{入力ファイル例}
+
+テキストファイルは、1行1文にしておくことが望ましい。
+文字コードはUTF-8である必要がある。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+\end{Verbatim}
+
+
+\subsubsection*{出力ファイル例}
+
+形態素解析の結果は、CSVとして出力される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+aid,sid,tid,word,orgWord,daiWord,yomi,class1,class2,class3,class4,annotation
+test.txt,0,0,子ども,子ども,子供,こども,名詞,普通名詞,,,代表表記:子供/こども カテゴリ:人
+test.txt,0,1,は,は,,は,助詞,副助詞,,,
+test.txt,0,2,リンゴ,リンゴ,林檎,りんご,名詞,普通名詞,,,代表表記:林檎/りんご カテゴリ:植物
+:
+\end{Verbatim}
+
+CSVの内容はJUMANの出力に依拠するが、
+各項目の意味は以下の通りである。
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|aid|        & : 入力ファイル名 \\
+\verb|sid|        & : 行番号（センテンスID） \\
+\verb|tid|        & : 形態素番号（トークンID） \\
+\verb|word|       & : 語（原形） \\
+\verb|orgWord|    & : 文中での表記 \\
+\verb|daiWord|    & : 代表表記 \\
+\verb|yomi|       & : 読み \\
+\verb|class1|     & : 品詞（レベル1） \\
+\verb|class2|     & : 品詞（レベル2） \\
+\verb|class3|     & : 品詞（レベル3） \\
+\verb|class4|     & : 品詞（レベル4） \\
+\verb|annotation| & : 意味情報 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection{利用例}
+\input{examples/tex/mjuman_ex.tex}
+
+%\end{document}
+

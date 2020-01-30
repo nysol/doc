@@ -1,0 +1,25 @@
+
+\section{export : Serialized output of ZDD\label{sect:export}}
+\subsection*{Format}
+$obj$.export($fileName$)
+
+~~$fileName$ : string
+
+\subsection*{Description}
+Serialize output of ZDD internal structure in $obj$ as text. 
+Export the output to the file specified at $fileName$. 
+If the file name is not specified, the result is sent to standard output (STDOUT). 
+
+Since the contents declared by the symbol function is not serialised according to item order, thus when restoring the ZDD object with import function, items must be declared again according to the same order. 
+
+Refer to \hyperref[sect:import]{import} function for specific examples. 
+
+\subsection*{Example}
+\input{examples/tex/export_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:import]{import} : Serialized import of ZDD
+
+\hyperref[sect:csvout]{csvout} : Output CSV file  
+
+\hyperref[sect:hashout]{hashout} : Hash output

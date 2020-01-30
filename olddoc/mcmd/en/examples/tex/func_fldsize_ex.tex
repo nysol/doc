@@ -1,0 +1,20 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+a,b,c,d
+1,2,3,4
+2,3,4,5
+3,,,
+4,x,y,z
+$ mcal c='fldsize()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=fldsize() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+a,b,c,d,rsl
+1,2,3,4,4
+2,3,4,5,4
+3,,,,4
+4,x,y,z,4
+\end{Verbatim}

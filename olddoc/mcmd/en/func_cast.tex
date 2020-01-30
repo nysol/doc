@@ -1,0 +1,25 @@
+
+%\begin{document}
+
+\section{Cast \label{sect:cast}}
+\index{cast@cast}
+
+Format: s2n($str$), n2s($num$), n2b($num$), s2n($str$), s2d($str$), s2t($str$)
+s2b($str$), d2s($date$), d2t($date$), t2s($time$), t2d($time$), b2n($bool$), b2s($bool$)
+
+Set of functions to convert data type.
+\verb|mcal| do not automatically converts data type, user must specify the required data type conversion. 
+
+\verb|n2b(s2b)| function converts true to 1("1") and false to 0("0"), other values are treated as NULL values. 
+\verb|b2n(b2s)| function converts true to 1("1") and false to 0("0").
+
+\verb|d2t| function converts date and time type data, and automatically completes the time as 12:00:00.
+\verb|d2s| function converts data to 8 digit fixed length character string ("yyyymmdd"), \verb|t2s| function converts data to 14 digit fixed length character string ("yyyymmddHHMMSS").
+
+Refer "\ref{sect:datetime} Date and Time Type" for more information on date and time. 
+
+\subsection*{Examples}
+\input{examples/tex/func_cast_ex.tex}
+
+%\end{document}
+

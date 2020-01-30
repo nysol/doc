@@ -1,0 +1,148 @@
+
+%\begin{document}
+%\newcommand{\ctab2}{\fcolorbox{red}{yellow}{TABを2回}}
+
+\section{bash completion\label{sect:whatis}}
+The bash-completion tool assists command input on the command line.
+To use the input completion functions shown below,install the 
+\href{https://github.com/scop/bash-completion}{bash-completion}
+configuration file for MCMD.
+It will greatly enhance the ease of using MCMD on the command line.
+\begin{itemize}
+\item Listing parameters available for each command and completing them
+\item Completing input/output filenames 
+\item Completing fieldnames in the input CSV data 
+\item Completing values of choice parameters
+\end{itemize}
+
+\subsection{Installation\label{sect:bash_comp_install}}
+To check whether bash-completion has been installed, check whether the \verb|complete| command can be used as described below.
+If it has not been installed, see the 
+\href{https://github.com/scop/bash-completion}{development page}
+and install it.
+You can search the Internet to find simple installation procedures for different platforms.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ complete --help
+-bash: complete: --: invalid option
+complete: usage: complete [-abcdefgjksuv] [-pr] [-o option] [-A action]
+[-G globpat] [-W wordlist] [-P prefix] [-S suffix] [-X filterpat] [-F function]
+[-C command] [name ...]
+\end{Verbatim}
+
+For the MCMD configuration file, find the \verb|bash_completion_mcmd.sh| file in the root of the \verb|mcmd/unitilies| directory of the MCMD source tree, copy it to the root of the \verb|home| directory, and rename it.
+
+%\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cp mcmd/unitilies/bash_completion_mcmd.sh ~/.bash_completion_mcmd.sh
+\end{Verbatim}
+%\caption{bash completionのMCMD用設定ファイルのインストール\label{fig:bash_comp_install}}
+%\end{figure}
+Then, as described below, add an instruction to run the script to \verb|~/.bash_profile|. 
+That way, the configuration is automatically loaded each time you log in.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+. ~/.bash_completion_mcmd.sh
+\end{Verbatim}
+
+\subsection{Completing parameters\label{sect:bash_comp_param}}
+After typing a command name, press the \verb|TAB| key twice to list the parameters and options that can be specified for that command. As an example, the following shows the list for the \verb|msum| command.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum [Press TAB twice]
+-assert_diffSize  -assert_nullkey   -n      -nfno     -q      f=      k=      precision=
+-assert_nullin    -assert_nullout   -nfn    -params   -x      i=      o=      tmpPath=
+\end{Verbatim}
+
+With the above list displayed, typing \verb|p| and pressing \verb|TAB| completes the keyword character string "\verb|precision=|” because it is the only parameter name that starts with a \verb|p|.
+Following the completion, a space is inserted after the keyword. To enter another value, you need to move back one character.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum p[Press TAB]
+# The string will be completed as shown below. 
+$ msum precision= 
+\end{Verbatim}
+
+Typing \verb|-a| and pressing TAB completes the keyword character string only up to “\verb|-assert_|” because it is common to the multiple options starting with -a. Then, pressing TAB again shows the four parameters that start with \verb|-assert_|.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum -a[Press TAB]
+-assert_diffSize  -assert_nullin    -assert_nullkey   -assert_nullout   
+\end{Verbatim}
+
+\subsection{Completing input/output filenames\label{sect:bash_comp_file}}
+In MCMD, several parameters are used to specify a filename or a directory name, such as \verb|i=|, \verb|m=|, and \verb|o=|. You can use filename completion by typing any of such parameters and pressing TAB. Typing \verb|=| only and pressing TAB lists the files in the root of the current directory. Typing a certain character string and pressing TAB shows the one filename or multiple candidate filenames starting with that character string.
+Only one filename can be completed per command, except for the \verb|mcat| command. When using the mcat command, you can enter multiple filenames by completion by pressing TAB after a comma.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum i=[Press TAB twice]
+test1.csv   test2.csv ...
+
+$ mcat i=test1.csv,[Press TAB twice]
+test1.csv   test2.csv ...
+\end{Verbatim}
+
+\subsection{Completing fieldnames\label{sect:bash_comp_field}}
+In MCMD, many parameters are used to specify a fieldname. If an input file has already been entered, the fieldnames in the file can be entered by completion.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat test1.csv 
+codeA,codeB,date,value1,value2
+A,aaa,20170101,3,120
+A,bbb,20170102,6,100
+
+$ msum i=test1.csv k=[Press TAB twice]
+codeA   codeB   date    value1  value2  
+~ $ msum i=test1.csv k=c[Press TAB]
+# The string will be completed as shown below.
+~ $ msum i=test1.csv k=code[Press TAB]
+codeA  codeB
+~ $ msum i=test1.csv k=codeA f=value[Press TAB twice]
+value1  value2
+~ $ msum i=test1.csv k=codeA f=value*
+codeA%0,codeB,date,value1,value2
+A,bbb,20170102,9,220
+#END# kgsum f=value* i=test1.csv k=codeA; IN=2 OUT=1;
+\end{Verbatim}
+
+For some commands like \verb|mjoin|, two input files are specified. If that is the case, which file to use has been predetermined for each keyword used to specify a filename. Thus, fieldnames in the file corresponding to the keyword are used for completion.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat test1.csv 
+codeA,codeB,date,value1,value2
+A,aaa,20170101,3,120
+A,bbb,20170102,6,100
+
+$ cat test2.csv
+code,name
+A,aaa
+B,bbb
+
+$ mjoin i=test1.csv m=test2.csv k=[Press TAB twice]
+codeA   codeB   date    value1  value2
+$ mjoin i=test1.csv m=test2.csv k=codeA K=[Press TAB twice]
+codeA  name
+$ mjoin i=test1.csv m=test2.csv k=codeA K=code f=[Press TAB twice]
+codeA  name
+$ mjoin i=test1.csv m=test2.csv k=codeA K=code f=name
+codeA%0,codeB,date,value1,value2,name
+A,aaa,20170101,3,120,aaa
+A,bbb,20170102,6,100,aaa
+#END# kgjoin K=code f=name i=test1.csv k=codeA m=test2.csv; IN=2 OUT=2;
+\end{Verbatim}
+
+\subsection{Completing choices\label{sect:bash_comp_items}}
+Some parameters allow you to choose one of several predetermined items, like the \verb|c=| parameter in the \verb|mstats| command. You can enter such parameters by completion.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msim c=[Press TAB twice]
+chi       confMax convMax cosine euclid  jaccard kendall oddsRatio phi      supportr yuleQ
+cityblock confMin convMin covar  hamming kappa   lift    pearson   spearman ucovar   yuleY
+
+~ $ mstats c=[Press TAB twice]
+USD     cv      kurt    mean    min     qrange  qtile3  sd      sum     ukurt   uskew   var
+count   devsq   max     median  mode    qtile1  range   skew    ucount  usd     uvar
+
+\end{Verbatim}
+
+%\end{document}

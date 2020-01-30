@@ -1,0 +1,114 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mminput 画面フォーム入力\label{sect:mminput}}
+\index{mminput@mminput}
+\underline{注)本コマンドは開発バージョンであり、仕様が変更される可能性があります。}
+
+\verb|i=|で与えられたテキストファイルを画面フォームとして読み込み、データ入力画面を表示する。
+画面フォーム上の文字列は、そのままのイメージで画面出力され、角括弧(\verb|[]|)で囲われた領域は
+自由入力欄として表示される。入力欄は複数あってもよい。
+利用者が入力したデータはCSVとして\verb|o=|で指定したファイルに出力する。
+出力されるデータは一行データで、入力欄が複数ある場合は、複数項目のCSVとして出力される。
+
+入力枠に何も入力せずに終了した場合は、null値が出力される。
+\verb|f=|を指定すれば、項目名を出力できる。
+\verb|f=|を省略すれば、項目名ヘッダーは出力されない。
+
+またターミナルの範囲を超えた文字列や入力枠が指定された場合の動作は不定である。
+
+\subsection*{書式}
+\verb/mminput i= [f=] /
+\hyperref[sect:option_o]{o=}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=| & 画面フォームのテキストファイル名\\
+\verb|f=| & 出力項目名\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+
+\subsubsection*{例1: 基本例}
+
+名前と住所を入力する画面を表示し、項目名\verb|name,address|として\verb|rsl1.csv|に出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more screen.txt
+
+     name   :[               ]
+     address:[               ]
+
+$ mminput i=screen.txt f=name,address o=rsl1.csv
+$ more rsl1.csv
+name,address
+Taro,Japan
+
+
+以下、画面イメージ
++--------------------------------------
+|
+|     name   :[Taro           ]
+|     address:[Japan          ]
+|
+\end{Verbatim}
+
+\subsubsection*{例2: 終了ステータスを判定する例}
+
+例1と同じパラメータで実行し、終了ステータスを判定して異なる動作をするスクリプトの例。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more scp.sh
+rm -f rsl3.csv
+clear
+mminput i=screen.txt f=name,address o=rsl3.csv
+if [ $? = 0 ] ; then
+  clear ; echo "end by enter key"
+else
+  clear ; echo "end by escape key"
+fi
+
+# TaroとJapanを入力後enterキーを入力した場合の結果
+$ bash scp.sh
+end by enter key
+$ more rsl3.csv
+name,address
+Taro,Japan
+
+# TaroとJapanを入力後escapeキーを入力した場合の結果
+$ bash scp.sh
+end by escape key
+$ more rsl3.csv
+name,address
+Taro,Japan
+\end{Verbatim}
+
+
+\subsection*{関連コマンド}
+\hyperref[sect:minput] {minput} :入力画面を表示する。
+
+\hyperref[sect:mdsp] {mdsp} : 画面の指定位置に文字列を表示する。
+
+\hyperref[sect:mseldsp] {mseldsp} : 画面に単一選択入力窓を表示する。
+
+\hyperref[sect:mmseldsp] {mmseldsp} : 画面に複数選択入力窓を表示する。
+
+
+%\end{document}

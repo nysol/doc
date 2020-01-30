@@ -1,0 +1,63 @@
+
+%\begin{document}
+
+\section{mrand - Generate Random Numbers\label{sect:mrand}}
+\index{mrand@mrand}
+Generate random number from the range 0.0 to 0.1, or generate random integers from a defined range. Define output column name at \verb|a=| parameter. 
+
+This command uses Mersenne twister (developed in 1937) as pseudo random number generator.
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Webpage of author}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library}).
+
+
+
+\subsection*{Format}
+\verb/mrand [k=] a= [max=] [min=] [S=] [-int]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}  
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Same random number is generated for same key value at the specified key field.  \\
+
+\verb|a=|    & New column name. [However, this parameter is not required when -nfn,-nfno option is specified]\\
+\verb|max=|  & Maximum value of random number [default value: INT\_MAX]\\
+             & Integer up to \verb|0\UTF{FF5E}2^32| [21 billion] ). \\
+             & \verb|-int| must be specified with this parameter. \\
+\verb|min=|  & Minimum value of random number [default=0]. \\
+             & Integer up to \verb|0\UTF{FF5E}2^32| [21 billion]). \\
+               & \verb|-int| must be specified with this parameter. \\
+\verb|S=|    & Random seed [default value: current time]\\
+             & The same random seed generates the same random number \\
+             & When  \verb|S=| is not specified, the default setting of random seed is set to the current time. \\
+             & Random seed value can be specified between -2147483648〜2147483647. \\
+\verb|-int|  & Generate random integers.\\
+\end{tabular} 
+}
+\end{table} 
+
+
+
+\subsection*{Examples}
+\input{examples/tex/mrand_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:mselrand] {mselrand} : Select a random record. 
+
+\hyperref[sect:mnewrand] {mnewrand} : Generate new random dataset without using input file. 
+
+%\end{document}

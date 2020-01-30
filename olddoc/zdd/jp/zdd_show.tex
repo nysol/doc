@@ -1,0 +1,68 @@
+
+\section{show : ZDDの表示\label{sect:show}}
+\subsection*{書式}
+$obj$.show([$switch$])
+
+~~$switch$ : string
+
+\subsection*{説明}
+ZDDオブジェクト$obj$を多様な形式で標準出力に出力する。
+出力形式は、表\ref{tbl:zdd_show_switch}に示された値(文字列)を与えることによって切り替える。
+$switch$を省略すればアイテムの積和形式で表示する。
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption{ZDDオブジェクトの表示形式のスイッチ一覧\label{tbl:zdd_show_switch}}
+{\small
+\begin{tabular}{l|l}
+\hline
+$switch$の値  & 機能 \\
+\hline
+ (スイッチ無し)	& アイテムの積和形での表示 \\
+  bit					& 重みの(-2)進数の各桁別アイテム集合の表示 \\
+  hex					& 整数値を 16 進数で表現する積和形表示 \\
+  map					& カルノー図で表示。アイテム変数6個まで表示できる \\
+  rmap				& カルノー図で表示。冗長なアイテム変数は省いて表示  \\
+  case				& 整数値ごとに場合分けして積和形表示 \\
+%  /size				& 計算結果のBDD節点数(および処理系全体の節点数)を表示 \\
+%  /count				& 式に現れる(0 以外の値を持つ)組合せの個数を表示 \\
+%  /density		  & 集合の濃度(0 以外の値を持つ組合せの比率)を表示 \\
+%  /value				& シンボル変数にすべて数値を代入したときの式の値を表示 \\
+%  /maxcover		& 式に含まれる(0 以外の値を持つ)コスト最大の組合せを1つ表示 \\
+%  /maxcost		  & コスト最大組合せのコスト値を表示 \\
+%  /mincover		& 式に含まれる(0 以外の値を持つ)コスト最小の組合せを1つ表示 \\
+%  /mincost		  & コスト最小組合せのコスト値を表示 \\
+%  /plot				& BDDの形を図示する。(使用不可) \\
+  decomp			& 単純直交分解形式での出力 \\
+%  /export			& BDDの形を図示する(否定枝不使用)。$fileName$に指定があれば、指定されたファイルに出力 \\
+%              & 指定されたファイルに出力 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\if0
+\subsubsection*{bit}
+ZDDでは重みをマイナス2進数で表現し、各桁ごとにZDDを生成している。
+このメソッドにより各桁別に、そのZDDに登録されているアイテム集合を標準出力に出力できる。
+\subsubsection*{hex}
+重みを16進数で表現し積和形で標準出力に出力する。
+\subsubsection*{map}
+カルノー図を標準出力に表示する。
+アイテム数は6個まで表示できる。
+\subsubsection*{rmap}
+カルノー図を標準出力に表示する。
+ただし、使われていないアイテムは省いて表示される。
+\subsubsection*{case}
+重みの値別にアイテム集合を標準出力に出力する。
+\subsubsection*{decomp}
+$obj$を単純直交分解(simple disjoint decomposition)形式で出力する。
+\fi
+
+\subsection*{例}
+\input{examples/tex/show_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:export]{export} : ZDDの構造をそのままフィアイルに出力する。

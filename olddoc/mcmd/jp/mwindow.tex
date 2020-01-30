@@ -1,0 +1,137 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mwindow スライド窓の生成\label{sect:mwindow}}
+\index{mwindow@mwindow}
+複数行をずらしながら複製していく。
+移動平均の計算など、時系列データにおいて一定幅の窓を設定し、
+その窓をずらしながらその窓を単位に何らかの処理(例えば平均)をする目的に利用する。
+このような窓をスライド窓(sliding window)と呼ぶ。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mwindow_input}〜\ref{tbl:mwindow_out2}に示す。
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.18\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mwindow_input}}
+{\small
+\begin{tabular}{cc}
+\hline
+date&val \\
+\hline
+4/6&1 \\
+4/7&2 \\
+4/8&3 \\
+4/9&4 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{wk=date:win t=2\label{tbl:mwindow_out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+win&date&val \\
+\hline
+4/7&4/6&1 \\
+4/7&4/7&2 \\
+4/8&4/7&2 \\
+4/8&4/8&3 \\
+4/9&4/8&3 \\
+4/9&4/9&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{wk=date:win t=2 -r\label{tbl:mwindow_out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+win&date&val \\
+\hline
+4/6&4/6&1 \\
+4/6&4/7&2 \\
+4/7&4/7&2 \\
+4/7&4/8&3 \\
+4/8&4/8&3 \\
+4/8&4/9&4 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+表\ref{tbl:mwindow_input}に示される入力データは日別の集計値が4日分示されており、スーパーの売上推移や株価推移と考えればよい。
+この入力データについて、2日間を窓サイズとして移動平均を計算することを考える。
+入力データに示される日付4/6〜4/9についてサイズ2の窓を作成すると
+[(4/6,1),(4/7,2)], [(4/7,2),(4/8,3)], [(4/8,3),(4/9,4)]の3つの窓が作成される。
+ここで`[]'は一つの窓を示し、`()'は行を示すものとする。
+そしてこれらの窓のユニークキー(以下「窓キー」と呼ぶ)として、
+各窓の日付の最大値(\verb|wk=|で指定した項目の最終行の値)をwinという項目名で出力する(表\ref{tbl:mwindow_out1})。
+窓キーを各窓の最小値(先頭行)とするには\verb|-r|オプションを用いればよい(表\ref{tbl:mwindow_out2})。
+あとは、出力結果(表\ref{tbl:mwindow_out1})に対して\verb|mavg|を実行することで移動平均が計算される。
+ちなみに\verb|mmvavg|コマンドは、上述の一連の処理(\verb|mwindow|+\verb|mavg|)と同様の処理を行うが、\verb|mmvavg|の方が高速である(約3.5倍速:200MB,1000万件データで窓サイズを10で実験した結果)。
+
+\subsection*{書式}
+\verb|mwindow wk= t= [k=] [-r] [-n] [i=] [o=]|
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|wk=|   & 出力データにおいて、窓をユニークに識別する値となる入力データ上の項目を指定する。\\
+             & ここで指定した項目で並べ替えられたのちスライド窓を生成していくが、\\
+			 & 降順で並べ替えるときは\%r、数値として並べ替えるときは\%nと追加する。\\
+             & 数値の降順で並べ替えるときは\%nrと追加すればよい。\\
+             & またコロンに続いて窓キーの項目名を指定しなければならない。複数項目を指定することもできる。 \\
+\verb|t=|    & 窓のサイズ(行数)を指定する。 \\
+%\verb|k=|    & ここで指定された項目の値を単位に窓の生成を行う。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|k=|    & ここで指定された項目の値を単位に窓の生成を行う。\\
+\verb|-r|    & 窓における基準行を先頭行とする。指定がなければ最終行となる。\\
+\verb|-n|    & 窓のサイズが\verb|t=|で指定した行数に満たなくても出力する。\\
+\verb|i=|    & 入力ファイル名\\
+\verb|-nfn|  & 入力データの1行目を項目名行とみなさない。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mwindow_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mmvavg] {mmvavg} : 移動窓の平均(移動平均)に特化した計算コマンド。
+
+\hyperref[sect:mmvstats] {mmvstats} : 移動窓の各種統計量を計算する。
+
+%\end{document}

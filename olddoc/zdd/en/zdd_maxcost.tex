@@ -1,0 +1,28 @@
+
+\section{maxcost : Return itemset with maximum cost\label{sect:maxcost}}
+\subsection*{Format}
+$obj$.maxcost $\rightarrow$ $cost$
+
+~~$cost$ : float
+
+\subsection*{Description}
+Among all itemsets in $obj$, return the one with maximum cost.  
+The cost value of the itemset is obtained by \hyperref[sect:maxcover]{maxcover}. 
+
+Specify the cost with \hyperref[sect:symbol]{symbol} function.
+
+\subsection*{Example}
+\input{examples/tex/maxcost_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:symbol]{symbol} : Declare items
+
+\hyperref[sect:cost]{cost} : Total cost of itemset 
+
+\hyperref[sect:maxcover]{maxcover} : Select itemset with maximum cost 
+
+\hyperref[sect:mincover]{mincover} : Select itemset with minimum cost
+
+\hyperref[sect:mincost]{mincost} : Cost of itemset with minimum cost
+
+

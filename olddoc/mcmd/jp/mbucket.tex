@@ -1,0 +1,129 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mbucket 件数均等化バケット分割\label{sect:mbucket}}
+\index{mbucket@mbucket}
+\verb|f=|で指定した数値項目を\verb|n=|で指定した数の区間に分割する。
+区間の計算には2通りの方法があり、一つは、
+各区間に属する件数ができるだけ均等になるような区間を計算する
+(件数均等化バケット分割と呼ぶ)。
+他方は、区間の範囲が均等になるような区間を計算する
+(範囲均等化バケット分割と呼ぶ)。
+\verb|-rng|を指定すると範囲均等分割となり、指定しなければ件数均等分割となる。
+\verb|f=|に複数の項目を指定した場合は、それぞれの項目ごとにバケット分割を実行する。
+
+\subsection*{書式}
+\verb|mbucket f= n= [-rng] [-r] [F=] [k=] [O=]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & ここで指定した項目(複数項目指定可)の値に基づいて分割をおこなう。\\
+             & 分割対象の項目名:出力する項目名\\
+\verb|n=|    & 分割数\\
+             & \verb|f=|で指定した項目それぞれの分割数をカンマで区切って指定する。\\
+             & ただし1つの数字を指定した場合は全ての項目の分割数として扱われる。
+\\
+\verb|F=|    & 出力形式【デフォルト値:0】\\
+             & バケットの名前を出力形式。\\
+             & 0:バケット番号のみを表示する。\\
+             & 1:バケットの範囲のみを表示する。\\
+             & 2:バケット番号とバケット範囲の両方を表示する。\\
+\verb|k=|    & バケット分割を行う単位となる項目(複数項目指定可)名リスト。\\
+\verb|O=|    & バケット範囲出力ファイル\\
+             & \verb|f=|パラメータで指定した各項目の各バケットの数値範囲を出力するファイル名。\\
+\verb|-rng|  & バケットの範囲均等指定 \\
+             & バケットの範囲が均等になるように分割する。\\
+\verb|-r|    & バケットの番号を逆順に出力する。 \\
+\verb|bufcount=| & バッファのサイズ数を指定する。 \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mbucket_ex.tex}
+\subsection*{問題の定式化\footnote{定式化およびアルゴリズムは加藤直樹教授(京都大学工学研究科)による。}}
+
+いま、$n$個のデータ$x_1,x_2,\cdots,x_n$(このデータ集合を$D$とする) が与えられている。
+これらのデータを$k$個のグループ(バケットと呼ぶ)に分割し、得られる$k$個のバケットに
+入っているデータの個数が一様になるようにしたい。
+一様性の評価基準としては分散を用いる。
+
+\[
+X=\{x_i~|~1~\leq~i~\leq~n~,~x_i~\in~D\}
+  \]
+
+
+とおく。$X$の異なる値を小さい順に並べたものを$v_1,v_2,\dots,v_n$とする。
+$X$のバケット分割とは、$\{v_1,v_2,\dots,v_n\}$を区間に分割することを表し，その区間を、$I_1,I_2,\dots,I_k$とおき、$D_j$、$n_j$を以下のように定める。
+\[
+ D_j=\{x_i~|~1~\leq~i~\leq~n~,~x_i~\in~I_j\}
+  \]
+  \[
+ n_j=|D_j|
+ \]
+一様さの基準である分散は以下のように定められる。\\
+\[
+Var=\sum_{j=1}^{k}~(n_j-\bar{n})
+\]
+ここで、$\bar{n}=n/k$である。展開すると、\\
+\[
+Var~=~\sum_{j=1}^{k}~(n_j^2-2n_j\bar{n}+\bar{n}^2)~~~~=~\sum_{j=1}^{k}~n_j^2~-~k\bar{n}^2
+\]
+となる。
+$k\bar{n}^2$は分割の仕方によらず定数なので、$Var$を最小化するには上式の第1項のみを考えたらよい。
+つまり、
+\[
+Var'=~\sum_{j=1}^{k}~n_j^2
+\]
+を最小化するような区間分割を求めることを考えたらよい。
+
+\subsection*{アルゴリズム}
+
+再帰方程式を用いることによって動的計画法により解ける。詳細は以下のとおりである。
+$DP(m,h)$を$v_1,v_2,\dots,v_m$を$h$個
+の区間$I_1,I_2,\dots,I_h$に分割したときの$\displaystyle \sum_{j=1}^{h}~n_j^2$の最小値とする。
+最終目標は$DP(n,k)$を求めることである。このとき，$DP(m,h)$は以下の方程式を満たす。
+\[
+DP(m,~h)~=~\min_{g=h-1,~\dots,m-1}~\{~DP(g,h-1)~+~|\{~x_i~|~v_{g+1}~\leq~x_i~\leq~v_m~\}|^2\}
+\]
+この再帰方程式を解く。ただし，初期値は
+\[
+DP(m,~1)~=~|\{~x_i~|~v_1~\leq~x_i~\leq~v_m~\}|^2~,~m=1,...,n
+\]
+である。再帰方程式は
+$DP(m,2)(m=1,\dots,n),DP(m,3)(m=1,\dots,n),\dots,DP(m,k-1)(m=1,\dots,n)$
+の順に解いていく。最後は，
+\[
+DP(n,~k)~=~\min_{g=k-1,~\dots,n-1}~\{~DP(g,k-1)~+~|\{~x_i~|~v_{g+1}~\leq~x_i~\leq~v_n~\}|^2\}
+\]
+により，$DP(n,k)$を求める
+
+\subsection*{関連コマンド}
+\hyperref[sect:mmbucket]{mmbucket} : 多次元のセルで件数均等化分割をする場合はこちらを使う。
+
+%\end{document}

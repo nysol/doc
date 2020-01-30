@@ -1,0 +1,36 @@
+\subsubsection*{Example 1: Basic }
+
+Calculate the statistical sum of "quantity" and "amount" field for each "customer".
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,10
+B,5,20
+B,2,10
+C,1,15
+C,3,10
+C,1,21
+$ mstats k=customer f=quantity,amount c=sum i=dat1.csv o=rsl1.csv
+#END# kgstats c=sum f=quantity,amount i=dat1.csv k=customer o=rsl1.csv
+$ more rsl1.csv
+customer%0,quantity,amount
+A,1,10
+B,7,30
+C,5,46
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+Calculate the statistical maximum value.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mstats k=customer f=quantity,amount c=max i=dat1.csv o=rsl2.csv
+#END# kgstats c=max f=quantity,amount i=dat1.csv k=customer o=rsl2.csv
+$ more rsl2.csv
+customer%0,quantity,amount
+A,1,10
+B,5,20
+C,3,21
+\end{Verbatim}

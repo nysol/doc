@@ -1,0 +1,20 @@
+\subsubsection*{例1: 顧客別金額合計}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more input.csv
+顧客,金額
+A,5200 
+B,4000   
+B,3500 
+A,2000 
+B,800 
+$ msortf f=顧客 i=input.csv | msum k=顧客 f=金額 o=output.csv
+#END# kgsortf f=顧客 i=input.csv
+#END# kgsum f=金額 k=顧客 o=output.csv
+$ more output.csv
+顧客%0,金額
+A,7200
+B,8300
+\end{Verbatim}

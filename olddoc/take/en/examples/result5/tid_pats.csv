@@ -1,0 +1,16 @@
+tid,class,pid
+T1,cls1,1
+T2,cls2,12
+T3,cls1,1
+T3,cls2,8
+T4,cls1,1
+T5,cls2,10
+T5,cls2,11
+T5,cls2,12
+T5,cls2,8
+T5,cls2,9
+T6,cls2,10
+T6,cls2,11
+T6,cls2,12
+T6,cls2,8
+T6,cls2,9

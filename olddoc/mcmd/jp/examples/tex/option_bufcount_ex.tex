@@ -1,0 +1,9 @@
+\subsubsection*{例1: 基本例}
+
+参照ファイルのキーサイズが80MB(4MB×20)以内であれば、一時ファイルは使われない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnjoin k=id m=ref.csv f=name i=dat.csv o=rsl.csv bufcount=20
+#END# kgnjoin bufcount=20 f=name i=dat.csv k=id m=ref.csv o=rsl.csv
+\end{Verbatim}

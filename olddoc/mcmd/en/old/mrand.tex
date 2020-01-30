@@ -1,0 +1,99 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mrand},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mrand (generate random number) command}
+Generate random integer and define name of column at \emph{a=} parameter. 
+
+\subsection*{Format}
+mrand a= [max=] [min=] [S=] [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}] [\href{run:option.pdf}{o=}] [--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & New column name【Required parameter. This parameter is not required when -nfn,-nfno option is specified】\\
+& Define column header for the new field. \\
+\verb|max=|    & Maximum value of random number【default=INT\_MAX】\\
+& Define upper bound of random value（Integer: Up to \verb|0\UTF{FF5E}2^32| [21 billion] ). 【default=21 billion】\\
+\verb|min=|    & Minimum value of random number【default=0】\\
+& Define lower bound of random value  (Integer: Up to \verb|0\UTF{FF5E}2^32| [21 billion])\\
+\verb|S=|  & Random seed【default = current time】\\
+& The same random seed generates the same random number \\
+& The default setting of random seed is set to the current time if this parameter is not specified.  \\
+& Range of random seed value is between -2147483648〜2147483647. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Generate a random number with a minimum value of 10 and maximum value of 100. Add the random numbers to a new column named "Random".}
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer
+A
+B
+C
+D
+E
+
+$ mrand a=Random min=10 max=100 S=1 i=dat.csv o=rsl.csv
+
+# 出力ファイル(rsl.csv)
+Customer,Random
+A,47
+B,100
+C,75
+D,94
+E,10
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Remarks}
+This command used Mersenne twister (developed in 1937) as pseudo random number generator.
+
+\subsection*{Related Command}
+\noindent
+\href{run:mcal.pdf}{mcal}: Computation of records between columns \\
+
+\begin{thebibliography}{9}
+\bibitem{boostライブラリ}
+http://www.boost.org/doc/libs/1\_37\_0/libs/random/random-generators.html
+\bibitem{原作者のページ}
+http://www.math.sci.hiroshima-u.ac.jp/\~{}m-mat/MT/MT2002/mt19937ar.html
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,40 @@
+\subsubsection*{Example 1: Basic Example}
+
+For records where the value of date field is \verb|20080203|, select those records in the input data where \verb|amount| field is more than \verb|5| but less than \verb|15| and join field where \verb|avg=150|. For records where \verb|amount| field is more than \verb|40| but less than \verb|50|, join field \verb|avg=200|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date,price
+20080123,10
+20080123,20
+20080203,10
+20080203,35
+200804l0,50
+$ more ref1.csv
+date,priceF,priceT,avg
+20080203,5,15,150
+20080203,40,50,200
+$ mnrjoin k=date f=avg m=ref1.csv R=priceF,priceT r=price%n i=dat1.csv o=rsl1.csv
+#END# kgnrjoin R=priceF,priceT f=avg i=dat1.csv k=date m=ref1.csv o=rsl1.csv r=price%n
+$ more rsl1.csv
+date%0,price,avg
+20080203,10,150
+\end{Verbatim}
+\subsubsection*{Example 2: Output unmatched data}
+
+Use \verb|-n| to return all records in the input data even if they do not match with those in the reference file (row where \verb|avg=| Null), and use \verb|-N| to return records in the reference file even if they do not match with those in the input file (rows where \verb|price=| null). This is known as outer-join.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnrjoin k=date f=avg m=ref1.csv R=priceF,priceT r=price%n -n -N i=dat1.csv o=rsl2.csv
+#END# kgnrjoin -N -n R=priceF,priceT f=avg i=dat1.csv k=date m=ref1.csv o=rsl2.csv r=price%n
+$ more rsl2.csv
+date%0,price,avg
+20080123,10,
+20080123,20,
+20080203,10,150
+20080203,35,
+20080203,,200
+200804l0,50,
+\end{Verbatim}

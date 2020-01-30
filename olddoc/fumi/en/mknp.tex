@@ -1,0 +1,76 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mknp.rb Parsing case structure using KNP \label{sect:mknp}}
+\index{mknp@mknp}
+
+Given a document in text file, KNP parses the case structure and saves the output in XML format. 
+This command can process multiple text files, and can be executed in multi-processing mode based on compatibility of OS. 
+
+
+\subsection{Format}
+\begin{verbatim}
+mknp.rb I= O= [P=] [mp=] [log=] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|I=|       & : Path name of the text document input. \\
+\verb|O=|       & : Path name of the analysis results saved as XML file.   \\
+\verb|P=|       & : Path name to save the direct output of KNP (default do not return output).  \\
+\verb|mp=|      & : Number of parallel processes.  Default is 2.   \\
+\verb|log=|     & :  Log file of processing error from KNP.  \\
+\verb|-mcmdenv| & : Display MCMD message containing environment variables.  \\
+                & :  Default returns warning and error message  (KG\_VerboseLevel=2). \\  
+\verb|--help|    & : Display help  \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsubsection*{Example of input file} 
+
+The structure of text is preferred to include one sentence per line. 
+The character code must be in UTF8 format. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+\end{Verbatim}
+
+
+\subsubsection*{Example of output file} 
+
+Results of case structure analysis is stored in XML file format. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+<?xml version='1.0' encoding='UTF-8'?>
+<article id='test.txt'>
+ <sentence id='0' text='子どもはリンゴがすきです。'>
+  <chunk id='0' link='2' phraseType='格助詞句' caseType='ガ２格' phrase='子供' phraseTok='子
+   <token id='0' class1='名詞' class2='普通名詞' word='子ども' orgWord='子ども' daiWord='子供
+   <token id='1' class1='助詞' class2='副助詞' word='は' orgWord='は'/>
+  </chunk>
+  <chunk id='1' link='2' phraseType='格助詞句' caseType='ガ格' phrase='林檎' phraseTok='リン
+   <token id='2' class1='名詞' class2='普通名詞' word='リンゴ' orgWord='リンゴ' daiWord='林檎
+   <token id='3' class1='助詞' class2='格助詞' word='が' orgWord='が'/>
+  </chunk>
+  <chunk id='2' link='-1' phraseType='用言句' phraseTok='すきだ' rawPhrase='すきです。' phrase
+   <token id='4' class1='形容詞' class3='ナ形容詞' class4='デス列基本形' word='すきだ' orgWord
+   <token id='5' class1='特殊' class2='句点' word='。' orgWord='。'/>
+  </chunk>
+ </sentence>
+:
+\end{Verbatim}
+
+The \hyperref[sect:mcaseframe]{mcaseframe.rb} command can be used to extract dependency relationship from this XML.  
+
+
+\subsection{Examples}
+\input{examples/tex/mknp_ex.tex}
+
+%\end{document}
+

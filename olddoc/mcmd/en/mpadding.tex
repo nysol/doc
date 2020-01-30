@@ -1,0 +1,58 @@
+%\begin{document}
+
+\section{mpadding - Row Padding\label{sect:mpadding}}
+
+Fill in values in between the records specified at \verb|f=| parameter based on the key field specified at \verb|k=| parameter. When \verb|v=| parameter is specified, create  padding records in between records with the specified string other than the fields specified at \verb|k=|,\verb|f=|. Create padding with null values when \verb|-n| option is specified. (Note: previous item value will be used as padding if both \verb|v=| and \verb|-n| parameters are not specified) 
+   
+
+\subsection*{Format}
+\verb|mpadding [k=] f= [v=] [S=] [E=] [-n] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_x]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify the key field. \\
+\verb|f=|    & Target field name for continuous padding. \\
+             & Specify the field name to create padding as continuous values between records. \\
+             	 & When creating padding in numerical values, attach \%n as no\%n.\\
+	 	& Attach \%d when creating padding for dates, or attach \%t for padding for time. \\
+	 & Atttach \%r when creating padding value in descending order as no\%d\%r.\\
+	 			 
+          
+%\verb|type=| & Specify the item type at f=.\\
+%             & int:numerical value/date:date/time:time can be specified (it is not possible to specify other types). \\
+\verb|v=|    & Specify padding value as character string.\\
+             & Create padding with with the specified string other than the fields specified at k=,f=. \\
+\verb|S=|    & Starting value\\
+             & Specify the starting value of the series in f=.\\
+\verb|E=|    & Ending value\\
+             & Specify the ending value of the series in f=.\\
+\verb|-n|    & Use null value as padding.\\
+             & Return null values in fields other than those specified in k=, f=.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mpadding_ex.tex}
+
+\subsection*{Related Command}
+
+%\end{document}

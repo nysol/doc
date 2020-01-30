@@ -1,0 +1,37 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate uniformly distributed random number from 0.0 to 1.0.
+Since a random seed is specified, the random number sequence generated is always the same.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+4
+$ mcal c='rand(1)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=rand(1) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,0.4170219984
+2,0.9971848081
+3,0.7203244893
+4,0.9325573612
+\end{Verbatim}
+\subsubsection*{Example 2: Random seed is not set}
+
+The random sequence will be different upon each run since random seed is not specified.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='rand()' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=rand() i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,rsl
+1,0.9931602769
+2,0.3491961618
+3,0.6793976133
+4,0.08248335845
+\end{Verbatim}

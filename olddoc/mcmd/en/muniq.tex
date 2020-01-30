@@ -1,0 +1,38 @@
+
+%\begin{document}
+
+\section{muniq - Unique Records\label{sect:muniq}}
+\index{muniq@muniq}
+Remove duplicate values and create unique records. 
+
+\subsection*{Format}
+\verb|muniq [k=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    &  Specify the field name (s) as the unique identifier of the records. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/muniq_ex.tex}
+\subsection*{Related Command}
+\hyperref[sect:mbest]{mbest} : Use \verb|mbest| command to select the line number for records with the same key. 
+
+%\end{document}

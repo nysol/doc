@@ -1,0 +1,29 @@
+
+
+\section{Summary}
+This package "TAKE (bamboo)" is developed at the centre led by Professor Takeaki Uno (Associate professor of National Institute of Informatics). This is a user-friendly group of commands as an extension of data mining software \cite{UnoWeb}. The package "TAKE" is therefore named after the developer.
+Many of the commands in this package is based on the pattern enumeration with a variety of target data such as an itemset, series, and general graph. 
+
+For example, the products in supermarket shopping baskets are treated as a set of items, the command is capable of enumerating combination of all products common in many shopping baskets at a high speed. In addition, with the concept of class is introduced, the specific patterns can be enumerated to describe a group of target / favourable customers. 
+
+Knowledge of popular sequential pattern from circular logging of web pages among most users provide useful insight to the web page structure. The concept of a class is can be used in conjunction with enumeration of sequential patterns. As a result, different traffic patterns from circular logging such as patterns specific to men and women can be enumerated. 
+
+In addition, the package includes commands for processing general graph based data. 
+Some possible usages include analysis of companies' trading data network, user data network in SNS, and similarity graph that represents the resemblance among items. For example, similarity graph can be constructed given the co-occurrence information of the merchandises.  In addition, it is possible to extract merchandises with strong relationships by enumerating the maximal cliques of the graph, these extracted clusters can be used as explanatory variables in the product purchase model.
+
+The data polishing method can be used in pre-processing stage to suppress massive number of maximal cliques, which in turn enumerates fewer medium sized maximal cliques. 
+
+All  commands in this package  is written in Ruby language. Internally, the native commands are executed through shell interface, where data is exchanged with native command in basic file format.
+
+\subsection{Installation}
+This package is part of the complete NYSOL package. 
+Thus, all software within the NYSOL package should be installed as prerequisite. 
+For details on the installation of NYSOL package, please refer to the URL: \url{http://www.nysol.jp/install}
+
+
+\subsection{License}
+This package comprised of source code of the command developed by Professor Uno, please refer to the \verb|readme.txt| file in the archive on licensing details \cite{UnoWeb}.  
+
+Other software is distributed through GNU AGPL(AFFERO GENERAL PUBLIC LICENSE: \url{http://www.gnu.org/licenses/agpl-3.0.html}) for public usage.
+ 
+

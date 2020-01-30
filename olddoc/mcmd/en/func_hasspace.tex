@@ -1,0 +1,18 @@
+
+%\begin{document}
+
+\section{hasspace - Search Whitespace Characters\label{sect:hasspace}}
+\index{hasspace@hasspace}
+
+Format 1: hasspace($str$, length)
+
+Format 2: hasspacew($str$, length)
+
+This function returns true if there is whitespace characters in character string $str$ and false if not. Whitespace characters is represented as ASCII code 0X20 to 0x09-0x0d. The respective ASCII code are represented as: single byte space (0x20), horizontal tab (0x09), new line (0x0a), vertical tabulation (0x0b), new page (0x0c), carriage return (0x0d). Use \verb|hasspacew| to search for multibyte white space character.
+
+
+\subsection*{Examples}
+\input{examples/tex/func_hasspace_ex.tex}
+
+%\end{document}
+

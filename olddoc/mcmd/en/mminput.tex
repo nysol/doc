@@ -1,0 +1,95 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mminput Display form input screen\label{sect:mminput}}
+\index{mminput@mminput}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command displays a data input screen using the text file specified by the \verb|i=| parameter as the screen form. The character strings on the screen form is displayed as is, and the area between square brackets (\verb|[]|) is shown as a freehand input field. There can be two or more input fields. The data entered by the user is output to the CSV file specified by the \verb|o=| parameter. The output data consists of one row. When there are two or more input fields, a multiple-field CSV file is output.
+When the command ends with nothing entered in the input frame, null is output. To output a fieldname, use the \verb|f=| parameter. With \verb|f=| omitted, no fieldname header is output. 
+The operation is indefinite if the specified coordinate is outside the scope of the terminal.
+
+\subsection*{Format}
+\verb/mminput i= [f=] /
+\hyperref[sect:option_o]{o=}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=| & Specify the text file containing the screen form.\\
+\verb|f=| & Specify the output fieldname.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+
+\subsubsection*{Example 1: Basic example}
+A \verb|name| and \verb|address| input screen is displayed. The entered name and address are output to \verb|rsl1.csv| under fieldnames name,address.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more screen.txt
+
+     name   :[               ]
+     address:[               ]
+
+$ mminput i=screen.txt f=name,address o=rsl1.csv
+$ more rsl1.csv
+name,address
+Taro,Japan
+
+
+The following will be displayed:
++--------------------------------------
+|
+|     name   :[Taro           ]
+|     address:[Japan          ]
+|
+\end{Verbatim}
+
+\subsubsection*{Example 2: Judging end status}
+The parameters are the same as in Example 1. This script judges the end status and performs different operations accordingly.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more scp.sh
+rm -f rsl3.csv
+clear
+mminput i=screen.txt f=name,address o=rsl3.csv
+if [ $? = 0 ] ; then
+  clear ; echo "end by enter key"
+else
+  clear ; echo "end by escape key"
+fi
+
+# Result of typing Taro and Japan and pressing Enter
+$ bash scp.sh
+end by enter key
+$ more rsl3.csv
+name,address
+Taro,Japan
+
+# Result of typing Taro and Japan and pressing ESC
+$ bash scp.sh
+end by escape key
+$ more rsl3.csv
+name,address
+Taro,Japan
+\end{Verbatim}
+
+\subsection*{Related Commands}
+\hyperref[sect:minput] {minput} : Displays the input screen.
+\hyperref[sect:mdsp] {mdsp} : Displays a character string at the specified position on the screen.
+\hyperref[sect:mseldsp] {mseldsp} : Displays a single-choice input window on the screen.
+\hyperref[sect:mmseldsp] {mmseldsp} : Displays a multiple-choice input window on the screen.
+
+%\end{document}

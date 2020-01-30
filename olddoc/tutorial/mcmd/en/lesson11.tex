@@ -1,0 +1,316 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Lesson 11: Create calculated fields using mcal command}
+
+Among all M-Commands, \verb|mcal| is powerful command equivalent to a spreadsheet program such as Excel to perform various mathematical calculations and add computed fields in the dataset. \verb|mcal| can be apply to calculate across rows and between fields within the same record. Details of calculation functions can be found in "Advanced Techniques" in the tutorial. In this lesson, you will learn about "fundamental arithmetic operations", "date" and "rounding numbers" functions.
+
+\subsection{Fundamental arithmetic operations }
+
+Create a new script \verb|mcal.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Report:  Create a master file of unit prices from all transactions.  \\ 
+
+Methodology: Select \emph{quantity,amount} columns with \verb|mcut| command. Pass the output to \verb|mcal| command and compute the unit price (amount/quantity) and save it as a new attribute \emph{unitPrice}. Afterwards, use \verb|mcut| to extract the new field \verb|unitPrice|, and remove all duplicate rows with \verb|muniq|. Finally, sort the unit prices in ascending order with numeric sort (use the \%n option).  Write the result to the file \verb|mcalout.csv|.\\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+
+\subsection{Step 1: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters as follows: \\
+
+Compute: 		\verb|c='${amount}/${quantity}'| \\
+Description: 	Specify the arithmetic expression for calculated values the at the \verb|c=| parameter.  In arithmetic expressions, the variable preceded by "\$" is enclosed in single quotes. Refer to the \verb|mcal| manual for more information on arithmetic operators. \\
+
+Attribute: 		\verb|a=unitPrice| \\
+Description: 	The calculated results will be appended as a new column, therefore, you will need to specify the name for the new column at the \verb|a=| parameter.\\
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 11: Create calculated fields
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=quantity,amount          i=${inPath}/dat.csv | 
+mcal c='${amount}/${quantity}' a=unitPrice      |
+mcut f=unitPrice                                |
+msortf f=unitPrice%n                            |
+muniq k=unitPrice               o=outdat/mcalout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{Step 2: Run the shell script}
+ 
+Save and run the script. The run-time message is as follows: \\
+
+\begin{verbatim}
+$ ./mcal.sh 
+#END# kgcut f=quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/19 23:29:46
+#END# kgcal a=unitPrice c=${amount}/${quantity}; ; 2013/08/19 23:29:46
+#END# kgcut f=unitPrice; IN=24737 OUT=24737; 2013/08/19 23:29:46
+#END# kgsortf f=unitPrice%n; IN=24737 OUT=24737; 2013/08/19 23:29:46
+#END# kguniq k=unitPrice o=outdat/mcaloRRut.csv; IN=24737 OUT=839; 2013/08/19 23:29:46
+
+The result is shown below: 
+unitPrice
+
+91
+101
+104
+106
+112
+114
+116
+119
+121
+122
+123
+124
+126
+128
+129
+130
+...
+..
+\end{verbatim}
+
+
+\begin{table}[htbp]
+%\begin{center}
+
+\begin{tabular}{ l | c | l }
+\hline
+\textbf{Operator Type}   & \textbf{Operator} & \textbf{Description}  \\
+\hline \hline
+Arithmetic operators&+&Addition\\ \hline
+&-&Substraction\\ \hline
+&*&Multiplication\\ \hline
+&/&Division\\ \hline
+&\%&Remainder\\ \hline\hline
+
+Relational Operators&==&Returns true if both numeric operands are equal.  \\ \hline
+&\textless&Left operand is less than the right operand. (Numeric/String) \\ \hline
+& \textless= & Left operand is less than or equal to the right operand. (Numeric/String)\\ \hline
+&\textgreater&Left operand is greater than the right operand. (Numeric/String) \\ \hline
+&\textgreater=&Left operand is greater than or equal to the right operand. (Numeric/String) \\ \hline
+&!=&Left numeric operand is not equal to the right operand. \\ \hline
+%&-eq&Character strings on the left is equal to the right. \\ \hline
+%&-ne&Character strings on the left is not equal to the right.\\ \hline
+%&=\~&pattern matching by regular expression. \\ \hline \hline
+
+Logical Operators&\textbar\textbar&Logical OR operator indicates whether either operand is true. \\ \hline
+&\&\&&Logical AND operator indicates whether both operands are true. \\ \hline
+\hline
+\end{tabular} 
+
+\end{table} 
+
+Arithmetic operators act on the operands and return the results. Relational operators compare operands on both sides and determine the validity of the relationship. The function returns "1" if the arguments meet the comparison condition and "0" otherwise. Logical operators determine whether both arguments or either arguments is true and return 1 or 0 depending on the logical operations. Experiment with the operators and see how they work.
+
+\subsection{Date Functions }
+Various date and time functions are available in \verb|mcal| command. This tutorial will walk through applying the \verb|diffday(), today()| function to compute the number of days. \\
+
+Example 1: Create a new script \verb|mcalday.sh|. Assume that this shop first opened on 2 January 2001, let's find out the number of days between the shop opening and purchase date for each customer. This can be done by extracting a list of customers and purchase dates from the dataset, and compute the number of days between each day from "2001/01/02". The \verb|diffday| function accepts 3 arguments: first date, second date, and unit of date (year, month, day). Afterwards, save the results in the output file \verb|mcalday.sh|. \\
+
+The sample script is as follows. Execute the script and verify the computation on the number of days in the output file.
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 11: Calculated fields
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=customer,date            i=${inPath}/dat.csv |
+msortf f=customer,date          |
+mcal c='diffday($d{date},0d20010102)' a="dayDiff" o=outdat/mcaldayout.csv
+#==========================================
+
+Results: 
+
+customer,date,dayDiff
+00000A,20011209,341
+00000A,20011209,341
+00000A,20011209,341
+00000A,20011209,341
+00000A,20011217,349
+00000A,20011217,349
+00000A,20011217,349
+00000B,20011209,341
+00000B,20011209,341
+00000B,20011209,341
+00000B,20011209,341
+00000B,20011217,349
+00000B,20011217,349
+00000B,20011217,349
+00000C,20011209,341
+00000C,20011209,341
+00000C,20011209,341
+00000C,20011209,341
+00000C,20011217,349
+00000C,20011217,349
+00000C,20011217,349
+00000D,20011209,341
+00000D,20011209,341
+00000D,20011209,341
+00000D,20011209,341
+00000D,20011217,349
+00000D,20011217,349
+00000D,20011217,349
+00001A,20011124,326
+00001A,20011124,326
+...
+..
+\end{verbatim}
+
+Now, let's compute the number of days between the purchase date and current date assuming today is 20 August 2013. 
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 11: Calculated fields
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=customer,date            i=${inPath}/dat.csv |
+msortf f=customer,date          |
+mcal c='diffday(today(),$d{date})' a="dayDiff" o=outdat/mcaldayout.csv
+#==========================================
+
+Results: 
+
+customer,date,dayDiff
+00000A,20011209,4272
+00000A,20011209,4272
+00000A,20011209,4272
+00000A,20011209,4272
+00000A,20011217,4264
+00000A,20011217,4264
+00000A,20011217,4264
+00000B,20011209,4272
+00000B,20011209,4272
+00000B,20011209,4272
+00000B,20011209,4272
+00000B,20011217,4264
+00000B,20011217,4264
+00000B,20011217,4264
+00000C,20011209,4272
+00000C,20011209,4272
+00000C,20011209,4272
+00000C,20011209,4272
+00000C,20011217,4264
+00000C,20011217,4264
+00000C,20011217,4264
+00000D,20011209,4272
+00000D,20011209,4272
+...
+..
+\end{verbatim}
+
+\subsection{Numerical Functions }
+There are various functions in \verb|mcal| which deal with arithmetic operations for numeric values. In this lesson, we will go through how to round off decimal numbers. Use the report created in exercise 2, lesson 9, let's convert amountShare and quantityShare into percentage and round the value of share to 2 decimal places.  \\
+
+Methodology: Copy the script mshare2.sh and save it as \verb|mcal45.sh|. In Lesson 9, we have created the script to compute the share of quantity and amount for each manufacturer within each 2-digit category code, where share is a real number between 0 and 1. Convert the share to percentage and by multiplying the share by 100, and use the round function to round off the results to the nearest 2 decimal places. \\
+
+The round function takes two arguments, the number and the rounding digit. For example: \\
+156.2841 round to the nearest 10 results 160. \\
+156.2841 round to the nearest 0.1 results 156.3 \\
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 11: Calculated fields
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=CategoryCode2,manufacturer,quantity,amount           i=${inPath}/dat.csv |
+msortf f=CategoryCode2,manufacturer                         |
+msum k=CategoryCode2,manufacturer f=quantity,amount         |
+mshare k=CategoryCode2 f=quantity:quantityShare,amount:amountShare | 
+mcal c='round(${quantityShare}*100,0.01)' a="qtySharePct" |
+mcal c='round(${amountShare}*100,0.01)' a="amtSharePct" o=outdat/mcal45out.csv
+#==========================================
+
+Results: 
+
+CategoryCode2,manufacturer,quantity,amount,quantityShare,amountShare,qtySharePct,amtSharePct
+11,0002,36,9990,0.001069614048,0.0006518657684,0.11,0.07
+11,0011,9,1980,0.0002674035119,0.0001291986208,0.03,0.01
+11,0013,318,172075,0.00944825742,0.01122820842,0.94,1.12
+11,0018,68,23979,0.00202038209,0.0015646736,0.2,0.16
+11,0019,25,13051,0.0007427875331,0.0008516016159,0.07,0.09
+11,0023,174,98112,0.00516980123,0.006401987414,0.52,0.64
+...
+..
+12,0293,80,31955,0.1891252955,0.156795109,18.91,15.68
+12,0316,16,5568,0.0378250591,0.02732076879,3.78,2.73
+12,0573,34,19890,0.08037825059,0.09759520316,8.04,9.76
+12,0828,13,6903,0.03073286052,0.03387127639,3.07,3.39
+12,1416,10,4495,0.02364066194,0.02205582897,2.36,2.21
+12,1483,49,17815,0.1158392435,0.08741370258,11.58,8.74
+12,1725,141,65328,0.3333333333,0.3205479855,33.33,32.05
+12,1878,80,51847,0.1891252955,0.2544001256,18.91,25.44
+13,0000,4,1248,0.0007092198582,0.0004598998981,0.07,0.05
+13,0025,106,50153,0.01879432624,0.01848185864,1.88,1.85
+...
+..
+\end{verbatim}
+
+\vspace {5mm}
+
+{\setlength{\parindent}{0cm}
+
+\textbf{Functions in mcal command }\\
+
+There are a variety of functions in mcal command for different purposes. The functions are categorized into five types as follows: \\
+1. Number related \\
+2. String association \\
+3. Regular expressions  \\
+4. Date and time functions \\
+ 
+ Please refer to the mcal manual on detailed usage of the functions. 
+
+}
+
+\subsection{Exercise }
+
+Let's practice the \verb|mcal| command on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Average quantity and amount per day without decimal places. & \href{exercise/mcal1.sh}{mcal1.sh} & \href{exercise/outdat/mcalout1.csv}{mcalout1.csv} \\
+2. Total amount per day inclusive of sales tax (5\%) without decimal places. & \href{exercise/mcal2.sh}{mcal2.sh} & \href{exercise/outdat/mcalout2.csv}{mcalout2.csv} \\
+3. List of unique dates and value of date after 45 days.  & \href{exercise/mcal3.sh}{mcal3.sh} & \href{exercise/outdat/mcalout3.csv}{mcalout3.csv} \\
+
+
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

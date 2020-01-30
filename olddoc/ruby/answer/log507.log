@@ -1,0 +1,3 @@
+#END# kgcut f=a,b i=indat/dat1.csv o=/tmp/__KGTMP_0x2903cc_36610_kgtp_0 IN=3 OUT=3
+#END# kgsum f=b i=/tmp/__KGTMP_0x2903cc_36610_kgtp_0 k=a IN=3 OUT=2
+#END# kgtp

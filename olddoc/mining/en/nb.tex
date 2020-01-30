@@ -1,0 +1,210 @@
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+%\documentclass[a4paper]{jarticle}
+%\renewcommand{\tablename}{table }
+
+
+\section{mnb.rb Na{\"i}ve Bayesian Classifier\label{sect:nb}}
+\index{nb@nb}
+
+Build a probability classifier model by applying Bayes' theorem using supervised learning.
+The probability of the class variable is calculated based on the presence of a particular feature of the item, and returns the predicted class from the test data in the output.
+The model used Multinomial Naive Bayes to handle the frequency distribution of the item.
+However, the probability becomes zero if the new item only appeared during validation stage. The problem can be avoided by applying Laplace smoothing. 
+Table \ref{tbl:inp1} shows an excerpt of training data which is used as input data.
+"Transaction ID" is used to identify each transaction, and each transaction must contain  "item", "frequency" and  "class information". 
+ In Table \ref{tbl:inp1}, the transaction fields correspond to "id", "word", "freq", "class". 
+ Table \ref{tbl:inp2} shows an example of validation (testing) data. In the validation data, the class field is not included, the class is predicted from the Naive Bayes model constructed with the training data. 
+ 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Training data(train.csv)\label{tbl:inp1}}
+{\small
+\begin{tabular}{cccc}
+\hline
+id & word & freq & class\\
+\hline
+1 & w1 & 2 & M\\
+1 & w2 & 4 & M\\
+2 & w1 & 1 & M\\
+2 & w2 & 2 & M\\
+2 & w3 & 3 & M\\
+4 & w1 & 3 & M\\
+4 & w2 & 3 & M\\
+4 & w3 & 2 & M\\
+5 & w1 & 1 & F\\
+6 & w1 & 2 & F\\
+6 & w2 & 1 & F\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Validation data(test.csv)\label{tbl:inp2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+id & word & freq\\
+\hline
+3 & w2 & 8\\
+3 & w3 & 2\\
+7 & w1 & 1\\
+7 & w2 & 3\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table}
+
+\subsection*{Format}
+\begin{verbatim}
+
+mnb.rb k= f= w= c= i= o= [I=] [O=] [-c] [-debug] [--help] 
+
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+
+\verb|i=|     &: File name of training data [required parameter].\\
+\verb|o=|     &: Output file name [required parameter].\\
+\verb|k=|     &: Field name of transaction ID (i= \& I=on field name) [required parameter].\\
+\verb|f=|     &: Field name (i= \& I=on field name) [required parameter].\\
+\verb|w=|     &: Field name of weight  (i= \& I=on field name) [required parameter].\\
+\verb|c=|     &: Field name of class  (class information) [required parameter].\\
+\verb|I=|     &: File name of testing data [optional].\\
+\verb|O=|     &: Output file name of testing data [required parameter].\\
+\verb|-c|     &: Execute with ComplementBayes [optional].\\
+\verb|-debug| &: Debug mode (Returns the detailed message in output, current output of work file is not removed).\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection*{Noten1}
+The field names in the training data and the test data must be specified at k=, f=, w=.
+
+\subsection*{Comment}
+
+Na{\"i}ve Bayes model is a probability model based on Bayes' theorem with independence assumptions. 
+Consider the vector with particular features ${\bf w}=(w_1,w_2,\cdots,w_n)^\top$ where the appearance of the feature is represented by the value $w_i=0,1$.
+The probability $p(c|{\bf w})$ of each class $c$, with the presence of feature expressed in ${\bf w}$ is represented in the Bayes' theorem formula shown in (\ref{eqn:bayes}) .
+
+%----------------------------------
+\begin{equation}
+p(c|{\bf w})=\frac{p({\bf w}|c)p(c)}{p({\bf w})}
+\label{eqn:bayes}
+\end{equation}
+%----------------------------------
+
+The denominator  $p({\bf w})$  is constant regardless of the value of variable $c$. Therefore, looking at the numerator, $p(c)$ is the posterior probability of class $c$. 
+The posterior probability $p(c|{\bf w})$  is updated when this probability of occurrence of the feature vector for the specific class has the likelihood of  $p({\bf w}|c)$.  This refers to the Bayes' Theorem.
+
+If there are more dimensions of ${\bf w}$, it becomes difficult to estimate the joint probability $p({\bf w}|c)$ for a single character. As shown in the formula (\ref{eq:ind}), naive Bayes method calculates $p({\bf w}|c)$, with the naive assumptions that the occurrence of all words is independent of each other.
+\begin{equation}
+p({\bf w} | c)=\prod p(w_i|c)
+\label{eq:ind}
+\end{equation}
+
+From the above, $p(c|{\bf w})$ is represented by the formula (\ref{eqn:bayes2}). In order to build a classifier using Maximum-a-Posterior (MAP) probability decision rule which adopts the most plausible hypothesis, the estimated class ${\hat c}$ can be determined by the formula (\ref{eqn:bayesCal}).
+
+\begin{equation}
+p(c|{\bf w}) \propto \sum_i \ln{p(w_i|c)}
+\label{eqn:bayes2}
+\end{equation}
+%
+\begin{equation}
+{\hat c}=\argmax_{c} \; p(c)\sum_i \ln{p(w_i|c)}
+\label{eqn:bayesCal}
+\end{equation}
+
+When the naive Bayes classifier is applied in practice, words or items are used as  feature vectors. These include cases with frequency information such as occurrences of the number of words and the number of items purchased.
+
+Therefore, assuming that the element $f_i$ of the vector with particular feature vector ${\bf f}$ has a frequency of occurrence with a feature value of $i$, each estimated class ${\hat c}$ is shown in the equation  (\ref{eq:bayesMul}), calculated by multiplying the frequency of likelihood $f_i$. The above is known as Multinomial Na{\"i}ve Bayes model.
+
+
+\begin{equation}
+{\hat c}=\argmax_{c} \; p(c)\sum_i f_i \ln{p(w_i|c})
+\label{eq:bayesMul}
+\end{equation}
+
+\subsubsection*{Problem of Zero Frequency}
+
+If the combination of the class and feature value is not present in the training examples, the probability estimation becomes zero, consequently, the product used for multiplication becomes zero.
+In order to avoid the problem of zero frequency, modify the estimated probability value with smoothing, and adjust the probability values of all combinations so that it will not become zero. In this case, Laplacian smoothing is applied by adding 1 to the number of occurrences to the feature value.
+
+\subsubsection*{Complement Na{\"i}ve Bayes}
+In Naive Bayes classifier, Complement Naive Bayes refers to an extension to learn a the model by using a complementary set that does not belong to any particular class.
+When predicting a class using the vector with features which do not belong to any class,  the probably of the unclassified vector will be assigned to the lowest class. 
+When classifying two values, it is not meaningful since the same result will be returned, however, the effect  is more prominent when there are a lot of class dispersion in a multi-class classification problem. 
+If -c option is specified, it is executed as Complement Na{\"i}ve Bayes.
+
+\subsubsection*{An Example to Determine the Gender Author}
+This example uses the above data to determine the single character gender information contained in the author's proposal submission data.
+
+Table \ref{tbl:inp1} shows the vectors containing the feature "word" in the training data, and build a naive Bayes model to determine the gender as specified in the "class" field, and the objective is to predict whether the class is M or F for each unique id in the validation data in Table \ref{tbl:inp2}. 
+
+When running the command (mnb.rb) below with train.csv and test.csv, 2 files namely out.csv and test\_out.csv will be returned as output. The prediction probabilities of F and M are contained in field names F,M corresponding to each id in out.csv. The class with higher probability value is returned as the predicted class  (predictCls) in the output. 
+
+In this example, class and PredictCls are in complete agreement, thus, the accuracy rate of the training data is 100\%. The resulting naive Bayes model is built as shown in nb\_test\_out.csv, Table \ref{tbl:inp2} shows the predicted class (predictCls) obtained from the feature "word" from each vector. Both vectors with id 3 and 7 has a predicted class as M (Male).  
+
+
+\begin{verbatim}
+------------------------------------------------
+$ more train.csv
+id,word,freq,class
+1,w1,2,M
+1,w2,4,M
+2,w1,1,M
+2,w2,2,M
+2,w3,3,M
+4,w1,3,M
+4,w2,3,M
+4,w3,2,M
+5,w1,1,F
+6,w1,2,F
+6,w2,1,F
+
+$ more test.csv
+id,word,freq,class
+3,w2,8,M
+3,w3,2,M
+7,w1,1,F
+7,w2,3,F
+
+$ mnb.rb i=train.csv I=test.csv O=test_out.csv o=out.csv k=id f=word w=freq c=class
+#MSG# naiveBayes start; 2013/12/31 23:59:59
+#END# nb.rb i=train.csv I=test.csv O=test_out.csv o=out.csv k=id f=word w=freq c=class; 2013/12/31 23:59:59
+
+$ more out.csv 
+id,F,M,class,predictCls
+1,0.4689127516,0.5310872483,M,M
+2,0.4296687087,0.5703312913,M,M
+4,0.4748995053,0.5251004949,M,M
+5,0.5353401796,0.4646598204,F,F
+6,0.5309945758,0.4690054242,F,F
+
+$ more test_out.csv
+id,F,M,predictCls
+3,0.3993866359,0.6006133641,M
+7,0.4451382443,0.5548617557,M
+
+
+------------------------------------------------
+\end{verbatim}
+
+
+%\end{document}
+

@@ -1,0 +1,29 @@
+
+\section{delta : Exclusive-OR operation\label{sect:delta}}
+\subsection*{Format}
+$obj$.delta($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{Description}
+Find out the exclusive-OR (XOR) operation on $\alpha \oplus \beta$ on the itemset $\beta$ from the ZDD object $obj$ which contains $\alpha$ and $zdd1$, and return the result of ZDD object as $zdd2$. 
+
+For example, XOR operations on itemset \verb|abc| and \verb|bcd| are as follows. 
+
+\verb|abc.delta(bcd) = abc|$\oplus$\verb|bcd = ad|
+
+Find out the XOR operation between multiple itemsets. 
+
+\verb|(abc + a).delta(bcd + b) = abc|$\oplus$\verb|bcd + abc|$\oplus$\verb|b + a|$\oplus$\verb|bcd + a|$\oplus$\verb|b|
+
+\verb|                         = ad + ac + abcd + ab|
+
+The weight is computed by expanding the same itemset to multiple instances. 
+
+\verb|(2abc).delta(bcd) = (abc+abc).delta(bcd) = ad + ad = 2ad|
+
+In addition, when $\alpha \oplus \beta$ is changed to $\alpha \cap \beta$ (intersection operation), it becomes delta function. 
+
+\subsection*{Example}
+\input{examples/tex/delta_ex.tex}
+
+\subsection*{See Also}
+

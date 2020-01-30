@@ -1,0 +1,201 @@
+
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+%\usepackage{comment}
+
+\section{mselstr - Select Records Matching Query String\label{sect:mselstr}}
+\index{mselstr@mselstr}
+For records where the values in fields \verb|f=| match with the string specified at \verb|v=| are selected.
+
+%\begin{comment}
+Commonly used examples are shown in \ref{tbl:mselstr_input} - \ref{tbl:mselstr_out2}. 
+In table \ref{tbl:mselstr_out1}, select records where \verb|val| is \verb|"y"| regardless of the value of \verb|key|. 
+In table \ref{tbl:mselstr_out2}, if any of the record contains the value \verb|"x"| in \verb|val|, records with the same key value will be selected.  i.e. all records with value \verb|"a"| in \verb|key| column are selected. Since none of the  records with key value \verb|"b"| contains value \verb|"x"|, none records are selected. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mselstr_input}}
+{\small
+\begin{tabular}{cc}
+\hline
+key & val \\
+\hline
+a & x \\
+a & y \\
+b & y \\
+b & z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{f=val v=y\label{tbl:mselstr_out1}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&y \\
+b&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+\caption{k=key f=val v=x\label{tbl:mselstr_out2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&x \\
+a&y \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Various selection criteria can be carried out with the parameters below.  
+Use \hyperref[sect:msel]{msel} command to build complex conditions using regular expressions and operators which cannot be specified in this command.
+
+\begin{itemize}
+\item \verb|v=| Match any character string from the list of string(s) specified. 
+\item \verb|f=| Match character string from the column(s) specified. 
+\item AND operator can be used to match values multiple fields (\verb|-F| option).
+\item Matching for exact, start, middle or partial string can be specified (\verb|-head,-tail,-sub| option). 
+\item \verb|k=| Select records related to the defined key. 
+\item Select records that matches all conditions by the key field (\verb|-R| option). 
+\end{itemize}
+
+Sample data with same key, containing two records and two columns is shown in (Table\ref{tbl:mselstr_input2}).
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+mselstr k=key f=fld1,fld2 v=s1,s2
+\end{Verbatim}
+Matching criteria without \verb|-R,-F| options are shown in \ref{tbl:mselstr_cond}. 
+
+\begin{table}[htbp]
+\begin{center}
+
+\caption{Input data\label{tbl:mselstr_input2}}
+{\small
+\begin{tabular}{ccc}
+\hline
+$\verb|key|$ & $\verb|fld1|$ & $\verb|fld2|$ \\
+\hline
+k & $v_{a1}$ & $v_{a2}$ \\
+k & $v_{b1}$ & $v_{b2}$ \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Using the input data shown in Table \ref{tbl:mselstr_input2}, the query results of the command 
+mselstr k=key f=fld1,fld2 v=v1,v2 with and without -R and F options differs accordingly.  
+If query matches all conditions, the output will print all rows (2 rows), when there is no matched records, no records will returned. \label{tbl:mselstr_cond}}
+
+{\footnotesize
+\begin{tabular}{ccl}
+\hline
+\verb|-F| & \verb|-R| & Matching conditions  \\
+\hline
+   &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F &    &
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) or
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+   & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  or
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  or
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+-F & -R & 
+(($v_{a1}$ \verb|==| s1 or $v_{a1}$ \verb|==| s2)  and
+ ($v_{a2}$ \verb|==| s1 or $v_{a2}$ \verb|==| s2)) and
+(($v_{b1}$ \verb|==| s1 or $v_{b1}$ \verb|==| s2)  and
+ ($v_{b2}$ \verb|==| s1 or $v_{b2}$ \verb|==| s2)) \\
+\hline
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+%\end{comment}
+
+\subsection*{Format}
+\verb|mselstr f= v= [k=]  [u=] [-F] [-r] [-R] [-sub] [-head] [-tail] [-W]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Target field name for query (allow multiple fields).\\
+\verb|v=|    & Select rows(s) where the string specified at \verb|f=| parameter matches any of the specified string(s) (allow multiple fields). \\
+\verb|k=|    & Select records based on the defined key field  (allow multiple fields).  \\
+\verb|o=|    & Print record(s) matching query to specified output file.   \\
+\verb|u=|    &  Print unmatched record(s) to this output file. \\
+\verb|-F|    &  Match all character strings specified at the \verb|f=| parameter. \\
+\verb|-r|    & Reverse selection \\
+             & Remove record matching records. \\
+\verb|-R|    & Returns rows that match all character strings specified at the \verb|k=| parameter.\\
+\verb|-sub|  & Search for substring that matches the part of the string pattern.  \\
+             & Select records based on substring match specified in \verb|v=| parameter, \\	
+             & against the string specified column(s) at the \verb|f=| parameter. \\
+\verb|-head| & Match beginning of string \\
+\verb|-tail| & Match end of string  \\
+\verb|-W|    & Match a sequence of wide-character substring when \verb|-sub|,\verb|-head|,\verb|-tail| option is specified. \\
+
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mselstr_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:msel] {msel} : Select records with more complex criteria. 
+
+\hyperref[sect:mcommon] {mcommon} : When selecting a large number of target strings use \verb|mcommon| command. 
+
+
+%\end{document}

@@ -1,0 +1,177 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvsort sorting vectors }
+This command sort series of vectors. 
+The items in Table \ref{tbl:input} shows multiple character strings separated by space. 
+Table \ref{tbl:input}〜\ref{tbl:out3} highlight examples sorting vectors. In Table  \ref{tbl:out1}, character strings are arranged in ascending order by default. The character strings can be sorted in ascending order by including \verb|n| after \verb|%| behind an item name (see Table \ref{tbl:out2}), and in reverse order by specifying \verb|r| behind an item name (Table \ref{tbl:out3}).  
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lrrr}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&2 1 13 \\
+2&4 5 2 5 \\
+3&112 14 \\
+4&5 31 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Basic usage: Sort character string elements in vector in ascending order. 
+\label{tbl:out1}}
+\verb|vf=items| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 13 2 \\
+2&2 4 5 5 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Sort numerical in ascending order. 
+\label{tbl:out2}}
+\verb|vf=items%n| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&1 2 13 \\
+2&2 4 5 5 \\
+3&14 112 \\
+4&5 31 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\caption{Sort numerical in descending order. 
+\label{tbl:out3}}
+\verb|vf=items%nr| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&13 2 \\
+2&5 5 4 2 \\
+3&112 14 \\
+4&31 5 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{format}
+\verb|mvsort vf= [-r] [-n]|
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=|   &  Specify the field name(s) of vectors for sorting. Multiple fields can be specified.【required parameter】\\
+             & Add \verb|n%| after field name to sort in ascending numerical order. \\
+             & Add \verb|r%| after field name to sort in reverse order. \\
+             & Add both \verb|`n' and `r'| after field name to sort in descending numerical order. \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Sort multiple vectors  }
+Sort item1 data series in ascending order and item2 in numerical ascending order.   
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2
+b a c,10 2
+c c,2 5 3
+e a a,1
+
+$ mvsort vf=items1%r,items2%n i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items1,items2
+c b a,2 10
+c c,2 3 5
+e a a,1
+------------------------------------------------
+\end{verbatim}
+
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mvselstr.pdf}{mvselstr} : select a vector element 
+\end{itemize}
+
+\end{document}

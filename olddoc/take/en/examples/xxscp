@@ -1,0 +1,4 @@
+more clique.csv
+mclique2g.rb i=clique.csv eo=edge.csv no=node.csv id=id f=node
+more edge.csv
+more node.csv

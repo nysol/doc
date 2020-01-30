@@ -1,0 +1,313 @@
+
+%\begin{document}
+
+\section{Mコマンドとは\label{sect:whatis}}
+Mコマンド(MCMDとも表記する)とは、大規模表構造データ(CSV)を高速に処理する目的で開発されたコマンド群である。
+MコマンドのMは、発案者である松田康之氏のイニシャルに拠っている。
+Mコマンドは、単一の機能(例えば、並べ替えや表の結合など)に特化したコマンドを約80種類提供している。
+全てのコマンドは共通して、標準入力からCSVデータを読み込み、標準出力に結果を書き込むだけの非常にシンプルな処理方式に従っている。
+そして単一の機能を持ったコマンドをパイプによって接続することで多様な処理を実現する。
+Mコマンドを使えば、標準的なPCであっても、数億件規模のデータ処理が可能である。
+Mコマンドの基本的な利用方法の習得にはさほど時間は必要とせず、集中的に取り組めば数週間でかなり自由にデータ加工ができるようになる。
+%Mコマンド(MCMDとも表記する)とは、大規模表構造データ(CSV)を高速に処理する目的で開発されたコマンド群である。
+%その起源は、1990年代初頭にまで遡ることができ、ある大企業で実施された大規模システム開発プロジェクトにおいて
+%松田康之氏が発案したものであり、MコマンドのMは同氏のイニシャルに拠っている。
+%同氏の発案は、単なる技術論ではなく、ビジネスにおいて「情報」システムとはどうあるべきかを根本的に問うたものであり、
+%これまでに我々が西洋から学んできた方法論とは全く異質のシステム設計思想と言ってもよいであろう。
+%その思想的内容については別稿に譲るとして、その技術内容においては、
+%現在のビッグデータ処理技術に酷似していたことは書き留めておく。
+
+%それはさておき、Mコマンドは、単一の機能(例えば、並べ替えや表の結合など)に特化したコマンドを約70種類提供している。
+%全てのコマンドは共通して、標準入力からCSVデータを読み込み、標準出力に結果を書き込むだけの非常にシンプルな処理方式に従っている。
+%そして単一の機能を持ったコマンドを「パイプ」と呼ばれるプロセス間通信を使って接続することで多様な処理を実現する。
+%これらの特徴は、まさにUNIXの思想であり、MコマンドとはUNIXコマンドだけで情報システムを構築しようとするものである。
+
+%Mコマンドを使えば、標準的なPCであっても、数億件規模のデータ処理が可能であり、
+%Mコマンドの習得にはさほど時間は必要としない。
+%これまでにも文系の学部生に簡単な指導を行ってきたが、集中的に取り組めば数週間で、
+%かなり自由にデータ加工ができるようになる。
+
+\newpage
+\section{インストール\label{sect:install}}
+\subsection{要件}
+MCMDは、Linux, MacOSX, Bash on Ubuntu on Windowsといった、
+代表的なOSでの動作確認はとれている。
+その他にも、UNIX系のOSであれば上記のツールさえあれば利用できるであろう。
+以下に動作が確認できているOSおよびそのバージョン一覧を示す。
+\begin{itemize}
+\item MacOS 10.9.5(Marverics)以上
+\item CentOS 7.3 1611
+\item Ubuntu 16.04 LTS
+\item Bash on Ubuntu on Windows(Windows 10)
+\end{itemize}
+
+ソースコードのコンパイルには以下に示すツールが必要となる。
+\begin{itemize}
+\item c++コンパイラ
+\item autotools
+\item boost C++ Library
+\item lib2xml Library
+\end{itemize}
+
+%\subsection{ダウンロード}
+%\subsubsection*{ZIPから}
+%\begin{itemize}
+%\item ソースコード(ZIP)をhttps://github.com/nysol/mcmdからダウンロードする。
+%\item アーカイブを展開し、ソースコードのディレクトリに移動する。
+%\end{itemize}
+%\subsubsection*{gitから}
+%\begin{itemize}
+%\item MCMDのリポジトリをクローンする git clone https://github.com/nysol/mcmd.git
+%\item mcmdディレクトリに移動する。
+%\end{itemize}
+
+\subsection{コンパイル＆インストール}
+\subsubsection{MacOS X\\} % \\が無いと改行が小さすぎる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## autotoolsとboostを導入していなければbrew等でインストールする。
+$ brew install autoconf
+$ brew install automake
+$ brew install libtool
+$ brew install boost
+
+## ソースのダウンロード
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd
+
+## コンパイルとインストール
+$ aclocal
+$ autoreconf -i
+$ automake --add-mising
+$ ./configure
+$ make
+$ sudo make install
+\end{Verbatim}
+
+\subsubsection{CentOS\\}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## autotools,boost,libxml2を導入していなければyum等でインストールする。
+$ sudo yum update
+$ sudo yum groupinstall "Development Tools"
+$ sudo yum install boost-devel
+$ sudo yum install libxml2-devel
+
+## ソースのダウンロード
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd
+
+## コンパイルとインストール
+$ aclocal
+$ autoreconf -i
+$ ./configure
+$ make
+$ sudo make install
+\end{Verbatim}
+
+\subsubsection{Ubuntu,Bash on Windows\\}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+## autotools,boost,libxml2など必要なツールを導入していなければapt-get等でインストールする。
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install build-essential
+$ sudo apt-get install libtool
+$ sudo apt-get install automake
+$ sudo apt-get install git
+$ sudo apt-get install libboost-all-dev
+$ sudo apt-get install libxml2-dev
+
+## ソースのダウンロード
+$ git clone https://github.com/nysol/mcmd.git
+$ cd mcmd/
+
+## コンパイルとインストール
+$ aclocal
+$ autoreconf -i
+$ ./configure 
+$ make
+$ sudo make install
+
+# 共有ライブラリのパス設定
+# 起動時に毎回設定するのであれば.bash_profileに記載しておく。
+$ export LD_LIBRARY_PATH=/usr/local/lib
+\end{Verbatim}
+
+\subsection{インストール完了の確認}
+各コマンドの利用方法については\verb|--help|オプションを指定することで簡単なヘルプが表示される(図\ref{fig:abstract3_1})。
+以下のようにコマンドヘルプが表示されたらインストールは完了している。
+Ver.2.4からは\verb|--help|オプションのデフォルトが英語に変更になった為、日本語で出力したい場合は、\verb|--helpl|オプションを指定すると今まで通りに日本語の簡単なヘルプが出力される(図\ref{fig:abstract3_2})。
+また、環境変数に\verb|KG_LOCALHELP=true|を設定しておくと、\verb|--help|で日本語を出力をデフォルトにすることができる。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --help
+
+MCUT - SELECT COLUMN
+
+Extract the specified column(s). The specified column is removed with -r
+option.
+
+Format
+
+mcut f= [-r] [-nfni] [i=] [o=] [-assert_diffSize] [-assert_nullin]
+[-nfn] [-nfno] [-x] [-q] [tmpPath=] [--help] [--helpl] [--version]
+                         :
+                         :
+
+\end{Verbatim}
+\caption{ヘルプの英語表示(デフォルト）\label{fig:abstract3_1}}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --helpl
+
+mcut 項目の選択
+===============
+指定した項目を選択する。
+-rオプションを付けると、指定した項目を削除する。
+
+書式
+----
+mcut f= [-r] [i=] [o=] [-nfn] [-nfno] [-x] [--help]  [--helpl] [--version]  
+
+パラメータ
+----------
+  f=      抜き出す項目名
+          項目名をコロンで区切ることで、出力項目名を変更することができる。
+          ex. f=a:A,b:B
+  -r      項目削除スイッチ
+          f=で指定した項目を削除し、それ以外の項目が抜き出される。
+  -nfni   入力データの１行目を項目名行とみなさない。よって項目番号で指定しなければならない。
+          以下のように、新項目名を組み合わせて指定することで項目名行を追加出力することが可能となる。
+          例）f=0:日付,2:店,3:数量
+                  :
+                  :
+
+\end{Verbatim}
+\caption{ヘルプの日本語表示\label{fig:abstract3_2}}
+\end{figure}
+
+また\verb|--version|にてMCMDのバージョンが表示される(図\ref{fig:abstract3_3})。
+このバージョンはコマンド毎のバージョンではなく、MCMD全体のバージョンであることに注意する。
+したがって、全てのコマンドで同じバージョンが表示される。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --version
+lib Version 1:1:0:0
+\end{Verbatim}
+\caption{バージョンの表示\label{fig:abstract3_3}}
+\end{figure}
+
+\subsection{インストールが出来ない場合の対処法}
+AnacondaをインストールしたOSでは一部、インストールが出来ない問題が確認されおり、
+コマンド検索PATHの順序を変更することでエラーを回避できることが確認されている。
+変更を行った後、各OSで記載されている手順に従ってインストールする。
+
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# ~/.bash_profileのPATH設定を以下の通り修正する。
+# 修正前）
+export PATH="/Users/username/anaconda/bin:$PATH"
+
+# 修正後）
+export PATH="$PATH:/Users/username/anaconda/bin"
+\end{Verbatim}
+\end{figure}
+
+\section{はじめよう\label{sect:helloWorld}}
+簡単な例から始めよう。
+まずはCSVデータがなければ始まらない。
+MCMDでは、多くの種類のデータセットを出力するための\verb|mdata|コマンドを備えている。
+図\ref{fig:abstract0_1}にその利用例を示す。
+\verb|$|で始まる行はコマンドラインでの入力を表し、その下に実行結果が示されている。
+\verb|mdata|コマンドは、データセットの種類を引数にとり、標準出力に内容を出力する(詳細は\hyperref[sect:mdata]{mdataの章}を参照)。 
+以下の例では、標準出力の内容をリダイレクトして\verb|man0.csv|という名前のファイルに出力している。
+
+%簡単な例から始めよう。
+%MCMDを\hyperref[sect:install]{インストール}しているのであれば、例に従ってコマンドラインに入力することで動作を確認してもらいたい。
+%まずはデータがなければ始まらない。
+%MCMDでは、多くの種類のデータセットを出力するための\verb|mdata|コマンドを備えている。
+%このコマンドには以下の例で利用する入力データやチュートリアルのデータを生成してくれる。
+%図\ref{fig:abstract0_1}にその利用例を示す。
+%\verb|$|で始まる行はコマンドラインでの入力を表し、その下に実行結果が示されている。
+%\verb|mdata|コマンドは、データセットの種類を引数にとり、標準出力に内容を出力する(詳細は\hyperref[sect:mdata]{mdataの章}を参照)。
+%以下の例では、標準出力の内容をリダイレクトして\verb|man0.csv|という名前のファイルに出力している。
+
+\input{examples/tex/abstract0_fig.tex}
+
+MCMDの全てのコマンドは、終了すれば\verb|#END#|から始まるメッセージを出力する
+（エラー終了すると\verb|#ERROR#|から始まるメッセージが出力される）。
+また、\verb|more|はファイルの内容をページ送りで表示するコマンドであり、データの内容を示すために利用している。
+本マニュアルで用いる例は、全て以上の形式に従って記述されている。
+
+%MCMDの全てのコマンドは、終了すれば\verb|#END#|から始まるメッセージを出力する。
+%また、\verb|more|はファイルの内容をページ送りで表示するコマンドであり、データの内容を示すために利用している。
+%本マニュアルで用いる例は、全て以上の形式に従って記述されている。
+
+\verb|man0.csv|データを利用して、金額を顧客別に合計する例を図\ref{fig:abstract1_1}に示す。
+\verb|msum|コマンドでは、\verb|man0.csv|データを読み込み(\verb|i=|)、
+顧客項目を集計キーにして(\verb|k=|)、金額項目を合計し(\verb|f=|)、
+結果を出力ファイル\verb|output.csv|に書き込んでいる(\verb|o=|)。
+出力されたCSVの項目名「顧客」に\verb|%0|が付いているが、
+これは\verb|msum|が顧客項目で並べ替えたことを示すものであり項目名の一部ではなく、
+今のところは特に気にする必要はない。
+
+%図\ref{fig:abstract0_1}で生成された\verb|man0.csv|データを利用して、金額を顧客別に合計する例を図\ref{fig:abstract1_1}に示す。
+%入力データは、「顧客」と「金額」の2つの項目の5行から構成されるCSVデータである。
+%このデータを\verb|msortf|コマンドで顧客別に並べ変え、その結果は、パイプ(\verb/"|"/)で連結されて
+%次の\verb|msum|コマンドへと送られる。
+%\verb|msum|コマンドでは、顧客項目を集計キーにして、金額項目を合計し、
+%結果を出力ファイル\verb|output.csv|に書き込んでいる。
+%Mコマンドは、その処理を終了するとメッセージを出力する。
+%正常終了すると\verb|#END#|から始まるメッセージが出力され、
+%エラー終了すると\verb|#ERROR#|から始まるメッセージが出力される。
+
+\input{examples/tex/abstract1_fig.tex}
+
+もう少し複雑な例を示しておこう。
+図\ref{fig:abstract2_1}に示された例では、顧客別にどのような商品を何個購入したか、マトリックス形式で集計する。
+\verb|#|で始まる行はコメントであり入力する必要はない。
+
+%もう少し複雑な例を示しておこう。
+%図\ref{fig:abstract2_1}に示された例では、顧客別にどのような商品を何個購入したか、マトリックス形式で集計する。
+%わかりやすさのために、各コマンドはパイプで接続せず、それぞれファイルに書きだし
+%その内容を示している。\verb|#|で始める行はコメントである。
+
+\hyperref[sect:mcut]{mcut}コマンドは指定した項目を切り出すだけの機能を持つコマンドで、
+\hyperref[sect:mcount]{mcount}コマンドは行数をカウントするコマンドである。
+そして\hyperref[sect:mcross]{mcross}コマンドはクロス集計を行う。
+ここでは、各コマンドの詳細な動きよりも、入力データが各コマンドによってどのように加工されていくかその流れを確認されたい。
+以上のように、Mコマンドでは80種類以上のコマンドを組み合わせる事で多様なデータ加工を実現するのである。
+
+\input{examples/tex/abstract2_fig.tex}
+
+以上の例では、各コマンドの結果をワークファイルファイル(\verb|xxa,xxb,xxc|)に出力したが、
+パイプ(\verb/|/)で連結することで、以下のようにワークファイルを使うことなく実行することも可能である(図\ref{fig:abstract2-1_1})。
+パイプにより、あるコマンドの出力結果は次のコマンドの入力へと次々に受け渡されていく。
+
+% 以下、パイプで連結したコマンドの例がはみ出るので、examples/tex/abstract2-1_fig.texの内容を貼り付ける。
+%\input{examples/tex/abstract2-1_fig.tex}
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdata -man1 | mcut f=顧客,商品 | mcount k=顧客,商品 a=件数 | mcross k=顧客 s=商品 f=件数 v=0 |
+mcut f=fld -r o=output.csv
+#END# mdata -man1
+#END# kgcut f=顧客,商品
+#END# kgcount a=件数 k=顧客,商品
+#END# kgcross f=件数 k=顧客 s=商品 v=0
+#END# kgcut -r f=fld o=output.csv
+$ more output.csv
+顧客%0,a,c,d,e,f
+A,2,1,0,1,0
+B,1,0,2,0,1
+\end{Verbatim}
+\caption{パイプで連結した例\label{fig:abstract2-1_1}}
+\end{figure}
+
+%\end{document}

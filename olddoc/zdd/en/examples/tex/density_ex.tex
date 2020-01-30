@@ -1,0 +1,34 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+
+# Total number of combinations using 3 items a,b,c is eight.
+# All combinations are stored in F in the expression below, with a density of 1.0.
+> f=(a+1)*(b+1)*(c+1)
+> f.show
+ a b c + a b + a c + a + b c + b + c + 1
+> puts f.density
+1.0
+
+# In the following, one set of combination (a b) is stored in F.
+# The density becomes 1/8=0.125.f=a*b
+> f.show
+ a b c + a b + a c + a + b c + b + c + 1
+
+> puts f.density
+1.0
+
+# When three sets of combinations (a b,a,b) are stored in F, the density becomes 3/8=0.375.
+> f+=a
+> f+=b
+> f.show
+ a b c + a b + a c + 2 a + b c + 2 b + c + 1
+> puts f.density
+1.0
+\end{Verbatim}

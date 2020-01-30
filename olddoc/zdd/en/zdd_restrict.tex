@@ -1,0 +1,20 @@
+
+\section{restrict : Selection of superset\label{sect:restrict}}
+\subsection*{Format}
+$obj$.restrict($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{Description}
+For itemsets included in $obj$, select the term as long as $zdd1$ contains at least one itemset. 
+
+More precisely, $\alpha_i$ is the set of items that make up $obj$ where the weight of term $T_i$ is removed,   
+assuming that $\beta_j$ represents the same itemsets in $zdd1$,  
+if at least one $j$ satisfy $\alpha_i \supseteq \beta_j$, select term $T_i$  that corresponds to $\alpha_i$ from $obj$.
+
+In relation, the conditional function $\alpha_i \supseteq \beta_j$ is changed to $\alpha_i \subseteq \beta_j$ to become 
+\hyperref[sect:permit]{permit} function. 
+
+\subsection*{Example}
+\input{examples/tex/restrict_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:permit]{permit} : Selection of subset

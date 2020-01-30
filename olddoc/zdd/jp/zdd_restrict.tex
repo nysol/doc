@@ -1,0 +1,18 @@
+
+\section{restrict : 上位集合の選択\label{sect:restrict}}
+\subsection*{書式}
+$obj$.restrict($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{説明}
+$obj$に含まれるアイテム集合について、$zdd1$中の少なくとも1つのアイテム集合を包含していれば、その項を選択する。
+より正確には、$obj$を構成するある項$T_i$から重みを省いたアイテム集合を$\alpha_i$、
+同じく$zdd1$のアイテム集合を$\beta_j$とすると、
+$\alpha_i \supseteq \beta_j$を満たすような$j$が少なくとも一つあれば、$\alpha_i$に対応する項$T_i$を$obj$から選択する。
+ちなみに、条件式$\alpha_i \supseteq \beta_j$を$\alpha_i \subseteq \beta_j$に変えれば
+\hyperref[sect:permit]{permit}関数となる。
+
+\subsection*{例}
+\input{examples/tex/restrict_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:permit]{permit} : 部分集合の選択

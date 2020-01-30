@@ -1,0 +1,91 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcount},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mcount (Return the number of rows) command}
+Count the number of rows and store the data in a new column defined in "a =" parameter.
+
+\subsection*{Format}
+mcount a= [k=] [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}]  [\href{run:option.pdf}{-x}]  [\href{run:option.pdf}{i=}] [\href{run:option.pdf}{o=}] [--help]\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & New column name  【required parameter】 \\
+& Specify the new field name to store the count data.\\
+& This parameter is not required when x,nfn option is specified.\\
+\verb|k=|    & Key item(s) (Multiple keys can be specified.)\\
+& Count the number of instances for incremental rows based on the key field(s) defined.  \\
+& ※Note: Sort the data by key field(s) as the unit of counting specified in the "k =" parameter prior to the command. \\
+& Use the x,nfn option to specify the item number (0〜).\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Count the number of customers by date. Store the count data in a new new column as "number of customers".}
+(Note) The data is sorted by the key field \emph{date} beforehand. Field name(s) with spaces should be enclosed with double quotes. 
+
+\begin{verbatim}
+------------------------------------------------
+# input file(dat.csv)
+date, customer
+20090109,A
+20090109,B
+20090109,C
+20090110,D
+20090110,E
+
+$ mcount k="date" a="number of customer" i=dat.csv o=rsl.csv
+
+# output file(rsl.csv)
+date, customer,number of customer
+20090109,C,3
+20090110,E,2
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Related command}
+\noindent
+
+
+\end{document}

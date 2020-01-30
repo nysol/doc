@@ -1,0 +1,16 @@
+
+%\begin{document}
+
+\section{berrand Bernoulli random numbers\label{sect:berrand}}
+\index{berrand@berrand}
+Format: berrand(probability[, random number seed])
+
+This command generates random numbers for $x$ at the specified probability $p$ regarding Bernoulli distribution $f(x) = px(1p)1xx = 0,1$. This function returns values of a logical type where $x=0$ is false and $x=1$ is true. The probability $p$ can be specified only as a constant, and no fieldname can be specified. 
+From the same random number seed, random numbers of the same series are generated. The range of the specifiable random number seeds is -2147483648 to +2147483647.
+When the random number seed is omitted, a different random number seed is used according to the time (in units of 1/1000 sec).
+Random number generation is based on the Mersenne-Twister scheme (\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{original author’s page},\href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boost library}).
+
+\subsection*{Examples}
+\input{examples/tex/func_berrand_ex}
+
+%\end{document}

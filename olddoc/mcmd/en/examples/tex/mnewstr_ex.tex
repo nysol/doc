@@ -1,0 +1,16 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate a new dataset with characters strings \verb|custNo| and \verb|A0001| printed in 5 rows, and name the fields as \verb|attribute| and \verb|code| respectively.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewstr a=attribute,code v=custNo,A0001 l=5 o=rsl1.csv
+#END# kgnewstr a=attribute,code l=5 o=rsl1.csv v=custNo,A0001
+$ more rsl1.csv
+attribute,code
+custNo,A0001
+custNo,A0001
+custNo,A0001
+custNo,A0001
+custNo,A0001
+\end{Verbatim}

@@ -1,0 +1,48 @@
+\subsubsection*{Example 1: Basic Example}
+
+By specifying "quantity:unit sales", the field name is converted from “quantity” to “unit sales” in the output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+brand,quantity
+A,10
+B,20
+C,30
+D,40
+$ mcut f=brand,quantity:salesquantity i=dat1.csv o=rsl1.csv
+#END# kgcut f=brand,quantity:salesquantity i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+brand,salesquantity
+A,10
+B,20
+C,30
+D,40
+\end{Verbatim}
+\subsubsection*{Example 2: Add field name}
+
+The maccum command accumulates the values in the "quantity" field, and add the field name "cumulative quantity" in the output results. If the parameter is specified as "f=quantity", the field name of the cumulative result will remain as "quantity", thus results in error because the same field name “quantity” exists in the output. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ maccum f=quantity:accumulationquantity i=dat1.csv o=rsl2.csv
+#ERROR# parameter s= is mandatory without -q,-nfn (kgaccum)
+$ more rsl2.csv
+$ maccum f=quantity i=dat1.csv o=rsl2.csv
+#ERROR# parameter s= is mandatory without -q,-nfn (kgaccum)
+\end{Verbatim}
+\subsubsection*{Example 3: Mixing field name and field number}
+
+The field name and field number can be specified at the same time.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=0,1:salesquantity -x i=dat1.csv o=rsl3.csv
+#END# kgcut -x f=0,1:salesquantity i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+brand,salesquantity
+A,10
+B,20
+C,30
+D,40
+\end{Verbatim}

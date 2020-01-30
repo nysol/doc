@@ -1,0 +1,25 @@
+
+%\begin{document}
+
+\section{dist - Distance\label{sect:dist}}
+\index{dist@dist}
+
+Format: dist(type,$num_1,num_2,\cdots,n_k,num_{k+1},num_{k+2},\cdots,num_{2k}$)
+
+Compute the distance between two dimension vectors ($num_1,num_2,\cdots,n_k),(num_{k+1},num_{k+2},\cdots,num_{2k}$). Refer to \verb|msim| for detailed definitions.
+
+
+\begin{itemize}
+\item \verb|euclid|: Euclidean distance 
+\item \verb|cityblock|: City Block distance 
+\item \verb|hamming|: Hamming distance
+\end{itemize}
+
+
+Hamming distance must be specified in character string format(refer to the example below). 
+
+\subsection*{Examples}
+\input{examples/tex/func_dist_ex}
+
+%\end{document}
+

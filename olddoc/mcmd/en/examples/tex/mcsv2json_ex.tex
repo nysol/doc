@@ -1,0 +1,67 @@
+\subsubsection*{Example 1: Example 1: Outputting arrays}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ mcsv2json f=v1,v2 i=dat1.csv
+[["1","a"],["2","b"],["3","c"],["4","d"],["5","e"]]
+#END# kgcsv2json f=v1,v2 i=dat1.csv
+\end{Verbatim}
+\subsubsection*{Example 2: Example 2: Outputting objects (key-value pairs)}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json h=v1,v2 i=dat1.csv
+[{"v1":"1","v2":"a"},{"v1":"2","v2":"b"},{"v1":"3","v2":"c"},{"v1":"4","v2":"d"},{"v1":"5","v2":"e"}]
+#END# kgcsv2json h=v1,v2 i=dat1.csv
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Outputting objects according to field specification}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json p=v2:v1 i=dat1.csv
+[{"a":"1"},{"b":"2"},{"c":"3"},{"d":"4"},{"e":"5"}]
+#END# kgcsv2json i=dat1.csv p=v2:v1
+\end{Verbatim}
+\subsubsection*{Example 4: Example 4: Specifying a key field}
+
+The three rows whose \verb|key1| field is \verb|A| are output as a single array. Then, the two rows whose \verb|key1| field is \verb|B| are output as a single array.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json k=key1 f=v1 i=dat1.csv
+[[["1"],["2"],["3"]],
+[["4"],["5"]]]
+#END# kgcsv2json f=v1 i=dat1.csv k=key1
+\end{Verbatim}
+\subsubsection*{Example 5: Example 5: Nesting key fields}
+
+One row where \verb|key1=A| and \verb|key2=X| is output as a single array, two rows where \verb|key1=A| and \verb|key2=Y| are output as a single array, and the two arrays (that is, rows where \verb|key1=A|) are bundled as a single array.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json k=key1,key2 f=v1 i=dat1.csv
+[[[["1"]],
+[["2"],["3"]]],
+[[["4"]],
+[["5"]]]]
+#END# kgcsv2json f=v1 i=dat1.csv k=key1,key2
+\end{Verbatim}
+\subsubsection*{Example 6: Example 6: Outputting rows flatly without bundling them as an array}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcsv2json f=v1,v2 -flat i=dat1.csv
+["1","a","2","b","3","c","4","d","5","e"]
+#END# kgcsv2json -flat f=v1,v2 i=dat1.csv
+\end{Verbatim}

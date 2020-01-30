@@ -1,0 +1,81 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mnrjoin 参照ファイルの複数範囲条件による自然結合\label{sect:mnrjoin}}
+\index{mnrjoin@mnrjoin}
+範囲により参照ファイルの項目を結合(join)する。
+\verb|r=|パラメータで指定した項目値が、\verb|m=|パラメータで指定した参照ファイルの
+\verb|R=|パラメータで指定した2項目の値の範囲条件(項目1以上項目2未満)に
+マッチすれば\verb|f=|パラメータの項目を結合する。
+マッチする行が複数あれば、それらの行全てが出力され、ちょうど自然結合のような動きをする。
+範囲比較される値は、デフォルトで文字列と見なされる。
+数値として処理したい場合は\verb|r=|パラメータの項目名のあとに\%nをつける。
+
+\subsection*{書式}
+\verb/mnrjoin  R= r= [k=] [K=] [f=] [-n] [-N] m=|/ 
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & 結合する参照ファイル上の項目名リスト(複数項目指定可)を指定する。\\
+             & 省略するとK=で指定された項目以外の項目を全て結合する。\\
+\verb|m=|    & 参照ファイル名を指定する。\\
+             & このパラメータが省略された時には標準入力が用いられる。(\verb|i=|指定ありの場合)\\
+%\verb|R=|    & 範囲項目名リスト(二項目限定)【\hyperref[sect:option_k]{結合キーブレイク処理}】\\
+\verb|R=|    & 範囲項目名リスト(二項目限定)\\
+             & 参照ファイル上の範囲項目名(start,end)を指定する。\\
+             & 第一項目のNULL値は無限小，第二項目のNULL値は無限大として扱われる。\\
+%\verb|r=|    & 範囲比較される項目名[\%{n}]【\hyperref[sect:option_k]{結合キーブレイク処理}】\\
+\verb|r=|    & 範囲比較される項目名[\%{n}]\\
+             & 入力ファイル上の項目名を指定する。\\
+             & 数値として処理したい場合は\verb|r=|パラメータの項目名のあとに\%nをつける。\\
+\verb|k=|    & 入力データ上の突き合わせる項目名リスト(複数項目指定可)\\
+             & ここで指定した入力データの項目と\verb|K=|パラメータで指定された参照データの項目が同じ行の項目結合が行われる。\\
+%             & 事前に\verb|k=|パラメータで指定する項目順に並べ替えておく必要がある。\\
+\verb|K=|    & 参照データ上の突き合わせる項目名リスト(複数項目指定可)\\
+             & ここで指定した参照データの項目と\verb|k=|パラメータで指定された入力データの項目が同じ行の項目結合が行われる。\\
+             & 参照データ上に\verb|k=|パラメータで指定した入力データ上の項目と同名の項目が存在する場合は指定する必要はない。\\
+\verb|-n|    & 参照データにない入力データをNULL値として出力するフラグ。\\
+\verb|-N|    & 入力データにない参照データをNULL値として出力するフラグ。\\
+\end{tabular} 
+}
+\end{table} 
+
+%\subsection*{並べ替え条件}
+%r=,R=の項目について事前に並べ替えておく必要がある。
+%ただし、数値として範囲比較して結合するのであれば、r=,R=で指定した何れの項目も数値昇順で並べ替えなければならない。
+%k=,K=を指定するのであれば、
+%それぞれのパラメータで指定した項目リストで文字列昇順で並べ替えておく必要がある。
+
+例えば、パラメータを\verb|k=key K=Key r=val%n R=range i=dat.csv m=ref.csv|と指定するのであれば、
+\verb|dat.csv|データは、\verb|msortf f=key,val%n|の条件で、また
+\verb|ref.csv|データは、\verb|msortf f=Key,range%n|の条件によって並べ替えておかなければならない。
+
+\subsection*{利用例}
+\input{examples/tex/mnrjoin_ex.tex}
+\subsection*{関連コマンド}
+\hyperref[sect:mrjoin] {mrjoin} : 参照データの結合キー(\verb|K=|項目)に重複がなければ\verb|mrjoin|を使う。
+
+%\end{document}

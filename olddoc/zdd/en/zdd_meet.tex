@@ -1,0 +1,37 @@
+
+\section{meet : Intersection operation\label{sect:meet}}
+\subsection*{Format}
+$obj$.meet($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{Description}
+Find out the intersection $\alpha \cap \beta$ of itemsets between itemsets $\alpha$ in $obj$ and itemsets $\beta$ in $zdd1$, and return as ZDD object $zdd2$. 
+
+For example, the intersection of itemset \verb|abc| and \verb|bcd| are as follows. 
+\begin{eqnarray*}
+%A &=& \frac{B}{C} \\
+%&=& B/C \\
+%&=& D
+\textrm{abc.meet(bcd)} = \textrm{abc} \cap \textrm{bcd} = \textrm{bc}
+\end{eqnarray*}
+
+Find out the intersection of all combinations on multiple operations across itemsets.   \begin{eqnarray*}
+\textrm{(abc + a).meet(bcd + b)} &=&
+\textrm{abc} \cap \textrm{bcd} + \textrm{abc} \cap \textrm{b} +
+\textrm{a} \cap \textrm{bcd} + \textrm{a} \cap \textrm{b}\\
+&=& \textrm{bc}  + \textrm{b} + 1 + 1\\
+&=& \textrm{bc} + \textrm{b} + 2\\
+\end{eqnarray*}
+
+Weight is computed by expanding the same itemset to multiple instances. 
+
+In addition, when $\alpha \cap \beta$ is changed to $\alpha \oplus \beta$ (exclusive OR operation), it becomes delta function. 
+
+\begin{eqnarray*}
+\textrm{(2abc).meet(bcd)} = \textrm{(abc+abc).meet(bcd)} = \textrm{bc + bc = 2bc}
+\end{eqnarray*}
+
+\subsection*{Example}
+\input{examples/tex/meet_ex.tex}
+
+\subsection*{Related}
+\hyperref[sect:delta]{delta} : Delta operation

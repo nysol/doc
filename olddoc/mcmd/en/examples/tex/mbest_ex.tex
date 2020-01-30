@@ -1,0 +1,73 @@
+\subsubsection*{Example 1: Basic Example}
+
+This example assumed that the "quantity" and "amount" fields are sorted from the largest value (descending order).
+Records are selected from the first row (line 0) by default if \verb|from=|,\verb|to=|,\verb|size=| parameters are not specified.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+Customer,Quantity,Amount
+A,20,5200 
+B,18,4000   
+C,15,3500 
+D,10,2000 
+E,3,800 
+$ mbest s=Quantity%nr,Amount%nr i=dat1.csv o=rsl1.csv
+#END# kgbest i=dat1.csv o=rsl1.csv s=Quantity%nr,Amount%nr
+$ more rsl1.csv
+Customer,Quantity%0nr,Amount%1nr
+A,20,5200 
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+After sorting by "customers", select 3 rows from the first row (line 0).
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mbest s=Customer from=0 size=3 i=dat1.csv o=rsl2.csv
+#END# kgbest from=0 i=dat1.csv o=rsl2.csv s=Customer size=3
+$ more rsl2.csv
+Customer%0,Quantity,Amount
+A,20,5200 
+B,18,4000   
+C,15,3500 
+\end{Verbatim}
+\subsubsection*{Example 3: Basic Example 3}
+
+Without sorting (in the original order), select from line 0 to line 1.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mbest -q from=0 to=1 i=dat1.csv o=rsl3.csv
+#END# kgbest -q from=0 i=dat1.csv o=rsl3.csv to=1
+$ more rsl3.csv
+Customer,Quantity,Amount
+A,20,5200 
+B,18,4000   
+\end{Verbatim}
+\subsubsection*{Example 4: Reverse Selection}
+
+Select records other than customers' first visit to store.
+Save the records of customers' first visit to the file \verb|fvd.csv|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+$ mbest s=Customer,Date k=Customer -r u=fvd.csv i=dat2.csv o=rsl4.csv
+#END# kgbest -r i=dat2.csv k=Customer o=rsl4.csv s=Customer,Date u=fvd.csv
+$ more rsl4.csv
+Customer,Date,Amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+$ more fvd.csv
+Customer,Date,Amount
+A,20081201,10
+B,20081002,40
+\end{Verbatim}

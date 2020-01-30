@@ -1,0 +1,65 @@
+
+%\begin{document}
+
+\section{データ型\label{sect:datatype}}
+MCMDで扱うCSVデータはプレーンテキストであり、全てのデータは文字列で表されている。
+よってその文字列をどのようなデータ型として扱うかはコマンドによって決まる。
+例えば、\verb|msum|コマンドで\verb|f=|で指定した項目データは、コマンド内部で文字列から数値へと変換される。
+MCMDで扱うことのできる型は、表\ref{tbl:datatype_types}に示される通り、
+数値型、文字列型、日付型、時刻型、論理型、ベクトル型の6つである。
+
+\begin{table}[!hb]
+\begin{center}
+\caption{MCMDが扱う6つのデータ型\label{tbl:datatype_types}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+データ型  & CSVデータ表記例        & 変換内容 \\ \hline
+数値型    & 10, 2.5, 1.5E+10       & 倍精度実数 \\
+文字列型  & abc, あいう            & 文字列 \\
+日付型    & 20130920               & 日付オブジェクト$^{*1}$(グレゴリオ暦,8桁固定長) \\
+時刻型    & 20130920151154.123456  & 日付オブジェクト$^{*1}$(グレゴリオ暦,8桁固定長) \\
+          &                        & \ \ \ \ +POSIX時刻$^{*2}$(6桁の時分秒+最大小数6桁のマイクロ秒) \\
+          & 151154.123456          & 日付が指定されていない場合は、内部的には本日日付が付加される \\
+論理型    & 1,0                    & "1"を真、"0"を偽のbool値に変換する \\
+ベクトル型& a c b, 1 5 11          & スペースで区切られた文字列を、上記のいずれかのデータ型に変換したもの \\
+\hline
+  \end{tabular}
+\\
+$^{*1}$ boostライブラリのboost::gregorian::dateクラスを利用 \\
+$^{*2}$ boostライブラリのboost::posix\_time::ptimeクラスを利用 \\
+  }
+  \end{center}
+\end{table}
+
+また、表\ref{tbl:datatype_commands}に各データ型として扱う代表的なコマンドを示しておく。
+
+\begin{table}[!hb]
+\begin{center}
+\caption{各データ型を扱う代表的なコマンド\label{tbl:datatype_commands}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+データ型  & コマンド               & 内容 \\ \hline
+数値型    & \hyperref[sect:msum]{msum} & 数値項目の合計計算 \\
+          & \hyperref[sect:msim]{msim} & 2つの項目の類似度計算 \\
+\hline
+文字列型  & \hyperref[sect:mjoin]{mjoin} & 参照ファイルの項目の結合 \\
+          & \hyperref[sect:mcombi]{mcombi} & 組み合せの列挙 \\
+\hline
+日付型    & \hyperref[sect:mcal]{mcal}の\hyperref[sect:age]{age}関数 & 年齢計算 \\
+          & \hyperref[sect:mcal]{mcal}の\hyperref[sect:leapyear]{leapyear}関数 & 閏年の判定 \\
+\hline
+時刻型    & \hyperref[sect:mcal]{mcal}の\hyperref[sect:now]{now}関数 & 現在時刻の出力(秒単位) \\
+          & \hyperref[sect:mcal]{mcal}の\hyperref[sect:unow]{unow}関数 & 現在時刻の出力(マイクロ秒単位) \\
+          & \hyperref[sect:mcal]{mcal}の\hyperref[sect:diff]{diffminute}関数 & 分単位での時刻差の計算 \\
+\hline
+論理型    & \hyperref[sect:mcal]{mcal}の\hyperref[sect:and]{and}関数 & 論理積の計算 \\
+          & \hyperref[sect:mcal]{mcal}の\hyperref[sect:if]{if}関数  & 条件による値の設定 \\
+\hline
+ベクトル型& \hyperref[sect:mvsort]{mvsort}    & ベクトル要素の並べ替え \\
+          & \hyperref[sect:mvuniq]{mvuniq}    & ベクトル要素の単一化 \\
+\hline
+  \end{tabular}
+  }
+  \end{center}
+\end{table}
+

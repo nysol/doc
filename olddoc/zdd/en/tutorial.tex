@@ -1,0 +1,438 @@
+%\documentclass[a4paper]{book}
+%\usepackage{zdd}
+%\begin{document}
+
+\chapter{Tutorial\label{sect:tutorial}}
+
+This tutorial starts with the basic functions of ZDD, followed by an application example on how to solve the N-Queens problem. The examples can be executed with Ruby script or  experimented from command line interactively using irb. This tutorial requires some basic knowledge of Ruby and you should have already installed ZDD Ruby Extension Library. 
+
+\section{Use require method to load ZDD Ruby Extension Library}
+ZDD Ruby Extension Library uses RubyGems package. Use the require method to load rubygems library and load the zdd library. Note that Ruby 1.9 and above includes RubyGems by default, thus it is not necessary to load gem libraries. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'rubygems' #Not required for Ruby 1.9 and above.
+> require 'zdd'
+\end{Verbatim}
+
+\section{Items Declaration\label{sect:tut_symbol}}
+Use ZDD::symbol method to define an individual item. Use one method to define one item.
+The order of items declaration is important and corresponds to the ZDD tree structure from root level.
+Items not declared in the proper order significantly affects how ZDD structure is generated and the resulting size of the tree structure.   
+The example below shows a declaration of four items \verb|"a","b","c","d"|.
+If the item order is not important, users can skip the symbol declaration function and use the itemset function described in the next section. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> ZDD::symbol("a")
+> ZDD::symbol("b")
+> ZDD::symbol("c")
+> ZDD::symbol("d")
+\end{Verbatim}
+
+Only items used are declared as symbols, next, the itemsets consisting of defined items will create the ZDD object.
+
+It is possible to create a ZDD object with the ZDD::itemset method to enumerate space delimited item names as itemsets. In the following, the ZDD object is expressed as itemset "abc" consisting of items "a", "b", "c" which is set as Ruby variable a. The content in the object is displayed in valued sum of products format using the show method.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> x=ZDD::itemset("a b c")
+> x.show
+ a b c
+\end{Verbatim}
+
+In the following, itemset consisting of 1 item is constructed, it will be used in the later section. Although the item name and the Ruby variable are both named as \verb|a|,  note that these two are totally different, 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+> a.show
+ a
+\end{Verbatim}
+
+\section{Operation\label{sect:tut_ope}}
+ The itemsets are transformed using various operations defined in ZDD. By combining the operations, the ZDD objects can be flexibly processed and manipulated. 
+ 
+Several examples are shown below. Some operations are computed just like general polynomial expressions, while some are not.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> (a+a).show # Weights are incorporated by the addition of the identical itemsets.
+2 a
+> (2*a).show # The result is the same by multiplying the variable.
+2 a
+> (a*b).show # An item is added to the itemset when multiplying different items.
+a b
+> (a*a).show # When multiplying the same item, the weight becomes 2 items 
+since there are two items.
+2 a
+> (2*a-a).show # Subtraction
+a
+> ((a*b*c+b*d+c)/b).show # Division
+a c + d
+> ((a+b)*(c+d)).show
+a c + a d + b c + b d 
+> ((a+1)*(a+1)).show #  "1" in the last term is the weight of the empty item set.
+3 a + 1
+> ((a+1)*(a-1)).show
+a - 1
+\end{Verbatim}
+
+Finally, let's enumerate all subsets of the itemset \{a,b,c,d\} for this example. 
+The expression and its results are shown below.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f=(a+1)*(b+1)*(c+1)*(d+1)
+> f.show
+a b c d + a b c + a b d + a b + a c d + a c + a d + a + b c d + b c +
+  b d + b + c d + c + d + 1
+\end{Verbatim}
+
+The method for expanding the expression above is similar expanding polynomial expressions. The calculation results on the right side are constructed as ZDD object and substituted into Ruby variable f.
+Consequently, 16($=2^4$) itemsets are enumerated. Note that the last term "1" is the weight of an empty itemset.
+
+\section{Frequent itemsets}
+Assuming four customers (f, g, h, i) purchased the items a, b, c, d in a supermarket.
+
+\begin{itemize}
+\item f: a,b,c,d
+\item g: b,d
+\item h: a,c,d
+\item i: a,b,d
+\end{itemize}
+Let's find out the common itemsets across three or more customers from the purchase data. The procedure is simple. 
+First, find out all subsets of the itemset each customer has purchased, then aggregate them. The method is shown as follows.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f=(a+1)*(b+1)*(c+1)*(d+1)
+> g=(b+1)*(d+1)
+> h=(a+1)*(c+1)*(d+1)
+> i=(a+1)*(b+1)*(d+1)
+> all=f+g+h+i
+> all.show
+a b c d + a b c + 2 a b d + 2 a b + 2 a c d + 2 a c + 3 a d + 3 a + b c d + b c +
+ 3 b d + 3 b + 2 c d + 2 c + 4 d + 4  
+\end{Verbatim}
+
+Based on the above result, there are two customers who purchased products a, b, and  two customers who purchased products a, b, c. Now, use the \hyperref[sect:termsGE]{termsGE} function to select the terms with a weight that is equal or greater than 3.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> all.termsGE(3).show
+ 3 a d + 3 a + 3 b d + 3 b + 4 d + 4
+\end{Verbatim}
+
+Alternatively, one may use the restrict function to select the itemsets which include  itemset \verb|"a b"|, alternatively, use the permit function to select itemsets which contains  itemset \verb|"a b"|.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> all.restrict("a b").show
+a b c d + a b c + 2 a b d + 2 a b 
+> all.permit("a b").show
+2 a b + 3 a + 3 b + 4  
+\end{Verbatim}
+
+The ZDD package contains several methods to store the enumeration results of frequent itemsets as ZDD object other than the method described above. More details can be found in\hyperref[sect:freqpatA]{freqpatA} function or \hyperref[sect:lcm]{lcm} function.
+
+\section{Cast}
+
+Up to this point, it is not explicitly explained in this package how data used in various ZDD operations and functions will be automatically converted (cast) to the corresponding data type. 
+
+For example, the operation of \verb|2*a| described in the previous section is derived by multiplying ZDD object variable a with Ruby integer 2. 
+
+The multiplication operator of ZDD \verb|*| obtains two ZDD object as arguments, if it is not a ZDD object as shown in the example, the contents are automatically converted to ZDD object for calculation. 
+
+Internally, \verb|2*a| operates as \verb|ZDD::constant(2)*a|. Here, \verb|constatnt| function defines the weight of empty itemset.
+
+In the following examples, the Ruby character string "a b" is automatically converted to ZDD object. Internally, it is operated as (a+ZDD::itemset("a b")).show.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> (a+"a b").show
+ a b + a
+\end{Verbatim}
+
+In the following, the character string of the two operands is combined to become a Ruby String object .
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> s="a b"+"c d"
+> p s
+"a bc d"
+\end{Verbatim}
+
+\section{Combination with control statement}
+The series of partial itemset enumeration shown in  section \ref{sect:tut_symbol} and \ref{sect:tut_ope} can be combined with the control statement. The examples are described below.
+
+In the example below, the item is not declared by the symbol function, but the itemset is  directly defined by the itemset function. Using the multiplication operator \verb|*=| on Ruby variable t, subsequent computation results is accumulated one after the other. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> t=ZDD::constant(1)
+> ["a","b","c","d"].each{|item|
+>  t*=(ZDD::itemset(item)+1)
+> }
+ a b c d + a b c + a b d + a b + a c d + a c + a d + a + b c d + b c +
+  b d + b + c d + c + d + 1
+\end{Verbatim}
+
+\section{Solving the N-queens problem}
+Let's solve the N-queens problem by applying various ZDD operations introduced in the previous sections.  N-queens problem is the number of different ways N number of queens can be set up on an N$\times$N chessboard so that no two queens may attack each other. 
+The queen is a chess that is capable of moving across and at angular movements in Shogi (Japanese chess). As shown in the figure \ref{fig:tut_queen_move},  the chess can move in a total of eight directions: right, left, up, down and diagonally.
+
+\begin{figure}[htbp]
+\begin{tabular}{cc}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+ &x& &x&\\
+\hline
+ & &x&x&\\
+\hline
+x&x&x&o&x\\
+\hline
+ & &x&x&x\\
+\hline
+ &x& &x&\\
+\hline
+\end{tabular}
+}
+\caption{The queen indicated as "o" can move to the squares marked as "x".\label{fig:tut_queen_move}}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.40\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+(0,0)&(0,1)&(0,2)&(0,3)&(0,4)\\
+\hline
+(1,0)&(1,1)&(1,2)&(1,3)&(1,4)\\
+\hline
+(2,0)&(2,1)&(2,2)&(2,3)&(2,4)\\
+\hline
+(3,0)&(3,1)&(3,2)&(3,3)&(3,4)\\
+\hline
+(4,0)&(4,1)&(4,2)&(4,3)&(4,4)\\
+\hline
+\end{tabular}
+}
+\caption{Coordinates of the $5\times 5$\label{fig:tut_chess} chessboard}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+o& & & &\\
+\hline
+ & &o& &\\
+\hline
+ & & & &o\\
+\hline
+ &o& & &\\
+\hline
+ & & &o&\\
+\hline
+\end{tabular}
+}
+\caption{Example of a solution to 5 queens problem\label{fig:tut_nqueen_sol1}}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{figure}
+
+Figure \ref{fig:tut_nqueen_scp1} shows a Ruby script for 5 queens problem using ZDD.
+
+The assumed coordinates of the chessboard used in this script is shown in figure \ref{fig:tut_chess}. The basic idea of the script is as follows.
+First, assume an item as a square where the Queen can be placed on the chessboard. The total number of squares on the chessboard is computed by $5\times 5=25$, and all itemset combinations can be enumerated from $2^{25}$.
+
+It is sufficient to apply the explanation in section \ref{sect:tut_ope} for this example. Then select the itemset that meets the two conditions as follows. 
+
+\begin{enumerate}
+\item Remove all itemsets that may attack each other.
+\item Delete the itemset with size less than 5.
+\end{enumerate}
+
+In this case, among itemsets whose size is larger than 5, remove those which satisfy the first condition. Next, verify the movement of the chess with the details described in the figures.
+At the end of the script, the number of terms in ZDD object stored during the operation and the number of internal contact points will be returned as output.
+
+\begin{figure}[!hbt]
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+#encoding: utf-8
+require "zdd"
+
+n = 5
+
+# In the nested loop below, the itemset combinations of 25 squares (items) are enumerated, 
+and stored in the variable "all".
+# Use the characters "i, j" to indicate the coordinates for the item name.
+all=ZDD.constant(1)
+(0...n).each{|i|
+	(0...n).each{|j|
+		all *= (1+ZDD::itemset("#{i},#{j}"))
+	}
+}
+
+# Enumerate all combinations two squares that attack each other and stored in the variable "ng".
+ng=ZDD.constant(0)
+(0...n).each{|i| # row loop
+  (0...n).each{|j| # column loop
+     # Item pair which has the same row number (i) with the square i.j
+    (j+1...n).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i},#{k}") # Row
+    }
+     # Item pair which has the same column number (i) with the square i.j
+    (i+1...n).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{k},#{j}") # Row
+    }
+    # item pair with the square i.j. and lower right direction from that square
+    (1...[n-i,n-j].min).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i+k},#{j+k}") #
+    }
+    # item pair with the square i.j. and lower left direction from that square
+    (1...[n-i,j+1].min).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i+k},#{j-k}") #
+    }
+  }
+}
+st=Time.new # Use for time measurement
+selNG=all.restrict(ng)     # 1) Select itemsets that contains the items pair which attacks 
+each other from all itemsets "all".
+selOK=selNG.iif(0,all)     # 2) Exclude the itemset obtained in 1) from the all itemsets "all".
+selLT=selOK.permitsym(n-1) # 3) From the results in 2), select the itemset where the size is 
+less than n-1.
+ans  =selLT.iif(0,selOK)   # 4) From the results in 2), remove the itemsets obtained in 3).
+
+# Display the number of ZDD itemset (totalweight function) created from the calculation process
+ and the number of ZDD nodes (size function).
+# totalweight function is a method to aggregate the weight of each term in ZDD.
+# Since the weight of all terms is 1, thus the number of itemset in the expression is 
+known from the expression. 
+puts "all   : #{all.totalweight}\t #{all.size}"
+puts "selNG : #{selNG.totalweight}\t #{selNG.size}"
+puts "selOK : #{selOK.totalweight}\t #{selOK.size}"
+puts "selLT : #{selLT.totalweight}\t #{selLT.size}"
+puts "ans   : #{ans.totalweight}\t #{ans.size}"
+puts "time: #{Time.new-st}"
+ans.show # Display the solution 
+\end{Verbatim}
+}
+\caption{The solution of 5 queens problem with ZDD. \label{fig:tut_nqueen_scp1}}
+\end{figure}
+
+The results are shown as follows. 
+There are about  33.55 million (value of $2^25$) possible ways to arrange the queens on 25 squares, represented by only 25 ZDD nodes.  
+The number of combinations (selNG) which attack each other selected by the restrict function is about the same, but the number of ZDD nodes rapidly increases to 587, it is also where most time is consumed. 
+Finally, the solution includes 10 enumerated itemsets.
+
+Among them, the placement of "0,0 1,2 2,4 3,1 4,3" in the initial solution (term) is shown in figure \ref{fig:tut_nqueen_sol1}.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+all   : 33554432	 25
+selNG : 33553970	 587
+selOK : 462	 193
+selLT : 452	 199
+ans   : 10	 40
+time: 0.003749
+ 0,0 1,2 2,4 3,1 4,3 + 0,0 1,3 2,1 3,4 4,2 + 0,1 1,3 2,0 3,2 4,4 + 0,1
+  1,4 2,2 3,0 4,3 + 0,2 1,0 2,3 3,1 4,4 + 0,2 1,4 2,1 3,3 4,0 + 0,3 1,0
+  2,2 3,4 4,1 + 0,3 1,1 2,4 3,2 4,0 + 0,4 1,1 2,3 3,0 4,2 + 0,4 1,2 2,0
+  3,3 4,1
+\end{Verbatim}
+
+Furthermore, the number of ZDD nodes, solutions and processing time when N is set from 4 to 11 are displayed in Table \ref{tbl:tut_nqueen_result}.
+
+ZDD objects (all) for all combinations of all squares, and ZDD object with the maximum number of ZDD nodes (selNG) are shown.  
+ 
+The number of nodes of selNG is about 20 million when N=11. It means about 600M bytes memory will be consumed for calculating 30 byte per node.
+
+The workspace during the calculation is limited to N=11 on a PC with 8GB memory.  More efficient solution using ZDD is shown in the reference \cite{okumura1995}, users are welcomed to challenge the program by all means.
+
+\begin{table}
+\begin{center}
+\caption{The number of ZDD nodes expressed as N, number of solutions, processing time\label{tbl:tut_nqueen_result}}
+\begin{tabular}{r|r|r|r|r}
+\hline
+N & ZDD nodes (all) & ZDD nodes (selNG) & number of solutions & processing time (seconds) \\
+\hline
+4 &  16 &      142 &    2 & - \\
+5 &  25 &      587 &   10 & - \\
+6 &  36 &     2918 &    4 & 0.017 \\
+7 &  49 &    15207 &   40 & 0.094 \\
+8 &  64 &    83962 &   92 & 0.65 \\
+9 &  81 &   489665 &  352 & 4.74 \\
+10& 100 &  2995555 &  724 & 34.7 \\
+11& 121 & 19074050 & 2680 & 247.5 \\
+\hline
+\end{tabular}
+\\
+{\scriptsize *OS: Mac OS X 10.6 Snow Leopard, CPU: 2.66GHz Intel Core i7, Memory: 8GB 1067MHz DDR3}\\
+\end{center}
+\end{table}
+
+\if0
+\section{The solution of N queens problem(2)}
+The solution shown in the previous section was a simple method, that is removed the combination does not match the condition after all enumerated the combination of squares. It was a very simple approach, but it took a long time to select the itemset by the restrict function.
+
+While registering one by one square, increase the combination set. Every time it is increased, the solution by the approach of deleting a combination set  does not match the conditions is shown in the figure \ref{fig:tut_nqueen_scp2}.
+
+
+\begin{figure}[!hbt]
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'zdd'
+
+def add_cell(ans,i,j,n)
+  # Place the Queen in the squares i, j, update the combination of squares obtained so far.
+   # It is easy to understand that you will add the item of the square i, j to the itemset registered in ans. a=ans*ZDD.itemset("#{i}-#{j}")
+
+  # The result of adding, delete the itemset that does not satisfy the constraint.
+  # By the remainder operator  %, which is used here, select the itemset that do not include the items on the right-hand side of % =from a .
+# Set it in a recursively. For more details, see the reference of the remainder operator.
+
+  (1..[n-j-1,i].min).each{|k| a%=ZDD.itemset("#{i-k}-#{j+k}")}
+  (1..[i    ,j].min).each{|k| a%=ZDD.itemset("#{i-k}-#{j-k}")}
+  (1..i).each            {|k| a%=ZDD.itemset("#{i-k}-#{j}")  }
+  return a
+end
+
+n=5
+# For the variable ans, the variable that is set the solution(the itemset meet the constraints) at the time of adding one after the other of each item(square).
+# However,
+ans=ZDD.constant(1)
+# each square (i,j)
+(0...n).each{|i|
+  # For each row, the item is 
+  new_ans=ZDD.constant(0)
+  (0...n).each{|j|
+    new_ans+=add_cell(ans,i,j,n)
+  }
+  # add the square (i,j)
+  ans=new_ans
+}
+ans.show
+puts "The number of solutions: #{ans.totalweight}"
+ans.csvout("xxans")
+\end{Verbatim}
+}
+\caption{The solution by ZDD of 5 queens problem2\label{fig:tut_nqueen_scp2}}
+\end{figure}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ ruby nqueen2.rb 5
+ 0-0 1-2 2-4 3-1 4-3 + 0-0 1-3 2-1 3-4 4-2 + 0-1 1-3 2-0 3-2 4-4 + 0-1
+  1-4 2-2 3-0 4-3 + 0-2 1-0 2-3 3-1 4-4 + 0-2 1-4 2-1 3-3 4-0 + 0-3 1-0
+  2-2 3-4 4-1 + 0-3 1-1 2-4 3-2 4-0 + 0-4 1-1 2-3 3-0 4-2 + 0-4 1-2 2-0
+  3-3 4-1
+The number of solutions: 10
+\end{Verbatim}
+\fi
+
+%\end{document}
+
+

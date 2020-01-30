@@ -1,0 +1,39 @@
+\subsubsection*{例1: 基本例}
+
+\verb|dat1.csv|ファイルを\verb|rsl1.csv|と\verb|rsl2.csv|という２つのファイルにコピーする。
+また、標準出力に出力されるので、画面上に内容が出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+$ mtee i=dat1.csv o=rsl1.csv,rsl2.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+#END# kgtee i=dat1.csv o=rsl1.csv,rsl2.csv
+$ more rsl1.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+$ more rsl2.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+\end{Verbatim}
+\subsubsection*{例2: 標準出力なし}
+
+\verb|-nostdout|を指定すると、\verb|rsl1.csv|と\verb|rsl2.csv|という２つのファイルにコピーのみ行い、
+標準出力には出力しない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtee i=dat1.csv o=rsl1.csv,rsl2,csv -nostdout
+#END# kgtee -nostdout i=dat1.csv o=rsl1.csv,rsl2,csv
+\end{Verbatim}

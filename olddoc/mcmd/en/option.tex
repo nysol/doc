@@ -1,0 +1,63 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{Specify Parameters}
+The format of the parameters used in M-Command is slightly different than UNIX commands. 
+The keyword and specified value is separated by an equal sign i.e.  "\verb|keyword=value|". 
+Option type parameters precedes with a minus sign e.g. "\verb|-keyword|" and do not require specified value.
+
+Many parameters share common functions in M-Command. The parameters are explained below. However, in some command, it works as a completely different function. 
+
+\begin{table}[!htbp]
+{\small
+\begin{center}
+\begin{tabular}{l|l}
+\hline
+Keyword&Description \\
+\hline
+\hyperref[sect:option_i]{i=}                & Input file name \\
+\hyperref[sect:option_o]{o=}                & Output file name \\
+\hyperref[sect:option_f]{f=}                & Input and output field name \\
+\hyperref[sect:option_k]{k=}                & Key field name \\
+\hyperref[sect:option_s]{s=}                & Sort field name  \\
+\hyperref[sect:option_a]{a=}                & Add item name \\
+\hyperref[sect:option_nfn]{-nfn}            & CSV without field name \\
+\hyperref[sect:option_nfno]{-nfno}          & Output without field name \\
+\hyperref[sect:option_x]{-x}                & Specify the field number \\
+\hyperref[sect:option_q]{-q}                & Disable automatic sorting \\
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]} & Compare numbers of inputs and outputs \\ % added from ver.3.0
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}   & Check whether a key field contains a NULL value \\ % added from ver.3.0
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}     & Check NULL value in the input field specified by f= or vf= \\ % added from ver.3.0
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}   & Check NULL value in output fields \\ % added from ver.3.0
+\hyperref[sect:option_precision]{precision=}& Number of significant figures \\
+\hyperref[sect:option_tmpPath]{tmpPath=}    & Work file storage path name \\
+\hyperref[sect:option_delim]{delim=}        & Delimiter of vector data \\
+\hyperref[sect:option_bufcount]{bufcount=}  & Number of buffers \\
+                         \verb|--help|      & Display help \\
+\hline
+\end{tabular} 
+\end{center}
+}
+\end{table} 
+
+\input{option_i}
+\input{option_o}
+\input{option_f}
+\input{option_k}
+\input{option_s}
+\input{option_a}
+\input{option_nfn}
+\input{option_nfno}
+\input{option_x}
+\input{option_q}
+\input{option_assert_diffSize}
+\input{option_assert_nullkey}
+\input{option_assert_nullin}
+\input{option_assert_nullout}
+\input{option_precision}
+\input{option_tmppath}
+\input{option_delim}
+\input{option_bufcount}
+
+%\end{document}

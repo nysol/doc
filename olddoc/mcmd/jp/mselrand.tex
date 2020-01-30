@@ -1,0 +1,65 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mselrand ランダムに行を選択\label{sect:mselrand}}
+\index{mselrand@mselrand}
+\verb|c=|パラメータもしくは\verb|p=|パラメータで指定した行数をランダムに選択する(非復元抽出)。
+\verb|k=|を指定した場合、同一キーの行から指定の行数をランダムに選択し、
+また同時に\verb|-B|オプションを指定すると、キー単位で選択する。
+
+乱数の生成にはメルセンヌ・ツイスター法を利用している
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
+
+
+\subsection*{書式}
+\verb/mselrand c=|p= [k=] [S=] [u=] [-B]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|c=|    & 各キーの値毎に選択する行数を指定する。\\
+             & \verb|p=|パラメータを指定しない場合の指定は必ず指定する必要がある。 \\
+\verb|p=|    & 各キーの値毎に選択する割合をパーセントで指定する。 \\
+             & \verb|c=|パラメータを指定しない場合の指定は必ず指定する必要がある。 \\
+\verb|k=|    & 指定する項目（複数項目指定可）の値が同じ行から、一定行数ランダムに選択する。 \\
+%\verb|k=|    & 指定する項目（複数項目指定可）の値が同じ行から、一定行数ランダムに選択する。【\hyperref[sect:option_k]{集計キーブレイク処理}】 \\
+%             & (注意）指定する場合は事前に\verb|k=|パラメータで指定する選択の単位となる項目順に並べ替えておく必要がある。 \\
+\verb|S=|    & 同じ乱数の種は同じシーケンスの乱数をふる。 \\
+             & 指定しない場合は、時刻に応じた異なる乱数の種が利用される。 \\
+             & 指定可能な乱数の種(-2147483648〜2147483647)\\
+\verb|u=|    & 指定の条件に一致しない行を出力するファイル名を指定する。\\
+\verb|-B|    & キー単位選択\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mselrand_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:msel]{msel} : 正規乱数も使える。
+
+\hyperref[sect:mrand]{mrand} : ランダム選択でなく、乱数項目を付け加える。
+
+%\end{document}

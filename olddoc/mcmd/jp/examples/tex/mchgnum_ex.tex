@@ -1,0 +1,94 @@
+\subsubsection*{例1: 基本例}
+
+\verb|quantity|項目の値が最小以上10未満を\verb|low|、
+10以上20未満を\verb|middle|、20以上最大未満を\verb|high|という文字列に置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity
+A,5
+B,10
+C,15
+D,2
+E,50
+$ mchgnum f=quantity R=MIN,10,20,MAX v=low,middle,high i=dat1.csv o=rsl1.csv
+#END# kgchgnum R=MIN,10,20,MAX f=quantity i=dat1.csv o=rsl1.csv v=low,middle,high
+$ more rsl1.csv
+customer,quantity
+A,low
+B,middle
+C,middle
+D,low
+E,high
+\end{Verbatim}
+\subsubsection*{例2: パラメータ範囲にイコールをつける例}
+
+\verb|quantity|項目の値が最小より多く10以下を\verb|low|、
+10より多く20以下を\verb|middle|、20より多く最大以下を\verb|high|という文字列に置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=MIN,10,20,MAX v=low,middle,high -r i=dat1.csv o=rsl2.csv
+#END# kgchgnum -r R=MIN,10,20,MAX f=quantity i=dat1.csv o=rsl2.csv v=low,middle,high
+$ more rsl2.csv
+customer,quantity
+A,low
+B,low
+C,middle
+D,low
+E,high
+\end{Verbatim}
+\subsubsection*{例3: 数値範囲リストに合致しない値を置換}
+
+\verb|quantity|項目の値が10以上20未満を\verb|low|、
+20以上30未満を\verb|middle|、30以上最大未満を\verb|high|、
+数量が10より小さい値は\verb|out of range|という文字列に置換する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=10,20,30,MAX v=low,middle,high O="out of range" i=dat1.csv o=rsl3.csv
+#END# kgchgnum O=out of range R=10,20,30,MAX f=quantity i=dat1.csv o=rsl3.csv v=low,middle,high
+$ more rsl3.csv
+customer,quantity
+A,out of range
+B,low
+C,low
+D,out of range
+E,high
+\end{Verbatim}
+\subsubsection*{例4: 新たな項目の追加}
+
+\verb|quantity|項目の値が最小以上10未満を\verb|low|、
+10以上20未満を\verb|middle|、20以上最大未満を\verb|high|という文字列に置換し
+\verb|evaluate|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity:evaluate R=MIN,10,20,MAX v=low,middle,high -A i=dat1.csv o=rsl4.csv
+#END# kgchgnum -A R=MIN,10,20,MAX f=quantity:evaluate i=dat1.csv o=rsl4.csv v=low,middle,high
+$ more rsl4.csv
+customer,quantity,evaluate
+A,5,low
+B,10,middle
+C,15,middle
+D,2,low
+E,50,high
+\end{Verbatim}
+\subsubsection*{例5: 範囲外を項目の値として出力}
+
+\verb|quantity|項目の値が10以上20未満を\verb|low|、20以上30未満を\verb|middle|、
+30以上最大未満を\verb|high|、数量が10より小さい値は置換しないでそのまま出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mchgnum f=quantity R=10,20,30,MAX v=low,middle,high -F i=dat1.csv o=rsl5.csv
+#END# kgchgnum -F R=10,20,30,MAX f=quantity i=dat1.csv o=rsl5.csv v=low,middle,high
+$ more rsl5.csv
+customer,quantity
+A,5
+B,low
+C,low
+D,2
+E,high
+\end{Verbatim}

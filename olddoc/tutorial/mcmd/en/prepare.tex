@@ -1,0 +1,99 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section*{Setup environment for M-Command tutorial }
+
+{M-Command (MCMD) is a set of commands for flexible and effective data manipulation. These commands are used to process big data used in data mining.  The commands can be executed in form of a shell script or as individual commands at the UNIX / LINUX command prompt. 
+\\ 
+\\
+In this lesson, you will learn how to setup the environment by creating sample datasets and shell scripts to run M-Command.
+\\
+\\
+Afterwards, this tutorial will walk you through the process of creating a simple shell script to run the \verb|mcut| command. This command allows users to select relevant information and remove extraneous columns by specifying columns to extract in dataset for different data processing needs.  }
+
+
+Before we start the lesson, go to the directory where you would like to create the data and scripts and create a new directory. \\
+
+\begin{verbatim}
+$ mkdir mcmd_exercise
+\end{verbatim}
+
+The \verb|mdata| command is part of the M-Commands. This command generates 1 year of artificial supermarket transaction data for use with the tutorial lessons. The dataset includes the following files:   \\ 
+
+\begin{enumerate}
+ 	\item cust.csv - Customer data
+ 	\item dat.csv - 2001 Supermarket transaction Data
+	\item jicfs1.csv - Master file of 1 digit product category code
+	\item jicfs2.csv - Master file of 2 digit product category code
+	\item jicfs4.csv - Master file of 4 digit product category code
+	\item jicfs6.csv - Master file of 6 digit product category code
+	\item syo.csv - Master file of product description
+\end{enumerate}
+
+Now, let's generate sample data for this tutorial. \\
+
+Go into the mcmd\_exercise/ directory, and execute \verb|mdata| at the command prompt: \\
+
+\begin{verbatim}
+$ cd mcmd_exercise
+$ mdata tutorial_en
+\end{verbatim}
+
+7 sets of data are stored inside the \verb|tutorial_en| directory created. Check the data as follows: \\
+\begin{verbatim}
+$ cd tutorial_en
+$ ls -l 
+total 4704
+-rw-r--r--  1 user  staff    20673 Aug 22 16:24 cust.csv
+-rw-r--r--  1 user  staff    2281329 Aug 22 16:24 dat.csv
+-rw-r--r--  1 user  staff    128 Aug 22 16:24 jicfs1.csv
+-rw-r--r--  1 user  staff    529 Aug 22 16:24 jicfs2.csv
+-rw-r--r--  1 user  staff    6630 Aug 22 16:24 jicfs4.csv
+-rw-r--r--  1 user  staff    36400 Aug 22 16:24 jicfs6.csv
+-rw-r--r--  1 user  staff    46482 Aug 22 16:24 syo.csv
+\end{verbatim}
+ 
+Review the transaction data by using the following command: \\
+\begin{verbatim}
+$ less dat.csv
+
+shop,date,time,receipt,customer,product,CategoryCode1,CategoryCode2,CategoryCode4,CategoryCode6,
+manufacturer,brand,unitCost,unitPrice,quantity,amount,costAmount,profit
+A,20010108,142748,1000000,00245A,0000311,1,11,1116,111603,1776,177601,339,441,1,441,339,102
+A,20010108,142748,1000000,00245A,0000384,1,14,1402,140205,0556,055600,286,372,1,372,286,86
+A,20010108,142748,1000000,00245A,0000304,1,11,1107,110707,1487,148704,343,446,1,446,343,103
+A,20010110,121010,1000001,00228A,0000426,1,11,1106,110601,1763,176305,177,231,5,1155,885,270
+A,20010110,121010,1000001,00228A,0000313,1,11,1119,111997,1378,137803,185,241,6,1446,1110,336
+A,20010110,121010,1000001,00228A,0000486,1,11,1108,110801,1315,131504,208,271,1,271,208,63
+A,20010110,121010,1000001,00228A,0000393,1,11,1105,110517,1889,188901,410,533,6,3198,2460,738
+A,20010110,121010,1000001,00228A,0000472,1,14,1402,140205,1974,197403,267,348,1,348,267,81
+A,20010110,121010,1000001,00228A,0000332,1,11,1107,110721,0550,055003,354,461,1,461,354,107
+...
+..
+\end{verbatim}
+
+The file directory structure for this tutorial is as follows: \\
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l l l }
+\hline
+\textbf{Directory}   & \textbf{Location} & \textbf{Description}   \\
+\hline
+ & ./ & Lessons (pdf format) \\
+mcmd\_exercise & ./mcmd\_exercise/ & Tutorial scripts (sh extension) \\
+outdat & ./mcmd\_exercise/outdat/ & Output files of scripts (csv format)  \\
+tutorial\_en & ./mcmd\_exercise/tutorial\_en/ & Data used in this tutorial (csv format)  \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+

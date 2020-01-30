@@ -1,0 +1,42 @@
+\subsubsection*{Example 1: Basic Example}
+
+Extract the first 3 characters in the \verb|str| column.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,abcdefg
+2,12345678
+3,
+4,12
+$ mcal c='left($s{str},3)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=left($s{str},3) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,abcdefg,abc
+2,12345678,123
+3,,
+4,12,12
+\end{Verbatim}
+\subsubsection*{Example 2: Include multibyte character}
+
+Use \verb|leftw| function if the string contains multibyte characters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,str
+1,あいうえお
+2,1あ2345678
+3,1あ
+4,ああ
+$ mcal c='leftw($s{str},3)' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=leftw($s{str},3) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,str,rsl
+1,あいうえお,あいう
+2,1あ2345678,1あ2
+3,1あ,1あ
+4,ああ,ああ
+\end{Verbatim}

@@ -1,0 +1,78 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id1
+1
+2
+3
+4
+$ more ref1.csv
+id2
+a
+b
+c
+d
+$ mpaste m=ref1.csv i=dat1.csv o=rsl1.csv
+#END# kgpaste i=dat1.csv m=ref1.csv o=rsl1.csv
+$ more rsl1.csv
+id1,id2
+1,a
+2,b
+3,c
+4,d
+\end{Verbatim}
+\subsubsection*{例2: 行数が異なる例}
+
+入力ファイルと参照ファイルで行数が異なる場合は、少いファイルの行数に合わせる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more ref2.csv
+id2
+a
+b
+$ mpaste m=ref2.csv i=dat1.csv o=rsl2.csv
+#END# kgpaste i=dat1.csv m=ref2.csv o=rsl2.csv
+$ more rsl2.csv
+id1,id2
+1,a
+2,b
+\end{Verbatim}
+\subsubsection*{例3: 外部結合}
+
+\verb|-n|を指定すると、参照ファイルの行数が少なくても、対応しない入力ファイルの行もNULL値を結合して出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpaste m=ref2.csv -n i=dat1.csv o=rsl3.csv
+#END# kgpaste -n i=dat1.csv m=ref2.csv o=rsl3.csv
+$ more rsl3.csv
+id1,id2
+1,a
+2,b
+3,
+4,
+\end{Verbatim}
+\subsubsection*{例4: 結合項目を指定}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more ref3.csv
+id2,val
+a,R0
+b,R1
+c,R2
+d,R3
+$ mpaste f=val m=ref3.csv i=dat1.csv o=rsl4.csv
+#END# kgpaste f=val i=dat1.csv m=ref3.csv o=rsl4.csv
+$ more rsl4.csv
+id1,val
+1,R0
+2,R1
+3,R2
+4,R3
+\end{Verbatim}

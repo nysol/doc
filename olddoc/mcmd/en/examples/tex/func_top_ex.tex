@@ -1,0 +1,34 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+val
+1
+2
+3
+4
+$ mcal c='top()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=top() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+val,rsl
+1,1
+2,0
+3,0
+4,0
+\end{Verbatim}
+\subsubsection*{Example 2: Compute the cumulative value}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(top(),${val},${val}+#{})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=if(top(),${val},${val}+#{}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+val,rsl
+1,1
+2,3
+3,6
+4,10
+\end{Verbatim}

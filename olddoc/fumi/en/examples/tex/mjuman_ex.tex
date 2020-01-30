@@ -1,0 +1,73 @@
+\subsubsection*{Example 1: Basic Example}
+
+File \verb|test.txt| is contained in \verb|text| directory for morphological analyisis. The results are saved in \verb|csv| directory. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more text/test.txt
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+$ mjuman.rb I=text O=csv
+#MSG# KNP: reading text/test.txt
+#MSG# JUMAN: MP-2 aid=test.txt sid=0 (sentences:1/2, articles:1/1)
+#MSG# JUMAN: MP-2 aid=test.txt sid=1 (sentences:2/2, articles:1/1)
+#MSG# JUM2CSV 1/1
+#MSG# Elapse: 0.048sec, # of sentences=2, # of articles=1
+#MSG#   0.024sec/sentence, 0.048sec/article
+#MSG#   mpCount=2, poolSize=1000
+#MSG#   maxLen=512Byte, maxSec=30sec, sizeLimit=2000MB
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mjuman.rb I=text O=csv
+$ more csv/test.txt
+aid,sid,tid,word,orgWord,daiWord,yomi,class1,class2,class3,class4,annotation
+test.txt,0,0,子ども,子ども,子供,こども,名詞,普通名詞,,,代表表記:子供/こども カテゴリ:人
+test.txt,0,1,は,は,,は,助詞,副助詞,,,
+test.txt,0,2,リンゴ,リンゴ,林檎,りんご,名詞,普通名詞,,,代表表記:林檎/りんご カテゴリ:植物
+test.txt,0,3,が,が,,が,助詞,格助詞,,,
+test.txt,0,4,すきだ,すきです,好きだ,すきです,形容詞,,ナ形容詞,デス列基本形,代表表記:好きだ/
+test.txt,0,5,。,。,,。,特殊,句点,,,
+test.txt,1,0,望遠,望遠,望遠,ぼうえん,名詞,普通名詞,,,代表表記:望遠/ぼうえん カテゴリ:抽象物
+test.txt,1,1,鏡,鏡,鏡,かがみ,名詞,普通名詞,,,代表表記:鏡/かがみ 漢字読み:訓 カテゴリ:人工物-
+test.txt,1,2,で,で,,で,助詞,格助詞,,,
+test.txt,1,3,泳ぐ,泳ぐ,泳ぐ,およぐ,動詞,,子音動詞ガ行,基本形,代表表記:泳ぐ/およぐ
+test.txt,1,4,少女,少女,少女,しょうじょ,名詞,普通名詞,,,代表表記:少女/しょうじょ カテゴリ:人
+test.txt,1,5,を,を,,を,助詞,格助詞,,,
+test.txt,1,6,見る,見た,見る,みた,動詞,,母音動詞,タ形,代表表記:見る/みる 補文ト 自他動詞:自:
+test.txt,1,7,。,。,,。,特殊,句点,,,
+\end{Verbatim}
+\subsubsection*{Example 2: Example of results of JUMAN (original)}
+
+JUMAN results (original) is saved in \verb|juman| directory. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more text/test.txt
+子どもはリンゴがすきです。
+望遠鏡で泳ぐ少女を見た。
+$ mjuman.rb I=text O=csv P=juman
+#MSG# KNP: reading text/test.txt
+#MSG# JUMAN: MP-2 aid=test.txt sid=0 (sentences:1/2, articles:1/1)
+#MSG# JUMAN: MP-2 aid=test.txt sid=1 (sentences:2/2, articles:1/1)
+#MSG# JUM2CSV 1/1
+#MSG# Elapse: 0.054sec, # of sentences=2, # of articles=1
+#MSG#   0.027sec/sentence, 0.054sec/article
+#MSG#   mpCount=2, poolSize=1000
+#MSG#   maxLen=512Byte, maxSec=30sec, sizeLimit=2000MB
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mjuman.rb I=text O=csv P=juman
+$ more juman/test.txt
+子ども こども 子ども 名詞 6 普通名詞 1 * 0 * 0 "代表表記:子供/こども カテゴリ:人"
+は は は 助詞 9 副助詞 2 * 0 * 0 NIL
+リンゴ りんご リンゴ 名詞 6 普通名詞 1 * 0 * 0 "代表表記:林檎/りんご カテゴリ:植物
+が が が 助詞 9 格助詞 1 * 0 * 0 NIL
+すきです すきです すきだ 形容詞 3 * 0 ナ形容詞 21 デス列基本形 29 "代表表記:好きだ/すきだ 反
+。 。 。 特殊 1 句点 1 * 0 * 0 NIL
+EOS
+望遠 ぼうえん 望遠 名詞 6 普通名詞 1 * 0 * 0 "代表表記:望遠/ぼうえん カテゴリ:抽象物"
+鏡 かがみ 鏡 名詞 6 普通名詞 1 * 0 * 0 "代表表記:鏡/かがみ 漢字読み:訓 カテゴリ:人工物-その
+で で で 助詞 9 格助詞 1 * 0 * 0 NIL
+泳ぐ およぐ 泳ぐ 動詞 2 * 0 子音動詞ガ行 4 基本形 2 "代表表記:泳ぐ/およぐ"
+少女 しょうじょ 少女 名詞 6 普通名詞 1 * 0 * 0 "代表表記:少女/しょうじょ カテゴリ:人"
+を を を 助詞 9 格助詞 1 * 0 * 0 NIL
+見た みた 見る 動詞 2 * 0 母音動詞 1 タ形 10 "代表表記:見る/みる 補文ト 自他動詞:自:見える/
+。 。 。 特殊 1 句点 1 * 0 * 0 NIL
+EOS
+\end{Verbatim}

@@ -1,0 +1,59 @@
+
+%\begin{document}
+
+\section{mnjoin - Natural Join with Reference File\label{sect:mnjoin}}
+\index{mnjoin@mnjoin}
+
+A natural join selects rows from input data and reference file that have equal values in columns defined at \verb|k=| parameter, the reference file is specified at the \verb|m=| parameter, fields in the reference file specified at \verb|f=| parameter is added through natural join. The difference with \verb|mjoin| command is that key field(s) in the reference field is not unique.  
+
+Given that the input data has $n$ records with a certain key value, and the reference file has $m$ records with the same key value, $n\times m$ records will be generated. In addition, if \verb|f=| is not defined, all fields except the key field will be added. 
+
+
+\subsection*{Format}
+\verb/mnjoin k= [f=] [K=] [-n] [-N] m=|/ 
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & key field name(s) from the input data for matching \\
+             & This key field is specified in the input data and at the \verb|K=| parameter.  \\
+             & Join rows when this fields matches with the fields from the reference data. \\
+\verb|f=|    & Specify the field name(s) to join from the reference file. \\
+             & When this parameter is not defined, all fields except the key field will be joined. \\
+\verb|m=|    & Reference file name. \\
+             & Read from standard input if this parameter is not set. (when \verb|i=| is specified) \\
+\verb|K=|    & Key field name(s) from the reference data for matching \\
+             & This key field(s) from reference data is compared with the key field(s) from  input data specified at \verb|k=| parameter, \\
+             & fields where records with common key are joined. \\
+             & This parameter is not required if the field name in reference file is the same as the one defined at the \verb|k=|parameter. \\
+\verb|-n|    & Output NULL values when reference data does not consist of input data. \\
+\verb|-N|    & Output NULL values when input data does not consist of reference data. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mnjoin_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mjoin] {mjoin} :  It is faster to use \verb|mjoin| if the key in the reference file is unique. 
+
+\hyperref[sect:mproduct] {mproduct} : Join combination of all records without using key. Each row in the reference file is joined with all records in the input data.
+
+%\end{document}

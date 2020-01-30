@@ -1,0 +1,23 @@
+\subsubsection*{Example 1: Basic Example}
+
+Calculate the share of "quantity" and "amount" fields for each "customer". Save the output in columns "volume share" and "share amount”.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,10
+A,2,20
+B,1,15
+B,3,10
+B,1,20
+$ mshare k=customer f=quantity:qtyShare,amount:amountShare i=dat1.csv o=rsl1.csv
+#END# kgshare f=quantity:qtyShare,amount:amountShare i=dat1.csv k=customer o=rsl1.csv
+$ more rsl1.csv
+customer%0,quantity,amount,qtyShare,amountShare
+A,1,10,0.3333333333,0.3333333333
+A,2,20,0.6666666667,0.6666666667
+B,1,15,0.2,0.3333333333
+B,3,10,0.6,0.2222222222
+B,1,20,0.2,0.4444444444
+\end{Verbatim}

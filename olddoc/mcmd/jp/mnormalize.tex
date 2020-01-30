@@ -1,0 +1,54 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mnormalize 基準化\label{sect:mnormalize}}
+\index{mnormalize@mnormalize}
+\verb|f=|パラメータで指定した項目を、\verb|c=|パラメータで指定した基準化の方法で基準化する。\\
+
+\subsection*{書式}
+\verb|mnormalize c= f= [k=]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|c=|    & 以下に示す基準化の方法のいずれかを指定する。\\
+             & \verb|z| : z得点 : $z_i=(x_i-m)/u$ ($x_i$: $i$番目のデータ, $m$ :算術平均, $u$ :標準偏差)\\
+             & \verb|Z| : 偏差値 : $Z_i=50+10\times z_i$\\
+             & \verb|range| : 最小値を0,最大値を1に線形変換 $r_i=(x_i-\min_x)/(\max_x-\min_x)$\\
+\verb|f=|    & ここで指定された項目が基準化される。\\
+             & :(コロン）で新項目名を指定する必要がある。例）\verb|f=|数量:数量基準値\\
+\verb|k=|    & キー項目名リスト\\
+             & ここで指定された項目を単位に基準化を行う。 \\
+\verb|bufcount=| & バッファのサイズ数を指定する。 \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mnormalize_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

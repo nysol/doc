@@ -1,0 +1,61 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{MCMD Module Configuration \label{sect:evnRB}}
+MCMD module is built using KGMOD library. All shell variables set in KGMOD can be used. The following explains the configuration method of Ruby MCMD module.
+
+
+\subsection{Output message}
+
+The environment variable \verb|KG_VerboseLevel| can be set to control the message to standard error for various methods such as \verb|Mcsvin|. The parameter and details are as follows.
+
+
+\begin{table}[htpb]
+\begin{center}
+\caption{Parameters of environment variables that control the message and its contents\label{tb:bench1}}
+%{\scriptsize 
+\begin{tabular}{c|l}
+\hline
+Parameter  & Description\\ \hline
+0 & Do not output any message \\
+1 & + error message output \\
+2 & + warning message output\\
+3 & + end message output \\
+4 & + msg message output (default) \\
+\hline
+\end{tabular}  
+%}
+\end{center}
+\end{table}  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ irb
+> require 'mcmd'
+
+# By default KG_Verbose=4, both normal message and error message are displayed. 
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+#END# mcsvin i=dat.csv; ; 2013/08/08 15:18:52
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+#ERROR# unknown parameter x= (mcsvin); mcsvin x=dat.csv; ; 2013/08/08 15:18:52
+
+# When KG_Verbose=1, ending error message is displayed, but the normal ending message is not displayed. 
+> ENV["KG_VerboseLevel"] = "1"
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+#ERROR# unknown parameter x= (mcsvin); mcsvin x=dat.csv; ; 2013/08/08 15:18:52
+
+# When KG_Verbose=0, both messages are not displayed.
+> ENV["KG_VerboseLevel"] = "0"
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+\end{Verbatim}
+
+\end{document}
+
+\subsection{Other variables}
+Besides control message, other environment variables can be set in KGMOD.
+See the documentation of KGMOD environment variables for more information.
+
+
+

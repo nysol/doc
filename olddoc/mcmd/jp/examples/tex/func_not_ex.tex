@@ -1,0 +1,18 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,b
+1,1
+2,
+3,0
+$ mcal c='not($b{b})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=not($b{b}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,b,rsl
+1,1,0
+2,,
+3,0,1
+\end{Verbatim}

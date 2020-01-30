@@ -1,0 +1,69 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mpadding (行補完) コマンド\label{sect:mpadding}}
+\index{mpadding@mpadding}
+\verb|k=|パラメータで指定した項目をキーとして、\verb|f=|パラメータで指定した項目の値が連続するようにレコードを作成する。\verb|v=|パラメータを指定した場合は、\verb|k=|,\verb|f=|で指定した以外の項目値を指定した文字列でパディングし、\verb|-n|オプション指定時は、nullでパディングする。(\verb|v=|,\verb|-n|共に指定がなければ直前の項目値でパディングする)
+
+\subsection*{書式}
+\verb|mpadding [k=] f= [v=] [S=] [E=] [-n] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_x]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+%\verb|k=|    & ここで指定された項目をキーとする。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & ここで指定された項目をキーとする。\\
+\verb|f=|    & 連続パディング対象項目名 \\
+             & ここで指定された項目の値が連続するようにレコードをパディングする。\\
+			 & 数字としてパディングするときは、no\%nのように\%nを指定する。\\
+			 & 日付としてパディングするときは\%d、時刻としてパディングするときは\%tを指定する。\\
+			 & 降順でパディングしたいときはno\%d\%rのようにrを追加する。\\
+%             & k=で指定した項目と合わせて事前に並べ替えておく必要がある。\\
+%             & 並べ方は、type=の指定によって異なる。整数としてパディングするのであればmsortf f=name\%nのように、\\
+%             & 数値昇順で並べ替え、日付としてパディングするのであればmsortf f=nameのように\\
+%             & 文字列昇順に並べ替えておかなければならない。\\
+%             & 降順にパディングするのであれば、f=name\%rのように項目名の後ろに\%rを付け、\\
+%             & 事前にmsortfにより降順に並べ替えておかなければならない。\\
+%             & また、k=をあわせて指定する場合は、事前にk=で指定した項目と合わせて事前に並べ替えておく必要がある。\\
+%\verb|type=| & f=で指定した項目の型を指定する。\\
+%             & int:数値/date:日付/time:時間の指定が可能。(それ以外の指定は不可)\\
+\verb|v=|    & パディング用文字列指定\\
+             & k=,f=で指定した以外の項目値を指定した文字列で出力する。\\
+\verb|S=|    & 開始値\\
+             & f=で指定した項目の値の開始値を指定する。\\
+\verb|E=|    & 終了値\\
+             & f=で指定した項目の値の終了値を指定する。\\
+\verb|-n|    & パディングにnull値指定\\
+             & k=,f=で指定した以外の項目値をnullで出力する。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mpadding_ex.tex}
+
+\subsection*{関連コマンド}
+
+%\end{document}

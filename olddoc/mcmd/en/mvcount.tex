@@ -1,0 +1,95 @@
+
+%\begin{document}
+%\usepackage{comment}
+
+\section{mvcount - Calculate Vector Size\label{sect:mvcount}}
+\index{mvcount@mvcount}
+Calculate the size of vector (number of elements in a vector) . 
+
+%\begin{comment}
+An example is shown in Table \ref{tbl:mvcount_input} - \ref{tbl:mvcount_out1}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvcount_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4& \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:mvcount_out1}}
+\verb|mvcount vf=items:size i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&items&size \\
+\hline
+1&a b c&3 \\
+2&a d&2 \\
+3&b f e f&4 \\
+4& &0\\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+%\end{comment}
+
+\subsection*{Format}
+\verb|mvcount vf=|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the field names (from input file \verb|i=|) of vectors to count the number of elements. \\
+           & Field name(s) of result(s) can be defined with \verb|:| followed after the vector name. \\
+           & Multiple vectors can be specified.\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mvcount_ex.tex}
+
+\subsection*{Related command}
+
+
+%\end{document}

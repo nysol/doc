@@ -1,0 +1,29 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> x=5*a+3*b+c
+> x.show
+ 5 a + 3 b + c
+> x.maxweight.show
+ 5
+
+# 最大値は定数項も含めて求められる。
+> x=5*a+3*b+c+10
+> x.show
+ 5 a + 3 b + c + 10
+> x.maxweight.show
+ 10
+
+# 最大の重みを持つ項を選択する。
+> x=5*a+3*b+5*c+2
+> x.show
+ 5 a + 3 b + 5 c + 2
+> x.termsEQ(x.maxweight).show
+ 5 a + 5 c
+\end{Verbatim}

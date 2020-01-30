@@ -1,0 +1,50 @@
+%\begin{document}
+
+\section{インストール\label{sect:install}}
+Mコマンドの動作確認は、以下のOSで確認している。
+\begin{itemize}
+\item Mac OS X 10.7.5(Lion)
+\item Ubuntu Linux 12.04(32bit, 64bit)
+%\item Fedora Linux 14(32bit, 64bit)
+\end{itemize}
+
+いずれも、すぐにインストール可能なパッケージが用意されている。
+上記のOSにおけるバージョンに違いがあっても、パッケージをインストールが可能であろう。
+また他のOSであっても、ソースからのコンパイルを行うことでインストールが可能である。
+
+\subsection{Mac OS X\label{sect:install_osx}}
+\href{http://sourceforge.jp/projects/nysol/releases/}{http://sourceforge.jp/projects/nysol/releases/}より
+最新のgemパッケージをダウンロードし、以下の手順にしたがってインストールする。
+ただし、ファイル名は「\verb|mining-1.1-x86_64-darwin.gem|」の形式に従っており、\verb|"1.1"|は最新のバージョン番号に読み替える。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ sudo gem install mining-1.1-x86_64-darwin.gem
+\end{Verbatim}
+
+\subsection{Ubuntu Linux\label{sect:install_ubuntu}}
+\href{http://sourceforge.jp/projects/nysol/releases/}{http://sourceforge.jp/projects/nysol/releases/}より
+最新のgemパッケージをダウンロードし、以下の手順にしたがってインストールする。
+ただし、ファイル名は以下に例示される形式に従っている(\verb|"1.1"|は最新のバージョン番号に読み替える)。
+\begin{itemize}
+\item 32bit環境: \verb|mining-1.1-x86-linux.gem|
+\item 64bit環境: \verb|mining-1.1-x86_64-linux.gem|
+\end{itemize}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ sudo gem install mining-1.1_darwin.gem
+\end{Verbatim}
+
+\subsection{ソースからのインストール\label{sect:install_source}}
+プログラムソースからコンパイルする際は、以下の手順に従う。
+
+以下の手順に従い、miningのgitサーバより最新のminingのソースをダウンロード＆インストールする。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ git clone http://scm.sourceforge.jp/gitroot/nysol/mining.git
+$ cd mining
+$ make
+$ sudo make install
+\end{Verbatim}
+
+
+%\end{document}

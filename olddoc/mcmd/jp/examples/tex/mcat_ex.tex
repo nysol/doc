@@ -1,0 +1,163 @@
+\subsubsection*{例1: 同一項目名ファイルの併合}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+$ more dat2.csv
+顧客,日付,金額
+A,20081207,20
+A,20081213,30
+B,20081209,50
+$ mcat i=dat1.csv,dat2.csv o=rsl1.csv
+#END# kgcat i=dat1.csv,dat2.csv o=rsl1.csv
+$ more rsl1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+A,20081207,20
+A,20081213,30
+B,20081209,50
+\end{Verbatim}
+\subsubsection*{例2: 項目名の異なるファイルの併合}
+
+\verb|i=|の最初のファイル\verb|dat1.csv|の項目「顧客,日付,金額」の3項目を併合する。
+しかし、\verb|dat3.csv|には「金額」項目がないので、エラーとなる。
+ただし、\verb|dat1.csv|の内容は既に出力されていることに注意する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+顧客,日付,数量
+A,20081201,3
+B,20081002,1
+$ mcat i=dat1.csv,dat3.csv o=rsl2.csv
+#ERROR# field name [金額] not found on file [dat3.csv] (kgcat)
+$ more rsl2.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+\end{Verbatim}
+\subsubsection*{例3: 項目名の異なるファイルの併合2}
+
+前例に\verb|-nostop|オプションを付けると、項目が見つからないデータについてはNULL値を出力するようになり、
+途中でエラー終了することはなくなる。
+その他にも、項目が見つからなかった場合の動作を変更するオプションとして、\verb|skip,force|がある。
+詳しくはパラメータの説明を参照されたい。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+顧客,日付,数量
+A,20081201,3
+B,20081002,1
+$ mcat -nostop i=dat1.csv,dat3.csv o=rsl3.csv
+#END# kgcat -nostop i=dat1.csv,dat3.csv o=rsl3.csv
+$ more rsl3.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+A,20081201,
+B,20081002,
+\end{Verbatim}
+\subsubsection*{例4: 項目名を指定して併合}
+
+\verb|f=|で項目名を指定すると、それら指定した項目のみを併合する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat f=顧客,日付 i=dat2.csv,dat3.csv o=rsl4.csv
+#END# kgcat f=顧客,日付 i=dat2.csv,dat3.csv o=rsl4.csv
+$ more rsl4.csv
+顧客,日付
+A,20081207
+A,20081213
+B,20081209
+A,20081201
+B,20081002
+\end{Verbatim}
+\subsubsection*{例5: 標準入力の併合}
+
+\verb|-stdin|を指定することで、\verb|dat2.csv|を標準入力から追加する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat -stdin i=dat1.csv o=rsl5.csv <dat2.csv
+#END# kgcat -stdin i=dat1.csv o=rsl5.csv
+$ more rsl5.csv
+顧客,日付,金額
+A,20081207,20
+A,20081213,30
+B,20081209,50
+A,20081201,10
+B,20081002,40
+\end{Verbatim}
+\subsubsection*{例6: ファイル名項目を追加}
+
+\verb|-add_fname|を指定すると、元ファイルの名前を\verb|fileName|項目で追加する。
+標準入力のファイル名は\verb|/dev/stdin|となる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat -add_fname -stdin i=dat1.csv o=rsl6.csv <dat2.csv
+#END# kgcat -add_fname -stdin i=dat1.csv o=rsl6.csv
+$ more rsl6.csv
+顧客,日付,金額,fileName
+A,20081207,20,/dev/stdin
+A,20081213,30,/dev/stdin
+B,20081209,50,/dev/stdin
+A,20081201,10,dat1.csv
+B,20081002,40,dat1.csv
+\end{Verbatim}
+\subsubsection*{例7: ワイルドカード指定}
+
+カレントディレクトリに\verb|dat1.csv,dat2.csv,dat3.csv|の3つのCSVファイルがあったとして、
+それらを全て併合するのにワイルドカード\verb|dat*.csv|を指定する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+$ more dat2.csv
+顧客,日付,金額
+A,20081207,20
+A,20081213,30
+B,20081209,50
+$ more dat3.csv
+顧客,日付,数量
+A,20081201,3
+B,20081002,1
+$ mcat -force i=dat*.csv o=rsl7.csv
+#END# kgcat -force i=dat*.csv o=rsl7.csv
+$ more rsl7.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+A,20081207,20
+A,20081213,30
+B,20081209,50
+A,20081201,3
+B,20081002,1
+\end{Verbatim}
+\subsubsection*{例8: 同一ファイルの複数回併合}
+
+同一ファイルを複数指定することも可能である。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat i=dat1.csv,dat1.csv,dat1.csv o=rsl8.csv
+#END# kgcat i=dat1.csv,dat1.csv,dat1.csv o=rsl8.csv
+$ more rsl8.csv
+顧客,日付,金額
+A,20081201,10
+B,20081002,40
+A,20081201,10
+B,20081002,40
+A,20081201,10
+B,20081002,40
+\end{Verbatim}

@@ -1,0 +1,30 @@
+\subsubsection*{例1: 基本例}
+
+\verb|mcut|の実行結果は\verb|o=|で指定した\verb|rsl1.csv|に出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+A,2,20
+$ mcut f=顧客,金額 i=dat1.csv o=rsl1.csv
+#END# kgcut f=顧客,金額 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+顧客,金額
+A,10
+A,20
+\end{Verbatim}
+\subsubsection*{例2: リダイレクト}
+
+標準出力をリダイレクト(\verb|">"|記号)して書き込む。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f=顧客,金額 i=dat1.csv >rsl2.csv
+#END# kgcut f=顧客,金額 i=dat1.csv
+$ more rsl2.csv
+顧客,金額
+A,10
+A,20
+\end{Verbatim}

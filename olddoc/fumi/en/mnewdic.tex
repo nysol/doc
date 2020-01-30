@@ -1,0 +1,100 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mnewdic.rb Output adjacent word pair candidate from corpus \label{sect:mnewdic}}
+\index{mnewdic@mnewdic}
+
+From text corpus  (large set of text files),  returns the candidate information of adjacent word pair to be registered in the dictionary. 
+
+JUMAN contains a standard dictionary with  common words, for text mining in specific fields, interpretation of 1 phrase  may be divided into multiple words. 
+    
+\verb|mnewdic.rb| command analyze the given corpus based on the frequency of phrases with words pairs that appears at the same time, and output the list in CSV file. 
+
+\verb|mjumandic.rb| command simply dictionary registration in the process of text mining.    
+
+
+\subsection{Format}
+\begin{verbatim}
+mnewdic.rb [i=] [O=] [S=] [n=] [seed=] [-dai] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|i=|       & : Corpus file name  \\
+\verb|O=|       & : Output directory name  \\
+\verb|S=|       & : Minimum value of word pair appearance \\
+\verb|n=|       & : Output sentence number for word pair  \\
+\verb|seed=|    & : Seed of random number  \\
+\verb|-dai|     & : Use a symbol to represent headwords  \\
+\verb|-mcmdenv| & : Display MCMD message containing environment variables.  \\
+                &    Default returns warning and error message  (KG\_VerboseLevel=2). \\
+\verb|--help|   & : Display help   \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection*{Example of input file }
+
+Given the corpus file specified at \verb|i=| parameter, one row corresponds to one sentence in text file. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+3年ぶりにウォークマンを買ったけど、育休中はあまり活躍の余地がないですね。
+待機児童解消の方がいい気がするけど。
+:
+\end{Verbatim}
+
+\subsubsection*{Example of Output File  }
+
+In the directory specified at \verb|O=| parameter, 
+the results are saved in \verb|words.csv| file and  \verb|corpus.csv| file  （when \verb|nkf| command is installed,  the character code converted from Shift JIS is also saved in the output in both files. 
+ 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+見出し語,品詞,読み,カテゴリ,ドメイン,pid,word1,word2,freq
+職場復帰,,,,,0,職場,復帰,31
+授業参観,,,,,1,授業,参観,28
+会議参加,,,,,2,会議,参加,26
+:
+\end{Verbatim}
+
+\newpage
+
+The description of each item in \verb|words.csv| file is shown below.  
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|見出し語| & : 見出し語 \\  
+\verb|品詞|     & : 品詞 \\  
+\verb|読み|     & : 読み \\  
+\verb|カテゴリ| & : カテゴリ \\  
+\verb|ドメイン| & : ドメイン \\  
+\verb|pid|      & : pid \\  
+\verb|word1|    & : 語1 \\  
+\verb|word2|    & : 語2 \\  
+\verb|freq|     & : 出現頻度 \\  
+\end{tabular} 
+}
+\end{table} 
+
+Users can refer to \verb|corpus.csv| to check whether the word of registered candidates appeared in the text.  
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+pid,id,text
+0,52,"神戸で始めての、育休後職場復帰セミナーを開催しました。"
+0,317,"僕の知り合いは2人子どもを産んで、立て続けに産休＋育休を取って、職場復帰した。"
+:
+\end{Verbatim}
+
+
+
+
+\subsection{Examples}
+\input{examples/tex/mnewdic_ex.tex}
+
+%\end{document}
+

@@ -1,0 +1,27 @@
+
+\section{maxcover : コスト最大のアイテム集合の表示\label{sect:maxcover}}
+\subsection*{書式}
+$obj$.maxcover $\rightarrow$ $zdd$
+
+\subsection*{説明}
+$obj$含まれるアイテム集合の中で、コストが最大となるアイテム集合をZDDオブジェクト$zdd$として返す。
+コストの計算に重みは考慮されないことに注意する。
+
+コストの値を得るにはmaxcostを用いる。
+コストの設定は\hyperref[sect:symbol]{symbol}関数で行う。
+
+\subsection*{例}
+\input{examples/tex/maxcover_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:symbol]{symbol} : アイテムの宣言
+
+\hyperref[sect:cost]{cost} : アイテム集合のコスト合計
+
+\hyperref[sect:maxcost]{maxcost} : コスト最大のアイテム集合のコスト
+
+\hyperref[sect:mincover]{mincover} : コスト最小のアイテム集合の選択
+
+\hyperref[sect:mincost]{mincost} : コスト最小のアイテム集合のコスト
+
+

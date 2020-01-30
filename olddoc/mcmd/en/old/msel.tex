@@ -1,0 +1,157 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{msel (select records with conditions) command}
+
+Use comparison search conditions to select records that match the criteria specified in \emph{c=} parameter. The row of record is selected if condition is true (1). 
+All operators and functions available in mcal command can be used in the conditional functions. For more details, please refer to \href{run:mcal.pdf}{mcal}.
+
+\subsection*{Format}
+msel c=  [u=] [-r]  [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}]  [\href{run:option.pdf}{-x}]  [\href{run:option.pdf}{i=}] [\href{run:option.pdf}{o=}] [--help]\\
+
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|c=|    & Condition【required parameter】\\
+& Select records with conditions using a set of operators and functions. \\
+& Please refer to \href{run:mcal.pdf}{mcal} for more details. \\
+
+\verb|o=|    & Output file name of matching records  \\
+& Records matching the condition will be printed to this output file. \\
+\verb|u=|    & Output file with unmatched records \\
+& Records that do not match the condition will be printed to this output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-r|    & Reverse selection\\
+& Select records excluded in the condition defined in \emph{c-}\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Select records if the amount is greater than 40. Write the unmatched records to a different output file file oth.csv. }
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+customer, quantity, amount 
+A,1,10
+A,2,20
+B,1,30
+B,3,40
+B,1,50
+
+$ msel c='${amount}>40' u=oth.csv i=dat.csv o=rsl.csv
+
+# output file 1(rsl.csv)
+customer, quantity, amount 
+B,1,50
+
+# output file 2(oth.csv)
+customer, quantity, amount 
+
+A,1,10
+A,2,20
+B,1,30
+B,3,40
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Selecting records with null value(s)}
+No records will be selected when the condition defined \emph{c=} returned a null value. Records that do not match the condition will be written to a separate file defined in \emph{u=}. 
+ 
+In the following example, the first three rows of data from column b are -1, null, and 1. When selecting records where b is greater than 0, the query record with a null value will be treated as an exception saved in the unmatched records file. 
+
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+a,b
+A,-1
+B,
+C,1
+
+$  msel c='${b}>0' i=dat.csv o=match.csv u=unmatch.csv
+
+# matched output data (match.csv)
+a,b
+C,1
+
+# unmatched output data (unmatch.csv)
+a,b
+A,-1
+B,
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Specifying Program Options}
+Null value is always evaluated as a unknown value regardless of the condition. Thus, the record with null value is not selected. 
+ 
+In the following example, the reverse selection parameter \emph{-r} is used with the same condition in the previous example. Even though the selection criteria is inverted, the record with the query record with a null value will be treated as an exception saved in the unmatched records file as in previous example. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+a,b
+A,-1
+B,
+C,1
+
+$ msel -r c='${b}>0' i=dat.csv o=match.csv u=unmatch.csv
+
+# matched output data(match.csv)
+a,b
+A,-1
+
+# unmatched output data(unmatch.csv)
+a,b
+B,
+C,1
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\noindent
+\href{run:mdelnul.pdf}{mdelnul}: delete records with null value(s)\\
+\href{run:mselstr.pdf}{mselstr}: select records matching query string
+
+\end{document}

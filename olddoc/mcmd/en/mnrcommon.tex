@@ -1,0 +1,69 @@
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{mnrcommon - Select Records within Specified Range(s) from Reference File\label{sect:mnrcommon}}
+\index{mnrcommon@mnrcommon}
+Select the record in the input file that matches the records within the defined range(s) defined from the reference file.
+ \verb|k=| parameter specifies the key field name from the input file to match with the key defined in \verb|K=| from the reference file. The selection criteria is based on the data series from the input file defined in \verb|r=| parameter for records that falls within the data range in the reference file defined in the \verb|R=| parameter. 
+Add \verb|%n| after the item name if the field defined at \verb|r=| parameter is a numerical value.  
+
+\subsection*{Format}
+\verb/mnrcommon [k=] R= r= [K=] [u=] [-r] m=|/ 
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Key item(s) to match in the input file (Multiple keys can be specified). \\
+             & The key(s) specified will be matched with the key field(s) at \verb|K=| parameter from the reference file. \\
+\verb|m=|    & Specify name of reference file.\\
+		& Data is read from standard input if this parameter is not defined. (when i= is specified)\\
+\verb|R=|    & Define the value range (start,end) in the reference file. \\ 
+             & If the first argument is NULL means less than, if the second argument is NULL means more than. \\
+\verb|r=|    & Field name of input file for range comparison. [\%{n}]\\
+             & Records in the input file that matches the key field specified in the \verb|k=| parameter in the reference data is selected.\\
+                    & when processing as numeric value, \%n will be added to field name defined at \verb|r=| parameter. \\
+\verb|K=|    &  Key field(s) in the reference data for matching (Multiple keys can be specified) \\	
+             & The key specified will be matched with the key field defined in \verb|k=| parameter from the input file.  \\
+             & Records in the input file that matches the key field specified in the \verb|k=| parameter in the reference data is selected. \\
+\verb|u=|    & Write unmatched records to this output file. \\
+\verb|-r|    & Reverse selection\\
+             & Select records that is not within the data range defined at \verb|R=| parameter. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Sort Criteria}
+
+Fields specified at \verb|r=,R=| must be sorted beforehand. 
+However, the numerical values defined in \verb|r=,R=| should be sorted in ascending order to join with the numerical range. 
+Where \verb|k=,K=| is specified, the strings defined at the parameter must be sorted in ascending order. 
+
+For example, when the parameter \verb|k=key K=Key r=val%n R=range i=dat.csv m=ref.csv| is specified, \verb|dat.csv| data, should be sorted with \verb|msortf f=key,val%n| as the criteria, and \verb|ref.csv| data, should be sorted with \verb|msortf f=Key,range%n| as the criteria. 
+
+\subsection*{Examples}
+\input{examples/tex/mnrcommon_ex.tex}
+
+\subsection*{Related commands}
+\hyperref[sect:mcommon] {mcommon} : Select common records in reference file
+
+\hyperref[sect:mnrjoin] {mnrjoin} : Natural join data from the reference file with multiple ranges. 
+
+
+
+%\end{document}

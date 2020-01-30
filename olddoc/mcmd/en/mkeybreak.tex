@@ -1,0 +1,43 @@
+
+%\begin{document}
+
+\section{mkeybreak Keybreak Point\label{sect:mkeybreak}}
+\index{msum@msum}
+Add an indicator to first rows and last rows of each key specified at \verb|k=| parameter. 
+The first row is indicated as \verb|1| in the \verb|top| field, and the same indicator is added to last row in the \verb|bot| column. 
+Records that are not in the first row nor last row will appear as NULL values. 
+
+\subsection*{Format}
+\verb|mkeybreak k= [s=] [a=]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify field names (multiple fields can be specified) of the aggregate key. \\
+\verb|s=|    & After sorted by specified fields (multiple fields can be specified), the first and last rows are marked. \\
+\verb|a=|    & Specify the field name for top and bottom indicators in the output. [default value: top,bot]\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mkeybreak_ex.tex}
+
+\subsection*{Related Command}
+
+%\end{document}

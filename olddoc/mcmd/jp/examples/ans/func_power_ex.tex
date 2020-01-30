@@ -1,0 +1,28 @@
+
+\subsubsection*{例1: 基本例}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,base,exponent
+1,5,2
+2,2,8
+3,,
+4,0,10
+5,10,0
+6,2,0.5
+7,2,-1
+
+$ mcal c='power(${base},${exponent})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=power(${base},${exponent}) i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,base,exponent,rsl
+1,5,2,25
+2,2,8,256
+3,,,
+4,0,10,0
+5,10,0,1
+6,2,0.5,1.414213562
+7,2,-1,0.5
+\end{Verbatim}

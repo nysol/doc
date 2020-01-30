@@ -1,0 +1,86 @@
+\subsubsection*{例1: 基本例}
+
+0.0から1.0の範囲の実数乱数を生成する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客
+A
+B
+C
+D
+E
+$ mrand a=rand i=dat1.csv o=rsl1.csv
+#END# kgrand a=rand i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+顧客,rand
+A,0.5477480278
+B,0.3656605978
+C,0.04199989187
+D,0.9302980842
+E,0.3048081712
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+-intで整数乱数
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mrand a=rand -int i=dat1.csv o=rsl2.csv
+#END# kgrand -int a=rand i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+顧客,rand
+A,1083858011
+B,549225333
+C,2044140724
+D,114682354
+E,65869181
+\end{Verbatim}
+\subsubsection*{例3: 最小値、最大値を決めた乱数の生成}
+
+最小値が10、最大値が100の整数の乱数を生成し、\verb|rand|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mrand a=rand -int min=10 max=100 S=1 i=dat1.csv o=rsl3.csv
+#END# kgrand -int S=1 a=rand i=dat1.csv max=100 min=10 o=rsl3.csv
+$ more rsl3.csv
+顧客,rand
+A,47
+B,100
+C,75
+D,94
+E,10
+\end{Verbatim}
+\subsubsection*{例4: キー単位の乱数生成}
+
+以下の例は、顧客\verb|A,B,C,D|の4人について同じ顧客には同じ乱数値を振る。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+顧客
+A
+A
+A
+B
+B
+C
+D
+D
+D
+$ mrand k=顧客 -int min=0 max=1 a=rand i=dat2.csv o=rsl4.csv
+#END# kgrand -int a=rand i=dat2.csv k=顧客 max=1 min=0 o=rsl4.csv
+$ more rsl4.csv
+顧客%0,rand
+A,1
+A,1
+A,1
+B,0
+B,0
+C,0
+D,1
+D,1
+D,1
+\end{Verbatim}

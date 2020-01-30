@@ -1,0 +1,42 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a b")
+> a.show
+ a b
+> b=ZDD::itemset("b")
+> b.show
+ b
+> c=ZDD::itemset("")
+> c.show
+ 1
+
+# Numbers can be used as name of item
+> x0=ZDD::itemset("2")
+> x0.show
+ 2
+
+# However, bear in mind that it  may be difficult to distinguish between weight and
+# numerical item name.
+> (2*x0).show
+ 2 2
+
+# Symbols can be used as name of item 
+> x1=ZDD::itemset("!#%&'()=~|@[;:]")
+> x1.show
+ !#%&'()=~|@[;:]
+
+# However, special symbols in Ruby must be escaped with a backward slash (\).
+# In the following example, the 3 characters \,$," are escaped. 
+> x2=ZDD::itemset("\\\$\"")
+> x2.show
+ \$"
+
+# Japanese characters can be used to name an item as well. 
+> x3=ZDD::itemset("りんご ばなな")
+> x3.show
+ りんご ばなな
+\end{Verbatim}

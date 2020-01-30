@@ -1,0 +1,37 @@
+\subsubsection*{Example 1: Basic Examples}
+
+Copy \verb|dat1.csv| file to two files \verb|rsl1.csv| and \verb|rsl2.csv| In addition, display output on screen through standard output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+$ mtee i=dat1.csv o=rsl1.csv,rsl2.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+#END# kgtee i=dat1.csv o=rsl1.csv,rsl2.csv
+$ more rsl1.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+$ more rsl2.csv
+customer,quantity,price
+A,1,10
+A,2,20
+B,1,15
+\end{Verbatim}
+\subsubsection*{Example 2: Do not print to standard output }
+
+When \verb|-nostdout| is specified, the command only copy the two files \verb|rsl1.csv| and \verb|rsl2.csv| but not to standard output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtee i=dat1.csv o=rsl1.csv,rsl2,csv -nostdout
+#END# kgtee -nostdout i=dat1.csv o=rsl1.csv,rsl2,csv
+\end{Verbatim}

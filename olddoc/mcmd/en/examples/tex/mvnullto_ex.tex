@@ -1,0 +1,62 @@
+\subsubsection*{Example 1: Example1: Replace null characters to the character string ’null’}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items
+b a  c
+ c c
+e a   b 
+$ mvnullto vf=items v=null i=dat1.csv o=rsl1.csv
+#END# kgvnullto i=dat1.csv o=rsl1.csv v=null vf=items
+$ more rsl1.csv
+items
+b a null c
+null c c
+e a null null b null
+\end{Verbatim}
+\subsubsection*{Example 2: Example 2: Use .(dot) as delimiting character}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+items
+b.a..c
+.c.c
+e.a...b.
+$ mvnullto vf=items v=null delim=. i=dat2.csv o=rsl2.csv
+#END# kgvnullto delim=. i=dat2.csv o=rsl2.csv v=null vf=items
+$ more rsl2.csv
+items
+b.a.null.c
+null.c.c
+e.a.null.null.b.null
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Replace null with the previous value}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvnullto vf=items -p i=dat1.csv o=rsl3.csv
+#END# kgvnullto -p i=dat1.csv o=rsl3.csv vf=items
+$ more rsl3.csv
+items
+b a a c
+ c c
+e a a a b b
+\end{Verbatim}
+\subsubsection*{Example 4: Example 4: Replace all values except null by specifying O=}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvnullto vf=items v=null O=X i=dat1.csv o=rsl4.csv
+#END# kgvnullto O=X i=dat1.csv o=rsl4.csv v=null vf=items
+$ more rsl4.csv
+items
+X X null X
+null X X
+X X null null X null
+\end{Verbatim}

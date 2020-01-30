@@ -1,0 +1,74 @@
+
+
+\chapter[Getting Started]{Introduction}
+
+\section{Summary}
+
+ ZDD(Zero-suppressed Binary Decision Diagrams) is used for efficient manipulation of weighted item combinations based on reduction rules. ZDD VSOP (Valued-Sum-Of-Products calculator) is implemented as a Ruby Extension Library to compute item combinations.  
+ 
+ VSOP is a combinatorial item set (sum-of-products format) where each product term has a weight (or coefficient). 
+  
+ There are many operands for ZDD objects (e.g. '+','-','=='), thus, the implementation of ZDD with Ruby enables seamless integration of Boolean set operations and arithmetic operations.  
+ 
+ This manual is complied from RDoc and can be retrieved from the command line. 
+ 
+\begin{Verbatim}[frame=single]
+ $ ri ZDD # Display manual of all ZDD modules
+ $ ri ZDD.symbol # Display symbol method 
+\end{Verbatim}
+
+ Note: The modules are under development and this document is subjected to changes without prior notice. 
+
+Japan Science and Technology Agency  ERATO Minato Discrete Structure Manipulation System Project  Kansai Satellite Lab.
+
+
+\section[Installation]{Installation}
+
+The ZDD Ruby package is tested on: 
+\begin{itemize}
+	\item Mac OS X 
+\end{itemize}
+
+The installation on Linux based platforms can be complied from source code. 
+
+ This package requires Ruby 1.9.3. You may check the installed version of Ruby and the location of RubyGem using:
+ 
+\begin{Verbatim}[frame=single]
+ ruby -v
+ gem environment
+ \end{Verbatim}
+ 
+ Afterwards, add RubyGems path in \.bash\_profile:
+\begin{Verbatim}[frame=single]
+ ruby -v
+ export PATH=~/.rvm/gems/ruby-1.9.3-p448/bin:$PATH
+\end{Verbatim}
+ 
+ Download the ZDD Ruby package from sourceforge.com. 
+ \# link and file name to be updated \#
+ 
+ Extract the tar archive file to desired location on your machine as follows:
+\begin{Verbatim}[frame=single]
+ tar xvzf vsop_ruby.tar.gz
+\end{Verbatim}
+ 
+ Go to the vsop\_ruby directory, create a makefile and install the program. 
+\begin{Verbatim}[frame=single]
+ cd vsop_ruby
+ make
+ sudo make install
+\end{Verbatim}
+  
+  \section{Environment Variables}
+  
+ Edit the environment variable to change the default behavior 
+
+　\textbf{ZDDLimitNode}
+
+    Maximum number of nodes Default value：1000000
+    
+　\textbf{ZDDWarning}
+
+    Warning message : Send a warning message when the item exceeds a specific value. 
+    
+    

@@ -1,0 +1,53 @@
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{m2cross Perform 1-to-N Crosstab\label{sect:mcross}}
+\index{m2cross@m2cross}
+This command performs 1-to-N crosstab.
+Use the \verb|s=| parameter to specify the field whose value will be horizontally transposed as a fieldname. Use the \verb|f=| parameter to specify the field to be output as a cell. Use the \verb|a=| parameter (specify two fields) to specify the values to be fieldnames; the fieldname specified for the \verb|f=| parameter will be vertically transposed to the first field, and the value specified for the \verb|f=| parameter will be vertically transposed to the second field. Use the \verb|k=| parameter to specify the value to be the row id used for the transposition.
+
+\subsection*{Format}
+\verb/m2cross f= s=|a= [k=] [v=]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the field whose value is to be output as the cell value.\\
+             & Multiple fields can be specified only when a= is used.\\
+\verb|s=|    & Specify the field to be transposed as the column fieldname.\\
+             & The value of the field specified here will be output as the fieldname.\\
+\verb|a=|    & Specify two fields.\\
+             & In the first field, specify the fieldname to which the fieldname specified for \verb|f=| is transposed.\\
+             & In the second field, specify the fieldname of the field value specified for \verb|f=|.\\
+\verb|k=|    & Specify the key fieldname list.\\
+             & The field specified here will be used as the key for transposition.\\
+\verb|v=|    & Specify the character string to replace a null value.\\
+             & A null value will be replaced by the character string specified here.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/m2cross_ex.tex} %added from ver.3.0
+
+\subsection*{Related Command}
+\hyperref[sect:mcross]{mcross} : A very similar command. Performs N-to-N crosstab.\\
+
+%\end{document}

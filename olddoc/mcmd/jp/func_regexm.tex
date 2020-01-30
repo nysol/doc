@@ -1,0 +1,20 @@
+
+%\begin{document}
+
+\section{regexm 全体マッチ\label{sect:regexm}}
+\index{regexm@regexm}
+
+書式1: regexm($str$,正規表現)
+
+書式2: regexmw($str$,正規表現)
+
+指定した正規表現が、文字列$str$全体にマッチすれば真を返す。
+$str$もしくは正規表現にマルチバイト文字を含み、
+Shift\_JISなど文字の出現順によっては意に沿わない検索結果となる場合はregexmw関数を使うこと。
+%正規表現の詳細については(\ref{sect:regex})を参照されたい。
+
+\subsection*{利用例}
+\input{examples/tex/func_regexm_ex}
+
+%\end{document}
+

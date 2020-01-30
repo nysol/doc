@@ -1,0 +1,21 @@
+\subsubsection*{Example 1: Basic Example}
+
+Find out the prefix of the longest substring that matches with the regular expression \verb|c.*a|. For example, in record \verb|id=4|, the function matches \verb|cabbca| in the  column and returns the prefix \verb|ba|. Since the same input data and substring are used in the \verb|regexstr,regexpfx| function, it is easy to compare the results.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,xcbbbayy
+2,xxcbaay
+3,
+4,bacabbca
+$ mcal c='regexpfx($s{str},"c.*a")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=regexpfx($s{str},"c.*a") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,xcbbbayy,x
+2,xxcbaay,xx
+3,,
+4,bacabbca,ba
+\end{Verbatim}

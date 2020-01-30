@@ -1,0 +1,51 @@
+
+%\begin{document}
+
+\section{mchgstr - Substitute String\label{sect:mchgstr}}
+\index{mchgstr@mchgstr}
+Replace the field(s) specified in the \verb|f=| parameter with the string according to the replacement criteria specified in the \verb|c=| parameter.
+
+\subsection*{Format}
+\verb|mchgstr c= f= [O=] [-A] [-F] [-sub] [-W] |    
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|c=|    & Specify the replacement character string to be replaced.\\
+\verb|f=|    & Specify the field(s) (multiple fields can be specified) where the character string is replaced \\
+		& according to the replacement criteria specified in the verb|c=| parameter.\\
+\verb|O=|    & Specify the replacement string if the values does not match any substitution criteria specified in the \verb|c=| parameter \\
+		& (returns NULL values when this parameter is not specified).\\
+\verb|-A|    & This option adds output in a new column instead of replacing the specified item. \\
+\verb|-F|    & Retain values in output even though values fall outside the specified numeric range defined in the R= parameter.  \\
+\verb|-sub|  & Compare using substring match rather than exact match. \\
+		& Search the values specified in the \verb|f=| parameter, \\
+		& and replace the string with the criteria specified in \verb|c=|. \\
+\verb|-W|    & Match wide-character substring with \verb|-sub| option.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mchgstr_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mchgnum]{mchgnum} : Substitution based on numeric range. 
+
+\hyperref[sect:msed]{msed} : Replace string by regular expression. 
+
+%\end{document}

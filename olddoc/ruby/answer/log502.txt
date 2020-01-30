@@ -1,0 +1,1 @@
+test.rb:620:in `each': Error RuntimeError

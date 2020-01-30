@@ -1,0 +1,78 @@
+
+%\begin{document}
+
+\section{Installation \label{sect:install}}
+M-Command supports the following operating system.
+\begin{itemize}
+\item Mac OS X 10.7.5(Lion)
+\item Ubuntu Linux 12.04(32bit, 64bit)
+%\item Fedora Linux 14(32bit, 64bit)
+\end{itemize}
+
+Installation packages are available for the above operating systems, users would be able to install MCMD on systems with slight variation of the OS versions listed above. 
+The software can be compiled and installed from the source code for installation in other OS.
+
+\subsection{Mac OS X\label{sect:install_osx}}
+Download the latest gem package from \href{http://sourceforge.jp/projects/nysol/releases/}{http://sourceforge.jp/projects/nysol/releases/} and install according to the following command. Note that in version number \verb|"1.0"| in the file name "\verb|mcmd-1.0.gem|" will be updated according to the latest version number.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ wget http://sourceforge.net/xxxx
+$ gem install mcmd-1.0_darwin.gem
+\end{Verbatim}
+
+\subsection{Ubuntu Linux\label{sect:install_ubuntu}}
+Download the latest gem package from \href{http://sourceforge.jp/projects/nysol/releases/}{http://sourceforge.jp/projects/nysol/releases/} and install according to the following command. The file name follows the format illustrated below (\verb|"1.1-0"| will be updated with the latest version). 
+
+
+\begin{itemize}
+\item 32bit environment: \verb|mcmd_1.1-0_i386.deb|
+\item 64bit environment: \verb|mcmd_1.1-0_amd64.deb|
+\end{itemize}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ wget http://sourceforge.net/xxxx
+$ gem install mcmd-1.0_darwin.gem
+\end{Verbatim}
+
+\subsection{Install from Source \label{sect:install_source}}
+Follow the procedures below to compile and install the library from source code. 
+
+\subsubsection{Install C++ boost library}
+
+Download and install\footnote{This library is compatible with boost\_1.52.0, however, this library cannot be compiled with version 1.54.0.} boost library from the C++ boost library website  (\url{http://www.boost.org/}).
+For installation in Mac and Linux 32 OS, please follow the instructions as follows. It will take about 30 minutes to install boost library.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ wget http://sourceforge.net/projects/boost/files/boost/1.52.0/boost_1_52_0.tar.gz/download
+$ tar zxvf boost_1_52_0.tar.gz
+$ cd boost_1_52_0
+$ ./bootstrap.sh
+$ ./bjam
+$ sudo ./bjam install
+\end{Verbatim}
+
+Follow the step below for installation instructions on Linux 64bit OS environment. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ wget http://sourceforge.net/projects/boost/files/boost/1.52.0/boost_1_52_0.tar.gz/download
+$ tar zxvf boost_1_52_0.tar.gz
+$ cd boost_1_52_0
+$ ./bootstrap.sh
+$ ./bjam cflags=-fPIC
+$ sudo ./bjam install cflags=-fPIC
+\end{Verbatim}
+
+\subsubsection{Install mcmd}
+Download and install the latest version of MCMD source code from the MCMD git server. Afterwards, confirm the installation by typing "\verb|mcut --help|" at the command prompt, if the help message of mcut command is shown, installation is completed. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ git clone http://scm.sourceforge.jp/gitroot/nysol/mcmd.git
+$ cd mcmd
+$ ./configure
+$ make
+$ sudo make install
+\end{Verbatim}
+
+%\end{document}

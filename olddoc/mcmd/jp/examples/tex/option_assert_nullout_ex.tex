@@ -1,0 +1,26 @@
+\subsubsection*{(基本例) }
+例えば、mslide(行ずらし）コマンドを例にあげる。k=パラメータで指定した項目単位に、f=パラメータで指定した項目の値を、t=パラメータで指定した行数ずらすことを想定した場合、データによっては、f=パラメータで指定した項目の行数よりも、t=パラメータで指定したずらす回数の方が多いケースがある。そのような処理をする場合に-nパラメータを指定することで、次（前）の行がなくてもNULL値を入れて出力することがある。出力項目にNULL値が含まれているかどうかを確認したい場合、-assert\_nulloutパラメータを指定すると、出力項目の値にNULL値が含まれているかどうかのチェックを行い、NULL値が含まれていた場合に、\verb|「#WARNING# ; exist NULL in output data」|というメッセージを表示するので出力項目にNULL値が含まれていたかどうかを確認することができる。\\ 下記の例では出力項目のsyo\_1,syo\_2コマンドの値にNULL値が含まれているかどうかのチェックを行い、含まれている為\verb|「#WARNING# ; exist NULL in output data」|が出力されている。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,日付,商品,数量
+A,20130406,a,1
+A,20130408,b,1
+A,20130416,c,1
+B,20130407,k,2
+C,20130408,d,1
+C,20130409,e,4
+
+$ mslide s=顧客,日付 k=顧客 f=商品:syo_ t=2 -n -assert_nullout i=dat1.csv  o=rsl1.csv
+#WARNING# ; exist NULL in output data
+#END# kgslide -assert_nullout -n f=商品:syo_ i=dat1.csv k=顧客 o=rsl1.csv s=顧客,日付 t=2
+
+$ more rsl1.csv
+顧客,日付,商品,数量,syo_1,syo_2
+A,20130406,a,1,b,c
+A,20130408,b,1,c,
+A,20130416,c,1,,
+B,20130407,k,2,,
+C,20130408,d,1,e,
+C,20130409,e,4,,
+\end{Verbatim}

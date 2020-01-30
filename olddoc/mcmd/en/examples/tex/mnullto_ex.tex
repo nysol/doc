@@ -1,0 +1,77 @@
+\subsubsection*{Example 1: Basic Example}
+
+Replace NULL values in the ¥verb|birthday| field with the string \verb|“no value”|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,birthday
+A,19690103
+B,
+C,19500501
+D,
+E,
+$ mnullto f=birthday v="no value" i=dat1.csv o=rsl1.csv
+#END# kgnullto f=birthday i=dat1.csv o=rsl1.csv v=no value
+$ more rsl1.csv
+customer,birthday
+A,19690103
+B,no value
+C,19500501
+D,no value
+E,no value
+\end{Verbatim}
+\subsubsection*{Example 2: Replace non-NULL values}
+
+Replace Null values in the \verb|birthday| field with the string \verb|"no value"| and change non-null values to the string ¥verb|"value"|, and rename the output column as \verb|entry|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnullto f=birthday:entry v="no value" O="value" i=dat1.csv o=rsl2.csv
+#END# kgnullto O=value f=birthday:entry i=dat1.csv o=rsl2.csv v=no value
+$ more rsl2.csv
+customer,entry
+A,value
+B,no value
+C,value
+D,no value
+E,no value
+\end{Verbatim}
+\subsubsection*{Example 3: Add new column}
+
+Replace Null values in the \verb|birthday| field with the string \verb|"no value"| and change non-null values to the string \verb|"value"|. Output the replacement strings in a new column named \verb|entry|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnullto f=birthday:entry v="no value" O="value" -A i=dat1.csv o=rsl3.csv
+#END# kgnullto -A O=value f=birthday:entry i=dat1.csv o=rsl3.csv v=no value
+$ more rsl3.csv
+customer,birthday,entry
+A,19690103,value
+B,,no value
+C,19500501,value
+D,,no value
+E,,no value
+\end{Verbatim}
+\subsubsection*{Example 4: Replace values in previous row}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,date
+A,19690103
+B,
+C,19500501
+D,
+E,
+$ mnullto f=date -p i=dat2.csv o=rsl4.csv
+#END# kgnullto -p f=date i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+id,date
+A,19690103
+B,19690103
+C,19500501
+D,19500501
+E,19500501
+\end{Verbatim}

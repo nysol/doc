@@ -1,0 +1,97 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvcount ベクトルサイズの計算\label{sect:mvcount}}
+\index{mvcount@mvcount}
+ベクトルのサイズ(ベクトルの要素数)を計算する。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvcount_input}〜\ref{tbl:mvcount_out3}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvcount_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4& \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{基本例\label{tbl:mvcount_out1}}
+\verb|mvcount vf=items:size i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&items&size \\
+\hline
+1&a b c&3 \\
+2&a d&2 \\
+3&b f e f&4 \\
+4& &0\\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mvcount vf=|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=| & 要素数をカウントするベクトルの項目名(\verb|i=|ファイル上)を指定する。\\
+           & 結果項目を\verb|:|に続けて複数項目指定可能。\\
+           & 複数項目指定可能。\\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvcount_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

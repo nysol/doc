@@ -1,0 +1,26 @@
+\subsubsection*{Example 1: Basic Example}
+
+Combine the \verb|date| column from reference file to the \verb|customer| column from the input file.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer
+A
+B
+$ more ref1.csv
+date
+20090101
+20090201
+20090301
+$ mproduct f=date m=ref1.csv i=dat1.csv o=rsl1.csv
+#END# kgproduct f=date i=dat1.csv m=ref1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,date
+A,20090101
+A,20090201
+A,20090301
+B,20090101
+B,20090201
+B,20090301
+\end{Verbatim}

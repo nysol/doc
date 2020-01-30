@@ -1,0 +1,62 @@
+
+%\begin{document}
+
+\section{mcommon - Select Common Records in Reference File\label{sect:mcommon}}
+\index{mcommon@mcommon}
+Compare records in the input file with the ones in the reference file, at which reference file is specified in \verb|m=| parameter. Set the key parameter at \verb|k=| for selecting records common in both files. 
+
+\subsection*{Format}
+\verb/mcommon  k= [K=] [u=] [-r] m=|/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & List of key field(s) to match the input data  (Multiple keys can be specified) \\
+             & Records in the input file matching the key field(s) in the reference file specified at  \verb|K=| is selected.  \\
+             & Records with same key values will appear in consecutive rows.  \\
+\verb|m=|    & Specify reference file name\\
+             & Standard input is used when this parameter is omitted (when \verb|i=| option is specified). \\
+\verb|K=|    & Key field(s) to match with from the reference data (Multiple keys can be specified). \\
+             & Records in the reference file that matches the key field specified in the \verb|k=| parameter is selected.   \\
+             & The parameter is not required if the key field is the same on both input data and reference file. \\
+             & Records with same key values will therefore appear in consecutive rows. \\
+\verb|u=|    & File name of output with unmatched records. \\
+\verb|-r|    & Reverse selection\\
+             & Compare the value specified at \verb|k=| parameter from the input file \\
+             & with the value from the reference file specified at \verb|m=| parameter, \\ 
+             & and select unmatched record(s) from the input file.  
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcommon_ex.tex}
+
+\subsection*{Related commands}
+\hyperref[sect:mselstr]{mselstr} : This command can be used when the types of join key in reference file is not a lot.
+
+\hyperref[sect:mnrcommon]{mnrcommon} : This command can be used when the join key in the reference file is not unique. 
+
+\hyperref[sect:mjoin]{mjoin} : This command is not only used for selecting data, but also for combining fields. 
+
+%\href{run:mselstr.pdf}{mselstr}: Select records by character string\\
+%\href{run:msel.pdf}{msel}:Select records with condition\
+%\href{run:mjoin.pdf}{mjoin}:Join data from the reference file \\
+%\href{run:mnjoin.pdf}{mnjoin}:Natural join with data from reference file \\
+
+%\end{document}

@@ -1,0 +1,185 @@
+
+%\begin{document}
+
+\section*{mvcal operations on vector }
+Performs various operations on vector .
+
+\begin{table}[htbp]
+\begin{center}
+\caption{list of vector operation\label{tbl:ope}}
+\begin{tabular}{ccc}
+\hline
+operator&signification \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:input} shows the string sequence under the items column. Each element in the string is separated by a space. 
+
+Some examples are shown in Table \ref{tbl:input}〜\ref{tbl:out3}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Reference file\label{tbl:ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{cc}
+\hline
+item&taxo \\
+\hline
+a&X \\
+b&Y \\
+c&Z \\
+e&X \\
+f&Z \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:out2}}
+\verb|vf=items m=ref.csv K=item f=taxo|
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.50\hsize}
+\begin{center}
+\caption{the example of specification of an unmatched item.\label{tbl:out3}}
+\verb|vf=items m=ref.csv K=item f=taxo n=* | \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b c X Y Z \\
+2&a d X * \\
+3&b f e f Y Z X Z \\
+4&f c d Z Z * \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Since the \verb|mvjoin| command once sets reference file data to a memory altogether, when a huge reference file is specified, it is cautious of a memory being used up. 
+
+\subsection*{format}
+\verb|mvjoin vf= [K=] m= f= [n=]|
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & The item name of the item set used as a joint key (\verb|i=|on a file) is specified. 
+This parameter is mandatory.\\
+           & Multiple items can be specified. Sorting of the item does not have to be carried out.  \\
+\verb|m=|  & A reference file is specified. \\
+\verb|K=|  & The item name of the item used as the joint key on reference file(\verb|m=|) is specified. 
+This parameter is mandatory.\\
+\verb|f=|  & The item (set) item name to combine is specified. 
+This parameter is mandatory.\\
+\verb|n=|  & The character string combined when the item of vf= and K= does not match is specified.  \\
+           & When it omits, combination of the target item is not performed. 
+ \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Usage examples}
+\subsubsection*{Example 1 the example combined to multiple items}
+\begin{verbatim}
+------------------------------------------------
+# dat1.csv
+items1,items2
+b a c,b b
+c c,a d
+e a a,a a
+
+# ref.csv
+item,taxo
+a,X
+b,X
+c,X
+d,Y
+e,Y
+
+$ mvjoin vf=items1,items2 m=ref.csv f=taxo i=dat1.csv o=rsl1.csv
+
+# rsl1.csv
+items1,items2
+b a c X X X,b b X X
+c c X X,a d X Y
+e a a Y X X,a a X X
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{related command}
+\begin{itemize}
+\item \href{run:mvcommon.pdf}{mvcommon}: selection of the vector element by a reference file 
+
+\end{itemize}
+
+\end{document}

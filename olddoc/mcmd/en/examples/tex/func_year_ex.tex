@@ -1,0 +1,40 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,date
+1,20000101
+2,20121021
+3,
+4,19770812
+$ mcal c='year($d{date})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=year($d{date}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,date,rsl
+1,20000101,2000
+2,20121021,2012
+3,,
+4,19770812,1977
+\end{Verbatim}
+\subsubsection*{Example 2: Time formatted values}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,time
+1,20000101000000
+2,20121021111213
+3,
+4,19770812122212
+$ mcal c='year($t{time})' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=year($t{time}) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,time,rsl
+1,20000101000000,2000
+2,20121021111213,2012
+3,,
+4,19770812122212,1977
+\end{Verbatim}

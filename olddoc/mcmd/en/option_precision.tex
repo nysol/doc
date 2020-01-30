@@ -1,0 +1,24 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{precision= Number of significant digits\label{sect:option_precision}}
+
+Applies sprintf format \verb|["%.|$n$\verb|g"]| in C language.
+This format converts the number of significant figures defined from normalized notation (integer bits, decimal bits: ex.\verb|123.456|) to exponent notation (mantissa e$\pm$ exponent part: ex. \verb|1.23456e+02|).
+The criteria to adopt exponent notation for conversion is when the exponent bits exceed the specified number of significant digits or if it is less than or equal to -5 (i.e more than 4 zeros after decimal points).
+
+Integers between 1 to 16 can be specified in $n$, the default value is 10.
+When $n<1$, set $n=1$, and when $n>16$ set to $n=16$.  
+
+In addition, the number of significant figures can be changed by setting the environment variable \verb|KG_Precision|. However, changes to the environment variable will affect the execution of all commands.
+
+\subsection*{Examples}
+\input{examples/tex/option_precision_ex.tex}
+
+\subsubsection*{Related commands}
+This setting applies to all commands for calculating real numbers which is used in \hyperref[sect:msum]{msum},\hyperref[sect:mcal]{mcal}.
+
+
+%\end{document}
+

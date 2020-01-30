@@ -1,0 +1,409 @@
+
+\section{msequence.rb 頻出系列パターンの列挙\label{sect:msequence}}
+アイテム系列データから頻出系列パターンを列挙する。
+アイテム系列データとは、順序付けられたアイテム列の集合であり、
+本コマンドは、アイテム系列データに多頻度に出現する部分系列をパターンとして列挙する。
+系列パターンが系列データに出現(もしくはマッチ)するとは、
+パターンを構成するアイテム全てが、その順序で系列データ上に現れることを意味する。
+列挙のコアアルゴリズムにはLCMseq(LCM algorithm for enumerating all frequently appearing sequences)を用いている\cite{UnoWeb}。
+本コマンドは以下のような特徴を持つ。
+\begin{itemize}
+% \item 他のパターンに含まれないパターン(極大パターン)を列挙することができる。
+%\item 同一の出現件数における極大パターン(飽和パターン)を列挙することができる。
+ \item gap長とwindow幅の制約条件(上限値)を与えることができる。
+ \item gap長とwindow幅の制約条件(上限値)を時間制約として与えることも可能。
+ \item アイテムの分類階層(taxonomy)を用いることができる。
+ \item 分類クラスを指定することで、あるクラスに特徴的なパターン(顕在系列パターン)を列挙することができる。
+3つ以上のクラスにも対応している。
+ \item アイテム集合のシーケンス(同じ時刻に異なる複数のアイテム)は扱うことができない。
+\end{itemize}
+
+表\ref{tbl:seqDB}に、本コマンドが扱う入力データ例を示す。
+tid項目によってひとつのシーケンスを識別し、time項目でitem項目の順序を表す。
+同じ時刻に複数のitemを含めることはできない(
+同時刻に複数のitemが存在した場合の動作は不定である)。
+ただし、time項目は基本的にはitemの順序を決めるためのみに利用される。
+\verb|-padding|オプションを指定した時のみ、整数で与えられたtime項目の値に応じたgap長やwindow幅の設定が可能となる(後述)。
+また、表\ref{tbl:seqDB}のデータを、わかりやすさのためにアイテムの順序、及び時刻別の順序として表したデータを
+、それぞれ表\ref{tbl:seqvDB}および表\ref{tbl:seqtimeDB}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.2\hsize}
+\begin{center}
+\caption{系列データ\label{tbl:seqDB}}
+{\small
+\begin{tabular}{ccc}
+\hline
+tid&time&item\\
+\hline
+T1&0&C\\
+T1&2&B\\
+T1&3&A\\
+T1&7&C\\
+T2&2&D\\
+  &:&\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{ベクトル型で表示\label{tbl:seqvDB}}
+{\small
+\begin{tabular}{cl}
+\hline
+  &シーケンス \\
+\hline
+T1&C B A C\\
+T2&D A B C\\
+T3&C B D E\\
+T4&A C B\\
+T5&B A D D C C\\
+T6&A B D B C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{時刻を考慮した表示\label{tbl:seqtimeDB}}
+{\small
+\begin{tabular}{ccccccccccc}
+\hline
+  &0&1&2&3&4&5&6&7&8&9 \\
+\hline
+T1&C& &B&A& & & &C& & \\
+T2& & &D&A& &B&C& & & \\
+T3& &C&B& &D& & & &E& \\
+T4& & &A& & & &C& & &B\\
+T5&B&A&D&D& & & &C& &C\\
+T6&A& & & & &B&D& &B&C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+このデータについて2件以上出現する系列パターンは(A C),(B C),(D B C)など20件存在する(例1を参照)。
+系列パターン(B C)は、tidがT1,T2,T5,T6のレコードに出現している。
+T3、T4はアイテムBとCの両方を含んでいるが、出現順序が違うために出現したことにはならない。
+
+%\subsubsection*{マッチとその位置}
+%ここで系列パターンの出現について、より詳しく見ていく。
+%系列パターンが系列データに出現(もしくはマッチ)するとは、
+%パターンを構成するアイテム全てが、その順序でデータ上に出現することを意味する。
+%また、後述するGAP制約およびWINDOW制約を理解するにあたって、
+%パターンがデータ上でマッチする位置も重要である。
+%例えば、パターン(B C)はデータ(B C C)に対して、1,2文字目にも、1,3文字目にもマッチするが、
+%本コマンドでは前者のマッチを優先させる。
+%そのルールは、パターンの各アイテムが最初にマッチした位置をマッチ位置とするものである。
+%いくつかの例を表\ref{tbl:match}に示す。
+
+%\begin{table}[htbp]
+%\begin{center}
+%\begin{tabular}{ccc}
+
+%\begin{minipage}{0.4\hsize}
+%\begin{center}
+%\caption{パターン(A C)がマッチする位置。太字で示された位置にマッチしたことになる。\label{tbl:match}}
+%{\small
+%\begin{tabular}{l}
+%\hline
+%{\bf A}B{\bf C}D \\
+%{\bf A}B{\bf C}CD \\
+%B{\bf A}AB{\bf C}D \\
+%{\bf A}AB{\bf C}CD \\
+%{\bf A}BAB{\bf C}CD \\
+%B{\bf A}AB{\bf C}ADC \\
+%{\bf A}BCB{\bf C}D \\ \hline
+%\end{tabular} 
+%}
+%\end{center}
+%\end{minipage}
+%\end{tabular} 
+%\end{center}
+%\end{table} 
+
+\subsubsection*{頻出系列パターン}
+頻出系列パターンとは、出現頻度(サポートと呼ぶ)が
+ユーザの与えた最小サポート以上であるような系列パターンのことを言う。
+最小サポートが3件とすると、
+系列パターン(B D)は、系列データT3,T5,T6の3件に出現しているので頻出であるが
+順序を逆にした系列パターン(D B)は、系列データT2,T6の2件にしか出現しないので頻出ではない。
+%系列パターン(B D C)はT5,T6の2件にしか出現していないので頻出ではない。
+ここで最小サポート3件を満たす全ての頻出系列パターンと、その出現件数を表\ref{tbl:freqSeq}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\caption{表\ref{tbl:seqvDB}において最小サポート3件を満たす全頻出系列パターンとその出現トランザクション\label{tbl:freqSeq}}
+\begin{tabular}{lcl}
+\hline
+系列パターン&出現件数&出現トランザクション \\
+\hline
+C   & 6 & T1,T2,T3,T4,T5,T6\\
+B   & 6 & T1,T2,T3,T4,T5,T6\\
+A   & 5 & T1,T2,T4,T5,T6 \\
+A C & 5 & T1,T2,T4,T5,T6 \\
+B C & 4 & T1,T2,T5,T6 \\
+D   & 4 & T2,T3,T5,T6\\
+A B & 3 & T2,T4,T6\\
+B D & 3 & T3,T5,T6\\
+C B & 3 & T1,T3,T4\\
+D C & 3 & T2,T5,T6\\
+\hline
+\end{tabular} 
+\end{center}
+\end{table} 
+
+%頻出アイテム集合を列挙すると、時にその数は膨大なものとなる。
+%そこで、列挙された頻出系列パターンから代表的な系列パターンのみを出力する
+%方法として、極大系列パターンの列挙がある。
+
+%\subsubsection*{極大系列パターン}
+%ある系列パターンが、その他の系列パターンに包含されていなければ(出現しなければ)、
+%その系列パターンを極大系列パターンと呼ぶ。
+%表\ref{tbl:freqSeq}において、(A B C)は他のどのパターンにも包含されていないので極大パターンであるが、
+%(A),(B),(C),(A C),(B C),(A B)は、いずれも(A B C)に包含されているので極大ではない。
+%極大系列パターンは、(B D),(C C),(A B C),(C B),(D C)の5つである。
+
+\subsubsection*{顕在系列パターン}
+各データが属する「クラス」を導入し、あるクラスに特徴的な系列パターンを列挙する。
+ここで特徴的とは、あるクラスには多頻度で、他のクラスでは多頻度でないことである。
+例えば、スーパーマーケットでは、男性と女性で購買されるアイテムの順序の違いを識別したい時などに使われる。
+顕在系列パターンの列挙例は\hyperref[ex:ep1]{例5}を、
+また、顕在系列パターンの評価指標として用いられる増加率や事後確率については、
+\hyperref[sect:mitemset]{mitemset.rb}コマンドの\hyperref[sect:ep]{資料1}を参照のこと。
+
+\subsubsection*{階層分類}
+アイテムの階層分類を反映させることができる。
+詳細は\hyperref[sect:mitemset]{mitemset.rb}コマンドを参照のこと。
+
+\subsubsection*{gap長上限}
+%列挙する系列パターンの系列データへのマッチの判定条件を制約することでができる。
+%そのことにより、同じパターンであっても出現数が異なってくるため、
+%結果として異なるパターンが列挙されることになる。
+gap長とは、系列パターンの隣接する任意の2アイテムについて、
+系列データ上でマッチした部分系列の距離(2アイテム間のアイテム数$-1$)として定義される。
+例えば、系列パターン(A B C)と系列データ(A D D D B D C)では、
+パターン上で隣接する2アイテムAB間の系列データ上でのgap長は4で、BC間のgap長は2である。
+gap長上限を指定することによって、系列パターンの「出現」の定義を、パターン上の任意のgap長が指定した上限以下であるように制約する。
+なお、複数のマッチが存在する場合は、いずれかのマッチが制約を満たしていれば出現したと考える。
+gap長上限を1に設定すると、データ上で隣接する頻出系列パターンを列挙することになる。
+gap長の計算例を表\ref{tbl:gapwin}に示す。
+
+\subsubsection*{window幅上限}
+window幅とは、マッチした系列データ上の部分系列について、その始点から終点までの長さ(アイテム数)である。
+例えば、パターン(A B C)と系列データ(C A D C B D C)を考えると、
+データ上のマッチした始点が2番目のアイテムで、終点が7番目目のアイテムとなり、window幅は6となる。
+window幅上限を指定することによって、パターンの出現の定義を、データ上のマッチ幅が指定した上限以下であるように制約する。
+なお、複数のマッチが存在する場合は、いずれかのマッチが制約を満たしていれば出現したと考える。
+window幅の計算例を表\ref{tbl:gapwin}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\caption{パターン(A B C)がマッチする位置と、そのgap長とwindow幅。
+下の4行は、系列データAAABCCについて4通りのマッチが存在し、
+それら全てのマッチについてのgap長とwindow幅を示している。
+これらのgap長もしくはwindow幅の一つでも条件にマッチすれば出現したとみなされる。
+例えば、window上限を3に設定した場合は、パターンABCは出現したことになるが、
+上限を2にすると出現したことにはならない。
+\label{tbl:gapwin}}
+\begin{tabular}{lccc}
+\hline
+系列データ & A-B間gap長 & B-C間gap長 & window幅 \\
+\hline
+{\bf A} D D D D {\bf B} D {\bf C} D & 5 & 2 & 8 \\
+{\bf A B C} D & 1 & 1 & 3 \\
+C {\bf A} A C {\bf B} A {\bf C} C & 3 & 2 & 6\\
+C {\bf A} C {\bf B} B A {\bf C} B C & 2 & 3 & 6\\
+\hline
+{\bf A} A {\bf B} {\bf C} C & 2 & 1 & 4\\
+A {\bf A} {\bf B} {\bf C} C & 1 & 1 & 3\\
+{\bf A} A {\bf B} C {\bf C} & 2 & 2 & 5\\
+A {\bf A} {\bf B} C {\bf C} & 1 & 2 & 4\\
+\hline
+\end{tabular} 
+\end{center}
+\end{table} 
+
+\subsubsection*{時間制約}
+LCMseqでは、アイテムの出現時刻を直接指定してgap長制約やwindow幅制約を指定することができない。
+そこで、前処理でアイテムが存在しない時刻に架空のアイテム("!":エクスクラメーションマーク)を導入することで時間制約を実現する。
+\footnote{
+そのため、アイテムの文字列として"!"を利用することはできない。
+}
+例えば、表\ref{tbl:seqtimeDB}に示された系列データは、表\ref{tbl:paddingDB}に示されるようなデータに変換される。
+そして、架空アイテムを挿入した系列データに対してgap長制約やwindow制約を指定して系列パターンを列挙する。
+そして最終の出力時に架空アイテムを含む系列パターンの出力を抑制する。
+
+\begin{table}[htbp]
+\begin{center}
+\caption{時間を考慮したgap長制約とwindow制約を実現するために、アイテムの存在しない時刻に架空のアイテム"!"を挿入する。
+\label{tbl:paddingDB}}
+{\small
+\begin{tabular}{cl}
+\hline
+  &シーケンス \\
+\hline
+T1&C ! B A ! ! ! C\\
+T2&D A ! B C\\
+T3&C B ! D ! ! ! E\\
+T4&A ! ! ! C ! ! B\\
+T5&B A D D ! ! ! C ! C\\
+T6&A ! ! ! ! B D B ! C\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\subsubsection{出力}
+本コマンドが出力するデータは、大きく分けて２つあり、一つは、列挙された系列パターンデータ(\verb|patterns.csv|)、
+そして他方は、それらのパターンをどのトランザクションが含むかについての情報(\verb|tid_pats.csv|である。
+パターンデータは、顕在系列パターンの場合異なるCSV項目を出力する。
+表\ref{tbl:qpat}〜表\ref{tbl:qep_pat}にそれらのサンプルを示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.6\hsize}
+\begin{center}
+\caption{patterns.csvのデータ例\label{tbl:qpat}。pid項目は一つの系列パターンを識別するためのIDで、
+sizeはパターンとしてのアイテム集合を構成するアイテム数、countはそのパターンが出現した系列データ数、
+そしてtotalは全系列データ数である。supportは出現確率で、count/totalで計算される。
+最後にpatternが系列パターンで、アイテムは半角スペースで区切られている。}
+{\small
+\begin{tabular}{crrrrl}
+\hline
+pid&pattern&size&count&total&support \\
+\hline
+1  & C  &1&6&6&1\\
+4  & B  &1&6&6&1\\
+11 & A C&2&5&6&0.8333333333\\
+10 & A  &1&5&6&0.8333333333\\
+16 & D  &1&4&6&0.6666666667\\
+7  & B C&2&4&6&0.6666666667\\
+12 & A B&2&3&6&0.5\\
+2  & C B&2&3&6&0.5\\
+19 & D C&2&3&6&0.5\\
+3  & C C&2&2&6&0.3333333333\\
+:  & :  &:&:&:&:\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{tidpats.csvの内容例\label{tbl:qtid_pats}。tidは系列データIDで、
+tid=パラメータで指定した入力データ項目に対応している。
+そしてそれぞれの系列データに含まれる系列パターンのIDがpidで示されている。
+}
+{\small
+\begin{tabular}{cr}
+\hline
+tid&pid \\
+\hline
+T1&0 \\
+T1&1 \\
+T1&10 \\
+T1&2 \\
+T2&0 \\
+T2&1 \\
+T2&10 \\
+T2&11 \\
+T3&0 \\
+T3&1 \\
+:&: \\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{minipage}
+
+\end{tabular} 
+\end{center}
+\end{table} 
+
+\begin{table}[htbp]
+\begin{center}
+\caption{顕在パターンにおけるpatterns.csvの内容例\label{tbl:qep_pat}。
+class項目は、どのクラスに特徴的な顕在パターンか、その対象クラスを示している。
+pid,pattern,size,totalは表\ref{tbl:qpat}と同様である。
+posは対象クラスのトランザクションに出現した件数で、
+negはそれ以外のクラスのトランザクションに出現した件数である。
+posTotal,negTotalは、対象クラスとそれ以外のクラスのトランザクション件数である。
+supportは、対象クラスにおける出現確率で、pos/posTotalで計算される。
+growthRateは増加率で、support/(neg/negTotal)で計算される値である。
+分母が0の場合はinfと表示される。
+この値が大きいほど、対象クラスに特徴的であることを意味する。
+postProbは、パターンを条件とした時の対象クラスの事後確率で、
+growthRateと同様、この値が大きいほど対象クラスに特徴的であることを意味する。
+詳細な定義はmitemset.rbコマンドの解説の\hyperref[sect:ep]{資料1}を参照のこと。
+}
+{\small
+\begin{tabular}{cclrrrrrrrrr}
+\hline
+class&pid&pattern&size&pos&neg&posTotal&negTotal&total&support&growthRate&postProb\\
+\hline
+cls1&1&B C&2&3&0&4&2&6&0.75&inf&1\\
+cls2&9&B C D&3&2&0&2&4&6&1&inf&1\\
+cls2&10&A D&2&2&0&2&4&6&1&inf&1\\
+cls2&11&A C D&3&2&0&2&4&6&1&inf&1\\
+cls2&8&B D&2&2&1&2&4&6&1&4&0.6666666667\\
+cls2&12&C D&2&2&1&2&4&6&1&4&0.6666666667\\
+\hline
+\end{tabular} 
+}
+\end{center}
+\end{table} 
+
+\subsection{書式}
+\begin{verbatim}
+msequence.rb i= [x=] [O=] [tid=] [item=] [class=] [taxo=] [s=|S=] [sx=|SX=] [l=] [u=]
+             [gap=] [win=] [p=] [g=] [top=] [-padding] [T=] [--help]
+
+  i=       key型トランザクションデータファイル名【必須】
+  c=       クラスファイル名【オプション】
+  x=       階層分類データファイル名【オプション】
+  O=       出力パス名【オプション:default=./take_#{日付時刻}】
+  tid=     トランザクションID項目名【必須】
+  time=    トランザクションID項目名【必須】
+  item=    時間項目名(i=上の項目名)【オプション:default="time"】 
+  class=   クラス項目名(c=上の項目名)【オプション】
+           クラス項目名を指定すると顕在パターンが列挙される。
+  taxo=    分類項目名【条件付き必須:x=】
+  s=       最小サポート(確率)【選択必須:s=, S=】
+  S=       最小サポート(件数)【選択必須:s=, S=】
+  sx=      最大サポート(確率)【オプション】
+  SX=      最大サポート(件数)【オプション】
+  l=       最小アイテム集合サイズ【オプション】
+  u=       最大アイテム集合サイズ【オプション】
+  gap=     パターンのギャップ長の上限(0以上の整数)【オプション:0で制限無し,default:0】
+  win=     パターンの窓サイズの上限(0以上の整数)【オプション:0で制限無し,default:0】
+  p=       顕在パターン用最小事後確率【オプション:default=0.5】
+  g=       顕在パターン用最小増加率【オプション】
+  top=     列挙するパターン数の上限【オプション:default:制限なし】
+  -padding 時刻を整数とみなし、連続でない時刻に特殊なアイテムがあることを想定する。
+           gap=やwin=の指定に影響する。
+  T=       ワークディレクトリ【オプション】
+  --help   ヘルプの表示
+\end{verbatim}
+
+\subsection{利用例}
+\input{examples/tex/msequence_ex.tex}
+
+

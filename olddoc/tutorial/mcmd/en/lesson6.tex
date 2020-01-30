@@ -1,0 +1,207 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+
+\section{Lesson 6: Select records with msel command}
+
+When processing large amount of data, typical operations in handling large data manipulation tasks include selecting records based on users' defined criteria. The operation is carried out by \verb|msel| command which allows users to define the filter for query and the selection method. \verb|msel| command supports the use of operators to compare strings and numbers. 
+
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|msel.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective: Select the quantity and amount information for transactions that took place on 20 Oct 2001.    \\
+
+Methodology: Select the fields \emph{date, quantity, and amount} with \verb|mcut| command, then redirect the output to \verb|msel| with pipe. Define the condition parameter to select records with date matches "20011020". Save the output to the file \verb|msel.csv|. \\
+
+This lesson will use the dataset \verb|dat.csv| generated from the \verb|mdata| command in lesson 1. 
+
+ \subsection{Step 2: Usage of msel command }
+
+
+{\setlength{\parindent}{0cm}
+Specify the parameters in \verb|msel| as follows: \\
+
+Condition:		\verb|c='${date}==20011020'| \\
+Description: 	Specify the query condition at the \verb|c=| parameter using a comparison operator where the date equals "20011020". The argument should be specified in single quotes. The attribute \verb|date| to be compared is preceded by "\$" as it is treated as a dynamic variable for each record to compare against the exact condition "20011020".\\
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 6: Select Records 
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount                      i=${inPath}/dat.csv |
+msel c='${date}==20011020'   			o=outdat/mselout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{Step 3: Specify multiple attributes }
+
+\begin{verbatim}
+$ ./msel.sh 
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/17 19:18:03
+#END# kgsel c=${date}==20011020 o=outdat/mselout.csv; IN=24737 OUT=106; 2013/08/17 19:18:03
+\end{verbatim}
+
+\noindent
+The result is as follows: 
+
+\begin{verbatim}
+date,quantity,amount
+20011020,1,541
+20011020,1,273
+20011020,1,506
+20011020,1,441
+20011020,1,634
+20011020,1,411
+20011020,1,561
+20011020,4,1940
+20011020,3,1515
+20011020,1,515
+20011020,1,467
+20011020,1,515
+20011020,1,1077
+20011020,1,357
+...
+..
+\end{verbatim}
+
+\subsubsection{Method 2: Query with mselstr }
+
+{\setlength{\parindent}{0cm}
+
+\verb|mselstr| command can be used to select records matching the specified string value. The parameters are as follows: \\
+
+Field: 		\verb|f=date| \\
+Description: 	Specify the query field at the \verb|f=| parameter. In this case, \emph{date} will be specified as the parameter. \\
+
+Value: 		\verb|v=20011020| \\
+Description: 	Specify the value of date to query at the \verb|v=| parameter. 
+
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 6: Select Records 
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+mcut f=date,quantity,amount                      i=${inPath}/dat.csv |
+mselstr f=date v=20011020  			o=outdat/mselout.csv
+#==========================================
+\end{verbatim}
+
+
+
+\begin{verbatim}
+$ ./msel.sh
+#END# kgcut f=date,quantity,amount i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2013/08/17 19:07:25
+#END# kgselstr f=date o=outdat/mselout.csv v=20011020; IN=24737 OUT=106; 2013/08/17 19:07:25
+\end{verbatim}
+
+\noindent
+The command returns 106 records with the same results as using \verb|mselstr|. 
+
+\subsubsection{Method 3: Select rows that satisfy multiple conditions}
+
+Users can use conjunction operator "\&\&" to select subsets of data that satisfy two or more expressions.  For instance, If you want to select transactions with quantity larger than 5 and amount larger than or equal to 1000, the condition parameter can be specified as follows.
+
+\begin{verbatim}
+mcut f=date,quantity,amount                     		i=${inPath}/dat.csv |
+msel c='${quantity}>5 && ${amount}>=1000'       o=outdat/mselout0.csv
+\end{verbatim}
+
+Order of operations is a set of rules which spell out the order of operations. In this example, the operators "greater than" and "greater than and equal to" are given higher priority than "\&\&". The operator  "greater than" and "greater than and equal to" have the same priority and will be executed in specified order from left to right. Parentheses can be used to denote precedence by grouping parts of the expressions to performed first. For instance, if we want to select transactions that took place after 20011015 where quantity is larger than 5 or amount is larger than or equal to 1000, we can define the expression as follows: 
+
+\begin{verbatim}
+msel c='${date}>20011015 && (${quantity}>5 || ${amount}>=1000)' 
+
+The expression to select transactions with quantity larger than 5 or amount is larger than or equal to 1000 "${quantity}>5 || ${amount}>=1000" is in parentheses as it is seen as one condition to be compared with transactions that took place after 20011015 "${date}>20011015". 
+\end{verbatim}
+
+\subsection{Step 4: Use of arithmetic operators}
+
+In addition to comparison operators, arithmetic operators in \verb|mcal| can also be used in \verb|msel| command. \\
+
+Given that "Amount = Unit Price X Quantity", let's select the records where unit price is less than or equal to 100 yen. The sample script is as follows: 
+
+\begin{verbatim}
+mcut f=date,quantity,amount                     i=${inPath}/dat.csv |
+msel c='(${amount}/${quantity})<=100'           o=outdat/mselout0.csv
+
+The output is shown below: 
+date,quantity,amount
+20010326,1,91
+20010509,5,455
+20010616,1,91
+20010619,1,91
+20010702,1,91
+20010720,1,91
+20010730,5,455
+20010909,1,91
+20010326,1,91
+20010502,1,91
+20010509,5,455
+20010616,1,91
+20010619,1,91
+20010702,1,91
+20010720,1,91
+20010730,1,91
+20010909,1,91
+20010911,1,91
+20011117,1,91
+20010326,1,91
+20010509,6,546
+20010326,1,91
+20010509,5,455
+20010616,5,455
+\end{verbatim}
+
+{\setlength{\parindent}{0cm}
+\textbf{What is the difference between comparing character strings and numerical values }\\
+
+
+In the example above, the result from comparing numerical values is the same as comparing character strings. However, numeric values and strings are processed differently. During comparison, strings assumed to be of same length and string type are compared by the first character of each and the second character of each in lexical order. Thus,  20 is larger than 100. In numeric comparison, 100 is greater than 20. 
+
+}
+
+%\newpage
+
+\subsection{Exercise }
+
+Let's practice the \verb|msel| function on the reports below. Check your results with the scripts and output files below. 
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{Report name}   & \textbf{Script name} & \textbf{Output file}  \\
+\hline
+1. Report on total quantity and total amount per day for transactions after "20011120". \\ with amount greater than 1000. & \href{exercise/msel1.sh}{msel1.sh} & \href{exercise/outdat/mselout1.csv}{mselout1.csv} \\
+2. Report on daily total quantity and total amount of which transactions took place after \\ 5pm
+(Time: 170000) with unit price less than or equal to 200. & \href{exercise/msel2.sh}{msel2.sh} & \href{exercise/outdat/mselout2.csv}{mselout2.csv} \\
+3. Display on daily total quantity and amount for manufacturer "0300". & \href{exercise/msel3.sh}{msel3.sh} & \href{exercise/outdat/mselout3.csv}{mselout3.csv} \\
+4. Display on daily total quantity and amount for manufacturer "0300"  or  "0320". & \href{exercise/msel4.sh}{msel4.sh} & \href{exercise/outdat/mselout4.csv}{mselout4.csv} \\
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

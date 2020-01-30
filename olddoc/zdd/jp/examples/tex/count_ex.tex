@@ -1,0 +1,28 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> f=a+b+a*b
+> f.show
+ a b + a + b
+> puts f.count
+3
+
+> g=a+b+a*b+1
+> g.show
+ a b + a + b + 1
+> puts g.count
+4
+
+> c=ZDD::constant(0)
+> puts c.count
+0
+
+> d=ZDD::constant(1)
+> puts d.count
+1
+\end{Verbatim}

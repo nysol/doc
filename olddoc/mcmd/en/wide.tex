@@ -1,0 +1,81 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{Multibyte Characters\label{sect:multibyte}}
+
+MCMD handles multibyte characters such as Chinese characters in UTF-8 encoding. 
+Other encodings such as SHIFT\_JIS can be treated as multibyte characters, however, some functions may not work correctly. The following explains how MCMD process multibyte characters.
+ 
+ Kanji-code is processed as multibyte characters without conversion in order to increase the processing speed when using MCMD. However, character string search and string substitution functions may result in unexpected results depending on the encoding.
+
+For example, "陰(shadow)" is represented as 0x8941 in SHIFT\_JIS, the second byte of this character refers to "A" in single-byte characters. Thus, when “A” is substituted with “B”,  "陰” will be converted to “隠 (hidden)” (0x8942). The UTF-8 uses an encoding system which could avoid problems with character substitution. Moreover, it is difficult to count the number of characters in strings containing multibyte characters and ASCII characters even in UTF-8. 
+
+This problem can be avoided by converting all characters including ASCII code to fixed length character, known as wide character (MCMD adopts 32-bit fixed length). 
+
+When converting wide characters, it is necessary to find out the encoding for multibyte characters in the environment variable \verb|LANG|. Type the following at the command prompt to check the environment variable, . 
+ 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ echo $LANG
+ja_JP.UTF-8
+\end{Verbatim}
+
+Some MCMD commands have built-in option (\verb|-W|) to convert input data to wide characters before data processing. The list of commands which support the option is shown in Table \ref{tbl:wide_cmd}. 
+These commands pertain to search or replace functions, it is not necessary to use this option if encoding is set as UTF-8. 
+
+\begin{table}[htbp]
+\begin{center}
+\caption{List of commands with wide character conversion function \label{tbl:wide_cmd}}
+%\begin{tabular}{lll}
+\begin{tabular}{lp{2cm}lp{2cm}lp{4cm}l}
+\hline
+Command name & Function & Description \\
+\hline
+mchgstr & Substitution & -By specifying -W, the field data specified by f=  is converted to wide characters internally. \\
+mselstr & Search & In case of substring matching (-sub),\\
+        &      & the field data specified by f=  is converted to wide characters internally. \\
+msed    & Substitution & By specifying -W, the field data specified by f=  is converted to wide characters internally.\\
+mtonull & Search & For substring matching (-sub),\\
+        &      & he field data specified by f=  is converted to wide characters internally. \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+In addition, mcal and msel incorporated functions to handle wide characters (Table \ref{tbl:wide_mcal}).
+For instance, the \verb|lengthw| function counts the number of characters and computes the character position for data in UTF-8 encoding. 
+
+\begin{table}[t]
+\begin{center}
+\caption{List of mcal functions with wide character conversion function\label{tbl:wide_mcal}}
+%\begin{tabular}{llc}
+\begin{tabular}{lp{2cm}lp{3cm}lp{6cm}l}
+\hline
+Name of the function    & Function & Details \\
+\hline
+lengthw   & Number of characters     & Convert target string to wide character before processing. \\
+midw      & Substring & Convert target string to wide character before processing. \\
+rightw    & Substring & Convert target string to wide character before processing.  \\
+leftw     & Substring & Convert target string to wide character before processing.  \\
+regexsw   & Match regular expression & Convert target string to wide character before processing.  \\
+regexmw   & Match regular expression  & Convert target string to wide character. \\
+regexrepw & Substitute by regular expression   & Convert target string to wide character. \\
+regexlenw & Match length by regular expression & Convert target string to wide character. \\
+regexposw & Match position by regular expression & Convert target string to wide character.   \\
+regexstrw & Substring match by regular expression  & Convert target string to wide character.  \\
+regexpfxw & Prefix by regular expression & Convert target string to wide character.  \\
+regexsfxw & Suffix match by regular expression & Convert target string to wide character.  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Take note of the following when handling wide-character.
+\begin{itemize}
+\item Conversion to wide character involves overhead which sacrifices the processing speed.
+\item Wide characters input data can be converted except for the field names. 
+\item File name with multibyte characters can be processed as it. 
+ \end{itemize}
+
+%\end{document}
+

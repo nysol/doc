@@ -1,0 +1,57 @@
+
+%\begin{document}
+
+\section{mmvsim - Sliding Windows Similarity Meausre\label{sect:mmvsim}}
+\index{mmvsim@mmvsim}
+
+Compute the similarity measure (bivariate statistics) using settings of sliding window. This is the sliding windows version of the \hyperref[sect:msim]{msim} command. The main difference between the two is that \verb|msim| can only carry out similarity calculation for 1 target object, whereas \verb|mmvsim| quantifies similarity between two objects.    
+
+
+\subsection*{Format}
+\verb|mmvsim [s=] [k=] f= c= a= [t=] [skip=] -n |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|s=|    &After the specified field is sorted (multiple fields can be specified), a variety of similarity computation is carried out. \\
+             & \verb|s=| parameter is required if  \verb|-q| is not specified. \\
+\verb|k=|    & Aggregate records using the specified field name(s) (multiple fields can be specified). \\
+\verb|f=|    & Field name(s) (multiple fields can be specified) for computation . \\
+\verb|t=|    & Integer intervals that is greater than 1.  \\
+\verb|c=|    & Define measures of similarity (one from the following).\\
+             & \verb/covar|ucovar|pearson|spearman|kendall|euclid|/\\
+             & \verb/cosine|cityblock|hamming|chi|phi|jaccard|support|lift/ \\
+             & Refer to \hyperref[sect:msim]{msim} command for detailed definition. \\
+\verb|skip=| & Specify the number of rows to hide from the top in the output [default value:\verb|skip=(value of t= -1)|]\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mmvsim_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:msim] {msim} : Find out the degree of similarity without setting sliding window.
+
+\hyperref[sect:mwindow] {mwindow} : Create sliding window data for use with \verb|mmvstats| for the computation of statistics. 
+
+\hyperref[sect:mmvavg] {mmvavg} : This command only computes moving average. 
+
+%\end{document}

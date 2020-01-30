@@ -1,0 +1,204 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mcat (conCATenate) command}
+Concatenate CSV files specified.
+
+\subsection*{Format}
+mcat [f=] [-skip\_fnf] [-nostop/-skip/-force] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{i=}]
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb [i= ] 	& Input file name \\
+& Read multiple CSV files separated by comma delimiter. Wild card characters can be used in the file name. \\
+\verb [f= ] 	& Specify the field name(s) to concatenate. \\
+& If \emph{f=} is not specified, the field names defaults to the first file defined in the \emph{i=} parameter. \\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{l p{15cm} l}
+\verb [-skip_fnf] 	& If the specified file in  the \emph{i=} parameter does not exist, the program will bypass the error. The program returns an error if all files cannot be found. \\
+\verb [-nostop] 	  & \emph{-nostop,-skip,-force} are parameters for controlling exceptions when header is not present. \\
+& \emph{-nostop} flag returns null if field name is not specified. When \emph{-nfn} flag is used with \emph{stop} flag, the program terminates if the number of items in the data is different than the parameter defined. \\
+\verb [-skip] 		& Files are not concatenated if field name(s) is not specified. \\
+& When \emph{-nfn} flag is used with \emph{-skip} flag, the files are not concatenated if the number of data items are different. \\
+\verb [-force] 		& Force concatenation of files using location of fields when header is not present. Print output to null if item number is not available. \\
+\end{tabular}
+}
+\end{table}
+
+
+\subsection*{Note}
+\begin{itemize}
+\item This command cannot be connected with pipe if file input stream is not available. 
+\item The files are concatenated according to the order defined in the \emph{i=} parameter. 
+\item Wild card characters ("?" and "*") can be used to read multiple directory and file names. 
+\item An input file with 0 bytes returns an error and return bytes with value 0. 
+\end{itemize}
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Concatenate files with the same header}
+
+\hrule width 8cm
+\begin{verbatim}
+
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+# dat2.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+$ mcat i=dat1.csv,dat2.csv o=rsl.csv
+
+# rsl.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+A,20081207,20
+A,20081213,30
+B,20081209,50
+\end{verbatim}
+\hrule width 8cm
+
+\subsubsection*{Example 2 Concatenate files with different header}
+
+\hrule width 8cm
+\begin{verbatim}
+
+# dat1.csv
+customer,date,sum total
+A,20081201,10
+B,20081002,40
+
+# dat2.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+$ mcat -nostop i=dat1.csv,dat2.csv o=rsl.csv
+
+# rsl.csv
+customer,date,sum total
+A,20081201,10
+B,20081002,40
+A,20081207,
+A,20081213,
+B,20081209,
+\end{verbatim}
+\hrule width 8cm
+
+\subsubsection*{Example 3 Concatenate specific field names from input files}
+
+\hrule width 8cm
+\begin{verbatim}
+
+# dat1.csv
+customer,date,quantity
+A,20081201,3
+B,20081002,1
+
+# dat2.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+$ mcat f=customer,date i=dat1.csv,dat2.csv o=rsl1.csv
+
+# rsl1.csv
+customer,date
+A,20081201
+B,20081002
+A,20081207
+A,20081213
+B,20081209
+
+$ mcat f=customer,date,amount i=dat1.csv,dat2.csv o=rsl2.csv
+
+# rsl.csv
+customer,date,amount
+A,20081201,
+B,20081002,
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+\end{verbatim}
+\hrule width 8cm
+
+\subsubsection*{Example 4 Wild card}
+This example concatenates all the files with file names starting with "abc". Wild card characters should be enclosed in single quotes to avoid misinterpretation in shell. \\
+
+\hrule width 8cm
+\begin{verbatim}
+$ mcat i='abc*'
+\end{verbatim}
+\hrule width 8cm
+\leavevmode \\ \\
+
+Concatenates all the files that end it by "abc" or " xyz'' in the following examples.\\
+
+\hrule width 8cm
+\begin{verbatim}
+$ mcat i='abc*,*xyz'
+\end{verbatim}
+\hrule width 8cm
+
+\subsection*{Related command}
+
+\hyperlink{msep.pdf}{msep} : Separate data files
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+
+\end{document}
+

@@ -1,0 +1,39 @@
+
+\section{meet : 共通集合演算\label{sect:meet}}
+\subsection*{書式}
+$obj$.meet($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{説明}
+$obj$に含まれるアイテム集合$\alpha$と$zdd1$に含まれるアイテム集合$\beta$の共通集合$\alpha \cap \beta$を求め、
+そのZDDオブジェクト$zdd2$を返す。
+
+例えば、アイテム集合\verb|abc|と\verb|bcd|の共通集合は以下の通り。
+\begin{eqnarray*}
+%A &=& \frac{B}{C} \\
+%&=& B/C \\
+%&=& D
+\textrm{abc.meet(bcd)} = \textrm{abc} \cap \textrm{bcd} = \textrm{bc}
+\end{eqnarray*}
+
+複数のアイテム集合間の演算では全組合せについて共通集合を求める。
+\begin{eqnarray*}
+\textrm{(abc + a).meet(bcd + b)} &=&
+\textrm{abc} \cap \textrm{bcd} + \textrm{abc} \cap \textrm{b} +
+\textrm{a} \cap \textrm{bcd} + \textrm{a} \cap \textrm{b}\\
+&=& \textrm{bc}  + \textrm{b} + 1 + 1\\
+&=& \textrm{bc} + \textrm{b} + 2\\
+\end{eqnarray*}
+
+重みについては、同じアイテム集合を複数に展開して計算すればよい。
+
+ちなみに$\alpha \cap \beta$を$\alpha \oplus \beta$(排他的論理和演算)に変更すればdelta関数となる。
+
+\begin{eqnarray*}
+\textrm{(2abc).meet(bcd)} = \textrm{(abc+abc).meet(bcd)} = \textrm{bc + bc = 2bc}
+\end{eqnarray*}
+
+\subsection*{例}
+\input{examples/tex/meet_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:delta]{delta} : delta演算

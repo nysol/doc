@@ -1,0 +1,33 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> c=ZDD::constant(10)
+> c.show
+ 10
+# The operation between ZDD weight object and Ruby character string,
+# where Ruby character string is read as an itemset and automatically cast as ZDD object.
+> (c*"a").show
+ 10 a
+
+# The operation between ZDD weight object and Ruby integer, where Ruby integer is
+# treated as ZDD weight object.
+> (0*c).show
+ 0
+
+# ZDD weight object is converted to Ruby integer, and the operation is carried out
+# in Ruby integer.
+> puts c.to_i*10
+100
+
+# In the following example, the weight is defined as 0. This object is automatically cast
+# to RubyString for computation.
+> a=ZDD::constant(0)
+> a+="x"
+> a+="x z"
+> a+="z"
+> a.show
+ x z + x + z
+\end{Verbatim}

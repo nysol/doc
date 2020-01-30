@@ -1,0 +1,151 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{レッスン 4: 集計（その２）}
+
+\verb|mcount| コマンドを使うと、レコード数（行数）を数えることができます。集計の単位となる項目の指定もできますので、日別、分類別、商品別のレコード数を数えたりするのによく使われます。
+
+\subsection{ステップ 1: スクリプトを作成する}
+
+テキストエディタを使って、スクリプトファイル \verb|mcount.sh| を作成しましょう。作成したら、ファイルに実行権限を与えるのを忘れないようにしてください。\\
+
+このレッスンでは、トランザクションデータ（スーパーのレシートデータ）から日別のレコード件数を数えます。\\
+
+そのためには、まず「日付」項目を \verb|mcut| コマンドで取り出し、ソートした上で \verb|mcount| コマンドに渡します。\verb|mcount| コマンドは日付単位でレコード数を数え、その結果を \verb|mcountout.csv| ファイルに書き出します。
+
+ \subsection{ステップ 2: パラメータを指定する}
+
+{\setlength{\parindent}{0cm}
+
+\verb|mcount| コマンドに与えるパラメータは次のようになります。\\
+
+キー項目: 		\verb|k=日付| \\
+説明: 集計単位となる列を指定します。このレッスンでは日別に集計を行うので、「日付」列を指定します。\\
+
+結果を格納する項目： \verb|a=行数| \\
+説明: 結果を格納するための新しい項目名（列名）は、a=で指定します。この例では、日別にいくつの商品がレジを通ったかがカウントされ「行数」列に格納されます。\\
+
+このレッスンでは、レッスン1で作成した \verb|dat.csv| （スーパーマーケットのレシートデータ）を使います。
+}
+
+\begin{verbatim}
+#!/bin/bash
+#=========================================
+# MCMD bash script - Lesson 4: Aggregate functions II
+#=========================================
+
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付 i=${inPath}/dat.csv |
+msortf f=日付 |   
+mcount k=日付 a=行数 o=outdat/mcountout.csv
+
+#==========================================
+\end{verbatim}
+
+\subsection{ステップ 3: シェルスクリプトを実行する}
+
+\begin{verbatim}
+$ ./mcount.sh
+#END# kgcut f=日付 i=tutorial_jp/dat.csv; IN=24737 OUT=24737; 2013/08/23 11:51:14
+#END# kgsortf f=日付; IN=24737 OUT=24737; 2013/08/23 11:51:14
+#END# kgcount a=行数 k=日付 o=outdat/mcountout.csv; IN=24737 OUT=324; 2013/08/23 11:51:14
+\end{verbatim}
+
+\noindent
+結果は次のようになります。
+
+\begin{verbatim}
+日付,行数
+20010108,12
+20010110,28
+20010111,48
+20010116,28
+20010119,84
+20010123,24
+20010125,20
+20010128,20
+20010130,96
+20010131,4
+20010201,4
+20010203,4
+20010204,71
+20010205,32
+20010206,36
+20010208,52
+20010209,20
+20010211,36
+20010212,36
+20010213,36
+20010216,122
+20010217,36
+...
+..
+\end{verbatim}
+
+\subsection{ステップ 4: パラメータを変更する}
+
+\noindent
+集計単位を指定するk=パラメータは省略することができます。その場合、入力ファイル全体のレコード数がカウントされます。
+
+\begin{verbatim}
+#!/bin/bash
+#=========================================
+# MCMD bash script - Lesson 3: Aggregate functions II
+#=========================================
+
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付 i=${inPath}/dat.csv |
+mcount a=行数 o=outdat/mcountout.csv
+
+#==========================================
+\end{verbatim}
+
+\noindent
+dat.csvファイルには24,737レコードあることがわかります。
+
+\begin{verbatim}
+日付,行数
+20011230,24737
+\end{verbatim}
+
+（日付に20011230と表示されていますが、k=パラメータを指定していない場合、この値に特に意味はありません）
+
+\newpage 
+
+\subsection{練習問題 }
+
+\verb|mcount| コマンドを使って、次のレポートを作成してみましょう。作成したら、出力ファイルとスクリプトを確認してください。
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{レポートの内容}   & \textbf{スクリプト名} & \textbf{出力ファイル名}  \\
+\hline
+1. メーカー別のレコード数 & \href{exercise/mcount1.sh}{mcount1.sh} & \href{exercise/outdat/mcountout1.csv}{mcountout1.csv} \\
+2. ブランド別のレコード数 & \href{exercise/mcount2.sh}{mcount2.sh} & \href{exercise/outdat/mcountout2.csv}{mcountout2.csv} \\
+3. 大分類別のレコード数 & \href{exercise/mcount3.sh}{mcount3.sh} & \href{exercise/outdat/mcountout3.csv}{mcountout3.csv} \\
+4. 中分類別のレコード数 & \href{exercise/mcount4.sh}{mcount4.sh} & \href{exercise/outdat/mcountout4.csv}{mcountout4.csv} \\
+5. 小分類別のレコード数 & \href{exercise/mcount5.sh}{mcount5.sh} & \href{exercise/outdat/mcountout5.csv}{mcountout5.csv} \\
+6. メーカー別・中分類別のレコード数 & \href{exercise/mcount6.sh}{mcount6.sh} & \href{exercise/outdat/mcountout6.csv}{mcountout6.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

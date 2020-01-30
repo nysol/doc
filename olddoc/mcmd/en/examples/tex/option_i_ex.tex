@@ -1,0 +1,28 @@
+\subsubsection*{Example 1: Basic Example}
+
+Run \verb|mcut| using \verb|dat1.csv| as input data.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,amount
+A,1,10
+A,2,20
+$ mcut f=customer,amount i=dat1.csv o=rsl1.csv
+#END# kgcut f=customer,amount i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,amount
+A,10
+A,20
+\end{Verbatim}
+\subsubsection*{Example 2: Specify output field name}
+
+Read standard input using redirection ("\verb|"<"|").
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut f= customer, amount o=rsl2.csv <dat1.csv
+#ERROR# invalid argument: customer, (kgcut)
+$ more rsl2.csv
+rsl2.csv: No such file or directory
+\end{Verbatim}

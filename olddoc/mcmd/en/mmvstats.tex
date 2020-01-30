@@ -1,0 +1,57 @@
+
+%\begin{document}
+
+\section{mmvstats - Compute Statistics of Sliding Window\label{sect:mmvstats}}
+\index{mmvstats@mmvstats}
+
+Calculate various statistics (1 variable) for sliding windows. This a variant of the \hyperref[sect:mstats]{mstats} command with functionality to compute sliding windows. 
+
+
+\subsection*{Format}
+\verb|mmvstats [s=] [k=] f= [t=] c= [skip=] -n |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|s=|    & After the specified field is sorted (multiple fields can be specified), various statistics is computed. \\
+             & \verb|s=| parameter is required when \verb|-q| is not specified. \\
+\verb|k=|    & Aggregate records using the specified field name(s) (multiple fields can be specified). \\
+
+\verb|f=|    & Field name(s) (multiple fields can be specified) for computation . \\
+\verb|t=|    & Integer interval greater than 1.  \\
+\verb|c=|    & Type of statistics (specify one of the following list)\\
+             & \verb/sum|mean|devsq|var|uvar|sd|usd|cv|min|/\\
+             & \verb/|max|range|skew|uskew|kurt|ukurt/\\
+             & Refer to \hyperref[sect:mstats]{mstats} for detailed definitions. \\
+\verb|skip=| & Specify the number of rows to hide from the top in the output. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mmvstats_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mmvavg] {mmvavg} : Calculate moving average.
+
+\hyperref[sect:mwindow] {mwindow} : Create sliding window data for use with \verb|mmvstats| for the computation of statistics. 
+
+\hyperref[sect:mmvsim] {mmvsim} : Compute the similarity measure (bivariate statistics) .
+%\end{document}

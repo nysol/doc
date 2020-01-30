@@ -1,0 +1,46 @@
+\subsubsection*{例1: 基本例}
+
+rslという項目の全行にNULL値を出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+$ mcal c='nulls()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=nulls() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,
+2,
+3,
+\end{Verbatim}
+\subsubsection*{例2: if文の中での利用}
+
+if文の第二パラメータで数値を指定しているので、それに合わせてnulln()関数を用いる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(${id}==1,1,nulln())' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=if(${id}==1,1,nulln()) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,rsl
+1,1
+2,
+3,
+\end{Verbatim}
+\subsubsection*{例3: isnullと同等の指定}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='if(${val}==nulln(),"null","notNull")' a=rsl i=dat2.csv o=rsl3.csv
+#END# kgcal a=rsl c=if(${val}==nulln(),"null","notNull") i=dat2.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,rsl
+1,a,
+2,,
+3,b,
+\end{Verbatim}

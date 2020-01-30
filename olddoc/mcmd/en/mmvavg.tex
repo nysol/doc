@@ -1,0 +1,85 @@
+
+%\begin{document}
+
+\section{mmvavg - Calculate Moving Average\label{sect:mmvavg}}
+\index{mmvavg@mmvavg}
+
+Calculate the moving average. The three different ways to calculate moving average include simple moving average ($SMA$), weighted moving average ($WMA$), and exponential moving average ($EMA$). 
+
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+
+The value of $t$ time is expressed by $x_t$, and period is represented by $m$ as defined in several formulas of moving average (\ref{eq:sma},\ref{eq:wma},\ref{eq:ema}).
+
+
+\begin{eqnarray}
+%\begin{footnotesize}
+SMA_t=\frac{1}{m} \sum_{i=0}^{m-1} x_{t-i}
+\label{eq:sma}
+%\end{footnotesize}
+\end{eqnarray}
+
+\begin{eqnarray}
+%\begin{footnotesize}
+WMA_t=\sum_{i=0}^{m-1} \frac{m-i}{S} x_{t-i},\ \ S=\sum_{i=1}^m i
+\label{eq:wma}
+%\end{footnotesize}
+\end{eqnarray}
+
+\begin{eqnarray}
+%\begin{footnotesize}
+EMA_t=\alpha x_t + (1-\alpha)EMA_{t-1}
+\label{eq:ema}
+%\end{footnotesize}
+\end{eqnarray}
+
+\subsection*{Format}
+\verb/mmvavg [s=] [k=] [n=] f= [t=] [-exp|-w] [alpha=] [skip=]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|s=|    & After the specified field is sorted (multiple fields can be specified), moving average is calculated. \\
+             & \verb|s=| parameter is required when \verb|-q| option is not specified. \\
+\verb|k=|    & Aggregate records using the specified field name(s) (multiple fields can as unit of calculation. \\
+\verb|f=|    & Compute the moving averages of the field(s) (multiple fields can be specified). \\
+\verb|t=|    & Interval numbers of integers greater than 1.  \\
+             & When \verb|-exp| is used with \verb|alpha=|, the \verb|t=| parameter do not need to be defined. \\
+\verb|-w|    & Linear weighted moving average.\\
+\verb|-exp|  & Exponential smoothing moving average. \\
+\verb|alpha=|& Use a real number as smoothing coefficient when \verb|-exp| is specified. \\
+             & The default value of alpha is \verb|alpha=2/(value of = t+1)|。\\
+\verb|skip=| & Specify the number of rows to hide from the top in the output. \\
+             & Default value: \verb|skip=(value of t= -1)|, \verb|skip=0| when \verb|-exp| is specified.  \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mmvavg_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mmvstats] {mmvstats} : Specify the average as well as various types of statistics. 
+
+\hyperref[sect:mmvsim] {mmvsim} : Compute bivariate statistics. 
+
+\hyperref[sect:mwindow] {mwindow} : Computes statistics on sliding window data which cannot be computed using \verb|mmvstats|. 
+
+%\end{document}

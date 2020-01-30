@@ -1,0 +1,45 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{meach 簡単な並列処理の実行メソッド\label{sect:meachRB}}
+排他制御を伴わない簡単な並列処理を実行するArrayクラスのメソッド。
+複数のプロセスを非同期に起動するだけの簡単な実装である。
+
+\subsection{書式}
+{\Large
+\begin{verbatim}
+1) Array::meach(mpcount){|value| block}
+2) Array::meach(mpcount){|value,count| block}
+\end{verbatim}
+} 
+
+配列の要素をブロックパラメータ\verb|value|として、\verb|block|で与えられたコードを並列に実行する。
+ブロックパラメータとして\verb|count|を与えれば、実行中の配列要素番号(0から始まる整数)がセットされる。
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/mpcount /} 並列で実行するプロセス数。
+\end{description}
+
+
+\subsection{利用例}
+\subsubsection*{例1 項目名の出力と行番号・値の出力}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# 10から6までの5つの要素(整数)について、2つのプロセスで並列処理する。
+# 処理内容は、要素の値と配列の要素番号を表示するだけの簡単なものである。
+> [10,9,8,7,6].meach(2){|value,count|
+>   puts "#{value},#{count}"
+> }
+10,0
+9,1
+8,2
+7,3
+6,4
+\end{Verbatim}
+
+\subsection{関連コマンド}
+
+%\end{document}
+

@@ -1,0 +1,137 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvuniq ベクトル要素の単一化\label{sect:mvuniq}}
+\index{mvuniq@mvuniq}
+
+ベクトル型の項目の要素を単一化する。
+内部的にはtree構造を利用して単一化をしているので、
+出力される要素の順序は文字列昇順に並び変わる。
+
+一方で、\verb|-n|オプションを指定すると、
+ベクトルを系列として考え、
+要素を先頭から順番に走査し、互いに隣接した要素のみを単一化し出力する。
+%よって、\verb|mvsort|コマンドにてソーティングさせた後に、
+%\verb|-n|オプションを指定して本コマンドを利用するとすよって、ベクトル内の全要素を対象に単一化したい場合は事前に
+%ておく必要がある。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvuniq_out1},\ref{tbl:mvuniq_out2}に示す。
+表\ref{tbl:mvuniq_out1}では、全ての要素が単一化されているのが分かる。
+一方で、\verb|-n|オプションを指定して実行すると、
+表\ref{tbl:mvuniq_out2}の３行目に見られるように、
+互いに隣接する\verb|b|のみが単一化される。
+%の１行目では、\verb|a|が２つ連続しているので
+%入力データ(表\ref{tbl:mvuniq_input})の１行目では、\verb|a|が２つ連続しているので
+%１つの\verb|a|に単一化される。
+%３行目は、\verb|a|が２つ出現するが連続していないので単一化されない。
+%一方で\verb|b|は連続しているので単一化される。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.28\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvuniq_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&b a a \\
+2&a a b b b \\
+3&a b b a \\
+4&a b c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.33\hsize}
+\begin{center}
+\caption{基本的な例\label{tbl:mvuniq_out1}}
+\verb|vf=items i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b \\
+2&a b \\
+3&a b \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.33\hsize}
+\begin{center}
+\caption{ベクトルを系列と考え、互いに隣り合う同じ要素のみを単一化する例\label{tbl:mvuniq_out2}}
+\verb|vf=items -n i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b a \\
+2&a b \\
+3&a b a \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mvuniq vf= [-A] [-n]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=| & 単一化する対象項目名を指定する。複数項目指定可能。 \\
+           & 結果の項目名を変更したいときは、:(コロン)に続けて新項目名を指定する。\\
+\verb|-A|  & \verb|vf=|で:(コロン)に続けて指定した項目名で、新たな項目が追加される。\\
+           & なお\verb|-A|オプションを指定した場合、\verb|vf=|パラメータで指定するすべての\\
+           & 項目に新項目名を指定しなければならない。\\
+\verb|-n|  & ベクトルを系列と考え隣接する同一要素のみ単一化する \\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvuniq_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

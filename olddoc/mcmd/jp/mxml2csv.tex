@@ -1,0 +1,162 @@
+
+%\begin{document}
+
+\section{mxml2csv xmlからcsvへの変換\label{sect:mxml2csv}}
+\index{mxml2csv@mxml2csv}
+xml形式のデータをcsv形式のデータに変換する。
+基本的な変換規則は、一行の単位となる要素(XMLタグ)と、
+項目に対応させる要素(もしくは属性)を、それぞれ\verb|k=|、\verb|f=|によって指定する。
+項目の値としては、
+要素で囲われたテキスト、要素が出現するかどうか、
+属性の値、属性が出現するかどうか、の4通りの方法を指定できる。
+
+XMLのパーサーとしてはSAXを用いているので、XMLのサイズ制約はない。
+XMLのエンコーディングがUTF-8以外であれば、UTF-8に変換されてCSVに出力される。
+XMLデータは、整形式XML文書(well-formed XML document)であることを前提としている。
+そうでない場合の処理結果は不定である。
+
+典型例を、表\ref{tbl:mxml2csv_input}に示されたXMLデータを用いて示す。
+より詳細な解説は、次節で行うとして、ここでは概略について解説する。
+表\ref{tbl:mxml2csv_out1}は、
+行の単位を要素\verb|<b>|とし(このような要素のことを「キー要素」と呼ぶ)、
+項目として、要素\verb|b|の属性\verb|att|の値(CSV項目名\verb|b_att|)、
+要素\verb|c|の属性\verb|p|の値(\verb|b_p|)とフラグ(\verb|b_p_f|)、
+そして要素\verb|d|と\verb|a|内のテキスト(\verb|d|と\verb|a|)を出力した結果である。
+ここで、フラグとは、指定した要素もしくは属性が、出現するかどうかを0-1で出力したものである。
+要素のテキスト出力は、指定した要素で囲われた範囲に出現する文字列を全て連結した文字列である。
+ただし、スペースと制御文字は出力されないことに注意する。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+
+\begin{minipage}{0.4\hsize}
+\caption{入力XMLデータ\label{tbl:mxml2csv_input}}
+\begin{verbatim}
+<a att="aa">
+  <b att="bb1">
+    <c p="pp1" q="qq1"/>
+    <d>text1</d>
+  </b>
+  <b att="bb2">
+    <c q="qq2"></c>
+    <d>text2</d>
+  </b>
+  <b>
+    <c p="pp3"/>
+    <d>text3</d>
+  </b>
+</a>
+\end{verbatim}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{キー:/a/b、項目:b@att,c@p,d,/a\label{tbl:mxml2csv_out1}}
+{\small
+\begin{tabular}{lllll}
+\hline
+b\_att&c\_p&c\_p\_f&d&a \\
+\hline
+bb1&pp1&1&text1&text1 \\
+bb2&&&text2&text1text2 \\
+&pp3&1&text3&text1text2text3 \\
+
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{キー要素の指定方法}
+一行の単位となるキー要素(\verb|k=|パラメータで指定)は絶対パスで指定する。
+絶対パスは、ルート記号(\verb|'/'|)から始めて、要素の階層を\verb|'/'|記号で区切って表される。
+本コマンドにおけるキー要素の役割は、キー要素の終了タグが出現した時に、以下の２点を実行することにある。
+\begin{itemize}
+\item 項目データを一行出力する。上記の例では、キー要素の終了タグ\verb|</b>|が3回出現しており、
+その度にCSVデータ一行が出力され改行される。
+\item 項目データを初期化する。ただし、キー要素の外側にある項目要素の出力データは初期化しない。
+表\ref{tbl:mxml2csv_out1}の要素\verb|a|の出力において、テキストが連結されていくのは、
+キー要素の終了タグが出現した時であっても、要素\verb|/a|がキー要素\verb|/a/b|より外側にあり、
+出力データが初期化されないためである。
+\end{itemize}
+
+\subsubsection*{要素の出力項目指定}
+\verb|f=|で要素をCSV項目として出力する場合、以下に示すフォーマットに従う。
+
+\verb|要素パス[%フラグ]:CSV項目名|
+
+「項目名」は、出力されるCSVの項目名であり、必ず指定しなければならない。
+
+要素を項目として出力する方法は２通りある。
+一つは、指定の要素の開始タグと終了タグで囲われたテキストを出力する方法で、
+他方は、指定した要素が存在するかどうかを0-1値で出力する方法である。
+前者は、対象となる要素パスを指定し、
+後者は、加えてフラグ\verb|%f|を付与する。
+また要素パスの指定方法は、絶対パスと相対パスの２通りある。
+相対パスは、k=で指定された要素からのパスを指定する。
+以下、表\ref{tbl:mxml2csv_input}のXMLについて、いくつかの要素パスの指定例を示す。
+
+\begin{itemize}
+\item \verb|k=/a/b|において、\verb|f=:B|と指定すると、相対パスは空でキー要素と同じ要素となる。CSVの項目名は\verb|B|である。
+\item \verb|k=/a/b|において、\verb|f=c:C|と\verb|f=/a/b/c:C|は同じ意味である。
+前者は相対パスによる指定、後者は絶対パスによる指定である。両者ともCSV項目名は\verb|C|である。
+\item \verb|f=d:D|は要素\verb|d|で囲われたテキストを出力し、
+\verb|f=d%f:D|は要素\verb|d|が存在するかどうかを出力する。CSV項目名は\verb|D|である。
+\item \verb|k=/a/b|において\verb|f=/a:A|とした場合、
+項目要素はキー要素の外側にあるため、\verb|a|要素内に含まれるテキストが次々と結合される。
+なぜならば、キー要素の終了タグが出現しても、項目要素の終了タグが出現しないために、その時点でデータがクリアされることがないためである。
+\end{itemize}
+
+\subsubsection*{属性の出力項目指定}
+\verb|f=|で属性をCSV項目として出力する場合、以下に示すフォーマットに従う。
+
+\verb|要素パス@要素名[%フラグ]:CSV項目名|
+
+「項目名」は、出力されるCSVの項目名であり、必ず指定しなければならない。
+
+要素パスの指定は、要素の出力項目指定と同様である。
+そして、属性名は、要素パスに続けて\verb|@|で連結して指定する。
+要素名の後に\verb|%f|を付けることで、その要素が存在するかどうかを0-1値で出力する。
+
+\subsection*{書式}
+\verb|mxml2csv k= f= [i=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & 一行の単位となる要素をルートからのパス名として指定する。\\
+             & パスはルート記号'/'から始まり、要素を'/'でつなげることで指定する。\\
+             & 例: /article/sentence/chunk \\
+\verb|f=|    & 項目として出力する要素もしくは属性をカンマで区切って指定する。\\
+             & フォーマットは以下のとおり。 \\
+             & \verb|要素パス[%フラグ]:CSV項目名| \\
+             & \verb|要素パス@要素名[%フラグ]:CSV項目名| \\
+\verb|i=|    & xmlデータファイル名を指定する。省略時は標準入力から読み込まれる。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mxml2csv_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

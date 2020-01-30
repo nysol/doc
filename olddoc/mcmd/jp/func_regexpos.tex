@@ -1,0 +1,20 @@
+
+%\begin{document}
+
+\section{regexpos マッチ位置\label{sect:regexpos}}
+\index{regexpos@regexpos}
+
+書式1: regexpos($str$,正規表現)
+
+書式2: regexposw($str$,正規表現)
+
+指定した正規表現が最長マッチする文字列$str$の部分文字列の開始位置を返す。
+文字列の先頭位置は0であることに注意する。またマッチしなければNULL値を返す。
+$str$もしくは正規表現にマルチバイト文字を含む場合はregexposw関数を使うこと。
+%正規表現の詳細については(\ref{sect:regex})を参照されたい。
+
+\subsection*{利用例}
+\input{examples/tex/func_regexpos_ex}
+
+%\end{document}
+

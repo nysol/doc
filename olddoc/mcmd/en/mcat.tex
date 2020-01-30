@@ -1,0 +1,66 @@
+
+%\begin{document}
+
+\section{mcat - ConCATenate\label{sect:mcat}}
+\index{mcat@mcat}
+Merge all records in the files specified at \verb|i=| parameter according to the order of files. If a wild card is used to specify file names, the files will be merged in alphabetical order of the file name. 
+
+\subsection*{Format}
+\verb/mcat [f=] [-skip_fnf] [-nostop|-skip|-force]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_add_fname]{[-add\_fname]}
+\hyperref[sect:option_-stdin]{[-stdin]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|        & Specify list of input file names. \\
+                 & Read multiple CSV files separated by comma delimiter. Wild card characters can be used in file name. \\
+\verb|f=|        & Specify the field name(s) to concatenate. \\
+                 & If \verb|f=| is not specified, the field names defaults to the first file defined in the \verb|i=| parameter. \\
+\verb|-skip_fnf| & If a specified file in  the \verb|i=| parameter does not exist, the program will bypass the error. \\
+		& However, the program returns an error if all files cannot be found. \\
+\verb|-nostop|   & \verb|-nostop,-skip,-force| are parameters for controlling exceptions when header is not present. \\
+                 & \verb|-nostop| flag returns null if field name is not specified. When \verb|-nfn| flag is used with \verb|stop| flag, \\
+                 & the program terminates if the number of items in the data is different than the parameter defined. \\
+\verb|-skip|     & Files are not concatenated if field name(s) is not specified. \\
+                 & When \verb|-nfn| flag is used with \verb|-skip| flag, files are not concatenated if the number of data items are different. \\
+\verb|-force|    & Force concatenation of files using location of fields when header is not present. \\
+		& Print output to null if item number is not available. \\
+\verb|-stdin|    & Merge from standard input. \\
+\verb|-add_fname|& Add  file name in the last column. \\
+                 & Standard input will be named as \verb|/dev/stdin|.\\
+                 & The field name for this option is fixed as \verb|"fileName"|, \\
+                 & error will be returned if input data contains the same field name. \\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{Note}
+\begin{itemize}
+\item Wild card characters ("?" and "*") can be used to specify multiple directory and file names. 
+\item The symbol \verb|~/|can be used to indicate home directory. 
+\item The files are concatenated according according to the order specified in the \verb|i=| parameter. If a wild card is used, files will be merged in alphabetical order. Standard input takes precedence when merging files. 
+\end{itemize}
+
+
+\subsection*{Examples}
+\input{examples/tex/mcat_ex.tex}
+
+\subsection*{Related command}
+\hyperref[sect:msep]{msep} : Reverse the operation mentioned above and separate data files. 
+
+%\end{document}

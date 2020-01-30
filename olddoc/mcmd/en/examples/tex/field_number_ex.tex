@@ -1,0 +1,84 @@
+\subsubsection*{Example 1: Specify range}
+
+By specifying "0-4", fields 0,1,2,3,4 are specified.  
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+brand,quantity01,quantity02,quantity03,quantity04,quantity05,quantity06,quantity07,quantity08,quantity09,quantity10
+A,10,50,90,130,170,210,250,290,330,370
+B,20,60,100,140,180,220,260,300,340,380
+C,30,70,110,150,190,230,270,310,350,390
+D,40,80,120,160,200,240,280,320,360,400
+$ mcut -x f=0-4 i=dat1.csv o=rsl1.csv
+#END# kgcut -x f=0-4 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+brand,quantity01,quantity02,quantity03,quantity04
+A,10,50,90,130
+B,20,60,100,140
+C,30,70,110,150
+D,40,80,120,160
+\end{Verbatim}
+\subsubsection*{Example 2: Specify range in reverse order}
+
+By specifying “4-0”,  fields 0,1,2,3,4 are specified.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -x f=4-0 i=dat1.csv o=rsl2.csv
+#END# kgcut -x f=4-0 i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+quantity04,quantity03,quantity02,quantity01,brand
+130,90,50,10,A
+140,100,60,20,B
+150,110,70,30,C
+160,120,80,40,D
+\end{Verbatim}
+\subsubsection*{Example 3: Specify Multiple ranges}
+
+By specifying “1-0,2-4”, fields “1,0,2,3,4” are specified.EOF
+scp=<<'EOF'
+mcut -x f=1-0,2-4 i=dat1.csv o=rsl3.csv
+more rsl3.csv
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -x f=4-0 i=dat1.csv o=rsl2.csv
+#END# kgcut -x f=4-0 i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+quantity04,quantity03,quantity02,quantity01,brand
+130,90,50,10,A
+140,100,60,20,B
+150,110,70,30,C
+160,120,80,40,D
+\end{Verbatim}
+\subsubsection*{Example 4: Specified field from the end}
+
+By specifying "2L", the second field from the end is specified (quantity 08).
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -x f=2L i=dat1.csv o=rsl4.csv
+#END# kgcut -x f=2L i=dat1.csv o=rsl4.csv
+$ more rsl4.csv
+quantity08
+290
+300
+310
+320
+\end{Verbatim}
+\subsubsection*{Example 5: Specify the range of fields from the end}
+
+By specifying "5-3L", the 5th to the 3rd item from end is specified, i.e. "5,6,7".
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -x f=5-3L i=dat1.csv o=rsl5.csv
+#END# kgcut -x f=5-3L i=dat1.csv o=rsl5.csv
+$ more rsl5.csv
+quantity05,quantity06,quantity07
+170,210,250
+180,220,260
+190,230,270
+200,240,280
+\end{Verbatim}

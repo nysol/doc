@@ -1,0 +1,42 @@
+
+%\begin{document}
+
+\section{mshare - Calculate Composition Ratio\label{sect:mshare}}
+\index{mshare@mshare}
+Calculate the composition ratio of the fields specified in \verb|f=|, and add results as a new field.\\
+
+\subsection*{Format}
+\verb|mshare f= [k=] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_x]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Calculate share value of field(s) (multiple fields can be specified) specified here. \\
+		& Specify the new field name using : (colon).  Example: f=Quantity:volume share. \\ 
+\verb|k=|    & Specify the list of field name(s)  (multiple items can be specified)  as the unit to calculate share.\\
+		& If the key is omitted, all lines are assumed to have the same key value. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mshare_ex.tex}
+\subsection*{Related Command}
+
+%\end{document}

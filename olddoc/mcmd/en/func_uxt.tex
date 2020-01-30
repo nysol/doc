@@ -1,0 +1,22 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{uxt - UNIX Time Conversion\label{sect:uxt}}
+\index{uxt@uxt}
+
+Format 1: uxt($date$)
+
+Format 2: uxt($time$)
+
+Format 3: uxt2d($num$)
+
+Format 4: uxt2t($num$)
+
+In format 1 and 2, convert $date$ or $time$ to UNIX time. In 3 and 4 format, by contraries, convert UNIX time to date type or time type. Giving date type, calculate \verb|00:00:00| as the first time of the day.
+
+\subsection*{Usage Examples}
+\input{examples/tex/func_uxt_ex.tex}
+
+%\end{document}
+

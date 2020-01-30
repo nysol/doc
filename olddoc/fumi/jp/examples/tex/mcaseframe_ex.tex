@@ -1,0 +1,69 @@
+\subsubsection*{例1: 基本例}
+
+前節の解説で用いてる例。1行が1つの格フレームとなっている。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more xml/test.txt
+<?xml version='1.0' encoding='UTF-8'?>
+<article id='test.txt'>
+  <sentence id='0' text='子どもはリンゴがすきです。'>
+    <chunk id='0' link='2' phraseType='格助詞句' caseType='ガ２格' phrase='子供' phraseTok='
+      <token id='0' class1='名詞' class2='普通名詞' word='子ども' orgWord='子ども' daiWord='
+      <token id='1' class1='助詞' class2='副助詞' word='は' orgWord='は'/>
+    </chunk>
+    <chunk id='1' link='2' phraseType='格助詞句' caseType='ガ格' phrase='林檎' phraseTok='リ
+      <token id='2' class1='名詞' class2='普通名詞' word='リンゴ' orgWord='リンゴ' daiWord='
+      <token id='3' class1='助詞' class2='格助詞' word='が' orgWord='が'/>
+    </chunk>
+    <chunk id='2' link='-1' phraseType='用言句' phraseTok='すきだ' rawPhrase='すきです。' ph
+      <token id='4' class1='形容詞' class3='ナ形容詞' class4='デス列基本形' word='すきだ' or
+      <token id='5' class1='特殊' class2='句点' word='。' orgWord='。'/>
+    </chunk>
+  </sentence>
+  <sentence id='1' text='望遠鏡で泳ぐ少女を見た。'>
+    <chunk id='0' link='3' phraseType='格助詞句' caseType='デ格' phrase='望遠鏡' phraseTok='
+      <token id='0' class1='名詞' class2='普通名詞' word='望遠' orgWord='望遠' daiWord='望遠
+      <token id='1' class1='名詞' class2='普通名詞' word='鏡' orgWord='鏡' daiWord='鏡' cate
+      <token id='2' class1='助詞' class2='格助詞' word='で' orgWord='で'/>
+    </chunk>
+    <chunk id='1' link='2' phraseType='用言句' phrase='泳ぐ' phraseTok='泳ぐ' rawPhrase='泳
+      <token id='3' class1='動詞' class3='子音動詞ガ行' class4='基本形' word='泳ぐ' orgWord=
+    </chunk>
+    <chunk id='2' link='3' phraseType='格助詞句' caseType='ヲ格' phrase='少女' phraseTok='少
+      <token id='4' class1='名詞' class2='普通名詞' word='少女' orgWord='少女' daiWord='少女
+      <token id='5' class1='助詞' class2='格助詞' word='を' orgWord='を'/>
+    </chunk>
+    <chunk id='3' link='-1' phraseType='用言句' phraseTok='見る' rawPhrase='見た。' phrase='
+      <token id='6' class1='動詞' class3='母音動詞' class4='タ形' word='見る' orgWord='見た'
+      <token id='7' class1='特殊' class2='句点' word='。' orgWord='。'/>
+    </chunk>
+  </sentence>
+</article>mcaseframe.rb I=xml o=caseframe.csv
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mcaseframe.rb I=xml o=caseframe.csv
+more caseframe.csv
+aid,sid,cid,contrastConj,denial,declinableWord,lid,caseWord,case
+test.txt,0,2,,,すきだ,0,子ども,ガ２
+test.txt,0,2,,,すきだ,1,リンゴ,ガ
+test.txt,1,3,,,見る,0,望遠鏡,デ
+test.txt,1,3,,,見る,2,少女,ヲ
+\end{Verbatim}
+\subsubsection*{例2: key型フォーマットによる出力}
+
+\verb|-key|オプションを付加して実行すると、
+用言と、その用言に係る格助詞句が行に展開されて出力される。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcaseframe.rb -key I=xml o=caseframe2.csv
+#END# /Users/maegawa/.rvm/rubies/ruby-2.0.0-p247/bin/mcaseframe.rb -key I=xml o=caseframe2.c
+$ more caseframe2.csv
+aid,sid,cid,contrastConj,denial,lid,word,type
+test.txt,0,2,,,2,すきだ,用言
+test.txt,0,2,,,0,子ども,ガ２
+test.txt,0,2,,,1,リンゴ,ガ
+test.txt,1,1,,,1,泳ぐ,用言
+test.txt,1,3,,,3,見る,用言
+test.txt,1,3,,,0,望遠鏡,デ
+test.txt,1,3,,,2,少女,ヲ
+\end{Verbatim}

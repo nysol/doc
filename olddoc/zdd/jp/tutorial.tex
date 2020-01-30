@@ -1,0 +1,452 @@
+
+\chapter{チュートリアル\label{sect:tutorial}}
+
+本チュートリアルでは、まずZDDの基本的な利用方法を示し、最後に応用例としてNクイーン問題の解法を示す。
+示された実行例は、rubyスクリプトを記述して実行してもよいし、irbで一行ずつ実行してもよい。
+なお、本チュートリアルの実行は、
+ZDD ruby拡張ライブラリが既に正しくインストールされており、またrubyについての基本的な知識があることを前提としている。
+
+\section{ZDD ruby拡張ライブラリのrequire}
+zdd ruby拡張ライブラリはrubygemsを使ってパッケージングされているので、以下の通りrubygemsをrequireした後にzddをrequireする。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'rubygems' # ruby 1.9以降は必要ない
+> require 'zdd'
+\end{Verbatim}
+
+\section{利用するアイテムの宣言と定義\label{sect:tut_symbol}}
+利用するアイテム名を宣言するためにZDD::symbolメソッドを利用する。一つのメソッドで一つのアイテムが宣言できる。
+アイテム宣言の順序は重要で、その順序がZDDの木構造における根から見た階層レベルに対応する。
+宣言の順序により異なる構造のZDDが作成され、そのサイズに大幅に影響を与えることがある。
+以下では、\verb|"a","b","c","d"|の4つのアイテムをその順序で宣言している。
+アイテム順序にこだわらないのであれば、symbol関数による宣言をスキップし、次に説明するitemset関数から利用することもできる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> ZDD::symbol("a")
+> ZDD::symbol("b")
+> ZDD::symbol("c")
+> ZDD::symbol("d")
+\end{Verbatim}
+
+symbolでは単に利用するアイテムを宣言しただけなので、次に、
+それらのアイテムから構成されるアイテム集合の定義、すなわちZDDオブジェクトを作成していく。
+ZDD::itemsetメソッドにアイテム名をスペース区切りで列挙することでアイテム集合のZDDオブジェクトを作成することができる。
+以下では3つのアイテム"a","b","c"で構成されるアイテム集合{a,b,c}を表すZDDオブジェクトを
+rubyの変数aにセットしている。
+オブジェクトの内容はshowメソッドにより積和形式で表示される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> x=ZDD::itemset("a b c")
+> x.show
+ a b c
+\end{Verbatim}
+
+以下では、後の節のために1つのアイテムから構成されるアイテム集合を作っておく。
+アイテム名とruby変数が同じ\verb|a|であるが、これら2つは全く別ものであることに注意する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> d=ZDD::itemset("d")
+> a.show
+ a
+\end{Verbatim}
+
+\section{演算\label{sect:tut_ope}}
+ZDDには四則演算を始めとして様々な演算が定義されており、
+それらを組み合わせることで、ZDDオブジェクトを自由に加工することが可能となる。
+以下に、いくつかの例を示す。
+一般的な多項式と同様に展開されるものもあれば、そうでないものもある。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> (a+a).show # 同じアイテム集合の足し算により重みが足しこまれる。
+2 a
+> (2*a).show # 定数を掛けても同様の結果になる。
+2 a
+> (a*b).show # 異なるアイテムの掛け算でアイテム集合にアイテムが追加される
+a b
+> (a*a).show # 同じアイテムの掛け算は、アイテムが2つになるので重みが2になる。
+2 a
+> (2*a-a).show # 引き算
+a
+> ((a*b*c+b*d+c)/b).show # 割り算
+a c + d
+> ((a+b)*(c+d)).show
+a c + a d + b c + b d 
+> ((a+1)*(a+1)).show # 最後の項の"1"は空アイテム集合の重み。
+3 a + 1
+> ((a+1)*(a-1)).show
+a - 1
+\end{Verbatim}
+
+演算の例として、最後にアイテム集合\{a,b,c,d\}の全ての部分集合を列挙してみよう。
+以下にそれを実現する式とその結果を示す。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f=(a+1)*(b+1)*(c+1)*(d+1)
+> f.show
+a b c d + a b c + a b d + a b + a c d + a c + a d + a + b c d + b c +
+  b d + b + c d + c + d + 1
+\end{Verbatim}
+
+式の展開方法は、上記のケースにおいては、一般的な多項式の展開方法と同様に考えれば良い。
+右辺の演算結果として構築されたZDDオブジェクトがruby変数fに代入されている。
+そして結果、16($=2^4$)のアイテム集合が列挙されていることがわかる。
+式の最後の項である1は、空のアイテム集合の重みであることに注意する。
+
+\section{頻出アイテム集合}
+今、スーパーマーケットで4人のお客さん(f,g,h,i)が、商品a,b,c,dについて以下の通り買い物をしていたとする。
+\begin{itemize}
+\item f: a,b,c,d
+\item g: b,d
+\item h: a,c,d
+\item i: a,b,d
+\end{itemize}
+これらの購買データから、3人以上に共通するアイテム集合を求めてみよう。
+手順は簡単で、それぞれのお客さんが購入したアイテム集合の全部分集合を求めておき、
+それらを合計すればよい。
+以下にその方法を示す。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> f=(a+1)*(b+1)*(c+1)*(d+1)
+> g=(b+1)*(d+1)
+> h=(a+1)*(c+1)*(d+1)
+> i=(a+1)*(b+1)*(d+1)
+> all=f+g+h+i
+> all.show
+a b c d + a b c + 2 a b d + 2 a b + 2 a c d + 2 a c + 3 a d + 3 a + b c d + b c +
+ 3 b d + 3 b + 2 c d + 2 c + 4 d + 4  
+\end{Verbatim}
+
+上記の結果から、商品a,bを購入していた顧客は2人で、a,c,dを購入した顧客も2人であることがわかる。
+さらに、重みが3以上の項を選択するには以下のように
+\hyperref[sect:termsGE]{termsGE}関数を用いればよい。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> all.termsGE(3).show
+ 3 a d + 3 a + 3 b d + 3 b + 4 d + 4
+\end{Verbatim}
+
+また、アイテム集合\verb|"a b"|を含むアイテム集合を選択するにはrestrict関数を、
+逆に、アイテム集合\verb|"a b"|に含まれるアイテム集合を選択
+するにはpermit関数を用いればよい。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> all.restrict("a b").show
+a b c d + a b c + 2 a b d + 2 a b 
+> all.permit("a b").show
+2 a b + 3 a + 3 b + 4  
+\end{Verbatim}
+
+ZDDパッケージには、上記の方法以外にも頻出アイテム集合を列挙し
+その結果をZDDオブジェクトとして格納する方法がいくつかある。
+詳細は、\hyperref[sect:freqpatA]{freqpatA}関数や\hyperref[sect:lcm]{lcm}関数を参照されたい。
+
+
+
+\section{キャスト}
+
+ここまでには明示的に説明はしなかったが、本パッケージではZDDの各種演算および関数に対して与えるデータは
+その型に応じて自動的に型変換(キャスト)される。
+例えば、前節で示した演算\verb|2*a|は、ZDDオブジェクトである変数aにrubyの整数である2を掛けたものである。
+ZDDの乗算演算子\verb|*|は2つのZDDオブジェクトを引数にとる、この例のように一方がZDDオブジェクトでない場合、
+その内容を自動的にZDDオブジェクトに変換する。
+すなわち\verb|2*a|は、内部で\verb|ZDD::constant(2)*a|が実行されることになる。
+ここで、\verb|constatnt|関数は、空のアイテム集合の重みを定義する関数である。
+
+以下の例ではruby文字列"a b"は自動的にZDDオブジェクトに変換される。
+内部的には、(a+ZDD::itemset("a b")).show を実行している。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> (a+"a b").show
+ a b + a
+\end{Verbatim}
+
+以下は演算子の引数が二つともrubyのStringオブジェクトであるため、単なる文字列の結合となってしまう。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> s="a b"+"c d"
+> p s
+"a bc d"
+\end{Verbatim}
+
+\section{制御文との組合せ}
+\ref{sect:tut_symbol}と\ref{sect:tut_ope}節に示した部分アイテム集合を全列挙する一連の流れは、
+制御文と組み合わせることでも実現できる。
+その例を以下に示す。
+以下の例ではsymbol関数によるアイテムの宣言はせず、直接itemset関数によりアイテム集合を定義している。
+そして乗算代入演算子\verb|*=|によりruby変数tに、次々と演算結果を累積していっている。
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> t=ZDD::constant(1)
+> ["a","b","c","d"].each{|item|
+>  t*=(ZDD::itemset(item)+1)
+> }
+ a b c d + a b c + a b d + a b + a c d + a c + a d + a + b c d + b c +
+  b d + b + c d + c + d + 1
+\end{Verbatim}
+
+\section{Nクイーン問題の解法}
+ここでは、これまでに紹介したZDDの各種演算を応用してNクイーン問題を解く方法を紹介する。
+Nクイーン問題とは、N$\times$Nのチェス盤上
+にN個のクイーンを、お互いにとられないように配置する問題である。
+クイーンは将棋の飛車と角を合わせた動きのできるコマで、図\ref{fig:tut_queen_move}に示されるように
+上下左右と斜め4方向の計8方向に進むことができる。
+
+\begin{figure}[htbp]
+\begin{tabular}{cc}
+
+\begin{minipage}{0.30\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+ &x& &x&\\
+\hline
+ & &x&x&\\
+\hline
+x&x&x&o&x\\
+\hline
+ & &x&x&x\\
+\hline
+ &x& &x&\\
+\hline
+\end{tabular}
+}
+\caption{"o"で示されたクイーンの動けるマス目を"x"で示している。\label{fig:tut_queen_move}}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.40\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+(0,0)&(0,1)&(0,2)&(0,3)&(0,4)\\
+\hline
+(1,0)&(1,1)&(1,2)&(1,3)&(1,4)\\
+\hline
+(2,0)&(2,1)&(2,2)&(2,3)&(2,4)\\
+\hline
+(3,0)&(3,1)&(3,2)&(3,3)&(3,4)\\
+\hline
+(4,0)&(4,1)&(4,2)&(4,3)&(4,4)\\
+\hline
+\end{tabular}
+}
+\caption{$5\times 5$のチェス盤の座標\label{fig:tut_chess}}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.25\hsize}
+\begin{center}
+{\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+o& & & &\\
+\hline
+ & &o& &\\
+\hline
+ & & & &o\\
+\hline
+ &o& & &\\
+\hline
+ & & &o&\\
+\hline
+\end{tabular}
+}
+\caption{5クイーン問題の解の一例\label{fig:tut_nqueen_sol1}}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{figure}
+
+5クイーン問題をZDDを用いて解くRubyスクリプトを図\ref{fig:tut_nqueen_scp1}に示す。
+このスクリプトで想定しているチェス盤の座標を図\ref{fig:tut_chess}に示している。
+このスクリプトの基本的な考え方は以下の通りである。
+まず、クイーンを配置するマス目をアイテムと考え、
+$5\times 5=25$のマス目の全組み合せ、すなわち$2^{25}$の組み合せのアイテム集合を全列挙する。
+そのためには\ref{sect:tut_ope}節で解説した方法を使えばよい。
+そして、その中から条件に合うアイテム集合を選択する。
+ここで条件としては以下に示される2つを満たせば十分である。
+\begin{enumerate}
+\item お互いに取られるようなアイテム集合を全て削除する。
+\item サイズが5未満のアイテム集合を削除する。
+\end{enumerate}
+ちなみに、サイズが5より大きいアイテム集合は、1の条件によって削除されることに注意する。
+詳細は、図中にコメントとして記しているので、そちらを参考に動きを確認してもらいたい。
+スクリプトの最後には、ZDDによる演算の途中で格納されたZDDオブジェクトの項の数と内部の接点数を出力している。
+
+\begin{figure}[!hbt]
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+#encoding: utf-8
+require "zdd"
+
+n = 5
+
+# 以下の二重ループにて、25マス(アイテム)の全組み合わせのアイテム集合が列挙され、変数allに格納される。
+# アイテム名には座標を示した文字列"i,j"を用いている。
+all=ZDD.constant(1)
+(0...n).each{|i|
+	(0...n).each{|j|
+		all *= (1+ZDD::itemset("#{i},#{j}"))
+	}
+}
+
+# 以下で、お互いに取られる2マスの組み合せを全列挙し、変数ngに格納する。
+ng=ZDD.constant(0)
+(0...n).each{|i| # 行ループ
+  (0...n).each{|j| # 列ループ
+     # マス目i,jと同じ行番号(i)を持つアイテムペア
+    (j+1...n).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i},#{k}") # 横
+    }
+     # マス目i,jと同じ列番号(j)を持つアイテムペア
+    (i+1...n).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{k},#{j}") # 横
+    }
+    # マス目i,jと、そこから右斜め下方向のアイテムペア
+    (1...[n-i,n-j].min).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i+k},#{j+k}") #
+    }
+    # マス目i,jと、そこから左斜め下方向のアイテムペア
+    (1...[n-i,j+1].min).each{|k|
+      ng+=ZDD::itemset("#{i},#{j} #{i+k},#{j-k}") #
+    }
+  }
+}
+st=Time.new # 時間計測用
+selNG=all.restrict(ng)     # 1) 全アイテム集合allからお互いに取られるアイテムペアを含むアイテム集合を選択する。
+selOK=selNG.iif(0,all)     # 2) 全アイテム集合allから、1)で求めたアイテム集合を除外する。
+selLT=selOK.permitsym(n-1) # 3) 2)の結果から、サイズがn-1以下のアイテム集合を選択する。
+ans  =selLT.iif(0,selOK)   # 4) 2)の結果から3)で求めたアイテム集合を除外する。
+
+# 計算過程で作成されたZDDのアイテム集合(totalweight関数)の数、およびZDDの接点数(size関数)を表示する。
+# totalweight関数はZDDの各項の重みを合計するメソッドである。
+# ここでは、全ての項の重みは1なので、結果として式に含まれるアイテム集合の数が分かる。
+puts "all   : #{all.totalweight}\t #{all.size}"
+puts "selNG : #{selNG.totalweight}\t #{selNG.size}"
+puts "selOK : #{selOK.totalweight}\t #{selOK.size}"
+puts "selLT : #{selLT.totalweight}\t #{selLT.size}"
+puts "ans   : #{ans.totalweight}\t #{ans.size}"
+puts "time: #{Time.new-st}"
+ans.show # 解の表示
+\end{Verbatim}
+}
+\caption{5クイーン問題のZDDによる解法。\label{fig:tut_nqueen_scp1}}
+\end{figure}
+
+以下に実行結果を示す。
+25マスの前組み合わせは約3355万通り($2^25$の値)と膨大であるにも関わらず、
+ZDDの節点数はわずかに25である。
+restrict関数によって選択されたお互いに取られる組み合わせ数(selNG)もほぼ同じ数であるが、
+そのZDD節点数は587と急激に増えており、時間的にも最も時間を要するところでもある。
+最終的に10のアイテム集合が解として列挙されている。
+その中の最初の解(項)である"0,0 1,2 2,4 3,1 4,3"の配置を図\ref{fig:tut_nqueen_sol1}に示す。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+all   : 33554432	 25
+selNG : 33553970	 587
+selOK : 462	 193
+selLT : 452	 199
+ans   : 10	 40
+time: 0.003749
+ 0,0 1,2 2,4 3,1 4,3 + 0,0 1,3 2,1 3,4 4,2 + 0,1 1,3 2,0 3,2 4,4 + 0,1
+  1,4 2,2 3,0 4,3 + 0,2 1,0 2,3 3,1 4,4 + 0,2 1,4 2,1 3,3 4,0 + 0,3 1,0
+  2,2 3,4 4,1 + 0,3 1,1 2,4 3,2 4,0 + 0,4 1,1 2,3 3,0 4,2 + 0,4 1,2 2,0
+  3,3 4,1
+\end{Verbatim}
+
+また、Nを4から11までに設定したときの、ZDDの節点数、解の数、
+そして計算時間を表\ref{tbl:tut_nqueen_result}に示す。
+ZDDの節点数としては、全升目の全組み合わせのZDDオブジェクト(all)と、
+ZDD節点数が最も多くなるZDDオブジェクト(selNG)についてのみ掲載している。
+N=11でselNGの接点数が約2000万となり、1節点あたり30バイトで計算して約600Mバイトのメモリ量を消費することになる。
+計算途中のワークスペースも含めて、8GBメモリのPCではN=11あたりが計算の限界となる。
+ZDDを用いたより効率的な解法が文献\cite{okumura1995}に示されているので、是非ともチャレンジしてもらいたい。
+
+\begin{table}
+\begin{center}
+\caption{Nの値によるZDDの節点数、解の数、処理時間\label{tbl:tut_nqueen_result}}
+\begin{tabular}{r|r|r|r|r}
+\hline
+N & ZDD節点数(all) & ZDD節点数(selNG) & 解数 & 計算時間(秒) \\
+\hline
+4 &  16 &      142 &    2 & - \\
+5 &  25 &      587 &   10 & - \\
+6 &  36 &     2918 &    4 & 0.017 \\
+7 &  49 &    15207 &   40 & 0.094 \\
+8 &  64 &    83962 &   92 & 0.65 \\
+9 &  81 &   489665 &  352 & 4.74 \\
+10& 100 &  2995555 &  724 & 34.7 \\
+11& 121 & 19074050 & 2680 & 247.5 \\
+\hline
+\end{tabular}
+\\
+{\scriptsize *OS: Mac OS X 10.6 Snow Leopard, CPU: 2.66GHz Intel Core i7, Memory: 8GB 1067MHz DDR3}\\
+\end{center}
+\end{table}
+
+\if0
+\section{Nクイーン問題の解法(2)}
+前節で示した解法は、マス目の組み合せを全列挙した後に、
+条件にマッチしない組み合せを削除するという、非常にシンプルなアプローチではあったが、
+restrict関数によるアイテム集合の選択に時間がかかっていた。
+
+そこで、マス目を１つずつ登録していきながら、組み合わせ集合を増やしていき、
+増やすたびに、条件にマッチしない組み合せ集合を削除するアプローチによる解法を
+図\ref{fig:tut_nqueen_scp2}に示す。
+
+\begin{figure}[!hbt]
+{\small
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'zdd'
+
+def add_cell(ans,i,j,n)
+  # マス目i,jにクイーンを配置し、ここまでに得られたマス目の組み合せを更新する。
+  # ansに登録された全てのアイテム集合に、マス目i,jというアイテムを追加すると考えれば分かりやすい。
+  a=ans*ZDD.itemset("#{i}-#{j}")
+
+  # 追加した結果、制約条件を満たさないアイテム集合を削除する。
+  # ここで使っている剰余演算子%によって、%=の右辺のアイテムが含まれないようなアイテム集合をaから選択し
+  # それを再帰的にaにセットする。詳細は剰余演算子のリファレンスを参照のこと。
+  (1..[n-j-1,i].min).each{|k| a%=ZDD.itemset("#{i-k}-#{j+k}")}
+  (1..[i    ,j].min).each{|k| a%=ZDD.itemset("#{i-k}-#{j-k}")}
+  (1..i).each            {|k| a%=ZDD.itemset("#{i-k}-#{j}")  }
+  return a
+end
+
+n=5
+# 変数ansには、行ごとに更新される変数で、各行のアイテム(マス目)を次々に加えていった時点での解(制約条件を満たすアイテム集合)が設定される。
+# ただし、
+ans=ZDD.constant(1)
+# 各マス目(i,j)
+(0...n).each{|i|
+  # 各行ごとに、アイテムを
+  new_ans=ZDD.constant(0)
+  (0...n).each{|j|
+    new_ans+=add_cell(ans,i,j,n)
+  }
+  # マス目(i,j)を加え
+  ans=new_ans
+}
+ans.show
+puts "The number of solutions: #{ans.totalweight}"
+ans.csvout("xxans")
+\end{Verbatim}
+}
+\caption{5クイーン問題のZDDによる解法2。\label{fig:tut_nqueen_scp2}}
+\end{figure}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ ruby nqueen2.rb 5
+ 0-0 1-2 2-4 3-1 4-3 + 0-0 1-3 2-1 3-4 4-2 + 0-1 1-3 2-0 3-2 4-4 + 0-1
+  1-4 2-2 3-0 4-3 + 0-2 1-0 2-3 3-1 4-4 + 0-2 1-4 2-1 3-3 4-0 + 0-3 1-0
+  2-2 3-4 4-1 + 0-3 1-1 2-4 3-2 4-0 + 0-4 1-1 2-3 3-0 4-2 + 0-4 1-2 2-0
+  3-3 4-1
+The number of solutions: 10
+\end{Verbatim}
+\fi

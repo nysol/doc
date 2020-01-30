@@ -1,0 +1,25 @@
+
+\section{freqpatA : 頻出アイテム集合の列挙\label{sect:freqpatA}}
+\subsection*{書式}
+$obj$.freqpatA($minsup$) $\rightarrow$ $zdd$
+
+~~$minsup$ : integer
+
+\subsection*{説明}
+ZDDオブジェクト$obj$から最小サポート$minsup$以上出現する頻出アイテム集合を全て列挙し、そのZDDオブジェクト$zdd$を返す。
+
+同様の関数に\hyperref[sect:lcm]{lcm}があるが、これはファイルからトランザクションデータを読み込み
+LCMアルゴリズムにより頻出アイテム集合を列挙するため、本関数に比べて非常に高速である。
+しかしながら、アイテム名として整数を用いる必要があり、またアイテム順序についても注意が必要であるため、
+さほど効率性が求められないのであれば、本関数を使えばよい。
+
+\subsection*{例}
+\input{examples/tex/freqpatA_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:freqpatM]{freqpatM} : 頻出極大アイテム集合の列挙
+
+\hyperref[sect:freqpatC]{freqpatC} : 頻出飽和アイテム集合の列挙
+
+\hyperref[sect:lcm]{lcm} : LCM over ZDD
+

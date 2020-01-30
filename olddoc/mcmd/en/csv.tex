@@ -1,0 +1,165 @@
+
+%\begin{document}
+
+\section{CSV\label{sect:csv}}
+MCMD processes spreadsheet data in CSV format (Comma Separated Values) as illustrated in Figure \ref{fig:csv_exp1}. CSV is a \textit{de facto} standard format for spreadsheet data. It is widely used as an intermediate format for data interchange between different application programs.
+
+\begin{figure}[hbt]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+Product code, product name, classification, price
+0899781,bread, food,128
+8879674,orange juice, beverage,98 3244565,cheese, food,350
+6711298,bowl, tableware,168
+\end{Verbatim}
+\caption{Example of CSV data\label{fig:csv_exp1}}
+\end{figure}
+
+\begin{figure}[hbt]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+(A) file = [header CRLF] record *(CRLF record) [CRLF]
+(B) header = name *(COMMA name)
+(C) record = field *(COMMA field)
+(D) name = field
+(E) field = (escaped / non-escaped)
+(F) escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
+(G) non-escaped = *TEXTDATA
+(H) COMMA = %x2C
+(I) CR = %x0D ;as per section 6.1 of RFC 2234 [2]
+(J) DQUOTE = %x22 ;as per section 6.1 of RFC 2234 [2]
+(K) LF = %x0A ;as per section 6.1 of RFC 2234 [2]
+(L) CRLF = CR LF ;as per section 6.1 of RFC 2234 [2]
+(M) TEXTDATA = %x20-21 / %x23-2B / %x2D-7E
+\end{Verbatim}
+
+\caption{Definition of ABNF for CSV\label{fig:csv_abnf}}
+\end{figure}
+
+The meaning of each line in Figure \ref{fig:csv_abnf} is as follows:
+
+\begin{itemize}
+\item (A) File consists of a header and record of one or more lines. A header is not required. The line break (CRLF) is attached at the end of the header and at each record. The line break (CRLF) in the last row is not required.
+\item (B) Header consists of one or more names separated by a single comma.
+\item (C) Record consists of one or more fields separated by a single comma.
+\item (D) Name refers to field.
+\item (E) Field can include an escape character or a non-escape character.
+\item (F) Field values containing 1 or more text characters (TEXTDATA), comma(COMMA), and a newline character (CR or LF) shall have a pair of consecutive double quotes character escaped by doubling it.
+\item (G) Non-escape refers to 1 or more text characters (TEXTDATA).
+\item (H) ASCII code of comma in hexadecimal is 2C.
+\item (I) ASCII code of carriage return (CR) in hexadecimal is 0D.
+\item (J) ASCII code of double quotation (DQUOTE) in hexadecimal is 22.
+\item (K) ASCII code of line feed (LF) in hexadecimal is 0A.
+\item (L) Line break or newline is represented as a carriage return + line feed.
+\item (M) Text character (TEXTDATA) had the range of 20-21, 23-2B, 2D-7E in hexadecimal ASCII code.
+\end{itemize}
+
+\subsection{Definition specific to MCMD}
+In addition to the above definitions, MCMD has the following restrictions regarding CSV:
+
+\begin{itemize}
+\item The number of fields must be the same in all the rows.
+\item There is a limit on the maximum length of a single row (1024000 bytes (1 MB) by default and expandable to 10 MB by changing the value of \verb|KG_LimitRecLen| in the source code kgConfig.h).
+\item Line break is only marked with Line Feed (LF).
+\item Line break is mandatory even in the last record.
+\item Added the 80-FF (hexadecimal) range to text characters for handling multibyte characters.
+\end{itemize}
+To check if a CSV file meets the above definitions, use the \hyperref[sect:mchkcsv]{mchkcsv} command.
+
+\subsection{Common input and output process}
+The input and output sequence of CSV file for MCMD follows the steps listed below.
+
+\begin{enumerate}
+\item Read file into memory blocks.
+\item Split the comma-delimited string into different fields while taking consideration of escape character.
+\item Interpret escape characters and convert to original data (except DQUOTE).
+\item Run the specific processing function of the command and write the results to the output buffer.
+\item Add character escapes if necessary.
+\item Output to a file when buffer is full.
+\end{enumerate}
+
+
+\subsection{Field sorting information\label{sect:csv_sort}}
+When the msortf command is used to sort fields or the \verb|s=| or \verb|k=| parameter is used in any other command, records in the specified fields will be sorted. Then, sorting information is added to the fieldnames in the output CSV file. Specifically, numerals will be added to the fieldnames in the order they are specified as sorting fields, starting with a zero: \verb|%0|, \verb|%1|, and so on. When the fields are sorted as numerical values, \verb|n| will be added. When they are sorted in the descending order, \verb|r| will be added. The added information is internally used by the commands for efficiency; the user must not specify it as part of a fieldname.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,item,price
+2,b2,200
+1,a1,100
+2,b1,120
+$ msortf f=id,price%n i=dat1.csv
+id%0,item,price%1n
+1,a1,100
+2,b1,120
+2,b2,200
+$ msum k=id f=price i=dat1.csv
+id%0,item,price
+1,a1,100
+2,b1,320
+\end{Verbatim}
+
+To delete the added information, run \verb|mfldname -q| as described below.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat2.csv
+id%0,item,price%1n
+1,a1,100
+2,b1,120
+2,b2,200
+$ mfldname i=dat2.csv
+id,item,price
+1,a1,100
+2,b1,120
+2,b2,200
+\end{Verbatim}
+
+If the fieldname sorting information does not match the actual sequence of records (for instance, a fieldname includes \verb|%0| although records have not been sorted), the operation of the commands is indefinite.
+
+\subsection{Notes}
+Points to note when preparing the CSV data will be described below with examples.
+
+\subsubsection{Data containing comma characters}
+Escape comma characters in data by enclosing them in double quotes.
+The following is a CSV file comprising of two fields \verb|f1,f2|. 
+The data in row 01 at column \verb|f1| is enclosed in double quotes since it contains a comma.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc,def",2
+xyz,2
+\end{Verbatim}
+\footnote{MCMD address the value of the first row as 0 (except for the field name row) consistently.}
+
+\subsubsection{Data containing double quotes}
+Data containing double quotes characters can be represented by a pair of consecutive double quotes. The following is the CSV file that consists of two columns \verb|f1,f2|. Data in row 0 and 1 at column \verb|f1| is escaped with a double quotation. The original data is written as \verb|abc"def| and \verb|"| respectively.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc""def",2
+"""",2
+\end{Verbatim}
+
+\subsubsection{Line breaks in data}
+Data including a line break can be a process when enclosed in double quotes. A line break is included in the data at row 0 in column \verb|f1| after \verb|abc|. Since the data is enclosed in double quotes, it is identified as part of the data instead of the end of the line.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+f1,f2
+"abc
+def",1
+\end{Verbatim}
+
+\subsubsection{Unnecessary double quotes}
+Unnecessary double quotes are removed in the output.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more data.csv
+f1,f2
+"abc",efg
+abc,"efg"
+$ mcut f=f1,f2 i=data.csv
+f1,f2
+abc,efg
+abc,efg
+\end{Verbatim}
+
+%\end{document}
+

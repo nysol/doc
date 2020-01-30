@@ -1,0 +1,58 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcsv2arff CSVをARFF形式に変換\label{sect:mcsv2arff}}
+\index{mcsv2arff@mcsv2arff}
+csv形式のデータからarff形式(WEKA用のデータフォーマット)のデータへ変換する。
+arffでは、属性の型を指定する必要があり、
+\verb|d=|でカテゴリ型項目を、\verb|n=|で数値型項目を、\verb|s=|で文字列型項目を、
+そして\verb|D=|で日付型項目をそれぞれ指定する。
+日付型項目名に\verb|%t|を付ければ時刻を含んだ値と見なし、付けなければ日付のみの値と見なす。
+
+\subsection*{書式}
+\verb/mcsv2arff n=|d=|D=|s= [T=]/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|n=|    & 数値項目名(複数項目指定可)を指定する。\\
+\verb|d=|    & カテゴリ項目名(複数項目指定可)を指定する。\\
+\verb|D=|    & 日付(時刻)項目名(複数項目指定可)リストを指定する。 [\%{t}]\\
+             & \verb|%t|を指定しなかった場合：yyyyMMdd\\
+             & \verb|%t|を指定した場合　　　：yyyyMMddHHmmss\\
+\verb|s=|    & 文字列項目名(複数項目指定可)を指定する。\\
+\verb|T=|    & タイトルにする文字列を指定する。\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mcsv2arff_ex.tex}
+\subsection*{関連コマンド}
+
+\hyperref[sect:marff2csv]{marff2csv} : 逆変換
+
+
+\subsection*{参考資料}
+\href{http://weka.wikispaces.com/ARFF}{http://weka.wikispaces.com/ARFF}
+
+%\end{document}

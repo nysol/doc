@@ -1,0 +1,177 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mselnum 数値範囲による行選択\label{sect:mselnum}}
+\index{mselnum@mselnum}
+\verb|f=|で指定した項目の値が、
+\verb|c=|で指定した数値範囲にマッチする行を選択する。
+以下に示すように多様な選択条件を指定することが可能である。
+このコマンドで指定できないより複雑な条件(文字列マッチとの組み合せなど)
+を設定するのであれば\hyperref[sect:msel]{msel}コマンドを利用すればよい。
+OR条件、AND条件およびキー指定についての詳細は\verb|mselstr|コマンドを参照されたい。
+
+\begin{itemize}
+\item 開区間、閉区間、半開区間、無限区間の制定が可能である。
+\item \verb|c=|に複数の範囲を指定すれば、いずれかの範囲にマッチすれば選択される(OR条件)。
+\item \verb|f|=に複数項目を指定すれば、いずれかの項目の値がマッチすれば選択される(OR条件)。
+\item \verb|f=|のOR条件をAND条件に変更することも可能(\verb|-F|オプション)。
+\item \verb|k=|を指定することでキー単位で選択することが可能。
+\item キー単位選択の場合、複数レコードのAND条件を指定可能(\verb|-R|オプション)。
+\end{itemize}
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mselnum_input}〜\ref{tbl:mselnum_out3}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.18\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mselnum_input}}
+{\small
+\begin{tabular}{cc}
+\hline
+key&val \\
+\hline
+a&1 \\
+a&-3 \\
+b&3 \\
+b&6 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.38\hsize}
+\begin{center}
+\caption{val項目が1以上3以下の行を選択\label{tbl:mselnum_out1}}
+\verb|mselnum f=val c='[1,3]' | \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+b&3 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.38\hsize}
+\begin{center}
+\caption{val項目が1以上3未満の行を選択\label{tbl:mselnum_out2}}
+\verb|mselnum f=val c='[1,3)'| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{5以上の行を選択\label{tbl:mselnum_out3}}
+\verb|mselnum f=val c='[5,)'| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+b&6 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{1以下もしくは5以上の行を選択\label{tbl:mselnum_out4}}
+\verb|mselnum f=val c='(,1],[5,)'| \\
+{\small
+\begin{tabular}{ccc}
+\hline
+key&val \\
+\hline
+a&1 \\
+a&-3 \\
+b&6 \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mselnum f= c= [k=] [u=] [-F] [-r] [-R]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+%\begin{table}[htbp]
+%\begin{center}
+%{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|f=|    & 検索対象となる項目名リスト(複数項目指定可)を指定する。\\
+\verb|c=|    & \verb|f=|パラメータで指定した項目の値が、ここで指定した文字列リスト(複数範囲指定可)の1つにマッチすれば選択される。 \\
+\verb|k=|    & 撰択する単位となるキー項目(複数項目指定可)を指定する。\\
+%\verb|k=|    & 撰択する単位となるキー項目(複数項目指定可)を指定する。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+%             & (注意）指定する場合は事前に\verb|k=|パラメータで指定する選択の単位となる項目順に並べ替えておく必要がある。\\
+\verb|o=|    & 指定の条件に一致する行を出力するファイル名を指定する。 \\
+\verb|u=|    & 指定の条件に一致しない行を出力するファイル名を指定する。\\
+\verb|-F|    & \verb|f=|パラメータで複数項目を指定した場合、その全ての値がマッチする行を撰択する。\\
+\verb|-r|    & 条件反転\\
+             & 選択ではなく削除する。\\
+\verb|-R|    & \verb|k=|パラメータを指定した場合、その全ての行がマッチすれば行を撰択する。\\
+\verb|bufcount=| & バッファのサイズ数を指定する。 \\
+\end{tabular} 
+%}
+%\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mselnum_ex}
+\subsection*{関連コマンド}
+\hyperref[sect:msel]{msel} : 複雑な条件指定による選択を行う場合に利用する。
+
+\hyperref[sect:mselstr]{mselstr} : 文字列マッチによる選択。
+
+%\end{document}

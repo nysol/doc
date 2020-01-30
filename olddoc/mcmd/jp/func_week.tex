@@ -1,0 +1,25 @@
+
+%\begin{document}
+
+\section{week 週\label{sect:week}}
+\index{week@week}
+
+書式1: week($date$)
+
+書式2: week($time$)
+
+書式3: week111($date$)
+
+書式4: week111($time$)
+
+
+日付$date$もしくは時刻$time$のISO8601で規定された週番号を返す。
+ISO8601で規定された週番号とは、年の最初の木曜日を含む週をその年の第1週と規定している。
+
+一方でweek111を利用すると、曜日に関係なく1/1を第1週の第1日目と考えて週番号を返す。
+
+\subsection*{利用例}
+\input{examples/tex/func_week_ex}
+
+%\end{document}
+

@@ -1,0 +1,125 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mvcat ベクトルの併合\label{sect:mvcat}}
+\index{mvcat@mvcat}
+複数のベクトルを併合して新しいベクトルを生成する。
+
+\if0 #no help# following sentences will not apear on the help document. \fi
+典型的な例を表\ref{tbl:mvcat_input}〜\ref{tbl:mvcat_out2}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{入力データ\label{tbl:mvcat_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items1,items2 \\
+\hline
+1&a c,b \\
+2&a d,a e \\
+3&b f, \\
+4&e,e \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{基本例\label{tbl:mvcat_out1}}
+\verb|mvcat vf=item1,items2 a=catItems i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&catItems \\
+\hline
+1&a c b \\
+2&a d a e \\
+3&b f \\
+4&e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{併合前のベクトルを残す例\label{tbl:mvcat_out2}}
+\verb|mvcat vf=item1,items2 -A i=in.csv| \\
+{\small
+\begin{tabular}{lll}
+\hline
+no&items1,items2,new \\
+\hline
+1&a c,b,a c b \\
+2&a d,a e,a d a e \\
+3&b f,,b f \\
+4&e,e,e e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{書式}
+\verb|mvcat vf= a= [-A]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|vf=| & 併合する複数のベクトル項目名(\verb|i=|ファイル上)を指定する。\\
+           & 項目名にワイルドカードを使うことができる。\\
+\verb|a=|  & 併合後の項目名を指定する。\\
+\verb|-A|  & 新しい項目として追加する。このオプションを指定しなければ、併合元の項目(\verb|vf=|)は削除される。 \\
+\verb|delim=| & ベクトル型データの区切り文字を指定する。\\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mvcat_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

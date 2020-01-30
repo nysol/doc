@@ -1,0 +1,90 @@
+\subsubsection*{例1: 基本例}
+
+「数量」と「金額」項目がNULL値の行を削除する。
+NULL値の行は\verb|oth.csv|に出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+$ mdelnull f=数量,金額 u=oth.csv i=dat1.csv o=rsl1.csv
+#END# kgdelnull f=数量,金額 i=dat1.csv o=rsl1.csv u=oth.csv
+$ more rsl1.csv
+顧客,数量,金額
+A,1,10
+B,1,15
+C,1,20
+$ more oth.csv
+顧客,数量,金額
+A,,20
+B,3,
+\end{Verbatim}
+\subsubsection*{例2: NULL値の行を選択}
+
+\verb|-r|を指定することで、削除ではなく選択することになる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull f=数量,金額 -r i=dat1.csv o=rsl2.csv
+#END# kgdelnull -r f=数量,金額 i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+顧客,数量,金額
+A,,20
+B,3,
+\end{Verbatim}
+\subsubsection*{例3: キー項目でのNULL値の行の削除}
+
+\verb|k=|を指定することで、集計キー単位で削除することになる。
+以下では「顧客」項目を単位にして、「数量」と「金額」項目にNULL値が一つでも含まれていれば削除する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull k=顧客 f=数量,金額 i=dat1.csv o=rsl3.csv
+#END# kgdelnull f=数量,金額 i=dat1.csv k=顧客 o=rsl3.csv
+$ more rsl3.csv
+顧客%0,数量,金額
+C,1,20
+\end{Verbatim}
+\subsubsection*{例4: 項目間AND条件の例}
+
+「数量」と「金額」項目の両方がNULL値の行を削除する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+顧客,数量,金額
+A,1,10
+A,,
+B,1,15
+B,3,
+C,1,20
+$ mdelnull f=数量,金額 -F i=dat2.csv o=rsl4.csv
+#END# kgdelnull -F f=数量,金額 i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+顧客,数量,金額
+A,1,10
+B,1,15
+B,3,
+C,1,20
+\end{Verbatim}
+\subsubsection*{例5: レコード間AND条件の例}
+
+「顧客」項目を単位にして、「数量」項目が全てNULL値の行を削除する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdelnull k=顧客 f=数量 -R i=dat1.csv o=rsl5.csv
+#END# kgdelnull -R f=数量 i=dat1.csv k=顧客 o=rsl5.csv
+$ more rsl5.csv
+顧客%0,数量,金額
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+\end{Verbatim}

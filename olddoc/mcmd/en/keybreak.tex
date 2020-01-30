@@ -1,0 +1,57 @@
+
+%\begin{document}
+
+\section{Key Break Processing\label{sect:keybreak}}
+
+In key break processing, it is assumed that within the column which matches the column specified, processing is executed for key fields with the same value. 
+Key break processing is broadly divided into two type of processes. First is key break processing  for aggregate calculation (referred to as  "{\bf aggregate key break processing}" below), second is key break processing for joins (referred to as "{\bf join key break processing}" below ). 
+ 
+Join key break processing is executed for commands such as \hyperref[sect:mjoin]{mjoin}, 
+\hyperref[sect:mcommon]{mcommon} which contains the word "join" and "common". Aggregate key break processing is carried out on other commands with \verb|k=| parameter. 
+
+
+For example, when the \verb|msum| command triggers aggregate key break processing, it detects the change of value in the key field, and executes aggregate processing for records with the same key. 
+ That is, the records need to be sorted according to the key field beforehand (unless the input files are sorted in advance). Thus, the msum command internally sorts the records before aggregate processing.
+Join key break processing involves a more complicated process. For instance, the \verb|mjoin| command takes in two data files, and compare the values in the key field.  The key fields from the smaller data set is read continuously, and the records are joined when the key fields in the input file and the reference file matches. When the comparing the key field values, since the key break processing is used for join operation,  the key fields from the two data files need to be sorted beforehand. 
+Therefore, the \verb|mjoin| command internally sorts the records in the two data files first.
+
+Basic sorting {\bf character string ascending order} is carried out for both key break processing, however, when joining records by numerical range in \verb|mrjoin| command, sorting is carried out by {\bf numeric ascending order}. 
+
+Besides the fields defined at \verb|k=| parameter are automatically sorted, in other commands automatic sorting is pre-determined, thus users do not need to resolve whether the input files requires sorting. 
+Even though users no longer need to initiate the sort command, note that sorting is handled within each command internally. Thus, depending on the construction of the script, sort processing may frequently take place which could reduce performance.  
+
+
+\subsection*{Example of Script}
+
+\subsubsection*{Example of script when sorting takes place frequently}
+
+Initially, \verb|name| column is sorted and saved as xxcustomer output file, afterwards, join processing by \verb|id| key field is carried out by \verb|mjoin| command. In this case, \verb|mjoin| is executed three times, and \verb|id| column from xxcustomer inputer data is sorted at each instance of \verb|mjoin| command. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+mcut   i=customer.csv f=id,name |
+msortf f=name o=xxcustomer
+
+mjoin i=xxcustomer m=address.csv k=id f=address o=cust_address.csv
+mjoin i=xxcustomer m=phone.csv   k=id f=phone   o=cust_phone.csv
+mjoin i=xxcustomer m=age.csv     k=id f=age     o=cust_age.csv
+\end{Verbatim}
+
+\subsubsection*{Example of script to minimize sorting}
+
+When the script is modified as follows, since xxcustomer file is sorted by \verb|id| field and saved as xxcustomer. Automatic sorting of the input file at \verb|mjoin| commands is not carried out. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+mcut   i=customer.csv f=id,name |
+msortf f=id o=xxcustomer
+
+mjoin i=xxcustomer m=address.csv k=id f=address o=cust_address.csv
+mjoin i=xxcustomer m=phone.csv   k=id f=phone   o=cust_phone.csv
+mjoin i=xxcustomer m=age.csv     k=id f=age     o=cust_age.csv
+\end{Verbatim}
+
+%\subsection*{利用例}
+%\input{examples/tex/keybreak_ex.tex}
+
+

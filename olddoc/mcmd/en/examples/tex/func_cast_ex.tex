@@ -1,0 +1,43 @@
+\subsubsection*{Example 1: Fixed length random number}
+
+Generate random numbers from 1 to 9999 as 4 digit fixed length string.
+Integer data (results of randi) is not supported by \verb|fixlen| function, thus the data must be converted to character string with n2s function. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+4
+$ mcal c='fixlen(n2s(randi(1,9999,11)),4,"R","0")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=fixlen(n2s(randi(1,9999,11)),4,"R","0") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,1803
+2,0684
+3,0195
+4,6647
+\end{Verbatim}
+\subsubsection*{Example 2: True false pattern}
+
+Detect unusual pattern in columns v1,v2,v3 and print as 01 in output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,v1,v2,v3
+1,10,5,7
+2,5,12,11
+3,3,6,2
+4,14,16,11
+$ mcal c='cat("",b2s(${v1}>=10),b2s(${v2}>=10),b2s(${v3}>=10))' a=rsl i=dat2.csv o=rsl2.csv
+#END# kgcal a=rsl c=cat("",b2s(${v1}>=10),b2s(${v2}>=10),b2s(${v3}>=10)) i=dat2.csv o=rsl2.csv
+$ more rsl2.csv
+id,v1,v2,v3,rsl
+1,10,5,7,100
+2,5,12,11,011
+3,3,6,2,000
+4,14,16,11,111
+\end{Verbatim}

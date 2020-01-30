@@ -1,0 +1,65 @@
+
+\section{lcm : LCM over ZDD\label{sect:lcm}}
+\subsection*{Format}
+
+$obj$.lcm($type,transaction,minsup[,order,ub]$) $\rightarrow$ $zdd$
+
+~~$transaction$ : string
+
+~~$type$ : string
+
+~~$minsup$ : integer
+
+~~$order$ : string
+
+~~$ub$ : integer
+
+\subsection*{Description}
+
+Using LCM over ZDD algorithm, enumerate frequent patterns above the specified minimum support $minsup$ from the transaction file specified at $transaction$, and return as ZDD object $zdd$.
+Specify the ZDD item order file at $order$, and specify the upper limit of the itemset size at $ub$. 
+
+Three types of frequent patterns can be enumerated which is defined at $type$ including "F" (frequent itemset), "M" (maximal itemset), "C" (closed itemsets). 
+
+Further, "FQ", attached with "Q", returns the frequencies and weight of each frequent itemset enumerated. 
+When "F" is used without "Q",  itemsets that meet the minimum support is returned without frequency information. 
+
+The transaction file as shown in the text file below, one row corresponds to one transaction. Items are specified by sequential numbers starting from 1, with a space delimiter between items. 
+
+Alphabet cannot be used as an item. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+1 2 3 6
+4 5 6
+1 2 4 6
+2 4 6
+1 2 4 5
+\end{Verbatim}
+
+$order$ file is a text file that shows the order of items registered in the ZDD item order table. 
+Typically, all items contained in the transaction data are assigned to sequential numbers. 
+In addition, note that when if there is a missing transaction item number, the missing number must be specified. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+1 2 3 4 5 6
+\end{Verbatim}
+When $order$ file is not specified (or specify as nil), the item order will be determined by the internal algorithm of LCM to increase efficiency. 
+
+However, this method, the item number is assigned sequentially in order, thus, the item number assigned to ZDD frequent itemset will be different than the original transaction number. 
+
+As long as the analysis is not related to the content of the item, it is computationally more  efficient to exclude $order$. Conversely, if the purpose is to analyze the contents of the items, an order file as shown above should be specified. 
+
+Specify the upper limit for the size of frequent itemsets to be enumerated at $ub$.  
+When the parameter is not specified, nil will be assigned when there is no maximum limit to the enumeration. 
+
+\subsection*{Examples}
+\input{examples/tex/lcm_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:freqpatA]{freqpatA} : Enumerate frequent itemsets
+
+\hyperref[sect:freqpatM]{freqpatM} : Enumerate maximal itemsets
+
+\hyperref[sect:freqpatC]{freqpatC} : Enumerate closed itemsets
+
+

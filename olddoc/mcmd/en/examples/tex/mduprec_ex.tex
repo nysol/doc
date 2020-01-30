@@ -1,0 +1,40 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate multiple records of the data based on the numeric value in the “Quantity” field. Records containing NULL values will not be duplicated.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+store,val
+A,2
+B,
+C,5
+$ mduprec f=val i=dat1.csv o=rsl1.csv
+#END# kgduprec f=val i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+store,val
+A,2
+A,2
+C,5
+C,5
+C,5
+C,5
+C,5
+\end{Verbatim}
+\subsubsection*{Example 2: Define the number of rows to duplicate}
+
+Duplicate two rows (\verb|n=2|) for each record in the dataset.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mduprec n=2 i=dat1.csv o=rsl2.csv
+#END# kgduprec i=dat1.csv n=2 o=rsl2.csv
+$ more rsl2.csv
+store,val
+A,2
+A,2
+B,
+B,
+C,5
+C,5
+\end{Verbatim}

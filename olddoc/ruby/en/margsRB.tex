@@ -1,0 +1,304 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+ \section{Margs - Argument operation class \label{sect:margsRB}}
+This class handles arguments at command line. The features are as follows. 
+\begin{itemize}
+%	\setlength{\itemindent}{-5mm}
+	\item Handle 2 types of argument format namely \verb|keyword=value| and \verb|-keyword|.
+	\item Convert Bool type (true/false) data using \verb|-keyword| option. 
+	\item Defined format of \verb|value| could be in Ruby original String array, Fixnum array, Float array. 
+	\item Provide file type and field name type for other special format.
+	\item Specify default value and value range. 
+	\item Display error message if the specified argument is not correct. 
+	\item When \verb|--help| is specified, help() is called. User can also specify the function name of help. Note that \verb|--help| is different than regular help option, and the prefix includes two minus sign.
+\end{itemize}
+
+\subsection{Method}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.new(ARGV[,allKeyWords][,mandatoryKeyWords][,helpFunction)
+\end{verbatim}
+}
+
+Create Margs object. 
+The arguments at the command line expressed in \verb|“keyword=value”| or \verb|“-keyword”| are set to Array or Hash variable within the class. 
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/ARGV /} - ARGV variable of Ruby.
+	\item {\large \verb/allKeyWords /} - Define argument keyword list by \verb/key=value/ or \verb/-key/.
+	Check the arguments other than the ones defined here is not defined at ARGV, if the argument is specified, the program will terminate with an error. Checking will not be carried out when  \verb/allKeyWords/ is not defined. 
+	\item {\large \verb/mandatoryKeyWords /} - Define argument keyword list by \verb/key=value/.
+	 If the specified arguments is not specified at the command line, the program terminates with an error.  Checking will not be carried out when \verb/mandatoryKeyWords/ is not defined. 
+	\item {\large \verb/helpFunction/} - Function name to call when \verb/--help/ is specified. 
+
+\end{description}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb i=dat.csv -abc
+
+# Contents of test.rb
+args=Margs.new(ARGV, "i=,v=,-abc") # OK
+args=Margs.new(ARGV, "i=,v=") # -abc cannot be specified and it is terminated with error
+args=Margs.new(ARGV, "i=,v=,-abc","i=,v=") # v= is required but is not specified, 
+thus it is terminated with error
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.file(keyWord,mode): Obtain file name 
+\end{verbatim}
+}
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/keyWord/} - Keyword in \verb/key=/format (String)
+	\item {\large \verb/mode/} - Specify "r"(check readable) or "w"(check writable)(String)
+\end{description}
+
+The value specified at keyWord is the input filename, when mode is set as "r", the method returns the file name if the file is readable. Otherwise, if the file cannot be read, it terminates with an error. When mode is set as "w", check whether the directory is writable, and return filename if it is writable, otherwise, terminate with error if not writable. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb i=dat.csv
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.file("i=","r") # dat.csv becomes "dat.csv" if it is readable
+puts args.file("i=","w") # current directory is "dat.csv" if it is writable 
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.field(keyWord,fileName)
+\end{verbatim}
+}
+Return various information in the file (specified at \verb/fileName/) related to the field names specified at \verb/keyWord/. 
+
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/keyWord /} - Keyword in \verb/"key="/ format (String).
+	\item {\large \verb/fileName /} - File name.
+\end{description}
+
+The specified field name at the command line must follow the format below. 
+\begin{equation}
+\verb/key=/name_1\verb/[:/newName_1\verb/%/option_1\verb/],/name_2\verb/[:/newName_2\verb/%/option_2\verb/],/\ldots
+\end{equation}
+
+Specify multiple field names delimited by comma. 
+$name_i$ represents the field names in the CSV file which is specified at \verb/fileName/.
+Otherwise, terminate with the error \verb/"field name not found"/.
+
+The two attributes $newName_i$ and $option_i$ can be specified (optional) at field name $name_i$. The attributes have various uses, and must be separated by \verb/:/ and \verb/%/. 
+
+Typically, the calculation results from fields $name_i$ will be added as a new field name in the output $newName_i$. In addition, $option_i$ is an option used to control the content of processing. 
+
+This method returns a variety of information shown below in Hash. Font in Bold represents Hash key.
+
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/names /} - \verb/names/ is the field name of the array (String Array).
+	\item {\large \verb/newNames /} - \verb/newNames/ is the new field name of the array (String Array). nil if this is not specified. 
+	\item {\large \verb/options /} - \verb/options/ is the option of the array (String Array). nil if this is not specified. 
+	\item {\large \verb/fld2csv /} - Item number (start from 0) in the CSV file (\verb/fileName/) which corresponds to the fields specified at  \verb/"key="/ (String Array). 
+	\item {\large \verb/csv2fld /} - Field number in CSV file is numbered according to the fields specified at \verb/"key="/ in sequential order (starting from 0) (String Array). Fields that are not specified is nil. 
+\end{description}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Contents of test.csv
+fld1,fld2,fld3
+1,2,3
+4,5,6
+
+# Command line 
+$ ruby test.rb f=fld1,fld3
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+fld=args.field("f=","test.csv")
+p fld["names"]   # -> ["fld1","fld3"]
+p fld["fld2csv"] # -> [0,2] fld1,fld3 corresponds to 0th item and 2nd item in test.csv
+p fld["csv2fld"] # -> [0,nil,1] the 0th item in test.csv is specified as 0th item at f=
+
+# Command line
+$ ruby test.rb f=fld3:newFld3%n,fld2%nr
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+fld=args.field("f=","test.csv")
+p fld["names"]    # -> ["fld3", "fld2"]
+p fld["newNames"] # -> ["newFld3", nil]
+p fld["options"]  # -> ["n", "nr"]
+p fld["fld2csv"]  # -> [2, 1]
+p fld["csv2fld"]  # -> [nil, 1, 0]
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.str(keyWord[,default][,token1][,token2])
+\end{verbatim}
+}
+Obtain character string arguments 
+\begin{description}
+	\setlength{\itemindent}{0mm}
+	\item {\large \verb/keyWord /} - Keyword in \verb/"key="/ format (String)
+	\item {\large \verb/default /} - Default value when the value is not specified. The value is nil if not specified. 
+	\item {\large \verb/token1 /} Delimiter when multiple character strings are specified. When the argument is not specified, no delimiter will be used. 
+	\item {\large \verb/token2 /} The character string divided by token1 is further delimited by token2. There will not be delimiter if the argument is not specified.\end{description}
+
+Among the arguments specified at the command line, return the character string that matches \verb/keyWord/. 
+
+Return the \verb/default/ character string specified at the command line. Returns nil if \verb/default/ contains \verb/nil/. 
+
+Return array when \verb/token1/ is specified as the delimiter of the character string. If \verb/token2/ is specified, return array within array. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb v=abc
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.str("v=") # ->"abc"
+puts args.str("w=") # -> nil
+puts args.str("w=","xyz") # -> "xyz"
+\end{Verbatim}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb v=abc,efg:xyz,hij
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.str("v=") # ->"abc,efg:xyz,hij"
+puts args.str("v=",nil,",") # ->["abc", "efg:xyz", "hij"]
+puts args.str("v=",nil,",",":") # ->[["abc"], ["efg","xyz"], ["hij"]]
+\end{Verbatim}
+
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.float(keyWord[,default][,from][,to]): Obtain float 
+type numerical  arguments 
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /}  - Keyword in "key='' format (String).
+\item {\large \verb/default /} - Specify the default value (Float). The value is nil if not specified. 
+\item {\large \verb/from /} Lower limit (Float) of range check. Lower limit is not checked if the argument is not specified. 
+\item {\large \verb/to /} Upper limit (Float) of range check. Upper limit is not checked if the argument is not specified. 
+\end{description}
+
+For all arguments specified at command line, convert values that matches \verb/keyWord/ to Float. Return the \verb/default/ value specified at the command line. Program will terminate with an error if the range check fails. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb v=0.12
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.float("v=") # -> 0.12
+puts args.float("v=",nil,0.2,0.3) # -> Range error
+puts args.float("w=") # -> nil
+puts args.float("w=",0.1) # -> 0.1
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.int(keyWord[,default][,from][,to]) Obtain fixnum 
+type numerical arguments
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /} - Keyword in \verb/key=/ format (String).
+\item {\large \verb/default /} - Specify the default value (Float). The value is nil if not specified. 
+\item {\large \verb/from /} -  Lower limit (Float) range check. Lower limit is not checked if the argument is not specified. 
+\item {\large \verb/to /} - Upper limit (Float) range check. Upper limit is not checked if the argument is not specified.
+\end{description}
+
+Among all arguments specified at command line, for values that matches \verb/keyWord/, convert to Float. Return the \verb/default/ value specified at the command line. 
+Program terminates with an error if range check fails. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line
+$ ruby test.rb v=10
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.int("v=") # -> 10
+puts args.int("v=",,20,30) # -> Range error 
+puts args.int("w=") # -> nil
+puts args.int("w=",15) # -> 15
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%
+{\Large
+\begin{verbatim}
+* MCMD::Margs.bool(keyWord) Obtain bool type arguments 
+\end{verbatim}
+}
+
+\begin{description}
+\item {\large \verb/keyWord /} Keyword that corresponds to "-key" (String)
+\end{description}
+
+Among the arguments specified at the command line, return true if \verb/keyWord/ matches with the argument, otherwise return false. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line 
+$ ruby test.rb -flag
+
+# Contents of test.rb
+args=Margs.new(ARGV)
+puts args.bool("-flag") # -> true
+puts args.bool("-x") # -> false
+\end{Verbatim}
+
+
+%\subsection{備考}
+%\begin{itemize}
+%\item 
+%\end{itemize}
+
+\subsection{Example}
+\subsubsection*{Example 1}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Command line 
+$ ruby test.rb i=dat.csv v=value -abc
+
+# Contents of test.rb
+args=Margs.new(ARGV, "i=,o=,w=,-flag,-x", "i=,w=")
+iFileName = args.file("i=") # -> "dat.csv"
+oFileName = args.str("o=","result.csv") # -> "result.csv"
+weight    = args.float("w=",0.1,0.0,1.0) # -> 0.1
+flag      = args.bool("-abc") # -> true
+wFlag     = args.bool("-w") # -> false
+\end{Verbatim}
+
+\subsection{Related Command}
+
+%\hyperlink{mtableRB.pdf}{Table} : 全データのメモリ読み込み
+%\hypertarget{ht}
+%\hyperlink{ht}{bbb}
+
+%\end{document}
+

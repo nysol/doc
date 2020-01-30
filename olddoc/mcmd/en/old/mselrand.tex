@@ -1,0 +1,147 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mselrand},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mselrand (random sampling) command}
+Random selection of records based on the variables set at \emph{c=} and \emph{p=} parameters. 
+
+\subsection*{Format}
+mselrand [c=]  [u=] [k=] [p=] [S=] [u=] [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}]  [\href{run:option.pdf}{-x}]  [\href{run:option.pdf}{i=}] [\href{run:option.pdf}{o=}] [--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|c=|    & Number of records\\
+& Select row(s) based on the number of keys and field specified. \\
+& \emph{p=} should always be specified with this parameter. \\
+\verb|k=|    & Key field name（Allow multiple values） \\
+& Random selection of records based on the defined key.  \\
+& Note: Sort data by key field(s) as specified in the \emph{k =} parameter prior to the command. \\
+\verb|p=|    & Percentage of records \\
+& Define the ratio of records based on each key value in percentage.  \\
+& \emph{c=} parameter should always be specified with this parameter.  \\
+\verb|S=|    & Random seed 【default = current time】\\
+& The same random seed generates the same row selection sequence. \\
+& The default setting of random seed is set to the current time if this parameter is not specified.  \\
+& Range of random seed value is between -2147483648〜2147483647. \\
+\verb|u=|    & Output file of unmatched records. \\
+& Print unmatched records to this output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Random Selection}
+Randomly select a transaction based on each customer.  Save other records to a separate file oth.csv. \\
+(Note) Sort the input file by customer in ascending order beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat1.csv)
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+
+$ mselrand k=Customer c=1 S=1 u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file 1(rsl.csv)
+Customer,Date,Amount
+A,20081201,10
+B,20081002,40
+
+#Output file 2(oth.csv)
+Customer,Date,Amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Select 50\% of the records at random}
+Select 50\% of each customers' records at random. Save other records to a separate file oth.csv. \\
+(Note）Sort the input file by customer in ascending order beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# dat.csv
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+
+$ mselrand k=Customer p=50 S=1 u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file 1(dat.csv)
+Customer,Date,Amount
+A,20081201,10
+B,20081002,40
+
+
+# Output file 2(oth.csv)
+Customer,Date,Amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Remarks}
+This command used Mersenne twister (developed in 1937) as pseudo random number generator.
+
+\subsection*{Related Commands}
+\noindent
+\href{run:msel.pdf}{msel}: Select records with conditions \\
+\href{run:mrand.pdf}{mrand}: Generate random number 
+
+\begin{thebibliography}{8}
+boostライブラリ: http://www.boost.org/doc/libs/1\_37\_0/libs/random/random-generators.html\\
+原作者のページ: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/MT2002/mt19937ar.html
+\end{thebibliography}
+
+\end{document}

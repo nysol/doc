@@ -1,0 +1,420 @@
+\subsubsection*{Example 1: Basic Example}
+
+Enumerate frequent itemset that appear more than 3 times.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+tid,item
+T1,C
+T1,E
+T2,D
+T2,E
+T2,F
+T3,A
+T3,B
+T3,D
+T3,F
+T4,B
+T4,D
+T4,F
+T5,A
+T5,B
+T5,D
+T5,E
+T6,A
+T6,B
+T6,D
+T6,E
+T6,F
+$ mitemset.rb  S=3 tid=tid item=item i=dat1.csv O=result1
+#MSG# lcm_20140215 FIf /tmp/__MTEMP_18926_70182748393500_0 3 /tmp/__MTEMP_18926_7018274838
+9080_0
+trsact: /tmp/__MTEMP_18926_70182748393500_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 5 ,size 20
+ output to: /tmp/__MTEMP_18926_70182748389080_0
+separated at 0
+iters=8
+14
+1
+5
+6
+2
+trsact: /tmp/__MTEMP_18926_70182748393500_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 6 ,size 21
+ output to: /tmp/__MTEMP_18926_70182748389080_1
+separated at 0
+iters=7
+6
+0
+6
+#MSG# output patterns to CSV file ...
+#MSG# the number of patterns enumerated is 13
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result1'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=3 tid=tid item=item i=
+dat1.csv O=result1
+$ more result1/patterns.csv
+pid,size,count,total,support,lift,pattern
+1,1,5,6,0.8333333333,1,D
+7,2,4,6,0.6666666667,1.2,D F
+6,1,4,6,0.6666666667,1,F
+4,1,4,6,0.6666666667,1,E
+2,1,4,6,0.6666666667,1,B
+3,2,4,6,0.6666666667,1.2,B D
+8,2,3,6,0.5,1.125,B F
+13,2,3,6,0.5,1.2,A D
+5,2,3,6,0.5,0.9,D E
+12,3,3,6,0.5,1.8,A B D
+11,2,3,6,0.5,1.5,A B
+10,1,3,6,0.5,1,A
+9,3,3,6,0.5,1.35,B D F
+$ more result1/tid_pats.csv
+tid,pid
+T1,4
+T2,1
+T2,4
+T2,7
+T2,6
+T2,5
+T3,10
+T3,6
+T3,13
+T3,7
+T3,11
+T3,8
+T3,3
+T3,12
+T3,1
+T3,2
+T3,9
+T4,6
+T4,7
+T4,8
+T4,2
+T4,1
+T4,3
+T4,9
+T5,11
+T5,13
+T5,3
+T5,1
+T5,4
+T5,10
+T5,5
+T5,2
+T5,12
+T6,2
+T6,11
+T6,6
+T6,7
+T6,5
+T6,10
+T6,1
+T6,8
+T6,12
+T6,4
+T6,9
+T6,13
+T6,3
+\end{Verbatim}
+\subsubsection*{Example 2: Set a limit on the size of itemset}
+
+For itemsets that appear more than 3 or more times, patterns of itemsets with size 3 is enumerated.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mitemset.rb S=3 l=3 u=3 tid=tid item=item i=dat1.csv O=result2
+#MSG# lcm_20140215 FIf -l 3 -u 3 /tmp/__MTEMP_19010_70360847449800_0 3 /tmp/__MTEMP_19010_
+70360847467580_0
+trsact: /tmp/__MTEMP_19010_70360847449800_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 5 ,size 20
+ output to: /tmp/__MTEMP_19010_70360847467580_0
+separated at 0
+iters=8
+2
+0
+0
+0
+2
+trsact: /tmp/__MTEMP_19010_70360847449800_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 6 ,size 21
+ output to: /tmp/__MTEMP_19010_70360847467580_1
+separated at 0
+iters=7
+6
+0
+6
+#MSG# output patterns to CSV file ...
+#MSG# the number of patterns enumerated is 2
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result2'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=3 l=3 u=3 tid=tid item
+=item i=dat1.csv O=result2
+$ more result2/patterns.csv
+pid,size,count,total,support,lift,pattern
+0,3,3,6,0.5,1.35,B D F
+1,3,3,6,0.5,1.8,A B D
+\end{Verbatim}
+\subsubsection*{Example 3: Enumerate closed itemsets}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mitemset.rb S=3 type=C tid=tid item=item i=dat1.csv O=result3
+#MSG# lcm_20140215 CIf /tmp/__MTEMP_19093_70290667606020_0 3 /tmp/__MTEMP_19093_7029066760
+1800_0
+trsact: /tmp/__MTEMP_19093_70290667606020_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 5 ,size 20
+ output to: /tmp/__MTEMP_19093_70290667601800_0
+separated at 0
+iters=8
+8
+1
+2
+3
+2
+trsact: /tmp/__MTEMP_19093_70290667606020_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 6 ,size 21
+ output to: /tmp/__MTEMP_19093_70290667601800_1
+separated at 0
+iters=7
+6
+0
+6
+#MSG# output patterns to CSV file ...
+#MSG# the number of patterns enumerated is 7
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result3'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=3 type=C tid=tid item=
+item i=dat1.csv O=result3
+$ more result3/patterns.csv
+pid,size,count,total,support,lift,pattern
+1,1,5,6,0.8333333333,1,D
+2,2,4,6,0.6666666667,1.2,B D
+3,1,4,6,0.6666666667,1,E
+5,2,4,6,0.6666666667,1.2,D F
+4,2,3,6,0.5,0.9,D E
+6,3,3,6,0.5,1.35,B D F
+7,3,3,6,0.5,1.8,A B D
+\end{Verbatim}
+\subsubsection*{Example 4: Enumerate maximal itemsets}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mitemset.rb S=3 type=M tid=tid item=item i=dat1.csv O=result4
+#MSG# lcm_20140215 MIf /tmp/__MTEMP_19176_70274959882120_0 3 /tmp/__MTEMP_19176_7027495987
+7480_0
+trsact: /tmp/__MTEMP_19176_70274959882120_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 5 ,size 20
+ output to: /tmp/__MTEMP_19176_70274959877480_0
+separated at 0
+iters=8
+3
+0
+0
+1
+2
+trsact: /tmp/__MTEMP_19176_70274959882120_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 6 ,size 21
+ output to: /tmp/__MTEMP_19176_70274959877480_1
+separated at 0
+iters=7
+6
+0
+6
+#MSG# output patterns to CSV file ...
+#MSG# the number of patterns enumerated is 3
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result4'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=3 type=M tid=tid item=
+item i=dat1.csv O=result4
+$ more result4/patterns.csv
+pid,size,count,total,support,lift,pattern
+0,2,3,6,0.5,0.9,D E
+1,3,3,6,0.5,1.35,B D F
+2,3,3,6,0.5,1.8,A B D
+\end{Verbatim}
+\subsubsection*{Example 5: Usage of hierarchical classification}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more taxo.csv
+item,taxonomy
+A,X
+B,X
+C,Y
+D,Z
+E,Z
+F,Z
+$ mitemset.rb S=4 tid=tid item=item i=dat1.csv x=taxo.csv taxo=taxonomy O=result5
+#MSG# lcm_20140215 FIf /tmp/__MTEMP_19260_70240579278840_0 4 /tmp/__MTEMP_19260_7024057927
+5400_0
+trsact: /tmp/__MTEMP_19260_70240579278840_0 ,#transactions 6 ,#items 10 ,size 32 extracted
+ database: #transactions 6 ,#items 6 ,size 27
+ output to: /tmp/__MTEMP_19260_70240579275400_0
+separated at 0
+iters=6
+22
+1
+6
+9
+5
+1
+trsact: /tmp/__MTEMP_19260_70240579278840_0 ,#transactions 6 ,#items 10 ,size 32 extracted
+ database: #transactions 6 ,#items 9 ,size 32
+ output to: /tmp/__MTEMP_19260_70240579275400_1
+separated at 0
+iters=9
+9
+0
+9
+#MSG# output patterns to CSV file ...
+#MSG# reducing redundant rules in terms of taxonomy ...
+#MSG# the number of patterns enumerated is 11
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result5'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=4 tid=tid item=item i=
+dat1.csv x=taxo.csv taxo=taxonomy O=result5
+$ more result5/patterns.csv
+pid,size,count,total,support,lift,pattern
+1,1,6,6,1,1,Z
+2,1,5,6,0.8333333333,1,D
+19,2,4,6,0.6666666667,1.2,D X
+13,2,4,6,0.6666666667,1,B Z
+14,1,4,6,0.6666666667,1,X
+6,1,4,6,0.6666666667,1,F
+11,2,4,6,0.6666666667,1.2,B D
+21,2,4,6,0.6666666667,1,X Z
+4,1,4,6,0.6666666667,1,E
+10,1,4,6,0.6666666667,1,B
+7,2,4,6,0.6666666667,1.2,D F
+\end{Verbatim}
+\subsubsection*{Example 6: Replace original items with hierarchical classification}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more taxo.csv
+item,taxonomy
+A,X
+B,X
+C,Y
+D,Z
+E,Z
+F,Z
+$ mitemset.rb S=4 tid=tid item=item i=dat1.csv x=taxo.csv taxo=taxonomy -replaceTaxo O=resul
+t6
+#MSG# lcm_20140215 FIf /tmp/__MTEMP_19394_70212028633240_0 4 /tmp/__MTEMP_19394_7021202864
+5160_0
+trsact: /tmp/__MTEMP_19394_70212028633240_0 ,#transactions 6 ,#items 4 ,size 11 extracted 
+database: #transactions 6 ,#items 2 ,size 10
+ output to: /tmp/__MTEMP_19394_70212028645160_0
+separated at 0
+iters=2
+4
+1
+2
+1
+trsact: /tmp/__MTEMP_19394_70212028633240_0 ,#transactions 6 ,#items 4 ,size 11 extracted 
+database: #transactions 6 ,#items 3 ,size 11
+ output to: /tmp/__MTEMP_19394_70212028645160_1
+separated at 0
+iters=3
+3
+0
+3
+#MSG# output patterns to CSV file ...
+#MSG# the number of patterns enumerated is 3
+#MSG# output tid-patterns ...
+#MSG# The final results are in the directory `result6'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=4 tid=tid item=item i=
+dat1.csv x=taxo.csv taxo=taxonomy -replaceTaxo O=result6
+$ more result6/patterns.csv
+pid,size,count,total,support,lift,pattern
+1,1,6,6,1,1,Z
+2,1,4,6,0.6666666667,1,X
+3,2,4,6,0.6666666667,1,X Z
+\end{Verbatim}
+\subsubsection*{Example 7: Enumerate emerging patterns}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+tid,item,class
+T1,C,cls1
+T1,E,cls1
+T2,D,cls1
+T2,E,cls1
+T2,F,cls1
+T3,A,cls1
+T3,B,cls1
+T3,D,cls1
+T3,F,cls1
+T4,B,cls1
+T4,D,cls1
+T4,F,cls1
+T5,A,cls2
+T5,B,cls2
+T5,D,cls2
+T5,E,cls2
+T6,A,cls2
+T6,B,cls2
+T6,D,cls2
+T6,E,cls2
+T6,F,cls2
+$ mitemset.rb S=2 tid=tid item=item class=class i=dat2.csv p=0.6 O=result7
+#MSG# lcm_20140215 FIA -w /tmp/__MTEMP_19510_70322251041060_1 /tmp/__MTEMP_19510_703222510
+41060_0 1073741817 /tmp/__MTEMP_19510_70322251051500_0
+trsact: /tmp/__MTEMP_19510_70322251041060_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 4 ,size 17 ,weightfile /tmp/__MTEMP_19510_70322251041060
+_1
+ output to: /tmp/__MTEMP_19510_70322251051500_0
+separated at 0
+iters=6
+9
+1
+4
+3
+1
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls1' enumerated is 8
+#MSG# output tid-patterns ...
+#MSG# lcm_20140215 FIA -w /tmp/__MTEMP_19510_70322251041060_2 /tmp/__MTEMP_19510_703222510
+41060_0 2147483645 /tmp/__MTEMP_19510_70322251051500_2
+trsact: /tmp/__MTEMP_19510_70322251041060_0 ,#transactions 6 ,#items 6 ,size 21 extracted 
+database: #transactions 6 ,#items 4 ,size 16 ,weightfile /tmp/__MTEMP_19510_70322251041060
+_2
+ output to: /tmp/__MTEMP_19510_70322251051500_2
+separated at 0
+iters=14
+11
+0
+1
+5
+4
+1
+#MSG# output patterns to CSV file ...
+#MSG# the number of contrast patterns on class `cls2' enumerated is 11
+#MSG# output tid-patterns ...
+#MSG# the number of emerging patterns enumerated is 11
+#MSG# The final results are in the directory `result7'
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mitemset.rb S=2 tid=tid item=item cl
+ass=class i=dat2.csv p=0.6 O=result7
+$ more result7/patterns.csv
+class,pid,pattern,size,pos,neg,posTotal,negTotal,total,support,growthRate,postProb
+cls2,13,A E,2,2,0,2,4,6,1,inf,1
+cls2,15,A B E,3,2,0,2,4,6,1,inf,1
+cls2,10,A B D E,4,2,0,2,4,6,1,inf,1
+cls2,14,B E,2,2,0,2,4,6,1,inf,1
+cls2,17,A D E,3,2,0,2,4,6,1,inf,1
+cls2,18,B D E,3,2,0,2,4,6,1,inf,1
+cls2,12,A B D,3,2,1,2,4,6,1,4,0.6666666667
+cls2,11,A D,2,2,1,2,4,6,1,4,0.6666666667
+cls2,16,D E,2,2,1,2,4,6,1,4,0.6666666667
+cls2,9,A B,2,2,1,2,4,6,1,4,0.6666666667
+cls2,8,A,1,2,1,2,4,6,1,4,0.6666666667
+\end{Verbatim}

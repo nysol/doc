@@ -1,0 +1,1 @@
+#END# kgcut f=a,b i=indat/dat1.csv o=outdat/dat7.csv IN=3 OUT=3

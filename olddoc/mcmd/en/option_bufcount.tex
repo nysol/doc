@@ -1,0 +1,18 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\subsection{bufcount= Buffer size\label{sect:option_bufcount}}
+
+Specify the internal buffer size (number of blocks) to be used in commands such as mbucket, mnjoin, and mshare, for processing key units at which data requires multiple pass scanning. 
+One buffer block contains 4MB, the default size is 10 blocks (40MB).
+In case of buffer overflow, data is written to a temporary file. If the key size is very large, the processing speed can be improved by adjusting this parameter if memory permits. 
+
+\subsection*{Examples}
+\input{examples/tex/option_bufcount_ex.tex}
+
+\subsubsection*{Related command}
+Commands that require multiple pass scanning of the data to process key units, such as \hyperref[sect:mbucket]{mbucket}, \hyperref[sect:mnjoin]{mnjoin}, and \hyperref[sect:mshare]{mshare}.
+
+%\end{document}
+

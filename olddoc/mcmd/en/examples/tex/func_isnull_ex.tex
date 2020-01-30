@@ -1,0 +1,44 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,a
+2,
+3,b
+$ mcal c='isnull(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=isnull(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,a,0
+2,,1
+3,b,0
+\end{Verbatim}
+\subsubsection*{Example 2: Specify other field types}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='isnull($s{val})' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=isnull($s{val}) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,val,rsl
+1,a,0
+2,,1
+3,b,0
+\end{Verbatim}
+\subsubsection*{Example 3: Specify null character}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='isnull("")' a=rsl i=dat1.csv o=rsl3.csv
+#END# kgcal a=rsl c=isnull("") i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+id,val,rsl
+1,a,1
+2,,1
+3,b,1
+\end{Verbatim}

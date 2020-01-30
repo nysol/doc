@@ -1,0 +1,31 @@
+\subsubsection*{Example 1: Basic Example}
+
+Extract fields \verb|val1| and \verb|val2|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val1,val2
+A,1,2
+B,2,3
+C,3,4
+$ mcut f=val1,val2 i=dat1.csv o=rsl1.csv
+#END# kgcut f=val1,val2 i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+val1,val2
+1,2
+2,3
+3,4
+\end{Verbatim}
+\subsubsection*{Example 2: Specify name of output field}
+
+Aggregate \verb|val1,val2|, and rename the fields in the output as \verb|sum1,sum2| respectively.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msum f=val1:sum1,val2:sum2 i=dat1.csv o=rsl2.csv
+#END# kgsum f=val1:sum1,val2:sum2 i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,sum1,sum2
+C,6,9
+\end{Verbatim}

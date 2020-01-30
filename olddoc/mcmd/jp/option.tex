@@ -1,0 +1,67 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{パラメータ指定}
+Mコマンドで使われるパラメータの書式は、一般的なUNIXコマンドのものとは少し異なる。
+値を伴うパラメータは「\verb|キーワード=値|」のように、キーワードと値をイコール記号で区切って指定する。
+またオプション型のパラメータは、「\verb|-キーワード|」のように、先頭にマイナス記号一つを付ける。
+
+またMコマンドで使われるパラメータには、概ね共通した意味で用いられるものが多い。
+以下では、それらのパラメータについて解説する。
+ただし、コマンドによっては全く異なる意味として実装されているケースもあるので注意されたい。
+
+\begin{table}[!htbp]
+{\small
+\begin{center}
+\begin{tabular}{l|l}
+\hline
+キーワード&意味 \\
+\hline
+\hyperref[sect:option_i]{i=}                & 入力ファイル名 \\
+\hyperref[sect:option_o]{o=}                & 出力ファイル名 \\
+\hyperref[sect:option_f]{f=}                & 入出力項目名 \\
+\hyperref[sect:option_k]{k=}                & キー項目名 \\
+\hyperref[sect:option_s]{s=}                & 並べ替え項目名 \\
+\hyperref[sect:option_a]{a=}                & 追加項目名 \\
+\hyperref[sect:option_nfn]{-nfn}            & 項目名行のないCSV \\
+\hyperref[sect:option_nfno]{-nfno}          & 項目名行を出力しない \\
+\hyperref[sect:option_x]{-x}                & 項目番号による指定 \\
+\hyperref[sect:option_q]{-q}                & 自動並べ替えの無効化 \\
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]} & 入力、出力件数比較を行う \\
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}   & キー項目にNULL値が含まれているかどうかのチェックを行う \\
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}     &  入力項目のf=またはvf=で指定された項目のNULL値チェックを行う \\
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}   & 出力項目のNULL値チェックを行う \\
+\hyperref[sect:option_precision]{precision=}& 有効桁数 \\
+\hyperref[sect:option_tmpPath]{tmpPath=}    & 作業ファイル格納パス名 \\
+\hyperref[sect:option_delim]{delim=}        & ベクトル型データの区切り文字 \\
+\hyperref[sect:option_bufcount]{bufcount=}  & バッファの数 \\
+                         \verb|--help|      & 英語ヘルプを表示する \\
+                         \verb|--helpl|     & 日本語ヘルプを表示する \\
+\hline
+\end{tabular} 
+\end{center}
+}
+\end{table} 
+
+\input{option_i}
+\input{option_o}
+\input{option_f}
+\input{option_k}
+\input{option_s}
+\input{option_a}
+\input{option_nfn}
+\input{option_nfno}
+\input{option_x}
+\input{option_q}
+\input{option_assert_diffSize}
+\input{option_assert_nullkey}
+\input{option_assert_nullin}
+\input{option_assert_nullout}
+\input{option_precision}
+\input{option_tmppath}
+\input{option_delim}
+\input{option_bufcount}
+
+%\end{document}

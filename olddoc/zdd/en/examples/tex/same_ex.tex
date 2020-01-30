@@ -1,0 +1,23 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+> require 'zdd'
+> a=ZDD::itemset("a")
+> b=ZDD::itemset("b")
+> c=ZDD::itemset("c")
+> puts a.same?(b)
+false
+> puts a.same?(a)
+true
+> puts (a+b).same?(a+c)
+false
+> puts (a+b).same?(a+b)
+true
+> puts (a-a).same?(0)
+true
+> puts (2*a/a)===2
+true
+\end{Verbatim}

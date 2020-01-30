@@ -1,0 +1,158 @@
+\subsubsection*{Example 1: Concatenate files with the same header}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+$ more dat2.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+$ mcat i=dat1.csv,dat2.csv o=rsl1.csv
+#END# kgcat i=dat1.csv,dat2.csv o=rsl1.csv
+$ more rsl1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+A,20081207,20
+A,20081213,30
+B,20081209,50
+\end{Verbatim}
+\subsubsection*{Example 2: Concatenate files with different header}
+
+The first file \verb|dat1.csv| defined at \verb|i=| contains columns "customer,date,amount". However, since "amount" is not present in \verb|dat3.csv|, it will return an error. Nevertheless, the contents in the first file \verb|dat1.csv| is merged and saved in the output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+customer,date,quantity
+A,20081201,3
+B,20081002,1
+$ mcat i=dat1.csv,dat3.csv o=rsl2.csv
+#ERROR# field name [amount] not found on file [dat3.csv] (kgcat)
+$ more rsl2.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+\end{Verbatim}
+\subsubsection*{Example 3: Concatenate files with different header2}
+
+When previous example is attached with \verb|-nostop| option, the command will continue processing and return NULL value for the data item not found. Other options such as \verb|skip,force| handle conditions when the field name is not found. For details, refer to the description of parameters.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat3.csv
+customer,date,quantity
+A,20081201,3
+B,20081002,1
+$ mcat -nostop i=dat1.csv,dat3.csv o=rsl3.csv
+#END# kgcat -nostop i=dat1.csv,dat3.csv o=rsl3.csv
+$ more rsl3.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+A,20081201,
+B,20081002,
+\end{Verbatim}
+\subsubsection*{Example 4: Concatenate specific field names from input files}
+
+Merge field names specified at \verb|f=|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat f=customer,date i=dat2.csv,dat3.csv o=rsl4.csv
+#END# kgcat f=customer,date i=dat2.csv,dat3.csv o=rsl4.csv
+$ more rsl4.csv
+customer,date
+A,20081207
+A,20081213
+B,20081209
+A,20081201
+B,20081002
+\end{Verbatim}
+\subsubsection*{Example 5: Merge from standard input}
+
+Read file \verb|dat2.csv| from standard input by specifying \verb|-stdin| option.
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat -stdin i=dat1.csv o=rsl5.csv <dat2.csv
+#END# kgcat -stdin i=dat1.csv o=rsl5.csv
+$ more rsl5.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+A,20081201,10
+B,20081002,40
+\end{Verbatim}
+\subsubsection*{Example 6: Add file name as new column}
+
+When \verb|-add_fname| is specified, the original file name \verb|fileName| is added as a new column.
+File name of standard input is \verb|/dev/stdin|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat -add_fname -stdin i=dat1.csv o=rsl6.csv <dat2.csv
+#END# kgcat -add_fname -stdin i=dat1.csv o=rsl6.csv
+$ more rsl6.csv
+customer,date,amount,fileName
+A,20081207,20,/dev/stdin
+A,20081213,30,/dev/stdin
+B,20081209,50,/dev/stdin
+A,20081201,10,dat1.csv
+B,20081002,40,dat1.csv
+\end{Verbatim}
+\subsubsection*{Example 7: Specify wild card}
+
+Specifying wild card \verb|dat*.csv| to concatenate the three CSV files \verb|dat1.csv,dat2.csv,dat3.csv| in the current directory.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+$ more dat2.csv
+customer,date,amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+$ more dat3.csv
+customer,date,quantity
+A,20081201,3
+B,20081002,1
+$ mcat -force i=dat*.csv o=rsl7.csv
+#END# kgcat -force i=dat*.csv o=rsl7.csv
+$ more rsl7.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+A,20081207,20
+A,20081213,30
+B,20081209,50
+A,20081201,3
+B,20081002,1
+\end{Verbatim}
+\subsubsection*{Example 8: Concatenate the same file multiple times}
+
+Same file can be specified more than one time.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcat i=dat1.csv,dat1.csv,dat1.csv o=rsl8.csv
+#END# kgcat i=dat1.csv,dat1.csv,dat1.csv o=rsl8.csv
+$ more rsl8.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+A,20081201,10
+B,20081002,40
+A,20081201,10
+B,20081002,40
+\end{Verbatim}

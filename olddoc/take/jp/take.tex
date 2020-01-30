@@ -1,0 +1,62 @@
+\documentclass[a4paper]{jsbook}
+\usepackage{take}
+
+% ------------------- Title and Author -----------------------------
+%\title{mining Package Documentation}
+%\author{NYSOL}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\huge Data Mining Package TAKE(竹) Documentation}\\
+\vspace{10truept}
+{\normalsize 対応 NYSOL パッケージ: Ver. 1.2,2.0}\\
+\vspace{1cm}
+
+revise history:\\
+
+October 6, 2014 : mclque2g.rb,mbiclique.rbなどの追加、枝ファイル、節点ファイルの指定方法の変更\\
+March 10, 2014 : nysol パッケージへの統合に伴いインストール方法変更\\
+March 10, 2014 : mitemset.rb 改良,msequence.rb,mpolishing.rb など追加\\
+February 28, 2014 : first release\\
+\vspace{18cm}
+{\small \today}
+
+{\small Copyright \copyright 2013 by NYSOL CORPORATION}
+\end{center}
+\end{titlepage}
+
+%\setlength{\baselineskip}{4mm}
+\setcounter{tocdepth}{1}
+%\label{mcmd:toc}
+\tableofcontents
+
+%\frontmatter
+%\maketitle
+
+
+
+\chapter{はじめに}
+\include{abstract}
+
+\chapter{コマンド}
+\include{mitemset}
+\include{msequence}
+\include{mpolishing}
+\include{mtra2g}
+\include{mclique}
+\include{mclique2g}
+\include{mbiclique}
+\include{mgdiff}
+\include{mcliqueInfo}
+
+%\chapter{その他}
+
+%\bibliographystyle{plain-annote}
+%\bibliography{mybibliography}
+\include{bib}
+
+
+\end{document}
+\end
+

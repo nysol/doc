@@ -1,0 +1,24 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,3.14
+2,3
+3,
+4,-12.56789
+5,1.2345e+2
+6,1.2345e-10
+$ mcal c='fract(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=fract(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,3.14,0.14
+2,3,0
+3,,
+4,-12.56789,-0.56789
+5,1.2345e+2,0.45
+6,1.2345e-10,1.2345e-10
+\end{Verbatim}

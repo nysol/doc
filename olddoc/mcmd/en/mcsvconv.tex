@@ -1,0 +1,60 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcsvconv Convert CSV into various other formats\label{sect:mcsvconv}}
+\index{mcsvconv@mcsvconv}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command converts CSV data into various other formats.
+Prepare a text file describing the rules of the conversion target data format, and the command outputs the specified CSV data fields according to the rule keywords.
+The following describes the fieldnames and output timings to be specified in the rule file.
+
+\begin{description}
+ \item[Fieldname keyword] Enclose a fieldname between two \verb|%| symbols, and it will be replaced with the corresponding field value in the CSV file. Ex. \verb|%fieldname%|
+ \item[Output timing keyword] There are three types of keywords that determine the CSV data output timing:
+ \item[LINEDATA] Use \verb|%LINEDATA| and \verb|%LINEEND| to enclose a fieldname keyword or any other character string, and it will be output every time a row of the CSV file is read.
+ \item[KEYHEAD] Use \verb|%KEYHEAD| and \verb|%KEYEND| to enclose a fieldname keyword or any other character string, and it will be output only when a keybreak has occurred for the key field specified for \verb|k=|. It will be output before LINEDATA.
+ \item[KEYFOOT] Use \verb|%KEYFOOT| and \verb|%KEYEND| to enclose a fieldname keyword or any other character string, and it will be output only when a keybreak has occurred for the key field specified for \verb|k=|. It will be output after LINEDATA. 
+ \item[Before and after a keyword] Character strings will be output only once before the CSV file is read if they are placed before a block enclosed between any of the above timing keywords. Character strings will be output only once after the CSV file is read if they are placed after the last such block.
+\end{description}
+
+When multiple fields are specified for the \verb|k=| parameter, you can control timing more precisely with \verb|KEYHEAD| and \verb|KEYFOOT|. By specifying a number at the end, e.g., \verb|%KEYHEAD1|, you can specify which field to monitor for a keybreak. For instance, if you specify k=A,B,C and \verb|%KEYHEAD1|, data will be output when a keybreak has occurred for key field \verb|A|. If you specify \verb|%KEYHEAD2|, data will be output when a keybreak has occurred for key fields \verb|A| and \verb|B|. If you specify \verb|%KEYHEAD3| or just \verb|%KEYHEAD|, data will be output when a keybreak has occurred for all of key fields \verb|A|, \verb|B|, and \verb|C|.
+When an output timing control keyword is described in a row, no other character can be described in it.
+
+\subsection*{Format}
+\verb/mcsvconv [k=] [s=] m= /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Key fieldname list\\
+\verb|s=|    & A fieldname list that determines the sorting sequence in a row where the values in the fields specified for \verb|k=| are the same.\\
+\verb|m=|    & Rule filename\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcsvconv_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mcsv2arff]{mcsv2arff} : Converts CSV data into arff data (data format for WEKA).\\
+\hyperref[sect:mcsv2json]{mcsv2json} : Converts CSV data into JSON format, the object notation syntax of Java Script.\\
+
+%\end{document}

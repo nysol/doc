@@ -1,0 +1,150 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{MCMD::Mtemp 一時ファイルクラス\label{sect:mtempRB}
+一時ファイルを扱うクラスで以下のような特徴を持つ。
+\begin{itemize}
+	\setlength{\itemindent}{-5mm}
+	\item 重複のない一時ファイル名を自動生成する。
+	\item オブジェクトがガベージコレクション(GC)される時に自動的に削除される。
+	\item 通常ファイルの他に名前付きパイプを扱うことができる(fifoファイルの自動生成/削除)。
+	\item その他の特殊な型として、ファイル型や項目名型を提供する。
+	\item デフォルト値や値の範囲を指定することができる。
+	\item 指定が正しくなければエラーメッセージを表示して終了する。
+\end{itemize}
+
+\subsection{メソッド}
+
+%%%%%%%%%%%%%%%%%%
+{\large
+\begin{verbatim}
+Mtemp.new(path=nil): コンストラクタ
+\end{verbatim}
+}
+Mtempオブジェクトを生成する。
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/path /} 一時ファイル名を作成するパス名。
+一時ファイル名の命名規則は以下の通り。
+
+\verb|"#{@path}/__MTEMP_#{@pid}_#{@oid}_#{@seq}"|
+\begin{description}
+	\setlength{\itemindent}{+5mm}
+	\item [@pid] プロセスID (\$\$)
+	\item [@oid] オブジェクトID (self.object\_id)
+	\item [@seq] オブジェクト内の通し番号 (自動採番で1から始まる)
+	\item [@path] 一時ファイルを作成するパス名で以下の優先順位で決まる。
+\end{description}
+
+\begin{enumerate}
+	\setlength{\itemindent}{+15mm}
+	\item Mtemp.newの第1引数で指定された値*
+	\item KG\_TmpPath環境変数の値
+	\item TMP環境変数の値
+	\item TEMP環境変数の値
+	\item "/tmp"
+	\item "\." (カレントパス)
+\end{enumerate}
+
+注*) 第1引数でパス名を明示的に指定した場合、GC時に自動削除されない。
+\end{description}
+
+%%%%%%%%%%%%%%%%%%
+{\large
+\begin{verbatim}
+Mtemp.file(name=nil): 一時ファイル名の取得
+\end{verbatim}
+}
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/name/} 一時ファイル名を直接指定する。通常はこのパラメータを指定する必要はない。
+\verb/name/が指定されると、\verb/new/メソッドにて解説した一時ファイル名生成規則とは全く関係なく
+\verb/name/の内容を一時ファイルとして利用する。
+また\verb|name|を指定して作成されたファイルはGC時に削除されない。
+デバッグでに利用する目的で用意したパラメータである。
+\end{description}
+
+%%%%%%%%%%%%%%%%%%
+{\large
+\begin{verbatim}
+Mtemp.pipe(name=nil): 名前付きパイプの一時ファイルの取得
+\end{verbatim}
+}
+\verb|file|メソッドとは違い、このメソッドが実行されると\verb|mkfifo|コマンドによってfifoファイルが作成される。
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/name/} \verb|file|メソッドと同様に、一時ファイル名を直接指定する。
+通常はこのパラメータを指定する必要はない。詳細は\verb|file|メソッドを参照のこと。
+\end{description}
+
+%%%%%%%%%%%%%%%%%%
+{\large
+\begin{verbatim}
+Mtemp.rm(): 一時ファイルを削除する。
+\end{verbatim}
+}
+
+system関数から以下のコマンドを実行することで一時ファイルを全て削除する。
+\verb |rm -rf \#{path}/\_\_MTEMP\_\#{@pid}\_\#{@oid}\_*|
+
+%\subsection{備考}
+%\begin{itemize}
+%\item 
+%\end{itemize}
+
+\subsection{利用例}
+
+\subsubsection*{例1 基本利用例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'mtools'
+
+tmp=MCMD::Mtemp.new
+fName1=tmp.file
+fName2=tmp.file
+fName3=tmp.file("./xxa")
+puts fName1 # -> /tmp/__MTEMP_60637_2152301760_0
+puts fName2 # -> /tmp/__MTEMP_60637_2152301760_1
+puts fName3 # -> ./xxa
+File.open(fName1,"w"){|fp| fp.puts "temp1"}
+File.open(fName2,"w"){|fp| fp.puts "temp2"}
+File.open(fName3,"w"){|fp| fp.puts "temp3"}
+# tmpがローカルのスコープを外れると
+# GCが発動するタイミングで一時ファイルも自動的に削除される。
+# ただし、fName3は一時ファイル名を直接指定しているの削除されない。
+\end{Verbatim}
+
+\subsubsection*{例2 全ての一時ファイルが自動削除されない例}
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'mtools'
+
+# コンストラクタでパスを指定すると自動削除されない。
+# (rmメソッドにより削除することはできる。)
+tmp=MCMD::Mtemp.new(".")
+fName=tmp.file
+File.open(fName,"w"){|fp| fp.puts "temp"}
+# tmpがローカルのスコープを外れGCが発動しても
+# 一時ファイルは削除されない。
+\end{Verbatim}
+
+\subsubsection*{例3 名前付きパイプの利用}
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+require 'mtools'
+
+tmp=MCMD::Mtemp.new
+pName=tmp.pipe
+system("ls -l #{pName}") # この段階で名前付きパイプファイルが作成されている。
+# -> prw-r--r--  1 user  group  0  7 19 12:20 /tmp/__MTEMP_60903_2152299720_0
+system("echo 'abc' > #{pName} &") # バックグラウンド実行でnamed pipeに書き込み
+system("cat <#{pName} &")         # バックグラウンド実行でnamed pipeから読み込み
+# tmpがローカルのスコープを外れると
+# GCが発動するタイミングで全ての一時ファイルは自動削除される。
+\end{Verbatim}
+
+\subsection{関連コマンド}
+
+%\end{document}
+

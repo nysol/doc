@@ -1,0 +1,27 @@
+\subsubsection*{(Basic example)}
+Assume, for instance, the mslide command (slide rows) is used. When the values of the fields specified by the f= parameter are slid for the number of rows specified by the t= parameter for each field specified by the k= parameter, the number of slides specified by the t= parameter can be greater than the number of rows of the fields specified by the f= parameter depending on the data. If that is the case, the -n option can be specified to output a field with a NULL value in it in the absence of the next (or previous) row. Specify the -assert\_nullout option to check whether an output field contains a NULL value. When a NULL value is contained, the \verb|“#WARNING# ; exist NULL in output data”| message is shown.
+\\In the example below, the option is used to check whether the syo\_1 and syo\_2 output fields contain a NULL value. Since the two fields contain a NULL value, the \verb|“#WARNING# ; exist NULL in output data”| message is shown.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,date,product,quantity
+A,20130406,a,1
+A,20130408,b,1
+A,20130416,c,1
+B,20130407,k,2
+C,20130408,d,1
+C,20130409,e,4
+
+$ mslide s=customer,date k=customer f=product:syo_ t=2 -n -assert_nullout i=dat1.csv o=rsl1.csv
+#WARNING# ; exist NULL in output data
+#END# kgslide -assert_nullout -n f=product:syo_ i=dat1.csv k=customer o=rsl1.csv s=customer,date t=2
+
+$ more rsl1.csv
+customer,date,product,quantity,syo_1,syo_2
+A,20130406,a,1,b,c
+A,20130408,b,1,c,
+A,20130416,c,1,,
+B,20130407,k,2,,
+C,20130408,d,1,e,
+C,20130409,e,4,,
+\end{Verbatim}

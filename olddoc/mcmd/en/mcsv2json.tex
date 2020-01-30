@@ -1,0 +1,58 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcsv2json Convert CSV to JSON format\label{sect:mcsv2json}}
+\index{mcsv2json@mcsv2json}
+\underline{Note: This command is a beta. Its specifications may be changed.}
+
+This command converts CSV data into JSON format, which is the object notation syntax for JavaScript. 
+This command has the following characteristics. 
+For details, see the examples.
+
+\begin{itemize}
+ \item Only character strings are supported on JSON.
+ \item Outputs can be arrays and objects (key-value pairs).
+ \item With a key field specified, outputs can be in nesting structures of arrays.
+\end{itemize}
+
+\subsection*{Format}
+\verb/mcsv2json [k=] [s=] f=|h=|p= -flat /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]}
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify a list of fieldnames for which arrays are nested on JSON\\
+             & Specifying three fields makes three-fold JSON arrays.\\
+\verb|s=|    & Specify the order of values. Specify \verb|%n| for numerical order or \verb|%r| for reverse order.\\
+\verb|f=|    & Specify the field whose value is to be output as a JSON array.\\
+\verb|h=|    & Specify the fieldname used as the key for outputting a JSON object (hash structure).\\
+\verb|p=|    & Specify pairs of key and value fieldnames of JSON objects.\\
+             & Use colons as delimiters between the two fieldnames as follows: \verb|p=key fieldname 1: value fieldname 1,key fieldname 2:value fieldname 2,...|\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcsv2json_ex.tex}
+\subsection*{Related Commands}
+
+\subsection*{Reference}
+http://www.rfc-editor.org/rfc/rfc4627.txt
+
+%\end{document}

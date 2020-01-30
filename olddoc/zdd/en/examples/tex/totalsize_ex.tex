@@ -1,0 +1,23 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+> require 'zdd'
+
+> a=5*ZDD::itemset("a b c")-3*ZDD::itemset("a b")+2*ZDD::itemset("b c")+1*ZDD::itemset("c")
+> a.show
+ 5 a b c - 3 a b + 2 b c + c
+> puts a.size
+10
+> puts ZDD::totalsize
+10
+
+> b=-3*ZDD::itemset("a c")
+> b.show
+ - 3 a c
+> puts b.size
+5
+> puts ZDD::totalsize
+14
+\end{Verbatim}

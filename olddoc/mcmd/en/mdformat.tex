@@ -1,0 +1,72 @@
+
+%\begin{document}
+
+\section{mdformat Extract Date Time\label{sect:mdformat}}
+\index{mdformat@mdformat}
+
+CSV data that was exported from other systems often contains forward slash and colon symbol in  date columns, in addition, date and time are stored in single digit (Example: \verb|2014/7 / 18 1:57|). Sorting and range specification processing on these kind of items in MCMD is not possible. 
+
+For ease of processing data and time formatted data \hyperref[sect:datetime]{Date Time Format}, the \verb|mdformat| command extracts the date, hour, minute, and second on fields specified in \verb|f=| parameter according to the format specified in the \verb|c=| parameter. 
+
+
+\subsection*{Format}
+\verb|mdformat c= f= [-A] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the field name for extraction (multiple items can be specified). \\
+\verb|c=|    & Specify string format according to the specified format. \\
+\verb|-A|    & Specify the new column name and save output results in new column.  \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Conversion Specification of Character Format}
+
+Table \ref{tbl:mdformat} shows the possible character conversion formats that can be defined in \verb|c=| parameter. 
+
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Conversion characters\label{tbl:mdformat}}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{llll}
+\hline
+Conversion Characters & Description  \\
+\hline
+\%Y           & Number representing year (4 digits) \\
+\%y           & Number representing year (2 digits)  \\
+\%m           & Number representing month (2 digits)  \\
+\%d           &  Number representing day (2 digits)  \\
+\%H           & Time (2 digits) \\
+\%M           & Minute (2 digits)   \\
+\%S           & Second (2 digits)   \\
+\hline \\
+\end{tabular}
+}      
+\end{center}
+\end{table}
+
+
+\subsection*{Examples }
+\input{examples/tex/mdformat_ex.tex}
+\subsection*{Related Command}
+
+%\end{document}

@@ -1,0 +1,147 @@
+
+%\begin{document}
+%\usepackage{comment}
+
+\section{mvcommon - Select Common Elements of Vector\label{sect:mvcommon}}
+\index{mvcommon@mvcommon}
+Within the vector, select common elements specified in reference file. 
+
+%\begin{comment}
+See examples in Table \ref{tbl:mvcommon_input}〜\ref{tbl:mvcommon_out3}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvcommon_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cl}
+\hline
+no&items \\
+\hline
+1&a b c \\
+2&a d \\
+3&b f e f \\
+4&f c d \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Reference file\label{tbl:mvcommon_ref}}
+\verb|ref.csv| \\
+{\small
+\begin{tabular}{c}
+\hline
+item \\
+\hline
+a \\
+c \\
+e \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+
+\begin{minipage}{0.5\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:mvcommon_out2}}
+\verb|vf=items m=ref.csv K=item| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a c \\
+2&a \\
+3&e \\
+4&c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.50\hsize}
+\begin{center}
+\caption{Selection of unmatched items. \label{tbl:mvcommon_out3}}
+\verb|vf=items m=ref.csv K=item -r| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b \\
+2&d \\
+3&b f f \\
+4&f d \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+Since the \verb|mvcommon| command reads the whole reference file at once into the memory, note that huge reference file may consume massive amount of memory, 
+%\end{comment}
+
+\subsection*{Format}
+\verb/mvcommon vf= [A=] K= [-r] m= |/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+
+\verb|vf=| & Specify the field name(s) of vector (from \verb|i=| input file) for matching. \\
+           & Multiple fields can be specified. Sorting on vectors is not required. \\
+           & Output of vector series can be defined with colon followed after the vector name. \\
+\verb|m=|  & Reference file. \\
+\verb|K=|  &  Join key of reference file (\verb|m=|) where corresponding taxonomy elements are joined to the vector. \\
+\verb|-r|  & Select records where key elements that do no match in \verb|vf=| and \verb|K=| .   \\
+\end{tabular}
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mvcommon_ex.tex}
+
+\subsection*{Related command}
+\hyperref[sect:mvjoin]{mvjoin} : Join reference element to vector instead of select. 
+
+%\end{document}

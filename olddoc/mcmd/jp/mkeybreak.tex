@@ -1,0 +1,49 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mkeybreak キーブレイク箇所\label{sect:mkeybreak}}
+\index{mkeybreak@mkeybreak}
+\verb|k=|パラメータで指定した項目をキー項目について、先頭と終端に印を付ける。
+先頭は\verb|top|項目に、終端は\verb|bot|項目に\verb|1|を出力する。
+先頭/終端でない行はNULL値を出力する。
+
+\subsection*{書式}
+\verb|mkeybreak k= [s=] [a=]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|    & 集計キーとなる項目名リスト（複数項目指定可）を指定する。\\
+\verb|s=|    & ここで指定した項目(複数項目指定可)で並べ替えた後、先頭・終端に印を付ける。\\
+\verb|a=|    & 先頭と終端の印を出力する項目名を指定する。【デフォルト値:top,bot】\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mkeybreak_ex.tex}
+
+\subsection*{関連コマンド}
+
+%\end{document}

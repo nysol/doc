@@ -1,0 +1,118 @@
+
+%\usepackage{comment}
+%\begin{document}
+
+\section{mvuniq - Unique Vector Elements\label{sect:mvuniq}}
+\index{mvuniq@mvuniq}
+
+This command merges duplicate elements in a vector. However, since the merging process uses a tree structure, the sequence of elements in the output maybe not be in order. 
+
+When \verb|-n| option is specified, the command reads the vector as a sequential series. The vector series is scanned from the beginning of the string, and output unique character strings in the vector. 
+
+%\begin{comment}
+The examples are highlighted in Table \ref{tbl:mvuniq_out1}, \ref{tbl:mvuniq_out2}.
+Table \ref{tbl:mvuniq_out1} shows all merged elements in the data series. When \verb|-n| option is specified,  same elements next to each other are merged in sequential order. In Table \ref{tbl:mvuniq_out2}, consecutive elements of \verb|b| are merged. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lll}
+
+\begin{minipage}{0.3\hsize}
+\begin{center}
+\caption{Input data\label{tbl:mvuniq_input}}
+\verb|in.csv| \\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&b a a \\
+2&a a b b b \\
+3&a b b a \\
+4&a b c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{Basic example\label{tbl:mvuniq_out1}}
+\verb|vf=items i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&a b \\
+2&a b \\
+3&a b \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.35\hsize}
+\begin{center}
+\caption{Merge same elements adjacent to each other in a vector series \label{tbl:mvuniq_out2}}
+\verb|vf=items -n i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b a \\
+2&a b \\
+3&a b a \\
+4&a b c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+%\end{comment}
+
+\subsection*{Format}
+\verb|mvuniq vf= [-A] [-n]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the target field name(s) of vectors. \\
+           & Multiple field name(s) of vectors can be specified.  \\
+\verb|-n|  & Merges same elements adjacent to each other in the vector.\\
+\end{tabular}
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mvuniq_ex.tex}
+
+\subsection*{Related Command}
+
+
+%\end{document}

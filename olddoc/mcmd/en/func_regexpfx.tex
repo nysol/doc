@@ -1,0 +1,17 @@
+
+%\begin{document}
+
+\section{regexpfx - Prefix of Match String\label{sect:regexpfx}}
+\index{regexpfx@regexpfx}
+
+Format 1: regexpfx($str$,regular expression)
+
+Format 2: regexpfx($str$,regular expression)
+
+Return the prefix (substring before character string) of the longest substring where the defined regular expression matches with the character string $str$. When the same character string and regular expression is used with the three functions to extract different parts of the string in sequential order, namely regexpfx function,regexstr function, and regexsfx function, the original string can be restored by merging the resulting character strings from the functions.  Use the regexpfxw function if $str$ or regular expression contain multibyte characters, or when characters in Shift\_JIS encoding does not correspond to search results. 
+
+\subsection*{Example}
+\input{examples/tex/func_regexpfx_ex}
+
+%\end{document}
+

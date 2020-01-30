@@ -1,0 +1,36 @@
+\subsubsection*{Example 1: Basic Example}
+
+Generate random integers from 100 to 999 (3 digit integers 900 types). Since a random seed is specified, the random number sequence generated is always the same.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+3
+4
+$ mcal c='randi(100,999,1)' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=randi(100,999,1) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,475
+2,997
+3,748
+4,939
+\end{Verbatim}
+\subsubsection*{Example 2: 0,1 random integers}
+
+Generate two sets of random integers 0 and 1. The random sequence will be different upon each run since the random seed is not specified.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='randi(0,1)' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=randi(0,1) i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+id,rsl
+1,1
+2,0
+3,1
+4,0
+\end{Verbatim}

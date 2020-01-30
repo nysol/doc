@@ -1,0 +1,43 @@
+
+%\begin{document}
+
+\section{msetstr - Add String Column\label{sect:msetstr}}
+\index{msetstr@msetstr}
+Add specified string as new field(s) in all rows. More than one fields can be added.
+
+
+\subsection*{Format}
+\verb|msetstr v= a= |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|v=| & List of character strings to add.  \\
+          & NULL value is added if the value is not specified.\\
+\verb|a=| & Add field name.\\
+          & The number of string and field name of specified at \verb|v=| must be the same number. \verb|v=|.\\
+\end{tabular}
+}
+\end{table}
+
+
+\subsection*{Examples}
+\input{examples/tex/msetstr_ex.tex}
+\subsection*{Related Command}
+\hyperref[sect:mcal]{mcal} : Use the \verb|if|  function to add a fixed string  according to differently conditions for each row.
+
+%\end{document}
+

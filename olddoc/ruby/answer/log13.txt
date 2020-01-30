@@ -1,0 +1,50 @@
+field size is 3
+record size is 3
+field names are ...
+["a", "b", "c"]
+cell(0,0) = x
+cell(0,1) = x
+cell(0,2) = y
+cell(1,0) = 2
+cell(1,1) = 5
+cell(1,2) = 2
+cell(2,0) = 3
+cell(2,1) = 6
+cell(2,2) = 3
+cell(3,0) = 
+cell(0,3) = x
+cell(3,3) = 
+cell(a,0) = x
+cell(a,1) = x
+cell(a,2) = y
+cell(b,0) = 2
+cell(b,1) = 5
+cell(b,2) = 2
+cell(c,0) = 3
+cell(c,1) = 6
+cell(c,2) = 3
+cell(c,3) = 
+cell(d,0) = 
+cell(d,3) = 
+a,0,x
+a,1,x
+a,2,y
+b,0,2
+b,1,5
+b,2,2
+c,0,3
+c,1,6
+c,2,3
+["x", "2", "3"]
+["x", "5", "6"]
+["y", "2", "3"]
+nil
+["x", "x", "y"]
+["2", "5", "2"]
+["3", "6", "3"]
+nil
+["x", "x", "y"]
+["2", "5", "2"]
+["3", "6", "3"]
+nil
+nil

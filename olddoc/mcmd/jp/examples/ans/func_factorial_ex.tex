@@ -1,0 +1,38 @@
+
+\subsubsection*{例1: 基本例}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,val
+1,1
+2,5
+3,
+4,10000
+
+$ mcal c='factorial(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=factorial(${val}) i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,val,rsl
+1,1,1
+2,5,120
+3,,
+4,10000,
+\end{Verbatim}
+
+\subsubsection*{例2: 定数を与える例}
+
+5の階乗を計算する。定数を与えているので、全行同じ結果が出力される。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcal c='factorial(5)' a=rsl i=dat1.csv o=rsl2.csv
+#END# kgcal a=rsl c=factorial(5) i=dat1.csv o=rsl2.csv
+
+$ cat rsl2.csv
+id,val,rsl
+1,1,120
+2,5,120
+3,,120
+4,10000,120
+\end{Verbatim}

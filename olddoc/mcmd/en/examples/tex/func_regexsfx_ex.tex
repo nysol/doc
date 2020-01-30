@@ -1,0 +1,22 @@
+\subsubsection*{Example 1: Basic Example}
+
+Extract the suffix of the longest substring that matches the regular expression \verb|c.*a|. For example, in row where \verb|id=4|, the regular expression matches \verb|cabbca| till the ending position in the  column, there is no suffix to the matching string, thus NULL character is returned.
+Since the same input data and substring are used as in the \verb|regexstr,regexpfx| function, it is easy to compare the results and understand the differences.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,xcbbbayy
+2,xxcbaay
+3,
+4,bacabbca
+$ mcal c='regexsfx($s{str},"c.*a")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=regexsfx($s{str},"c.*a") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,xcbbbayy,yy
+2,xxcbaay,y
+3,,
+4,bacabbca,
+\end{Verbatim}

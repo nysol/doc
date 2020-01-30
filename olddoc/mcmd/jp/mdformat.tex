@@ -1,0 +1,85 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mdformat 日付時刻抽出\label{sect:mdformat}}
+\index{mdformat@mdformat}
+
+他のシステムからエクスポートしたCSVデータでは、
+日付時刻項目にスラッシュ記号やコロン記号が入っていることが多く、
+また月日や時が1桁で格納されている場合もある
+(例:\verb|2014/7/18 1:57|)。
+このような項目をそのままMCMDで扱おうとすると、
+日付計算や並べ替え、範囲検索がうまくいかない。
+
+\verb|mdformat|コマンドを使うことで、
+\verb|f=|パラメータで指定した項目から、
+\verb|c=|パラメータで指定したフォーマットに従って
+年月日・時分秒を抽出し、MCMDで扱うことが可能な
+\hyperref[sect:datetime]{日付型や時刻型}
+に変換することができる。
+
+\subsection*{書式}
+\verb|mdformat c= f= [-A] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|f=|    & 抽出対象となる項目名リスト(複数項目指定可)を指定する。\\
+\verb|c=|    & 文字列のフォーマットを指定する。フォーマットの変換指定文字参照 \\
+\verb|-A|    & このオプションにより、指定した項目を置き換えるのではなく、新たに項目が追加される。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{フォーマットの変換指定文字}
+\verb|c=|パラメータで利用可能な変換指定文字を表\ref{tbl:mdformat}に示す。
+
+\begin{table}[htbp]
+\begin{center}
+\caption{変換指定文字\label{tbl:mdformat}}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{llll}
+\hline
+変換指定文字 & 意味 \\
+\hline
+\%Y           & 西暦を表す数(4桁以内) \\
+\%y           & 西暦を表す数(2桁以内)  \\
+\%m           & 月を表す数字(2桁以内)  \\
+\%d           & 日を表す数字(2桁以内)  \\
+\%H           & 時間(2桁以内) \\
+\%M           & 分(2桁以内)   \\
+\%S           & 秒(2桁以内) \\
+\%s           & 秒.マイクロ秒 \\
+\hline \\
+\end{tabular}
+}      
+\end{center}
+\end{table}
+
+
+\subsection*{利用例}
+\input{examples/tex/mdformat_ex.tex}
+\subsection*{関連コマンド}
+
+%\end{document}

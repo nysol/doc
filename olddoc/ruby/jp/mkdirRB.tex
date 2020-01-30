@@ -1,0 +1,37 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mkDir ディレクトリの作成メソッド\label{sect:mkDir}}
+ディレクトリを作成する。
+パラメータの指定により、指定したディレクトリが存在すれば削除してから作成する。
+
+\subsection{書式}
+
+{\large
+\begin{verbatim}
+MCMD::mkDir(dirName[,rmExistingDir])
+\end{verbatim}
+} 
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/dirName /} 作成するディレクトリ名。
+	\item {\large \verb/rmExistingDir /} trueを指定したとき、\verb/dirName/が既に存在してれば、削除してから作成する。
+\end{description}
+
+\subsection{利用例}
+\subsubsection*{例1 基本例}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# ./folderというディレクトリを作成する。
+# すでに存在していれば何もしない。
+> MCMD::mkDir("./folder")
+# 第２引数にtrueを指定したとき、すでに./folder存在していれば削除してからディレクトリを作成する。
+> MCMD::mkDir("./folder",true)
+\end{Verbatim}
+
+\subsection{関連コマンド}
+
+%\end{document}
+

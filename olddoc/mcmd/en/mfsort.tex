@@ -1,0 +1,40 @@
+
+%\begin{document}
+
+\section{mfsort - Sort Field\label{sect:mfsort}}
+\index{mfsort@mfsort}
+Sort according to the values of the specified fields at \verb|f=| within each record (in default ascending order by character string). Note that this does not change the sequence of field names. 
+
+\subsection*{Format}
+\verb|mfsort f= [-r] [-n]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=| & Specify multiple fields where data items are sorted. The result remains the same when one field is defined. \\
+\verb|-n| & Arrange in numerical order. \\
+\verb|-r| & Arrange in reverse order. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mfsort_ex.tex}
+
+\subsection*{Related Command}
+
+%\end{document}

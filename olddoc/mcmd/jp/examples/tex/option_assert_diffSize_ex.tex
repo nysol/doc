@@ -1,0 +1,29 @@
+\subsubsection*{(基本例) }
+例えば、mjoin（参照ファイルの項目結合）コマンドを利用する際に、入力ファイルのキー項目（k=パラメータで指定する項目）と参照ファイルのキー項目（K=パラメータで指定する項目）が完全に一致しているかどうかを確認したい場合を想定する。mjoinコマンドでNULL値を出力する-n、-Nパラメータを指定しない場合は、入力ファイルと参照ファイルで共通のキー項目のみが結合され、一致しないキー項目の値は除外される為、入力データと出力データの件数が異なる。その際、-assert\_diffSizeパラメータを指定しておくと、入力ファイルと出力ファイルの件数の比較を行い、入力ファイルと出力ファイルの件数が異なる場合に\verb|「#WARNING# ; the number of lines is different」|というメッセージを表示するので入力ファイルと参照ファイルのキー項目が完全に一致していないことを確認することができる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,price
+A,20081201,100
+A,20081213,98
+B,20081002,400
+B,20081209,450
+C,20081201,100
+
+$ more ref1.csv
+item,cost
+A,50
+B,300
+E,200
+
+$ mjoin k=item f=cost m=ref1.csv -assert_diffSize i=dat1.csv o=rsl1.csv
+#WARNING# ; the number of lines is different
+#END# kgjoin -assert_diffSize f=cost i=dat1.csv k=item m=ref1.csv o=rsl1.csv; IN=5 OUT=4
+
+$ more rsl1.csv
+item%0,date,price,cost
+A,20081201,100,50
+A,20081213,98,50
+B,20081002,400,300
+B,20081209,450,300
+\end{Verbatim}

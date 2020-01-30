@@ -1,0 +1,83 @@
+\subsubsection*{Example 1: Basic Example}
+
+Example illustrated from the above section.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+node1,node2
+a,b
+a,c
+a,d
+a,e
+b,c
+b,d
+b,f
+c,d
+c,e
+d,e
+e,f
+$ mclique.rb i=dat1.csv f=node1,node2 o=result1.csv log=log1.csv
+/Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/margs.rb:
+154:in `block in initialize': I don't know such a argument: `i=' (RuntimeError)
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `each'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `initialize'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `new'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `<top (required)>'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `load'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `<main>'
+$ more result1.csv
+result1.csv: No such file or directory
+$ more cn1.csv
+cn1.csv: No such file or directory
+$ more ce1.csv
+ce1.csv: No such file or directory
+$ more log1.csv
+log1.csv: No such file or directory
+\end{Verbatim}
+\subsubsection*{Example 2: Enumerate maximal cliques with size 4 or above}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mclique.rb i=dat1.csv f=node1,node2 l=4 o=result2.csv
+/Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/margs.rb:
+154:in `block in initialize': I don't know such a argument: `i=' (RuntimeError)
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `each'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `initialize'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `new'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `<top (required)>'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `load'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `<main>'
+$ more result2.csv
+result2.csv: No such file or directory
+\end{Verbatim}
+\subsubsection*{Example 3: Enumerate all cliques with size of 3}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mclique.rb i=dat1.csv f=node1,node2 l=3 u=3 -all o=result3.csv
+/Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/margs.rb:
+154:in `block in initialize': I don't know such a argument: `i=' (RuntimeError)
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `each'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/lib/nysol/mar
+gs.rb:152:in `initialize'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `new'
+	from /Users/stephane/.rvm/gems/ruby-1.9.3-p448/gems/nysol-1.5-x86_64-darwin/bin/mclique.r
+b:124:in `<top (required)>'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `load'
+	from /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mclique.rb:23:in `<main>'
+$ more result3.csv
+result3.csv: No such file or directory
+\end{Verbatim}

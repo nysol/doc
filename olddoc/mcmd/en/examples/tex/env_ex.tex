@@ -1,0 +1,36 @@
+\subsubsection*{Example 1: End message}
+
+The default setting of output message is set as \verb|KG_Verbose=4| which displays a message when the program finished processing normally or terminates upon an error.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat.csv
+k,v
+A,1
+B,2
+$ mcut f=k,v i=dat.csv o=out.csv
+#END# kgcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+#ERROR# unknown parameter x= (kgcut)
+\end{Verbatim}
+\subsubsection*{Example 2: Only display error messages}
+
+If \verb|KG_Verbose=1|, the stop error message is displayed, but not the normal exit message.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_VerboseLevel=1
+$ mcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+#ERROR# unknown parameter x= (kgcut)
+\end{Verbatim}
+\subsubsection*{Example 3: Do not display any messages}
+
+If \verb|KG_Verbose=0|, no message will be displayed. 
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_VerboseLevel=0
+$ mcut f=k,v i=dat.csv o=out.csv
+$ mcut x=k,v i=dat.csv o=out.csv
+\end{Verbatim}

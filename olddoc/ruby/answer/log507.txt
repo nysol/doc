@@ -1,0 +1,4 @@
+a,b
+x,7
+y,2
+test.rb:658:in `run': `kgcut' has already run RuntimeError

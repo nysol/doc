@@ -1,0 +1,126 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Mtable CSVデータのセル単位での読み込み操作クラス\label{sect:mtableRB}}
+指定したCSVデータ全体をメモリに読み込み、セル単位でランダムアクセスを可能としたクラス。
+以下のような特徴を持つ。
+\begin{itemize}
+\setlength{\itemindent}{0mm}
+\item 行と列の指定によりセルをランダムにアクセス可能。
+\item 読み込み専用であり、データの更新や追加は一切できない。
+\item データは全て文字列として読み込むので、その他の方で利用する時は適宜型変換(ex. to\_i)が必要。
+\item メモリが空いている限りデータを読み込む。領域がなくなればエラー終了する。
+\end{itemize}
+
+\subsection{メソッド}
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::new(arguments)
+\end{verbatim}
+}
+
+Mtableオブジェクトを生成する。
+\verb|arguments|に、以下の引数をスペースで区切った文字列として指定する。
+
+\begin{table}[htbp]
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名(String)\\
+\verb|-nfn|  & 1行目を項目名と見なさない。\\
+\end{tabular} 
+\end{table} 
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::cell(col=0, row=0) -> String
+\end{verbatim}
+}
+
+row(行),col(列)に対応するセルの値を返す。
+row,colの与え方は、列番号と行番号による。
+列/行番号共に0から始まる整数(Mcsvinの列番号は1から始まる)。
+row,colが範囲外の場合はnilを返す。
+
+\begin{description}
+\setlength{\itemindent}{0mm}
+\item[row ] 行番号で、0以上の整数を用いる。デフォルトは0。
+\item[col ] 列番号で、0以上の整数を用いる。項目名は指定できない。デフォルトは0。
+\end{description}
+
+colのみ与えると0行目のcol番目の項目の値を返す。cell(col,0)を指定したのと同等。
+またcol,row両方とも与えなければ0行目の0項目目の値を返す。cell(0,0)を指定したのと同等。
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::names() -> String Array
+\end{verbatim}
+}
+
+項目名配列を返す。
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::name2num() -> String=>Fixnum Hash
+\end{verbatim}
+}
+
+項目名をキー、対応する項目番号を値とするHashを返す。
+
+{\Large
+\begin{verbatim}
+* MCMD::Mtable::size() -> Fixnum
+\end{verbatim}
+}
+
+行数を返す。
+
+%\subsection{備考}
+%\begin{itemize}
+%\item k=を指定する場合は、そこで指定した項目で並べ替えておく必要はない(内部ではHash型変数で管理するため)。
+%\end{itemize}
+
+\subsection{利用例}
+\subsubsection*{例1}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+tbl=MCMD::Mtable.new("i=dat1.csv")
+p tbl.names     # -> ["customer", "date", "amount"]
+p tbl.name2num  # -> {"amount"=>2, "date"=>1, "customer"=>0}
+p tbl.size      # -> 2
+p tbl.cell(0,0) # -> "A"
+p tbl.cell(0,1) # -> "B"
+p tbl.cell(1,1) # -> "20081202"
+p tbl.cell(1)   # -> "20081201"
+p tbl.cell      # -> "A"
+\end{Verbatim}
+
+\subsubsection*{例2 項目名行なし}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# dat1.csv
+customer,date,amount
+A,20081201,10
+B,20081002,40
+
+tbl=MCMD::Mtable.new("i=dat1.csv -nfn") # 一行目もデータと見なしてしまう。
+p tbl.names     # -> nil
+p tbl.name2num  # -> nil
+p tbl.size      # -> 3
+p tbl.cell(0,0) # -> "customer"
+p tbl.cell(0,1) # -> "A"
+p tbl.cell(1,1) # -> "20081201"
+p tbl.cell(1)   # -> "date"
+p tbl.cell      # -> "customer"
+\end{Verbatim}
+
+\subsection{関連コマンド}
+\hyperref[sect:mcsvinRB]{Mcsvin} : CSVデータの読み込み
+
+%\end{document}
+

@@ -1,0 +1,24 @@
+
+\subsubsection*{例1: 基本例}
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,exponent
+1,1
+2,-1
+3,
+4,0
+5,0.5
+
+$ mcal c='exp(${exponent})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=exp(${exponent}) i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,exponent,rsl
+1,1,2.718281828
+2,-1,0.3678794412
+3,,
+4,0,1
+5,0.5,1.648721271
+\end{Verbatim}

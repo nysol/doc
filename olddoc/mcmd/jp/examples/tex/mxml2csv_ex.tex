@@ -1,0 +1,59 @@
+\subsubsection*{例1: 基本例}
+
+概要にて解説した例。
+/a/bをキー要素として、5つのCSV項目を出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.xml
+<a att="aa">
+  <b att="bb1">
+    <c p="pp1" q="qq1"/>
+    <d>text1</d>
+  </b>
+  <b att="bb2">
+    <c q="qq2"></c>
+    <d>text2</d>
+  </b>
+  <b>
+    <c p="pp3"/>
+    <d>text3</d>
+  </b>
+</a>
+$ mxml2csv k=/a/b f=@att:b_att,c@p:c_p,c@p%f:c_p_f,d:d,/a:a i=dat1.xml  o=rsl1.csv
+#END# kgxml2csv f=@att:b_att,c@p:c_p,c@p%f:c_p_f,d:d,/a:a i=dat1.xml k=/a/b o=rsl1.csv
+$ more rsl1.csv
+b_att,c_p,c_p_f,d,a
+bb1,pp1,1,text1,text1
+bb2,,,text2,text1text2
+,pp3,1,text3,text1text2text3
+\end{Verbatim}
+\subsubsection*{例2: 絶対パス}
+
+基本例と同じ要素を絶対パスで指定する例。
+/a/bをキー要素として、5つのCSV項目を出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mxml2csv k=/a/b f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml  o=rsl2.csv
+#END# kgxml2csv f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml k=/a/b o=rsl2.csv
+$ more rsl2.csv
+b_att,c_p,c_p_f,d,a
+bb1,pp1,1,text1,text1
+bb2,,,text2,text1text2
+,pp3,1,text3,text1text2text3
+\end{Verbatim}
+\subsubsection*{例3: キー要素の変更}
+
+絶対パスの例でキー要素をaに変更した例。
+aの終了タグは一つしかないので、一行だけ出力されている。
+f=で指定した/a/b@attは、2回出現しているが、最後に出現した値が出力されている。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mxml2csv k=/a f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml o=rsl3.csv
+#END# kgxml2csv f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml k=/a o=rsl3.csv
+$ more rsl3.csv
+b_att,c_p,c_p_f,d,a
+bb2,pp3,1,text3,text1text2text3
+\end{Verbatim}

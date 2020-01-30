@@ -1,0 +1,20 @@
+\subsubsection*{例1: 基本例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+val
+1
+2
+3
+4
+$ mcal c='bottom()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=bottom() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+val,rsl
+1,0
+2,0
+3,0
+4,1
+\end{Verbatim}

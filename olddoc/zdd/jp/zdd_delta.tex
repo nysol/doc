@@ -1,0 +1,29 @@
+
+\section{delta : 排他的論理和演算\label{sect:delta}}
+\subsection*{書式}
+$obj$.delta($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{説明}
+ZDDオブジェクト$obj$に含まれるアイテム集合$\alpha$と$zdd1$に含まれるアイテム集合$\beta$の排他的論理和$\alpha \oplus \beta$を求め、
+その結果のZDDオブジェクト$zdd2$を返す。
+例えば、アイテム集合\verb|abc|と\verb|bcd|の排他的論理和は以下の通り。
+
+\verb|abc.delta(bcd) = abc|$\oplus$\verb|bcd = ad|
+
+複数のアイテム集合間の演算では全組合せについて排他的論理和を求める。
+
+\verb|(abc + a).delta(bcd + b) = abc|$\oplus$\verb|bcd + abc|$\oplus$\verb|b + a|$\oplus$\verb|bcd + a|$\oplus$\verb|b|
+
+\verb|                         = ad + ac + abcd + ab|
+
+重みについては、同じアイテム集合を複数に展開して計算すればよい。
+
+\verb|(2abc).delta(bcd) = (abc+abc).delta(bcd) = ad + ad = 2ad|
+
+ちなみに$\alpha \oplus \beta$を$\alpha \cap \beta$(共通集合演算)に変更すればdelta関数となる。
+
+\subsection*{例}
+\input{examples/tex/delta_ex.tex}
+
+\subsection*{関連}
+

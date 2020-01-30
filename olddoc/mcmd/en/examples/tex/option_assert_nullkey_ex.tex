@@ -1,0 +1,23 @@
+\subsubsection*{(Basic example) }
+Assume, for instance, the msum command (sum the field values) is used. When the values in the fields specified by the f= parameter is summed for the rows that have the same value in the fields specified by the k= parameter, the value of the key field specified by the k= parameter may contain a NULL value. Specify the -assert\_nullkey option to check whether a key field contains a NULL value. When a NULL value is contained, the \verb|“#WARNING# ; exist NULL in key filed”| message is shown.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,quantity,金額
+A,1,10
+,1,10
+B,1,15
+A,2,20
+B,3,10
+B,1,20
+
+$ msum k=customer f=quantity:quantityT,Amount:AmountT -assert_nullkey i=dat1.csv o=rsl1.csv
+#WARNING# ; exist NULL in key filed
+#END# kgsum -assert_nullkey f=quantity:quantityT,Amount:AmountT i=dat1.csv k=customer o=rsl1.csv
+
+$ more rsl1.csv
+customer%0,quantityT,AmountT
+,1,10
+A,3,30
+B,5,45
+\end{Verbatim}

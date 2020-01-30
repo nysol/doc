@@ -1,0 +1,61 @@
+\subsubsection*{Example 1: Basic Example}
+
+Enumerate all combinations of two items in the \verb|item| field for each \verb|customer|, and save the output in \verb|item1,item2|.  Fields not specified at \verb|k=,f=| (\verb|item| field in this case) remains after the key field column.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,item
+A,a1
+A,a2
+A,a3
+B,a4
+B,a5
+$ mcombi k=customer f=item n=2 a=item1,item2 i=dat1.csv o=rsl1.csv
+#END# kgcombi a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl1.csv
+$ more rsl1.csv
+customer%0,item,item1,item2
+A,a3,a1,a2
+A,a3,a1,a3
+A,a3,a2,a3
+B,a5,a4,a5
+\end{Verbatim}
+\subsubsection*{Example 2: Basic Example 2}
+
+When you specify the \verb|-dup| option, the output includes combination of the same field.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi k=customer f=item n=2 a=item1,item2 i=dat1.csv o=rsl2.csv -dup
+#END# kgcombi -dup a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl2.csv
+$ more rsl2.csv
+customer%0,item,item1,item2
+A,a3,a1,a1
+A,a3,a1,a2
+A,a3,a1,a3
+A,a3,a2,a2
+A,a3,a2,a3
+A,a3,a3,a3
+B,a5,a4,a4
+B,a5,a4,a5
+B,a5,a5,a5
+\end{Verbatim}
+\subsubsection*{Example 3: Compute permutation}
+
+Enumerate permutation of two items in the \verb|item| field for each \verb|customer|, and save the output in column \verb|item1,item2|.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcombi k=customer f=item n=2 a=item1,item2 -p i=dat1.csv o=rsl3.csv
+#END# kgcombi -p a=item1,item2 f=item i=dat1.csv k=customer n=2 o=rsl3.csv
+$ more rsl3.csv
+customer%0,item,item1,item2
+A,a3,a1,a2
+A,a3,a2,a1
+A,a3,a1,a3
+A,a3,a3,a1
+A,a3,a2,a3
+A,a3,a3,a2
+B,a5,a4,a5
+B,a5,a5,a4
+\end{Verbatim}

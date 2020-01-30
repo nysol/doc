@@ -1,0 +1,38 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{mkDir - Create directory method \label{sect:mkDir}}
+
+Create directory. If the directory specified at the parameter exists, it is removed and created. 
+
+\subsection{Format}
+
+{\large
+\begin{verbatim}
+MCMD::mkDir(dirName[,rmExistingDir])
+\end{verbatim}
+}  
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/dirName /} - Directory name to create.
+	\item {\large \verb/rmExistingDir /} - When true is specified, if \verb/dirName/ exists, it is removed and created. 
+\end{description}
+
+\subsection{Examples }
+\subsubsection*{Example 1 Basic Example}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Create the directory ./folder. 
+# Do not do anything if the directory exists. 
+> MCMD::mkDir("./folder")
+# When true is specified at the second,  if ./folder already exists, delete the existing
+ directory and create a directory . 
+> MCMD::mkDir("./folder",true)
+\end{Verbatim}
+
+\subsection{Related Command}
+
+%\end{document}
+

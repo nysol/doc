@@ -1,0 +1,49 @@
+
+%\begin{document}
+
+\section{mnewnumber - Generate List of Sequential Numbers\label{sect:mnewnumber}}
+\index{mnewnumber@mnewnumber}
+Define the start value of the alphabetic sequence at the \verb|S=| parameter, set the the interval of alphabet sequence at \verb|I=| parameter, and define the column name of the sequence at \verb|a=| parameter. 
+The alphabet sequence uses 26 alphabetic characters in base-26 from A to Z (A,B,$\cdots$,Z,AA,AB,$\cdots$,AZ,BA,BB,$\cdots$,ZZ,AAA,AAB,$\cdots$).
+
+
+
+\subsection*{Format}
+\verb|mnewnumber a= [I=] [S=] [l=]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & Specify the field name of the list of new serials.\\
+             & This parameter is not required when \verb|-nfn,-nfno| option is specified. \\
+\verb|I=|    & Interval between the sequence of numbers [default value: 1]\\
+\verb|S=|    & Starting value/alphabet(upper case letters) [default value:1]\\
+             & Assign either alphabet or numbers as the starting value of the sequence.\\
+             & A list of serial numbers is generated when the starting numeric value is specified. \\
+             & An alphabet sequence is generated when the starting alphabet is specified (cannot be specified in lowercase). \\
+\verb|l=|    & Number of rows to generate [default value:10]\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mnewnumber_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mnewrand] {mnewrand} : Generate a dataset with random numbers. 
+
+\hyperref[sect:mnewstr] {mnewstr} : Generate fixed character strings. 
+
+%\end{document}

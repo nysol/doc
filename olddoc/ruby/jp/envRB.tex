@@ -1,0 +1,62 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{MCMDモジュール環境設定\label{sect:evnRB}}
+MCMDモジュールは、KGMODライブラリを利用して構築されているので、
+KGMODで設定可能なシェル変数は全て利用することができる。
+以下では、Ruby MCMDモジュールを利用する中での設定方法について解説する。
+
+\subsection{メッセージ出力}
+
+環境変数\verb|KG_VerboseLevel|を設定することで\verb|Mcsvin|などのメソッドが標準エラー出力に出力する
+メッセージを制御できる。
+設定値とその内容は以下の通りである。
+
+\begin{table}[htpb]
+\begin{center}
+\caption{メッセージを制御する環境変数の設定値とその内容\label{tb:bench1}}
+%{\scriptsize 
+\begin{tabular}{c|l}
+\hline
+値  & 内容\\ \hline
+0 & メッセージを一切出力しない \\
+1 & + errorメッセージ出力 \\
+2 & + warningメッセージ出力 \\
+3 & + endメッセージ出力 \\
+4 & + msgメッセージ出力(デフォルト) \\
+\hline
+\end{tabular}  
+%}
+\end{center}
+\end{table}  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ irb
+> require 'mcmd'
+
+# デフォルトではKG_Verbose=4なので、正常終了時のメッセージもエラー終了メッセージも出力される。
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+#END# mcsvin i=dat.csv; ; 2013/08/08 15:18:52
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+#ERROR# unknown parameter x= (mcsvin); mcsvin x=dat.csv; ; 2013/08/08 15:18:52
+
+# KG_Verbose=1とすると、エラー終了メッセージは表示されるが、正常終了メッセージは表示されない。
+> ENV["KG_VerboseLevel"] = "1"
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+#ERROR# unknown parameter x= (mcsvin); mcsvin x=dat.csv; ; 2013/08/08 15:18:52
+
+# KG_Verbose=0とすると、いずれのメッセージも表示されない。
+> ENV["KG_VerboseLevel"] = "0"
+> MCMD::Mcsvin.new("i=dat.csv"){|csv| csv.each{|flds|}}
+> MCMD::Mcsvin.new("x=dat.csv"){|csv| csv.each{|flds|}}
+\end{Verbatim}
+
+\end{document}
+
+\subsection{その他の変数}
+メッセージの制御以外にもKGMODで設定できる環境変数は全て利用可能である。
+詳細はKGMODの環境変数のドキュメントを参照されたい。
+
+

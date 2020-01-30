@@ -1,0 +1,23 @@
+
+%\begin{document}
+
+\section{regexpfx マッチ文字列のプレフィックス\label{sect:regexpfx}}
+\index{regexpfx@regexpfx}
+
+書式1: regexpfx($str$,正規表現)
+
+書式2: regexpfxw($str$,正規表現)
+
+指定した正規表現が最長マッチする文字列$str$の部分文字列のプレフィックス
+(部分文字列より先頭側の文字列)を返す。
+同じ文字列及び正規表現によってregexpfx関数,regexstr関数,regexsfx関数の3関数を実行した場合、
+それぞれで得られた文字列をその順番に結合すると元の文字列が再現できる関係にある。
+$str$もしくは正規表現にマルチバイト文字を含み、
+Shift\_JISなど文字の出現順によっては意に沿わない検索結果となる場合はregexpfxw関数を使うこと。
+%正規表現の詳細については(\ref{sect:regex})を参照されたい。
+
+\subsection*{利用例}
+\input{examples/tex/func_regexpfx_ex}
+
+%\end{document}
+

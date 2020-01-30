@@ -1,0 +1,18 @@
+
+%\begin{document}
+
+\section{regexpos - Match Position\label{sect:regexpos}}
+\index{regexpos@regexpos}
+
+Format 1: regexpos($str$,regular expression)
+
+Format 2: regexposw($str$,regular expression)
+
+Return the starting position of the longest substring where the defined regular expression matches with the character string $str$. The first character of the string starts at position 0. The function return NULL if no match is found. Use the regexposw function if $str$ or regular expression contain multibyte characters. 
+
+
+\subsection*{Examples}
+\input{examples/tex/func_regexpos_ex.tex}
+
+%\end{document}
+

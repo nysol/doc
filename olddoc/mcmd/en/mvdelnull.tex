@@ -1,0 +1,57 @@
+
+%\begin{document}
+
+\section{mvdelnull - Remove a NULL Element in Vector \label{sect:mvdelnull}}
+\index{mvreplace@mvreplace}
+Remove all NULL elements in the vector. 
+If NULL element exist in vector, there will be consecutive delimiters of the elements. 
+All vectors shown below contains NULL elements. 
+However, for ease of reading, \verb|`\n'| is added at the end of each vector. 
+Reading from the top row, the 3rd element, 1st element, 4th element are NULL. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+a b  c\n
+ a b\n
+a b c \n
+\end{Verbatim}
+
+\subsection*{Format}
+\verb/mvdelnull vf= [-A] /
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_delim]{[delim=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=| & Specify the field name (from input file \verb|i=| ) which contains NULL element for removal. \\
+           & Multiple files can be specified. \\
+\verb|-A|  & Instead of replacing the specified item, this option\\
+           &  adds output as a new field.\\
+           & When -A open is specified, the new field name must be specified after :(colon).\\
+           & Example:  f=quantity:substitution field name \\
+
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mvdelnull_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:mvnullto]{mvnullto} : Replace NULL element to any value. 
+
+%\end{document}

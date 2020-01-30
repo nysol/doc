@@ -1,0 +1,60 @@
+
+%\begin{document}
+
+\section{mcross - Crosstab\label{sect:mcross}}
+\index{mcross@mcross}
+Build a crosstab. Transpose the fields specified at \verb|s=| parameter horizontally, itemize the array of data specified at the \verb|f=| parameter to the corresponding key specified at k=. 
+
+\subsection*{Format}
+\verb|mcross f= s= [a=] [k=] [v=]|   
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name specified will become cross tab fact cell. \\
+	    & When multiple fields are specified, the variables will be transposed to multiple rows. \\
+	    & The \verb|fld| field is created to identify multiple rows of the field. \\  
+             & Specify the name of field at f= as the column variable. \\ 
+             & Use \verb|a=| parameter to rename the field \verb|fld|. \\
+\verb|s=|    & Field names of transposed field.  \\
+             & The data series in the field becomes column name of transposed rows.\\
+           %  & Thus, it is important that the value of the field specified here is unique.\\
+            % & Use \verb|-r| option to specify multiple field names. \\
+             %& \verb|fld| will be printed before the transposed rows of field names. \\
+             %& \verb|fld| can be renamed using colon ":" followed by the new field name. \\
+             %& Example  s=2008*:Date"\&"\\
+\verb|a=|    & Specify the field name to transpose the row of field names. \\
+             & The field name is set to \verb|fld| by default when this parameter is not defined. \\
+\verb|k=|    & Key field name [aggregate key break processing]\\
+             & Key to transpose data into horizontal rows. \\
+\verb|v=|    & Null value replacement string \\
+             & Replace null character with a character defined at \verb|v=| parameter. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcross_ex.tex}
+
+\subsection*{Related Command}
+\hyperref[sect:mtra]{mtra} : Creates the same data image of horizontal transposition, but \verb|mtra| output the vector as a single field in the output. \\
+
+
+%\end{document}

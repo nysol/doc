@@ -1,0 +1,37 @@
+\subsubsection*{例1: 基本例}
+
+「顧客」項目を単位に「数量」と「金額」項目の
+各統計量合計値を計算する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+顧客,数量,金額
+A,1,10
+B,5,20
+B,2,10
+C,1,15
+C,3,10
+C,1,21
+$ mstats k=顧客 f=数量,金額 c=sum i=dat1.csv o=rsl1.csv
+#END# kgstats c=sum f=数量,金額 i=dat1.csv k=顧客 o=rsl1.csv
+$ more rsl1.csv
+顧客%0,数量,金額
+A,1,10
+B,7,30
+C,5,46
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+各統計量最大値を計算する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mstats k=顧客 f=数量,金額 c=max i=dat1.csv o=rsl2.csv
+#END# kgstats c=max f=数量,金額 i=dat1.csv k=顧客 o=rsl2.csv
+$ more rsl2.csv
+顧客%0,数量,金額
+A,1,10
+B,5,20
+C,3,21
+\end{Verbatim}

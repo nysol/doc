@@ -1,0 +1,107 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{レッスン 7: mselstrコマンドを使ってレコードを選択する}
+
+レコードの選択には、\verb|mselstr| コマンドも使えます。1つの項目に複数の選択条件を指定するときなど、\verb|msel| コマンドより簡単に使える場合もあります。
+
+\subsection{ステップ 1: スクリプトを作成する}
+
+テキストエディタを使って、スクリプトファイル \verb|mselstr.sh| を作成しましょう。作成したら、ファイルに実行権限を与えるのを忘れないようにしてください。\\
+
+このレッスンでは、2001年10月の10日、23日および30日のトランザクションデータを選択します。\\
+
+そのために、まず「日付」「数量」「金額」列を \verb|mcut| コマンドで取り出し、パイプを介して \verb|mselstr| コマンドに渡します。\verb|mselstr| コマンドで日付が20010110、20010123、20010130のいずれかであるレコードだけを選択し、結果を \verb|mselstrout.csv| ファイルに書き出します。\\
+
+このレッスンでは、レッスン1で作成した \verb|dat.csv|（スーパーマーケットのレシートデータ）を使います。
+
+\subsection{ステップ 2: パラメータを指定する}
+
+{\setlength{\parindent}{0cm}
+
+\verb|mselstr| コマンドに与えるパラメータは次のようになります。\\
+
+項目: 		\verb|f=日付| \\
+説明: レコードの選択条件となる項目はf=パラメータで指定します。ここでは、「日付」項目をしています。複数の項目を指定することもできます。\\
+
+値: 		\verb|v=20010110,20010123, 20010130 | \\
+説明: 選択条件となる値はv=パラメータで指定します。複数の値を指定するときはカンマで区切ります。
+Description: 	Specify the list of substring(s) for matching with the values in the field parameter at the \verb|v=| parameter. Multiple values can be specified separated by ",". 
+
+}
+
+\begin{verbatim}
+#!/bin/bash
+#=========================================
+# MCMD bash script - Lesson 7: Select Records 
+#=========================================
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+mselstr f=日付 v=20010110,20010123,20010130 o=outdat/mselstrout.csv
+#==========================================
+\end{verbatim}
+
+\subsection{ステップ 3: シェルスクリプトを実行する}
+
+\begin{verbatim}
+$ ./mselstr.sh 
+#END# kgcut f=日付,数量,金額i=tutorial_jp/dat.csv; IN=24737 OUT=24737; 2013/08/19 11:26:13
+#END# kgselstr f=日付 o=outdat/mselstrout.csv v=20010110,20010123,20010130; IN=24737 OUT=148;
+2013/08/19 11:26:14
+\end{verbatim}
+
+\noindent
+結果は次のようになります。
+
+\begin{verbatim}
+日付,数量,金額
+20010110,5,1155
+20010110,6,1446
+20010110,1,271
+20010110,6,3198
+20010110,1,348
+20010110,1,461
+20010110,1,363
+20010123,2,564
+20010123,1,401
+20010123,1,528
+20010123,1,436
+20010123,3,813
+20010123,1,419
+20010130,1,362
+20010130,1,294
+20010130,2,544
+...
+..
+\end{verbatim}
+
+\subsection{練習問題}
+
+\verb|mselstr| コマンドを使って、次のレポートを作成してみましょう。作成したら、出力ファイルとスクリプトを確認してください。
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{レポート内容}   & \textbf{スクリプト名} & \textbf{出力ファイル名}  \\
+\hline
+1. メーカーが「0054」「0085」「1110」のいずれかであるレコードの数量合計 & \href{exercise/mselstr1.sh}{mselstr1.sh} & \href{exercise/outdat/mselstrout1.csv}{mselstrout1.csv} \\
+2. 小分類が「1101」「1111」「1115」「1401」「1403」「1406」のいずれか \\ であるレコードの数量合計 & \href{exercise/mselstr2.sh}{mselstr2.sh} & \href{exercise/outdat/mselstrout2.csv}{mselstrout2.csv} \\
+3. 金額が「199」「299」「399」のいずれかであるレコードの数量合計と金額合計 & \href{exercise/mselstr3.sh}{mselstr3.sh} & \href{exercise/outdat/mselstrout3.csv}{mselstrout3.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+%\end{document}

@@ -1,0 +1,43 @@
+
+%\begin{document}
+
+\section{mduprec - Duplicate Record\label{sect:mduprec}}
+\index{mduprec@mduprec}
+Duplicate each record. Specify the number of rows to duplicate at \verb|n=|, and duplicate records based on the field specified at \verb|f=| parameter.  
+
+\subsection*{Format}
+\verb/mduprec f=|n=/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Duplicate records based on the values in the field name.\\
+             & Duplicate the number of rows for each record based on the numeric values in the column. \\
+\verb|n=|    & Number of records to duplicate\\
+             & Specify the number of rows to duplicate for each record. \\
+\end{tabular} 
+}
+\end{table} 
+\subsection*{Examples}
+\input{examples/tex/mduprec_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mcount]{mcount} : Reverse the operation of \verb|mduprec|.
+
+\hyperref[sect:mwindow]{mwindow} : Copy and shift a specified number of records. 
+
+%\end{document}

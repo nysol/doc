@@ -1,0 +1,110 @@
+\subsubsection*{例1: 基本例}
+
+\verb|price|と\verb|quantity|項目を1つの文字列として連結し、
+\verb|transaction|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,price,quantity
+A,198,1
+B,325,2
+C,200,3
+D,450,2
+E,100,1
+$ mtrafld a=transaction f=price,quantity i=dat1.csv o=rsl1.csv
+#END# kgtrafld a=transaction f=price,quantity i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer,transaction
+A,price=198 quantity=1
+B,price=325 quantity=2
+C,price=200 quantity=3
+D,price=450 quantity=2
+E,price=100 quantity=1
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+出力された結果を\verb|-r|をつけて再実行し元に戻す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -r a=transaction f=price,quantity i=rsl1.csv o=rsl2.csv
+#END# kgtrafld -r a=transaction f=price,quantity i=rsl1.csv o=rsl2.csv
+$ more rsl2.csv
+customer,price,quantity
+A,198,1
+B,325,2
+C,200,3
+D,450,2
+E,100,1
+\end{Verbatim}
+\subsubsection*{例3: 区切り文字の指定}
+
+\verb|price|と数量\verb|quantity|項目を\_(アンダーバー）で区切り1つの文字列として連結し、
+項目名とデータは：（コロン）で区切り\verb|transaction|という項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld a=transaction f=price,quantity delim=_ delim2=':' i=dat1.csv o=rsl3.csv
+#END# kgtrafld a=transaction delim2=: delim=_ f=price,quantity i=dat1.csv o=rsl3.csv
+$ more rsl3.csv
+customer,transaction
+A,price:198_quantity:1
+B,price:325_quantity:2
+C,price:200_quantity:3
+D,price:450_quantity:2
+E,price:100_quantity:1
+\end{Verbatim}
+\subsubsection*{例4: NULL値を含む場合}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+customer,price,quantity
+A,198,1
+B,,2
+C,200,
+D,450,2
+E,,
+$ mtrafld a=transaction f=price,quantity i=dat2.csv o=rsl4.csv
+#END# kgtrafld a=transaction f=price,quantity i=dat2.csv o=rsl4.csv
+$ more rsl4.csv
+customer,transaction
+A,price=198 quantity=1
+B,quantity=2
+C,price=200
+D,price=450 quantity=2
+E,
+\end{Verbatim}
+\subsubsection*{例5: NULL値を含む場合2}
+
+出力された結果を\verb|-r|をつけて再実行し元に戻す。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -r a=transaction f=price,quantity i=rsl4.csv o=rsl5.csv
+#END# kgtrafld -r a=transaction f=price,quantity i=rsl4.csv o=rsl5.csv
+$ more rsl5.csv
+customer,price,quantity
+A,198,1
+B,,2
+C,200,
+D,450,2
+E,,
+\end{Verbatim}
+\subsubsection*{例6: -valOnlyの指定}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mtrafld -valOnly f=price,quantity a=transaction i=dat2.csv o=rsl6.csv
+#END# kgtrafld -valOnly a=transaction f=price,quantity i=dat2.csv o=rsl6.csv
+$ more rsl6.csv
+customer,transaction
+A,198 1
+B,2
+C,200
+D,450 2
+E,
+\end{Verbatim}

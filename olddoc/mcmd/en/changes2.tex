@@ -1,0 +1,181 @@
+
+%\begin{document}
+
+\section{Changes in Ver.2\label{sect:changes}}
+\subsection{Addition of Automatic Sorting Function\label{sect:changes}}
+
+In MCMD Ver. 1.0, sorting by key field with \verb|msortf| is necessary  prior to the aggregate calculation with commands such as \verb|msum| and joining of files such as \verb|mjoin| command. 
+
+Key fields must be sorted for commands which require specification key field name, or else it would result in calculation error if users failed to sort the key field beforehand, this is the main draw back  easily give rise to bugs in scripts. 
+
+Therefore, the new function in Ver. 2.0 automatically sorts key columns for commands where key field(s) is/are specified at \verb|k=| option. The symbol of sort order by column is added to the field name in the CSV header (Refer to sort \hyperref[sect:csv_sort]{Sort order of columns} for more information),  and sorting is only carried out when necessary on required commands. 
+
+\subsubsection*{Example of Ver. 1.0}
+
+Before executing \verb|msum k=customer| command, \verb|customer| column must be sorted with \verb|msortf| command. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,amount
+A,10
+B,10
+A,20
+B,15
+B,20
+$ msortf i=dat1.csv f=customer | msum k=customer f=amount:totalamount o=rsl1.csv
+#END# kgsortf f=customer i=dat1.csv
+#END# kgsum f=amount:totalamount k=customer o=rsl1.csv
+$ more rsl1.csv
+customer,totalamount
+A,30
+B,45
+\end{Verbatim}
+
+\subsubsection*{Example of Ver. 2.0}
+
+
+\verb|msum| will perform sorting when necessary without the use of \verb|msortf| command while achieving the correct results as shown in the previous example. The symbol \verb|%0| is added next to the column name of \verb|customer| after sorting is carried out in \verb|msum| command.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+customer,amount
+A,10
+B,10
+A,20
+B,15
+B,20
+$ msum i=dat1.csv k=customer f=amount:totalamount o=rsl1.csv
+#END# kgsum f=amount:totalamount k=customer i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+customer%0,totalamount
+A,30
+B,45
+\end{Verbatim}
+%\input{examples/tex/changes2_ex.tex}
+
+\subsection{Commands with Change in Specifications \label{sect:changedcommands}}
+
+Table \ref{tbl:changed_commands} shows the list of commands with specification changes from Ver. 1.0  (Excludes commands with \verb|k=| parameter where automatic sorting has been added ).  
+In addition, the \verb|s=| parameter is added to the commands where the sort order of records will affect the processing results. 
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Commands with Change in Specifications \label{tbl:changed_commands}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+Command                             & Description               & Changes \\ \hline
+\hyperref[sect:maccum]{maccum}       & Calculate cumulative totals           & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mbest]{mbest}         & Select specific rows       & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mcombi]{mcombi}       & Compute combinations         & Added \verb|s=| parameter \\
+\hyperref[sect:mkeybreak]{mkeybreak} & Keybreak point   & Added \verb|s=| parameter \\
+\hyperref[sect:mmvavg]{mmvavg}       & Compute moving average     & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mmvsim]{mmvsim}       & Compute similarity of sliding window & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mmvstats]{mmvstats}   & Compute statistics of sliding window & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mnumber]{mnumber}     & Serial number              & \verb|s=| parameter is required when \verb|-B| is not used.  \\
+\hyperref[sect:mpadding]{mpadding}   & Repair rows     &  \verb|type=| parameter is not retired, \\
+                                     &                    & repair method is specified at \verb|f=|. \\
+\hyperref[sect:mrjoin]{mrjoin}       & Join reference file by specified range & Specify sorting method at  \verb|r=| parameter.  \\
+\hyperref[sect:mslide]{mslide}       & Shift records            & Added \verb|s=| parameter (required) \\
+\hyperref[sect:mtra]{mtra}           & Convert vert data to vector  & Added \verb|s=| parameter \\
+\hyperref[sect:mwindow]{mwindow}     & Generate sliding window   & Specify sorting method at \verb|wk=|parameter. \\
+
+\hline
+  \end{tabular}
+  }
+  \end{center}
+\end{table}
+
+\subsection{Executing Previous Scripts \label{sect:howtomodify}}
+
+When \verb|-q| option is used, automatic sorting on columns defined at \verb|k=| parameter is disabled. As shown in Table \ref{tbl:changed_commands}, when  \verb|s=| parameter  is not defined for commands  that takes in \verb|s=| parameter, the commands will operate as in Ver. 1.0. 
+For scripts  using Ver. 2.0 commands where \verb|k=| parameter and  \verb|-q| option is specified, while   \verb|s=| parameter is not defined, the results is equivalent to scripts using Ver. 1.0 commands  (For \hyperref[sect:mpadding]{mpadding} command, even though \verb|type=| parameter is removed, the specification is required at \verb|f=| parameter ). 
+ 
+\subsubsection*{Script Before Modification}
+In Ver. 2.0, \verb|maccum| command will return an error if \verb|s=| parameter is not specified. 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+msortf i=customer.csv f=custID,date |
+maccum k=custID f=amount o=accum.csv
+\end{Verbatim}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#ERROR# parameter s= is mandatory without -q (kgaccum); kgaccum f=amount i=test.csv k=custID
+\end{Verbatim}
+
+\subsubsection*{Modification}
+\verb|s=| parameter is required for \verb|maccum| command, when -q option is used, it is equivalent to the execution method in Ver. 1.0.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+msortf i=customer.csv f=custID,date |
+maccum -q k=custID f=amount o=accum.csv
+\end{Verbatim}
+
+\section{Changes in Ver. 3\label{sect:changes}}
+MCMD has been separated from the NYSOL package and registered in GitHuB. Accordingly, the version level has been raised from 2.x to 3.0.
+There are no major changes in the command specifications. There are some minor enhancements as described in the following sections. Several new commands have been added, including input commands.
+
+\subsection{Addition of the -params option}
+For all commands, the -params option has been added. This option is primarily intended for use by a system. Specifying the -params option sends a list of available parameters (and options) to the standard output.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut -params
+-assert_diffSize
+-assert_nullin
+-nfn
+-nfni
+-nfno
+-params
+-r
+-x
+f=
+i=
+o=
+precision=
+tmpPath=
+\end{Verbatim}
+
+\subsection{Addition of environment variable KG\_msgTimebyfsec}
+When this environment variable is true, the end message time is shown in units of microseconds.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ export KG_msgTimebyfsec=true
+\end{Verbatim}
+
+\subsection{Enhancement of the mchkcsv command functions}
+
+\begin{itemize}
+ \item UTF BOM is automatically removed.
+ \item Changes have been made so that specifying the -diag option makes the contents output in English and specifying the -diagl option makes the contents output in Japanese.
+\end{itemize}
+
+\subsection{Enhancement of the mcal command functions}
+\begin{itemize}
+ \item Changes have been made so that multiple values can be specified for c= and a=.
+ \item Changes have been made to allow values in microseconds to be entered in \verb|$t{}|, \verb|#t{}|, and \verb|0t|. Microseconds are indicated by way of the decimal point (six digits). Accordingly, the following functions have been added: \verb|diffusecond(T,T), tuseconds(T), usecond(T), useconds(T), and unow()|.
+ \item A Boolean value can be returned as in \verb|if(B,B,B)|.
+\end{itemize}
+
+\subsection{Enhancement of the mcat command functions}
+\begin{itemize}
+ \item With the \verb|-skip_zero| option specified, a 0-byte file no longer results in an error even when the \verb|-nfn| option is not specified.
+ \item Using the \verb|flist=| parameter, you can specify a CSV file as the list of files to be merged. Use the following syntax: flist=filename:fldName.
+ \item With the \verb|kv=| parameter specified, the “key-value” character string is extracted from a path name and added to data as a fieldname and its value.
+\end{itemize}
+
+\subsection{Additional commands}
+Five screen input commands shown below have been added. They are still under development, and their specifications may be changed in the future.
+\begin{itemize}
+\item \hyperref[sect:minput] {minput} : Displays the input screen.
+\item \hyperref[sect:mminput] {mminput} : Displays the input screen with multiple input frames.
+\item \hyperref[sect:mdsp] {mdsp} : Displays a character string at a specified position on the screen.
+\item \hyperref[sect:mseldsp] {mseldsp} : Displays a single-choice input window on the screen. 
+\item \hyperref[sect:mmseldsp] {mmseldsp} : Displays a multiple-choice input window on the screen.
+\end{itemize}
+
+In addition, the following commands have been added:
+\begin{itemize}
+\item \hyperref[sect:mshuffle] {mshuffle} : Partitions a file with a hush key.
+\item \hyperref[sect:mcsvconv] {mcsvconv} : Converts a CSV file into one of several other formats.
+\item \hyperref[sect:mcsv2json] {mcsv2json} : Converts a CSV file into a json file.
+\end{itemize}
+
+%\end{document}

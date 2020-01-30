@@ -1,0 +1,16 @@
+\subsubsection*{例1: 基本例}
+
+\verb|custNo|と\verb|A0001|という文字列データを5行作成し、\verb|attribute,code|という名前の項目名で出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mnewstr a=attribute,code v=custNo,A0001 l=5 o=rsl1.csv
+#END# kgnewstr a=attribute,code l=5 o=rsl1.csv v=custNo,A0001
+$ more rsl1.csv
+attribute,code
+custNo,A0001
+custNo,A0001
+custNo,A0001
+custNo,A0001
+custNo,A0001
+\end{Verbatim}

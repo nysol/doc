@@ -1,0 +1,27 @@
+
+\section{maxcost : コスト最大のアイテム集合のコスト値を返す\label{sect:maxcost}}
+\subsection*{書式}
+$obj$.maxcost $\rightarrow$ $cost$
+
+~~$cost$ : float
+
+\subsection*{説明}
+$obj$含まれるアイテム集合の中で、最大コストを返す。
+そのコストの値を持つアイテム集合を得るには\hyperref[sect:maxcover]{maxcover}を用いる。
+コストの設定は\hyperref[sect:symbol]{symbol}関数で行う。
+
+\subsection*{例}
+\input{examples/tex/maxcost_ex.tex}
+
+\subsection*{関連}
+\hyperref[sect:symbol]{symbol} : アイテムの宣言
+
+\hyperref[sect:cost]{cost} : アイテム集合のコスト合計
+
+\hyperref[sect:maxcover]{maxcover} : コスト最大のアイテム集合の選択
+
+\hyperref[sect:mincover]{mincover} : コスト最小のアイテム集合の選択
+
+\hyperref[sect:mincost]{mincost} : コスト最小のアイテム集合のコスト
+
+

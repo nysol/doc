@@ -1,0 +1,203 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mdelnull},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mdelnull (remove row with null values) command}
+Select and remove the row if values defined at \emph{f=} parameter contain null value(s). \\
+
+\subsection*{Format}
+mdelnull f= [k=] [u=] [-F] [-r] [-R]   
+[\href{run:option.pdf}{bufcount=}] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{i=}] 
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name(s)（Multiple fields can be specified）【required parameter】\\
+& Search specified field(s) with null values. \\
+& Specify field number (0〜) with x,nfn options. \\
+\verb|k=|    & Key field name（Multiple fields can be specified）【optional parameter】\\
+& Remove records with null values  based on the same key field. \\
+& ※Note: Sort input data by \emph{k=} parameter beforehand. \\
+\verb|u=|    & Output file with unmatched records. 【required parameter】\\
+& Records that do not match the condition will be printed to this output file. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-F|    & Condition with multiple fields\\
+& When multiple fields are defined at \emph{f=} parameter, null values in all fields will be selected and removed. \\
+\verb|-r|    & Reverse selection \\
+& Select records not removed. \\
+\verb|-R|    & Condition for records \\
+& All records with null values will be removed when \emph{k=} parameter is specified. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Example}
+\subsubsection*{Example 1 Remove records where Quantity \emph{or} Amount contain null values. Save records with null values to a separate file oth.csv. 
+}
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+
+$ mdelnull f=Quantity,Amount u=oth.csv i=dat.csv o=rsl.csv
+
+# Output file (rsl.csv)
+Customer,Quantity,Amount
+A,1,10
+B,1,15
+C,1,20
+
+# Output file2(oth.csv)
+Customer,Quantity,Amount
+A,,20
+B,3,
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Remove records where quantity and amount has null values. 
+}
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+
+$ mdelnull f=Quantity,Amount -r i=dat.csv o=rsl.csv
+
+# Output file1(rsl.csv)
+Customer,Quantity,Amount
+A,,20
+B,3,
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 3 Remove records where quantity and amount has null values for each customer. 
+}
+※Note: Sort input data by customer beforehand. \\
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+
+$ mdelnull k=Customer f=Quantity,Amount i=dat.csv o=rsl.csv
+
+# Output file 1(rsl.csv)
+Customer,Quantity,Amount
+C,1,20
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 4 Remove records where quantity \emph{and} amount has null values. 
+}
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,10
+A,,
+B,1,15
+B,3,
+C,1,20
+
+$ mdelnull f=Quantity,Amount -F i=dat.csv o=rsl.csv
+
+# Output file 1(rsl.csv)
+Customer,Quantity,Amount
+A,1,10
+B,1,15
+B,3,
+C,1,20
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 5 Remove customer records where quantity is null. 
+}
+※Note: Sort input data by customer beforehand. \\ 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,10
+A,,20
+B,1,15
+B,3,
+C,1,20
+
+$ mdelnull k=Customer f=Quantity i=dat.csv o=rsl.csv
+
+# Output file 1(rsl.csv)
+Customer,Quantity,Amount
+B,1,15
+B,3,
+C,1,20
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Related Command}
+\noindent
+\href{run:mnullto.pdf}{mnullto}: Replace null value \\
+
+\end{document}

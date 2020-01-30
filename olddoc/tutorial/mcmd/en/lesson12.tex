@@ -1,0 +1,132 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{Lesson 12: Partition file into multiple segments }
+
+When the file size of the data is large, the dataset is divided into multiple segments classified by time, region, categories, and other attributes for ease of maintenance and retrieval for data analysis. The \verb|msep| command allow users to  separate files based on the values in the specified columns. 
+
+\subsection{Step 1: Create script}
+
+Create a new script \verb|msep.sh| with a text editor. Make sure the file permission is changed to executable permission. \\
+
+Objective:  Partition \verb|dat.csv| by shop.  \\ 
+
+Methodology: Divide \verb|dat.csv| into four segments by store A, B, C, D using the \verb|msep| command. Save the files in the same directory "\~/tutorial\_en/" and name the files using the parameter \verb|shop + ${shop}.csv|. 
+ 
+ \subsection{Step 2: Define attributes and options }
+
+{\setlength{\parindent}{0cm}
+
+Specify the parameters for \verb|msep| as follows: \\
+
+Path and file name: 		\verb|d=tutorial_en/shop${shop}.csv| \\
+Description: 	This parameter defines the directory path and the naming convention for the new file names. The file name is defined as a dynamic variable according to the values in the specified column. Be sure the complete path name (e.g. tutorial\_en)  is spelled out in the parameter.
+}
+
+\begin{verbatim}
+#/bin/bash
+#=========================================
+# MCMD bash script - Lesson 12: Separate files by shop name
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+msep d='./tutorial_en/shop${shop}.csv'                   i=${inPath}/dat.csv
+#==========================================
+\end{verbatim}
+
+All records in year 2001 are separated by shop name and saved in the "\~/tutorial\_en/" directory. List the files in the "\~/tutorial\_en/" directory with \verb|ls| command.  \\
+
+ \begin{verbatim}
+ $ ls
+ cust.csv	jicfs2.csv	outdat		shopC.csv
+dat.csv		jicfs4.csv	shopA.csv 	shopD.csv
+jicfs1.csv	jicfs6.csv	shopB.csv		syo.csv
+ \end{verbatim}
+
+ \subsection{Step 3: Partition data by month}
+ 
+ Next, let's separate the 2001 dataset by month. The monthly data will be used in the next tutorial. \\
+ 
+ {\setlength{\parindent}{0cm}
+ 
+ Objective:  Partition the records in dat.csv file by month.  \\ 
+
+Methodology: Create a new script \verb|msep1.sh| with a text editor. In lesson 5, you have learned how to use the left function of mcal to create a new column "YearMonth" in the format "YYYYMM". The file name of the output is determined, based on the value of each row in this column. 
+After data is sorted by the "YearMonth" column, use the  \verb|msep| command to divide into 12 files based on "YearMonth" (One year receipt data of year 2001 contains 12 months of data). 
+Save the output files in the directory  \verb|tutorial_en|, and define the file name as \verb|dat${YearMonth}.csv|. 
+
+
+Specify the parameters for \verb|msep| as follows: \\
+
+Path and file name: 		\verb|d=tutorial_en/dat${YearMonth}.csv| \\
+Description: 	This parameter defines the directory path and the naming convention for the new file names. The file name is defined as a dynamic variable according to the values in the specified column. 
+}
+ 
+ \begin{verbatim}
+ #/bin/bash
+#=========================================
+# MCMD bash script - Lesson 12: Separate files by year and month
+#=========================================
+# Variables
+inPath="tutorial_en"
+
+# Command 
+
+mcal c='left($s{日付},6)' a=YearMonth i=${inPath}/dat.csv |
+msortf f=YearMonth |
+msep d='tutorial_en/dat${YearMonth}.csv' 
+
+ #==========================================
+ \end{verbatim}
+ 
+ 
+Save and run the script. The run-time message is as follows: \\
+
+\begin{verbatim}
+$ ./msep1.sh 
+#END# kgcal a=YearMonth c=left($s{date},6) i=tutorial_en/dat.csv; IN=24737 OUT=24737; 2014/05/01 05:07:47
+#END# kgsortf f=YearMonth; IN=24737 OUT=24737; 2014/05/01 05:07:47
+#END# kgsep d=tutorial_en/dat${YearMonth}.csv; IN=24737 OUT=2283; 2014/05/01 05:07:47
+ \end{verbatim}
+ 
+All records in year 2001 are separated by month and saved to "\~/tutorial\_en/" directory. Use the \verb|ls| command to check the files in the "\~/tutorial\_en/" directory.   
+
+ \begin{verbatim}
+$ ls
+cust.csv	dat200112.csv	dat200106.csv	jicfs2.csv	shopB.csv
+dat.csv		dat200102.csv	dat200107.csv	jicfs4.csv	shopC.csv
+dat200101.csv	dat200103.csv	dat200108.csv	jicfs6.csv	shopD.csv
+dat200110.csv	dat200104.csv	dat200109.csv	syo.csv
+dat200111.csv	dat200105.csv	jicfs1.csv	shopA.csv
+\end{verbatim}
+
+Review the 200101.csv data, the data should appear as follows: 
+
+\begin{verbatim}
+shop,date,time,receipt,customer,product,CategoryCode1,CategoryCode2,CategoryCode4,CategoryCode6,
+manufacturer,brand,unitCost,unitPrice,quantity,amount,costAmount,profit,YearMonth
+A,20010108,142748,1000000,00245A,0000311,1,11,1116,111603,1776,177601,339,441,1,441,339,102,200101
+B,20010130,185345,1000011,00018B,0000362,1,11,1119,111901,0171,017104,222,289,1,289,222,67,200101
+D,20010119,111636,1000007,00228D,0000461,1,14,1406,140671,0894,089401,381,496,1,496,381,115,200101
+B,20010131,080841,1000014,00217B,0000215,1,11,1119,111907,0143,014301,99,129,7,903,693,210,200101
+D,20010119,111636,1000007,00228D,0000421,1,11,1105,110597,0616,061601,412,536,6,3216,2472,744,200101
+B,20010130,185345,1000011,00018B,0000255,1,14,1406,140621,1894,189400,256,333,1,333,256,77,200101
+D,20010119,111636,1000007,00228D,0000409,1,13,1301,130125,1033,103300,333,433,6,2598,1998,600,200101
+B,20010130,185345,1000011,00018B,0000362,1,11,1119,111901,0171,017104,222,289,1,289,222,67,200101
+D,20010119,111636,1000007,00228D,0000405,1,13,1301,130123,1310,131000,408,531,1,531,408,123,200101
+B,20010130,185345,1000011,00018B,0000208,1,11,1112,111203,0777,077700,358,466,1,466,358,108,200101
+D,20010119,111636,1000007,00228D,0000304,1,11,1107,110707,1487,148704,343,446,4,1784,1372,412,200101
+B,20010130,185345,1000011,00018B,0000455,1,14,1406,140681,0361,036103,376,489,1,489,376,113,200101
+...
+..
+ \end{verbatim}
+
+%\end{document}

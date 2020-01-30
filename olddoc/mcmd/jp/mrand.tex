@@ -1,0 +1,66 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mrand 擬似乱数\label{sect:mrand}}
+\index{mrand@mrand}
+0.0から1.0の範囲の実数の擬似乱数、もしくは範囲指定による整数の擬似乱数を生成し、\verb|a=|パラメータで指定した項目名で出力する。
+
+乱数の生成にはメルセンヌ・ツイスター法を利用している
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
+
+
+\subsection*{書式}
+\verb/mrand [k=] a= [max=] [min=] [S=] [-int]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}  
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+%\verb|k=|   & 指定したキー項目について、同じキー値には同じ乱数値が振られる。【\hyperref[sect:option_k]{集計キーブレイク処理}】\\
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|k=|   & 指定したキー項目について、同じキー値には同じ乱数値が振られる。\\
+\verb|a=|   & 新たに追加される項目の名前を指定する。【但し、-nfn,-nfnoオプション指定時は必要なし】\\
+\verb|max=| & 乱数の最大値【デフォルト値:INT\_MAX】\\
+            & 0〜$2^{32}$(約21億)の範囲の整数が指定可能\\
+            & このパラメータを指定するときは\verb|-int|も指定しなければならない。\\
+\verb|min=| & 整数乱数の最小値【デフォルト値:0】\\
+            & 0〜$2^{32}$(約21億)の範囲の整数が指定可能\\
+            & このパラメータを指定するときは\verb|-int|も指定しなければならない。\\
+\verb|S=|   & 乱数の種【デフォルト値:現在時刻】\\
+            & 同じ乱数の種を指定すれば、同じ乱数系列となる。\\
+            & \verb|S=|を指定しなければ、時刻(ミリ(1/1000秒単位)に応じた異なる乱数の種が利用される。\\
+            & 指定可能な乱数の種(-2147483648〜2147483647)\\
+\verb|-int| & 整数乱数を生成\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mrand_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mselrand] {mselrand} : ランダムに行を選択する。
+
+\hyperref[sect:mnewrand] {mnewrand} : 入力ファイルなしに、乱数データを新たに生成する。
+
+
+%\end{document}

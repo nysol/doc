@@ -1,0 +1,19 @@
+
+%\begin{document}
+
+\subsection{-nfn 項目名行のないCSV(No Field Namesの略)\label{sect:option_nfn}}
+
+このオプションを指定すると入力データの1行目を項目名行とみなさない。
+主に1行目に項目名がないデータの場合に利用される。
+このフラグを指定すると項目指定のときに項目名は利用できないので項目番号指定をすることになる。
+項目番号は0から始まる整数で指定することに注意する。
+\verb|-nfn|オプションを指定すると、出力ファイルにも項目名は出力されない。
+
+\subsection*{利用例}
+\input{examples/tex/option_nfn_ex.tex}
+
+\subsubsection*{対応コマンド}
+mchkcsv以外全てのコマンドで利用できる。
+
+%\end{document}
+

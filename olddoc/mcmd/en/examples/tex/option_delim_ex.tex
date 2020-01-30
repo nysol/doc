@@ -1,0 +1,47 @@
+\subsubsection*{Example 1: Basic Example}
+
+Sort the elements of the vector field “\verb|vec|” with colon as a delimiter.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+vec
+b:a:c
+x:p
+$ mvsort vf=vec delim=: i=dat1.csv o=rsl1.csv
+#END# kgvsort delim=: i=dat1.csv o=rsl1.csv vf=vec
+$ more rsl1.csv
+vec
+a:b:c
+p:x
+\end{Verbatim}
+\subsubsection*{Example 2: When delimiter is not specified}
+
+\verb|b:a:c|, \verb|x:p|, etc are intepreted as one element when \verb|delim| is not specified.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mvsort vf=vec i=dat1.csv o=rsl2.csv
+#END# kgvsort i=dat1.csv o=rsl2.csv vf=vec
+$ more rsl2.csv
+vec
+b:a:c
+x:p
+\end{Verbatim}
+\subsubsection*{Example 3: Use comma as delimiter}
+
+If comma is used as delimiter for the vector, the entire vector is enclosed by double quote to draw distinction between the delimiter of CSV and the delimiter of the vector.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,vec1,vec2
+1,a,b
+2,p,q
+$ mvcat vf=vec1,vec2 a=vec3 delim=, i=dat2.csv o=rsl3.csv
+#END# kgvcat a=vec3 delim=, i=dat2.csv o=rsl3.csv vf=vec1,vec2
+$ more rsl3.csv
+id,vec3
+1,"a,b"
+2,"p,q"
+\end{Verbatim}

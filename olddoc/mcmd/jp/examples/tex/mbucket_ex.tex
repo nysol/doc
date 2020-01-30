@@ -1,0 +1,103 @@
+\subsubsection*{例1: 基本例}
+
+\verb|x,y|項目それぞれで、件数ができるだけ均等になるように2分割する。
+その際、各バケットの数値範囲を\verb|rng1.csv|に出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,x,y
+A,2,7
+B,6,7
+C,5,6
+D,7,5
+E,6,4
+F,1,3
+G,3,3
+H,4,2
+I,7,2
+J,2,1
+$ mbucket f=x:xb,y:yb n=2 O=rng1.csv i=dat1.csv o=rsl1.csv
+#END# kgbucket O=rng1.csv f=x:xb,y:yb i=dat1.csv n=2 o=rsl1.csv
+$ more rsl1.csv
+id,x,y,xb,yb
+A,2,7,1,2
+B,6,7,2,2
+C,5,6,2,2
+D,7,5,2,2
+E,6,4,2,2
+F,1,3,1,1
+G,3,3,1,1
+H,4,2,1,1
+I,7,2,2,1
+J,2,1,1,1
+$ more rng1.csv
+fieldName,bucketNo,rangeFrom,rangeTo
+x,1,,4.5
+x,2,4.5,
+y,1,,3.5
+y,2,3.5,
+\end{Verbatim}
+\subsubsection*{例2: 範囲均等化分割}
+
+\verb|-rng|オプションを指定すると範囲均等化分割となる。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mbucket f=x:xb,y:yb n=2 -rng O=rng2.csv i=dat1.csv o=rsl2.csv
+#END# kgbucket -rng O=rng2.csv f=x:xb,y:yb i=dat1.csv n=2 o=rsl2.csv
+$ more rsl2.csv
+id,x,y,xb,yb
+A,2,7,1,2
+B,6,7,2,2
+C,5,6,2,2
+D,7,5,2,2
+E,6,4,2,2
+F,1,3,1,1
+G,3,3,1,1
+H,4,2,2,1
+I,7,2,2,1
+J,2,1,1,1
+$ more rng2.csv
+fieldName,bucketNo,rangeFrom,rangeTo
+x,1,,4
+x,2,4,
+y,1,,4
+y,2,4,
+\end{Verbatim}
+\subsubsection*{例3: キー項目を指定した例}
+
+id項目を集計キーとして、\verb|x,y|項目それぞれを件数均等化バケット分割する。
+\verb|n=2,3|と指定することで、\verb|x|項目の分割数は2に、
+\verb|y|項目の分割数は3となる。
+出力形式はバケット番号とバケット範囲の両方を表示する(\verb|F=2|)。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.csv
+id,x,y
+A,2,7
+A,6,7
+A,5,6
+B,7,5
+B,6,4
+B,1,3
+C,3,3
+C,4,2
+C,7,2
+C,2,1
+$ mbucket k=id f=x:xb,y:yb n=2,3 F=2 i=dat2.csv o=rsl3.csv
+#END# kgbucket F=2 f=x:xb,y:yb i=dat2.csv k=id n=2,3 o=rsl3.csv
+$ more rsl3.csv
+id%0,x,y,xb,yb
+A,2,7,1:_3.5,2:6.5_
+A,6,7,2:3.5_,2:6.5_
+A,5,6,2:3.5_,1:_6.5
+B,7,5,2:3.5_,3:4.5_
+B,6,4,2:3.5_,2:3.5_4.5
+B,1,3,1:_3.5,1:_3.5
+C,3,3,1:_3.5,3:2.5_
+C,4,2,2:3.5_,2:1.5_2.5
+C,7,2,2:3.5_,2:1.5_2.5
+C,2,1,1:_3.5,1:_1.5
+\end{Verbatim}

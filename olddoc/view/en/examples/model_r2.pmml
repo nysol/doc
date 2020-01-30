@@ -1,0 +1,188 @@
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_2 http://www.dmg.org/v4-2/pmml-4-2.xsd">
+ <Header copyright="Copyright (c) 2015 stephane" description="RPart Decision Tree Model">
+  <Extension name="user" value="stephane" extender="Rattle/PMML"/>
+  <Application name="Rattle/PMML" version="1.4"/>
+  <Timestamp>2015-08-02 12:23:26</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="7">
+  <DataField name="progstat" optype="categorical" dataType="string">
+   <Value value="No"/>
+   <Value value="Prog"/>
+  </DataField>
+  <DataField name="age" optype="continuous" dataType="double"/>
+  <DataField name="eet" optype="continuous" dataType="double"/>
+  <DataField name="g2" optype="continuous" dataType="double"/>
+  <DataField name="grade" optype="continuous" dataType="double"/>
+  <DataField name="gleason" optype="continuous" dataType="double"/>
+  <DataField name="ploidy" optype="categorical" dataType="string">
+   <Value value="diploid"/>
+   <Value value="tetraploid"/>
+   <Value value="aneuploid"/>
+  </DataField>
+ </DataDictionary>
+ <TreeModel modelName="RPart_Model" functionName="classification" algorithmName="rpart" splitCharacteristic="binarySplit" missingValueStrategy="defaultChild">
+  <MiningSchema>
+   <MiningField name="progstat" usageType="predicted"/>
+   <MiningField name="age" usageType="active"/>
+   <MiningField name="eet" usageType="active"/>
+   <MiningField name="g2" usageType="active"/>
+   <MiningField name="grade" usageType="active"/>
+   <MiningField name="gleason" usageType="active"/>
+   <MiningField name="ploidy" usageType="active"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_progstat" optype="categorical" dataType="string" feature="predictedValue"/>
+   <OutputField name="Probability_No" optype="continuous" dataType="double" feature="probability" value="No"/>
+   <OutputField name="Probability_Prog" optype="continuous" dataType="double" feature="probability" value="Prog"/>
+  </Output>
+  <Node id="1" score="No" recordCount="146" defaultChild="3">
+   <True/>
+   <ScoreDistribution value="No" recordCount="92" confidence="0.63013698630137"/>
+   <ScoreDistribution value="Prog" recordCount="54" confidence="0.36986301369863"/>
+   <Node id="2" score="No" recordCount="61">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="grade" operator="lessThan" value="2.5"/>
+     <SimplePredicate field="gleason" operator="lessThan" value="5.5"/>
+     <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+      <Array n="1" type="string">&quot;diploid&quot;</Array>
+     </SimpleSetPredicate>
+     <SimplePredicate field="g2" operator="lessThan" value="9.945"/>
+     <SimplePredicate field="age" operator="greaterOrEqual" value="66.5"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="No" recordCount="52" confidence="0.852459016393443"/>
+    <ScoreDistribution value="Prog" recordCount="9" confidence="0.147540983606557"/>
+   </Node>
+   <Node id="3" score="Prog" recordCount="85" defaultChild="6">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="grade" operator="greaterOrEqual" value="2.5"/>
+     <SimplePredicate field="gleason" operator="greaterOrEqual" value="5.5"/>
+     <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+      <Array n="2" type="string">&quot;tetraploid&quot; &quot;aneuploid&quot;</Array>
+     </SimpleSetPredicate>
+     <SimplePredicate field="g2" operator="greaterOrEqual" value="9.945"/>
+     <SimplePredicate field="age" operator="lessThan" value="66.5"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="No" recordCount="40" confidence="0.470588235294118"/>
+    <ScoreDistribution value="Prog" recordCount="45" confidence="0.529411764705882"/>
+    <Node id="6" score="No" recordCount="40" defaultChild="12">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="g2" operator="lessThan" value="13.2"/>
+      <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+       <Array n="2" type="string">&quot;diploid&quot; &quot;aneuploid&quot;</Array>
+      </SimpleSetPredicate>
+      <SimplePredicate field="age" operator="greaterOrEqual" value="68.5"/>
+      <SimplePredicate field="gleason" operator="lessThan" value="6.5"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="No" recordCount="23" confidence="0.575"/>
+     <ScoreDistribution value="Prog" recordCount="17" confidence="0.425"/>
+     <Node id="12" score="No" recordCount="31" defaultChild="25">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+        <Array n="2" type="string">&quot;diploid&quot; &quot;tetraploid&quot;</Array>
+       </SimpleSetPredicate>
+       <SimplePredicate field="g2" operator="greaterOrEqual" value="4.33"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="No" recordCount="20" confidence="0.645161290322581"/>
+      <ScoreDistribution value="Prog" recordCount="11" confidence="0.354838709677419"/>
+      <Node id="24" score="No" recordCount="7">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="g2" operator="greaterOrEqual" value="11.845"/>
+        <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;tetraploid&quot;</Array>
+        </SimpleSetPredicate>
+       </CompoundPredicate>
+       <ScoreDistribution value="No" recordCount="6" confidence="0.857142857142857"/>
+       <ScoreDistribution value="Prog" recordCount="1" confidence="0.142857142857143"/>
+      </Node>
+      <Node id="25" score="No" recordCount="24" defaultChild="51">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="g2" operator="lessThan" value="11.845"/>
+        <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;diploid&quot;</Array>
+        </SimpleSetPredicate>
+       </CompoundPredicate>
+       <ScoreDistribution value="No" recordCount="14" confidence="0.583333333333333"/>
+       <ScoreDistribution value="Prog" recordCount="10" confidence="0.416666666666667"/>
+       <Node id="50" score="No" recordCount="17">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="g2" operator="lessThan" value="11.005"/>
+         <SimplePredicate field="age" operator="lessThan" value="71.5"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="No" recordCount="12" confidence="0.705882352941177"/>
+        <ScoreDistribution value="Prog" recordCount="5" confidence="0.294117647058824"/>
+       </Node>
+       <Node id="51" score="Prog" recordCount="7">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="g2" operator="greaterOrEqual" value="11.005"/>
+         <SimplePredicate field="age" operator="greaterOrEqual" value="71.5"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="No" recordCount="2" confidence="0.285714285714286"/>
+        <ScoreDistribution value="Prog" recordCount="5" confidence="0.714285714285714"/>
+       </Node>
+      </Node>
+     </Node>
+     <Node id="13" score="Prog" recordCount="9">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+        <Array n="1" type="string">&quot;aneuploid&quot;</Array>
+       </SimpleSetPredicate>
+       <SimplePredicate field="g2" operator="lessThan" value="4.33"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="No" recordCount="3" confidence="0.333333333333333"/>
+      <ScoreDistribution value="Prog" recordCount="6" confidence="0.666666666666667"/>
+     </Node>
+    </Node>
+    <Node id="7" score="Prog" recordCount="45" defaultChild="14">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="g2" operator="greaterOrEqual" value="13.2"/>
+      <SimpleSetPredicate field="ploidy" booleanOperator="isIn">
+       <Array n="1" type="string">&quot;tetraploid&quot;</Array>
+      </SimpleSetPredicate>
+      <SimplePredicate field="age" operator="lessThan" value="68.5"/>
+      <SimplePredicate field="gleason" operator="greaterOrEqual" value="6.5"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="No" recordCount="17" confidence="0.377777777777778"/>
+     <ScoreDistribution value="Prog" recordCount="28" confidence="0.622222222222222"/>
+     <Node id="14" score="No" recordCount="22" defaultChild="29">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="g2" operator="greaterOrEqual" value="17.91"/>
+       <SimplePredicate field="age" operator="greaterOrEqual" value="61.5"/>
+       <SimplePredicate field="eet" operator="greaterOrEqual" value="1.5"/>
+       <SimplePredicate field="grade" operator="greaterOrEqual" value="3.5"/>
+       <SimplePredicate field="gleason" operator="greaterOrEqual" value="6.5"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="No" recordCount="14" confidence="0.636363636363636"/>
+      <ScoreDistribution value="Prog" recordCount="8" confidence="0.363636363636364"/>
+      <Node id="28" score="No" recordCount="15">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="age" operator="greaterOrEqual" value="62.5"/>
+        <SimplePredicate field="gleason" operator="greaterOrEqual" value="6.5"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="No" recordCount="11" confidence="0.733333333333333"/>
+       <ScoreDistribution value="Prog" recordCount="4" confidence="0.266666666666667"/>
+      </Node>
+      <Node id="29" score="Prog" recordCount="7">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="age" operator="lessThan" value="62.5"/>
+        <SimplePredicate field="gleason" operator="lessThan" value="6.5"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="No" recordCount="3" confidence="0.428571428571429"/>
+       <ScoreDistribution value="Prog" recordCount="4" confidence="0.571428571428571"/>
+      </Node>
+     </Node>
+     <Node id="15" score="Prog" recordCount="23">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="g2" operator="lessThan" value="17.91"/>
+       <SimplePredicate field="age" operator="lessThan" value="61.5"/>
+       <SimplePredicate field="eet" operator="lessThan" value="1.5"/>
+       <SimplePredicate field="grade" operator="lessThan" value="3.5"/>
+       <SimplePredicate field="gleason" operator="lessThan" value="6.5"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="No" recordCount="3" confidence="0.130434782608696"/>
+      <ScoreDistribution value="Prog" recordCount="20" confidence="0.869565217391304"/>
+     </Node>
+    </Node>
+   </Node>
+  </Node>
+ </TreeModel>
+</PMML>

@@ -1,0 +1,135 @@
+
+%----------------------------------------------------------------------------------------
+% MCMD Basic Techniques 	
+% Lessons on Basic Commands  
+%----------------------------------------------------------------------------------------
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+\section{レッスン 5: 文字列の切り出し}
+
+\verb|mcal| コマンドを使うと、さまざまな計算・加工を行うことができます。ここでは、「日付」列から「年」や「月」を取り出すのにmcalコマンドを使ってみましょう。
+
+\subsection{ステップ 1: スクリプトを作成する}
+
+テキストエディタを使って、スクリプトファイル \verb|substring.sh| を作成しましょう。作成したら、ファイルに実行権限を与えるのを忘れないようにしてください。\\
+
+このレッスンでは、年月別の数量合計、金額合計を求めます。\\
+
+
+「日付」項目には年月日が8桁（YYYYMMDD;年4桁+月2桁+日2桁）で格納されています。
+年と月を取り出す方法は大きく２つあり、一つは文字列として左から6文字の部分文字列を切り出す方法(left関数)で、
+他方は、内部的に日付型に変換した後に年(year関数)と月(month関数)を取り出す方法です。
+以下のスクリプトでは、left関数で年月を切り出した後に、年月別に数量と金額の合計を計算しています。
+また練習問題に示された解答では、year関数を使う方法が示されています。
+
+%そのためには、まず「日付」「数量」「金額」項目を \verb|mcut| コマンドで取り出し、\verb|mcal| コマンドに渡します。「日付」項目には年月日が8桁（YYYYMMDD;年4桁+月2桁+日2桁）で格納されています。年と月を取り出して「年月」項目を作成し、ソートしたあとで数量と金額の合計を年月別に求めます。結果は \verb|substringout.csv| ファイルに書き出します。
+
+ \subsection{ステップ 2: パラメータを指定する}
+
+{\setlength{\parindent}{0cm}
+
+\verb|mcal| コマンドに与えるパラメータは次のようになります。\\
+
+計算式: \verb|c='left($s{日付},6)'|\\
+説明: c=パラメータで計算式を指定します。ここでは、「日付」列から左側の部分文字列を切り出すleft関数を用いています。
+
+%計算式: \verb|c='cat("",n2s(year($d{日付})),n2s(month($d{日付})))'| \\
+%説明: c=パラメータで計算式を指定します。ここでは、「日付」列から年を切り出すyear関数、月を切り出すmonth関数を用いた上で、その2つを結合するcat関数に与えています。\\
+
+結果を格納する列:　\verb|a=年月| \\
+計算結果を格納するための新しい項目名（列名）は、a=で指定します。この例では、c=で指定した計算結果を「年月」項目に格納します。\\
+
+このレッスンでは、レッスン1で作成した \verb|dat.csv| （スーパーマーケットのレシートデータ）を使います。
+}
+
+\begin{verbatim}
+#!/bin/bash
+#=========================================
+# MCMD bash script - Lesson 5: Query by substring
+
+# Variables
+inPath="tutorial_jp"
+
+# Command 
+mcal c='left($s{日付},6)' a=年月 i=${inPath}/dat.csv |
+mcut f=年月,数量,金額 |
+msortf f=年月 |
+msum k=年月 f=数量:数量合計,金額:金額合計 o=outdat/substringout.csv
+#==========================================
+\end{verbatim}
+%mcut f=日付,数量,金額 i=${inPath}/dat.csv |
+%mcal c='cat("",n2s(year($d{日付})),n2s(month($d{日付})))' a="年月" | 
+%msortf f=年月%n |   
+%msum k=年月 f=数量:数量合計,金額:金額合計 |
+%mcut f=日付 -r o=outdat/substringout.csv
+
+\subsection{ステップ 3: シェルスクリプトを実行する}
+
+\begin{verbatim}
+$ ./substring.sh
+#END# kgcal a=年月 c=left($s{日付},6) i=xxd; IN=24737 OUT=24737; 2014/05/01 04:35:43
+#END# kgcut f=年月,数量,金額; IN=24737 OUT=24737; 2014/05/01 04:35:43
+#END# kgsortf f=年月; IN=24737 OUT=24737; 2014/05/01 04:35:43
+#END# kgsum f=数量:数量合計,金額:金額合計 k=年月 o=outdat/substringout.csv; IN=24737 OUT=12; 2014/05/01 04:35:43
+\end{verbatim}
+%#END# kgcut f=日付,数量,金額 i=tutorial_jp/dat.csv; IN=24737 OUT=24737; 2013/08/15 14:49:20
+%#END# kgcal a=年月 c=cat("",n2s(year($d{日付})),n2s(month($d{日付}))); ; 2013/08/15 14:49:20
+%#END# kgsortf f=年月%n; IN=24737 OUT=24737; 2013/08/15 14:49:20
+%#END# kgsum f=数量:数量合計,金額:金額合計 k=年月; IN=24737 OUT=12; 2013/08/15 14:49:20
+%#END# kgcut -r f=日付 o=outdat/substringout.csv; IN=12 OUT=12; 2013/08/15 14:49:20
+
+\noindent
+結果は次のようになります。
+
+\begin{verbatim}
+年月,数量合計,金額合計
+200101,768,304178
+200102,1843,718715
+200103,3760,1497215
+200104,4041,1617813
+200105,5050,2091847
+200106,4844,2164878
+200107,5984,2722816
+200108,5904,2775503
+200109,5115,2444511
+200110,4965,2533169
+200111,3879,2006570
+200112,4686,2396780
+\end{verbatim}
+%数量合計,金額合計,年月
+%768,304178,20011
+%1843,718715,20012
+%3760,1497215,20013
+%4041,1617813,20014
+%5050,2091847,20015
+%4844,2164878,20016
+%5984,2722816,20017
+%5904,2775503,20018
+%5115,2444511,20019
+%4965,2533169,200110
+%3879,2006570,200111
+%4686,2396780,200112
+
+\subsection{練習問題 }
+
+\verb|mcal| コマンドを使って、次のレポートを作成してみましょう。作成したら、出力ファイルとスクリプトを確認してください。
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ l | c || r }
+\hline
+\textbf{レポートの内容}   & \textbf{スクリプト名} & \textbf{出力ファイル名}  \\
+\hline
+1. 「月」単位に集計した合計数量、合計金額 & \href{exercise/substring1.sh}{substring1.sh} & \href{exercise/outdat/substringout1.csv}{substringout1.csv} \\
+2. 「日」単位に集計した合計数量、合計金額 & \href{exercise/substring2.sh}{substring2.sh} & \href{exercise/outdat/substringout2.csv}{substringout2.csv} \\
+3. 「時」単位に集計した合計数量、合計金額 & \href{exercise/substring3.sh}{substring3.sh} & \href{exercise/outdat/substringout3.csv}{substringout3.csv} \\
+
+\hline
+\end{tabular} 
+}
+\end{table} 
+
+
+%\end{document}

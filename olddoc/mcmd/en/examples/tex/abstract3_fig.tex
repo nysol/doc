@@ -1,0 +1,84 @@
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mcut --help
+
+MCUT - SELECT COLUMN
+
+Extract the specified column(s). The specified column is removed with -r
+option.
+
+Format
+
+$ mcut f= [-r] [-nfni] [i=] [o=] [-assert_diffSize] [-assert_nullin]
+[-nfn] [-nfno] [-x] [-q] [tmpPath=] [--help] [--helpl] [--version]
+
+Parameters
+
+  f=      Define name of column to be extracted
+          New column name for can be specified by defining the field name, followed by colon and the new field name.
+          ex. f=a:A,b:B
+  -r      Field removal switch
+          Remove all columns defined in the f= parameter.
+  -nfni   When header is not present in first row of the input data, position number of column is used to identify corresponding field(s).
+          New column name(s) for each column can be specified in the output file as follows.
+          Example f=0:date,2:store,3:quantity
+
+Examples
+
+Example 1: Basic Example
+
+Extract customer and amount information from the data file dat1.csv
+Rename the column “amount ” to “sales” in the output.
+
+    $ more dat1.csv
+    customer,quantity,amount
+    A,1,10
+    A,2,20
+    B,1,15
+    B,3,10
+    B,1,20
+    $ mcut f=customer,amount:sales i=dat1.csv o=rsl1.csv
+    #END# kgcut f=customer,amount:sales i=dat1.csv o=rsl1.csv
+    $ more rsl1.csv
+    customer,sales
+    A,10
+    A,20
+    B,15
+    B,10
+    B,20
+
+Example 2: Remove columns
+
+Remove columns customer and amount specified at -r.
+
+    $ mcut f=customer,amount -r i=dat1.csv o=rsl2.csv
+    #END# kgcut -r f=customer,amount i=dat1.csv o=rsl2.csv
+    $ more rsl2.csv
+    quantity
+    1
+    2
+    1
+    3
+    1
+
+Example 3: Data without field names
+
+Select columns 0, 2 from an input file without field header, add
+customer and amount as field names in the output file.
+
+    $ mcut f=0:customer,2:amount -nfni i=dat1.csv o=rsl3.csv
+    #END# kgcut -nfni f=0:customer,2:amount i=dat1.csv o=rsl3.csv
+    $ more rsl3.csv
+    customer,amount
+    customer,amount
+    A,10
+    A,20
+    B,15
+    B,10
+    B,20
+
+mcut --version
+lib Version 2:1:0:0: mod Version 0
+\end{Verbatim}
+\caption{Display help information\label{fig:abstract3_1}}
+\end{figure}

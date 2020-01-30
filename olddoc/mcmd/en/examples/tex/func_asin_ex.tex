@@ -1,0 +1,22 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,-1.0
+2,0
+3,1.0
+4,
+5,2
+$ mcal c='asin(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=asin(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,-1.0,-1.570796327
+2,0,0
+3,1.0,1.570796327
+4,,
+5,2,
+\end{Verbatim}

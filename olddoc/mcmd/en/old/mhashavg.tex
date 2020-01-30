@@ -1,0 +1,130 @@
+
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mhashavg},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mhashavg (compute average with hash function) command}
+Use hash function to calculate the average of data series specified at \emph{f=} parameter based on the key defined at \emph{k=}. 
+
+The processing speed of this command is faster than \verb|mavg| without having to sort by key fields before the command. However, variation in length of keys (different length of strings in field) will slow down the processing speed. 
+
+\subsection*{Format}
+mhashavg f= [hs=] [k=] [-n] 
+[\href{run:option.pdf}{-nfn}] 
+[\href{run:option.pdf}{-nfno}] 
+[\href{run:option.pdf}{-x}] 
+[\href{run:option.pdf}{precision=}] 
+[\href{run:option.pdf}{i=}] 
+[\href{run:option.pdf}{o=}] 
+[--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Field name (Multiple fields can be specified.)【required parameter】\\
+& Calculate average of the column specified. \\
+& Rename the field header by specifying the new field name after ":". Example f=Quantity:AverageQuantity. \\
+\verb|k=|    & Key item (Multiple keys can be specified.)\\
+& Calculate the average on the data series based on the key field(s) defined. \\
+& ※Note：Unlike \href{run:mavg.pdf} {mavg}, \verb|mhashavg| does not require sorting on the key field \emph{k=} in advance.  \\
+& Use x,nfn option to specify an item number ( 0... ).\\
+\verb|hs=|    & Hash size \\
+& Specify the hash size (Default: 199999).\\
+& Refer to \href{run:mhashsum.pdf}{mhashsum} for more information.
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-n|    & Print output as null if there are null values in \emph{f=}. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Calculate the average quantity and average amount for each customer.}
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,
+B,,15
+A,2,20
+B,3,10
+B,1,20
+
+$ mhashavg k="Customer" f="Quantity","Amount" i=dat.csv o=rsl.csv
+
+# OUtput file (rsl.csv)
+Customer,Quantity,Amount
+A,1.5,20
+B,2,15
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Calculate the average quantity and average amount for each customer. Calculated output is null if there is a null value in quantity and amount. Use \emph{-n} option to print the null value. 
+}
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,1,
+B,,15
+A,2,20
+B,3,10
+B,1,20
+
+$ mhashavg k="Customer" f="Quantity","Amount" -n i=dat.csv o=rsl.csv
+
+# Output file (rsl.csv)
+Customer, Quantity, Amount
+A,1.5,
+B,,15
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Remarks}
+Refer to the section on benchmark at \href{run mhashsum.pdf} {mhashsum} to find out more on processing speed. 
+
+\subsection*{Related commands}
+\noindent
+\href{run:mavg.pdf}{mavg}: Compute average \\
+\href{run:mhashsum.pdf}{mhashsum}: Compute hash total value  \\
+\href{run:mstat.pdf}{mstat}: Compute statistics of one variable\\
+
+\end{document}

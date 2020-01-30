@@ -1,0 +1,55 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{msep レコードの分割\label{sect:msep}}
+\index{msep@msep}
+\verb|d=|パラメータで指定したファイル名のデータに各レコードを出力する。
+指定するファイル名に項目名を埋め込むことができるので、結果としてレコード分割することになる。
+埋め込むファイル名は\verb|${項目名}|によって指定する。
+例えば、\verb|d=./out/${date}.csv|と指定すれば、カレントディレクトリの下の\verb|out|ディレクトリの下に、
+\verb|date|項目の値別にファイルが作成されることになる。
+
+内部的には、埋め込んだ項目の値をキーとして認識し、並べ替えが行われた後レコードが分割される。
+
+\subsection*{書式}
+\verb|msep d= [-p] [f=] |  
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|d=|    & 異なるデータファイルに分割する項目名を指定する。\\
+             & ここで指定した文字列をファイル名として各レコードが追記されていく。\\
+             & 項目名は\verb|${項目名}|によって埋め込む。\\
+\verb|f=|		 & 出力する項目名を指定する。 \\
+\verb|-p|    & \verb|d=| パラメータで指定したディレクトリ名が存在しなければ作成する。\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/msep_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:msep2]{msep2} : \verb|msep|と同じような機能だが、ファイル名は連番で出力し、キー項目との対応表を別途ファイルに出力する。
+
+\hyperref[sect:mcat] {mcat} : \verb|msep|で分割したファイルをこのコマンドで併合すると元に戻る。
+
+%\end{document}

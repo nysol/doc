@@ -1,0 +1,49 @@
+
+%\begin{document}
+
+\section{mcut - Select Column\label{sect:mcut}}
+\index{mcut@mcut}
+Extract the specified column(s). 
+The specified column is removed with \verb|-r| option. 
+
+\subsection*{Format}
+\verb|mcut f= [-r] [-nfni]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Define name of column to be extracted  \\
+             & New column name for can be specified by defining the field name, followed by colon and the new field name. \\
+             & ex. \verb|f=a:A,b:B| \\
+\verb|-r|    & Field removal switch \\
+             & Remove all columns defined in the \verb|f=| parameter.\\
+\verb|-nfni| & When header is not present in first row of the input data, position number of column is used to identify corresponding field(s). \\
+             & New column name(s) for each column can be specified in the output file as follows. \\
+             & Example f=0:date,2:store,3:quantity \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mcut_ex.tex}
+
+\subsection*{related command}
+\hyperref[sect:mfldname]{mfldname} : Use \verb|mfldname| to change the field names. 
+
+%\href{run:msubstr.pdf}{msubstr}:extraction of substring
+%\end{document}

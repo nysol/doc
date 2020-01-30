@@ -1,0 +1,144 @@
+\subsubsection*{例1: 基本例1}
+
+CSVの2項目\verb|key1,v1|をスペース区切りで出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ more form1.txt
+%LINEDATA
+%key1% %v1%
+%LINEEND
+$ mcsvconv m=form1.txt i=dat1.csv o=rsl1.txt
+#END# kgcsvconv i=dat1.csv m=form1.txt o=rsl1.txt
+$ more rsl1.txt
+A 1
+A 2
+A 3
+B 4
+B 5
+\end{Verbatim}
+\subsubsection*{例2: 基本例2}
+
+2行にズラして出力する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ more form2.txt
+%LINEDATA
+%key1% %v1%
+       %key2% %v2%
+%LINEEND
+$ mcsvconv m=form2.txt i=dat1.csv o=rsl2.txt
+#END# kgcsvconv i=dat1.csv m=form2.txt o=rsl2.txt
+$ more rsl2.txt
+A 1
+       X a
+A 2
+       Y b
+A 3
+       Y c
+B 4
+       X d
+B 5
+       Y e
+\end{Verbatim}
+\subsubsection*{例3: keyを指定した例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ more form3.txt
+Head Area
+%KEYHEAD
+KeyHead=%key1% %key2% %v1% %v2%
+%KEYEND
+%LINEDATA
+%v1%-%v2%
+%LINEEND
+%KEYFOOT
+KeyFoot=%key1% %key2% %v1% %v2%
+%KEYEND
+Foot Area
+$ mcsvconv k=key1 m=form3.txt i=dat1.csv o=rsl3.txt
+#END# kgcsvconv i=dat1.csv k=key1 m=form3.txt o=rsl3.txt
+$ more rsl3.txt
+Head Area
+KeyHead=A X 1 a
+1-a
+2-b
+3-c
+KeyFoot=A Y 3 c
+KeyHead=B X 4 d
+4-d
+5-e
+KeyFoot=B Y 5 e
+Foot Area
+\end{Verbatim}
+\subsubsection*{例4: texデータとして出力する例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+key1,key2,v1,v2
+A,X,1,a
+A,Y,2,b
+A,Y,3,c
+B,X,4,d
+B,Y,5,e
+$ more form3.txt
+Head Area
+%KEYHEAD
+KeyHead=%key1% %key2% %v1% %v2%
+%KEYEND
+%LINEDATA
+%v1%-%v2%
+%LINEEND
+%KEYFOOT
+KeyFoot=%key1% %key2% %v1% %v2%
+%KEYEND
+Foot Area
+$ mcsvconv k=key1 m=form4.txt i=dat1.csv o=rsl4.tex
+#END# kgcsvconv i=dat1.csv k=key1 m=form4.txt o=rsl4.tex
+$ more rsl4.tex
+\documentclass{article}
+\begin{document}
+\begin{table}
+\begin{tabular}{l|l|r|r}
+\hline
+key1 & key2 & v1 & v2 \\
+\hline
+A & X & 1 & a \\
+  & X & 1 & a \\
+  & Y & 2 & b \\
+  & Y & 3 & c \\
+\hline
+B & X & 4 & d \\
+  & X & 4 & d \\
+  & Y & 5 & e \\
+\hline
+\end{tabular}
+\end{table}
+\end{document}
+\end{Verbatim}

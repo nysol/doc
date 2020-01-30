@@ -1,0 +1,45 @@
+
+%\begin{document}
+
+\section{mproduct - Cartesian Join with Reference File\label{sect:mproduct}}
+\index{mproduct@mproduct}
+
+Combine every row of column specified at \verb|f=| parameter from the reference file at the \verb|m=| parameter with every record from the input file. 
+
+
+\subsection*{Format}
+\verb/mproduct [f=] m=|/
+\hyperref[sect:option_i]{i=}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Combine field name(s) (multiple fields can be specified) from reference file. \\
+             & All field(s) are combine if this parameter is not specified. \\
+\verb|m=|    & Specify reference file name. \\
+             & Read from standard input if this parameter is not defined (when i= is specified).\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mproduct_ex.tex}
+\subsection*{Related Command}
+
+\hyperref[sect:mnjoin]{mnjoin} : Similar operation with \verb|mproduct| but join key is specified. 
+
+%\end{document}

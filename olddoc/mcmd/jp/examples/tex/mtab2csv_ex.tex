@@ -1,0 +1,46 @@
+\subsubsection*{例1: 基本例}
+
+ タブ区切りデータをcsvへ変換
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.tab
+id	data	data2
+A	1102	a
+A	2203	aaa
+B	1155	bbbb
+B	3104	c
+B	1206	de
+$ mtab2csv i=dat1.tab o=rsl1.csv
+#END# kgtab2csv i=dat1.tab o=rsl1.csv
+$ more rsl1.csv
+id,data,data2
+A,1102,a
+A,2203,aaa
+B,1155,bbbb
+B,3104,c
+B,1206,de
+\end{Verbatim}
+\subsubsection*{例2: d=指定}
+
+\verb|d=|を使用してtab以外の区切り文字を使う
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat2.bar
+id-data-data2
+A-1102-a
+A-2203-aaa
+B-1155-bbbb
+B-3104-c
+B-1206-de
+$ mtab2csv d=- i=dat2.bar o=rsl2.csv
+#END# kgtab2csv d=- i=dat2.bar o=rsl2.csv
+$ more rsl2.csv
+id,data,data2
+A,1102,a
+A,2203,aaa
+B,1155,bbbb
+B,3104,c
+B,1206,de
+\end{Verbatim}

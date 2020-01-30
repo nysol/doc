@@ -1,0 +1,20 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,val
+1,1.0
+2,-2.5
+3,
+4,0
+$ mcal c='abs(${val})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=abs(${val}) i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,val,rsl
+1,1.0,1
+2,-2.5,2.5
+3,,
+4,0,0
+\end{Verbatim}

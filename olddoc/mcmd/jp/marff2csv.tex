@@ -1,0 +1,66 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{marff2csv arff形式からcsv形式への変換\label{sect:marff2csv}}
+\index{marff2csv@marff2csv}
+arff形式(WEKA用のデータフォーマット)のデータからcsv形式のデータへ変換する。
+
+\subsubsection*{arff形式データ}
+以下arff形式データのフォーマットを記載する。
+\begin{Verbatim}[baselinestretch=0.7,frame=single,fontsize=\small]
+@RELATION       タイトル
+
+@ATTRIBUTE      項目名    string(文字列)
+@ATTRIBUTE      項目名    date(日時 フォーマット:フォーマットは省略可能。
+                                省略した場合は、"yyyy-MM-dd'T'HH:mm:ss"）
+@ATTRIBUTE      数量    numeric(数字)
+@ATTRIBUTE      商品    {A,B}(カテゴリ型項目)
+
+@DATA(実データ)
+No.1,20081201,1,10,A
+No.2,20081202,2,20,A
+No.3,20081203,3,30,A
+No.4,20081201,4,40,B
+No.5,20081203,5,50,B
+\end{Verbatim}
+
+\subsection*{書式}
+%marff2csv [\href{run:option.pdf}{i=}] [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}] [\href{run:option.pdf}{o=}] [--help]\\
+\verb|marff2csv|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{利用例}
+\input{examples/tex/marff2csv_ex.tex}
+\subsection*{関連コマンド}
+
+\hyperref[sect:mcsv2arff] {mcsv2arff}
+
+\subsection*{参考資料}
+\href{http://weka.wikispaces.com/ARFF}{http://weka.wikispaces.com/ARFF}
+
+%\end{document}

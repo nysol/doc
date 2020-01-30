@@ -1,0 +1,57 @@
+
+%\begin{document}
+
+\section{mhashavg - Compute Average with Hash Function\label{sect:mhashavg}}
+\index{mhashavg@mhashavg}
+Calculate the average of data series specified at \verb|f=| parameter based on the key at \verb|k=| with hash function. 
+
+The processing speed of this command is faster than \hyperref[sect:avg]{mavg} since the key fields do not have require  prior sorting. However, variation in key lengths (different length of strings in field) will slow down the processing speed. 
+
+\subsection*{Format}
+\verb|mhashavg f= [hs=] [k=] [-n] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Calculate the average of the field name (Multiple fields can be specified) . \\
+             & Specify the new field name after colon ":". Example:  f=Quantity:AverageQuantity. \\
+\verb|k=|    & Calculate the average on the data series based on the key field(s) (Multiple keys can be specified). \\
+   	& This command do not use \hyperref[sect:option_k]{aggregate key break processing}, prior sorting is not required.\\
+\verb|hs=|   & Hash size (Default value: 199999)\\
+             & Refer to \href{run:mhashsum.pdf}{mhashsum} for related information.\\
+\verb|-n|    & Return NULL in output if there are null values in \verb|f=|. \\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{Examples}
+\input{examples/tex/mhashavg_ex.tex}
+
+\subsection*{Remarks}
+Refer to the benchmark at \hyperref[sect:mhashsum]{mhashsum} to find out more on processing speed. 
+
+\subsection*{Related commands}
+\hyperref[sect:mavg] {mavg} : Compute average
+
+\hyperref[sect:mhashsum]{mhashsum} : Compute hash total value
+
+
+%\end{document}

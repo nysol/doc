@@ -1,0 +1,65 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mmvsim 移動窓の類似度計算\label{sect:mmvsim}}
+\index{mmvsim@mmvsim}
+
+移動窓を設定し、各種類似度(2変量の統計量)を計算する。
+\hyperref[sect:msim]{msim}コマンドの移動窓バージョンとして考えればよい。
+\verb|msim|との違いは、指定できる類似度は一つだけで、また類似度計算の対象項目は2つのみである。
+
+\subsection*{書式}
+\verb|mmvsim [s=] [k=] f= c= a= [t=] [skip=] [-n] |
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|s=|    & ここで指定した項目(複数項目指定可)で並べ替えられた後、各種類似度が計算される。\\
+             & \verb|-q|オプションを指定しないとき、\verb|s=|パラメータは必須。\\
+\verb|k=|    & ここで指定された項目(複数項目指定可)を単位として集計する。 \\
+\verb|f=|    & 集計項目名リスト(複数項目指定可)を指定する。\\
+\verb|t=|    & 期間数を1以上の整数で指定する。 \\
+\verb|c=|    & 類似度(以下のリストから一つだけ)指定する。\\
+             & \verb/covar|ucovar|pearson|spearman|kendall|euclid|/\\
+             & \verb/cosine|cityblock|hamming|chi|phi|jaccard|support|lift/ \\
+             & 詳細な定義は\hyperref[sect:msim]{msim}コマンドを参照のこと。\\
+\verb|skip=| & 出力を抑制する最初の行数を指定する。【デフォルト値:\verb|skip=(t=の値-1)|】\\
+\verb|a=| & 計算結果の出力として追加される項目の名前を指定する。 \\
+\verb|-n| & 期間内にNULL値が1つでも含まれていると結果もNULL値とする。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mmvsim_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:msim] {msim} : 移動窓を設定せずに類似度計算を行う。
+
+\hyperref[sect:mwindow] {mwindow} : 動窓のデータを作成するので、そのデータを使えば\verb|mmvstats|で計算できない統計量も計算可能。
+
+\hyperref[sect:mmvavg] {mmvavg} : 移動平均に限定した計算を行う。
+
+%\end{document}

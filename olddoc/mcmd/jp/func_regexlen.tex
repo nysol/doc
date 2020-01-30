@@ -1,0 +1,20 @@
+
+%\begin{document}
+
+\section{regexlen マッチ文字数\label{sect:regexlen}}
+\index{regexlen@regexlen}
+
+書式1: regexlen($str$,正規表現)
+
+書式2: regexlenw($str$,正規表現)
+
+指定した正規表現が最長マッチする文字列$str$の部分文字列の長さを返す。
+マッチしなければ0を返す。すなわち0文字にマッチしたと解釈する。
+$str$もしくは正規表現にマルチバイト文字を含む場合はregexlenw関数を使うこと。
+%正規表現の詳細については(\ref{sect:regex})を参照されたい。
+
+\subsection*{利用例}
+\input{examples/tex/func_regexlen_ex}
+
+%\end{document}
+

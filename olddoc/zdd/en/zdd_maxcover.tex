@@ -1,0 +1,27 @@
+
+\section{maxcover : Select itemset with maximum cost\label{sect:maxcover}}
+\subsection*{Format}
+$obj$.maxcover $\rightarrow$ $zdd$
+
+\subsection*{Description}
+Among all itemsets in $obj$, return itemset with maximum cost as ZDD object $zdd$. 
+Note that the weight is not taken into account when calculating the cost. 
+
+The value of cost is obtained by maxcost. 
+Specify the cost with \hyperref[sect:symbol]{symbol} function. 
+
+\subsection*{Example}
+\input{examples/tex/maxcover_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:symbol]{symbol} : Declare items
+
+\hyperref[sect:cost]{cost} : Total cost of itemsets
+
+\hyperref[sect:maxcost]{maxcost} : Cost of itemset with maximum cost
+
+\hyperref[sect:mincover]{mincover} : Select itemset with minimum cost 
+
+\hyperref[sect:mincost]{mincost} : Cost of itemset with minimum cost 
+
+

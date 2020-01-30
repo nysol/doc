@@ -1,0 +1,151 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mmseldsp 複数選択画面入力\label{sect:mmseldsp}}
+\index{mmseldsp@mmseldsp}
+\underline{注)本コマンドは開発バージョンであり、仕様が変更される可能性があります。}
+
+座標\verb|x=,y=|で指定したターミナル上の位置に\verb|i=|、
+もしくは\verb|seldata=|で指定した文字列リストの選択画面を表示し、
+ユーザが選んだ文字列を\verb|o=|で指定したファイルに出力する。
+\hyperref[sect:mseldsp]{mseldsp}コマンドでは、利用者は一つの選択肢しか選択できないが、
+\verb|mmseldsp|は複数の選択肢を選択できる。
+選ばれた複数の文字列は、複数行のCSV項目として出力される。
+入力枠に何も入力せずに終了した場合は、null値が出力される(すなわち改行だけが出力される)。
+\verb|f=|を指定すれば、項目名を出力できる。
+\verb|f=|を省略すれば、項目名ヘッダーは出力されない。
+選択肢の数が多くて画面をはみ出る場合は、\verb|height=|で
+スクロール窓の行数を指定すればよい。
+
+選択画面でエンターキーを押すと、終了ステータス0を返して終了し、
+エスケープキーを押すと、終了ステータス1を返して終了する。
+いずれのキーで終了しても、選択画面で選ばれた内容はファイルに出力される。
+
+座標は左上が\verb|x=1,y=1|である(エスケープシーケンスの仕様)。
+\verb|x=|もしくは\verb|y=|で指定した値が1より小さい場合は、1を指定したものとして動作する。
+またターミナルの範囲を超えた座標が指定された場合の動作は不定である。
+
+
+\subsection*{書式}
+\verb/mmseldsp x= y= [f=] [height=] i=|seldata=/
+\hyperref[sect:option_o]{o=}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|   & 出力ファイル名を指定する。\\
+\verb|x=|   & x軸(左から右への横方向)表示開始位置(1以上の値)を指定する。\\
+\verb|y=|   & y軸(上から下への縦方向)表示開始位置(1以上の値)を指定する。\\
+\verb|height=| & 選択肢を表示する行数。 \\
+\verb|i=|   & 選択肢の文字列を項目として持つCSVファイル名 \\
+\verb|f=|   & 選択肢の文字列を項目として持つCSVファイル名 \\
+\verb|seldata=| & カンマで区切られた選択肢の文字列リスト \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+
+\subsubsection*{例1: 基本例}
+
+ターミナルのx=10,y=2の位置に\verb|sel.txt|の内容を表示し、
+利用者が選んだ文字列を\verb|rsl1.txt|に出力する。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+$ more sel.txt
+apple
+pineapple
+grape
+orange
+$ mmseldsp x=10 y=2 i=sel.txt o=rsl1.txt
+# 利用者が一行目を選んだとする。
+$ mose rsl1.txt
+apple
+orange
+
+
+以下、画面イメージ
++--------------------------------------
+|
+|          \textColor{red}{black}{apple    }
+|          \textColor{white}{black}{pineapple}
+|          \textColor{white}{black}{grape}
+|          \textColor{red}{black}{orange   }
+|
+\end{Verbatim}
+
+\subsubsection*{例2: 引数で与える例}
+
+例1と同様で、選択肢の文字列を\verb|seldata=|で与える。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single,commandchars=\\\{\}]
+$ mmseldsp x=10 y=2 seldata=apple,pineapple,grape,orange o=rsl2.txt
+# 利用者が二行目を選んだとする。
+$ mose rsl2.txt
+apple
+grape
+
+
+以下、画面イメージ
++--------------------------------------
+|
+|
+|          \textColor{red}{black}{apple    }
+|          \textColor{white}{black}{pineapple}
+|          \textColor{red}{black}{grape    }
+|          \textColor{white}{black}{orange}
+|
+\end{Verbatim}
+
+\subsubsection*{例3: 終了ステータスを判定する例}
+
+例2と同じパラメータで実行し、終了ステータスを判定して異なる動作をするスクリプトの例。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more scp.sh
+rm -f rsl3.csv
+clear
+mmseldsp x=10 y=2 seldata=apple,pineapple,grape,orange o=rsl3.csv
+if [ $? = 0 ] ; then
+  clear ; echo "end by enter key"
+else
+  clear ; echo "end by escape key"
+fi
+
+# appleを選択後enterキーを入力した場合の結果
+$ bash scp.sh
+end by enter key
+$ more rsl3.csv
+apple
+
+# appleを選択後escapeキーを入力した場合の結果
+$ bash scp.sh
+end by escape key
+$ more rsl3.csv
+apple
+\end{Verbatim}
+
+\subsection*{関連コマンド}
+\hyperref[sect:minput] {minput} :入力画面を表示する。
+
+\hyperref[sect:mminput] {mminput} : 複数入力枠による入力画面を表示する。
+
+\hyperref[sect:mdsp] {mdsp} : 画面の指定位置に文字列を表示する。
+
+\hyperref[sect:mseldsp] {mseldsp} : 画面に単一選択入力窓を表示する。
+
+
+%\end{document}

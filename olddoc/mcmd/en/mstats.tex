@@ -1,0 +1,98 @@
+
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{mstats - Calculate Statistics of 1 Variable\label{sect:mstats}}
+\index{mstats@mstats}
+
+Specify the numeric fields in the parameter \verb|f=|, and calculate the statistics specified in the parameter \verb|c=|. Specify the aggregate key unit at \verb|k=|. NULL value in the specified field(s) at \verb|f=| are ignored. However, if all records include NULL values, NULL values will be included in the output.
+
+
+\subsection*{Format}
+\verb|mstats c= f= [k=] [-n] | 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Compute aggregate statistics on the key field(s) specified (multiple fields can be specified). \\
+
+\verb|f=|    & Fields for which statistics are computed (multiple fields can be specified).\\
+\verb|c=|    & Statistics (select one from the list below)\\
+             & \verb/sum|mean|count|ucount|devsq|var|uvar|sd|usd|USD|cv|min|qtile1|/\\
+             & \verb/median|qtile3|max|range|qrange|mode|skew|uskew|kurt|ukurt/\\
+\verb|-n|    & Flag to be NULL if null data.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{List of statistics}
+\begin{table}[t]
+%\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lp{4cm}lp{4cm}lp{3cm}l}
+\hline
+Value of \verb|c=| & Description & Equation & Remarks \\
+\hline
+count  & Count (Except NULL value) & $n$: Number of non-NULL records & It can not be applied to character string field.\\
+ucount & Unique count     & $un$: Number of duplicate values removed &  It can not be applied to character string field. \\
+sum    & Total             & $sum=\sum_{i=1}^n x_i$ & \\
+mean   & Arithmetic mean         & $m=\frac{1}{n}\sum_{i=1}^n x_i$ & \\
+devsq  & Sum of squared deviation       & $S=\sum_{i=1}^n(x_i-m)^2$ & \\
+var    & Variance             & $s^2=\frac{1}{n}S$ & \\
+uvar   & Variance (unbiased estimate) & $u^2=\frac{1}{n-1}S$ & \\
+sd     & Standard deviation         & $s=\sqrt{s^2}$ & \\
+usd    & Standard deviation (unbiased variance) & $u=\sqrt{u^2}$ & commonly used standard deviation\\
+USD    & Unbiased standard deviation     & Omission              & Accurate unbiased estimation \\
+cv     & Coefficient of variation  & $cv=s/mx100\%$ & \\
+mode   & Mode           & $mode$: Most frequent value & Print the value of the smaller value if the frequency is same \\
+       &                  &                   & Print NULL if values are different.\\
+min    & Minimum value           & $min=\min_i x_i$ & \\
+max    & Maximum value           & $max=\max_i x_i$ & \\
+range  & Range             & $r=max-min$  & \\
+median & Median           & $Q2=Second quartile when sorted in ascending order$ & \\
+qtile1 & First quartile      & $Q1=First quartile when sorted in ascending order$ & \\
+%qtile1 & 第1四分位点      & $Q1$ 第1四分位順位が自然数でない場合:$Q1=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.25(n-1)$ & \\
+qtile3 & Third quartile      & $Q3=Third quartile when sorted in ascending order$ & \\
+% 第3四分位順位が自然数でない場合:$Q3=(\lceil t\rceil -t)x\lfloor t\rfloor +(t-\lfloor t \rfloor)x\lceil t\rceil$ただし,$t=1+0.75(n-1)$ \\
+qrange & Interquartile range      & $rq=Q3-Q1$ & \\
+skew   & Skewness             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^3}{s^3}$ & \\
+uskew  & Skewness (unbiased estimate) & omitted & \\
+kurt   & Kurtosis             & $\frac{\frac{1}{n}\sum_{i=1}^n (x_i-m)^4}{s^4}-3.0$ & \\
+ukurt  & Kurtosis (unbiased estimated) & omitted & \\
+\hline \\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{Examples}
+\input{examples/tex/mstats_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:msim]{msim} : Find out the bivariate statistics.
+
+\hyperref[sect:mavg] {mavg} : Commands specific to\verb|c=avg|.
+
+\hyperref[sect:msum] {msum} : Commands specific to \verb|c=sum|.
+
+\hyperref[sect:mcount] {mcount} : Unlike \verb|c=count|, this count the number of rows for each aggregate key.
+
+%\end{document}

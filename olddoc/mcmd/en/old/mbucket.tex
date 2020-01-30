@@ -1,0 +1,220 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--?????
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--??????????????????
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%s
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mbucket command (Partition data into uniform buckets) }
+Data item(s) specified in \emph{f=} parameter will be determined and distributed into number of buckets defined in\emph{n=} parameter.  
+
+\subsection*{Format}
+mbucket f= n= [-rng] [F=] [k=] [O=]  [\href{run:nfn.pdf}{-nfn}] [\href{run:nfno.pdf}{-nfno}]  [\href{run:x.pdf}{-x}][\href{run:i.pdf}{i=}] [\href{run:o.pdf}{o=}] [--help]\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Numerical data item for partitioning (multiple fields can be specified) 【required parameter】\\
+& Data partitioning is based on the field name(s) specified in the parameter. \\
+& Target field name for partition:New field name \\
+& x,nfn option can be used to specify item number (0 ...).\\
+\verb|n=|    & Number of buckets 【required parameter】\\
+& Specify the number of buckets to be partitioned for the data item(s) defined in \emph{f=} parameter(s). \\
+& If 1 is defined, the command will partition by the number of items specified in \emph{f=} parameter.
+\\
+\verb|F=|    & Output format 【default=0】\\
+& Output format of bucket value. If parameter is not specified, F defaults to 0.\\
+& 0:Display bucket numbers\\
+& 1:Display value range of buckets\\
+& 2:Display both bucket numbers and value range of buckets. \\
+\verb|k=|    & Key item(s) (multiple keys can be specified in priority order) 【optional parameter】\\
+& Unique key to retrieve rows of data incrementally for partitioning into buckets.\\
+& (Note) Data should be sorted by the key field name specified in the \emph{k=} parameter before partitioning into buckets.\\
+\verb|O=|    & Output file with values range of bucket 【optional parameter】\\
+& Specify output file name with values range of bucket on the field name(s) defined in parameter \emph{f=}. \\
+
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Options}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-rng|  & Value range of buckets \\
+& This parameter defines a specific range of each bucket\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Partition x and y into two subsets of equal extent and save the output file as rng.csv} 
+\noindent
+※Note: The input file is sorted by customer id beforehand.
+
+\begin{verbatim}
+------------------------------------------------
+# input file(dat.csv)
+id,x,y
+A,2,7
+B,6,7
+C,5,6
+D,7,5
+E,6,4
+F,1,3
+G,3,3
+H,4,2
+I,7,2
+J,2,1
+
+$ mbucket f=x:xb,y:yb n=2,2 O=rng.csv i=dat.csv o=rsl.csv
+
+# output file(rsl.csv)
+id,x,y,xb,yb
+A,2,7,1,2
+B,6,7,2,2
+C,5,6,2,2
+D,7,5,2,2
+E,6,4,2,2
+F,1,3,1,1
+G,3,3,1,1
+H,4,2,1,1
+I,7,2,2,1
+J,2,1,1,1
+
+#output file2(rng.csv)
+fieldName,bucketNo,rangeFrom,rangeTo
+x,1,,4.5
+x,2,4.5,
+y,1,,3.5
+y,2,3.5,
+
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Partition x and y into two subsets of equal extent using "id" as the key parameter. \\Include bucket numbers and value range of buckets in the output file.}
+\noindent
+※Note: The input file is sorted by customer id beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# input data(dat.csv)
+id,x,y
+A,2,7
+A,6,7
+A,5,6
+B,7,5
+B,6,4
+B,1,3
+C,3,3
+C,4,2
+C,7,2
+C,2,1
+
+$ mbucket k=id f=x:xb,y:yb n=2,2 F=2 i=dat.csv o=rsl2.csv
+
+# output file1(rsl2.csv)
+id,x,y,xb,yb
+A,2,7,1:_3.5,2:6.5_
+A,6,7,2:3.5_,2:6.5_
+A,5,6,2:3.5_,1:_6.5
+B,7,5,2:3.5_,2:3.5_
+B,6,4,2:3.5_,2:3.5_
+B,1,3,1:_3.5,1:_3.5
+C,3,3,1:_3.5,2:1.5_
+C,4,2,2:3.5_,2:1.5_
+C,7,2,2:3.5_,2:1.5_
+C,2,1,1:_3.5,1:_1.5
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{Theorem of Arithmetic}
+
+Assume $D$ is a data set of n elements ($x_1,x_2,\cdots,x_n$).
+Partition $D$ uniformly into $k$ number of groups (referred to as buckets) and ensure that the data is partitioned uniformly in each bucket. Dispersion is used as the fundamental evaluation criteria for uniformity.
+
+\[
+X=\{x_i~|~1~\leq~i~\leq~n~,~x_i~\in~D\}
+\]
+
+Arrange each value within $X$ in  ascending order $v_1,v_2,\dots,v_n$.
+Partition of the buckets $X$ is represented by partition of intervals  $\{v_1,v_2,\dots,v_n\}$.
+This interval is defined as $I_1,I_2,\dots,I_k$. Based on these elements,$D_j$?$n_j$, the following is defined.
+
+\[
+ D_j=\{x_i~|~1~\leq~i~\leq~n~,~x_i~\in~I_j\}
+  \]
+  \[
+ n_j=|D_j|
+ \]
+The basis of uniform dispersion is described as follows. \\
+\[
+Var=\sum_{j=1}^{k}~(n_j-\bar{n})
+\]
+If $\bar{n}=n/k$, the equation becomes\\
+\[
+Var~=~\sum_{j=1}^{k}~(n_j^2-2n_j\bar{n}+\bar{n}^2)~~~~=~\sum_{j=1}^{k}~n_j^2~-~k\bar{n}^2
+\]
+
+$k\bar{n}^2$ remains a constant regardless of how the data is partitioned. Therefore, the first term from the above equation:  
+\[
+Var'=~\sum_{j=1}^{k}~n_j^2
+\]
+minimizes $Var$ and splits the data into intervals. 
+
+
+\subsection*{Algorithm}
+
+Recursive equation for dynamic programming is used for optimization as illustrated in the following. 
+The minimum value of $\displaystyle \sum_{j=1}^{h}~n_j^2$
+is divided into $h$ intervals of $I_1,I_2,\dots,I_h$  of $v_1,v_2,\dots,v_m$, to determine  $DP(n,k)$. 
+ $DP(m,h)$ is substituted in the following function.
+
+\[
+DP(m,~h)~=~\min_{g=h-1,~\dots,m-1}~\{~DP(g,h-1)~+~|\{~x_i~|~v_{g+1}~\leq~x_i~\leq~v_m~\}|^2\}
+\]
+The above function recursively defines a sequence. Given the initial term below: 
+\[
+DP(m,~1)~=~|\{~x_i~|~v_1~\leq~x_i~\leq~v_m~\}|^2~,~m=1,...,n
+\]
+the next term of the sequence is defined as a function of the preceding term and iterated as follows:
+$DP(m,2)(m=1,\dots,n),DP(m,3)(m=1,\dots,n),\dots,DP(m,k-1)(m=1,\dots,n)$.
+
+The function ends until it searches for the term $DP(n,k)$
+\[
+DP(m,~k)~=~\min_{g=k-1,~\dots,n-1}~\{~DP(g,k-1)~+~|\{~x_i~|~v_{g+1}~\leq~x_i~\leq~v_n~\}|^2\}
+\]
+
+\subsection*{Related command}
+\noindent
+\href{run:mmbucket.pdf}{mmbucket}:Partition multidimensional data into uniform buckets \\
+
+\end{document}

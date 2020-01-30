@@ -1,0 +1,129 @@
+\subsubsection*{例1: 基本例}
+
+前節の解説で用いてる例。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+node1,node2
+a,b
+a,c
+a,d
+a,e
+b,c
+b,d
+b,f
+c,d
+c,e
+d,e
+e,f
+$ mclique.rb ei=dat1.csv ef=node1,node2 o=result1.csv log=log1.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+sgraph: /tmp/__MTEMP_95881_70169578268420_0 ,#nodes 6 ,#edges 11 ,#arcs 0
+ output to: /tmp/__MTEMP_95881_70169578268420_2
+iters=4
+4
+0
+0
+2
+0
+2
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mclique.rb ei=dat1.csv ef=node1,node2 o=result1.csv log=log1.csv
+$ more result1.csv
+id,node,size
+0,e,2
+0,f,2
+1,b,2
+1,f,2
+2,a,4
+2,c,4
+2,d,4
+2,e,4
+3,a,4
+3,b,4
+3,c,4
+3,d,4
+$ more cn1.csv
+cn1.csv: No such file or directory
+$ more ce1.csv
+ce1.csv: No such file or directory
+$ more log1.csv
+key,value
+ei=,dat1.csv
+ef=,"node1,node2"
+o=,result1.csv
+log=,log1.csv
+-all,false
+time,0.085455
+\end{Verbatim}
+\subsubsection*{例2: サイズが4以上の極大クリークのみ列挙}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mclique.rb ei=dat1.csv ef=node1,node2 l=4 o=result2.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+sgraph: /tmp/__MTEMP_95916_70352131156000_0 ,#nodes 6 ,#edges 11 ,#arcs 0
+ output to: /tmp/__MTEMP_95916_70352131156000_2
+iters=4
+2
+0
+0
+0
+0
+2
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mclique.rb ei=dat1.csv ef=node1,node2 l=4 o=result2.csv
+$ more result2.csv
+id,node,size
+0,a,4
+0,c,4
+0,d,4
+0,e,4
+1,a,4
+1,b,4
+1,c,4
+1,d,4
+\end{Verbatim}
+\subsubsection*{例3: サイズが3の全クリークを列挙}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mclique.rb ei=dat1.csv ef=node1,node2 l=3 u=3 -all o=result3.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+sgraph: /tmp/__MTEMP_95948_70136489403820_0 ,#nodes 6 ,#edges 11 ,#arcs 0
+ output to: /tmp/__MTEMP_95948_70136489403820_2
+iters=0
+7
+0
+0
+0
+7
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mclique.rb ei=dat1.csv ef=node1,node2 l=3 u=3 -all o=result3.csv
+$ more result3.csv
+id,node,size
+0,a,3
+0,b,3
+0,c,3
+1,a,3
+1,b,3
+1,d,3
+2,a,3
+2,c,3
+2,d,3
+3,b,3
+3,c,3
+3,d,3
+4,a,3
+4,c,3
+4,e,3
+5,a,3
+5,d,3
+5,e,3
+6,c,3
+6,d,3
+6,e,3
+\end{Verbatim}

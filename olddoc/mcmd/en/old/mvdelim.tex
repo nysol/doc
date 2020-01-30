@@ -1,0 +1,187 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mcat},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\renewcommand{\tablename}{Table }
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mvdelim  change vector delimiter}
+
+Change delimiter used to separate between string of characters in a vector. 
+Some examples are shown in Table \ref{tbl:input}〜\ref{tbl:out4}. When comma is used as delimiter, a pair of double quotation marks is added to the vector as seen in Table \ref{tbl:out2}.  The delimiter between characters will be removed if a null character is specified as delimiter at \emph{v=} as seen in Table \ref{tbl:out3}.   
+
+Alphabet and chinese characters can be used as delimiter as shown in Table \ref{tbl:out4}. Since the character type delimiter is read as character string as part of the vector by other commands such as mvsort, character type delimiter can be specified in \verb|delim=|. 
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ll}
+
+\begin{minipage}{0.20\hsize}
+\begin{center}
+\caption{input data\label{tbl:input}}
+\verb|in.csv|\\
+{\small
+\begin{tabular}{cll}
+\hline
+no&items \\
+\hline
+1&b a a \\
+2&a a b b \\
+3&a b b a \\
+4&a b c \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.40\hsize}
+\begin{center}
+\caption{Basic example : Replace space delimiter with minus character. \label{tbl:out1}}
+
+\verb|vf=items v=- i=in.csv|\\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&b-a-a \\
+2&a-a-b-b \\
+3&a-b-b-a \\
+4&a-b-c \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.40\hsize}
+\begin{center}
+\caption{Use comma as a delimiter. \label{tbl:out2}}
+\verb|vf=items v=, i=in.csv|\\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&"b,a,a" \\
+2&"a,a,b,b" \\
+3&"a,b,b,a" \\
+4&"a,b,c" \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ll}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Remove delimiter between characters in a vector. 
+\label{tbl:out3}}
+\verb|vf=items v= i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&baa \\
+2&aabb \\
+3&abba \\
+4&abc \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{0.4\hsize}
+\begin{center}
+\caption{Use character as a delimiter.
+\label{tbl:out4}}
+\verb|vf=items v=xx i=in.csv| \\
+{\small
+\begin{tabular}{ll}
+\hline
+no&items \\
+\hline
+1&bxxaxxa \\
+2&axxaxxbxxb \\
+3&axxbxxbxxa \\
+4&axxbxxc \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{minipage}
+
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{Format}
+\verb|midelim vf= v= |
+[\href{run:delim.pdf}{delim=}]
+[\href{run:input.pdf}{i=}]
+[\href{run:output.pdf}{o=}]
+[\href{run:nfn.pdf}{-nfn}]
+[\href{run:nfno.pdf}{-nfno}]
+[\href{run:x.pdf}{-x}] [--help]
+
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|vf=|   & Field name of vector. Multiple fields can be specified. 【required parameter】\\
+& Change delimiters in vectors at the specified field. \\
+\verb|v=|    & Define new delimiter.   【required parameter】
+If the parameter is not defined, the delimiter is treated as a null character.  \\
+\end{tabular}
+}
+\end{table} 
+
+\subsection*{Example}
+\subsection*{Related command}
+%\begin{itemize}
+%\item \href{run:miselstr.pdf}{miselstr}:アイテムの選択
+%\end{itemize}
+
+\end{document}

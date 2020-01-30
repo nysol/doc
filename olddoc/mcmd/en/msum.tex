@@ -1,0 +1,49 @@
+
+%\begin{document}
+
+\section{msum - Sum of Column\label{sect:msum}}
+\index{msum@msum}
+
+Aggregate the sum of values in the records at the specified field defined at \verb|f=| parameter for records with the same key value defined at \verb|k=|. \\
+
+\subsection*{Format}
+\verb|msum f= [k=] [-n]| 
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_tmpPath]{[tmpPath=]} 
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Specify list of field name(s) (multiple fields can be specified) as aggregate unit. \\
+
+\verb|f=|    & Aggregate the values specified at the field(s) (multiple items can be specified). Records with NULL values are ignored. \\
+\verb|-n|    & If NULL exist in the field defined at \verb|f=|, the result will return NULL. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/msum_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mhashsum]{mhashsum} : Compute sum without sorting by aggregate key in advance. 
+
+\hyperref[sect:mavg]{mavg} : Compute average. 
+
+\hyperref[sect:mstats]{mstats} : Compute a variety of statistics.
+
+%\end{document}

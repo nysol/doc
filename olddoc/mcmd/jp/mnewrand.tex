@@ -1,0 +1,56 @@
+
+%\begin{document}
+
+\section{mnewrand 乱数データの新規生成\label{sect:mnewrand}}
+\index{mnewrand@mnewrand}
+0.0から1.0の範囲の実数乱数を生成する。
+\verb|-int|を指定することで、整数乱数を生成することもできる。
+
+乱数の生成にはメルセンヌ・ツイスター法を利用している
+(\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{原作者のページ}
+, \href{http://www.boost.org/doc/libs/1_54_0/doc/html/boost_random.html}{boostライブラリ})。
+
+
+\subsection*{書式}
+\verb|mnewrand a= [max=] [min=] [S=] [l=] [-int]|
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|o=|      & 出力ファイル名を指定する。\\
+\verb|a=|      & 新規に作成するデータの項目名を指定する。\\
+               & \verb|-nfn,-nfno|オプション指定時は指定の必要はない。\\
+\verb|max=|    & 乱数の最大値を指定する。【デフォルト値:INT\_MAX】\\
+               & このパラメータを指定するときは\verb|-int|も指定しなければならない。\\
+\verb|min=|    & 乱数の最小値を指定する。【デフォルト値:0】\\
+               & このパラメータを指定するときは\verb|-int|も指定しなければならない。\\
+\verb|S=|      & 乱数の種を指定する。【デフォルト値:現在時刻】\\
+\verb|l=|      & 行数【デフォルト値:10】\\
+               & 新規作成する乱数データの行数を指定する。\\
+\verb|-int|    & 整数乱数を生成する\\
+\end{tabular} 
+}
+\end{table} 
+
+
+\subsection*{利用例}
+\input{examples/tex/mnewrand_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mnewnumber] {mnewnumber} : 連番を生成する。
+
+\hyperref[sect:mnewstr] {mnewstr} : 固定文字列を生成する。
+
+%\end{document}

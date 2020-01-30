@@ -1,0 +1,42 @@
+
+\section{== : Equal to comparison operator\label{sect:eq}}
+\subsection*{Format}
+$zdd1$ == $zdd2$ $\rightarrow$ $zdd3$
+
+\subsection*{Description}
+
+Compare terms in $zdd1$ and  $zdd2$, select terms with equal weight (terms with same weight and itemset), and return the itemset. 
+Note that the resulting weight of the itemset returned is 1. 
+
+The \hyperref[sect:iif]{iif} function can be used in cases where weight is also selected. 
+
+This package can be used with the following comparison operators (functions). 
+\begin{itemize}
+\item zdd1 == zdd2   : Equal to operator
+\item zdd1 $>$= zdd2   : Greater than or equal to operator
+\item zdd1 $>$  zdd2   : Greater than operator 
+\item zdd1 $<$= zdd2   : Less than or equal to operator 
+\item zdd1 $<$  zdd2   : Less than operator 
+\item zdd1.ne?(zdd2) : Not equal to function 
+\end{itemize}
+
+In addition,  \hyperref[sect:same?]{same?}(\hyperref[sect:same?]{==}) and \hyperref[sect:diff?]{diff?} can be used to   evaluate the equivalence on the complete expression. 
+
+
+\subsection*{Examples}
+\input{examples/tex/eq_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:eq]{==},
+\hyperref[sect:lt]{$<$},
+\hyperref[sect:le]{$<=$},
+\hyperref[sect:gt]{$>$},
+\hyperref[sect:ge]{$>=$},
+\hyperref[sect:ne]{ne?} : Various comparison operations 
+
+\hyperref[sect:iif]{iif} : Select by comparison of items
+
+\hyperref[sect:same?]{same?} : Same comparison operator 
+
+\hyperref[sect:diff?]{diff?} : Not equal to comparison operator
+

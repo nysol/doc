@@ -1,0 +1,73 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcat 併合\label{sect:mcat}}
+\index{mcat@mcat}
+\verb|i=|パラメータで指定した全ファイルのレコードを、指定した順に併合する。
+ワイルドカードでファイル名を指定した場合は、ファイル名のアルファベット順に併合される。
+
+\subsection*{書式}
+\verb/mcat [f=] [-skip_fnf] [-skip_zero] [flist=] [kv=] [-nostop|-skip|-force]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_add_fname]{[-add\_fname]}
+\hyperref[sect:option_-stdin]{[-stdin]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|        & 入力ファイル名リストを指定する。\\
+                 & 複数のファイルをカンマで区切って指定する。ワイルドカードを用いることができる。\\
+\verb|o=|  			 & 出力ファイル名を指定する。\\
+\verb|f=|        & 併合する項目名を指定する。\\
+                 & 指定を省略すれば\verb|i=|で指定した1つ目のファイルの項目名が使われる。\\
+\verb|-skip_fnf| & \verb|i=|で指定したファイルが存在しなくてもエラー終了しない。\\
+                 & ただし、全ファイルがなければエラーとなる。\\
+\verb|-nostop|   & \verb|-nostop| ,\verb|-skip|,\verb|-force|は、指定の項目名がなかったときの動作を制御するフラグである。\\
+                 & \verb|-nostop|は、指定の項目名がなければnullを出力する。\\
+                 & \verb|-nfn|が同時に指定された場合，項目数が異なればエラー終了する。\\
+\verb|-skip|     & 指定の項目名がなければそのファイルは併合しない。\\
+                 & \verb|-nfn|が同時に指定された場合、項目数が異なればそのファイルは併合しない。\\
+\verb|-skip_zero|	& -nfnを指定していない場合でも0バイトファイルでエラーにならないようにする。 \\
+\verb|flist=|		 & 併合するファイルリストをCSVデータとして指定する。flist=fileName:fldNameで指定する。\\
+\verb|kv=|			 & パス名に含めた”key-value”の文字列を抜き出し項目名とその値としてデータに付加する。\\
+\verb|-force|    & 指定の項目名がなければ，項目番号で強制併合する。\\
+                 & 指定の項目番号がなければnullを出力する。\\
+\verb|-stdin|    & 標準入力も併合する。\\
+\verb|-add_fname|& 併合元のファイル名を最終項目として追加する。\\
+                 & 標準入力は\verb|/dev/stdin|という名称になる。\\
+                 & 項目名は\verb|"fileName"|固定なので、入力データに同一の項目名があるとエラーとなる。\\
+\end{tabular}
+}
+\end{table}
+
+\subsection*{備考}
+\begin{itemize}
+\item 複数ファイルの指定にワイルドカード("*"と"?")を利用することができる。ファイル名だけでなくディレクトリ名に対しても指定することができる。
+\item ホームディレクトリ記号(\verb|~/|)も利用可能。
+\item 併合される順序は\verb|i=|で指定したファイルの出現順。ワイルドカードを指定した場合は、アルファベット順。標準入力は最初に併合される。
+\end{itemize}
+
+\subsection*{利用例}
+\input{examples/tex/mcat_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:msep]{msep} : ちょうど逆の動きをする。
+
+%\end{document}
+

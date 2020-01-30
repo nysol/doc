@@ -1,0 +1,54 @@
+\begin{figure}[htbp]
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mdata -man1 >man1.csv
+#END# kgData -man1
+$ more man1.csv
+顧客,日付,商品
+A,20130916,a
+A,20130916,c
+A,20130917,a
+A,20130917,e
+B,20130916,d
+B,20130917,a
+B,20130917,d
+B,20130917,f
+$ mcut f=顧客,商品 i=man1.csv o=xxa
+#END# kgcut f=顧客,商品 i=man1.csv o=xxa
+$ more xxa
+顧客,商品
+A,a
+A,c
+A,a
+A,e
+B,d
+B,a
+B,d
+B,f
+# 顧客商品別に行数をカウントする。
+$ mcount k=顧客,商品 a=件数 i=xxa o=xxb
+#END# kgcount a=件数 i=xxa k=顧客,商品 o=xxb
+$ more xxb
+顧客%0,商品%1,件数
+A,a,2
+A,c,1
+A,e,1
+B,a,1
+B,d,2
+B,f,1
+# 商品を項目にしたクロス集計を実行。購入されていない商品の個数は0にしている。
+$ mcross k=顧客 s=商品 f=件数 v=0 i=xxb o=xxc
+#END# kgcross f=件数 i=xxb k=顧客 o=xxc s=商品 v=0
+$ more xxc
+顧客%0,fld,a,c,d,e,f
+A,件数,2,1,0,1,0
+B,件数,1,0,2,0,1
+# 余分な項目"fld"を除いている。
+$ mcut f=fld -r i=xxc o=output.csv
+#END# kgcut -r f=fld i=xxc o=output.csv
+$ more output.csv
+顧客%0,a,c,d,e,f
+A,2,1,0,1,0
+B,1,0,2,0,1
+\end{Verbatim}
+\caption{顧客別商品購入数量マトリックス\label{fig:abstract2_1}}
+\end{figure}

@@ -1,0 +1,61 @@
+
+%\begin{document}
+
+\section{Data Type\label{sect:datatype}}
+MCMD handles plain text files in CSV format, where the data is a sequence of characters. Thus, it depends on how the specific command interprets the character string for the data type. For example, the data in the field specified at \verb|f=| in \verb|msum| command is converted from a character string to a number. As shown in Table \ref{tbl:datatype_types}, MCMD can handle six types of data including numeric, character string, date, time, boolean and vector type.
+
+\begin{table}[!hb]
+\begin{center}
+\caption{Table 2.1: Six data types supported by MCMD\label{tbl:datatype_types}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+Data type             & Notation of CSV Data type & Details of Conversion \\ \hline
+Numerical type        & 10, 2.5, 1.5E+10          & Double-precision real number \\
+Character string type & abc, あいう               & Character string \\
+Date type             & 20130920                  & Date object$^{*1}$(Gregorian calendar, 8-digit fixed length) \\
+Time type             & 20130920151154.123456     & Date object$^{*1}$(Gregorian calendar, 8-digit fixed length) \\
+                      &                           & \ \ \ \ +POSIX time$^{*2}$(6 digits indicating hhmmss + microseconds in up to 6 digits below decimal) \\
+                      & 151154.123456             & If no date is specified, the date of the day is added internally. \\
+Boolean type          & 1,0                       & Convert character to boolean value. ”1” is true and “0” is false \\
+Vector type           & a c b, 1 5 11             & Character string delimited by space can be converted to any data type above. \\
+\hline
+  \end{tabular}
+\\
+$^{*1}$ The boost::gregorian::date class in the boost library is used. \\
+$^{*2}$ The boost::posix time::ptime class in the boost library is used. \\
+  }
+  \end{center}
+\end{table}
+
+Further, list of data types of commonly used commands is shown in Table \ref{tbl:datatype_commands}.
+
+\begin{table}[!hb]
+\begin{center}
+\caption{Table 2.2: Data types of commonly used commands\label{tbl:datatype_commands}}
+{\small
+  \begin{tabular}{l|l|l} \hline
+Data type      & Command                                                                        & Details \\ \hline
+Numerical type & \hyperref[sect:msum]{msum}                                                     & Calculate total of numeric field \\
+               & \hyperref[sect:msim]{msim}                                                     & Calculate the similarity between two fields \\
+\hline
+String type    & \hyperref[sect:mjoin]{mjoin}                                                   & Combine fields from the reference file \\
+               & \hyperref[sect:mcombi]{mcombi}                                                 & Enumerate combination \\
+\hline
+Date type      & \hyperref[sect:age]{age} function of \hyperref[sect:mcal]{mcal}                & Calculate Age \\
+               & \hyperref[sect:leapyear]{leapyear} function of \hyperref[sect:mcal]{mcal}      & Determine leap year \\
+\hline
+Time type      & \hyperref[sect:now]{now} function of \hyperref[sect:mcal]{mcal}                & Output the current time (in seconds) \\
+               & \hyperref[sect:unow]{unow} function of \hyperref[sect:mcal]{mcal}              & Output the current time (in microsecconds) \\
+               & \hyperref[sect:diff]{diffminute} function of \hyperref[sect:mcal]{mcal}        & Calculate the time difference in minutes \\
+\hline
+Boolean type   & \hyperref[sect:and]{and} function of \hyperref[sect:mcal]{mcal}                & Compute the logical product \\
+               & \hyperref[sect:if]{if} function of \hyperref[sect:mcal]{mcal}                  & Set the value of the criteria \\
+\hline
+Vector type    & \hyperref[sect:mvsort]{mvsort}                                                 & Sort vector elements \\
+               & \hyperref[sect:mvuniq]{mvuniq}                                                 & Extract unique vector elements \\
+\hline
+  \end{tabular}
+  }
+  \end{center}
+\end{table}
+

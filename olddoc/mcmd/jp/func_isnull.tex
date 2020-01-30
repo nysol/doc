@@ -1,0 +1,16 @@
+
+%\begin{document}
+
+\section{isnull NULL値判定\label{sect:isnull}}
+\index{isnull@isnull}
+
+書式: isnull($num$), isnull($str$), isnull($date$), isnull($time$), isnull($bool$)
+
+$num$(他のデータ型も同様)で与えられた値がNULL値であるかどうかを判定する。
+NULL値であれば\verb|0b1|(真)を、そうでなければ\verb|0b0|(偽)を返す。
+
+\subsection*{利用例}
+\input{examples/tex/func_isnull_ex}
+
+%\end{document}
+

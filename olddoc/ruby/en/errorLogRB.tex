@@ -1,0 +1,44 @@
+
+%\documentclass[a4paper]{jarticle}
+%\begin{document}
+
+\section{errorLog - Output error log message \label{sect:errorLog}}
+
+Display error log message which is similar to the format of error log messages of MCMD shown upon completion. The format is as follows. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+#ERROR# mesage; date and time
+\end{Verbatim}
+
+
+\subsection{Format}
+
+{\large
+\begin{verbatim}
+MCMD::errorLog(msg[,fileObject])
+\end{verbatim}
+} 
+
+\begin{description}
+	\setlength{\itemindent}{-5mm}
+	\item {\large \verb/msg /} - Message to be displayed. 
+	\item {\large \verb/fileObject /} - Output file object. Returns standard error (STDERR) when this is not specified. 
+	
+\end{description}
+
+\subsection{Example}
+\subsubsection*{Example 1 Basic Example}
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+# Display ending error message to standard error. 
+> MCMD::errorLog("mburst.rb ended with error. ")
+#END# mburst.rb  ended with error.; 2013/11/01 19:09:50
+\end{Verbatim}
+
+\subsection{Related Commands}
+\hyperref[sect:errorLogRB]{endLog} : Output end log message.
+
+\hyperref[sect:messageRB]{messageLog} : Output general log message.
+
+%\end{document}
+

@@ -1,0 +1,38 @@
+
+%\begin{document}
+\section{msplit Partitioning fields by delimiters\label{sect:msplit}}
+\index{msplit@msplit}
+This command partitions fields by delimiters.
+
+\subsection*{Format}
+\verb|msplit f= a= [-r] [delim=]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Specify the fieldname of the data to be partitioned by delimiters.\\
+\verb|a=|    & Specify new fields.\\
+             & The data will be partitioned into the number of fieldnames specified here. If the data falls short, the values will be NULL.\\
+\verb|delim=| & Specify a new delimiter. The default is the en space.\\
+\verb|-r|    & Use this option to remove the field specified by f=.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/msplit_ex.tex}
+\subsection*{Related Commands}
+
+%\end{document}

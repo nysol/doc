@@ -1,0 +1,18 @@
+\subsubsection*{Example 1: Merge vectors using wild character}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+items1,items2,items3,items4
+b a c,b,x,y
+c c,,x,y
+e a a,a a a,x,y
+$ mvcat vf=items* a=items i=dat1.csv o=rsl1.csv
+#END# kgvcat a=items i=dat1.csv o=rsl1.csv vf=items*
+$ more rsl1.csv
+items
+b a c b x y
+c c x y
+e a a a a a x y
+\end{Verbatim}

@@ -1,0 +1,20 @@
+
+\section{permit : Selection of subset\label{sect:permit}}
+\subsection*{Format}
+$obj$.permit($zdd1$) $\rightarrow$ $zdd2$
+
+\subsection*{Description}
+For itemsets included in $obj$, select the term that is included in at least 1 itemset contained in $zdd1$. 
+
+More precisely, $\alpha_i$ is the set of items that make up $obj$ where the weight of term $T_i$ is removed, 
+assuming that $\beta_j$ represents the same itemsets in $zdd1$, 
+if at least one $j$ satisfy $\alpha_i \subseteq \beta_j$, select term $T_i$ that corresponds to $\alpha_i$ from $obj$. 
+
+In relation, the conditional expression $\alpha_i \subseteq \beta_j$ is changed to $\alpha_i \supseteq \beta_j$ and become \hyperref[sect:restrict]{restrict} function. 
+
+
+\subsection*{Example}
+\input{examples/tex/permit_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:restrict]{restrict} : Selection of superset

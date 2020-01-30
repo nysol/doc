@@ -1,0 +1,23 @@
+\subsubsection*{例1: 基本例}
+
+\verb|x、y|項目についてのピアソンの積率相関係数を3期を窓として計算する。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+t,x,y
+1,14,0.17
+2,11,0.2
+3,32,0.15
+4,13,0.33
+5,8,0.1
+6,19,0.56
+$ mmvsim s=t t=3 c=pearson f=x,y a=sim i=dat1.csv o=rsl1.csv
+#END# kgmvsim a=sim c=pearson f=x,y i=dat1.csv o=rsl1.csv s=t t=3
+$ more rsl1.csv
+t%0,x,y,sim
+3,32,0.15,-0.8746392857
+4,13,0.33,-0.6515529194
+5,8,0.1,-0.1164257338
+6,19,0.56,0.9986254289
+\end{Verbatim}

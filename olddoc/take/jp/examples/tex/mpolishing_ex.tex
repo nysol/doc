@@ -1,0 +1,383 @@
+\subsubsection*{例1: 基本例}
+
+類似度をresemblance(sim=R)とし、th=0.4で枝を張り直して得られた研磨グラフ。
+\verb|log1.csv|を見ると研磨回数は4回で収束していることがわかる(iter,4)。
+出力結果は図\ref{fig:resemblance04}に示されるグラフ。
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+node1,node2
+a,b
+a,c
+a,e
+b,c
+b,e
+b,g
+c,d
+c,g
+d,e
+e,f
+$ mpolishing.rb ei=dat1.csv ef=node1,node2 sim=R th=0.4 eo=result1.csv log=log1.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+input-file /tmp/__MTEMP_95376_70244664277340_3, output-file /tmp/__MTEMP_95376_70244664277
+340_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95376_70244664277340_3
+file read end: /tmp/__MTEMP_95376_70244664277340_3
+iterative scan: #nodes=7, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95376_70244664277340_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# polishing iteration #0 (tra size=61
+sspc_20140215 R -l 0 /tmp/__MTEMP_95376_70244664277340_4 0.4 /tmp/__MTEMP_95376_7024466427
+7340_3
+trsact: /tmp/__MTEMP_95376_70244664277340_4 ,#transactions 7 ,#items 7 ,size 27 extracted 
+database: #transactions 7 ,#items 7 ,size 27
+ output to: /tmp/__MTEMP_95376_70244664277340_3
+separated at 0
+11 pairs are found
+0,1,2,4, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,3,6, :1.000000  (0)
+2,3,4, :1.000000  (0)
+0,1,3,4,5, :1.000000  (0)
+4,5, :1.000000  (0)
+1,2,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95376_70244664277340_3, output-file /tmp/__MTEMP_95376_70244664277
+340_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95376_70244664277340_3
+file read end: /tmp/__MTEMP_95376_70244664277340_3
+iterative scan: #nodes=7, #edges = 22
+forwardstar graph: /tmp/__MTEMP_95376_70244664277340_3 ,#nodes 7(7,7) ,#edges 22
+#MSG# polishing iteration #1 (tra size=65
+sspc_20140215 R -l 0 /tmp/__MTEMP_95376_70244664277340_4 0.4 /tmp/__MTEMP_95376_7024466427
+7340_3
+trsact: /tmp/__MTEMP_95376_70244664277340_4 ,#transactions 7 ,#items 7 ,size 29 extracted 
+database: #transactions 7 ,#items 7 ,size 29
+ output to: /tmp/__MTEMP_95376_70244664277340_3
+separated at 0
+11 pairs are found
+0,1,2,3,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,3, :1.000000  (0)
+0,1,2,4,5, :1.000000  (0)
+4,5, :1.000000  (0)
+0,1,2,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95376_70244664277340_3, output-file /tmp/__MTEMP_95376_70244664277
+340_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95376_70244664277340_3
+file read end: /tmp/__MTEMP_95376_70244664277340_3
+iterative scan: #nodes=6, #edges = 22
+forwardstar graph: /tmp/__MTEMP_95376_70244664277340_3 ,#nodes 7(7,7) ,#edges 22
+#MSG# polishing iteration #2 (tra size=63
+sspc_20140215 R -l 0 /tmp/__MTEMP_95376_70244664277340_4 0.4 /tmp/__MTEMP_95376_7024466427
+7340_3
+trsact: /tmp/__MTEMP_95376_70244664277340_4 ,#transactions 7 ,#items 7 ,size 28 extracted 
+database: #transactions 7 ,#items 7 ,size 28
+ output to: /tmp/__MTEMP_95376_70244664277340_3
+separated at 0
+10 pairs are found
+0,1,2,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+ :1.000000  (0)
+0,1,2,4,5,6, :1.000000  (0)
+4,5, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95376_70244664277340_3, output-file /tmp/__MTEMP_95376_70244664277
+340_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95376_70244664277340_3
+file read end: /tmp/__MTEMP_95376_70244664277340_3
+iterative scan: #nodes=5, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95376_70244664277340_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# polishing iteration #3 (tra size=57
+sspc_20140215 R -l 0 /tmp/__MTEMP_95376_70244664277340_4 0.4 /tmp/__MTEMP_95376_7024466427
+7340_3
+trsact: /tmp/__MTEMP_95376_70244664277340_4 ,#transactions 7 ,#items 7 ,size 25 extracted 
+database: #transactions 7 ,#items 7 ,size 25
+ output to: /tmp/__MTEMP_95376_70244664277340_3
+separated at 0
+10 pairs are found
+0,1,2,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+ :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+ :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95376_70244664277340_3, output-file /tmp/__MTEMP_95376_70244664277
+340_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95376_70244664277340_3
+file read end: /tmp/__MTEMP_95376_70244664277340_3
+iterative scan: #nodes=5, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95376_70244664277340_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mpolishing.rb ei=dat1.csv ef=node1,node2 sim=R th=0.4 eo=result1.csv log=lo
+g1.csv
+$ more result1.csv
+node1,node2
+a,b
+a,c
+a,e
+a,g
+b,c
+b,e
+b,g
+c,e
+c,g
+e,g
+$ more log1.csv
+key,value
+ei=,dat1.csv
+ef=,"node1,node2"
+sim=,R
+th=,0.4
+eo=,result1.csv
+log=,log1.csv
+-indirect,false
+iter,4
+time,0.1502
+nSize0,7
+eSize0,10
+dens0,0.4761904762
+nSize1,7
+eSize1,11
+dens1,0.5238095238
+nSize2,6
+eSize2,11
+dens2,0.7333333333
+nSize3,5
+eSize3,10
+dens3,1
+nSize4,5
+eSize4,10
+dens4,1
+\end{Verbatim}
+\subsubsection*{例2: PMIによる研磨}
+
+類似度をnormalized PMI(sim=P)とし、th=0.2で枝を張り直して得られた研磨グラフ。
+出力結果は図\ref{fig:pmi02}に示されるグラフ。
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpolishing.rb ei=dat1.csv ef=node1,node2 sim=P th=0.2 eo=result2.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+input-file /tmp/__MTEMP_95435_70301715200880_3, output-file /tmp/__MTEMP_95435_70301715200
+880_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95435_70301715200880_3
+file read end: /tmp/__MTEMP_95435_70301715200880_3
+iterative scan: #nodes=7, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95435_70301715200880_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# polishing iteration #0 (tra size=61
+sspc_20140215 P -l 0 /tmp/__MTEMP_95435_70301715200880_4 0.2 /tmp/__MTEMP_95435_7030171520
+0880_3
+trsact: /tmp/__MTEMP_95435_70301715200880_4 ,#transactions 7 ,#items 7 ,size 27 extracted 
+database: #transactions 7 ,#items 7 ,size 27
+ output to: /tmp/__MTEMP_95435_70301715200880_3
+separated at 0
+5 pairs are found
+0,1,2,4, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,3,6, :1.000000  (0)
+2,3,4, :1.000000  (0)
+0,1,3,4,5, :1.000000  (0)
+4,5, :1.000000  (0)
+1,2,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95435_70301715200880_3, output-file /tmp/__MTEMP_95435_70301715200
+880_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95435_70301715200880_3
+file read end: /tmp/__MTEMP_95435_70301715200880_3
+iterative scan: #nodes=6, #edges = 10
+forwardstar graph: /tmp/__MTEMP_95435_70301715200880_3 ,#nodes 7(7,7) ,#edges 10
+#MSG# polishing iteration #1 (tra size=39
+sspc_20140215 P -l 0 /tmp/__MTEMP_95435_70301715200880_4 0.2 /tmp/__MTEMP_95435_7030171520
+0880_3
+trsact: /tmp/__MTEMP_95435_70301715200880_4 ,#transactions 7 ,#items 7 ,size 16 extracted 
+database: #transactions 7 ,#items 7 ,size 16
+ output to: /tmp/__MTEMP_95435_70301715200880_3
+separated at 0
+5 pairs are found
+0,1, :1.000000  (0)
+0,1,2,6, :1.000000  (0)
+1,2,6, :1.000000  (0)
+ :1.000000  (0)
+4,5, :1.000000  (0)
+4,5, :1.000000  (0)
+1,2,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95435_70301715200880_3, output-file /tmp/__MTEMP_95435_70301715200
+880_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95435_70301715200880_3
+file read end: /tmp/__MTEMP_95435_70301715200880_3
+iterative scan: #nodes=6, #edges = 10
+forwardstar graph: /tmp/__MTEMP_95435_70301715200880_3 ,#nodes 7(7,7) ,#edges 10
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mpolishing.rb ei=dat1.csv ef=node1,node2 sim=P th=0.2 eo=result2.csv
+$ more result2.csv
+node1,node2
+a,b
+b,c
+b,g
+c,g
+e,f
+\end{Verbatim}
+\subsubsection*{例3: intersectionで1回の研磨}
+
+前節の解説で用いてる例。類似度をintersection(sim=T)とし、2件以上(th=2)で枝を張り直し
+直接の接続を考慮に入れる例。研磨回数は1回のみ(iter=1)。
+出力結果は図\ref{fig:polished2}に示されるグラフ。
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpolishing.rb ei=dat1.csv ef=node1,node2 sim=T th=2 iter=1 eo=result3.csv
+#MSG# converting graph files into a pair of numbered nodes ...
+input-file /tmp/__MTEMP_95485_70155283659220_3, output-file /tmp/__MTEMP_95485_70155283659
+220_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95485_70155283659220_3
+file read end: /tmp/__MTEMP_95485_70155283659220_3
+iterative scan: #nodes=7, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95485_70155283659220_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# polishing iteration #0 (tra size=61
+sspc_20140215 T -l 0 /tmp/__MTEMP_95485_70155283659220_4 2.0 /tmp/__MTEMP_95485_7015528365
+9220_3
+trsact: /tmp/__MTEMP_95485_70155283659220_4 ,#transactions 7 ,#items 7 ,size 27 extracted 
+database: #transactions 7 ,#items 7 ,size 27
+ output to: /tmp/__MTEMP_95485_70155283659220_3
+separated at 0
+14 pairs are found
+0,1,2,4, :1.000000  (0)
+0,1,2,4,6, :1.000000  (0)
+0,1,2,3,6, :1.000000  (0)
+2,3,4, :1.000000  (0)
+0,1,3,4,5, :1.000000  (0)
+4,5, :1.000000  (0)
+1,2,6, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95485_70155283659220_3, output-file /tmp/__MTEMP_95485_70155283659
+220_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95485_70155283659220_3
+file read end: /tmp/__MTEMP_95485_70155283659220_3
+iterative scan: #nodes=7, #edges = 28
+forwardstar graph: /tmp/__MTEMP_95485_70155283659220_3 ,#nodes 7(7,7) ,#edges 28
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mpolishing.rb ei=dat1.csv ef=node1,node2 sim=T th=2 iter=1 eo=result3.csv
+$ more result3.csv
+node1,node2
+a,b
+a,c
+a,d
+a,e
+a,g
+b,c
+b,d
+b,e
+b,g
+c,d
+c,e
+c,g
+d,e
+e,f
+\end{Verbatim}
+\subsubsection*{例4: 直接の接続を考慮しない例}
+
+\verb|-indirect|を指定することで、類似度の計算で直接の接続は無視される。
+出力結果は図\ref{fig:polished1}に示されるグラフであり、枝が全て消えるため、研磨後の枝データは出力されない。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mpolishing.rb ei=dat1.csv ef=node1,node2 sim=T th=2 eo=result4.csv -indirect
+#MSG# converting graph files into a pair of numbered nodes ...
+input-file /tmp/__MTEMP_95528_70362712963820_3, output-file /tmp/__MTEMP_95528_70362712963
+820_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95528_70362712963820_3
+file read end: /tmp/__MTEMP_95528_70362712963820_3
+iterative scan: #nodes=7, #edges = 20
+forwardstar graph: /tmp/__MTEMP_95528_70362712963820_3 ,#nodes 7(7,7) ,#edges 20
+#MSG# polishing iteration #0 (tra size=47
+sspc_20140215 T -l 0 /tmp/__MTEMP_95528_70362712963820_4 2.0 /tmp/__MTEMP_95528_7036271296
+3820_3
+trsact: /tmp/__MTEMP_95528_70362712963820_4 ,#transactions 7 ,#items 7 ,size 20 extracted 
+database: #transactions 7 ,#items 7 ,size 20
+ output to: /tmp/__MTEMP_95528_70362712963820_3
+separated at 0
+6 pairs are found
+1,2,4, :1.000000  (0)
+0,2,4,6, :1.000000  (0)
+0,1,3,6, :1.000000  (0)
+2,4, :1.000000  (0)
+0,1,3,5, :1.000000  (0)
+4, :1.000000  (0)
+1,2, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95528_70362712963820_3, output-file /tmp/__MTEMP_95528_70362712963
+820_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95528_70362712963820_3
+file read end: /tmp/__MTEMP_95528_70362712963820_3
+iterative scan: #nodes=6, #edges = 12
+forwardstar graph: /tmp/__MTEMP_95528_70362712963820_3 ,#nodes 7(7,7) ,#edges 12
+#MSG# polishing iteration #1 (tra size=31
+sspc_20140215 T -l 0 /tmp/__MTEMP_95528_70362712963820_4 2.0 /tmp/__MTEMP_95528_7036271296
+3820_3
+trsact: /tmp/__MTEMP_95528_70362712963820_4 ,#transactions 7 ,#items 7 ,size 12 extracted 
+database: #transactions 7 ,#items 7 ,size 12
+ output to: /tmp/__MTEMP_95528_70362712963820_3
+separated at 0
+0 pairs are found
+1,3,6, :1.000000  (0)
+0,2,3, :1.000000  (0)
+1,4, :1.000000  (0)
+0,1, :1.000000  (0)
+2, :1.000000  (0)
+ :1.000000  (0)
+0, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95528_70362712963820_3, output-file /tmp/__MTEMP_95528_70362712963
+820_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95528_70362712963820_3
+file read end: /tmp/__MTEMP_95528_70362712963820_3
+iterative scan: #nodes=0, #edges = 0
+forwardstar graph: /tmp/__MTEMP_95528_70362712963820_3 ,#nodes 0(0,0) ,#edges 0
+#MSG# polishing iteration #2 (tra size=6
+sspc_20140215 T -l 0 /tmp/__MTEMP_95528_70362712963820_4 2.0 /tmp/__MTEMP_95528_7036271296
+3820_3
+trsact: /tmp/__MTEMP_95528_70362712963820_4 ,#transactions 2 ,#items 4 ,size 1 extracted d
+atabase: #transactions 2 ,#items 4 ,size 1
+ output to: /tmp/__MTEMP_95528_70362712963820_3
+separated at 0
+0 pairs are found
+ :1.000000  (0)
+3, :1.000000  (0)
+come
+input-file /tmp/__MTEMP_95528_70362712963820_3, output-file /tmp/__MTEMP_95528_70362712963
+820_4
+degree threshold: 
+first & second scan end: /tmp/__MTEMP_95528_70362712963820_3
+file read end: /tmp/__MTEMP_95528_70362712963820_3
+iterative scan: #nodes=0, #edges = 0
+forwardstar graph: /tmp/__MTEMP_95528_70362712963820_3 ,#nodes 0(0,0) ,#edges 0
+#MSG# converting the numbered nodes into original name ...
+#END# /usr/bin/mpolishing.rb ei=dat1.csv ef=node1,node2 sim=T th=2 eo=result4.csv -indirec
+t
+$ more result4.csv
+node1,node2
+\end{Verbatim}

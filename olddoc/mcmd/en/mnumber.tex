@@ -1,0 +1,62 @@
+
+%\begin{document}
+
+\section{mnumber - Serials\label{sect:mnumber}}
+\index{mnumber@mnumber}
+
+Show the alphabetical sequence (A,B,...,Z,AA,AB,...,AZ,BA,BB,...,ZZ,AAA,AAB,...) and save the output in a new column defined at \verb|a=| parameter. 
+
+
+\subsection*{Format}
+\verb|mnumber a= [e=] [I=] [k=] [s=] [S=] [-B]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|a=|    & Specify the field name and the list of new serials. \\
+		& [However, this parameter is not required when \verb|-nfn or -nfno| options are specified] \\
+\verb|e=|    & Process records with same Rank \\
+             & Specify how to handle fields with same key same sort values. \\
+             & Default setting is \verb|e=seq|. \\
+             & \verb|seq:| Create sequential serial numbers or alphabets for records with same rank, but the sequence of recoreds is undetermined. \\
+             & \verb|same:| Records with equal numerical or alphabetical values receive the same rank order. \\
+             & \verb|skip:| Records with equal numerical or alphabetical values receive the same rank order, \\
+             & number of subsequent rank is skipped for the following record. \\
+             & Note: \verb|e={same/skip}| must be specified with the \verb|s=| parameter. \\
+\verb|I=|    & Interval between the sequence. \\
+		& However, a negative interval value cannot be specified for alphabet sequence. \\
+\verb|k=|    & Generate sequential characters for the key field(s) (multiple fields can be specified) \\
+\verb|s=|    & Specified field(s) (multiple fields can be specified) containing same rank values . \\
+             & Note: This parameter must be declared with \verb|e={same/skip}|. \\
+\verb|S=|    & Starting No \\
+             & Specify the starting value of the sequence.  \\
+             & Uppercase alphabet letters for the alphabet sequence. \\
+ \verb|-B|   & Assign same sequential number or alphabet to each key.  \\
+             & Records with the same key will each be assigned the same number (No) or alphabet.  \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mnumber_ex.tex}
+
+\subsection*{Related Commands}
+\hyperref[sect:mnewnumber]{mnewnumber} :  Generate list of sequential numbers in a new dataset. 
+
+\hyperref[sect:mbest]{mbest} : Use \verb|mnumber| if the query requires selection of records according to line numbers. 
+
+%\end{document}

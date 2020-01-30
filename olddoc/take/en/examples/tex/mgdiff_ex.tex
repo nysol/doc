@@ -1,0 +1,25 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more g1.csv
+node1,node2
+a,b
+b,c
+c,d
+$ more g2.csv
+node1,node2
+a,b
+c,d
+d,e
+$ mgdiff.rb i=g1.csv m=g2.csv o=result1.csv f=node1,node2
+#END# /Users/stephane/.rvm/rubies/ruby-1.9.3-p448/bin/mgdiff.rb i=g1.csv m=g2.csv o=result
+1.csv f=node1,node2
+$ more result1.csv
+node1,node2,fld,i,m,diff
+b,c,file,g1.csv,,-1
+a,b,file,g1.csv,g2.csv,0
+c,d,file,g1.csv,g2.csv,0
+d,e,file,,g2.csv,1
+\end{Verbatim}

@@ -1,0 +1,24 @@
+\subsubsection*{例1: 基本例}
+
+正規表現\verb|c.*a|に最も長くマッチする部分文字列のサフィックスを得る。
+例えば\verb|id=4|では、$str$項目の\verb|cabbca|にマッチしており、そのサフィックス
+すなわちnull文字を返している。
+\verb|regexstr,regexpfx|と同じ入力データを使っているので、比較すると分かりやすい。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id,str
+1,xcbbbayy
+2,xxcbaay
+3,
+4,bacabbca
+$ mcal c='regexsfx($s{str},"c.*a")' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=regexsfx($s{str},"c.*a") i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,str,rsl
+1,xcbbbayy,yy
+2,xxcbaay,y
+3,,
+4,bacabbca,
+\end{Verbatim}

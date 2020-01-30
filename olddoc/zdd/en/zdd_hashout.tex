@@ -1,0 +1,26 @@
+
+\section{hashout : Hash output\label{sect:hashout}}
+\subsection*{Format}
+$obj$.hashout $\rightarrow$ $hash$
+
+\subsection*{Description}
+ Convert contents in $zdd$ to Ruby $hash$ object and return the object. 
+
+ Each hash key corresponds to weight of item set.  
+
+However, there is an upper limit to the maximum number of itemsets that can be returned, if it exceeds 4,096,000 itemsets, the output process will be forced to stop. 
+
+The \hyperref[sect:partly]{partly} method can be used to check whether the process  stopped during processing. 
+
+\subsection*{Example}
+\input{examples/tex/hashout_ex.tex}
+
+\subsection*{See Also}
+\hyperref[sect:partly]{partly} : Partial Hash output flag
+
+\hyperref[sect:to_a]{to\_a} : Convert to itemset array
+
+\hyperref[sect:csvout]{csvout} : CSV file output
+
+\hyperref[sect:export]{export} : Serialized output of ZDD
+

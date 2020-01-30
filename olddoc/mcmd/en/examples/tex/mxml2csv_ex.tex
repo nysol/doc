@@ -1,0 +1,55 @@
+\subsubsection*{Example 1: Example 1: Basic example}
+
+The example below is illustrated in the summary above. Output the 5 CSV fields with /a/b set as the key elements.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.xml
+<a att="aa">
+  <b att="bb1">
+    <c p="pp1" q="qq1"/>
+    <d>text1</d>
+  </b>
+  <b att="bb2">
+    <c q="qq2"></c>
+    <d>text2</d>
+  </b>
+  <b>
+    <c p="pp3"/>
+    <d>text3</d>
+  </b>
+</a>
+$ mxml2csv k=/a/b f=@att:b_att,c@p:c_p,c@p%f:c_p_f,d:d,/a:a i=dat1.xml  o=rsl1.csv
+#END# kgxml2csv f=@att:b_att,c@p:c_p,c@p%f:c_p_f,d:d,/a:a i=dat1.xml k=/a/b o=rsl1.csv
+$ more rsl1.csv
+b_att,c_p,c_p_f,d,a
+bb1,pp1,1,text1,text1
+bb2,,,text2,text1text2
+,pp3,1,text3,text1text2text3
+\end{Verbatim}
+\subsubsection*{Example 2: Example 2: Absolute path}
+
+Specification of same element as in the basic example with an absolute path. Output the 5 CSV fields with /a/b as the key elements.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mxml2csv k=/a/b f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml  o=rsl2.csv
+#END# kgxml2csv f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml k=/a/b o=rsl2.csv
+$ more rsl2.csv
+b_att,c_p,c_p_f,d,a
+bb1,pp1,1,text1,text1
+bb2,,,text2,text1text2
+,pp3,1,text3,text1text2text3
+\end{Verbatim}
+\subsubsection*{Example 3: Example 3: Changing key elements}
+
+Example of changing a key element to a using an absolute path. Since there is only one end tag a, one row of record will be returned as output. /a/b@att specified at f= appeared twice, the last value is returned as output.
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ mxml2csv k=/a f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml o=rsl3.csv
+#END# kgxml2csv f=/a/b@att:b_att,/a/b/c@p:c_p,/a/b/c@p%f:c_p_f,/a/b/d:d,/a:a i=dat1.xml k=/a o=rsl3.csv
+$ more rsl3.csv
+b_att,c_p,c_p_f,d,a
+bb2,pp3,1,text3,text1text2text3
+\end{Verbatim}

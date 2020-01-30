@@ -1,0 +1,77 @@
+
+%\begin{document}
+
+\section{キーブレイク処理\label{sect:keybreak}}
+
+キーブレイク処理とは、その項目が並べ換わっていることを前提として、
+同一のキー項目値毎に一定の処理を行う処理方式のことを言う。
+キーブレイク処理は大きく分けて2つの処理に分けられる。
+一つは集計のためのキーブレイク処理(以下「{\bf 集計キーブレイク処理}」と呼ぶ)で、
+他方は結合のためのキーブレイク処理(以下「{\bf 結合キーブレイク処理}」と呼ぶ)である。
+
+\hyperref[sect:mjoin]{mjoin}、
+\hyperref[sect:mcommon]{mcommon}など
+コマンド名に「join」か「common」を含むコマンドが結合キーブレイク処理を、
+それ以外のコマンドのうち\verb|k=|パラメータを持つすべてのコマンドが
+集計キーブレイク処理を行っていると考えてよい。
+
+たとえば集計キーブレイク処理を行う\verb|msum|コマンドでは、
+キー項目の値の変化を検知することで、同一キー毎に合計処理を実行する。
+そのためには事前にキー項目で行の並べ替えをしておく必要があるので、
+(入力ファイルが事前に並べ替えられている場合を除き)\verb|msum|コマンドは、内部で
+まず並べ替えをした上で、合計処理を行う。
+
+結合キーブレイク処理はもう少し複雑で、たとえば\verb|mjoin|コマンドは、
+2つのデータファイルについて、キー項目の大小を見比べる。
+キー項目が小さいデータファイルは読み進め、キー項目値が同じであれば結合処理を実施する。
+このようにキー項目値の大小比較をしているため、結合のためのキーブレイク処理においては、
+事前に2つのデータファイルともキー項目で並べ替えられていることが前提となる。
+そのため\verb|mjoin|コマンドは、まず内部で2つのデータファイルを並べ替える。
+
+どちらのキーブレイク処理でも基本は{\bf 文字列昇順}による並べ替えを行うが、
+\verb|mrjoin|のような数値範囲による結合キーブレイク処理においては、
+{\bf 数値昇順}で並べ替えを行う。
+
+\verb|k=|パラメータで項目を指定するだけで、各コマンドが自動的に並べ替えの要否を
+判断し、必要な場合は並べ替えを行うため、ユーザは原則としてファイルの並べ替えを
+意識する必要はない。ただ並べ替え処理が不要になったわけではなく、
+各コマンドが内部的に並べ替え処理を行っているという点に注意が必要である。
+スクリプトの構成によっては、並べ替え処理が頻繁に発生し、パフォーマンス低下の原因となる。
+
+\subsection*{スクリプトの例}
+
+\subsubsection*{並べ替え処理が頻繁に発生するスクリプト}
+
+最初にxxcustomerファイルを\verb|name|項目で並べ替えた状態で出力しているが、
+その後の\verb|mjoin|コマンドはいずれも、\verb|id|をキー項目として
+結合処理を行っている。この場合、3つの\verb|mjoin|コマンドがそれぞれ
+\verb|id|項目による並べ替えを行ってしまう。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+mcut   i=customer.csv f=id,name |
+msortf f=name o=xxcustomer
+
+mjoin i=xxcustomer m=address.csv k=id f=address o=cust_address.csv
+mjoin i=xxcustomer m=phone.csv   k=id f=phone   o=cust_phone.csv
+mjoin i=xxcustomer m=age.csv     k=id f=age     o=cust_age.csv
+\end{Verbatim}
+
+\subsubsection*{並べ替え処理が最小限のスクリプト}
+
+次のように修正すれば、xxcustomerファイルは\verb|id|項目で
+並べ替えられているので、続く3つの\verb|mjoin|コマンドはいずれも
+並べ替え処理を省略できる。
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+mcut   i=customer.csv f=id,name |
+msortf f=id o=xxcustomer
+
+mjoin i=xxcustomer m=address.csv k=id f=address o=cust_address.csv
+mjoin i=xxcustomer m=phone.csv   k=id f=phone   o=cust_phone.csv
+mjoin i=xxcustomer m=age.csv     k=id f=age     o=cust_age.csv
+\end{Verbatim}
+
+%\subsection*{利用例}
+%\input{examples/tex/keybreak_ex.tex}
+
+

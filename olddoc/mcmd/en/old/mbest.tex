@@ -1,0 +1,128 @@
+
+% how to compile: platex xxx.tex ; dvipdfmx xxx.dvi
+
+\documentclass[a4paper]{jarticle}
+
+%--余白の設定
+\setlength{\topmargin}{20mm}
+\addtolength{\topmargin}{-1in}
+\setlength{\oddsidemargin}{20mm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{15mm}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{254mm}
+\setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\topskip}{0mm}
+
+%--ハイバーリンクを可能にするパッケージ
+\usepackage[dvipdfmx,%
+ bookmarks=true,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ setpagesize=false,%
+ pdftitle={mbest},%
+ pdfauthor={BMRC},%
+ pdfkeywords={TeX; dvipdfmx; hyperref; color;}]{hyperref}
+
+\begin{document}
+
+\setlength{\baselineskip}{4mm}
+
+\section*{mbest (select specific row) command}
+Select record  based on the row number defined at \emph{R=} parameter. 
+
+\subsection*{Format}
+mbest R= [k=] [u=] [-r] [\href{run:option.pdf}{-nfn}] [\href{run:option.pdf}{-nfno}]  [\href{run:option.pdf}{-x}][\href{run:option.pdf}{i=}] [\href{run:option.pdf}{o=}] [--help]\\
+
+\subsection*{Parameter}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|R=|    & Range list (accept multiple fields)【required parameter】\\
+& Set the range using line numbers.\\
+& Use \_(underscore) to specify the range in the format of MIN (start of row)\_MAX (end of row).\\
+& ※Note: Sort the data in advance based on user's preference.  \\
+\verb|k=|    & Key field (accept multiple key fields)【optional parameter】\\
+& Records with same values will be selected based on th line number defined at the \emph{R=} parameter. \\
+& ※Note: Sort the data according to the key field as specified at the \emph{k=} parameter. \\
+& Use x,nfn option to specify item number (0...). \\
+\verb|u=|    &  Output file containing unmatched records【optional parameter】\\
+& Write the unmatched records to this output file.\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Option}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|-r|  & Reverse selection\\
+& Select records not within the query range defined in the \emph{R=} parameter. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\subsubsection*{Example 1 Select the top 3 customers with most purchase quantity and amount. (Select row 1-3)}
+※Note: This example assumed that data is sorted by quantity and amount in descending order beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat.csv)
+Customer,Quantity,Amount
+A,20,5200 
+B,18,4000   
+C,15,3500 
+D,10,2000 
+E,3,800 
+
+$ mbest R=1_3 i=dat.csv o=rsl.csv
+
+# Output file (rsl.csv)
+Customer,Quantity,Amount 
+A,20,5200
+B,18,4000
+C,15,3500
+------------------------------------------------
+\end{verbatim}
+
+\subsubsection*{Example 2 Select all transactions upon customers' repeated visits to store. Save each customers'  transactions on first visit to the file fvd.csv. (Save the first transaction for each customer to fvd.csv and print the rest to output file.)}
+※Note: This example assumed that data is sorted by date for each customer beforehand. 
+
+\begin{verbatim}
+------------------------------------------------
+# Input file (dat2.csv)
+Customer,Date,Amount
+A,20081201,10
+A,20081207,20
+A,20081213,30
+B,20081002,40
+B,20081209,50
+
+$ mbest k=Customer R=1 -r u=fvd.csv i=dat2.csv o=rsl2.csv
+
+# Output file 1(rsl2.csv)
+Customer,Date,Amount
+A,20081207,20
+A,20081213,30
+B,20081209,50
+
+#Output file 2(fvd.csv)
+Customer,Date,Amount
+A,20081201,10
+B,20081002,40
+------------------------------------------------
+\end{verbatim}
+
+\subsection*{関連コマンド}
+\noindent
+\href{run:msel.pdf}{msel}:条件式による行撰択\\
+\href{run:msort.pdf}{msort}:レコードの並べ換え\\
+\href{run:msortf.pdf}{msortf}:項目指定によるレコードの並べ換え\\
+\href{run:muniq.pdf}{muniq}:レコードの単一化\\
+
+\end{document}

@@ -1,0 +1,36 @@
+\subsubsection*{例1: 基本例}
+
+\verb|date|項目を単位に重複行を削除し単一にする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+date,customer
+20081201,A
+20081202,A
+20081202,B
+20081202,B
+20081203,C
+$ muniq k=date i=dat1.csv o=rsl1.csv
+#END# kguniq i=dat1.csv k=date o=rsl1.csv
+$ more rsl1.csv
+date%0,customer
+20081201,A
+20081202,B
+20081203,C
+\end{Verbatim}
+\subsubsection*{例2: 複数の項目での重複行の削除}
+
+\verb|date|と\verb|customer|項目を単位に重複行を削除し単一にする。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ muniq k=date,customer i=dat1.csv o=rsl2.csv
+#END# kguniq i=dat1.csv k=date,customer o=rsl2.csv
+$ more rsl2.csv
+date%0,customer%1
+20081201,A
+20081202,A
+20081202,B
+20081203,C
+\end{Verbatim}

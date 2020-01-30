@@ -1,0 +1,284 @@
+
+%\begin{document}
+
+\section{msim - Calculate Similarity Between Two Variables\label{sect:msim}}
+\index{msim@msim}
+
+Find out the degree of similarity between two variable fields (distance) at \verb|f=| parameter, specify the degree of  similarity (distance) function at \verb|c=| parameter to derive the similarity matrix.
+
+\subsection*{Format}
+\verb/msim c= f= [a=] [k=] [n=] [-d]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_bufcount]{[bufcount=]} 
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_x]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|k=|    & Field(s) (multiple items can be specified) specified here is used as the unit of calculation. \\
+
+\verb|f=|    & Field names for the calculation of degree of similarities between two fields.\\
+\verb|c=|    & Specify the similarity measure(s)  (distance)  (multiple fields can be specified).\\
+             & As shown in the example below, the field name of the similarity measure results can be defined by using a : (colon). \\
+             & If the name of field is not defined with colon, the type of degree of similarity (distance) is used as the field name. \\
+             & Example: \verb|msim f=x,y,z c=pearson:Pearson product-moment correlation coefficient,|\\
+             & \verb|euclid:Euclidean distance,cosine:Cosine|\\
+             & Similarity measure\verb/=covar|ucovar|pearson|spearman|kendall|euclid|cosine|/\\
+             &       ~~\verb/cityblock|hamming|chi|phi|jaccard|supportr|lift|confMax|/\\
+             &       ~~\verb/confMin|yuleQ|yuleY|kappa|oddsRatio|convMax|convMin/\\
+\verb|a=|    & Specify the field name that indicates the name of the two variables. \\
+		&  Specify the two arguments with a comma. Field names \verb|fld1,fld2| are used if \verb|a=| is not defined.\\   
+\verb|-d|    & Output as diagonal matrix and upper triangular matrix.\\
+             & Only the lower triangular matrix of similarity matrix is shown if \verb|-d| option is not specified, \\
+             & but both upper triangular matrix and diagonal matrix are shown by when \verb|-d|  option is specified. \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Definition of similarity (distance)}
+
+\subsubsection*{Real vector}
+
+Definition of size for the degree of similarity (or distance) in relation to two real number vectors ${\bf x}=(x_1,x_2,\cdots,x_n),{\bf y}=(x_1,x_2,\cdots,x_n)$ is shown in Table \ref{tbl:simReal}.
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Summary of degree of similarity for real number vectors\label{tbl:simReal}}
+{\small 
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{lllll}
+\hline
+Parameter value & Detail & Distance/similarity & Equation definition & Range\\
+\hline
+covar	& Covariance	& Degree of similarity & 
+$
+\frac{1}{n}\sum_{i=1}^n~(x_i-\bar{x})(y_i-\bar{y})
+$
+ & $-\infty$ 〜 $\infty$\\
+
+ucovar	& Unbiased covariance	& Degree of similarity & 
+$
+\frac{1}{n-1}\sum_{i=1}^n~(x_i-\bar{x})(y_i-\bar{y})
+$
+ & $-\infty$ 〜 $\infty$\\
+
+pearson	& Pearson's product-moment correlation coeff & Degree of similarity & 
+$
+\frac{\frac{1}{n}\sum_{i=1}^n~(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\frac{1}{n}\sum_{i=1}^n~(x_i-\bar{x})^2}\sqrt{\frac{1}{n}\sum_{i=1}^n~(y_i-\bar{y})^2}}~
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+spearman & Spearman's rank correlation coefficient	& Degree of similarity &
+$\bf{x},\bf{y}$ Product-moment correlation coefficient is converted into a ranking 
+ & $-1.0$ 〜 $1.0$ \\
+
+kendall  & Kendall's rank correlation coefficient	& Degree of similarity &
+$
+\frac{c-d}{\frac{1}{2}n(n-1)} ^{Note:1,2}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+euclid   & Euclidean distance (number)   & Distance & 
+$
+\sqrt{\sum_{i=1}^n~(x_i-y_i)^2}~
+$
+ & $0$ 〜 $\infty$ \\
+
+cosine   & Cosine   & Degree of similarity & 
+$
+\frac{\bf{x}\cdot~\bf{y}}{\mid\bf{x}\mid\mid\bf{y}\mid}=\frac{\sum_{i=1}^n~x_i~y_i}{\sqrt{\sum_{i=1}^n~x_i^2}\sqrt{\sum_{i=1}^n~y_i^2}}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+cityblock   & City block distance   & Distance & 
+$
+\sum_{i=1}^n~\mid~x_i-y_i\mid
+$
+ & $-\infty$ 〜 $\infty$\\
+
+hamming   & Hamming distance   & Distance & 
+$
+\mid\{i \mid x_i\ne y_i, i=1,2,\cdots,n\}\mid
+$
+ & $0$ 〜 $n$\\
+
+\hline
+\end{tabular}
+}
+{\footnotesize
+\\
+Note 1:
+$c=|\{(i,j)|(x_i>x_j ~{\rm and}~ y_i>y_j) ~{\rm or}~ (x_i<x_j ~{\rm and}~ y_i<y_j), i>j, i=1,2,\cdots,n, j=1,2,\cdots,n\}|$\\
+Note 2:
+$d=|\{(i,j)|(x_i>x_j ~{\rm and}~ y_i<y_j) ~{\rm or}~ (x_i<x_j ~{\rm and}~ y_i>y_j), i>j, i=1,2,\cdots,n, j=1,2,\cdots,n\}|$
+}
+
+\end{center}
+\end{table}
+
+\subsubsection*{0-1Vector}
+Take the value as 0 or 1, the definition of degree of similarity of two 0-1 vectors ${\bf a}=(a_1,a_2,\cdots,a_n),{\bf b}=(b_1,b_2,\cdots,b_n)$ is shown in Table \ref{tbl:sim01}.
+The $f_{jk}$ symbols used in the table, the value of $a_i,b_i$ is enumerated in different combinations of (0,1), and shown in Table \ref{tbl:matrix}.
+
+\begin{table}[htbp]
+\begin{center}
+\caption{Combinations of the values of the 2 variables in $2\times 2$ contingency table\label{tbl:matrix}}
+{\small 
+\begin{tabular}{l|ll|l}
+\hline
+ & $b_i=1$ & $b_i=0$ & Total\\
+\hline
+$a_i=1$ & $f_{11}$ & $f_{10}$ & $f_{1.}$\\
+$a_i=0$ & $f_{01}$ & $f_{00}$ & $f_{0.}$\\
+\hline
+Total & $f_{.1}$ & $f_{.0}$ & $f_{..}$\\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+Further, meaning of $P(\cdot)$ is shown below. 
+\begin{table}[htbp]
+\begin{center}
+{\small 
+\begin{tabular}{l}
+\hline
+$P(a)=f_{1.}/f_{..}$\\
+$P(b)=f_{.1}/f_{..}$\\
+$P({\bar a})=f_{0.}/f_{..}$\\
+$P(a,b)=f_{11}/f_{..}$\\
+$P(a|b)=f_{11}/f_{.1}$\\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+
+\begin{table}[t]
+\begin{center}
+\caption{Summary of degree of similarity for vector 0-1\label{tbl:sim01}}
+{\small 
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{lllll}
+\hline
+Parameter values & Content & Distance/similarity & Equation & Range\\
+\hline
+
+chi   & Chi-square value   & Degree of similarity & 
+$
+\sum_{i=0}^1~\sum_{j=0}^1~\frac{f_{ij}-e_{ij}}{e_{ij}}~ ^{Note:1}
+$
+ & $0$ 〜 $\infty$\\
+
+
+phi   & Phi coefficient   & Degree of similarity & 
+$
+\frac{f_{11}f_{00}-f_{10}f_{01}}{\sqrt{f_{1.}f_{0.}f_{.1}f_{.0}}}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+jaccard   & Jack card factor   & Degree of similarity & 
+$
+\frac{P(a,b)}{P(a)+P(b)-P(a,b)}
+$
+ & $0.0$ 〜 $1.0$ \\
+
+support   & Support   & Degree of similarity & 
+$
+P(a,b)
+$
+ & $0.0$ 〜 $1.0$ \\
+
+lift   & Value of lift  & Degree of similarity & 
+$
+\frac{P(a,b)}{P(a)P(b)}
+$
+ & $0$ 〜 $\infty$\\
+
+confMax  & Maximum confidence   & Degree of similarity & 
+$
+\max(P(a|b),P(b|a))
+$
+ & $0.0$ 〜 $1.0$ \\
+
+confMin  & Minimum confidence   & Degree of similarity & 
+$
+\min((P(a|b),P(b|a))
+$
+ & $0.0$ 〜 $1.0$ \\
+
+yuleQ  & Ren correlation coefficient of yule (Q) & Degree of similarity & 
+$
+\frac{\alpha-1}{\alpha+1} ^{Note: 2}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+yuleY  & Ren correlation coefficient of yule (Y)  & Degree of similarity & 
+$
+\frac{\sqrt{\alpha}-1}{\sqrt{\alpha}+1} ^{Note: 2}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+kappa  & kappa & Degree of similarity & 
+$
+\frac{P(a,b)+P(\bar{a},\bar{b})-P(a)P(b)-P(\bar{a})P(\bar{b})}{1-P(a)P(b)-P(\bar{a})P(\bar{b})}
+$
+ & $-1.0$ 〜 $1.0$ \\
+
+oddsRatio  & oddsRatio & Degree of similarity & 
+$
+\frac{P(a,b)P(\bar{a},\bar{b})}{P(a,\bar{b})P(\bar{a},b)}
+$
+ & $0$ 〜 $\infty$\\
+
+convMax  & Maximum conviction & Degree of similarity & 
+$
+\max(\frac{P(a)P(\bar{b})}{P(a,\bar{b})},\frac{P(\bar{a})P(b)}{P(\bar{a},b)})
+$
+ & $0.5$ 〜 $\infty$\\
+
+convMin  & Minimum conviction & Degree of similarity & 
+$
+\min(\frac{P(a)P(\bar{b})}{P(a,\bar{b})},\frac{P(\bar{a})P(b)}{P(\bar{a},b)})
+$
+ & $0.5$ 〜 $\infty$\\
+
+
+\hline
+\end{tabular}
+}
+
+{\footnotesize
+Note 1: $e_{ij}=\frac{f_{i.}f_{.j}}{f_{..}}$
+Note 2:  $\alpha=\frac{f_{11}f_{00}}{f_{10}f_{01}}$
+}
+\end{center}
+\end{table}
+
+
+\subsection*{Examples}
+\input{examples/tex/msim_ex.tex}
+\subsection*{Related Commands}
+\hyperref[sect:mstats]{mstats} : Calculate the statistics of one variable.
+
+\hyperref[sect:mmvsim]{mmvsim} :  Calculate sliding window similarity measure.
+
+%\end{document}

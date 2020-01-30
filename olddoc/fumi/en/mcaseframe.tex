@@ -1,0 +1,102 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+
+\section{mcaseframe.rb Extract Case Frame\label{sect:mcaseframe}}
+\index{mcaseframe@mcaseframe}
+ 
+This command extracts case frame from the output of KNP analysis.    
+
+Case frame refers to the clause consisting of verb and case  particle in Japanese, such as 「リンゴ（が）」+「好き」、「望遠鏡（で）」+「見る」. 
+This command reads the parsing results (in XML format) from \verb|mknp.rb| command, extracts the case frame,  and saves the output in CSV format.  
+
+
+\subsection{Format}
+\begin{verbatim}
+mcaseframe.rb I= o= [-key] [-mcmdenv] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|I=|        & : Path name of the parsing results in XML file from mknp.rb. \\
+\verb|o=|        & : Output of case frame file name.  \\
+\verb|-key|      & : Output in key type format.  \\
+\verb|-mcmdenv|  & : Display MCMD message containing environment variables.  \\
+                 &   Default returns warning and error message  (KG\_VerboseLevel=2). \\
+\verb|--help|    & : Display help  \\
+\end{tabular} 
+}
+\end{table} 
+
+\subsubsection{Extract case frame }
+
+The XML output of \verb|mknp.rb| command is shown below (excerpt).
+ 
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+ <sentence id='0' text='子どもはリンゴがすきです。'>
+  <chunk id='0' link='2' phraseType='格助詞句' caseType='ガ２格' phrase='子供' phraseTok='子
+   <token id='0' class1='名詞' class2='普通名詞' word='子ども' orgWord='子ども' daiWord='子供
+   <token id='1' class1='助詞' class2='副助詞' word='は' orgWord='は'/>
+  </chunk>
+  <chunk id='1' link='2' phraseType='格助詞句' caseType='ガ格' phrase='林檎' phraseTok='リン
+   <token id='2' class1='名詞' class2='普通名詞' word='リンゴ' orgWord='リンゴ' daiWord='林檎
+   <token id='3' class1='助詞' class2='格助詞' word='が' orgWord='が'/>
+  </chunk>
+  <chunk id='2' link='-1' phraseType='用言句' phraseTok='すきだ' rawPhrase='すきです。' phrase
+   <token id='4' class1='形容詞' class3='ナ形容詞' class4='デス列基本形' word='すきだ' orgWord
+   <token id='5' class1='特殊' class2='句点' word='。' orgWord='。'/>
+  </chunk>
+ </sentence>
+\end{Verbatim}
+
+In the examples,  
+chunk id='0'「子どもは」 in link='2', 
+chunk id='1'「リンゴが」also has link='2', 
+therefore, chunk id='2'「すきです」is related . 
+The dependency relationship is illustrated in the figure. 
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+子どもは──┐　
+リンゴが──┤　
+      すきです。
+\end{Verbatim}
+
+When using this command, the dependency relationships are extracted and saved as CSV shown as follows.  
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+aid,sid,cid,contrastConj,denial,declinableWord,lid,caseWord,case
+test.txt,0,2,,,すきだ,0,子ども,ガ２
+test.txt,0,2,,,すきだ,1,リンゴ,ガ
+\end{Verbatim}
+
+The meaning of each item of CSV is shown as follows. 
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|aid|            & : Name of input file \\  
+\verb|sid|            & : Line number (sentence ID)  \\  
+\verb|cid|            & : Chunk ID \\  
+\verb|contrastConj|   & : Reverse connection conjunctions  \\  
+\verb|denial|         & : Set as 1 when chunk contains negative word  \\  
+\verb|declinableWord| & : Verb clause \\  
+\verb|lid|            & : Chunk ID of case particle clause  \\  
+\verb|caseWord|       & : Case particle clause  \\  
+\verb|case|           & : Kind of case particle clause   \\  
+\end{tabular} 
+}
+\end{table} 
+
+\vspace{3cm}
+
+
+
+
+
+\subsection{Examples}
+\input{examples/tex/mcaseframe_ex.tex}
+
+%\end{document}
+

@@ -1,0 +1,41 @@
+\subsubsection*{例1: 基本例}
+
+\verb|item、date|順に並べ替える。
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+item,date,quantity,price
+B,20081201,4,40
+A,20081201,10,200
+A,20081201,10,100
+B,20081203,5,50
+B,20081201,2,500
+A,20081201,3,300
+$ msortf f=item,date i=dat1.csv o=rsl1.csv
+#END# kgsortf f=item,date i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+item%0,date%1,quantity,price
+A,20081201,10,200
+A,20081201,10,100
+A,20081201,3,300
+B,20081201,4,40
+B,20081201,2,500
+B,20081203,5,50
+\end{Verbatim}
+\subsubsection*{例2: 数量(quantity)降順，金額(price)昇順に並べ替える例}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ msortf f=quantity%nr,price%n i=dat1.csv o=rsl2.csv
+#END# kgsortf f=quantity%nr,price%n i=dat1.csv o=rsl2.csv
+$ more rsl2.csv
+item,date,quantity%0nr,price%1n
+A,20081201,10,100
+A,20081201,10,200
+B,20081203,5,50
+B,20081201,4,40
+A,20081201,3,300
+B,20081201,2,500
+\end{Verbatim}

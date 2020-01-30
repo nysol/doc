@@ -1,0 +1,22 @@
+
+\subsubsection*{Example1: Basic Example}
+Returns true if any of \verb|s1, s2, s3| items contains the string \verb|ab|.
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ cat dat1.csv
+id,s1,s2,s3
+1,ab,abx,x
+2,abc,xaby,xxab
+3,,,
+4,#ac,x,x
+
+$ mcal c='isinor("ab",$s{s1},$s{s2},$s{s3})' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=isinor("ab",$s{s1},$s{s2},$s{s3}) i=dat1.csv o=rsl1.csv
+
+$ cat rsl1.csv
+id,s1,s2,s3,rsl
+1,ab,abx,x,1
+2,abc,xaby,xxab,1
+3,,,,0
+4,#ac,x,x,0
+\end{Verbatim}

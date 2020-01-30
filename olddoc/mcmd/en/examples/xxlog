@@ -1,0 +1,6 @@
+msum -nfn k=0 f=1,2 i=dat1.csv o=rsl3.csv
+#END# kgsum -nfn f=1,2 i=dat1.csv k=0 o=rsl3.csv; IN=6 OUT=3; 2017/10/13 13:36:59
+more rsl3.csv
+customer,0,0
+A,3,30
+B,5,45

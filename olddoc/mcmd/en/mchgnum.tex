@@ -1,0 +1,60 @@
+%\documentclass[a4paper]{book}
+%\usepackage{mcmd}
+%\begin{document}
+
+\section{mchgnum - Substitute Values within Numerical Range\label{sect:mchgnum}}
+\index{mchgnum@mchgnum}
+The field name for encoding is specified at \verb|f=| parameter, number and range criteria is specified at the \verb|R=| parameter, the substitution string specified in the \verb|v=| parameter replaces the value in the defined field.
+
+\subsection*{Format}
+\verb/mchgnum f= R= [O=|-F] [v=] [-A] [-r]/
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullin]{[-assert\_nullin]}
+\hyperref[sect:option_assert_nullout]{[-assert\_nullout]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{Parameters}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|f=|    & Replace the specified field (multiple fields can be specified) according to the replacement string list \\
+		& at \verb|v=| parameter and the numerical ranges list at \verb|R=| parameter. \\
+\verb|R=|    & Specify the numerical range to be replaced (multiple fields can be specified) \\ 
+		& (\verb|1.1,2.5| : more than 1.1 and less than 2.5).\\
+             & Use \verb|MIN| for minimum value, \verb|MAX| for maximum value ( MIN, 2.5 : 2.5 or less).\\
+\verb|O=|    & Out of range character strings\\
+             & Specify the replacement string when values fall outside the numeric range list at the \\
+             & \verb|R=| parameter (returns NULL values in output when this parameter is not specified). \\
+\verb|-F|    & Display out of range values in the column. \\
+		& Retain the out of range values in the output even though the values fall outside the \\
+		& specified numeric range defined in the \verb|R=| parameter. \\
+\verb|v=|    & Specify the replacement character string corresponding to the numerical range in the \verb|R=| parameter. \\
+             & More than 1 argument must be defined at \verb|R=|.\\
+\verb|-A|    & This option adds output to a new column instead of replacing the specified item.\\
+\verb|-r|    & The range defined at \verb|R=| parameter deals with '~greater than ~less than'.\\
+		& For example, \verb|1.1_2.5| represents "greater than 1.1 <  less than 2.5".\\
+
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{Examples}
+\input{examples/tex/mchgnum_ex.tex}
+
+\subsection*{Related Commands}
+
+\hyperref[sect:mchgstr]{mchgstr} : Substitute string. 
+
+\hyperref[sect:msed]{msed} : Replace text with regular expressions. 
+
+%\end{document}

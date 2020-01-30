@@ -1,0 +1,91 @@
+
+
+%\documentclass[a4paper]{jarticle}
+
+\section{mbar.rb Draw bar graph \label{sect:mbar}}
+\index{mbar@mbar}
+
+The command creates a bar graph. 
+By specifying the attributes assigned to x axis and y axis,  users can create 1 dimensional or 2 dimensional bar matrix. 
+The output of the graph is saved as HTML file which can be displayed in popular browsers. 
+
+The input data in CSV format is shown in Table \ref{tbl:mbar_input2}. The fields that construct the bar graph can be specified at \verb|f=| parameter. 
+The attributes assigned to x-axis and y-axis can be specified in \verb|k=| parameter. 
+When one field is specified at \verb|k=| parameter, one-dimensional bar graph matrix is created, 
+if two fields are specified at \verb|k=| parameter, two-dimensional bar graph matrix is created. 
+When \verb|k=| parameter is not specified, one bar graph is created. 
+ 
+The bar graph is created with the JavaScript library D3.js （Data-Driven Documents). Please refer to the official website of D3.js  (\url{http://d3js.org/}) for more details.   
+ Note that Nysol/mcmd library is required for this command. 
+ 
+
+\begin{table}[http]
+\begin{center}
+\caption{Number of individuals by age  and prefecture\label{tbl:mbar_input2}}
+{\small
+\begin{tabular}[t]{ccr}
+\hline
+Pref&Age&Population \\
+\hline
+Nara&10&310504\\
+Nara&20&552339\\
+Nara&30&259034\\
+Nara&40&450818\\
+Nara&50&1231572\\
+Nara&60&1215966\\
+Nara&70&641667\\
+Hokkaido&10&310504\\
+Hokkaido&20&252339\\
+Hokkaido&30&859034\\
+Hokkaido&40&150818\\
+Hokkaido&50&9231572\\
+Hokkaido&60&4215966\\
+Hokkaido&70&341667\\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+\newpage
+\subsection{Format}
+\begin{verbatim}
+  mbar.rb [i=] f= v= [o=] [k=] [title=] [width=] [height=] [cc=] [--help]
+\end{verbatim}
+
+\begin{table}[htbp]
+{\small
+\begin{tabular}{ll}
+\verb|i=|        & Input data file name (CSV format) \\
+\verb|f=|        & Specify the field name of component.   \\
+                 & Null data is ignored. \\
+\verb|v=|        & Specify the field name of component ratio (item that determines the height of the bar graph). \\
+                 & Data is treated as zero if it consists of null value.  \\
+                 & Accepts minus, decimal values.  \\
+                 & Values started with 0 is ignored. Values except numeric characters returns error. \\
+\verb|o=|        & Output file name (HTML file) \\
+\verb|k=|        & Specify two or less field names assigned to x-axis and y-axis. \\
+                 & Create one bar graph when this parameter is not specified. \\
+ 		 & Create a one-dimensional bar graph  when one field is specified, \\
+                 & create two-dimensional bar graph when two fields are specified. \\
+\verb|title=|    & Specify the title of the graph. \\
+\verb|width=|    &  Specify the width of drawing frame for the bar graph  (default is 250, 1 bar graph is 600) .  \\
+\verb|height=|   & Specify the height of drawing frame for the bar graph (default is 250, 1 bar graph is 400).  \\
+\verb|cc=|       & Specify the maximum number of bars to be displayed in a row (default is 5) . \\
+                 & Specify for one-dimension pie chart matrix.  \\
+\verb|--help|    & Show help \\
+\end{tabular} 
+}
+\end{table} 
+
+Noted that in \verb|mbar.rb| command, 
+the fields specified in \verb|f=| parameter  and \verb|k=| parameter do not have automatic sorting function. 
+It is necessary to sort the data prior to this command as needed. 
+
+
+
+\subsection{Example}
+\input{examples/tex/mbar_ex.tex}
+
+%\end{document}
+

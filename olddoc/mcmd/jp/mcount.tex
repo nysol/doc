@@ -1,0 +1,50 @@
+
+%\documentclass[a4paper]{jsbook}
+%\usepackage{mcmd_jp}
+%\begin{document}
+
+\section{mcount 行数カウント\label{sect:mcount}}
+\index{mcount@mcount}
+行数をカウントし、\verb|a=|パラメータで指定した項目名で出力する。
+\verb|k=|を指定すると、集計キー毎の件数をカウントし、
+\verb|k=|を指定しなければ、全行数がカウントされる。
+
+\subsection*{書式}
+\verb|mcount a= [k=]|
+\hyperref[sect:option_i]{[i=]}
+\hyperref[sect:option_o]{[o=]}
+\hyperref[sect:option_assert_diffSize]{[-assert\_diffSize]}
+\hyperref[sect:option_assert_nullkey]{[-assert\_nullkey]}
+\hyperref[sect:option_nfn]{[-nfn]} 
+\hyperref[sect:option_nfno]{[-nfno]}  
+\hyperref[sect:option_x]{[-x]}
+\hyperref[sect:option_q]{[-q]}
+\hyperref[sect:option_option_tmppath]{[tmpPath=]}
+\hyperref[sect:option_precision]{[precision=]}
+\verb|[-params]|
+\verb|[--help]|
+\verb|[--helpl]|
+\verb|[--version]|\\
+
+\subsection*{パラメータ}
+\begin{table}[htbp]
+%\begin{center}
+{\small
+\begin{tabular}{ll}
+\verb|i=|    & 入力ファイル名を指定する。\\
+\verb|o=|    & 出力ファイル名を指定する。\\
+\verb|a=|    & 新たに追加される項目の名前を指定する。\\
+             & \verb|nfn|オプション使用時は、必須ではない。\\
+\verb|k=|    & キー項目名リスト(複数項目指定可)\\
+             & カウントの単位となる項目名リスト。\\
+\end{tabular} 
+}
+\end{table} 
+
+\subsection*{利用例}
+\input{examples/tex/mcount_ex.tex}
+
+\subsection*{関連コマンド}
+\hyperref[sect:mstats]{mstats} : \verb|c=count|を指定することで、NULL値でないデータ件数をカウントできる。
+
+%\end{document}

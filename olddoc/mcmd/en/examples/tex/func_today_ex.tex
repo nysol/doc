@@ -1,0 +1,16 @@
+\subsubsection*{Example 1: Basic Example}
+
+
+
+\begin{Verbatim}[baselinestretch=0.7,frame=single]
+$ more dat1.csv
+id
+1
+2
+$ mcal c='today()' a=rsl i=dat1.csv o=rsl1.csv
+#END# kgcal a=rsl c=today() i=dat1.csv o=rsl1.csv
+$ more rsl1.csv
+id,rsl
+1,20171013
+2,20171013
+\end{Verbatim}
